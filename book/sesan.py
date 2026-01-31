@@ -1,7 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.fft import fft, fftfreq, fftshift
-
+from matplotlib import rcParams
+rcParams['font.sans-serif'] = ['SimHei']
+rcParams['axes.unicode_minus'] = False 
 # 设置参数
 N = 2048  # 采样点数
 t = np.linspace(-10, 10, N)  # 时间轴
@@ -58,9 +60,9 @@ plt.figure(figsize=(16, 12))
 # 子图1: 初始波形
 ax1 = plt.subplot(2, 3, 1)
 plt.plot(t, initial_wave, 'b-', linewidth=2)
-plt.title('初始波形 (t=0)', fontsize=14, fontproperties='SimHei')
-plt.xlabel('时间', fontsize=12, fontproperties='SimHei')
-plt.ylabel('振幅', fontsize=12, fontproperties='SimHei')
+plt.title('初始波形', fontsize=20)
+#plt.xlabel('时间', fontsize=12, fontproperties='SimHei')
+#plt.ylabel('振幅', fontsize=12, fontproperties='SimHei')
 plt.grid(True, alpha=0.3)
 plt.axhline(y=0, color='k', linestyle='-', alpha=0.3)
 plt.fill_between(t, 0, initial_wave, where=initial_wave>0, alpha=0.3, color='blue')
@@ -68,9 +70,9 @@ plt.fill_between(t, 0, initial_wave, where=initial_wave>0, alpha=0.3, color='blu
 # 子图2: 展宽后的波形
 ax2 = plt.subplot(2, 3, 4)
 plt.plot(t, dispersed_wave, 'r-', linewidth=2)
-plt.title('色散后波形 (展宽)', fontsize=14, fontproperties='SimHei')
-plt.xlabel('时间', fontsize=12, fontproperties='SimHei')
-plt.ylabel('振幅', fontsize=12, fontproperties='SimHei')
+plt.title('色散后波形 ', fontsize=20)
+#plt.xlabel('时间', fontsize=12, fontproperties='SimHei')
+#plt.ylabel('振幅', fontsize=12, fontproperties='SimHei')
 plt.grid(True, alpha=0.3)
 plt.axhline(y=0, color='k', linestyle='-', alpha=0.3)
 plt.fill_between(t, 0, dispersed_wave, where=dispersed_wave>0, alpha=0.3, color='red')
@@ -80,9 +82,9 @@ ax3 = plt.subplot(2, 3, 2)
 # 只显示主要频率成分
 mask = (freq_shifted > -5) & (freq_shifted < 5)
 plt.plot(freq_shifted[mask], freq_magnitude_initial[mask], 'b-', linewidth=2)
-plt.title('初始波形频谱', fontsize=14, fontproperties='SimHei')
-plt.xlabel('频率', fontsize=12, fontproperties='SimHei')
-plt.ylabel('幅度', fontsize=12, fontproperties='SimHei')
+plt.title('初始幅度谱', fontsize=20)
+#plt.xlabel('频率', fontsize=12, fontproperties='SimHei')
+#plt.ylabel('幅度', fontsize=12, fontproperties='SimHei')
 plt.grid(True, alpha=0.3)
 plt.axhline(y=0, color='k', linestyle='-', alpha=0.3)
 plt.fill_between(freq_shifted[mask], 0, freq_magnitude_initial[mask], alpha=0.3, color='blue')
@@ -90,9 +92,9 @@ plt.fill_between(freq_shifted[mask], 0, freq_magnitude_initial[mask], alpha=0.3,
 # 子图4: 展宽后波形的频谱
 ax4 = plt.subplot(2, 3, 5)
 plt.plot(freq_shifted[mask], freq_magnitude_dispersed[mask], 'r-', linewidth=2)
-plt.title('色散后波形频谱', fontsize=14, fontproperties='SimHei')
-plt.xlabel('频率', fontsize=12, fontproperties='SimHei')
-plt.ylabel('幅度', fontsize=12, fontproperties='SimHei')
+plt.title('色散后幅度谱', fontsize=20)
+#plt.xlabel('频率', fontsize=12, fontproperties='SimHei')
+#plt.ylabel('幅度', fontsize=12, fontproperties='SimHei')
 plt.grid(True, alpha=0.3)
 plt.axhline(y=0, color='k', linestyle='-', alpha=0.3)
 plt.fill_between(freq_shifted[mask], 0, freq_magnitude_dispersed[mask], alpha=0.3, color='red')
@@ -105,17 +107,17 @@ phase_dispersed = np.angle(fftshift(dispersed_freq_domain))
 # 子图5：初始波形相位谱
 ax5 = plt.subplot(2, 3, 3)
 plt.plot(freq_shifted[mask], phase_initial[mask], 'b-', linewidth=2)
-plt.title('初始波形相位谱', fontsize=14, fontproperties='SimHei')
-plt.xlabel('频率', fontsize=12, fontproperties='SimHei')
-plt.ylabel('相位 (弧度)', fontsize=12, fontproperties='SimHei')
+plt.title('初始相位谱', fontsize=20)
+#plt.xlabel('频率', fontsize=12, fontproperties='SimHei')
+#plt.ylabel('相位 (弧度)', fontsize=12, fontproperties='SimHei')
 plt.grid(True, alpha=0.3)
 
 # 子图6：色散后波形相位谱
 ax6 = plt.subplot(2, 3, 6)
 plt.plot(freq_shifted[mask], phase_dispersed[mask], 'r-', linewidth=2)
-plt.title('色散后波形相位谱', fontsize=14, fontproperties='SimHei')
-plt.xlabel('频率', fontsize=12, fontproperties='SimHei')
-plt.ylabel('相位 (弧度)', fontsize=12, fontproperties='SimHei')
+plt.title('色散后相位谱', fontsize=20)
+#plt.xlabel('频率', fontsize=12, fontproperties='SimHei')
+#plt.ylabel('相位 (弧度)', fontsize=12, fontproperties='SimHei')
 plt.grid(True, alpha=0.3)
 
 plt.tight_layout()

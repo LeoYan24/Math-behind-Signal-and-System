@@ -946,21 +946,80 @@ $$a_0=\frac{1}{2^\nu\Gamma(\nu+1)}$$
 
 \section{实变函数概要}\label{sec:Real_Analysis}
 
-\subsection{勒贝格积分}\label{sub:lebesgue}
+\subsection{勒贝格测度与可测函数}\label{sub:lebesgue}
 读者可能已经注意到，并不是所有的函数都是可积的，例如$e^x$即使视为功率信号，其能量和功率也不具有意义，因此它既不属于能量信号，也不属于功率信号；另一种情况是：
 \begin{example}[狄利克雷函数]
     \[D(x)=
     \begin{cases}
         1 & x \in \mathbb{Q}    \\
-        0 & x \in \mathbb{Q} ^C
+        0 & x \in \mathbb{Q} ^c
     \end{cases}\]
-（其中$\mathbb{Q}$ 表示有理数集，上标C在不引起歧义的前提下用来表示取补集）
+（其中$\mathbb{Q}$ 表示有理数集，上标c表示取补集）
 \end{example}
-它在黎曼积分（也就是数学分析或高等数学课程，以及多数工科课程中用的积分）的意义下是不可积的，因为它在所有点不连续，但是这样的函数在\textbf{勒贝格积分}的意义下可积，可以这样理解：勒贝格积分考察函数在某个值处的“区间长度”（严格来讲应为测度），狄利克雷函数在一个有限区间上取值1的长度为0，因为有理数是可数集，取值0的长度就是区间长度，所以其积分值为0。对于非反常积分，勒贝格积分是黎曼积分的推广，黎曼可积的函数一定是勒贝格可积的，并且在同样的区间上积分值相等。
+它在黎曼积分（也就是数学分析或高等数学课程，以及多数工科课程中用的积分）的意义下是不可积的，因为它在所有点不连续，但是这样的函数在\textbf{勒贝格积分}的意义下可积，可以这样理解：勒贝格积分考察函数在某个值处的“区间长度”（严格来讲应为测度），狄利克雷函数在一个有限区间上取值1的长度为0，因为有理数是可数集，取值0的长度就是区间长度，所以其积分值为0。对于非反常积分，勒贝格积分是黎曼积分的推广，黎曼可积的函数一定是勒贝格可积的，并且在同样的区间上积分值相等。本小节先来建立一些实变函数中的基本概念，再在下一小节给出勒贝格积分的定义。
 
-本节就来介绍一些以勒贝格积分为基础的实变函数理论，以便后续学习中使用。阅读本小节有困难的读者，不妨先接受一些重要结论。
+本节就来介绍一些基础的实变函数理论，以便后续学习中使用。阅读本小节有困难的读者，不妨先接受一些重要结论。
 
-\subsection{单调收敛定理，控制收敛定理}\label{sub:swap}
+首先，我们给出\textbf{外测度}和\textbf{可测集}的概念。
+\begin{definition}[勒贝格外测度]
+    设集合$A\in\mathbb{R}$，其勒贝格外测度定义为
+    \[m^*(A)=\inf\left\{\sum_{k=1}^{\infty}l(I_k)\left|A\subset\bigcup_{k=1}^{\infty}I_k\right.\right\}\]
+    其中$\{I_k\}_{k=1}^{\infty}$为覆盖$A$的可数开区间族，$l(I_k)$表示区间$I_k$的长度。
+\end{definition}
+这个定义看起来不是很直观，但它很好地描述了“集合的长度”这一概念，例如，对于任何一个区间$I$来说，总有$l(I)=m^*(I)$。此外，外测度的以下基本性质符合我们的直观：
+\begin{proposition}[外测度的性质]
+    \quad
+    \begin{itemize}
+        \item 单调性：设$A\subset B$，则$m^*(A)\leq m^*(B)$
+        \item 平移不变性：实数集$A$的平移记为为$A+y=\{x\in \mathbb{R}|x-y\in A\}$，满足$m^*(A+y)=m^*(A)$
+        \item 次可数可加性：设$\{E_k\}_{k=1}^{\infty}$是可数集族，则$m^*\left(\bigcup_{k=1}^{\infty}E_k\right)\leq\sum_{k=1}^{\infty}m^*(E_k)$
+    \end{itemize}
+\end{proposition}
+
+次可数可加性中不等号的提出是为了处理$\{E_k\}_{k=1}^{\infty}$之间有重叠的情况，但是一般而言，即使它是不交集族，也不满足可数可加性，即
+$$m^*\left(\bigsqcup_{k=1}^{\infty}E_k\right)\neq\sum_{k=1}^{\infty}m^*(E_k)$$
+保证这样的可数可加性，需要集合\textbf{可测}。
+
+\begin{definition}[可测集]
+    集合$E$是\textbf{可测集}，如果
+    $$\forall A,m^*(A)=m^*(A\cap E)+m^*(A\cap E^c)$$
+    这个条件称为称\textbf{卡氏条件}。定义可测集的\textbf{勒贝格测度}为它的勒贝格外测度，即
+    $m(E)=m^*(E)$。
+\end{definition}
+在这个约束下，集合的不交族的勒贝格测度是可数可加的，即：
+\[m\left(\bigsqcup_{k=1}^{\infty}E_k\right)=\sum_{k=1}^{\infty}m(E_k)\]
+其中$\sqcup E_k$表示集族$\{E_k\}$是彼此不交的。此外，区间都是可测的，它们的测度就等于区间的长度。我们所遇到的几乎所有集合都是可测的，但是，任意具有正测度的集合，都有不可测子集，这个子集的构造可以借助选择公理给出。
+
+\begin{definition}[可测函数]
+    定义在可测集上的函数$f:E\to\mathbb{R}$是可测的，如果
+    $$\forall c\in\mathbb{R},E_c=\left\{x\in E\left| f(x)<c\right.\right\}\text{可测}$$
+    可测函数构成线性空间。
+\end{definition}
+
+这些公理化的定义为理论推带来了方便，但对初学者而言往往难以理解。下面给出可测集和可测函数的一些刻画，以帮助读者快速建立对它们的直观。数学家Littlewood曾说\cite{real_analysis}，只要掌握了以下三个观点，就相当于掌握了实变函数的大部分基础内容。
+
+\begin{theorem}[可测集接近于区间的有限不交并]
+    设$E$可测，$m(E)<\infty$，则$\forall \epsilon>0$，存在开有界区间族$\{I_k\}_{k=1}^{n}$，记$U=\bigsqcup_{k=1}^{n} I_k$，有
+    \[m(U\setminus E)+m(E\setminus U)<\epsilon\]
+\end{theorem}
+
+\begin{theorem}[Lusin定理：可测函数接近于连续函数]
+    设$f:E\to\mathbb{R}$可测，则$\forall \epsilon>0$，存在连续函数$g:E\to\mathbb{R}$及闭集$F\subset E$，使得$m(E\setminus F)<\epsilon$，且在$F$上有$f=g$。
+\end{theorem}
+
+\begin{definition}[几乎处处收敛]
+    函数列$\{f_n:E\to\mathbb{R}\}_{n=1}^{\infty}$在$E$上几乎处处收敛于函数$f:E\to\mathbb{R}$，如果存在一个零测度集$E_0$，使得
+    $$\forall x\in E\setminus E_0,\lim_{n\to\infty}f_n(x)=f(x)$$
+    记为$f_n\to f,a.e.$
+\end{definition}
+
+几乎处处收敛是对逐点收敛性的减弱，它意味着函数列零测集上不好的性质几乎不会影响到全局性质。
+
+\begin{theorem}[Egoroff定理：几乎处处收敛的可测函数列接近一致收敛]
+    设集合$E$有限可测（即$m(E)<\infty$），可测函数列$\{f_n:E\to\mathbb{R}\}$几乎处处收敛于$f:E\to\mathbb{R}$，则$\forall \epsilon>0$，存在闭集$F\subset E$，满足$m(E\setminus F)<\epsilon$，且在$F$上$f_n$一致收敛于$f$，记为$f_n\rightrightarrows f$。
+\end{theorem}
+
+\subsection{勒贝格积分}\label{sub:integral}
 
 \subsection{*函数空间}\label{sub:Lp_space}
 
@@ -1044,7 +1103,7 @@ $$a_0=\frac{1}{2^\nu\Gamma(\nu+1)}$$
 \[a_i=\frac{(g,f_i)}{(f_i,f_i)}=\frac{\int_{T}g(t)f_i^*(t)\,dt}{\int_{T}|f_i(t)|^2\,dt}\]
 细心的读者可能已经发现，这里得到的公式用到了有限维线性空间中的结论，但要推广到无限维线性空间并不是显然的。我们将在下一节给出帕塞瓦尔定理之后一并讨论这个问题。
 
-在适当的伸缩变换下，\ref{sub:bessel}中介绍的贝塞尔函数就是一个完备正交函数。此外，典型的标准完备正交函数系还有勒让德多项式 (Legendre polynomials)、小波变换基函数 (wavelet basis functions)等，下面仅讨论三角函数系和指数函数系。
+在适当的伸缩变换下，\ref{sub:bessel}中介绍的贝塞尔函数就是一个完备正交函数，傅里叶级数理论也是建立在完备正交函数系的基础之上的。此外，典型的标准完备正交函数系还有勒让德多项式 (Legendre polynomials)、小波变换基函数 (wavelet basis functions)等，下面仅讨论三角函数系和指数函数系。
 
 \section{傅里叶级数}\label{sec:Fourier_Series}
 
@@ -1071,30 +1130,31 @@ $$a_0=\frac{1}{2^\nu\Gamma(\nu+1)}$$
     =\frac{2}{T}\int_{T}f(t)\cos(k\omega t)(t)\,dt\]
 \[b_k=\frac{(f(t),\sin(k\omega t))}{(\sin(k\omega t),\sin(k\omega t))}=\frac{\int_{T}f(t)\sin(k\omega t)^*(t)\,dt}{\int_{T}|\sin(k\omega t)|^2\,dt}
     =\frac{2}{T}\int_{T}f(t)\sin(k\omega t)(t)\,dt\]
+
+如果将傅里叶级数展开式写为
+\begin{align*}
+    f(t) = & \frac{a_0}{2}+\sum_{k = 1}^{\infty} a_k \cos(k\omega t) \\
+           & +\sum_{k = 1}^{\infty} b_k \sin(k\omega t)
+\end{align*}
+则前半部分为偶函数，称之为$f(t)$的\textbf{偶分量}$f_e(t)$;后半部分为奇函数，称之为$f(t)$的\textbf{奇分量}$f_o(t)$。函数的偶分量和奇分量都是唯一的，并且\begin{align*}
+    f_e(t)=\frac{f(t)+f(-t)}{2} \\
+    f_o(t)=\frac{f(t)-f(-t)}{2}
+\end{align*}
+
+容易利用对称性得到：
 \begin{claim}[偶函数的傅里叶展开]
 当$f(t)$为偶函数，或者由$f(t)$做偶延拓时,展开式为
 \[f(t)=\frac{a_0}{2}+\sum_{k = 1}^{\infty} a_k\cos(k\omega t)\]
 其中
-\[a_k=\frac{4}{T}\int_{0}^{\frac{T}{2}} f(t)\cos(k\omega t)\,dt\]
+\[a_k=\frac{4}{T}\int_{0}^{T/2} f(t)\cos(k\omega t)\,dt\]
 \[b_k=0\]
 \end{claim}\begin{claim}[奇函数的傅里叶展开]
 当$f(t)$为奇函数，或者由$f(t)$做奇延拓时,展开式为
 \[f(t)=\sum_{k = 1}^{\infty} b_k \sin(k\omega t)\]
 其中
 \[a_k=0\]
-\[b_k=\frac{4}{T}\int_{0}^{\frac{T}{2}} f(t)\sin(k\omega t)\,dt\]
+\[b_k=\frac{4}{T}\int_{0}^{T/2} f(t)\sin(k\omega t)\,dt\]
 \end{claim}
-容易利用对称性得到这些公式。
-
-如果将傅里叶级数展开式$f(t) =\frac{a_0}{2}+\sum_{k = 1}^{\infty} a_k \cos(k\omega t)+b_k\sin(k\omega t)$写为
-\begin{align*}
-    f(t) = & \frac{a_0}{2}+\sum_{k = 1}^{\infty} a_k \cos(k\omega t) \\
-           & +\sum_{k = 1}^{\infty} b_k \sin(k\omega t)
-\end{align*}
-则前半部分为偶函数，称之为$f(t)$的\textbf{偶分量}$f_e(t)$;后半部分为奇函数，称之为$f(t)$的\textbf{奇分量}$f_o(t)$。高中数学中我们知道，函数的偶分量和奇分量都是唯一的，并且\begin{align*}
-    f_e(t)=\frac{f(t)+f(-t)}{2} \\
-    f_o(t)=\frac{f(t)-f(-t)}{2}
-\end{align*}
 
 除了奇偶性，还可以从奇次谐波、偶次谐波的角度来理解函数。
 \begin{definition}[奇谐函数]
@@ -1120,13 +1180,13 @@ $$a_0=\frac{1}{2^\nu\Gamma(\nu+1)}$$
         \frac{4}{T}\int_{0}^{T/2}f(t)\sin(k\omega t)\,dt,&\text{if }k\text{为奇数}
     \end{cases}
 \end{align*}
-有了奇谐函数自然也能够定义偶谐函数：$f\left(t+\frac{T}{2}\right)=f(t)$，容易验证它只有偶次谐波分量，但从定义式可以看出这只是周期减半的函数。
+有了奇谐函数自然也能够定义偶谐函数：$f\left(t+\dfrac{T}{2}\right)=f(t)$，容易验证它只有偶次谐波分量，但从定义式可以看出这只是周期减半的函数。
 
 由欧拉公式$e^{ik\omega t}=\cos(k\omega t)+i\sin(k\omega t)$，得到
 \[\cos(k\omega t)=\frac{e^{ik\omega t}+e^{-ik\omega t}}{2},\sin(k\omega t)=\frac{e^{ik\omega t}-e^{-ik\omega t}}{2i}\]
 故函数$f(t)$也可在指数函数系下展开：\begin{definition}[指数形式傅里叶展开]
     \[f(t)=\sum_{k = 0}^{\infty}  c_k e^{ik\omega t} ,c_k=\frac{a_k-ib_k}{2},c_{-k}=\frac{a_k+ib_k}{2}=c_k^*,k\in \mathbb{N}\]
-（特别地，$c_0=c_0^*\Rightarrow c_0\in\mathbb{R} $）
+（特别地，$c_0=c_0^*\implies c_0\in\mathbb{R} $）
 \end{definition}
 容易验证$\{e^{ik\omega t}\}_{k=0}^{\infty}$是完备正交函数系：
 \begin{align*}
@@ -1152,8 +1212,7 @@ $$a_0=\frac{1}{2^\nu\Gamma(\nu+1)}$$
 可知单边频谱相比双边频谱，在给定正频率处的幅值加倍，相位不变。这里的频率实际上是角频率$\omega$，用频率f画频谱只涉及图像的横向伸缩，此处不再赘述。
 
 \begin{example}[周期矩形脉冲信号的傅里叶级数展开和频谱图]
-脉冲宽度为$\tau$，脉冲幅度为E，周期为$T (\tau<T)$的周期矩形脉冲信号$f(t)=E\chi_{[-\tau/2,\tau/2]}$，基波角频率
-$\omega=\frac{2\pi}{T}$，傅里叶级数展开为
+脉冲宽度为$\tau$，脉冲幅度为E，周期为$T (\tau<T)$的周期矩形脉冲信号$f(t)=E\chi_{[-\tau/2,\tau/2]}$，基波角频率$\omega=\dfrac{2\pi}{T}$，傅里叶级数展开为
 \[f(t)=\sum_{k = 1}^{\infty}  \frac{E\tau}{T}\text{Sa}\left(\frac{k\omega \tau}{2}\right)e^{ik\omega t}\]
 \end{example}
 \begin{figure}[H]
@@ -1163,7 +1222,13 @@ $\omega=\frac{2\pi}{T}$，傅里叶级数展开为
 \end{figure}
 如图，可以看到，这个频谱与采样函数$\text{Sa}(\omega)$非常相似（为了体现这一点，绘制频谱时将基波角频率大幅减小，并不是第一张图直接做傅里叶级数展开的结果），原因将在\ref{sub:fourier_of_signal}中给出。
 
-\textbf{带宽} (bandwidth)指最高频率与最低频率之差，表征信号频率的集中程度。对于实信号，有时仅考虑正频率\cite{signal_systems}，带宽减半。周期矩形脉冲信号的频谱是无限的，但能量基本集中在最靠近y轴的两个零点之间，此时可以将带宽定义为\textbf{第一过零点带宽}$B=\frac{2\pi}{\tau}$（仅考虑正频率）。
+\begin{definition}[带宽]
+    \textbf{带宽} (bandwidth)指信号的最高频率与最低频率之差，表征信号频率的集中程度。对于实信号，有时仅考虑正频率\cite{signal_systems}，带宽减半。
+
+    周期矩形脉冲信号的频谱是无限的，但能量基本集中在最靠近y轴的两个零点之间，此时可以将它的带宽定义为\textbf{第一过零点带宽}：
+    $$B=\dfrac{2\pi}{\tau}$$
+
+\end{definition}
 
 \subsection{傅里叶级数的收敛性}\label{sub:fourier_series_convergency}
 我们根据内积空间的理论写出了函数的傅里叶级数展开式，但这并不能保证傅里叶级数存在且收敛（换言之，前文所述的展开式中等号不能保证相等，只能保证后者是前者的展开式，尽管在多数情况下等号是正确的），保证这一点需要\textbf{狄利克雷条件}：
@@ -1175,6 +1240,10 @@ $\omega=\frac{2\pi}{T}$，傅里叶级数展开为
     \item 在一个周期内，f的极值点个数有限
 \end{itemize}
 \end{definition}
+\begin{definition}[分段连续]
+    函数$f$在区间$[a,b]$上是\textbf{分段连续}的，如果存在区间的划分$a=x_0<x_1<\dots <x_n=b$，使得在每个子区间$(x_{i-1},x_i)$上f连续，且区间端点处$f$的左右极限存在，记作$f\in PC[a,b]$。
+\end{definition}
+
 \begin{theorem}[狄利克雷定理]
     满足狄利克雷条件时，f的傅里叶级数展开在在任意点收敛到其左右极限的平均值：
     \[\forall t\in \mathbb{R},\sum_{k=\infty}^{\infty}c_k e^{2\pi ikt}=\frac{f(t+)+f(t-)}{2}\]
@@ -1186,13 +1255,13 @@ $\omega=\frac{2\pi}{T}$，傅里叶级数展开为
 看起来，可导性比连续性强不少，但在大部分情况下，我们讨论的函数都是分段光滑。在分段光滑的条件下，我们可以证明傅里叶级数是一致收敛于原函数的。
 
 \subsection{帕塞瓦尔恒等式}\label{sub:paseval}
-类比有限维线性空间中的勾股定理，有\begin{claim}[帕塞瓦尔定理/瑞利恒等式]
+类比有限维线性空间中的勾股定理，有
+\begin{theorem}[帕塞瓦尔定理/瑞利恒等式]
     \[\|f\|_2=\sum_{k=1}^{\infty}c_k^2|e^{ik\omega t}|^2=T\sum_{k=1}^{\infty}c_k^2\]
 即\[P=\frac{1}{T}\int_{T}|f(t)|^2\,dt=\sum_{k=1}^{\infty}c_k^2\]
 其中P为平均功率。
-\end{claim}
-
-至此，我们得到了傅里叶系数的公式和帕塞瓦尔定理，但其实证明用到的结论是基于有限维线性空间的，现在就来填补这个逻辑漏洞，对此不感兴趣的读者可以忽略这部分内容。以下设$\{\phi_n\}_{n=1}^{\infty}$是$L^2(a,b)$的标准正交基,$f\in L^2(a,b)$（注意这里已经不局限于讨论傅里叶级数，并且与前文未标准化的正交基略有形式上的差别）。
+\end{theorem}
+至此，我们得到了傅里叶系数的公式和帕塞瓦尔定理，但其实证明用到的结论是基于有限维线性空间的，现在就来填补这个逻辑漏洞，对此不感兴趣的读者可以忽略这部分内容。以下设$\{\phi_n\}_{n=1}^{\infty}$是$L^2(a,b)$的标准正交基，$f\in L^2(a,b)$（注意这里已经不局限于讨论傅里叶级数，并且与前文未标准化的正交基略有形式上的差别）。
 
 \begin{lemma}[*贝塞尔不等式]
 \[\sum_{n=1}^{\infty}|(f,\phi_n)|^2\leq\|f\|_2^2\]
@@ -1224,14 +1293,15 @@ $\omega=\frac{2\pi}{T}$，傅里叶级数展开为
 \begin{flalign*}
               \left\|\sum_{n=m_1}^{m_2}(f,\phi_n)\phi_n\right\|_2^2=\sum_{n=m_1}^{m_2}\left|(f,\phi_n)\right|^2\to 0
 \end{flalign*}
-因此$\sum_{n=1}^{\infty}(f,\phi_n)\phi_n$构成柯西列。
+因此$\sum_{n=1}^{\infty}(f,\phi_n)\phi_n$构成柯西列。由于$L^2(a,b)$是无限维的完备度量空间，即\textbf{希尔伯特空间} (Hilbert space)，见\ref{sub:Lp_space}。
 
 令$m_1=1,m_2\to\infty$，即得
 \begin{flalign*}
 \left\|\sum_{n=1}^{\infty}(f,\phi_n)\phi_n\right\|_2 =\sum_{n=1}^{\infty}\left|(f,\phi_n)\phi_n\right|^2\leq\|f\|_2^2
 \end{flalign*}
 \end{proof}
-柯西列能够推出收敛是因为$L^2(a,b)$是无限维的完备度量空间，即\textbf{希尔伯特空间} (Hilbert space)，见\ref{sub:Lp_space}。构建这个引理是为了使用希尔伯特空间中内积的连续性，其表述见下一个命题。
+
+构建这个引理是为了使用希尔伯特空间中内积的连续性，其表述见下一个命题。
 
 \begin{proposition}[*希尔伯特空间H中的内积的连续性]
 如果级数$\sum_{n=1}^{\infty}\phi_n$的部分和$S_N$依范数收敛到S，则任给$y\in H$，总有
@@ -1286,9 +1356,45 @@ $3\implies 1$：$(f,\phi_n)=0\implies\|f\|_2=0\implies f\sim 0$.
 并称之为\textbf{傅里叶变换对}。
 \end{definition}
 
-傅里叶变换没有最好的符号，在不引起歧义时采用最简洁和便于理解的即可。注意在傅里叶变换的理论中，要求$f\in L^1(\mathbb{R})$而不是$L^2(\mathbb{R})$，$\mathbb{R}$是无穷区间，$L^1(\mathbb{R})$与$L^2(\mathbb{R})$之间不存在包含关系。
+傅里叶变换没有最好的符号，在不引起歧义时采用最简洁和便于理解的即可。注意在傅里叶变换的理论中，要求$f\in L^1(\mathbb{R})$而不是$L^2(\mathbb{R})$。
 
-我们通过以下两个命题来说明$L^1(\mathbb{R})$的必要性。
+下面解释“乘T，认为$k\omega$或$k\xi$为自变量”的本质。我们来看上一节中\ref{sub:tri_exp_series}的例2.2.1，为了体现双边频谱与采样函数的相似性，我们取了一个较为特殊的周期矩形脉冲信号，它的基波角频率应为图中两相邻竖直线间的间隔，即\textbf{谱线间隔}，可见其频率极小、周期极大，与我们研究非周期现象所用到的极限情况$T\to\infty$是一致的，换言之，令$T\to\infty$自动地使“傅里叶系数”在频谱中的间隔变小，\textbf{周期信号趋向非周期信号的过程自动地使离散频谱趋向连续频谱}。这样，乘T就不难理解了，它的作用是“除以$\dfrac{1}{T}$”，$\dfrac{1}{T}$是所在频率成分处小矩形的宽（类似于黎曼积分），换言之，以频率$\xi$为横坐标，\textbf{谱系数}$c_n$是$\dfrac{n}{T}=n\xi$处的小矩形面积，$Tc_n$是f中对应频率成分的含量，可以理解为单位频段内的谱系数，即频谱密度；以角频率$\omega$为横坐标，$c_n$是$\dfrac{2\pi n}{T}=n\omega$处的小矩形面积，$Tc_n$是f中对应角频率成分的含量。因此，$F(\xi)$或$F(\omega)$也称为频谱密度函数。
+
+实际上，从这个角度出发，可以立即得到\textbf{傅里叶逆变换} (Inverse Fourier Tansform,IFT)的公式，因为我们已经将f展开为傅里叶级数，这对应着由f的傅里叶变换$\mathcal{F} f$还原出f。我们知道
+\lr{
+f(t)&=\sum_{n=-\infty}^{\infty}c_n e^{2\pi i\xi t}\\
+&=\frac{1}{T}\sum_{n=-\infty}^{\infty}\left(\int_{T}f(t)e^{-2\pi i\xi t}\,dt\right)e^{2\pi i\xi t}
+}{
+f(t)&=\sum_{n=-\infty}^{\infty}c_n e^{i\omega t}\\
+&=\frac{1}{T}\sum_{n=-\infty}^{\infty}\left(\int_{T}f(t)e^{-i\omega t}\,dt\right)e^{i\omega t}
+}
+根据前文所述的对应关系，做以下替换（注意$T\to\infty$）：
+\lr{
+    &\frac{1}{T}\rightarrow d\xi,\int_{T}f(t)e^{-2\pi i\xi t}\,dt\rightarrow \mathcal{F} f(\xi)\\
+    &f(t)=\mathcal{F} ^{-1}\mathcal{F} (t)=\int_{-\infty}^{\infty}\mathcal{F} f(\xi)e^{2\pi i\xi t}\,d\xi
+}{
+    &\frac{2\pi}{T}\rightarrow d\omega,\int_{T}f(t)e^{i\omega t}\,dt\rightarrow \mathcal{F} f(\omega)\\
+    &f(t)=\mathcal{F} ^{-1}\mathcal{F} (t)=\frac{1}{2\pi}\int_{-\infty}^{\infty}\mathcal{F} f(\omega)e^{i\omega t}\,d\omega
+}
+这里$\mathcal{F} ^{-1}$表示取傅里叶逆变换，和$\mathcal{F} $一样，是一种从函数空间到函数空间的映射，$\mathcal{F} $是从时域函数到频域（角频域）函数的映射，$\mathcal{F} ^{-1}$是从频域（角频域）到时域函数的映射。因此，严格来说我们总应该写上自变量，但在不引起歧义的情况下允许略去，例如我们同时承认$F(\xi)=\mathcal{F} [f(t)](\xi)$和$F(\xi)=\mathcal{F} [f(t)]$的写法。
+
+至此我们得到了傅里叶逆变换\footnote{在一些文献中，傅里叶变换为$\frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty}f(t)e^{-i\omega t}\,dt$，这样逆变换为$\frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty}f(\omega)e^{i\omega t}\,d\omega$，公式具有对称性，但不具有直接的物理意义，并且没有本质区别，故本书不加以讨论。}的定义：
+\begin{definition}[傅里叶逆变换]
+    设$f\in L^1(\mathbb{R})$，其傅里叶逆变换为\lr{
+        \mathcal{F} ^{-1}f(t)=\int_{-\infty}^{\infty}f(\xi)e^{2\pi i\xi t}\,d\xi
+    }{
+        \mathcal{F} ^{-1}f(t)=\frac{1}{2\pi}\int_{-\infty}^{\infty}f(\omega)e^{i\omega t}\,d\omega
+    }
+\end{definition}
+并且从形式上得到了\textbf{傅里叶反演公式} (the Fourier Inversion Thoerem)：
+\begin{claim}[傅里叶反演公式]
+    \[f=\mathcal{F} \mathcal{F} ^{-1}f=\mathcal{F} ^{-1}\mathcal{F} f\]
+\end{claim}
+\begin{remark}
+    一般的傅里叶反演公式将在\ref{sub:fourier_inversion}中给出，而不会导致循环论证。类似傅里叶级数，我们实际上也应该要求$f\in PC$，傅里叶逆变换收敛到左右极限的平均值，但更多时候我们不关心不连续点的值。
+\end{remark}
+
+我们通过以下两个命题来说明傅里叶变换的定义中$L^1(\mathbb{R})$的好处。
 
 \begin{proposition}
     $f\in L^1(\mathbb{R})$时，它的傅里叶变换是有界的、一致连续的。
@@ -1334,42 +1440,6 @@ $3\implies 1$：$(f,\phi_n)=0\implies\|f\|_2=0\implies f\sim 0$.
     }
 \end{claim}
 它的证明比较复杂，将在\ref{sub:riemman_lebesgue_lemma}中给出。
-
-下面解释“乘T，认为$k\omega$或$k\xi$为自变量”的本质。我们来看上一节中\ref{sub:tri_exp_series}的例2.2.1，为了体现双边频谱与采样函数的相似性，我们取了一个较为特殊的周期矩形脉冲信号，它的基波角频率应为图中两相邻竖直线间的间隔，即\textbf{谱线间隔}，可见其频率极小、周期极大，与我们研究非周期现象所用到的极限情况$T\to\infty$是一致的，换言之，令$T\to\infty$自动地使“傅里叶系数”在频谱中的间隔变小，\textbf{周期信号趋向非周期信号的过程自动地使离散频谱趋向连续频谱}。这样，乘T就不难理解了，它的作用是“除以$\frac{1}{T}$”，$\frac{1}{T}$是所在频率成分处小矩形的宽（类似于黎曼积分），换言之，以频率$\xi$为横坐标，\textbf{谱系数}$c_n$是$\frac{n}{T}=n\xi$处的小矩形面积，$Tc_n$是f中对应频率成分的含量，可以理解为单位频段内的谱系数，即频谱密度；以角频率$\omega$为横坐标，$c_n$是$\frac{2\pi n}{T}=n\omega$处的小矩形面积，$Tc_n$是f中对应角频率成分的含量。因此，$F(\xi)$或$F(\omega)$也称为频谱密度函数。
-
-实际上，从这个角度出发，可以立即得到\textbf{傅里叶逆变换} (Inverse Fourier Tansform,IFT)的公式，因为我们已经将f展开为傅里叶级数，这对应着由f的傅里叶变换$\mathcal{F} f$还原出f。我们知道
-\lr{
-f(t)&=\sum_{n=-\infty}^{\infty}c_n e^{2\pi i\xi t}\\
-&=\frac{1}{T}\sum_{n=-\infty}^{\infty}\left(\int_{T}f(t)e^{-2\pi i\xi t}\,dt\right)e^{2\pi i\xi t}
-}{
-f(t)&=\sum_{n=-\infty}^{\infty}c_n e^{i\omega t}\\
-&=\frac{1}{T}\sum_{n=-\infty}^{\infty}\left(\int_{T}f(t)e^{-i\omega t}\,dt\right)e^{i\omega t}
-}
-根据前文所述的对应关系，做以下替换（注意$T\to\infty$）：
-\lr{
-    &\frac{1}{T}\rightarrow d\xi,\int_{T}f(t)e^{-2\pi i\xi t}\,dt\rightarrow \mathcal{F} f(\xi)\\
-    &f(t)=\mathcal{F} ^{-1}\mathcal{F} (t)=\int_{-\infty}^{\infty}\mathcal{F} f(\xi)e^{2\pi i\xi t}\,d\xi
-}{
-    &\frac{2\pi}{T}\rightarrow d\omega,\int_{T}f(t)e^{i\omega t}\,dt\rightarrow \mathcal{F} f(\omega)\\
-    &f(t)=\mathcal{F} ^{-1}\mathcal{F} (t)=\frac{1}{2\pi}\int_{-\infty}^{\infty}\mathcal{F} f(\omega)e^{i\omega t}\,d\omega
-}
-这里$\mathcal{F} ^{-1}$表示取傅里叶逆变换，和$\mathcal{F} $一样，是一种从函数空间到函数空间的映射，$\mathcal{F} $是从时域函数到频域（角频域）函数的映射，$\mathcal{F} ^{-1}$是从频域（角频域）到时域函数的映射。因此，严格来说我们总应该写上自变量，但在不引起歧义的情况下允许略去，例如我们同时承认$F(\xi)=\mathcal{F} [f(t)](\xi)$和$F(\xi)=\mathcal{F} [f(t)]$的写法。
-
-至此我们得到了傅里叶逆变换\footnote{在一些文献中，傅里叶变换为$\frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty}f(t)e^{-i\omega t}\,dt$，这样逆变换为$\frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty}f(\omega)e^{i\omega t}\,d\omega$，公式具有对称性，但不具有直接的物理意义，并且没有本质区别，故本书不加以讨论。}的定义：
-\begin{definition}[傅里叶逆变换]
-    设$f\in L^1(\mathbb{R})$，其傅里叶逆变换为\lr{
-        \mathcal{F} ^{-1}f(t)=\int_{-\infty}^{\infty}f(\xi)e^{2\pi i\xi t}\,d\xi
-    }{
-        \mathcal{F} ^{-1}f(t)=\frac{1}{2\pi}\int_{-\infty}^{\infty}f(\omega)e^{i\omega t}\,d\omega
-    }
-\end{definition}
-并且从形式上得到了\textbf{傅里叶反演公式} (the Fourier Inversion Thoerem)：
-\begin{claim}[傅里叶反演公式]
-    \[f=\mathcal{F} \mathcal{F} ^{-1}f=\mathcal{F} ^{-1}\mathcal{F} f\]
-\end{claim}
-\begin{remark}
-    一般的傅里叶反演公式将在\ref{sub:fourier_inversion}中给出，而不会导致循环论证。类似傅里叶级数，我们实际上也应该要求$f\in PC$，傅里叶逆变换收敛到左右极限的平均值，但更多时候我们不关心不连续点的值。
-\end{remark}
 
 \subsection{傅里叶变换的运算性质}\label{sub:fourier_operation_properties}
 \begin{theorem}[傅里叶变换的运算性质]
@@ -1569,30 +1639,40 @@ $\evalat{e^{-2\pi i\xi t}f(t)}{-\infty}{\infty},\evalat{e^{-i\omega t}f(t)}{-\in
 \subsection{常用信号的傅里叶变换}\label{sub:fourier_of_signal}
 
 \begin{example}[矩形函数]
-在\ref{sub:tri_exp_series}中讨论了矩形函数$f(t)=E\chi_{[-T/2,T/2]}$的傅里叶变换，现在可以验证它的频谱与采样函数相似：
+在\ref{sub:tri_exp_series}中讨论了矩形函数$f(t)=E\chi_{[-T/2,T/2]}$的傅里叶级数，并发现它的频谱与采样函数非常相似。现在可以验证，它的傅里叶变换就是某个采样函数：
 \begin{lralign}
 \mathcal{F} f(\xi)&=\int_{-\infty}^{\infty}f(t)e^{-2\pi i\xi t}\,dt\\
 &=E\int_{-\infty}^{\infty}\chi_{[-T/2,T/2]}(t)e^{-2\pi i\xi t}\,dt\\
-&=E\int_{-\frac{T}{2}}^{\frac{T}{2}}e^{-2\pi i\xi t}\,dt\\
-&=-\frac{E}{2\pi i\xi}\evalat{e^{-2\pi i\xi t}}{-\frac{T}{2}}{\frac{T}{2}}\\
+&=E\int_{-T/2}^{T/2}e^{-2\pi i\xi t}\,dt\\
+&=-\frac{E}{2\pi i\xi}\evalat{e^{-2\pi i\xi t}}{-T/2}{T/2}\\
 &=\frac{e^{\pi i\xi T}-e^{-\pi i\xi T}}{2i}\frac{E}{\pi\xi}\\
 &=\frac{E}{\pi\xi}\sin(\pi T\xi)=ET\text{sinc}(T\xi)
 \switch
 \mathcal{F} f(\omega)&=\int_{-\infty}^{\infty}f(t)e^{-i\omega t}\,dt\\
 &=E\int_{-\infty}^{\infty}\chi_{[-T/2,T/2]}(t)e^{-i\omega t}\,dt\\
-&=E\int_{-\frac{T}{2}}^{\frac{T}{2}}e^{-i\omega t}\,dt\\
-&=-\frac{E}{i\omega}\evalat{e^{-i\omega t}}{-\frac{T}{2}}{\frac{T}{2}}\\
-&=\frac{e^{\frac{i\omega T}{2}}-e^{-\frac{i\omega T}{2}}}{2i}\frac{2E}{\pi\omega}\\
-&=\frac{2E}{\omega}\sin(\frac{T\omega}{2})=ET\text{Sa}\left(\frac{T\omega}{2}\right)
+&=E\int_{-T/2}^{T/2}e^{-i\omega t}\,dt\\
+&=-\frac{E}{i\omega}\evalat{e^{-i\omega t}}{-T/2}{T/2}\\
+&=\frac{e^{i\omega T/2}-e^{-i\omega T/2}}{2i}\frac{2E}{\pi\omega}\\
+&=\frac{2E}{\omega}\sin\left(\frac{T\omega}{2}\right)=ET\text{Sa}\left(\frac{T\omega}{2}\right)
 \end{lralign}
-因此\lr{
-    \mathcal{F} \chi_{[-T/2,T/2]}(\xi)&=T\text{sinc}(T\xi)\\
-    \mathcal{F} \left[\text{sinc}(Tt)\right](\xi)&=\frac{1}{T}\chi_{[-T/2,T/2]}\left(\frac{\xi}{T}\right)
-}{
-    \mathcal{F} \chi_{[-T/2,T/2]}(\omega)&=T\text{Sa}\left(\frac{T\omega}{2}\right)\\
-    \mathcal{F}\left[\text{Sa}(Tt)\right](\omega)&=\frac{\pi}{T}\chi_{[-T,T]}(\omega)
-}
+即
+\begin{lralign}
+    \mathcal{F} \chi_{[-T/2,T/2]}(\xi)&=T\text{sinc}(T\xi)
+\switch
+    \mathcal{F} \chi_{[-T/2,T/2]}(\omega)&=T\text{Sa}\left(\frac{T\omega}{2}\right)
+\end{lralign}
 \end{example}
+将矩形函数周期化，傅里叶系数与矩形函数的傅里叶变换在一列等间距的点上取值成正比，这一关系的解释将在\ref{sub:poisson_summation}中给出。
+
+由傅里叶反演公式得到：
+\begin{corollary}[采样函数的傅里叶变换]
+    \begin{lralign}
+        \mathcal{F} \left[\text{sinc}(Tt)\right](\xi)&=\frac{1}{T}\chi_{[-T/2,T/2]}\left(\frac{\xi}{T}\right)
+\switch
+        \mathcal{F}\left[\text{Sa}(Tt)\right](\omega)&=\frac{\pi}{T}\chi_{[-T,T]}(\omega)
+    \end{lralign}
+\end{corollary}
+
 基于以上结果，可以证明\ref{sub:int_sin}中给出的狄利克雷积分公式：
 \begin{corollary}[狄利克雷积分]
     \[\int_{-\infty}^{\infty}\frac{\sin t}{t}\,dt=\pi\]
@@ -1668,14 +1748,14 @@ $\evalat{e^{-2\pi i\xi t}f(t)}{-\infty}{\infty},\evalat{e^{-i\omega t}f(t)}{-\in
 \end{lralign}
 \end{corollary}
 
-由傅里叶反演公式，有：\begin{lralign}
-    \mathcal{F} \mathcal{F} \text{sgn}&=2\pi \text{sgn}^-=-2\pi \text{sgn}\\
-    &=\mathcal{F} \left[\frac{1}{\pi i\xi}\right]
-\switch
-    \mathcal{F} \mathcal{F} \text{sgn}&=2\pi \text{sgn}^-=-2\pi \text{sgn}\\
-    &=\mathcal{F} \left[\frac{2}{i\omega}\right]
-\end{lralign}
-由此可得
+由傅里叶反演公式可得：%\begin{lralign}
+%    \mathcal{F} \mathcal{F} \text{sgn}&=2\pi \text{sgn}^-=-2\pi \text{sgn}\\
+%    &=\mathcal{F} \left[\frac{1}{\pi i\xi}\right]
+%\switch
+%    \mathcal{F} \mathcal{F} \text{sgn}&=2\pi \text{sgn}^-=-2\pi \text{sgn}\\
+%    &=\mathcal{F} \left[\frac{2}{i\omega}\right]
+%\end{lralign}
+%由此可得
 \begin{corollary}
     \quad
 \lr{
@@ -2486,17 +2566,15 @@ $\overline{T}=-T$，则称T为\textbf{纯虚分布}。
 \end{equation*}
 \end{definition}
 
-分布的伸缩与函数的伸缩有一点不同，即多了一个$\dfrac{1}{|a|}$的因子，这意味着，作为形式上的函数定义的分布$T(x)$，其伸缩$\sigma_a T(x)$并不一定等于$T(ax)$。例如：
+分布的伸缩与函数的伸缩有一点不同，即多了一个$\dfrac{1}{|a|}$的因子，这意味着，作为形式上的函数定义的分布$T(x)$，其伸缩$\sigma_a T(x)$并不一定等于$T(ax)$。在\ref{sub:signal}中定义过
+$$\delta(ax)=\dfrac{1}{|a|}\delta(x)$$
+它与分布的伸缩定义相符：
+$$\sigma_a\delta=\delta(ax)=\frac{1}{|a|}\delta(x)$$
+
+但是，如果分布本身是由不属于$L^1(\mathbb{R})$的函数定义的正则分布，那么它的伸缩就不等于该函数的伸缩，因此必须明确伸缩算子所处的语境。
+
 \begin{example}
-    \[\sigma_a\delta=\frac{1}{a}\delta\]
-    这是因为（以下默认$a>0$，$a<0$的情况可直接从$\delta$是偶分布得出）：
-\begin{align*}
-    \left\langle \sigma_a\delta,\varphi\right\rangle&=\left\langle \delta,\frac{1}{a}\sigma_{1/a}\varphi\right\rangle=\frac{1}{a}\varphi(0)=\left\langle \frac{1}{a}\delta,\varphi\right\rangle
-\end{align*}
-根据\ref{sub:signal}中的定义，$\delta(ax)=\delta(x)/|a|$，这样就有$\sigma_a\delta=\delta(ax)$。
-\end{example}
-\begin{example}
-    函数$mathds{1}\notin L^1(\mathbb{R})$，作为一个分布，它的伸缩为：
+    函数$\mathds{1}\notin L^1(\mathbb{R})$，作为一个分布，它的伸缩为：
 \begin{align*}
     \sigma_a\mathds{1}&=\frac{1}{|a|}\mathds{1}
 \end{align*}
@@ -2766,32 +2844,90 @@ $\overline{T}=-T$，则称T为\textbf{纯虚分布}。
 \section{系统概述}\label{sec:System}
 
 \subsection{系统的基本概念}\label{sub:concepts_of_system}
-对于单输入单输出系统，将输入信号称为激励 (excitation)，输出信号称为响应 (response)，并将时域信号分别用$e(t),r(t)$表示，如果系统用字母H表示，可以记$r(t)=H[e(t)]$，或更简洁地，$r(t)=He(t)$.H是函数空间上的映射。下面先引入几个基本的定义\cite{brad_osgood_ee261}\cite{signal_systems}。
+
+对于单输入单输出系统，将输入信号称为\textbf{激励} (excitation)，输出信号称为\textbf{响应} (response)，并将时域信号分别用$e(t),r(t)$表示，如果系统用字母H表示，可以记$r(t)=H[e(t)]$，或更简洁地，$r(t)=He(t)$。$H$是函数空间上的映射。
+
+\begin{example}
+    给定以下一阶动态电路，并设各元件无初始储能。
+    \begin{center}
+        \begin{circuitikz}[american]
+            \draw (0,0) to[V=$1$V] (0,3)
+            to[closing switch] (5,3)
+            to[C=$C$] (5,0)
+            to[R=$R$] (0,0);
+        \end{circuitikz}
+    \end{center}
+    在$t=0$时刻闭合开关，则系统的激励为$e(t)=u(t)$。如果认为电容两段的电压$u_C(t)$是系统的响应$r(t)$，则可以用$r(t)=H[e(t)]$来表示这个系统。
+
+    使用三要素法分析该电路，显然初状态下有$u_C(0)=0$V，末状态下$u_C(\infty)=1$V，时间常数$\tau=RC$，因此
+    \[e(t)=u_C(t)=1-e^{t/RC}\]
+\end{example}
+
+一般来说，如果我们对系统进行适当的建模，则可以用函数方程来描述这个系统。函数方程不意味着我们一定能够给出响应关于激励的封闭表达式。
+\begin{example}
+设激励$e(t)$与响应$r(t)$满足
+\[r^3(t)+4r(t)=\exp e(t)\]
+这是一个超越方程，但由于$f(x)=x^3+4x$严格单调递增，可由激励唯一确定响应的值，这也是一个系统。
+\end{example}
+
+我们特别关注能够用\textbf{微分方程}描述的系统，例如，第一个例子中的动态电路就可以用一阶微分方程来描述。
+\begin{definition}[微分方程]
+    称如下形式的方程为\textbf{常微分方程}(ordinary differential equation,ODE)\cite{ode}：
+    \[F(x,y,y',\cdots,y^{(n)})=0,n\geq 1\]
+    其中$F$为已知函数，自变量$x$在$\mathbb{R}$的某个区间上变化，未知函数$y\in\mathbb{R}$，正整数$n$称为方程的\textbf{阶}。如果$n\geq 2$，则方程称为\textbf{高阶微分方程}。
+\end{definition}
+\begin{definition}[初值问题]
+    数学上，将微分方程中的函数在某一点的各阶导数值称为\textbf{初始条件}，以$t=0$时刻为例，又称为\textbf{0时刻状态}：
+    \[y(0)=y_0,y'(0)=y'_0,\cdots,y^{(n-1)}(0)=y^{(n-1)}_0\]
+    我们称这样的问题为\textbf{初值问题}。
+\end{definition}
+
+常微分方程的解空间是有限维的，只要给定足够的初值数量，就可以唯一确定方程的解，因此常微分方程系统都具有\textbf{即时性}。
+
+\begin{definition}[即时性与记忆性]
+一个系统具有\textbf{即时性}（或无记忆性、Markov性），如果该系统的响应在任意时刻$t$的状态演化率完全且唯一地取决于该时刻的系统状态与激励，而不显式地依赖于任何过去时刻$t'<t$的系统状态或历史激励。换言之，如果一个初值问题的解存在且唯一，则由它描述的系统具有即时性。
+
+一个系统具有\textbf{记忆性}（或历史依赖性、非Markov性），如果系统的响应在任意时刻$t$的状态演化率显式地依赖于过去时刻$t'<t$的系统状态或历史激励，而不能被简化为仅依赖于当前时刻$t$的量。
+\end{definition}
+\begin{example}[积分方程]
+    设系统由积分方程$r(t)=\int_{-\infty}^{t}e(y)\,dy$描述，则它是记忆系统。
+\end{example}
+\begin{example}[时滞系统]
+    由时滞微分方程描述的系统称为时滞系统。时滞微分方程是指类似于
+    \[y'(t)=F(y(t),y(t-\tau),t)\]
+    的方程（我们一般不将这类方程归类于微分方程），其中$\tau$是常数，它的解空间是无限维的，不可能通过某一时刻的系统状态唯一确定方程的解。这个方程描述了一个无激励的记忆系统。
+\end{example}
+
+微分方程涉及到非常庞杂的理论。在信号与系统课程中，我们通常关注的是更为特殊的微分方程，它所描述的系统是具有\textbf{线性}和\textbf{时不变性}的，这种系统我们将在\ref{sec:ODE}详细讨论。现在先来给出线性和时不变性的定义。
+
 \begin{definition}[线性系统]
     如果算子H是线性的，即
 \[\forall a,b\in\mathbb{C},\forall e_1(t),e_2(t),H[ae_1(t)+be_2(t)]=aH[e_1(t)]+bH[e_2(t)]\]
 就说系统是\textbf{线性系统}(linear system)，且满足叠加法则 (principle of superposition)。
 \end{definition}
+
+对于线性系统，由于系统原有的能量，即便激励$e(t)=0$，响应$r(t)$也可能不为零。根据系统的线性性，可以将$r(t)$分解为两部分：\textbf{零输入响应}(zero input response,$r_{zi}(t)$)和\textbf{零状态响应}(zero state response,$r_{zs}(t)$)。
 \begin{definition}[零输入响应与零状态响应]
-    由于系统原有的能量，初始状态可能不为零，这时即便激励$e(t)=0$，响应$r(t)$也可能不为零。根据系统的线性性，可以将r(t)分解为两部分：\textbf{零输入响应}(zero input response,$r_{zi}(t)$)和\textbf{零状态响应}(zero state response,$r_{zs}(t)$)，零输入响应是指$e(t)=0$，由初始状态产生的响应，零状态响应则是将初始状态置零时的响应。\textbf{全响应}$r(t)=r_{zi}(t)+r_{zs}(t)$。
+    零输入响应是指$e(t)=0$时，由于系统原有能量而产生的响应；零状态响应是指将系统初始能量置零时的响应。\textbf{全响应}$r(t)=r_{zi}(t)+r_{zs}(t)$。
 \end{definition}
-对于零输入响应不为0的线性系统，直接将两个响应相加将得到两倍的零输入响应，这不是我们希望看到的，因此我们其实应该定义零状态响应有线性性的系统为线性系统。
-\begin{definition}[单位脉冲响应与单位阶跃响应]
-    当$e(t)=\delta(t)$时，$r_{zs}(t)$为\textbf{单位脉冲响应}，在不涉及零输入
-响应时就说r(t)为单位脉冲响应。当$e(t)=u(t)$时，响应r(t)称为\textbf{单位阶跃响应}。习惯上，将单位脉冲响应记为h(t)，单位阶跃响应记为g(t)。需要指出，对于线性系统，脉冲响应应该定义为双变量函数$h(x,y)=H[\delta(x-y)]$，见后文的讨论。
-\end{definition}
+对于零输入响应不为0的线性系统，直接将两个响应相加将得到两倍的零输入响应，这不是我们希望看到的，因此我们其实应该定义\textbf{零状态响应有线性性的系统为线性系统}。
 
-除了线性性，系统还有一些其他的特性，下面一一进行说明。
 \begin{definition}[时不变性和移不变性]
-    如果一个系统的输出不依赖于输入信号施加于系统的时间，输入信号发生时移，输出信号也发生相同的时移，即$\forall b\in\mathbb{R},H[e(t-b)]=r(t-b)$,则称该系统是\textbf{时不变系统}
-用第二章中定义的时移算子的符号，时不变性可以记为$H\tau_b=\tau_b H$，换言之，时移和经过系统可交换，这与我们的直观相符。
+    如果一个系统的输出不依赖于输入信号施加于系统的时间，输入信号发生时移，输出信号也发生相同的时移，即$\forall b\in\mathbb{R},H[e(t-b)]=r(t-b)$,则称该系统是\textbf{时不变系统}用第二章中定义的时移算子的符号，时不变性可以记为$H\tau_b=\tau_b H$，换言之，时移和经过系统可交换，这与我们的直观相符。
 
-如果激励和响应的自变量是空间，我们同样可以定义系统的\textbf{移不变性}(shift invariance)，这时$H\tau_b=\tau_b H$中b是空间中的向量。后面的讨论中，不特意区分时域和空间域。
+    如果激励和响应的自变量是空间，我们同样可以定义系统的\textbf{移不变性}(shift invariance)，这时$H\tau_b=\tau_b H$中b是空间中的向量。后文中一般不特意区分时域和空间域。
 \end{definition}
 \begin{definition}[线性时不变系统]
     如果一个系统既是线性的又是时不变的，就说它是\textbf{线性时不变系统}(linear time-invariant system,LTI)。
 \end{definition}
-线性时不变系统满足$r(t)=(h*e)(t)$，h为单位脉冲响应，将在本小节的后文介绍。在考虑系统的初始状态时，只要零状态响应具有线性和时不变性，就说系统是线性时不变系统。
+线性时不变系统是信号与系统课程中所研究的主要系统类型。
+
+\begin{definition}[单位脉冲响应与单位阶跃响应]
+    当$e(t)=\delta(t)$时，$r_{zs}(t)$为\textbf{单位脉冲响应}，在不涉及零输入响应时就说$r(t)$为单位脉冲响应。当$e(t)=u(t)$时，响应$r(t)$称为\textbf{单位阶跃响应}。习惯上，将单位脉冲响应记为$h(t)$，单位阶跃响应记为$g(t)$。需要指出，对于线性系统，脉冲响应应该定义为双变量函数$h(x,y)=H[\delta(x-y)]$，见后文的讨论。
+\end{definition}
+线性时不变系统满足$r(t)=(h*e)(t)$，h为单位脉冲响应，将在\ref{sub:cascade}介绍。
+
+除了线性性与时不变性，系统还有一些其他的特性，下面一一进行说明。
 
 \begin{definition}[因果性]
 一个系统在有激励时，才会出现响应，或者说
@@ -2820,10 +2956,6 @@ $r(t_0)$仅依赖于e(t)在$t<t_0$时的值（这里不等号不取等是标准�
 \end{definition}
 工程上，一个实用系统在所有可能条件下都保持稳定时至关重要的。我们将在\ref{sub:stability_of_system}中给出线性时不变系统具有稳定性的充分必要条件。
 
-\begin{definition}[记忆性]
-如果一个系统在$t_0$时刻的响应不仅与该时刻的输入有关，还与其他时刻的输入有关，则称之为\textbf{记忆系统/动态系统}，与之相对的是\textbf{即时系统}，在$t_0$时刻的响应仅与$t_0$时刻的激励有关，这使得我们可以直接用函数$r(t)=f(e(t))$对系统进行建模。
-\end{definition}
-
 \begin{definition}[可逆性]
     如果H（作为映射）如果是单射，则也是双射（因为我们不关注其值域），于是H是可逆的。换句话说，一种响应仅可能对应唯一的激励。
 \end{definition}
@@ -2837,17 +2969,11 @@ $r(t_0)$仅依赖于e(t)在$t<t_0$时的值（这里不等号不取等是标准�
 例如描述开关开闭的系统，$f(t)=\chi_{[-T/2,T/2]}(t)$或$u(t)$，描述采样的系统，$f(t)=\shah(t)$.
 \end{example}
 
-\begin{example}[矩阵乘法]
-对于n维的离散激励信号$\mathbf{v}$，\begin{equation}
-    \mathbf{w}=A\mathbf{v},A\in M_{n\times n}(\mathbb{C})
-\end{equation}
-例如，线性动力系统中，初值问题$\mathbf{\dot{x}}(t)=A\mathbf{x}(t)$的解为$H[\mathbf{v}]=e^{At}\mathbf{v}$。
+\begin{example}[微分器与积分器]
+    积分器是由积分方程$$r(t)=\int_{-\infty}^{t}e(y)\,dy$$描述的系统；微分器是由微分方程$$r(t)=\frac{de(t)}{dt}$$描述的系统。它们可以通过运算放大器实现，见电路分析或模拟电子电路的教材，例如\cite{electronic_circuits}。
 \end{example}
-线性代数中，如果一个线性算子L的在某一组基下的矩阵表示是A，则将L的转置定义为用$A^T$表示的线性算子，其中T表示矩阵的转置，如果矩阵A是对称的，则算子L称为对称算子；L的共轭转置定义为用$A^H$表示的线性算子，其中H表示矩阵的共轭转置，如果A是埃尔米特的(Hermitian)，即$A^H=A$，则称算子L是埃尔米特的，并说L是\textbf{自伴算子}
-(self-adjoint operator).对于矩阵乘法系统，可以根据A的性质定义
-\textbf{对称系统、自伴系统}。
 
-\begin{example}[积分]
+\begin{example}[对核积分]
 \begin{equation*}
     r(t)=\int_{a}^{b}k(x,y)e(y)\,dy
 \end{equation*}
@@ -2858,6 +2984,17 @@ $r(t_0)$仅依赖于e(t)在$t<t_0$时的值（这里不等号不取等是标准�
     \item 如果$k(x,y)=k(y,x)$，称k是对称的并将系统称为\textbf{对称系统}
     \item 如果$k(x,y)=\overline{k(y,x)}$，称k是埃尔米特的并将系统称为\textbf{自伴系统}。
 \end{itemize}
+
+类似地，对于周期离散信号，矩阵乘法定义了线性系统：
+\begin{example}[矩阵乘法]
+对于n维的离散激励信号$\mathbf{v}$，\begin{equation*}
+    \mathbf{w}=A\mathbf{v},A\in M_{n\times n}(\mathbb{C})
+\end{equation*}
+例如，线性动力系统中，初值问题$\mathbf{\dot{x}}(t)=A\mathbf{x}(t)$的解为$H[\mathbf{v}]=e^{At}\mathbf{v}$。
+\end{example}
+线性代数中，如果一个线性算子L的在某一组基下的矩阵表示是A，则将L的转置定义为用$A^T$表示的线性算子，其中T表示矩阵的转置，如果矩阵A是对称的，则算子L称为对称算子；L的共轭转置定义为用$A^H$表示的线性算子，其中H表示矩阵的共轭转置，如果A是埃尔米特的(Hermitian)，即$A^H=A$，则称算子L是埃尔米特的，并说L是\textbf{自伴算子}
+(self-adjoint operator).对于矩阵乘法系统，可以根据A的性质定义
+\textbf{对称系统、自伴系统}。
 
 \begin{example}[卷积]
     取定连续信号$g,r(t)=g*e(t)$;取定周期离散信号$\mathbf{h},r[n]=\mathbf{h*e}[n]$.
@@ -2872,36 +3009,39 @@ $r(t_0)$仅依赖于e(t)在$t<t_0$时的值（这里不等号不取等是标准�
 \begin{example}[信号平移]
     取定时延b，$r(t)=e(t-b)$;取定整数m，$r[n]=e[n-m]$.
 \end{example}
+这也是时滞系统的例子，只不过不涉及微分的运算。
 
 \begin{example}[傅里叶变换]
 $r(t)=\mathcal{F} e(t)$.
 
-在一些光学仪器中可以实现空间上的傅里叶变换，这时变量t是多维的空间变量，例如矩孔夫琅禾费衍射装置。作为径向对称函数的傅里叶变换的特例，零阶汉克尔变换可以用圆孔夫琅禾费衍射装置实现。对于这两个变换，见\ref{sub:hankel}和\ref{sub:hilbert}.
+在一些光学仪器中可以实现空间上的傅里叶变换，这时变量t是多维的空间变量，例如矩孔夫琅禾费衍射装置。作为径向对称函数的傅里叶变换的特例，零阶汉克尔变换可以用圆孔夫琅禾费衍射装置实现。对于这两个变换，见\ref{sub:multi_fourier}和\ref{sub:hankel}.
 \end{example}
 
 \subsection{系统的级联}\label{sub:cascade}
 我们知道，函数与$\delta$的卷积还是它本身，这就好比信号在进入任何一个系统前，先经过了一个与$\delta$卷积的系统。这样的系统连接方式称为系统的\textbf{级联}(cascade)，下面就来研究这个话题。
 \begin{theorem}[线性系统的级联]
-    设有两线性系统K,L,将两系统级联之后，所得的新系统仍是线性系统：\begin{align*}
+    设有两线性系统K,L,将两系统级联之后，所得的新系统仍是线性系统。
+\end{theorem}
+\begin{proof}
+    \begin{align*}
     LK[ae_1+be_2]=L[aK[e_1]+bK[e_2]]=aLK[e_1]+bLK[e_2]
 \end{align*}
-\end{theorem}
+\end{proof}
 对于周期离散信号，两个系统都是矩阵乘法，则级联系统也可以用矩阵乘法来描述，并且其矩阵是两子系统的矩阵之乘积，这正是定义矩阵乘法的原因之一；对于连续信号，如果两个系统都是对核积分系统，我们也有类似的结论：
 \begin{theorem}[对核积分系统的级联]
     设有两对核积分系统K，L：
-    \[K[e(t)](x)=\int_{a}^{b}k(x,y)e(y)\,dy,L[e(t)](x)=\int_{a}^{b}l(x,y)e(y)\,dy\]
+    \[K[e(t)](x)=\int_{a}^{b}k(x,y)e(y)\,dy,L[e(t)](x)=\int_{c}^{d}l(x,y)e(y)\,dy\]
 则级联系统$H=LK$也是对核积分系统，并且核函数为\begin{equation*}
-    h(x,z)=L_y(k(y,z))(x)=\int_{a}^{b}l(x,y)k(y,z)\,dy
+    h(x,z)=L_y(k(y,z))(x)=\int_{c}^{d}l(x,y)k(y,z)\,dy
 \end{equation*}
 \end{theorem}
 这里$L_y$表示$k(x,y)$作为y的函数输入系统L，输出为x,y的双变量函数。
 \begin{proof}\begin{align*}
     H[e(z)](x)&=LK[e(z)](x)\\
-    &=\int_{a}^{b}l(x,y)\left(\int_{a}^{b}k(y,z)e(z)\,dz\right)\,dy\\
-    &=\int_{a}^{b}e(z)\,dz\int_{a}^{b}l(x,y)k(y,z)\,dy\\
+    &=\int_{c}^{d}l(x,y)\left(\int_{a}^{b}k(y,z)e(z)\,dz\right)\,dy\\
+    &=\int_{a}^{b}e(z)\,dz\int_{c}^{d}l(x,y)k(y,z)\,dy\\
     &=\int_{a}^{b}h(x,z)e(z)\,dz
 \end{align*}
-可以看到，只要我们使用的函数满足富比尼定理(Fubini's thoerem)\cite{xinjiang}的条件，就可以交换积分次序，并得到前文中断言的证明。
 \end{proof}
 
 如果系统H是对核的无穷限积分，就有\textbf{叠加定理}(superposition thoerem)\cite{brad_osgood_ee261}，由于它是泛函分析中对应定理的特殊形式，有时也将它称为\textbf{施瓦兹核定理}(Schwartz kernel thoerem):
@@ -2940,57 +3080,64 @@ $r(t)=\mathcal{F} e(t)$.
     “一个系统是线性时不变系统”等价于“响应是激励与脉冲响应的卷积”。
 \end{proposition}
 
-\begin{example}[单位阶跃响应]
-求线性时不变系统的单位阶跃响应$g(t)$：\begin{align*}
+\begin{proposition}[单位阶跃响应]
+线性时不变系统的单位阶跃响应$g(t)=\int_{-\infty}^{t}h(y)\,dy$，其中$h(t)$为系统的单位脉冲响应。
+\end{proposition}
+\begin{proof}
+\begin{align*}
     g(t)&=H[u(t)]=(u*h)(t)\\
     &=\int_{-\infty}^{\infty}u(t-y)h(y)\,dy\\
     &=\int_{-\infty}^{t}h(y)\,dy
 \end{align*}
-可以看到，单位阶跃响应就是单位脉冲响应的积分，利用这个性质，可以快速地求出单位阶跃响应，在使用卷积来描述线性时不变系统时，这个性质很容易得到，但在一些其他的线性时不变系统中很难想到具有这样的性质，例如下一节将讨论的系统。
-\end{example}
+\end{proof}
 
 \section{常系数线性微分方程}\label{sec:ODE}
 
-除了上一节中提到的几种系统，还有一种典型的具有因果性的线性时不变系统是用常系数线性微分方程表示的，在学习数学分析时我们曾遇到过这种微分方程，下面先回忆在数学分析中对于这种方程的处理方法\cite{xinjiang}\cite{ode}
+除了上一节中提到的几种系统，还有一种典型的具有因果性的线性时不变系统是用常系数线性微分方程表示的，它是以激励$e(t)$为方程的非齐次项，以微分方程的完全解$y(t)$为响应$r(t)$的系统。我们将看到，这种系统式因果的线性时不变系统。
 
 \subsection{解法回顾}\label{sub:solution_of_ODE}
+
 \begin{definition}[常系数线性微分方程]
     一个形如
-\[a_n y^{(n)}+a_{n-1}y^{(n-1)}+\cdots +a_1 y'+a_0 y=f\]
-称为\textbf{n阶常系数线性微分方程}，等式左侧的y和f都是t的函数，特别地，如果
-$f(t)=0$，称之为\textbf{n阶常系数线性齐次微分方程}。
+    \[a_n y^{(n)}+a_{n-1}y^{(n-1)}+\cdots +a_1 y'+a_0 y=f\]
+    称为\textbf{n阶常系数线性微分方程}，等式左侧的y和f都是t的函数，将$f(t)$称为\textbf{非齐次项}。特别地，如果$f(t)=0$，称之为\textbf{n阶常系数线性齐次微分方程}。
 \end{definition}
-不难看出，如果找到了n阶常系数线性齐次微分方程的两个解$y_1,y_2$，则$ay_1+by_2$也是方程的解；另外，如果带
-入$y=e^{\lambda t}$并消去这一项，则微分方程化为其\textbf{特征方程}：
+
+不难看出，如果找到了n阶常系数线性齐次微分方程的两个解$y_1,y_2$，则$ay_1+by_2$也是齐次方程的解；另外，如果带入$y=e^{\lambda t}$并消去这一项，则微分方程化为其\textbf{特征方程}：
 \begin{definition}[特征方程]
+    上述方程对应的特征方程为
     \[a_n\lambda^n+a_{n-1}\lambda^{n-1}+\cdots+a_1\lambda+a_0=0\]
 \end{definition}
 
-根据代数基本定理，$\lambda$在复数域$\mathbb{C}$中有n个解（称之为\textbf{特征根}）
-，即微分方程一定有n个形如$e^{\lambda t}$的解。因此，对于常系数线性微分方程，我
-们的标准处理方法是：
+根据代数基本定理，$\lambda$在复数域$\mathbb{C}$中有n个解（称之为\textbf{特征根}），即微分方程对应的齐次方程一定有n个形如$e^{\lambda t}$的解。因此，对于常系数线性微分方程，我们的标准处理方法是：
 \begin{enumerate}
     \item 先令$f(t)=0$，得到其对应的\textbf{齐次方程}，解其方程的特征方程得到n个\textbf{齐次解}(homogeneous solution)，记为$y_h(t)$；
     \item 找到一个\textbf{特解}(particular solution)使得它恰好满足原方程，记为$y_p(t)$；
     \item 将齐次解的线性组合与特解相加，得到\textbf{完全解}：$y(t)=y_h(t)+y_p(t)$。
 \end{enumerate}
-对于特解，需要一定的配凑技巧，特别地，如果f为一个t的多项式与某个齐次解的乘积，则
-需要带入固定形式的特解求解其中的参数（以下默认P、Q为多项式）：\begin{itemize}
+对于特解，需要一定的配凑技巧，特别地，如果f为一个t的多项式与某个齐次解的乘积，则需要带入固定形式的特解求解其中的参数（以下默认P、Q为多项式）：\begin{itemize}
     \item 如果$f(t)=c$，c为常数，则特解$y_p(t)$也为常数；
     \item 如果$f(t)=e^{\beta t}$，$\beta$不是特征根，则特解$y_p(t)=ce^{\beta t}$，c为常数；
     \item 如果$f(t)$为关于t的n次多项式，则特解$y_p(t)$也为t的n次多项式；
-    \item 如果$f(t)=P(t)e^{\lambda t}$，$\lambda$为k重特征根，则特解$y_p(t)=t^k Q(t)e^{\lambda t}$，其中Q是与P次数相同的多项式，即$deg Q=degP$；
-    \item 如果$f(t)=(P_1(t)\cos(\omega t)+P_2(t)\sin(\omega t))e^{\lambda t}$，$\lambda\pm i\omega$是k重特征根，则特解$y_p(t)=t^k(Q_1(t)\cos(\omega t)+Q_2(t)\sin(\omega t))e^{\lambda t}$，其中$degQ_1=degQ_2=max\{degP_1,degP_2\}$
+    \item 如果$f(t)=P(t)e^{\lambda t}$，$\lambda$为k重特征根，则特解$y_p(t)=t^k Q(t)e^{\lambda t}$，其中Q是与P次数相同的多项式，即$\deg Q=\deg P$；
+    \item 如果$f(t)=(P_1(t)\cos(\omega t)+P_2(t)\sin(\omega t))e^{\lambda t}$，$\lambda\pm i\omega$是k重特征根，则特解为
+    $$y_p(t)=t^k(Q_1(t)\cos(\omega t)+Q_2(t)\sin(\omega t))e^{\lambda t}$$
+    其中$\deg Q_1=\deg Q_2=\max\{\deg P_1,\deg P_2\}$
 \end{itemize}
-如果确定了一组初始条件$y(t_0),y'(t_0),\cdots,y^{(n-1)}(t_0)$，则微分方程有唯一的解，因为完全解中的特解部分是确定的，而齐次解部分的n个解对应着n个系数，只要给定n个初始条件，就相当于给出了n个方程，可以解出所有的系数。
+此外，若非齐次项是以上几种形式的线性组合，则可以将方程拆分为几个子方程分别求解，再将各子方程的特解相加得到原方程的特解。
+
+如果确定了一组初始条件$y(t_0),y'(t_0),\cdots,y^{(n-1)}(t_0)$，则微分方程有唯一的解，因为完全解中的特解部分是确定的，而齐次解部分构成$n$维线性空间，只要给定$n$个不相关系数即可唯一确定。
+
+下面给出一个常系数线性微分方程的求解例子：
 \begin{example}
     求解微分方程\[y''-3y'+2y=2e^{-x}\cos x+e^{2x}(4x+5)\]
 解：特征方程为$\lambda^2-3\lambda+2=0$，有两个特征根$\lambda_1=1,\lambda_2=2$，
-齐次解为$y_h(t)=C_1e^{\lambda_1 t}+C_2e^{\lambda_2 t}$。根据解的线性性，可以将方程拆分为：\begin{align*}
+齐次解为$$y_h(t)=C_1e^{\lambda_1 t}+C_2e^{\lambda_2 t}$$
+根据解的线性性，可以将方程拆分为：\begin{align*}
     y''-3y'+2y=2e^{-x}\cos x\\
     y''-3y'+2y=e^{2x}(4x+5)
 \end{align*}
-对于前一个方程，$-1+i$不是特征根，设方程特解为$y_1(t)=e^{-x}(A\cos x+B\sin x)$，带入原方程可得$A=\frac{1}{5},B=-\frac{1}{5}$，即$y_1(t)=\frac{1}{5}e^{-x}(\cos x-\sin x)$。\\
+对于前一个方程，$-1+i$不是特征根，设方程特解为$y_1(t)=e^{-x}(A\cos x+B\sin x)$，带入原方程可得$A=\dfrac{1}{5},B=-\dfrac{1}{5}$，即$y_1(t)=\dfrac{1}{5}e^{-x}(\cos x-\sin x)$。\\
 对后一个方程，2是一重特征根，设方程特解为$y_2(t)=e^{2x}x(ax+b)$，带入原方程可得$a=2,b=1$，即$y_2(t)=e^{2x}x(2x+1)$。\\
 将齐次解与特解相加，得到完全解：\begin{align*}y(t)&=C_1e^{\lambda_1 t}+C_2e^{\lambda_2 t}+\frac{1}{5}e^{-x}(\cos x-\sin x)+e^{2x}x(2x+1)\\
     &=C_1 e^{x}+\frac{1}{5}e^{-x}(\cos x-\sin x)+e^{2x}(2x^2+x+C_2)
@@ -2998,33 +3145,31 @@ $f(t)=0$，称之为\textbf{n阶常系数线性齐次微分方程}。
 \end{example}
 
 \subsection{信号与系统中的一些术语}\label{sub:term_in_ODE}
+
 \begin{definition}[自由响应与强迫相应]
-    一个用常系数线性微分方程描述的系统，就是指激励为$e(t)=f(t)$，响应为微分方程的完
-全解$y(t)$的系统，齐次解$y_h(t)$相当于在激励为0时系统的响应。其中，齐次解又称为\textbf{自由响应}(natural response)，它不依赖于激励的形式，而特解又称为\textbf{强迫响应}(forced response)。
+    齐次解$y_h(t)$又称为\textbf{自由响应}(natural response)，它仅依赖于方程的形式，不依起始状态和激励；特解又称为\textbf{强迫响应}(forced response)，它是由起始状态和激励共同决定的。
 \end{definition}
-注意区分它们与\ref{sub:concepts_of_system}中介绍的零状态响应、零输入响应，后者对于更一般的线性系统都有定义，对于用微分方程描述的系统，齐次解和特解、零输入响应和零状态响应也是不同的分类方式。
+注意区分它们和\ref{sub:concepts_of_system}中介绍的零状态响应、零输入响应。对于用微分方程描述的系统，零输入响应、零状态响应是将起始状态和激励分别置零后求得的响应。
 
 \begin{example}[两种响应划分方式的区别]
     由微分方程及初始条件
 \[y'+2y=10,y(0)=1\]
-描述的系统，采用数学的解法，可以求出其特征方程$\lambda+2=0$的解$\lambda=-2$，从而有齐次解$y_h(t)=Ce^{-2t}$，C为常数，特解$y_p(t)=5$，完全解$y(t)=y_h(t)+y_p(t)=5+Ce^{-2t}$，带入$y(0)=1$得$5+C=1,C=-4$，因此最终的解为\[y(t)=5-4e^{-2t}\]
-采用系统响应分解，求零输入响应时，应求齐次方程满足初始条件得解，即令$y_h(0)=C=1$，得到$C=1,y_{z.i.}(t)=e^{-2t}$；而求零状态响应时，则应该求原方程在初始条件为0向量情况下的解，即在前面得到的完全解中令$y(0)=5+C=0$,得到$C=-5$，$y_{zs}(t)=5-5e^{-2t}$，将零输入响应、零状态响应相加，又得到了原来的解$y(t)=5-4e^{-2t}$。
+描述的系统，特征方程$\lambda+2=0$的解为$\lambda=-2$，从而有齐次解$y_h(t)=Ce^{-2t}$（C为常数）及特解$y_p(t)=5$，完全解为$y(t)=y_h(t)+y_p(t)=5+Ce^{-2t}$，带入$y(0)=1$得$5+C=1,C=-4$，因此
+\[y(t)=5-4e^{-2t}\]
+求零输入响应时，应求齐次方程满足初始条件的解，即令$y_h(0)=C=1$，得到$C=1,y_{zi}(t)=e^{-2t}$；而求零状态响应时，则应该求原方程在初始条件为0时的解，即在完全解$y(t)=5+Ce^{-2t}$中，令$y(0)=5+C=0$得到$C=-5$，$y_{zs}(t)=5-5e^{-2t}$。将零输入响应、零状态响应相加，又得到了原来的解$y(t)=5-4e^{-2t}$。
 
 可见，$y_h(t)\neq y_{zi}(t),y_p(t)\neq y_{zs}(t)$。
 \end{example}
 尽管从数学上我们先得到了齐次解和特解才进一步求出零输入响应、零状态响应，但解的这两种划分都是有意义的，后者揭示了：响应中有一部分齐次解用来使响应满足初始条件，而另一部分齐次解会与特解叠加得到无关初始条件、仅依赖于方程形式的解。
 
-由于我们对输入激励建模时，常常认为激励是瞬间施加到系统上的，并且经常认为激励施加的时间就是0时刻，我们需要区分0的左、右邻域内的系统状态，为此定义\cite{signal_systems}：
+由于我们对输入激励建模时，常常认为激励是瞬间施加到系统上的，并且经常认为激励施加的时间就是0时刻，使用初始条件这一术语就会带来歧义，我们必须区分0的左、右邻域内的系统状态，为此定义\cite{signal_systems}：
 \begin{definition}[起始状态和初始状态]
     将激励接入之前的瞬间系统的状态称为\textbf{$0_-$状态}或\textbf{起始状态}，记为
-\[y^{(k)}(0-)=[y(0-),y'(0-),\cdots,y^{(n-1)}(0-)]\]
-将激励接入之后的瞬间系统的状态称为\textbf{$0_+$状态}或\textbf{初始状态}，记为
-\[y^{(k)}(0+)=[y(0+),y'(0+),\cdots,y^{(n-1)}(0+)]\]
+    \[y^{(k)}(0-)=[y(0-),y'(0-),\cdots,y^{(n-1)}(0-)]\]
+    将激励接入之后的瞬间系统的状态称为\textbf{$0_+$状态}或\textbf{初始状态}，记为
+    \[y^{(k)}(0+)=[y(0+),y'(0+),\cdots,y^{(n-1)}(0+)]\]
 \end{definition}
-\begin{definition}[初始条件]
-    在微分方程的理论中\cite{ode}，将$y^{(k)}(0+)$称为初始条件。由于我们对激励和响应的建模是允许跳变的，一般不会给出初始条件。
-\end{definition}
-注意此时我们是允许一些条件发生突变的。
+
 \begin{example}[换路定则]
     RLC振荡电路中，对于电感，$u_L=Ldi_L/dt$，施加于电感两侧的电压不会无穷大，其电流$i_L(t)$总是连续的，即$i_L(0_-)=i_L(0_+)=i_L(0)$，而其电压则可以不连续；对于电容，$i_C=Cdu_C/dt$，通过电容的电流不会无穷大，其电压$u_C(t)$总是连续的，即$u_C(0_-)=u_C(0_+)=u_C(0)$，而其电流可以不连续。电感电流、电容电压不突变的这个结果，称为换路定则。
 \end{example}
@@ -3037,21 +3182,22 @@ $f(t)=0$，称之为\textbf{n阶常系数线性齐次微分方程}。
 \end{definition}
 
 \begin{proposition}
-    由常系数线性齐次微分方程描述的系统，如果初始状态为0向量，则该系统是因果线性时不变系统。
+    由常系数线性齐次微分方程描述的系统是因果线性时不变系统。
 \end{proposition}
 \begin{proof}
     设一个系统描述为
-\[a_n r^{(n)}+a_{n-1}r^{(n-1)}+\cdot +a_1 r'+a_0 r=e\]
-并且对于给定的激励$e(t)$找到了完全解$r(t)$，那么\begin{align*}
-    \tau_b e&=\tau_b(a_n r^{(n)}+a_{n-1}r^{(n-1)}+\cdot +a_1 r'+a_0 r)\\
-    &=a_n \tau_b r^{(n)}+a_{n-1}\tau_b r^{(n-1)}+\cdot +a_1 \tau_b r'+a_0 \tau_b r\\
-    &=a_n (\tau_b r)^{(n)}+a_{n-1}(\tau_b r)^{(n-1)}+\cdot +a_1 (\tau_b r)'+a_0 (\tau_b r)
+\[a_n r^{(n)}+a_{n-1}r^{(n-1)}+\cdots +a_1 r'+a_0 r=e\]
+考察零状态响应，令起始状态为0，对于任意激励信号$e(t)$，响应$r(t)$满足上述微分方程。现在考察激励信号延时b后的系统响应：
+\begin{align*}
+    \tau_b e&=\tau_b(a_n r^{(n)}+a_{n-1}r^{(n-1)}+\cdots +a_1 r'+a_0 r)\\
+    &=a_n \tau_b r^{(n)}+a_{n-1}\tau_b r^{(n-1)}+\cdots +a_1 \tau_b r'+a_0 \tau_b r\\
+    &=a_n (\tau_b r)^{(n)}+a_{n-1}(\tau_b r)^{(n-1)}+\cdots +a_1 (\tau_b r)'+a_0 (\tau_b r)
 \end{align*}
-即激励产生延时b时，零状态响应也产生延时b。
+即激励产生延时b时，零状态响应也产生延时b，系统是时不变的。
 
-线性性是显然的，对此感到疑惑的读者可以自行将激励带入微分方程验证。
+线性性是显然的，任给激励$e_1,e_2$及对应零状态响应$r_1,r_2$，显然$ar_1+br_2$是激励为$ae_1+be_2$时的零状态响应。
 
-对于因果性，见后文中对这种系统的单位脉冲响应的讨论。
+对于因果性，见\ref{sub:fundamental_solution}。
 \end{proof}
 至于零输入响应，它不会由于激励的改变而改变，不仅会破坏系统的时不变性，还会破坏系统的线性性，因为在初始状态非0时，直接将两个完全解相加，则所得信号的初始条件变为给定初始条件的两倍，但由于零输入相应是易于研究的，并且只要指出了零输入响应，就可以认为系统的初始状态为n维零向量来进行研究，最后将所得的零状态响应与零输入响应叠加，因此我们约定：
 \begin{definition}
@@ -3103,12 +3249,14 @@ $r(t)=f(t)u(t)+a\delta$，求出其一阶、二阶导数：\begin{align*}
     &f(t)=e^{-t}-e^{-2t}\\
     &h(t)=\left(e^{-t}-e^{-2t}\right)u(t)
 \end{align*}
-总之，只要将齐次解乘以$u(t)$，求出对应阶导数并带回原方程对比系数，即可得到单位脉
-冲响应；由于单位阶跃响应形如$h(t)=y_h(t)u(t)$，满足$h(t)=0,t<0$，微分方程描述的
+总之，只要将齐次解乘以$u(t)$，求出对应阶导数并带回原方程对比系数，即可得到单位脉冲响应；由于单位阶跃响应形如$h(t)=y_h(t)u(t)$，满足$h(t)=0,t<0$，微分方程描述的
 系统还具有因果性。
 \end{example}
+
+以上例子中多次出现满足$h(t)=y_h(t)u(t)$的信号，为此定义：
+
 \begin{definition}[因果信号]
-    以上例子中出现了满足$h(t)=y_h(t)u(t)$的信号，将这种信号称为\textbf{因果信号}(cau\text{Sa}l signal)；而如果信号满足$h(t)=y_h(t)u(-t)$，则称之为\textbf{反因果信号}(anti-cau\text{Sa}l signal)。
+    如果信号满足$h(t)=y_h(t)u(t)$或$h(t)=0,\forall t<0$，则称之为\textbf{因果信号}(causal signal)；而如果信号满足$h(t)=y_h(t)u(-t)$，则称之为\textbf{反因果信号}(anti-causal signal)。
 \end{definition}
 
 更一般地，由微分方程\[\sum_{n=0}^{N}a_n r^{(n)}(t)=\sum_{m=0}^{M}b_m e^{(m)}(t)\]
@@ -3116,7 +3264,9 @@ $r(t)=f(t)u(t)+a\delta$，求出其一阶、二阶导数：\begin{align*}
 \[\sum_{n=0}^{N}a_n r^{(n)}(t)=\sum_{m=0}^{M}b_m \delta^{(m)}\]
 当$r(t)$的最高次导的阶数大于$\delta$的最高阶导阶数，即$N> M$时，解为$y_h(t)u(t)$；当$r(t)$的最高次导的阶数不小于$\delta$的最高阶导阶数，即$N\leq M$时，解为$y_h(t)u(t)+\sum_{k=0}^{M-N}c_k \delta^{(k)}$。换言之，需要利用方程左侧的最高阶导，让方程右侧所需的$\delta$的最高阶导数项出现。
 
-从数学上我们没有必要考虑这种形式的方程，只要把方程右侧看作一个新的非齐次项，它与其他微分方程没有区别，但作为一个线性时不变系统，求解其脉冲响应就显得十分重要了。另一种单位脉冲响应的求解方法是，将系统视作普通的常系数线性微分方程，将基本解与$\sum_{m=0}^{M}b_m e^{(m)}(t)$的卷积作为系统的单位脉冲响应，但这样涉及$\delta$各阶导数的卷积，计算较为复杂，通过待定系数法求解往往更快。
+从数学上我们没有必要考虑这种形式的方程。只要把方程右侧看作一个新的非齐次项，它与其他微分方程没有区别。以这种视角看来，另一种单位脉冲响应的求解方法是，将基本解$h_0(t)$与非齐次项的卷积
+$$h_0(t)*\sum_{m=0}^{M}b_m e^{(m)}(t)$$
+作为系统的单位脉冲响应$h(t)$，但这样涉及$\delta$各阶导数的卷积，计算较为复杂，通过待定系数法求解往往更快。
 
 我们在\ref{sub:cascade}末尾得到：单位脉冲响应是单位阶跃响应的导数，因此可以通过单位脉冲响应求出单位阶跃响应。不过一般不会使用待定系数法求解单位阶跃响应，因为这涉及非齐次项得处理，读者可以在以下例子中，改写对比系数所得得方程组来体会这一点。
 \begin{example}
@@ -3148,15 +3298,37 @@ $r(t)=f(t)u(t)+a\delta$，求出其一阶、二阶导数：\begin{align*}
 \begin{definition}[频率响应]
     将$H(\omega)$称为$r(t)$的\textbf{频率响应}，简称\textbf{频响}。
 \end{definition}
-一个物理可实现的系统，容易理解它必须满足因果性，即$h(t)=0,t<0$。实际上，这样的系统还必须满足\textbf{佩利-维纳准则}(Paley-Wiener criterion)\cite{signal_systems}：
-\begin{definition}[佩利-维纳准则]
-    \begin{align*}
-    &\int_{-\infty}^{\infty}\left|H(\omega)\right|^2\,d\omega<\infty\\
-    &\int_{-\infty}^{\infty}\frac{\left|\ln|H(\omega)|\right|}{1+\omega^2}\,d\omega<\infty
-\end{align*}
+
+将频率响应$H(\omega)$看作一个复数，即$H(\omega)=|H(\omega)|e^{i\varphi(\omega)}$，则$|H(\omega)|$表示系统对频率为$\omega$的信号成分的放大倍数，$\varphi(\omega)$表示该频率成分经过系统后相位的变化。我们定义:
+\begin{definition}[幅频特性和相频特性]
+    $|H(\omega)|-\omega$称为系统的\textbf{幅频特性}，$\varphi(\omega)-\omega$称为系统的\textbf{相频特性}，这里$\varphi(\omega)$通常取主值，即$(-\pi,\pi]$内的值。
 \end{definition}
 
-在分析电路时曾见过它的另一种定义方式\cite{electronic_circuits}：
+以下命题得自傅里叶变换的对偶性：
+\begin{proposition}
+    响应为实信号的线性时不变系统的频率响应满足$H(-\omega)=\overline{H(\omega)}$，这表明幅频特性$|H(\omega)|$是偶函数，相频特性$\varphi(\omega)$是奇函数。
+\end{proposition}
+
+一个物理可实现的线性时不变系统必须是因果的，即$h(t)=0,t<0$。此外，系统的频率响应$H(\omega)$还必须满足\textbf{佩利-维纳准则}(Paley-Wiener criterion)\cite{signal_systems}：
+\begin{definition}[佩利-维纳准则]
+    \[\int_{-\infty}^{\infty}\left|H(\omega)\right|^2\,d\omega<\infty\]
+    \[\int_{-\infty}^{\infty}\frac{\left|\ln|H(\omega)|\right|}{1+\omega^2}\,d\omega<\infty\]
+\end{definition}
+\begin{example}
+    高斯滤波器的单位冲激响应和频率响应特性分别为
+    $$h(t)=e^{-t^2},H(\omega)=\sqrt{\pi}e^{-\omega^2/4}$$
+    利用反常积分的比较判别法的极限形式，
+    \[\frac{|\ln|H(\omega)||}{1+\omega^2}=\frac{\left|\ln \sqrt{\pi}-\frac{\omega^2}{4}\right|}{1+\omega^2}\sim \frac{\omega^2/4}{\omega^2}=\frac{1}{4},|\omega|\to\infty\]
+    于是
+    \[\int_{-\infty}^{\infty}\frac{\left|\ln|H(\omega)|\right|}{1+\omega^2}\,d\omega=\infty\]
+    高斯滤波器不满足佩利-维纳准则。它不是因果系统，不是物理可实现的。
+\end{example}
+
+佩利-维纳准则表明$|H(\omega)|$是能量有限的，并且衰减速度不能过快，特别地，$|H(\omega)|$不能紧支，于是下一小节\ref{sub:filter}中提到的理想滤波器都是不可能实现的。这是因为有限能量输入对应有限能量输出。激励$e(t)=\delta(t)$时，输入能量是有限的，$h(t)$的能量也是有限的，根据帕塞瓦尔定理，$H(\omega)$的能量也是有限的；另一方面，$H\in L^2(\mathbb{R})$是得到后一条件所必需的。
+
+佩利-维纳准则是因果性能量有限系统的必要特性，它没有对系统引入额外的要求。但是，得到这一条件需要比较复杂的数学知识，本书不作讨论。
+
+在分析电路时曾见过频率响应的另一种引入方式\cite{electronic_circuits}：
 \begin{definition}[频率响应]
     $H(\omega)=Y(\omega)/X(\omega)$，其中$Y(\omega)$是输出端口信号的频域形式，$X(\omega)$是输入端口信号的频域形式
 \end{definition}
@@ -3168,15 +3340,18 @@ $r(t)=f(t)u(t)+a\delta$，求出其一阶、二阶导数：\begin{align*}
 \[I(\omega)=i\omega C V(\omega)\]
 因此电容的阻抗为
 \[Z_C(\omega)=\frac{V(\omega)}{I(\omega)}=\frac{1}{i\omega C}\]
-描述电感的方程为：
-\[v(t)=L\frac{d}{dt}i(t)\]
-对其做傅里叶变换，得到
-\[V(\omega)=i\omega L I(\omega)\]
-因此电感的阻抗为
-\[Z_L(\omega)=\frac{V(\omega)}{I(\omega)}=i\omega L\]
+同理可得电感的阻抗为$Z_L(\omega)=i\omega L$。
 \end{example}
+%\begin{example}
+%描述电感的方程为：
+%\[v(t)=L\frac{d}{dt}i(t)\]
+%对其做傅里叶变换，得到
+%\[V(\omega)=i\omega L I(\omega)\]
+%因此电感的阻抗为
+%\[Z_L(\omega)=\frac{V(\omega)}{I(\omega)}=i\omega L\]
+%\end{example}
 \begin{example}
-    考虑RC电路：
+    考虑二端口网络：
 \begin{center}\begin{circuitikz}[american] % 美式电路风格
     % 输入端口
     \draw (0,2) to [short, o-] (1,2) % 输入接线端到电阻
@@ -3203,11 +3378,6 @@ $r(t)=f(t)u(t)+a\delta$，求出其一阶、二阶导数：\begin{align*}
 \end{example}
 可见相量法可以省去列写微分方程和求傅里叶变换的过程，直接得到频率响应，这也是前文中强调定义式$H(\omega)=Y(\omega)/X(\omega)$的原因。
 
-将频率响应$H(\omega)$看作一个复数，即$H(\omega)=|H(\omega)|e^{i\varphi(\omega)}$，则$|H(\omega)|$表示系统对频率为$\omega$的信号成分的放大倍数，$\varphi(\omega)$表示该频率成分经过系统后相位的变化。我们定义:
-\begin{definition}[幅频特性和相频特性]
-    $|H(\omega)|-\omega$称为系统的\textbf{幅频特性}，$\varphi(\omega)-\omega$称为系统的\textbf{相频特性}，这里$\varphi(\omega)$通常取主值，即$(-\pi,\pi]$内的值。
-\end{definition}
-
 \subsection{滤波器}\label{sub:filter}
 我们曾在\ref{sub:convolution}中提到，滤波就是把信号中的某些成分剔除或大幅减少，相当于在频域乘以一个函数，在时域上的表现则是与这个函数的傅里叶逆变换进行卷积。从频率响应的视角来看，滤波器就是一个系统，理想滤波器的幅频特性在某些频率处接近于0，而在另一些频率处接近于1。
 
@@ -3221,9 +3391,9 @@ $r(t)=f(t)u(t)+a\delta$，求出其一阶、二阶导数：\begin{align*}
     \caption{理想滤波器的频率响应特性}
 \end{figure}
 
-偶函数在傅里叶变换下仍是偶函数，因此以上滤波器的单位脉冲响应也是偶函数，不具有因果性，因此是无法实现的。以它们作为理想滤波器，是因为实信号的幅度谱是偶函数，我们希望实信号经过系统还是实信号。实际设计滤波器时，只能逼近理想滤波器，例如巴特沃斯滤波器、切比雪夫滤波器等。
+以上滤波器的单位脉冲响应是采样函数的经平移、伸缩和线性组合的结果，不具有因果性，因此是无法实现的（也可以用佩利-维纳准则验证这一点）。实际设计滤波器时，只能逼近理想滤波器，例如巴特沃斯滤波器、切比雪夫滤波器等。
 
-一般而言，理想滤波器的单位脉冲响应是实函数，从而频率响应满足$H(\omega)=\overline{H(-\omega)}$，即幅频特性是偶函数，相频特性是奇函数。
+一般而言，理想滤波器的单位脉冲响应是实函数，这样激励是实信号时，响应也是实信号。这也是为什么以上滤波器的幅频特性都是偶函数。
 \begin{example}
 将激励信号$V_{in}(t)=\cos(\omega_0 t)$施加于例10中的RC电路，求输出信号$V_{out}(t)$\\
 解：激励信号的傅里叶变换为
@@ -3354,12 +3524,13 @@ $r(t)=f(t)u(t)+a\delta$，求出其一阶、二阶导数：\begin{align*}
 
 \subsection{*色散}\label{sub:dispersion}
 \begin{definition}[色散介质]
-    物理上，研究波在介质中的传播时，将波速与频率无关的介质称为\textbf{无色散介质}(non-dispersive medium)，将波速与频率有关的介质称为\textbf{色散介质}(dispersive medium)。在无色散介质中，波的相时延和群时延相等，即无失真传输；在色散介质中，波的相时延和群时延不相等，这种波速差往往会导致波形展宽，发生相位失真。
+    物理上，研究波在介质中的传播时，将波速与频率无关的介质称为\textbf{无色散介质}(non-dispersive medium)，将波速与频率有关的介质称为\textbf{色散介质}(dispersive medium)。在无色散介质中，波的相时延和群时延相等，即无失真传输；在色散介质中，相时延和群时延的波速差往往会导致波形展宽，发生相位失真。
 \end{definition}
+
 典型的色散现象如一束白光通过三棱镜时，不同频率的光波由于波速不同而发生空间分离，形成彩虹色带。在无线电通信中，电离层对不同频率的电磁波有不同的折射率，导致信号传播速度不同，从而引起信号失真。
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{sesan}
+    \includegraphics[width=0.8\textwidth]{sesan}
     \caption{波通过色散介质时波形展宽示意图}
 \end{figure}
 
@@ -3573,7 +3744,7 @@ $r(t)=f(t)u(t)+a\delta$，求出其一阶、二阶导数：\begin{align*}
 \[\mathcal{S} =\left\{\varphi\in C^{\infty}(\mathbb{R} )\left|\lim_{|x|\to\infty}|x|^m\varphi^{(n)}(x)=0,\forall m,n\in\mathbb{N} \right.\right\}\]
 对任意的t，考察级数$\sum_{k=-\infty}^{\infty}f(t-kT)$的收敛性时，只需要将n取为0，m取为不小于2的整数，则在$|k|$充分大时，级数比$C/n^2$更小，从而绝对收敛。注意这种估计方式并不依赖于自变量t的选取，因此这个函数项级数一致收敛，其和函数会保留$f(t)$的许多分析性质，例如我们可以逐项求导（从而和函数也无限阶可导）、逐项积分，还可以交换求和符号与其他极限过程的顺序（见数学分析教材，如\cite{zorich}\cite{xinjiang}）。
 
-\subsection{泊松求和公式}\label{sub:possion_summation}
+\subsection{泊松求和公式}\label{sub:poisson_summation}
 本小节旨在说明\textbf{泊松求和公式}(the Poisson summation formula)，它揭示了傅里叶级数与傅里叶变换的深刻关系。
 \begin{theorem}[泊松求和公式]
 \begin{align*}
@@ -3595,7 +3766,7 @@ $r(t)=f(t)u(t)+a\delta$，求出其一阶、二阶导数：\begin{align*}
 即\begin{align*}
     \hat{\Phi}(k)=\mathcal{F} \varphi(k)
 \end{align*}
-证明中，第二行到第三行的积分与求和的换序用到了周期化函数作为函数项级数的一致收敛性。这个等式意味着对时限函数的关系$\mathcal{F} f(k)=Tc_k$对施瓦兹函数都成立（以上是周期化为$T=1$的情况，读者可以自行推广至周期为其他值的情况），进一步，在恒等式
+证明中，第二行到第三行的积分与求和的换序用到了周期化函数作为函数项级数的一致收敛性。这个等式意味着\textbf{施瓦兹函数的傅里叶变换在整数点处的值就是其周期化函数的傅里叶系数}（以上是周期化为$T=1$的情况，周期为其他值的情况是类似的），进一步，在恒等式
 \begin{align*}
     \Phi(t)&=\sum_{k=-\infty}^{\infty}\hat{\Phi}(k)e^{2\pi ikt}=\sum_{k=-\infty}^{\infty}\mathcal{F} \varphi(k)e^{2\pi ikt}
 \end{align*}
@@ -4522,7 +4693,7 @@ $\mathcal{S} $是线性空间，因此可以定义其对偶空间，即\textbf{�
     \[\sum_{\mathbf{k}\in\mathbb{Z}^2}\mathcal{F} \varphi(\mathbf{k})=\sum_{\mathbf{k}\in\mathbb{Z}^2}\varphi(\mathbf{k}),\varphi\in\mathcal{S} \]
 \end{theorem}
 \begin{proof}
-    仿照一维情况下的证明（见\ref{sub:possion_summation}），令$\Phi(\mathbf{x})=(\shah *\varphi)(\mathbf{x})=\sum_{\mathbf{k}\in\mathbb{Z}^2}\varphi(\mathbf{x}-\mathbf{k})$，则$\Phi$为周期为1的二维函数，可以展开为傅里叶级数：
+    仿照一维情况下的证明（见\ref{sub:poisson_summation}），令$\Phi(\mathbf{x})=(\shah *\varphi)(\mathbf{x})=\sum_{\mathbf{k}\in\mathbb{Z}^2}\varphi(\mathbf{x}-\mathbf{k})$，则$\Phi$为周期为1的二维函数，可以展开为傅里叶级数：
     \[\Phi(\mathbf{x})=\sum_{\mathbf{k}\in\mathbb{Z}^2}\hat{\Phi}(\mathbf{k})e^{2\pi i \mathbf{k}\cdot \mathbf{x}}\]
     其中\begin{align*}
         \hat{\Phi}(\mathbf{k})&=\int_{[0,1]^2}\Phi(\mathbf{x})e^{-2\pi i\mathbf{k}\cdot \mathbf{x}}\,d\mathbf{x}\\
@@ -5110,9 +5281,231 @@ $\rho-\hat{\mathbf{n}}\cdot\mathbf{b}<0$的情况，将在下一性质指出处�
 
 \section{回到有限区间}\label{sec:Finite_Interval}
 
-%PS3.6卷积的周期化
-%PS4.3
-%加窗傅里叶变换，小波变换
+\subsection{周期函数的卷积}\label{sub:conv_of_period_func}
+
+不考虑收敛性的问题，当函数$f$有周期$T$时，$f$与另一个函数$g$的卷积$f*g$也具有周期$T$。这是因为，根据我们在\ref{sub:intuition_of_convolution}中给出的卷积的性质，
+\[\tau_T(f*g)=(\tau_T f)*g=f*g\]
+其中$\tau_T$为平移算子，$(\tau_T f)(x)=f(x-T)$。进一步，如果$f,g$均为以$T$为周期的周期函数，则卷积积分在每个长为$T$的区间上取值相同，这样不仅会导致冗余的计算，而且卷积积分或者为0，或者发散，因此需要对周期函数单独定义卷积运算。与之前一样，我们不讨论卷积积分收敛对$f,g$的要求。
+
+\begin{definition}[周期函数的卷积]
+    设$f,g$为以$T$为周期的周期函数，则它们的卷积定义为：
+    \[(f*g)(x)=\int_{0}^{T}f(y)g(x-y)\,dy\]
+\end{definition}
+
+我们自然希望，在这中定义下的卷积具有与常规函数的卷积类似的性质，例如交换律、结合律、分配律等。事实上，这些性质都成立：
+\begin{proposition}[卷积的线性性、结合律、交换律]
+    设$f,g,h$为以$T$为周期的周期函数，$a,b\in\mathbb{C}$，则有：
+    \begin{align*}
+        a(f*g)+b(f*h)&=f*(ag+bh)\\
+        f*(g*h)&=(f*g)*h\\
+        f*g&=g*f
+    \end{align*}    
+\end{proposition}
+它的证明与\ref{sub:properties_of_convolution}节中的类似，不再赘述。
+
+\begin{proposition}[信号反转]
+    设$f,g$为以$T$为周期的周期函数，则有：
+    \[(f*g)^-=(f^-)*(g^-)\]
+\end{proposition}
+\begin{proof}
+    \begin{align*}
+        (f*g)^-(x)&=(f*g)(-x)\\
+        &=\int_0^{T}f(y)g(-x-y)\,dy\\
+        &=\int_0^{T}f^-( -y)g^-(x+y)\,dy\\
+        &=(f^-*g^-)(x)
+    \end{align*}
+\end{proof}
+
+\begin{proposition}[“面积”关系]
+    设$f,g$为以$T$为周期的周期函数，则有：
+    \[\int_0^{T}(f*g)(x)\,dx=\left(\int_0^{T}f(x)\,dx\right)\left(\int_0^{T}g(x)\,dx\right)\]
+\end{proposition}
+\begin{proof}
+    \begin{align*}
+        \int_0^{T}(f*g)(x)\,dx&=\int_0^{T}\left(\int_0^{T}f(y)g(x-y)\,dy\right)\,dx\\
+        &=\int_0^{T}f(y)\left(\int_0^{T}g(x-y)\,dx\right)\,dy\\
+        &=\int_0^{T}f(y)\left(\int_{-y}^{T - y}g(u)\,du\right)\,dy&(u=x-y)\\
+        &=\int_0^{T}f(y)\left(\int_0^{T}g(u)\,du\right)\,dy\\
+        &=\left(\int_0^{T}f(x)\,dx\right)\left(\int_0^{T}g(x)\,dx\right)
+    \end{align*}
+\end{proof}
+
+不过，周期函数的卷积也与经典的卷积有一些差别。例如，在函数的平移和伸缩变换下，卷积不再具有类似\ref{sub:intuition_of_convolution}中的性质，因为这两个性质的证明都依赖于无穷的积分区间。
+
+在\ref{sub:poisson_summation}中，我们指出，周期函数可以视作施瓦兹函数的周期延拓，并且周期函数的傅里叶级数的系数正比于紧支函数的傅里叶变换在离散点处的取值。因此，我们希望周期函数的卷积的傅里叶系数也具有类似卷积定理的性质。事实也确实如此：
+\begin{theorem}[周期函数的卷积定理]
+    设$f,g\in L^2([0,T])$，且$f,g$为以$T$为周期的周期函数，记它们的傅里叶级数系数分别为$\{a_n\},\{b_n\}$，则它们的卷积$f*g\in L^2([0,T])$，并且傅里叶级数系数$c_n=T a_n b_n$。
+\end{theorem}
+\begin{proof}
+    由柯西不等式，
+    \begin{align*}
+        |f*g(x)|&=\left|\int_0^{T}f(y)g(x-y)\,dy\right|\\
+        &\leq \left(\int_0^{T}|f(y)|^2\,dy\right)^{1/2}\left(\int_0^{T}|g(x-y)|^2\,dy\right)^{1/2}\\
+        &=\|f\|_2\|g\|_2<\infty
+    \end{align*}
+    因此$f*g$是有界的。事实上，$f*g$还是连续的（因为连续函数在$L^2$空间中稠密），因此$$f*g\in L^2([0,T])$$
+
+    记$f,g$的基波角频率为$\omega=\dfrac{2\pi}{T}$，则
+    \begin{align*}
+        c_n&=\frac{1}{T}\int_0^{T}(f*g)(x)e^{-in\omega x}\,dx\\
+        &=\frac{1}{T}\int_0^{T}\left(\int_0^{T}f(y)g(x-y)\,dy\right)e^{-in\omega x}\,dx\\
+        &=\frac{1}{T}\int_0^{T}f(y)\left(\int_0^{T}g(x-y)e^{-in\omega x}\,dx\right)\,dy\\
+        &=\frac{1}{T}\int_0^{T}f(y)e^{-in\omega y}\left(\int_{-y}^{T - y}g(u)e^{-in\omega u}\,du\right)\,dy&(u=x-y)\\
+        &=\frac{1}{T}\int_0^{T}f(y)e^{-in\omega y}\left(\int_0^{T}g(u)e^{-in\omega u}\,du\right)\,dy\\
+        &=\left(\frac{1}{T}\int_0^{T}f(y)e^{-in\omega y}\,dy\right)\left(\int_0^{T}g(u)e^{-in\omega u}\,du\right)\\
+        &=T a_n b_n
+    \end{align*}
+\end{proof}
+
+\subsection{窗函数与加窗傅里叶变换}\label{sub:window}
+
+傅里叶变换有局限性：\begin{itemize}
+    \item 在实际应用中，我们往往只能获得信号在有限区间内的取值；
+    \item 傅里叶变换处理的频域信息是全局的，无法获得时间局部的频率成分信息
+\end{itemize}
+
+因此需要对信号进行截断处理，即对信号乘以一个\textbf{窗函数}(window function)，这个过程称为\textbf{加窗}(windowing)。常见的窗函数有矩形窗、三角窗、高斯窗和汉明窗(Hamming window)等。其中，汉明窗又称升余弦窗，它的定义为：
+\begin{definition}[汉明窗]
+    设$L>0$，则汉明窗$w:\mathbb{R}\to\mathbb{R}$定义为：
+    \[w(t)=\begin{cases}
+        \alpha+(1-\alpha)\cos\left(\dfrac{2\pi t}{L}\right),&|t|\leq \dfrac{L}{2}\\
+        0,&|t|>\dfrac{L}{2}
+    \end{cases}\]
+\end{definition}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{window}
+    \caption{常见窗函数示意图}
+\end{figure}
+
+\begin{definition}[短时傅里叶变换]
+    设$f:\mathbb{R}\to\mathbb{C}$为信号，$w:\mathbb{R}\to\mathbb{C}$为窗函数，则$f$的\textbf{短时傅里叶变换}(short-time Fourier transform, STFT)定义为：
+    \begin{lralign}
+        \mathrm{STFT} _{f,w}(\tau,\xi)&=\mathcal{F} [f(t)w(t-\tau)](\xi)\\
+        &=\int_{-\infty}^{\infty}f(t)w(t-\tau)e^{-2\pi i\xi t}\,dt
+    \switch
+        \mathrm{STFT} _{f,w}(\tau,\omega)&=\mathcal{F} [f(t)w(t-\tau)](\omega)\\
+        &=\int_{-\infty}^{\infty}f(t)w_{\tau}(t)e^{-i\omega t}\,dt
+    \end{lralign}
+    其中参数$\tau$表示加窗的时间位置。特别地，当窗函数为矩形窗时，短时傅里叶变换称为\textbf{滑动傅里叶变换}(sliding Fourier transform)；当窗函数为高斯窗时，短时傅里叶变换称为\textbf{Gabor变换}(Gabor transform)。
+\end{definition}
+
+一般来说，短时傅里叶变换不涉及积分发散的问题，因此我们仅仅要求本小节中的函数局部可积，而无需要求它们属于某个更严格的函数空间。但我们需要对窗函数做一些要求：
+\begin{itemize}
+    \item 归一化条件：
+    \[\|w\|_2=\left(\int_{-\infty}^{\infty}|w(t)|^2\,dt\right)^{1/2}=1\]
+    \item 良好的局部性质：窗函数$w\in\mathcal{S} $，$\mathcal{S} $为施瓦兹函数空间。
+\end{itemize}
+
+归一化条件是必要的，否则窗函数$w$的若干倍仍为窗函数，但$\alpha w(\alpha\in\mathbb{R})$不具有单独的研究价值。我们也可以采取其他的归一化条件，例如$\|w\|_1=1$或$\|w\|_{\infty}=1$，只是以上给出的归一化条件更为方便。
+
+根据卷积定理，有：\begin{lralign}
+    \mathrm{STFT} _{f,w}(\tau,\xi)&=\mathcal{F} [f(t)w(t-\tau)](\xi)\\
+    &=\mathcal{F} f(\xi)*\mathcal{F} [w(t-\tau)](\xi)\\
+    &=\mathcal{F} f(\xi)*\left(e^{-2\pi i \xi \tau}\mathcal{F} w(\xi)\right)
+\switch
+    \mathrm{STFT} _{f,w}(\tau,\omega)&=\mathcal{F} [f(t)w(t-\tau)](\omega)\\
+    &=\mathcal{F} f(\omega)*\mathcal{F} [w(t-\tau)](\omega)\\
+    &=\mathcal{F} f(\omega)*\left(e^{-i \omega \tau}\mathcal{F} w(\omega)\right)
+\end{lralign}
+
+窗外的函数值任意变化，都不会影响$STFT _{f,w}(\tau,\xi)$，因此卷积是不可逆的，与另一函数的卷积必然丢失函数的信息。但是，如果加窗的位置取遍所有时间点，则可以还原出完整的函数：
+\begin{definition}[短时傅里叶逆变换]
+    设$w$为窗函数，则二元函数$F$的\textbf{短时傅里叶逆变换}(short-time Fourier inverse transform)定义为：
+    \begin{lralign}
+        f(t)&=\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}F(\tau,\xi)w(t-\tau)e^{2\pi i \xi t}\,d\xi\,d\tau
+        \switch
+        f(t)&=\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}F(\tau,\omega)w(t-\tau)e^{i \omega t}\,d\omega\,d\tau
+    \end{lralign}
+\end{definition}
+\begin{theorem}[短时傅里叶反演公式]
+    以$w$为窗函数，对$f$做短时傅里叶变换得到$\mathrm{STFT} _{f,w}$，则$\mathrm{STFT} _{f,w}$的短时傅里叶逆变换为$f$
+\end{theorem}
+\begin{proof}
+    \begin{lralign}
+    &\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}\mathrm{STFT} _{f,w}(\tau,\xi)w(t-\tau)e^{2\pi i \xi t}\,d\xi\,d\tau\\
+        =&\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}\mathcal{F} [f(u)w(u-\tau)](\xi)w(t-\tau)e^{2\pi i \xi t}\,d\xi\,d\tau\\
+        =&\int_{-\infty}^{\infty}w(t-\tau)\,dt\int_{-\infty}^{\infty}\mathcal{F} [f(u)w(u-\tau)](\xi)e^{2\pi i \xi t}\,d\xi\\
+        =&\int_{-\infty}^{\infty}w(t-\tau)\mathcal{F} ^{-1}\mathcal{F} [f(t)w(t-\tau)]\,d\tau\\
+        =&\int_{-\infty}^{\infty}w(t-\tau)f(t)w(t-\tau)\,d\tau\\
+        =&f(t)\int_{-\infty}^{\infty}w^2(t-\tau)\,d\tau\\
+        =&f(t)\|w\|_2^2=f(t)
+\switch
+&\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}\mathrm{STFT} _{f,w}(\tau,\omega)w(t-\tau)e^{i \omega t}\,d\omega\,d\tau\\
+        =&\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}\mathcal{F} [f(u)w(u-\tau)](\omega)w(t-\tau)e^{i \omega t}\,d\omega\,d\tau\\
+        =&\int_{-\infty}^{\infty}w(t-\tau)\,dt\int_{-\infty}^{\infty}\mathcal{F} [f(u)w(u-\tau)](\omega)e^{i \omega t}\,d\omega\\
+        =&\int_{-\infty}^{\infty}w(t-\tau)\mathcal{F} ^{-1}\mathcal{F} [f(t)w(t-\tau)]\,d\tau\\
+        =&\int_{-\infty}^{\infty}w(t-\tau)f(t)w(t-\tau)\,d\tau\\
+        =&f(t)\int_{-\infty}^{\infty}w^2(t-\tau)\,d\tau\\
+        =&f(t)\|w\|_2^2=f(t)
+\end{lralign}
+以上过程用到了傅里叶反演公式并忽略了$f$在不连续点的取值问题。
+\end{proof}
+
+即使不要求窗函数归一化，我们也能得到类似的公式，但会引入归一化系数，这解释了为什么我们以$L^2$范数归一化窗函数。
+
+\subsection{小波变换初步}\label{sub:wavelet}
+
+在适当的伸缩变换下，可以保证窗函数满足能量归一化的条件，而不改变局部的良好性质。那么，应该如何选取窗函数的宽度呢？为了回答这个问题，我们首先需要研究窗的在宽度变化时，短时傅里叶变换的行为特性。
+
+\begin{proposition}
+    窗函数较宽时，短时傅里叶变换的频率分辨率较高，但时间分辨率较低。
+\end{proposition}
+
+直观上，宽的窗使得我们能够看清信号的周期结构，频率特征明显，但无法精确描述信号的时域变化的时间。
+
+\begin{example}
+    下图中的例子展示了窗函数较宽导致的低时间分辨率的现象。对于区间$[0,4]$，选取平稳信号
+    \[f_1(t)=\cos(4\pi t)+\cos(8\pi t)+\cos(12\pi t)+\cos(20\pi t)\]
+    以及非平稳信号
+    \[f_2(t)=\cos(4\pi t)\chi_{[0,1]}+\cos(8\pi t)\chi_{(1,2]}+\cos(12\pi t)\chi_{(2,3]}+\cos(20\pi t)\chi_{(3,4]}\]
+    \[f_3(t)=\cos(20\pi t)\chi_{[0,1]}+\cos(12\pi t)\chi_{(1,2]}+\cos(8\pi t)\chi_{(2,3]}+\cos(4\pi t)\chi_{(3,4]}\]
+    
+    以矩形窗$\chi_{[0,4]}$为窗函数，对$f_1,f_2,f_3$做短时傅里叶变换，得到的频谱图如下所示。从图中可以看出，三个信号的频谱图都清晰地在四个角频率2，4，6，10附近显示出尖峰，频率特征明显；三个信号的频谱图非常相似，并且后两个频谱图几乎无法区分，我们难以根据频谱图判断时域信号的具体变化方式。
+    \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{widewindow}
+    \caption{低时间分辨率示意图}
+\end{figure}
+\end{example}
+
+\begin{proposition}
+    窗函数较窄时，短时傅里叶变换的时间分辨率较高，但频率分辨率较低。
+\end{proposition}
+
+直观上，窄的窗使得我们能够精确定位信号的时域变化产生的时间，但看到的波形片段太短，难以判定信号的频率。
+
+根据上一小节中用卷积定理得到的恒等式：
+\begin{lralign}
+    \mathrm{STFT} _{f,w}(\tau,\xi)&=\mathcal{F} f(\xi)*\left(e^{-2\pi i \xi \tau}\mathcal{F} w(\xi)\right)
+\switch
+    \mathrm{STFT} _{f,w}(\tau,\omega)&=\mathcal{F} f(\omega)*\left(e^{-i \omega \tau}\mathcal{F} w(\omega)\right)
+\end{lralign}
+考虑窗函数的伸缩变换$w_a(t)=\dfrac{1}{\sqrt{a}}w\left(\dfrac{t}{a}\right)(a>0)$，则有：\begin{align*}
+    \int_{-\infty}^{\infty}|w_a(t)|^2\,dt&=\int_{-\infty}^{\infty}\left|\frac{1}{\sqrt{a}}w\left(\frac{t}{a}\right)\right|^2\,dt\\
+    &=\int_{-\infty}^{\infty}\frac{1}{a}|w\left(\frac{t}{a}\right)|^2\,dt\\
+    &=\int_{-\infty}^{\infty}|w(u)|^2\,du&\left(u=\frac{t}{a}\right)=1
+\end{align*}
+以及\begin{align*}
+    \mathcal{F} w_a(\xi)&=\sqrt{a}\mathcal{F} w(a\xi)
+\end{align*}
+在$0<a<1$时，窗函数变窄，而$\mathcal{F} w_a(\xi)$舒张。
+
+我们知道，卷积式一种起“平均化”作用的运算，与$\mathcal{F} f$卷积的函数越集中（类似$\delta$分布），平均化作用越弱，卷积所得函数越接近$\mathcal{F} f$本身；反之，与$\mathcal{F} f$卷积的函数越分散（类似$\mathds{1}$），平均化作用越强，卷积所得函数越平滑。因此，窗函数变窄时，尽管很容易指出频率特性所反映的时域信号位置，但$\mathcal{F} w_a$变宽，频谱受平均化作用，频率分辨率降低。
+
+\begin{example}
+    下图中的例子展示了窗函数较窄导致的低频率分辨率的现象。对于区间$[0,4]$，选取信号
+    \[f(t)=\cos(4\pi t)+\cos(8\pi t)+\cos(12\pi t)+\cos(20\pi t)\]
+    及宽为0.5的矩形窗$\chi_{[1.75,2.25]}$，对$f$做短时傅里叶变换，得到的频谱图如下所示。从图中可以看出，频谱图无法清晰地显示出四个角频率2，4，6，10附近的尖峰，频率特征不明显；但根据频谱图（还需结合相频图来判断信号的具体位置）可以较好地还原出加窗信号在时域上的特性。
+    \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{thinwindow}
+    \caption{低频率分辨率示意图}
+\end{figure}
+\end{example}
+
+为了兼顾时间分辨率和频率分辨率，一方面，我们可以探究对于特定的信号处理场景，通常应该选取怎样的窗函数；另一方面，我们可以对窗函数做多尺度分析，即对不同的频率成分使用不同宽度的窗函数。例如，对高频成分使用窄窗以提高时间分辨率，对低频成分使用宽窗以提高频率分辨率。这种方法就是\textbf{小波变换}(wavelet transform)。
 
 \chapter{拉普拉斯变换与系统的复频域分析}
 
@@ -5935,11 +6328,11 @@ $f(z)=e^{1/z}$在0处有本性奇点，$f(z)=1/\sin(\pi z)$在$z=n,n\in\mathbb{Z
 \section{拉普拉斯变换的收敛域}\label{Convergence}
 
 \subsection{收敛横坐标}\label{sub:converge_abscissa}
-我们在定义拉普拉斯变换时，曾要求$|f(t)|\leq C e^{at}$，这样拉普拉斯积分$\mathcal{L} f(s)=\int_{0}^{\infty}f(t)e^{-st}\,dt$在\\$\text{Re}\ s>a$上收敛，但是我们不知道这个收敛域是否是最精确的。本节就来讨论拉普拉斯变换收敛域的问题，并由此给出一些由拉普拉斯变换分析时域性质的方法。
+我们在定义拉普拉斯变换时，曾要求$|f(t)|\leq C e^{at}$，这样拉普拉斯积分$\mathcal{L} f(s)=\int_{0}^{\infty}f(t)e^{-st}\,dt$\\
+在$\text{Re}\ s>a$上收敛，但是我们不知道这个收敛域是否是最精确的。本节就来讨论拉普拉斯变换收敛域的问题，并由此给出一些由拉普拉斯变换分析时域性质的方法。
 
 \begin{definition}[收敛横坐标]
-    \quad\\
-    \textbf{收敛横坐标}为使得拉普拉斯积分$\mathcal{L} f(s)=\int_{0}^{\infty}f(t)e^{-st}\,dt$最大收敛域的收敛轴实部（横坐标）$\sigma_c$，使得$\mathcal{L} f(s)$恰好在$\text{Re}\ s>\sigma_c$上收敛，而在$\text{Re}\ s<\sigma_c$上发散，即
+    \textbf{收敛横坐标}为使得拉普拉斯积分$$\mathcal{L} f(s)=\int_{0}^{\infty}f(t)e^{-st}\,dt$$最大收敛域的收敛轴实部（横坐标）$\sigma_c$，使得$\mathcal{L} f(s)$恰好在$\text{Re}\ s>\sigma_c$上收敛，而在$\text{Re}\ s<\sigma_c$上发散，即
     \[\sigma_c=\inf\{a\in\mathbb{R}|\mathcal{L} f(s)\text{在}\text{Re}\ s>a\text{上收敛}\}\]
 \end{definition}
 
@@ -6261,13 +6654,9 @@ $\delta$的各阶导数同理。这样，分布理论处理的问题仅仅在于
 可以看到，这样的定义方式帮助我们避开了$u(t)$跳变的问题和$\delta(0)=\infty$的问题，同时积分下限为“0-”排除了$f$在$(-\infty,0)$上的行为对拉普拉斯变换的影响，仅仅是拉普拉斯变换的改进，而没有对任何性质产生本质影响。另外，这样的定义方式有助于我们讨论微分方程描述的系统的起始状态，下一小节就来讨论这个问题。
 
 \subsection{常系数线性微分方程}\label{sub:laplace_ODE}
-拉普拉斯变换是处理常系数线性微分方程的有力工具。数学上，将微分方程中的函数在某一点的各阶导数值称为\textbf{初始条件}，即（以$t=0$为例）：
-\[r(0)=r_0,r'(0)=r'_0,\cdots,r^{(n-1)}(0)=r^{(n-1)}_0\]
-这时只需要经典的拉普拉斯变换就可以处理带初始条件的微分方程了（我们称这样的问题为\textbf{初值问题}）。在函数连续可微的情况下，起始状态、初始状态和初始条件三个概念是等价的。但是，在信号与系统中，由于我们对激励的建模是允许它进行跳变的，引入起始状态、初始状态更为方便，而改进后的拉普拉斯变换很好地适配了这种需求——一般地，我们会给出系统的起始状态，而初始状态则要依赖于激励的选取。
-
-根据拉普拉斯变换的时域微分性质：
+拉普拉斯变换是处理常系数线性微分方程的有力工具。根据拉普拉斯变换的时域微分性质：
 \[\mathcal{L}\left[f^{(n)}(t)\right](s)=s^n\mathcal{L} f(s)-s^{n-1}f(0-)-s^{n-2}f'(0-)-\cdots -f^{(n-1)}(0-)\]
-可以将常系数线性微分方程转化为代数方程，还能够一并处理起始状态。我们先提出一个一般的解法，再通过一个具体的例子来展示拉普拉斯变换的威力。
+可以将常系数线性微分方程转化为代数方程，还能够一并处理起始状态\footnote{数学上，我们使用经典的拉普拉斯变换以处理带初始状态的初值问题。初始状态、初值问题的定义，见\ref{sub:concepts_of_system}，起始条件、初始条件的定义，见\ref{sub:term_in_ODE}}。我们先提出一个一般的解法，再通过一个具体的例子来展示拉普拉斯变换的威力。
 
 考虑常系数线性微分方程
 \[a_n r^{(n)}(t)+a_{n-1}r^{(n-1)}(t)+\cdots +a_1 r'(t)+a_0 r(t)=e(t)\]
@@ -6365,8 +6754,10 @@ Q(s)&=a_n\left(s^{n-1}c_0 +s^{n-2}c_1 +\cdots +c_{n-1}\right)+a_{n-1}\left(s^{n-
 
 作为一个例子，我们使用复频域分析的方法来处理一个二阶动态电路：
 \begin{example}[二阶动态电路]
-    设电路如下图所示，起始状态为0，$t=0$时刻开关闭合，求电流$i(t)$。
+    设电路如下图(a)所示，起始状态为0，$t=0$时刻开关闭合，求电流$i(t)$。
     \begin{center}
+    \begin{tabular}{cc}
+        % 左侧电路图 (时域)
         \begin{circuitikz}[american]
             \draw (0,0) to[V=$E$] (0,3)
             to[closing switch] (2.5,3)
@@ -6374,9 +6765,8 @@ Q(s)&=a_n\left(s^{n-1}c_0 +s^{n-2}c_1 +\cdots +c_{n-1}\right)+a_{n-1}\left(s^{n-
             to[C=$C$] (5,0)
             to[R=$R$] (0,0);
         \end{circuitikz}
-    \end{center}
-    解：采用复频域模型：
-    \begin{center}
+        &
+        % 右侧电路图 (s域)
         \begin{circuitikz}[american]
             \draw (0,0) to[V=$E/s$] (0,3)
             to[short] (2.5,3)
@@ -6384,8 +6774,11 @@ Q(s)&=a_n\left(s^{n-1}c_0 +s^{n-2}c_1 +\cdots +c_{n-1}\right)+a_{n-1}\left(s^{n-
             to[C=$1/sC$] (5,0)
             to[R=$R$] (0,0);
         \end{circuitikz}
-    \end{center}
-    由基尔霍夫电压定律，有
+        \\
+        \text{(a) 时域电路} & \text{(b) s域等效电路}
+    \end{tabular}
+\end{center}
+    解：采用复频域模型，如上图(b)所示。由基尔霍夫电压定律，有
     \[\frac{E}{s}=I(s)\left(R+sL+\frac{1}{sC}\right)\]
     因此
     \[I(s)=\frac{E}{s\left(R+sL+\frac{1}{sC}\right)}=\frac{E}{Ls^2+Rs+\frac{1}{C}}\]
@@ -6420,7 +6813,9 @@ Q(s)&=a_n\left(s^{n-1}c_0 +s^{n-2}c_1 +\cdots +c_{n-1}\right)+a_{n-1}\left(s^{n-
 
 \subsection{系统流图与梅森增益公式}\label{sub:mason_gain_formula}
 
-系统的\textbf{信号流图}(signal flow graph)由香农在1942年发明，后经梅森(J.E. Mason)推广完善，成为分析线性时不变系统的有力工具，因此又称为\textbf{梅森信号流图}(Mason signal flow graph)。
+系统的\textbf{信号流图}(signal flow graph)由香农在1942年发明，后经梅森(J.E. Mason)推广完善，成为分析线性时不变系统的有力工具，因此又称为\textbf{梅森信号流图}(Mason signal flow graph)或\textbf{梅森图}(Mason graph)。
+
+信号流图可以看作是系统框图的另一种表示形式。由于系统框图不能很好地展示出系统的数学模型，本书中未涉及系统框图的概念，感兴趣的读者可以参考\cite{oppenheim1997signals}\cite{signal_systems}。
 
 \begin{definition}
 信号流图是一种有向图，其节点表示系统的变量（输入、输出或中间变量），有向边表示变量之间的线性关系，边上的权值表示线性关系的系数。信号流图可以直观地反映系统的结构特性，并且可以通过图论的方法来分析系统的传递函数。
@@ -6482,7 +6877,7 @@ Q(s)&=a_n\left(s^{n-1}c_0 +s^{n-2}c_1 +\cdots +c_{n-1}\right)+a_{n-1}\left(s^{n-
     \end{align*}
 \end{example}
 
-信号流图是一种有向图，$n$个节点的信号流图可以通过$n$阶的\textbf{邻接矩阵}$A$来表示，其元素$a_{ij}$表示从节点$j$到节点$i$的支路增益，如果没有支路连接这两个节点，则$a_{ij}=0$。显然，信号流图可由其邻接矩阵唯一表示，但邻接矩阵中会有一些冗余的行和列。我们通过一个例子来说明这一点。
+信号流图是一种有向图，$n$个节点的信号流图可以通过$n$阶的\textbf{邻接矩阵}$A$来表示，其元素$a_{ij}$表示从节点$j$到节点$i$的支路增益，如果没有支路连接这两个节点，则$a_{ij}=0$。%显然，信号流图可由其邻接矩阵唯一表示，但邻接矩阵中会有一些冗余的行和列。我们通过一个例子来说明这一点。
 
 \begin{example}
     上例中，节点依次为$X_1,X_2,M_1,M_2,Y_1,Y_2$，则对应的邻接矩阵为
@@ -6567,11 +6962,11 @@ Q(s)&=a_n\left(s^{n-1}c_0 +s^{n-2}c_1 +\cdots +c_{n-1}\right)+a_{n-1}\left(s^{n-
 在系统矩阵$S=I-A$可逆时，有
 \[\mathbf{M}=(I-A)^{-1}\mathbf{X}=S^{-1}\mathbf{X}\]
 因此中间节点$M_i$可由以下公式计算：\[M_i=\frac{S^*_{1i}}{\Delta} X\]
-其中$\Delta=|S|$为特征行列式，$S^*_{1i}$为系统矩阵$S$的去掉第1行、第i列所得的代数余子式。输出节点的响应是中间节点线性组合。以$M_n$为输出为例，我们可以写出\textbf{梅森增益公式}(Mason gain formula)：
+其中$\Delta=\det S$为特征行列式，$S^*_{1i}$为系统矩阵$S$的去掉第1行、第i列所得的代数余子式。输出节点的响应是中间节点线性组合。以$M_n$为输出为例（否则可更换节点命名并重复此过程），可以写出\textbf{梅森增益公式}(Mason gain formula)：
 \begin{theorem}[梅森增益公式]
     设系统有$n$个中间节点$M_1,M_2,\cdots,M_n$，激励$X$接入节点$M_1$，响应$Y$取自节点$M_n$，则
     \[H=\frac{Y}{X}=(S^{-1})_{1n}=\frac{S^*_{n1}}{\Delta}\]
-    其中$(S^{-1})_{1n}$为系统矩阵$S$的逆矩阵的第1行第$n$列元素，$\Delta=|S|$为特征行列式，$S^*_{n1}$为系统矩阵$S$的去掉第$n$行、第1列所得的代数余子式。
+    其中$(S^{-1})_{1n}$为系统矩阵$S$的逆矩阵的第1行第$n$列元素，$\Delta=\det S$为特征行列式，$S^*_{n1}$为系统矩阵$S$的去掉第$n$行、第1列所得的代数余子式。
 \end{theorem}
 
 根据行列式的图论展开的几何意义，梅森增益公式又可以写成如下形式：
@@ -6589,7 +6984,12 @@ Q(s)&=a_n\left(s^{n-1}c_0 +s^{n-2}c_1 +\cdots +c_{n-1}\right)+a_{n-1}\left(s^{n-
 \[\det S=\sum_{\sigma\in S_n}\text{sgn}(\sigma)\prod_{i=1}^{n}s_{i,\sigma(i)}\]
 其中$S_n$为所有$n$个元素的排列组成的集合，$\text{sgn}(\sigma)$为排列$\sigma$的符号。对于$S=I-A$，对角元为$s_{ii}=1-a_{ii}$，非对角元为$s_{ij}=-a_{ij}$。
 
-我们知道，每个置换都可以分解为不相交循环的乘积，例如，$\sigma(1)=3,\sigma(3)=4,\sigma(4)=1,\sigma(2)=5,\sigma(5)=2$可以表示为$\sigma=(1\ 3\ 4)(2\ 5)$，对应中间节点组成的环路$M_1\to M_3\to M_4\to M_1$和$M_2\to M_5\to M_2$。因此，行列式的每一项$\prod_{i=1}^{n}s_{i,\sigma(i)}$都可以看作是由若干个不接触环路增益的乘积。如果环路中出现不动点$\sigma(i)=i$，则对应的$s_{ii}=1-a_{ii}$中的1，表示该节点不参与任何环路；如果考虑自环，则对应$-a_{ii}$。
+我们知道，每个置换都可以分解为不相交循环的乘积，例如，$$\sigma(1)=3,\sigma(3)=4,\sigma(4)=1,\sigma(2)=5,\sigma(5)=2$$
+可以表示为
+$$\sigma=(1\ 3\ 4)(2\ 5)$$
+对应中间节点组成的环路
+$$M_1\to M_3\to M_4\to M_1,M_2\to M_5\to M_2$$
+因此，行列式的每一项$\prod_{i=1}^{n}s_{i,\sigma(i)}$都可以看作是由若干个不接触环路增益的乘积。如果环路中出现不动点$\sigma(i)=i$，则对应的$s_{ii}=1-a_{ii}$中的1，表示该节点不参与任何环路；如果考虑自环，则对应$-a_{ii}$。
 
 其次，考虑正负号的问题。对于k-循环，它对$\text{sgn}(\sigma)$的贡献为$(-1)^{k-1}$，而每个增益对应一个$-a_{ij}$，因此k-循环对行列式的贡献为$(-1)^{k-1}(-1)^k=-1$。因此，$l$个互不接触的环路增益之积的符号应为$(-1)^l$。
 \begin{example}
@@ -6612,21 +7012,7 @@ Q(s)&=a_n\left(s^{n-1}c_0 +s^{n-2}c_1 +\cdots +c_{n-1}\right)+a_{n-1}\left(s^{n-
 注意，如果原图中不含有$M_1\to M_n$的支路，则$s_{n1}=0$，此时我们只好假想有一条“增益为0”的支路连接$M_1$和$M_n$，才能看出代数余子式的几何意义。因此，在梅森增益公式中，我们总是需要将前向通路考虑进来，而不管是否存在$M_1\to M_n$的支路。
 
 \begin{example}
-    考虑具有4个中间节点的信号流图，其增益矩阵为
-    \[A=\begin{bmatrix}
-        0 & a_{12} & 0 & 0 \\
-        a_{21} & 0 & a_{23} & a_{24} \\
-        0 & 0 & 0 & a_{34} \\
-        0 & 0 & 0 & 0
-    \end{bmatrix}\]
-    系统矩阵为
-    \[S=\begin{bmatrix}
-        1 & s_{12} & 0 & 0 \\
-        s_{21} & 1 & s_{23} & s_{24} \\
-        0 & 0 & 1 & s_{34} \\
-        0 & 0 & 0 & 1
-    \end{bmatrix}\]
-    可以看出其系统流图为：
+    考虑具有4个中间节点的信号流图：
     \begin{figure}[H]
         \centering
         \begin{tikzpicture}[auto, >=Stealth, node distance=2.2cm]
@@ -6650,7 +7036,26 @@ Q(s)&=a_n\left(s^{n-1}c_0 +s^{n-2}c_1 +\cdots +c_{n-1}\right)+a_{n-1}\left(s^{n-
             \draw[->] (M2) to[out=150,in=30,looseness=1.3] node[above left=1pt and -2pt, font=\small] {$a_{21}$} (M1);
         \end{tikzpicture}
     \end{figure}
-    这个系统并没有$M_4\to M_1$的支路，但我们假想有支路$a_{41}=-s_{41}=0$，这样就产生了环路$M_1\to M_2\to M_3\to M_4\to M_1$和$M_1\to M_2\to M_4\to M_1$，前向通路增益分别为$g_1=a_{12}a_{23}a_{34}$和$g_2=a_{12}a_{24}$。
+    仍设激励接入的节点为$M_1$，输出取自节点$M_n$，则前向通路有两条：
+    \[M_1\to M_2\to M_3\to M_4,M_1\to M_2\to M_4\]
+    我们来考察前向通路与系统矩阵的对应关系。增益矩阵为
+    \[A=\begin{bmatrix}
+        0 & a_{12} & 0 & 0 \\
+        a_{21} & 0 & a_{23} & a_{24} \\
+        0 & 0 & 0 & a_{34} \\
+        0 & 0 & 0 & 0
+    \end{bmatrix}\]
+    因此系统矩阵为
+    \[S=I-A=\begin{bmatrix}
+        1 & s_{12} & 0 & 0 \\
+        s_{21} & 1 & s_{23} & s_{24} \\
+        0 & 0 & 1 & s_{34} \\
+        0 & 0 & 0 & 1
+    \end{bmatrix}\]
+    
+    这个系统并没有$M_4\to M_1$的支路，但我们假想有支路$a_{41}=-s_{41}=0$，这样就产生了环路
+    $$M_1\to M_2\to M_3\to M_4\to M_1,M_1\to M_2\to M_4\to M_1$$
+    前向通路增益分别为$g_1=a_{12}a_{23}a_{34}$和$g_2=a_{12}a_{24}$。
 
     计算特征行列式：原图中有环路$M_1\to M_2\to M_1$，环路增益为$L_1=a_{12}a_{21}$，特征行列式为$\Delta=1-L_1=1-a_{12}a_{21}$；对于两条前向通路，去掉所涉及的节点后不再有回路，因此$\Delta_1=\Delta_2=1$。根据梅森增益公式，有
     \[H=\frac{Y}{X}=\frac{g_1\Delta_1+g_2\Delta_2}{\Delta}=\frac{a_{12}a_{23}a_{34}+a_{12}a_{24}}{1-a_{12}a_{21}}\]
@@ -6723,6 +7128,8 @@ Q(s)&=a_n\left(s^{n-1}c_0 +s^{n-2}c_1 +\cdots +c_{n-1}\right)+a_{n-1}\left(s^{n-
     前向通路共有两条，增益分别为$g_1=H_{13}$和$g_2=H_{12}H_{23}$，去掉前向通路中的节点后没有环路，因此$\Delta_1=\Delta_2=1$。根据梅森增益公式，有
     \[H=\frac{g_1\Delta_1+g_2\Delta_2}{\Delta}=\frac{H_{13}+H_{12}H_{23}}{1-G_{21}H_{12}-G_{31}H_{13}-G_{32}H_{23}-G_{21}G_{32}H_{13}-G_{31}H_{23}H_{12}}\]
 \end{example}
+
+\subsection{最小相位系统}\label{sub:min_phase}
 
 \chapter{离散时间变换}
 
@@ -7499,7 +7906,7 @@ $\int_{-\infty}^{\infty}|g(y)|\,dy<\infty$的必要条件是$\int_{\delta/\lambd
 }{
     \int_{-\infty}^{\infty}e^{i\omega (x-y)}\,d\omega
 }
-两个积分是发散的，无法进行积分换序。我们可以使用“收敛因子”来处理这个问题，从信号处理的角度，这就是\textbf{加窗}(windowing)的手法，典型的\textbf{窗函数}(windowing function)如矩形窗（对应短时傅里叶变换）、三角窗和高斯窗（对应加博变换），更一般地还有\textbf{小波变换}(wavelet transform,WT)，见\ref{sec:Finite_Interval}。这里我们用高斯窗，仍记$G_\lambda(\xi)=\frac{1}{\lambda\sqrt{\pi}}e^{-\xi^2/\lambda^2}$，有\lr{
+两个积分是发散的，无法进行积分换序。我们可以使用“收敛因子”来处理这个问题，从信号处理的角度，这就是\textbf{加窗}(windowing)的手法，见\ref{sub:window}。这里我们用高斯窗，仍记$G_\lambda(\xi)=\frac{1}{\lambda\sqrt{\pi}}e^{-\xi^2/\lambda^2}$，有\lr{
     \mathcal{F} G_\lambda(\xi)=e^{-\pi^2 \lambda^2 \xi^2}
 }{
     \mathcal{F} G_\lambda(\omega)=e^{-\lambda^2 \omega^2/4}
@@ -7780,7 +8187,7 @@ $\int_{-\infty}^{\infty}|g(y)|\,dy<\infty$的必要条件是$\int_{\delta/\lambd
 \end{proof}
 
 \begin{example}
-    取$a=2\sigma(f)$，则有\[\int_{|t|\geq 2\sigma(f)}|f(t)|^2\,dt\leq \frac{1}{4}\]
+    设$f$满足归一化条件且数学期望为0，取$a=2\sigma(f)$，则有\[\int_{|t|\geq 2\sigma(f)}|f(t)|^2\,dt\leq \frac{1}{4}\]
 即$f$在区间$[-2\sigma(f),2\sigma(f)]$之外的能量不超过总能量的$1/4$。
 \end{example}
 可见，前面证明的$\sigma_f \sigma_F\geq 1/4\pi$又可以表述为时域上的“宽度”与频域上的“宽度”之积有下界，由此可以定义信号的时宽、带宽积：
