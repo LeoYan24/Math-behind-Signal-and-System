@@ -5380,7 +5380,7 @@ $\rho-\hat{\mathbf{n}}\cdot\mathbf{b}<0$的情况，将在下一性质指出处�
 \end{figure}
 
 \begin{definition}[短时傅里叶变换]
-    设$f:\mathbb{R}\to\mathbb{C}$为信号，$w:\mathbb{R}\to\mathbb{C}$为窗函数，则$f$的\textbf{短时傅里叶变换}(short-time Fourier transform, STFT)定义为：
+    设$f\in L^2(\mathbb{R})$，$w:\mathbb{R}\to\mathbb{C}$为窗函数，则$f$的\textbf{短时傅里叶变换}(short-time Fourier transform, STFT)定义为：
     \begin{lralign}
         \mathrm{STFT} _{f,w}(\tau,\xi)&=\mathcal{F} [f(t)w(t-\tau)](\xi)\\
         &=\int_{-\infty}^{\infty}f(t)w(t-\tau)e^{-2\pi i\xi t}\,dt
@@ -5391,36 +5391,33 @@ $\rho-\hat{\mathbf{n}}\cdot\mathbf{b}<0$的情况，将在下一性质指出处�
     其中参数$\tau$表示加窗的时间位置。特别地，当窗函数为矩形窗时，短时傅里叶变换称为\textbf{滑动傅里叶变换}(sliding Fourier transform)；当窗函数为高斯窗时，短时傅里叶变换称为\textbf{Gabor变换}(Gabor transform)。
 \end{definition}
 
-一般来说，短时傅里叶变换不涉及积分发散的问题，因此我们仅仅要求本小节中的函数局部可积，而无需要求它们属于某个更严格的函数空间。但我们需要对窗函数做一些要求：
+要求$f\in L^2(\mathbb{R})$是为了保证$f(t)w(t-\tau)\in L^1(\mathbb{R})$，从而短时傅里叶变换良定义。由柯西不等式，有：
+\begin{align*}
+    \left|\int_{-\infty}^{\infty}f(t)w(t-\tau)e^{-2\pi i \xi t}\,dt\right|
+    \leq&\int_{-\infty}^{\infty}|f(t)w(t-\tau)|\,dt\\
+    \leq &\left(\int_{-\infty}^{\infty}|f(t)|^2\,dt\right)^{1/2}\left(\int_{-\infty}^{\infty}|w(t-\tau)|^2\,dt\right)^{1/2}\\
+    =&\|f\|_2\|w\|_2<\infty
+\end{align*}
+
+窗函数$w$通常需要满足以下条件：
 \begin{itemize}
     \item 归一化条件：
     \[\|w\|_2=\left(\int_{-\infty}^{\infty}|w(t)|^2\,dt\right)^{1/2}=1\]
-    \item 良好的局部性质：窗函数$w\in\mathcal{S} $，$\mathcal{S} $为施瓦兹函数空间。
+    \item 良好的局部性质：窗函数$w$紧支或快速衰减
 \end{itemize}
 
-归一化条件是必要的，否则窗函数$w$的若干倍仍为窗函数，但$\alpha w(\alpha\in\mathbb{R})$不具有单独的研究价值。我们也可以采取其他的归一化条件，例如$\|w\|_1=1$或$\|w\|_{\infty}=1$，只是以上给出的归一化条件更为方便。
+归一化条件是必要的，否则窗函数$w$的若干倍仍为窗函数，但$\alpha w(\alpha\in\mathbb{R})$不具有单独的研究价值。我们很快会看到选取$L^2$范数作为归一化带来的方便。
 
-根据卷积定理，有：\begin{lralign}
-    \mathrm{STFT} _{f,w}(\tau,\xi)&=\mathcal{F} [f(t)w(t-\tau)](\xi)\\
-    &=\mathcal{F} f(\xi)*\mathcal{F} [w(t-\tau)](\xi)\\
-    &=\mathcal{F} f(\xi)*\left(e^{-2\pi i \xi \tau}\mathcal{F} w(\xi)\right)
-\switch
-    \mathrm{STFT} _{f,w}(\tau,\omega)&=\mathcal{F} [f(t)w(t-\tau)](\omega)\\
-    &=\mathcal{F} f(\omega)*\mathcal{F} [w(t-\tau)](\omega)\\
-    &=\mathcal{F} f(\omega)*\left(e^{-i \omega \tau}\mathcal{F} w(\omega)\right)
-\end{lralign}
+使用短时傅里叶变换无法还原出窗外函数的信息，但是，如果加窗的位置取遍所有时间点，则可以还原出完整的函数：
 
-窗外的函数值任意变化，都不会影响$STFT _{f,w}(\tau,\xi)$，因此卷积是不可逆的，与另一函数的卷积必然丢失函数的信息。但是，如果加窗的位置取遍所有时间点，则可以还原出完整的函数：
-\begin{definition}[短时傅里叶逆变换]
-    设$w$为窗函数，则二元函数$F$的\textbf{短时傅里叶逆变换}(short-time Fourier inverse transform)定义为：
-    \begin{lralign}
-        f(t)&=\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}F(\tau,\xi)w(t-\tau)e^{2\pi i \xi t}\,d\xi\,d\tau
-        \switch
-        f(t)&=\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}F(\tau,\omega)w(t-\tau)e^{i \omega t}\,d\omega\,d\tau
-    \end{lralign}
-\end{definition}
 \begin{theorem}[短时傅里叶反演公式]
-    以$w$为窗函数，对$f$做短时傅里叶变换得到$\mathrm{STFT} _{f,w}$，则$\mathrm{STFT} _{f,w}$的短时傅里叶逆变换为$f$
+    设$w$为窗函数，$f\in L^2(\mathbb{R})$，则
+    {\color{blue}\begin{align*}
+        f(t)&=\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}\mathrm{STFT} _{f,w}(\tau,\xi)w(t-\tau)e^{2\pi i \xi t}\,d\xi\,d\tau
+    \end{align*}}
+    {\color{red}\begin{align*}
+        f(t)&=\frac{1}{2\pi}\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}\mathrm{STFT} _{f,w}(\tau,\omega)w(t-\tau)e^{i \omega t}\,d\omega\,d\tau
+    \end{align*}}
 \end{theorem}
 \begin{proof}
     \begin{lralign}
@@ -5435,17 +5432,16 @@ $\rho-\hat{\mathbf{n}}\cdot\mathbf{b}<0$的情况，将在下一性质指出处�
 &\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}\mathrm{STFT} _{f,w}(\tau,\omega)w(t-\tau)e^{i \omega t}\,d\omega\,d\tau\\
         =&\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}\mathcal{F} [f(u)w(u-\tau)](\omega)w(t-\tau)e^{i \omega t}\,d\omega\,d\tau\\
         =&\int_{-\infty}^{\infty}w(t-\tau)\,dt\int_{-\infty}^{\infty}\mathcal{F} [f(u)w(u-\tau)](\omega)e^{i \omega t}\,d\omega\\
-        =&\int_{-\infty}^{\infty}w(t-\tau)\mathcal{F} ^{-1}\mathcal{F} [f(t)w(t-\tau)]\,d\tau\\
-        =&\int_{-\infty}^{\infty}w(t-\tau)f(t)w(t-\tau)\,d\tau\\
-        =&f(t)\int_{-\infty}^{\infty}w^2(t-\tau)\,d\tau\\
-        =&f(t)\|w\|_2^2=f(t)
+        =&\int_{-\infty}^{\infty}w(t-\tau)2\pi\mathcal{F} ^{-1}\mathcal{F} [f(t)w(t-\tau)]\,d\tau\\
+        =&2\pi\int_{-\infty}^{\infty}w(t-\tau)f(t)w(t-\tau)\,d\tau\\
+        =&2\pi f(t)\int_{-\infty}^{\infty}w^2(t-\tau)\,d\tau\\
+        =&2\pi f(t)\|w\|_2^2=2\pi f(t)
 \end{lralign}
-以上过程用到了傅里叶反演公式并忽略了$f$在不连续点的取值问题。
+
+以上过程对$f(t)w(t-\tau)$使用了傅里叶反演公式并忽略了在不连续点的取值问题。前面已经验证$f(t)w(t-\tau)\in L^1(\mathbb{R})$，但是\ref{sub:fourier_inversion}中傅里叶反演公式所需的其他条件需要对$f,w$做出更严格的假设，这里不再赘述。
 \end{proof}
 
-即使不要求窗函数归一化，我们也能得到类似的公式，但会引入归一化系数，这解释了为什么我们以$L^2$范数归一化窗函数。
-
-\subsection{小波变换初步}\label{sub:wavelet}
+即使不要求窗函数归一化，我们也能得到类似的公式，但会引入额外的系数，这解释了为什么我们以$L^2$范数归一化窗函数。
 
 在适当的伸缩变换下，可以保证窗函数满足能量归一化的条件，而不改变局部的良好性质。那么，应该如何选取窗函数的宽度呢？为了回答这个问题，我们首先需要研究窗的在宽度变化时，短时傅里叶变换的行为特性。
 
@@ -5476,18 +5472,17 @@ $\rho-\hat{\mathbf{n}}\cdot\mathbf{b}<0$的情况，将在下一性质指出处�
 
 直观上，窄的窗使得我们能够精确定位信号的时域变化产生的时间，但看到的波形片段太短，难以判定信号的频率。
 
-根据上一小节中用卷积定理得到的恒等式：
-\begin{lralign}
-    \mathrm{STFT} _{f,w}(\tau,\xi)&=\mathcal{F} f(\xi)*\left(e^{-2\pi i \xi \tau}\mathcal{F} w(\xi)\right)
+根据卷积定理，有：\begin{lralign}
+    \mathrm{STFT} _{f,w}(\tau,\xi)&=\mathcal{F} [f(t)w(t-\tau)](\xi)\\
+    &=\mathcal{F} f(\xi)*\mathcal{F} [w(t-\tau)](\xi)\\
+    &=\mathcal{F} f(\xi)*\left(e^{-2\pi i \xi \tau}\mathcal{F} w(\xi)\right)
 \switch
-    \mathrm{STFT} _{f,w}(\tau,\omega)&=\mathcal{F} f(\omega)*\left(e^{-i \omega \tau}\mathcal{F} w(\omega)\right)
+    \mathrm{STFT} _{f,w}(\tau,\omega)&=\mathcal{F} [f(t)w(t-\tau)](\omega)\\
+    &=\mathcal{F} f(\omega)*\mathcal{F} [w(t-\tau)](\omega)\\
+    &=\mathcal{F} f(\omega)*\left(e^{-i \omega \tau}\mathcal{F} w(\omega)\right)
 \end{lralign}
-考虑窗函数的伸缩变换$w_a(t)=\dfrac{1}{\sqrt{a}}w\left(\dfrac{t}{a}\right)(a>0)$，则有：\begin{align*}
-    \int_{-\infty}^{\infty}|w_a(t)|^2\,dt&=\int_{-\infty}^{\infty}\left|\frac{1}{\sqrt{a}}w\left(\frac{t}{a}\right)\right|^2\,dt\\
-    &=\int_{-\infty}^{\infty}\frac{1}{a}|w\left(\frac{t}{a}\right)|^2\,dt\\
-    &=\int_{-\infty}^{\infty}|w(u)|^2\,du&\left(u=\frac{t}{a}\right)=1
-\end{align*}
-以及\begin{align*}
+考虑窗函数的伸缩变换$w_a(t)=\dfrac{1}{\sqrt{a}}w\left(\dfrac{t}{a}\right)(a>0)$，容易验证这个变换保持$L^2$范数为1不变，此外，
+\begin{align*}
     \mathcal{F} w_a(\xi)&=\sqrt{a}\mathcal{F} w(a\xi)
 \end{align*}
 在$0<a<1$时，窗函数变窄，而$\mathcal{F} w_a(\xi)$舒张。
@@ -5497,7 +5492,7 @@ $\rho-\hat{\mathbf{n}}\cdot\mathbf{b}<0$的情况，将在下一性质指出处�
 \begin{example}
     下图中的例子展示了窗函数较窄导致的低频率分辨率的现象。对于区间$[0,4]$，选取信号
     \[f(t)=\cos(4\pi t)+\cos(8\pi t)+\cos(12\pi t)+\cos(20\pi t)\]
-    及宽为0.5的矩形窗$\chi_{[1.75,2.25]}$，对$f$做短时傅里叶变换，得到的频谱图如下所示。从图中可以看出，频谱图无法清晰地显示出四个角频率2，4，6，10附近的尖峰，频率特征不明显；但根据频谱图（还需结合相频图来判断信号的具体位置）可以较好地还原出加窗信号在时域上的特性。
+    及宽为0.5的矩形窗$\chi_{[1.75,2.25]}$，对$f$做短时傅里叶变换，得到的频谱图如下所示。从图中可以看出，频谱图无法清晰地显示出四个角频率2，4，6，10附近的尖峰，频率特征不明显；但根据频谱图可以较好地还原出加窗信号在时域上的特性。
     \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{thinwindow}
@@ -5505,7 +5500,164 @@ $\rho-\hat{\mathbf{n}}\cdot\mathbf{b}<0$的情况，将在下一性质指出处�
 \end{figure}
 \end{example}
 
-为了兼顾时间分辨率和频率分辨率，一方面，我们可以探究对于特定的信号处理场景，通常应该选取怎样的窗函数；另一方面，我们可以对窗函数做多尺度分析，即对不同的频率成分使用不同宽度的窗函数。例如，对高频成分使用窄窗以提高时间分辨率，对低频成分使用宽窗以提高频率分辨率。这种方法就是\textbf{小波变换}(wavelet transform)。
+\subsection{小波变换初步}\label{sub:wavelet}
+
+为了兼顾时间分辨率和频率分辨率，一方面，我们可以探究对于特定的信号处理场景，通常应该选取怎样的窗函数；另一方面，我们可以对窗函数做多尺度分析，即对不同的频率成分使用不同宽度的窗函数。例如，对高频成分使用窄窗以提高时间分辨率，对低频成分使用宽窗以提高频率分辨率。这种方法就是\textbf{小波变换}(wavelet transform,WT)。
+
+取定某一窗函数$\psi$为\textbf{小波母函数}(mother wavelet)，则小波函数由小波母函数通过平移和伸缩变换得到：
+\[\psi_{a,b}(t)=\frac{1}{\sqrt{a}}\psi\left(\frac{t-b}{a}\right),a>0,b\in\mathbb{R}\]
+其中$a$为伸缩参数，$b$为平移参数。小波变换定义为：
+\begin{definition}[小波变换]
+    设$f\in L^2(\mathbb{R})$，$\psi$为小波母函数，则$f$关于$\psi$的小波变换定义为：
+    \begin{align*}
+        \mathrm{WT} _{f,\psi}(a,b)=\int_{-\infty}^{\infty}f(t)\overline{\psi_{a,b}(t)}\,dt=\langle f,\psi_{a,b}\rangle
+    \end{align*}
+    其中$\langle\cdot,\cdot\rangle$为$L^2(\mathbb{R})$空间中的内积。通过变量代换$u=\dfrac{t-b}{a}$，小波变换也可写为：
+    \begin{align*}
+        \mathrm{WT} _{f,\psi}(a,b)&=|a|^{-1/2}\int_{-\infty}^{\infty}f(t)\overline{\psi\left(\frac{t-b}{a}\right)}\,dt\\
+        &=|a|^{1/2}\int_{-\infty}^{\infty}f(au+b)\overline{\psi(u)}\,du
+    \end{align*}
+    这样，伸缩参数$a$可以延拓至整个实轴。
+\end{definition}
+
+小波变换的定义式有些奇怪：我们不仅使得窗函数可以任意伸缩，还去掉了$e^{-2\pi i \xi t}$这一振荡因子。这是因为，小波变换不仅仅是为了\textbf{多分辨率分析}(multi-resolution analysis, MRA)而对短时傅里叶变换的推广，它还要求小波母函数$\psi$本身就具有振荡特性，从而能够提取信号的频率成分信息。
+
+为了保证小波母函数的振荡特性，通常要求小波母函数的直流分量为0\cite{mathematics_in_signal_processing}：
+\[\int_{-\infty}^{\infty}\psi(t)\,dt=0\]
+
+此外，小波母函数需满足\textbf{容许性条件}(admissibility condition)：
+\begin{definition}[容许性条件]
+    设$\psi\in L^2(\mathbb{R})$，记$\psi$的频率形式的傅里叶变换为$\hat{\psi}$，则$\psi$满足容许性条件当且仅当\textbf{容许性常数}(admissibility constant)$C_{\psi}$有限：
+    \[C_{\psi}=\int_{-\infty}^{\infty}\frac{|\hat{\psi}(\xi)|^2}{|\xi|}\,d\xi<\infty\]
+\end{definition}
+
+使用频率形式的傅里叶变换，仅仅是因为需要借助傅里叶变换的工具来分析小波变换，使用角频率也不会产生本质区别。
+
+这一条件保证了小波变换可逆，并且使得小波变换的普朗歇尔公式成立。
+
+\begin{proposition}
+    \[ C_{\psi}<\infty\implies\int_{-\infty}^{\infty}\psi(t)\,dt=0\]
+    即要求$\psi$直流分量为0是冗余的。
+\end{proposition}
+\begin{proof}
+    如果$\psi$直流分量不为0，即
+    \begin{align*}
+    \hat{\psi}(0)&=\int_{-\infty}^{\infty}\psi(t)\,dt\neq 0
+    \end{align*}
+    则由于$\hat{\psi}$连续（见\ref{sub:introduction_of_fourier}），在$\omega=0$的某个邻域内，$|\hat{\psi}(\omega)|\geq \dfrac{|\hat{\psi}(0)|}{2}>0$，从而
+    \begin{align*}
+        C_{\psi}&=\int_{-\infty}^{\infty}\frac{|\hat{\psi}(\omega)|^2}{|\omega|}\,d\omega\\
+        &\geq \int_{-\epsilon}^{\epsilon}\frac{|\hat{\psi}(\omega)|^2}{|\omega|}\,d\omega&(\epsilon>0)\\
+        &\geq \int_{-\epsilon}^{\epsilon}\frac{|\hat{\psi}(0)|^2}{4|\omega|}\,d\omega=\infty
+    \end{align*}
+    矛盾。
+\end{proof}
+
+\begin{theorem}[小波变换普朗歇尔公式]
+    设$f,g\in L^2(\mathbb{R})$，$\psi$为满足容许性条件的小波母函数，则
+    \[\langle f,g\rangle=\frac{1}{C_{\psi}}\int_{-\infty}^{\infty}a^{-2}\,da\int_{-\infty}^{\infty}\mathrm{WT} _{f,\psi}(a,b)\overline{\mathrm{WT} _{g,\psi}(a,b)}\,db\]
+\end{theorem}
+\begin{proof}
+    \ref{sub:fourier_operation_properties}中的普朗歇尔定理表明：
+    \begin{align*}
+        \langle f,g\rangle=\langle \hat{f},\hat{g}\rangle=\int_{-\infty}^{\infty}\hat{f}(\omega)\overline{\hat{g}(\omega)}\,d\omega
+    \end{align*}
+    其中$\hat{f},\hat{g}$分别为$f,g$的傅里叶变换。另一方面，考察右式内层的积分：
+    \begin{align*}
+        \int_{-\infty}^{\infty}\mathrm{WT} _{f,\psi}(a,b)\overline{\mathrm{WT} _{g,\psi}(a,b)}\,db=\left\langle \mathrm{WT} _{f,\psi}(a,\cdot),\mathrm{WT} _{g,\psi}(a,\cdot)\right\rangle
+    \end{align*}
+    希望使用普朗歇尔定理，为此考察$\mathcal{F} _b[\mathrm{WT} _{f,\psi}(a,b)](\xi)$。将小波变换的定义式改写为
+    \begin{align*}
+        \mathrm{WT} _{f,\psi}(a,b)=|a|^{-1/2}\int_{-\infty}^{\infty}f(t)\overline{\psi\left(\frac{t-b}{a}\right)}\,dt=|a|^{-1/2}(f*\overline{\sigma_{-1/a}\psi})(b)
+    \end{align*}
+    则
+    \begin{align*}
+        \mathcal{F} _b[\mathrm{WT} _{f,\psi}(a,b)](\xi)&=|a|^{-1/2}\mathcal{F} _b[f*\overline{\sigma_{-1/a}\psi}](\xi)\\
+        &=|a|^{-1/2}\mathcal{F} f(\xi)\cdot \mathcal{F} [\overline{\sigma_{-1/a}\psi}](\xi)\\
+        &=|a|^{-1/2}\hat{f}(\xi)\cdot |a|\overline{\hat{\psi}(a\xi)}\\
+        &=|a|^{1/2}\hat{f}(\xi)\overline{\hat{\psi}(a\xi)}
+    \end{align*}
+    于是，右式内层的积分化为
+    \begin{align*}
+        &\int_{-\infty}^{\infty}\mathrm{WT} _{f,\psi}(a,b)\overline{\mathrm{WT} _{g,\psi}(a,b)}\,db\\
+        =&\int_{-\infty}^{\infty}\mathcal{F} _b[\mathrm{WT} _{f,\psi}(a,b)](\xi)\overline{\mathcal{F} _b[\mathrm{WT} _{g,\psi}(a,b)](\xi)}\,d\xi\\
+        =&\int_{-\infty}^{\infty}|a|^{1/2}\hat{f}(\xi)\overline{\hat{\psi}(a\xi)}\cdot |a|^{1/2}\overline{\hat{g}(\xi)}\hat{\psi}(a\xi)\,d\xi\\
+        =&|a|\int_{-\infty}^{\infty}\hat{f}(\xi)\overline{\hat{g}(\xi)}|\hat{\psi}(a\xi)|^2\,d\xi
+    \end{align*}
+    带入右式即得：
+    \begin{align*}
+        &\frac{1}{C_{\psi}}\int_{-\infty}^{\infty}a^{-2}\,da\int_{-\infty}^{\infty}\mathrm{WT} _{f,\psi}(a,b)\overline{\mathrm{WT} _{g,\psi}(a,b)}\,db\\
+        =&\frac{1}{C_{\psi}}\int_{-\infty}^{\infty}|a|^{-1}\,da\int_{-\infty}^{\infty}\hat{f}(\xi)\overline{\hat{g}(\xi)}|\hat{\psi}(a\xi)|^2\,d\xi\\
+        =&\frac{1}{C_{\psi}}\int_{-\infty}^{\infty}\hat{f}(\xi)\overline{\hat{g}(\xi)}\,d\xi\int_{-\infty}^{\infty}\frac{|\hat{\psi}(a\xi)|^2}{|a|}\,da\\
+        =&\frac{1}{C_{\psi}}\int_{-\infty}^{\infty}\hat{f}(\xi)\overline{\hat{g}(\xi)}\,d\xi\int_{-\infty}^{\infty}\frac{|\hat{\psi}(x)|^2}{|x|}\,dx&(x=a\xi)\\
+        =&\int_{-\infty}^{\infty}\hat{f}(\xi)\overline{\hat{g}(\xi)}\,d\xi=\langle f,g\rangle
+    \end{align*}
+\end{proof}
+
+\begin{theorem}[小波变换反演公式]
+    设$f\in L^2(\mathbb{R})$，$\psi$为满足容许性条件的小波母函数，则
+    \[f(t)=\frac{1}{C_{\psi}}\int_{-\infty}^{\infty}|a|^{-5/2}\,da\int_{-\infty}^{\infty}\mathrm{WT} _{f,\psi}(a,b)\overline{\psi_{a,b}(t)}\,db\]    
+\end{theorem}
+\begin{proof}
+    仍先用普朗歇尔定理处理内层积分。根据上一定理证明过程中的结果，有：
+    \begin{align*}
+        \mathcal{F} _b[\mathrm{WT} _{f,\psi}(a,b)](\xi)&=|a|^{1/2}\hat{f}(\xi)\overline{\hat{\psi}(a\xi)}\\
+        \mathcal{F} _b[\overline{\psi_{a,b}(t)}](\xi)&=|a|e^{-2\pi i\xi b}\hat{\psi}(a\xi)
+    \end{align*}
+    因此
+    \begin{align*}
+        &\int_{-\infty}^{\infty}\mathrm{WT} _{f,\psi}(a,b)\overline{\psi_{a,b}(t)}\,db\\
+        =&\left\langle \mathrm{WT} _{f,\psi}(a,\cdot),\overline{\psi_{a,\cdot}(t)}\right\rangle\\
+        =&\left\langle \mathcal{F} _b[\mathrm{WT} _{f,\psi}(a,b)](\xi),\mathcal{F} _b[\overline{\psi_{a,b}(t)}](\xi)\right\rangle\\
+        =&\int_{-\infty}^{\infty}|a|^{1/2}\hat{f}(\xi)\overline{\hat{\psi}(a\xi)}\cdot |a| \hat{\psi}(a\xi)e^{2\pi i\xi t}\,d\xi\\
+        =&|a|^{3/2}\int_{-\infty}^{\infty}\hat{f}(\xi)|\hat{\psi}(a\xi)|^2 e^{2\pi i\xi t}\,d\xi
+    \end{align*}
+    带入右式即得：
+    \begin{align*}
+        &\frac{1}{C_{\psi}}\int_{-\infty}^{\infty}|a|^{-5/2}\,da\int_{-\infty}^{\infty}\mathrm{WT} _{f,\psi}(a,b)\overline{\psi_{a,b}(t)}\,db\\
+        =&\frac{1}{C_{\psi}}\int_{-\infty}^{\infty}|a|^{-5/2}\,da\int_{-\infty}^{\infty}\mathrm{WT} _{f,\psi}(a,b)\overline{\psi_{a,b}(t)}\,db\\
+        =&\frac{1}{C_{\psi}}\int_{-\infty}^{\infty}|a|^{-1}\,da\int_{-\infty}^{\infty}\hat{f}(\xi)|\hat{\psi}(a\xi)|^2 e^{2\pi i\xi t}\,d\xi\\
+        =&\frac{1}{C_{\psi}}\int_{-\infty}^{\infty}\hat{f}(\xi)e^{2\pi i\xi t}\,d\xi\int_{-\infty}^{\infty}\frac{|\hat{\psi}(a\xi)|^2}{|a|}\,da\\
+        =&\frac{1}{C_{\psi}}\int_{-\infty}^{\infty}\hat{f}(\xi)e^{2\pi i\xi t}\,d\xi\int_{-\infty}^{\infty}\frac{|\hat{\psi}(x)|^2}{|x|}\,dx&(x=a\xi)\\
+        =&\int_{-\infty}^{\infty}\hat{f}(\xi)e^{2\pi i\xi t}\,d\xi=f(t)
+    \end{align*}
+\end{proof}
+
+\begin{example}[Haar小波]
+    设小波母函数为Haar小波：
+    \[\psi(t)=\begin{cases}
+        1,&0\leq t<\dfrac{1}{2}\\
+        -1,&\dfrac{1}{2}\leq t<1\\
+        0,&\text{otherwise}
+    \end{cases}\]
+    则对于$f\in L^2(\mathbb{R})$，其关于Haar小波的小波变换为：
+    \begin{align*}
+        \mathrm{WT} _{f,\psi}(a,b)&=|a|^{-1/2}\int_{-\infty}^{\infty}f(t)\overline{\psi\left(\frac{t-b}{a}\right)}\,dt\\
+        &=|a|^{-1/2}\left(\int_{b}^{b+\frac{a}{2}}f(t)\,dt-\int_{b+\frac{a}{2}}^{b+a}f(t)\,dt\right)
+    \end{align*}
+    检验容许性条件：
+    \begin{align*}
+        \hat{\psi}(\xi)&=\int_{-\infty}^{\infty}\psi(t)e^{-2\pi i \xi t}\,dt\\
+        &=\int_{0}^{\frac{1}{2}}e^{-2\pi i \xi t}\,dt-\int_{\frac{1}{2}}^{1}e^{-2\pi i \xi t}\,dt\\
+        &=\frac{1-e^{-\pi i \xi}}{2\pi i \xi}-\left(\frac{e^{-\pi i \xi}-e^{-2\pi i \xi}}{2\pi i \xi}\right)\\
+        &=\frac{1-2e^{-\pi i \xi}+e^{-2\pi i \xi}}{2\pi i \xi}=\frac{(1-e^{-\pi i \xi})^2}{2\pi i \xi}\\
+        &=\frac{2e^{-\pi i\xi}}{\pi i\xi}\sin^2\left(\frac{\pi \xi}{2}\right)\\
+        |\hat{\psi}(\xi)|^2&=\frac{4}{\pi^2 \xi^2}\sin^4\left(\frac{\pi \xi}{2}\right)
+    \end{align*}
+    因此，
+    \begin{align*}
+        C_{\psi}&=\int_{-\infty}^{\infty}\frac{|\hat{\psi}(\xi)|^2}{|\xi|}\,d\xi\\
+        &=\int_{-\infty}^{\infty}\frac{4}{\pi^2 |\xi|^3}\sin^4\left(\frac{\pi \xi}{2}\right)\,d\xi\\
+        &=\frac{8}{\pi^2}\int_{0}^{\infty}\frac{\sin^4\left(\frac{\pi \xi}{2}\right)}{\xi^3}\,d\xi\\
+        &=2\int_{0}^{\infty}\frac{\sin^4(u)}{u^3}\,du&\left(u=\frac{\pi \xi}{2}\right)\\
+        &=\ln 2
+    \end{align*}
+    我们利用了积分结果$\int_{0}^{\infty}\dfrac{\sin^4(x)}{x^3}\,dx=\dfrac{\ln 2}{2}$。因此，Haar小波满足容许性条件。
+\end{example}
+
+需要注意，在一些文献中不会考虑负的伸缩系数$a$，此时容许性条件需要改为：
+\[C_{\psi}=\int_{0}^{\infty}\frac{|\hat{\psi}(\xi)|^2}{\xi}\,d\xi<\infty\]
+于是Haar小波的容许性常数变为$C_{\psi}=\dfrac{\ln 2}{2}$，并且普朗歇尔公式与反演公式也需要做相应调整。
 
 \chapter{拉普拉斯变换与系统的复频域分析}
 
