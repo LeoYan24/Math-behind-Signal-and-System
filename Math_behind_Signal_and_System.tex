@@ -3324,7 +3324,7 @@ $$h_0(t)*\sum_{m=0}^{M}b_m e^{(m)}(t)$$
     高斯滤波器不满足佩利-维纳准则。它不是因果系统，不是物理可实现的。
 \end{example}
 
-佩利-维纳准则表明$|H(\omega)|$是能量有限的，并且衰减速度不能过快，特别地，$|H(\omega)|$不能紧支，于是下一小节\ref{sub:filter}中提到的理想滤波器都是不可能实现的。这是因为有限能量输入对应有限能量输出。激励$e(t)=\delta(t)$时，输入能量是有限的，$h(t)$的能量也是有限的，根据帕塞瓦尔定理，$H(\omega)$的能量也是有限的；另一方面，$H\in L^2(\mathbb{R})$是得到后一条件所必需的。
+佩利-维纳准则表明$|H(\omega)|$是能量有限的，并且衰减速度不能过快，特别地，$|H(\omega)|$不能紧支，于是下一小节中提到的理想滤波器都是不可能实现的。要求能量有限，是因为有限能量输入对应有限能量输出。激励$e(t)=\delta(t)$时，输入能量是有限的，$h(t)$的能量也是有限的，根据帕塞瓦尔定理，$H(\omega)$的能量也是有限的；另一方面，$H\in L^2(\mathbb{R})$是得到佩里维纳准则的第二条所必需的。
 
 佩利-维纳准则是因果性能量有限系统的必要特性，它没有对系统引入额外的要求。但是，得到这一条件需要比较复杂的数学知识，本书不作讨论。
 
@@ -3595,7 +3595,7 @@ $$h_0(t)*\sum_{m=0}^{M}b_m e^{(m)}(t)$$
     &=e^{i(\omega_0 t-k(\omega_0)x)}A\left(t - k'(\omega_0)x\right)e^{-i\omega_0 (t- k'(\omega_0)x)}\\
     &=A\left(t - k'(\omega_0)x\right)e^{i(\omega_0 k'(\omega_0)-k(\omega_0))x}
 \end{align*}
-可以看到，波形的包络$A\left(t - k'(\omega_0)x\right)$以速度$v_g(\omega_0)=\frac{1}{k'(\omega_0)}$传播，因此波包速度等于群速度。
+可以看到，波形的包络$A\left(t - k'(\omega_0)x\right)$以速度$v_g(\omega_0)=\dfrac{1}{k'(\omega_0)}$传播，因此波包速度等于群速度。
 \end{proof}
 
 \section{调制、解调与复用传输}\label{sec:modulation}
@@ -5279,7 +5279,7 @@ $\rho-\hat{\mathbf{n}}\cdot\mathbf{b}<0$的情况，将在下一性质指出处�
 
 这意味着，在高维空间中，辐射对称函数的傅里叶变换可以用半整数阶汉克尔变换表示，仅仅使用第一类贝塞尔函数是无法处理奇数维空间的情况的。
 
-\section{回到有限区间}\label{sec:Finite_Interval}
+\section{回到有界区间}\label{sec:Finite_Interval}
 
 \subsection{周期函数的卷积}\label{sub:conv_of_period_func}
 
@@ -5500,7 +5500,7 @@ $\rho-\hat{\mathbf{n}}\cdot\mathbf{b}<0$的情况，将在下一性质指出处�
 \end{figure}
 \end{example}
 
-\subsection{小波变换初步}\label{sub:wavelet}
+\subsection{*小波变换初步}\label{sub:wavelet}
 
 为了兼顾时间分辨率和频率分辨率，一方面，我们可以探究对于特定的信号处理场景，通常应该选取怎样的窗函数；另一方面，我们可以对窗函数做多尺度分析，即对不同的频率成分使用不同宽度的窗函数。例如，对高频成分使用窄窗以提高时间分辨率，对低频成分使用宽窗以提高频率分辨率。这种方法就是\textbf{小波变换}(wavelet transform,WT)。
 
@@ -7282,6 +7282,137 @@ $$M_1\to M_3\to M_4\to M_1,M_2\to M_5\to M_2$$
 \end{example}
 
 \subsection{最小相位系统}\label{sub:min_phase}
+
+根据\ref{sub:stability_of_system}，对于因果且稳定的连续线性时不变系统，其系统函数$H(s)$的所有极点均位于复平面的左半平面。如果我们还希望系统具有最小的延时特性，则需要系统函数$H(s)$的所有零点也位于复平面的左半平面，这样的系统称为\textbf{最小相位系统}(minimum-phase system)。
+
+\begin{definition}[最小相位系统]
+    设因果且稳定的连续线性时不变系统的系统函数为$H(s)$，设$H(s)$的零点集为$\{z_k\}$，如果$\forall k,\text{Re}(z_k)<0$，则称该系统为\textbf{最小相位系统}。
+\end{definition}
+
+为了说明为什么这样的系统具有最小的延时特性，我们首先考虑一个例子：
+\begin{example}
+    设因果且稳定的连续线性时不变系统A，B的系统函数分别为
+    \[H_A(s)=\frac{s+1}{s+2},H_B(s)=\frac{s-1}{s+2}\]
+    这两个系统具有相同的幅频特性：
+    \[|H_A(i\omega)|=|H_B(i\omega)|=\frac{\sqrt{\omega^2+1}}{\sqrt{\omega^2+4}}\]
+    其中系统A为最小相位系统，系统B不是最小相位系统。计算两个系统的相频特性：
+    \begin{align*}
+        \varphi_A(\omega)&=\arg(i\omega+1)-\arg(i\omega+2)=\arctan(\omega)-\arctan\left(\frac{\omega}{2}\right)\\
+        \varphi_B(\omega)&=\arg(i\omega-1)-\arg(i\omega+2)=-\arctan(\omega)-\arctan\left(\frac{\omega}{2}\right)
+    \end{align*}
+
+    在\ref{sub:distortion}中曾介绍，考察系统的延时特性，可以使用相时延$\tau_p$和群时延$\tau_g$。计算两个系统的相时延和群时延：
+    \begin{align*}
+        \tau_{pA}(\omega)&=-\frac{\varphi_A(\omega)}{\omega}=\frac{-\arctan(\omega)+\arctan\left(\frac{\omega}{2}\right)}{\omega}\\
+        \tau_{pB}(\omega)&=-\frac{\varphi_B(\omega)}{\omega}=\frac{\arctan(\omega)+\arctan\left(\frac{\omega}{2}\right)}{\omega}\\
+        \tau_{gA}(\omega)&=-\frac{d\varphi_A(\omega)}{d\omega}=-\frac{1}{1+\omega^2}+\frac{2}{4+\omega^2}\\
+        \tau_{gB}(\omega)&=-\frac{d\varphi_B(\omega)}{d\omega}=\frac{1}{1+\omega^2}+\frac{2}{4+\omega^2}
+    \end{align*}
+    可以发现，
+    \begin{align*}
+        &\tau_{pA}(\omega)-\tau_{pB}(\omega)=-\frac{2\arctan(\omega)}{\omega}<0\\
+        &\tau_{gA}(\omega)-\tau_{gB}(\omega)=-\frac{2}{1+\omega^2}<0
+    \end{align*}
+    也就是说，最小相位系统A的相时延和群时延均小于非最小相位系统B的相时延和群时延，因此系统A具有更好的延时特性。
+\end{example}
+
+可以归纳出：
+\begin{proposition}
+    具有相同幅频特性的因果且稳定的连续线性时不变系统中，最小相位系统具有最小的相时延和群时延，因此具有最佳的延时特性。
+\end{proposition}
+\begin{proof}
+    我们对系统函数为有理函数的情况进行证明。设因果且稳定的连续线性时不变系统的系统函数为
+    \[H(s)=K(s)\frac{\prod_{k=1}^{m}(s-z_k)}{\prod_{l=1}^{n}(s-p_l)}\]
+    其中$K(s)$仅有左半平面内的零点而没有极点。$\text{Re}(p_l)<0,\forall l,\text{Re}(z_k)> 0,\forall k$。设系统函数$H(s)$的幅频特性为$|H(i\omega)|=A(\omega)$，则
+    \[A(\omega)=|K(s)|\frac{\prod_{k=1}^{m}\sqrt{\omega^2+|z_k|^2}}{\prod_{l=1}^{n}\sqrt{\omega^2+|p_l|^2}}\]
+    设另一个系统的系统函数为
+    \[\tilde{H}(s)=K(s)\frac{\prod_{k=1}^{m}(s-\tilde{z}_k)}{\prod_{l=1}^{n}(s-p_l)}\]
+    其中$\tilde{z}_k=-\overline{z_k}$，即$z_k$关于虚轴的对称点，则$\tilde{H}(s)$的幅频特性与$H(s)$相同，且该系统是最小相位系统。计算两个系统的相频特性之差：
+    \begin{align*}
+        \varphi(\omega)-\tilde{\varphi}(\omega)&=\sum_{k=1}^{m}\left(\arg(i\omega-z_k)-\arg(i\omega-\tilde{z}_k)\right)\\
+        &=\sum_{k=1}^{m}\left(\arctan\left(\frac{\omega-\text{Im}(z_k)}{-\text{Re}(z_k)}\right)-\arctan\left(\frac{\omega-\text{Im}(z_k)}{\text{Re}(z_k)}\right)\right)\\
+        &=-2\sum_{k=1}^{m}\arctan\left(\frac{\omega-\text{Im}(z_k)}{\text{Re}(z_k)}\right)
+    \end{align*}
+    比较相时延和群时延：
+    \begin{align*}
+        \tau_p(\omega)-\tilde{\tau}_p(\omega)&=-\frac{\varphi(\omega)-\tilde{\varphi}(\omega)}{\omega}\\
+        &=\frac{2}{\omega}\sum_{k=1}^{m}\arctan\left(\frac{\omega-\text{Im}(z_k)}{\text{Re}(z_k)}\right)>0\\
+        \tau_g(\omega)-\tilde{\tau}_g(\omega)&=-\frac{d}{d\omega}(\varphi(\omega)-\tilde{\varphi}(\omega))\\
+        &=2\sum_{k=1}^{m}\frac{\text{Re}(z_k)}{(\omega-\text{Im}(z_k))^2+\text{Re}(z_k)^2}>0
+    \end{align*}
+    因此，最小相位系统$\tilde{H}(s)$的相时延和群时延均小于非最小相位系统$H(s)$的相时延和群时延。
+\end{proof}
+
+需要指出，这个证明并不严谨。其一，这个证明无法涵盖虚轴上存在零点的情况；其二，这个证明仅适用于有理函数。但是，更一般的情况需要用到哈代空间中函数的内外分解，我没能找到既严谨又通俗的证明。
+
+在最小相位系统的约束下，其\textbf{逆系统}也是因果且稳定的连续线性时不变系统。这是因为最小相位系统的系统函数$H(s)$的零点均位于复平面的左半平面，因此其倒数$H^{-1}(s)$的极点也均位于复平面的左半平面，从而保证了逆系统的因果性和稳定性。
+
+\begin{example}
+    设因果且稳定的连续线性时不变系统的系统函数及单位脉冲响应为
+    \[H(s)=\frac{s+1}{s+2},h(t)=\delta(t)-e^{-2t}u(t)\]
+    则其逆系统的系统函数及单位脉冲响应为
+    \[H^{-1}(s)=\frac{s+2}{s+1},h_{inv}(t)=\delta(t)+e^{-t}u(t)\]
+    该逆系统也是因果且稳定的连续线性时不变系统。将两个系统级联，其单位脉冲响应为
+\begin{align*}
+    h_{eq}(t)&=h(t)*h_{inv}(t)\\
+    &=\delta(t)-e^{-2t}u(t)+e^{-t}u(t)-(e^{-2t}u(t))*(e^{-t}u(t))\\
+    &=\delta(t)-e^{-2t}u(t)+e^{-t}u(t)-u(t)\int_0^t e^{-2\tau}e^{-(t-\tau)}d\tau\\
+    &=\delta(t)
+\end{align*}
+\end{example}
+
+对于逆系统，容易产生这样的误解：将两个系统级联，则系统函数为$H(s)\cdot H^{-1}(s)=1$，因此输出应与输入相同；考虑群时延和相时延，两个系统的群时延和相时延之和必定为0，因此只要两个系统中必有其中之一具有负的时延；进一步，考虑输入单频的正弦信号，在负的相时延下，输出信号应当提前出现，从而违反因果性。
+
+事实上，两个系统都产生时延，与系统在级联后表现为恒等变换系统，二者并不矛盾，并且两个系统也的确满足因果性，上例中已经说明了这一点。
+
+那么，以上“违反因果性”的结论在那一步出错了呢？实际上，这是因为单频正弦信号“提前出现”的表现，并没有破坏因果性，这是因为，当我们考虑系统的激励为正弦信号时，实际上假定这是一个\textbf{稳态}信号，即该正弦信号从$t=-\infty$时刻就已经存在了，我们观察到的相位“提前”，\textbf{实际上是相位延迟}，而级联所得的恒等变换系统总延迟为0，实际上是两个系统的相位延迟相互抵消了。因此，并不存在违反因果性的情况。
+
+进一步，群时延之和为0，表现出调幅信号的包络峰提前出现的现象。这也没有违反因果性，因为响应起始时刻仍在激励之后，这种包络峰提前出现的现象，实际上是\textbf{相位失真引起的波形重构}。
+
+\begin{example}[负的群时延]
+    考虑调幅信号通过具有负的群时延的系统。设
+    \[e(t)=\cos(\omega_m t)\cos(\omega_c t),H(s)=\frac{s+1}{s+2},h(t)=\delta-e^{-2t}u(t)\]
+    则系统的群时延为
+    \[\tau_g(\omega)=-\frac{d\varphi(\omega)}{d\omega}=-\frac{1}{1+\omega^2}+\frac{2}{4+\omega^2}\]
+    在低频段，群时延为负值。设基波频率$\omega_m=1$，载波频率$\omega_c=5$（这个载波的频率不算很高，这是为了使响应与激励区分开），则
+    \begin{align*}
+        e(t)=\cos(t)\cos(5t)=\frac{1}{2}[\cos(4t)+\cos(6t)],\tau_g(1)=-0.1
+    \end{align*}
+    系统的响应为
+    \begin{align*}
+        y(t)&=(h*e)(t)\\
+        &=\cos(t)\cos(5t)-\frac{1}{2}u(t)\int_{0}^{t}e^{-2\tau}[\cos(4(t-\tau))+\cos(6(t-\tau))]d\tau\\
+        &=\cos(t)\cos(5t)-\frac{1}{2}u(t)\left[\frac{\cos(4t)+2\sin(4t)-e^{-2t}}{10}+\frac{\cos(6t)+3\sin(6t)-e^{-2t}}{20}\right]
+    \end{align*}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{neg_taug}
+        \caption{调幅信号通过具有负群时延系统的响应}
+    \end{figure}
+    依稀能辨认出-0.1s的群时延，但由于输入稳态信号，并没有违反因果性。
+\end{example}
+
+那么，对于暂态信号，情况又如何呢？考虑相时延
+$$tau_p(\omega)=\dfrac{-\arctan(\omega)+\arctan(\frac{\omega}{2})}{\omega},\forall \omega>0,\tau_p(\omega)<0$$
+即各频率分量均有负的相时延。
+
+不过，时限函数不可能同时是带限的（见\ref{sub:time_freq_limit}），激励在全频域上均有频率分量，这当然可能使得响应的各分量提前出现，却在$t=0$时刻前抵消，最终呈现出响应与激励起始时刻相同，不违反因果性的结果。
+
+\begin{example}[暂态信号经过逆系统]
+    设激励信号为$\chi_{[0,1]}(t)$，系统函数为$H(s)=\frac{s+1}{s+2}$，则系统的响应为
+    \begin{align*}
+        y(t)&=(h*\chi_{[0,1]})(t)\\
+        &=\chi_{[0,1]}(t)-u(t)\int_0^t \chi_{[0,1]}(\tau)e^{-2(t-\tau)}d\tau\\
+        &=\chi_{[0,1]}(t)-u(t)\int_0^{\min(t,1)} e^{-2(t-\tau)}d\tau\\
+        &=\chi_{[0,1]}(t)-u(t)\frac{1}{2}(1-e^{-2\min(t,1)})e^{-2(t-\min(t,1))}
+    \end{align*}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{inv_system}
+        \caption{暂态信号通过逆系统的响应}
+    \end{figure}
+    响应与激励的起始时刻一致，满足因果性。
+\end{example}
 
 \chapter{离散时间变换}
 
