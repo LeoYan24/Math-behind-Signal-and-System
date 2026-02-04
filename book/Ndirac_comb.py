@@ -83,11 +83,11 @@ ax.set_axis_off()
 ax.set_xlim(-axis_len, axis_len)
 ax.set_ylim(-axis_len, axis_len)
 ax.set_zlim(-0.5, 1.5)
-ax.set_box_aspect((1, 1, 0.5)) # 压扁Z轴，使XY平面在视野中占比更大
+ax.set_box_aspect((1, 1, 0.35)) # 进一步压扁Z轴，减少空白
 
 # 5. 设置适当观察角度，确保箭头不重合
 ax.view_init(elev=35, azim=25)
-ax.dist = 6  # 配合box_aspect调整距离
-plt.subplots_adjust(left=0.05, right=0.95, wspace=0.0)
+ax.dist = 4.5  # 拉近视距，减少空白
+plt.subplots_adjust(left=0.05, right=0.98, wspace=0.02)
 
 plt.show()

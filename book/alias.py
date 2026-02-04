@@ -1,9 +1,16 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-# 设置中文字体和图形参数
+from matplotlib import rcParams
+# 设置中文字体和全局字体大小
 plt.rcParams['font.sans-serif'] = ['SimHei']
 plt.rcParams['axes.unicode_minus'] = False
+plt.rcParams['font.size'] = 20
+plt.rcParams['axes.labelsize'] = 20
+plt.rcParams['xtick.labelsize'] = 20
+plt.rcParams['ytick.labelsize'] = 20
+plt.rcParams['legend.fontsize'] = 20
+plt.rcParams['figure.titlesize'] = 20
 
 # 创建图形
 plt.figure(figsize=(12, 8))
@@ -32,13 +39,12 @@ plt.plot(t_sampled, sampled_signal, 'ro', markersize=8, label='采样点')
 plt.plot(t_continuous, alias_signal, 'red', linewidth=2, linestyle='--', label='混叠低频信号 (1Hz)')
 
 # 添加连接采样点的虚线
-plt.plot(t_sampled, sampled_signal, 'red', linewidth=1, linestyle=':', alpha=0.7)
 
 # 设置图形属性
-plt.xlabel('时间 (s)')
-plt.ylabel('幅度')
+plt.xlabel('时间 (s)', fontsize=20)
+plt.ylabel('幅度', fontsize=20)
 plt.grid(True, alpha=0.3)
-plt.legend(loc='upper right')
+plt.legend(loc='upper right', fontsize=20)
 plt.xlim(0, 2)
 plt.ylim(-1.2, 1.2)
 

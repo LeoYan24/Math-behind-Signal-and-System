@@ -3,7 +3,12 @@ import numpy as np
 
 plt.rcParams['font.sans-serif'] = ['SimSun']
 plt.rcParams['axes.unicode_minus'] = False
-
+plt.rcParams['font.size'] = 20
+plt.rcParams['axes.labelsize'] = 20
+plt.rcParams['xtick.labelsize'] = 20
+plt.rcParams['ytick.labelsize'] = 20
+plt.rcParams['legend.fontsize'] = 20
+plt.rcParams['figure.titlesize'] = 20
 # 定义狄利克雷核函数
 def dirichlet_kernel(x, N):
     """狄利克雷核: D_N(x) = sin((N+1/2)x) / sin(x/2)"""
@@ -30,7 +35,7 @@ envelope_lower = -envelope_upper
 plt.figure(figsize=(14, 10))
 
 # 绘制狄利克雷核
-plt.plot(x, D_N, 'b-', linewidth=1.5, alpha=0.8, label=f'狄利克雷核 D_{N}(x)')
+plt.plot(x, D_N, 'b-', linewidth=1.5, alpha=0.8, label=f'狄利克雷核')
 
 # 绘制包络线
 plt.plot(x, envelope_upper, 'r--', linewidth=2, alpha=0.7, label='包络: 1/|sin(x/2)|')
@@ -44,11 +49,10 @@ main_lobe_mask = (x > -2*np.pi/(2*N+1)) & (x < 2*np.pi/(2*N+1))
 plt.fill_between(x[main_lobe_mask], D_N[main_lobe_mask], 0, color='blue', alpha=0.2, label='主瓣')
 
 # 设置图形属性
-plt.title(f'狄利克雷核 D_{N}(x) = sin((N+1/2)x) / sin(x/2) 及其包络特性', fontsize=14, fontweight='bold')
-plt.xlabel('x', fontsize=12)
-plt.ylabel('D_N(x)', fontsize=12)
+plt.title(f'狄利克雷核及其包络特性', fontsize=20, fontweight='bold')
+
 plt.grid(True, alpha=0.3)
-plt.legend(fontsize=11)
+plt.legend(fontsize=20)
 
 # 设置坐标轴范围
 plt.ylim(-3*N, 3*N)

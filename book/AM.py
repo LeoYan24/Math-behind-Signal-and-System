@@ -23,17 +23,15 @@ envelope_lower = - np.cos(omega_m * t)  # 下包络线
 plt.figure(figsize=(12, 8))
 
 # 绘制信号
-plt.plot(t, signal, 'b-', linewidth=1.5, label=r'$e(t) = \cos((\omega_c+\omega_m)t)+\cos((\omega_c-\omega_m)t)$')
+plt.plot(t, signal, 'b-', linewidth=1.5)
 
 # 绘制包络线
 plt.plot(t, envelope_upper, 'r--', linewidth=2)
 plt.plot(t, envelope_lower, 'g--', linewidth=2)
 
 # 设置图形属性
-plt.xlabel('时间 t', fontsize=12)
-plt.ylabel('幅度', fontsize=12)
+
 plt.grid(True, alpha=0.3)
-plt.legend(fontsize=11)
 
 # 调整坐标轴范围以更好显示
 plt.ylim(-1.2, 1.2)

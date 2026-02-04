@@ -5,13 +5,18 @@ from scipy import signal
 # 设置中文字体和图形参数
 plt.rcParams['font.sans-serif'] = ['SimHei']
 plt.rcParams['axes.unicode_minus'] = False
-
+plt.rcParams['font.size'] = 20
+plt.rcParams['axes.labelsize'] = 20
+plt.rcParams['xtick.labelsize'] = 20
+plt.rcParams['ytick.labelsize'] = 20
+plt.rcParams['legend.fontsize'] = 20
+plt.rcParams['figure.titlesize'] = 20
 # 创建图形和子图 - 3行2列
 fig, axes = plt.subplots(3, 2, figsize=(15, 15))
 plt.subplots_adjust(hspace=0.4, wspace=0.3)
 
 # 定义高斯函数作为带限信号
-fs_continuous = 1000  # 连续信号采样频率
+fs_continuous = 100000  # 连续信号采样频率
 dt = 1.0 / fs_continuous
 # 使用 endpoint=False 避免首尾重复采样点
 t_continuous = np.linspace(-1, 1, int(fs_continuous * 2), endpoint=False)  # 对称时间轴
@@ -27,16 +32,14 @@ spectrum = np.fft.fftshift(np.fft.fft(gaussian_signal)) * dt
 
 # 图1：高斯信号的时域图像
 axes[0, 0].plot(t_continuous, gaussian_signal, 'b-', linewidth=2)
-axes[0, 0].set_xlabel('时间 (s)')
-axes[0, 0].set_ylabel('幅度')
+
 axes[0, 0].set_title('原信号 - 时域')
 axes[0, 0].grid(True, alpha=0.3)
 axes[0, 0].set_xlim(-1, 1)
 
 # 图2：高斯信号的频域图像（对称显示）
 axes[0, 1].plot(freq_continuous, np.abs(spectrum), 'b-', linewidth=2)
-axes[0, 1].set_xlabel('频率 (Hz)')
-axes[0, 1].set_ylabel('幅度')
+
 axes[0, 1].set_title('原信号 - 频域')
 axes[0, 1].grid(True, alpha=0.3)
 axes[0, 1].set_xlim(-15, 15)
@@ -51,8 +54,7 @@ sampled_signal = np.exp(-t_sampled**2 / (2 * sigma**2))
 # 图3：频域周期化并标出时域取样点
 axes[1, 0].plot(t_continuous, gaussian_signal, 'b-', linewidth=2, alpha=0.5, label='原信号')
 axes[1, 0].plot(t_sampled, sampled_signal, 'ro', markersize=6, label='采样点')
-axes[1, 0].set_xlabel('时间 (s)')
-axes[1, 0].set_ylabel('幅度')
+
 axes[1, 0].set_title(f'时域采样 (fs={fs_low}Hz)')
 axes[1, 0].grid(True, alpha=0.3)
 axes[1, 0].legend()
@@ -95,12 +97,11 @@ if np.any(alias_mask):
         fend = freq_continuous[e - 1]
         axes[1, 1].axvspan(fstart, fend, alpha=0.25, color='red', label='混叠区域' if s == starts[0] else '')
 
-axes[1, 1].set_xlabel('频率 (Hz)')
-axes[1, 1].set_ylabel('幅度')
-axes[1, 1].set_title('频域周期化', fontsize=10)
+
+axes[1, 1].set_title('频域周期化', fontsize=20)
 axes[1, 1].grid(True, alpha=0.3)
 axes[1, 1].set_xlim(-15, 15)
-axes[1, 1].legend(fontsize=8)
+
 
 # 图5：利用采样点还原的失真信号
 # 图5：利用采样点还原的失真信号
@@ -116,11 +117,10 @@ for i, t_val in enumerate(t_continuous):
         reconstructed_signal[i] += sample_val * np.sinc(fs_low * (t_val - t_sample))
 
 axes[2, 0].plot(t_continuous, reconstructed_signal, 'r-', linewidth=2, label='重建信号')
-axes[2, 0].set_xlabel('时间 (s)')
-axes[2, 0].set_ylabel('幅度')
-axes[2, 0].set_title('失真重建', fontsize=10)
+
+axes[2, 0].set_title('失真重建', fontsize=20)
 axes[2, 0].grid(True, alpha=0.3)
-axes[2, 0].legend(fontsize=8)
+
 axes[2, 0].set_xlim(-1, 1)
 
 # 图6：频域加窗处理（对称显示）
@@ -151,19 +151,14 @@ axes[2, 1].plot(freq_continuous, window * window_scale, 'g--', linewidth=1.5, la
 windowed_periodized = periodized * window
 axes[2, 1].plot(freq_continuous, windowed_periodized, 'r-', linewidth=2, label='加窗后周期化谱')
 
-axes[2, 1].set_xlabel('频率 (Hz)')
-axes[2, 1].set_ylabel('幅度')
-axes[2, 1].set_title('频域加窗 - 周期化频谱上应用理想低通', fontsize=10)
+
+axes[2, 1].set_title('频域加窗', fontsize=20)
 axes[2, 1].grid(True, alpha=0.3)
 axes[2, 1].set_xlim(-15, 15)
-axes[2, 1].legend(fontsize=8)
+
 
 # 减小子图标题字体、增大间距以避免文字重叠
-plt.tight_layout(rect=[0, 0, 1, 0.98])
-plt.subplots_adjust(hspace=0.45, wspace=0.35)
+plt.tight_layout()
+
 plt.show()
 
-# 打印混叠信息
-print(f"高斯信号标准差: {sigma}")
-print(f"连续采样率 (用于频谱显示): {fs_continuous} Hz, dt={dt}")
-print(f"离散采样频率: {fs_low} Hz (奈奎斯特频率: {nyquist} Hz)")

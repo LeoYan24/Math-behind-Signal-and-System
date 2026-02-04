@@ -360,8 +360,10 @@
     $x[n]=a^n u[n]$称为指数序列，其中$a\in\mathbb{R}$。
 \end{definition}
 \begin{definition}[复指数序列]
-    $x[n]=e^{i\Omega_0 n}$称为复指数序列，其中$\Omega_0$称为数字角频率。
+    $E_{\Omega}[n]=e^{i\Omega_0 n}$称为复指数序列，其中$\Omega_0$称为数字角频率。
 \end{definition}
+
+$E_{\Omega}[n]$这个记号仅在本书中使用，但这样做是值得的——它表征了离散信号频率成分的基本形式，我们将在离散信号的章节中多次用到它。
 
 \begin{definition}[正弦序列]
     $x[n]=\sin(\Omega_0n)$,其中$\Omega_0$称为数字角频率。
@@ -427,47 +429,55 @@ $$x[n]\to x[\alpha n],\alpha\in\mathbb{R}$$
     证明：$\forall f(x),g(x)\in W,\forall \alpha,\beta\in \mathbb{R}$，则有$(\alpha f+\beta g)(0)=\alpha f(0)+\beta g(0)=0$，所以$\alpha f+\beta g\in W$，因此$W$为$V$的子空间。
 \end{example}
 
+\begin{definition}[线性无关]
+    向量组$\{\mathbf{v}_i\}$如果满足：
+    $$\sum_i \alpha_i \mathbf{v}_i=\mathbf{0}\Rightarrow \alpha_i=0,\forall i$$
+    则称$\{\mathbf{v}_i\}$\textbf{线性无关}(linear independent)，否则称为\textbf{线性相关}(linear dependent)。
+\end{definition}
+
 \begin{definition}[基]
     给定线性空间$V$，如果$V$中的向量组$\{\mathbf{v}_i\}$线性无关，且$V$中任意向量都可以由$\{\mathbf{v}_i\}$线性表示，则称$\{\mathbf{v}_i\}$为$V$的一组\textbf{基}(basis)。
 \end{definition}
 
-根据处理矩阵的经验，我们可以很容易地理解线性无关和线性表示的概念。线性无关指的是不存在非零系数使得向量组的线性组合为零向量；线性表示指的是任意向量都可以表示为基向量的线性组合。容易验证，线性空间的基不唯一，但所有基的向量个数相同。
+%\begin{definition}[线性表出]
+%    向量$\mathbf{v}$如果可以表示为向量组$\{\mathbf{v}_i\}$的线性组合：
+%    \[\mathbf{v}=\sum_i \alpha_i \mathbf{v}_i\]
+%    则称$\mathbf{v}$可以由$\{\mathbf{v}_i\}$\textbf{线性表出}(linear representation)。
+%\end{definition}
 
 \begin{definition}[维数]
     线性空间$V$的任意一组基的向量个数称为$V$的\textbf{维数}(dimension)，记为$\dim V$。如果$V$的维数为有限值，则称$V$为\textbf{有限维}线性空间，否则称为\textbf{无限维}线性空间。
 \end{definition}
 
-显然，子空间的维数低于母空间的维数。
-
-我们将在\ref{sub:infinite_linear}中讨论无限维线性空间的内容。
+显然，子空间的维数低于母空间的维数。我们将在\ref{sub:infinite_linear}中讨论无限维线性空间的内容。
 
 \begin{example}
     设$V$为所有实值连续函数构成的线性空间，则$V$为无限维线性空间。\\
     证明：多项式函数构成一个线性空间。多项式空间是$V$的子空间，它已经是无限维的，因为它的基可以取为$\{1,x,x^2,x^3,\ldots\}$。
 \end{example}
 
-\begin{definition}[线性变换]
+\begin{definition}[线性映射]
     设有线性空间$V$和$W$，如果映射$T:V\to W$满足：
-    \[T(\alpha \mathbf{u}+\beta \mathbf{v})=\\alpha T(\mathbf{u})+\beta T(\mathbf{v}),\forall \mathbf{u},\mathbf{v}\in V,\forall \alpha,\beta\in F\]
-    则称$T$为从$V$到$W$的\textbf{线性变换}(linear transformation)。
+    \[T(\alpha \mathbf{u}+\beta \mathbf{v})=\alpha T(\mathbf{u})+\beta T(\mathbf{v}),\forall \mathbf{u},\mathbf{v}\in V,\forall \alpha,\beta\in F\]
+    则称$T$为从$V$到$W$的\textbf{线性映射}(linear mapping)。特别地，如果$W=V$，则称$T$为$V$上的\textbf{线性变换}(linear transformation)。
 \end{definition}
 
 \begin{example}
-    对于向量$\mathbf{v}\in\mathbb{R}^n$，定义映射$T:\mathbb{R}^n\to\mathbb{R}^m$为矩阵$A\in\mathbb{R}^{m\times n}$与$\mathbf{v}$的乘积，即$T(\mathbf{v})=A\mathbf{v}$，则$T$为从$\mathbb{R}^n$到$\mathbb{R}^m$的线性变换。
+    对于向量$\mathbf{v}\in\mathbb{R}^n$，定义映射$T:\mathbb{R}^n\to\mathbb{R}^m$为矩阵$A\in\mathbb{R}^{m\times n}$与$\mathbf{v}$的乘积，即$T(\mathbf{v})=A\mathbf{v}$，则$T$为从$\mathbb{R}^n$到$\mathbb{R}^m$的线性映射。
 \end{example}
 
 \begin{example}
-    设$V$为所有实值无限可微的函数构成的线性空间（记为$C^\infty(\mathbb{R})$），定义映射$T:V\to V$为微分算子，即$T(f)=f'$，则$T$为从$V$到$V$的线性变换。\\
+    设$V$为所有实值无限可微的函数构成的线性空间（记为$C^\infty(\mathbb{R})$），定义映射$T:V\to V$为微分算子，即$T(f)=f'$，则$T$为从$V$到$V$的线性映射。\\
     证明：$\forall f(x),g(x)\in V,\forall \alpha,\beta\in \mathbb{R}$，根据微分的线性性质，有
     \begin{align*}
         T(\alpha f+\beta g)&=(\alpha f+\beta g)'\\
                            &=\alpha f'+\beta g'\\
                            &=\alpha T(f)+\beta T(g)
     \end{align*}
-    因此$T$为从$V$到$V$的线性变换。
+    因此$T$为从$V$到$V$的线性映射。
 \end{example}
 
-对于有限维线性空间，取定一组基，线性变换可以用矩阵表示，这与我们处理矩阵的经验是一致的。但是，对于无限维线性空间，线性变换只能作为抽象的映射来处理，无法用矩阵表示。
+对于有限维线性空间，分别取定定义域和值域一组基，线性映射可以用矩阵表示，这与我们处理矩阵的经验是一致的。但是，对于无限维线性空间，线性映射只能作为抽象的映射来处理。
 
 在线性映射中，有一类特殊的线性映射，它将线性空间映射到数域，我们将这样的映射称为\textbf{线性函数}。
 
@@ -477,10 +487,16 @@ $$x[n]\to x[\alpha n],\alpha\in\mathbb{R}$$
     如果$V$是某种函数空间，则线性函数又称为\textbf{线性泛函}(linear functional)。一些文献中，不区分$V$是否为函数空间，而统一地将线性函数称为线性泛函。
 \end{definition}
 \begin{example}
-    设$V$为所有实值连续函数构成的线性空间，定义映射$T:V\to \mathbb{R}$为积分算子，即$T(f)=\int_{a}^{b}f(x)\,dx$，则$T$为从$V$到$\mathbb{R}$的线性变换，因此$T\in \mathcal{L} (V,F)$。
+    设$V$为所有实值连续函数构成的线性空间，定义映射$T:V\to \mathbb{R}$为积分算子，即$T(f)=\int_{a}^{b}f(x)\,dx$，则$T$为从$V$到$\mathbb{R}$的线性映射，因此$T\in \mathcal{L} (V,F)$。
 \end{example}
 
 对于有限维线性空间，它的对偶空间与它本身同构（或者说，定义$V$上的线性函数，就等价于对它的一组基定义函数值），因而具有相同的维度；对于无限维线性空间，它的对偶空间也是无限维的。
+
+顺便一提，对于了解抽象代数的读者，可以发现线性空间的公理实际上不依赖数域$F$中元素的逆元存在性，因此容易将域$F$推广为交换环$R$，从而得到$R$-\textbf{模}(module)的概念；如果模上还定义了乘法运算，则可以推广为$R$-\textbf{代数}(algebra)。后续内容中有时会见到它们的例子，供感兴趣的读者了解。
+
+\begin{example}
+    或许环对各位读者不是那么熟悉，但定义在域上的代数是喜闻乐见的，它仅仅是在线性空间的基础上多定义了一个乘法运算，并且乘法运算满足结合律和分配律。例如，连续函数空间$C[a,b]$为复线性空间，并且任意两个连续函数的乘积仍为连续函数，因此$C[a,b]$也是一个$\mathbb{C}$-代数。
+\end{example}
 
 \subsection{度量、范数和内积}\label{sub:measurement}
 
@@ -702,7 +718,7 @@ $\lbrace\mathbf{v_i}\rbrace_{i=1}^{\infty}$是V的一组基，如果
 %    \end{align*}
 %\end{example}
 
-%比起将未知问题化归为已知问题，我们更愿意将大学问题化归为小学问题：
+比起将未知问题化归为已知问题，我们更愿意将大学问题化归为小学问题：
 \begin{example}[贝塔函数的使用]
     计算定积分$\int_{0}^{1}x^2(1-x)^7\,dx$。\\
     解：利用二项式展开或者分部积分都可以计算出结果，但实际计算非常复杂且容易出错。更简便的方法是利用贝塔函数：\begin{align*}
@@ -757,7 +773,7 @@ $\lbrace\mathbf{v_i}\rbrace_{i=1}^{\infty}$是V的一组基，如果
 
 \subsection{正弦积分函数}\label{sub:int_sin}
 
-本小节介绍\textbf{正弦积分函数}及\textbf{狄利克雷积分}，后文中将多次使用它们。
+本小节介绍\textbf{正弦积分函数}及\textbf{狄利克雷积分}。正弦积分函数是作为采样函数的反导数\footnote{反导数(antiderivative)可以粗略地理解为变限积分，因为变限积分的导数是被积函数，但在复变函数中它具有更深刻的意义。}定义的：
 
 \begin{definition}[正弦积分函数]
     \[\text{Si}(x)=\int_{0}^{x}\frac{\sin t}{t}\,dt\]    
@@ -786,7 +802,7 @@ $\dfrac{\sin t}{t}$是\ref{sub:signal}中介绍的采样信号，在$t=0$处连�
 \end{align*}
 是交错级数，其各项绝对值单调递减且趋于0，根据Leibniz判别法可知该级数收敛，即积分收敛。由于正弦积分函数是奇函数，$\text{Si}(-\infty)$也是收敛的，综上我们说明了正弦积分函数的有界性。
 
-进一步，正弦积分函数在$\infty$处收敛于$\dfrac{\pi}{2}$，这个结果称为\textbf{狄利克雷积分}，它可以通过留数定理或傅里叶变换来证明，我们将在\ref{sub:fourier_of_signal}中给出基于傅里叶变换的证明。
+进一步，正弦积分函数在$\infty$处收敛于$\pi/2$，这个结果称为\textbf{狄利克雷积分}，它可以通过留数定理或傅里叶变换来证明，我们将在\ref{sub:fourier_of_signal}中给出基于傅里叶变换的证明。
 \begin{theorem}[狄利克雷积分]
     \[\int_{0}^{\infty}\frac{\sin t}{t}\,dt=\text{Si}(\infty)=\frac{\pi}{2}\]
 \end{theorem}
@@ -947,16 +963,18 @@ $$a_0=\frac{1}{2^\nu\Gamma(\nu+1)}$$
 \section{实变函数概要}\label{sec:Real_Analysis}
 
 \subsection{勒贝格测度与可测函数}\label{sub:lebesgue}
-读者可能已经注意到，并不是所有的函数都是可积的，例如$e^x$即使视为功率信号，其能量和功率也不具有意义，因此它既不属于能量信号，也不属于功率信号；另一种情况是：
+读者可能已经注意到，并不是所有的函数都是可积的，例如$e^x$即使视为功率信号，其能量和功率也不具有意义，因此它既不属于能量信号，也不属于功率信号；另一种情况下，函数本身的性质比较差，以至于在黎曼积分的框架下说不清它是什么：
 \begin{example}[狄利克雷函数]
-    \[D(x)=
+    \[\chi_{\mathbb{Q}}(x)=
     \begin{cases}
         1 & x \in \mathbb{Q}    \\
         0 & x \in \mathbb{Q} ^c
     \end{cases}\]
 （其中$\mathbb{Q}$ 表示有理数集，上标c表示取补集）
 \end{example}
-它在黎曼积分（也就是数学分析或高等数学课程，以及多数工科课程中用的积分）的意义下是不可积的，因为它在所有点不连续，但是这样的函数在\textbf{勒贝格积分}的意义下可积，可以这样理解：勒贝格积分考察函数在某个值处的“区间长度”（严格来讲应为测度），狄利克雷函数在一个有限区间上取值1的长度为0，因为有理数是可数集，取值0的长度就是区间长度，所以其积分值为0。对于非反常积分，勒贝格积分是黎曼积分的推广，黎曼可积的函数一定是勒贝格可积的，并且在同样的区间上积分值相等。本小节先来建立一些实变函数中的基本概念，再在下一小节给出勒贝格积分的定义。
+它在黎曼积分的意义下是不可积的，因为它在所有点不连续，但是这样的函数在\textbf{勒贝格积分}的意义下可积。在勒贝格积分的框架下，有理数集这样的可数集是零测度的（类似于区间长度为0），$\chi_{\mathbb{Q}}$在零测集上取1而在其余位置取0，所以其积分值为0。
+
+对于非反常积分，\textbf{勒贝格积分是黎曼积分的推广}，黎曼可积的函数一定是勒贝格可积的，并且在同样的区间上积分值相等。本小节先来建立一些实变函数中的基本概念，再在下一小节给出勒贝格积分的定义。
 
 本节就来介绍一些基础的实变函数理论，以便后续学习中使用。阅读本小节有困难的读者，不妨先接受一些重要结论。
 
@@ -972,13 +990,14 @@ $$a_0=\frac{1}{2^\nu\Gamma(\nu+1)}$$
     \begin{itemize}
         \item 单调性：设$A\subset B$，则$m^*(A)\leq m^*(B)$
         \item 平移不变性：实数集$A$的平移记为为$A+y=\{x\in \mathbb{R}|x-y\in A\}$，满足$m^*(A+y)=m^*(A)$
-        \item 次可数可加性：设$\{E_k\}_{k=1}^{\infty}$是可数集族，则$m^*\left(\bigcup_{k=1}^{\infty}E_k\right)\leq\sum_{k=1}^{\infty}m^*(E_k)$
+        \item 次可数可加性：设$\{E_k\}_{k=1}^{\infty}$是可数集族，则
+        $$m^*\left(\bigcup_{k=1}^{\infty}E_k\right)\leq\sum_{k=1}^{\infty}m^*(E_k)$$
     \end{itemize}
 \end{proposition}
 
 次可数可加性中不等号的提出是为了处理$\{E_k\}_{k=1}^{\infty}$之间有重叠的情况，但是一般而言，即使它是不交集族，也不满足可数可加性，即
 $$m^*\left(\bigsqcup_{k=1}^{\infty}E_k\right)\neq\sum_{k=1}^{\infty}m^*(E_k)$$
-保证这样的可数可加性，需要集合\textbf{可测}。
+其中$\sqcup E_k$表示集族$\{E_k\}$是彼此不交的。保证这样的可数可加性，需要集合列中的每个集合\textbf{可测}。
 
 \begin{definition}[可测集]
     集合$E$是\textbf{可测集}，如果
@@ -988,7 +1007,7 @@ $$m^*\left(\bigsqcup_{k=1}^{\infty}E_k\right)\neq\sum_{k=1}^{\infty}m^*(E_k)$$
 \end{definition}
 在这个约束下，集合的不交族的勒贝格测度是可数可加的，即：
 \[m\left(\bigsqcup_{k=1}^{\infty}E_k\right)=\sum_{k=1}^{\infty}m(E_k)\]
-其中$\sqcup E_k$表示集族$\{E_k\}$是彼此不交的。此外，区间都是可测的，它们的测度就等于区间的长度。我们所遇到的几乎所有集合都是可测的，但是，任意具有正测度的集合，都有不可测子集，这个子集的构造可以借助选择公理给出。
+此外，区间都是可测的，它们的测度就等于区间的长度。我们所遇到的几乎所有集合都是可测的，但是，任意具有正测度的集合，都有不可测子集，这个子集的构造可以借助选择公理给出。
 
 \begin{definition}[可测函数]
     定义在可测集上的函数$f:E\to\mathbb{R}$是可测的，如果
@@ -998,12 +1017,16 @@ $$m^*\left(\bigsqcup_{k=1}^{\infty}E_k\right)\neq\sum_{k=1}^{\infty}m^*(E_k)$$
 
 这些公理化的定义为理论推带来了方便，但对初学者而言往往难以理解。下面给出可测集和可测函数的一些刻画，以帮助读者快速建立对它们的直观。数学家Littlewood曾说\cite{real_analysis}，只要掌握了以下三个观点，就相当于掌握了实变函数的大部分基础内容。
 
-\begin{theorem}[可测集接近于区间的有限不交并]
+首先，\textbf{可测集可以用区间的有限不交并近似}：
+
+\begin{theorem}
     设$E$可测，$m(E)<\infty$，则$\forall \epsilon>0$，存在开有界区间族$\{I_k\}_{k=1}^{n}$，记$U=\bigsqcup_{k=1}^{n} I_k$，有
     \[m(U\setminus E)+m(E\setminus U)<\epsilon\]
 \end{theorem}
 
-\begin{theorem}[Lusin定理：可测函数接近于连续函数]
+其次，\textbf{可测函数接近于连续函数}：
+
+\begin{theorem}[Lusin定理]
     设$f:E\to\mathbb{R}$可测，则$\forall \epsilon>0$，存在连续函数$g:E\to\mathbb{R}$及闭集$F\subset E$，使得$m(E\setminus F)<\epsilon$，且在$F$上有$f=g$。
 \end{theorem}
 
@@ -1013,9 +1036,11 @@ $$m^*\left(\bigsqcup_{k=1}^{\infty}E_k\right)\neq\sum_{k=1}^{\infty}m^*(E_k)$$
     记为$f_n\to f,a.e.$
 \end{definition}
 
-几乎处处收敛是对逐点收敛性的减弱，它意味着函数列零测集上不好的性质几乎不会影响到全局性质。
+几乎处处收敛是对逐点收敛性的减弱，它意味着函数列\textbf{零测集上不好的性质几乎不会影响到全局性质}。
 
-\begin{theorem}[Egoroff定理：几乎处处收敛的可测函数列接近一致收敛]
+Littlewood的第三个观点是，\textbf{几乎处处收敛的可测函数列近似于一致收敛}：
+
+\begin{theorem}[Egoroff定理]
     设集合$E$有限可测（即$m(E)<\infty$），可测函数列$\{f_n:E\to\mathbb{R}\}$几乎处处收敛于$f:E\to\mathbb{R}$，则$\forall \epsilon>0$，存在闭集$F\subset E$，满足$m(E\setminus F)<\epsilon$，且在$F$上$f_n$一致收敛于$f$，记为$f_n\rightrightarrows f$。
 \end{theorem}
 
@@ -3675,8 +3700,6 @@ $$h_0(t)*\sum_{m=0}^{M}b_m e^{(m)}(t)$$
 
 \section{采样与插值，狄拉克梳状分布}\label{sec:Sampling_Interpolation}
 
-本节和下一节中涉及采样频率等问题，简洁起见，我们将使用频率做傅里叶变换。
-
 \subsection{插值问题}\label{sub:interpolation}
 \textbf{插值}的雏形来自于古代天文学，最简单的插值就是通过观察星体在几个时刻的位置推测中间时刻的位置。在数学上，插值需要我们给出一个连续信号来逼近甚至还原原信号，工程上则需要我们插入若干新的样值点使得离散信号看起来更接近原信号。我们首先引入一些术语：
 \begin{definition}
@@ -3729,7 +3752,7 @@ $$h_0(t)*\sum_{m=0}^{M}b_m e^{(m)}(t)$$
     \caption{狄拉克梳状分布示意图}
 \end{figure}
 其二是$\shah$在伸缩变换下的性质：\begin{proposition}[$\shah$的伸缩]
-    \[\sigma_a\shah=\frac{1}{a}\shah_{1/a},\shah_T=\frac{1}{T}\sigma_{1/T}\shah \quad (a\to\frac{1}{T})\]
+    \[\sigma_a\shah=\frac{1}{a}\shah_{1/a},\shah_T=\frac{1}{T}\sigma_{1/T}\shah \quad \left(a\to\frac{1}{T}\right)\]
 \end{proposition}
 \begin{proof}
 \begin{align*}
@@ -3747,9 +3770,11 @@ $$h_0(t)*\sum_{m=0}^{M}b_m e^{(m)}(t)$$
 \subsection{泊松求和公式}\label{sub:poisson_summation}
 本小节旨在说明\textbf{泊松求和公式}(the Poisson summation formula)，它揭示了傅里叶级数与傅里叶变换的深刻关系。
 \begin{theorem}[泊松求和公式]
-\begin{align*}
+\begin{lralign}
     \sum_{k=-\infty}^{\infty}\varphi(k)=\sum_{k=-\infty}^{\infty}\mathcal{F} \varphi(k)
-\end{align*}
+    \switch
+    \sum_{k=-\infty}^{\infty}\varphi(k)=\sum_{k=-\infty}^{\infty}\mathcal{F} \varphi(2\pi k)
+\end{lralign}
 \end{theorem}
 \begin{proof}
 考虑函数$f\in\mathcal{S} $，记其周期化函数为$\Phi=\shah*\varphi$，并将$\Phi$的傅里叶系数记为$\hat{\Phi}(k)$，由$\Phi$的无限阶可导性可知其傅里叶级数绝对一致收敛于它本身（这里只需要逐点收敛性，至于更强的收敛性，见\ref{sub:uniform_converge}），即
@@ -3759,57 +3784,72 @@ $$h_0(t)*\sum_{m=0}^{M}b_m e^{(m)}(t)$$
     \hat{\Phi}(k)&=\int_{0}^{1}\Phi(t)e^{-2\pi ikt}\,dt\\
     &=\int_{0}^{1}\left(\sum_{n=-\infty}^{\infty}\varphi(t-n)\right)e^{-2\pi ikt}\,dt\\
     &=\sum_{n=-\infty}^{\infty}\left(\int_{0}^{1}\varphi(t-n)e^{-2\pi ikt}\,dt\right)\\
-    &=\sum_{n=-\infty}^{\infty}\left(\int_{n}^{n+1}\varphi(t)e^{-2\pi ik(t+n)}\,dt\right)   &(t\to t+n)\\
+    &=\sum_{n=-\infty}^{\infty}\left(\int_{n}^{n+1}\varphi(t)e^{-2\pi ik(t+n)}\,dt\right)&(t\to t+n)\\
     &=\sum_{n=-\infty}^{\infty}\int_{n}^{n+1}\varphi(t) e^{-2\pi ikt}\,dt\\
     &=\int_{-\infty}^{\infty}\varphi(t)e^{-2\pi ikt}\,dt
 \end{align*}
-即\begin{align*}
+即\begin{lralign}
     \hat{\Phi}(k)=\mathcal{F} \varphi(k)
-\end{align*}
+    \switch
+    \hat{\Phi}(k)=\mathcal{F} \varphi(2\pi k)
+\end{lralign}
 证明中，第二行到第三行的积分与求和的换序用到了周期化函数作为函数项级数的一致收敛性。这个等式意味着\textbf{施瓦兹函数的傅里叶变换在整数点处的值就是其周期化函数的傅里叶系数}（以上是周期化为$T=1$的情况，周期为其他值的情况是类似的），进一步，在恒等式
-\begin{align*}
+\begin{lralign}
     \Phi(t)&=\sum_{k=-\infty}^{\infty}\hat{\Phi}(k)e^{2\pi ikt}=\sum_{k=-\infty}^{\infty}\mathcal{F} \varphi(k)e^{2\pi ikt}
-\end{align*}
+    \switch
+    \Phi(t)&=\sum_{k=-\infty}^{\infty}\hat{\Phi}(k)e^{2\pi ikt}=\sum_{k=-\infty}^{\infty}\mathcal{F} \varphi(2\pi k)e^{2\pi ikt}
+\end{lralign}
 中取$t=0$，则得到
-\begin{align*}
-\Phi(0)=\sum_{k=-\infty}^{\infty}\mathcal{F} \varphi(k)
-\end{align*}
+\begin{lralign}
+    \Phi(0)=\sum_{k=-\infty}^{\infty}\mathcal{F} \varphi(k)
+\switch
+    \Phi(0)=\sum_{k=-\infty}^{\infty}\mathcal{F} \varphi(2\pi k)
+\end{lralign}
 又由\[\Phi=\shah*\varphi,\Phi(0)=\sum_{k=-\infty}^{\infty}\varphi(k)\]
 得证。
 \end{proof}
 
-我们当然也可以对$\shah_T*\varphi$做类似的推导，但其结论远不如以上两式简洁，这实际上是整数集$\mathbb{Z}$的自对偶性的体现。
+%我们当然也可以对$\shah_T*\varphi$做类似的推导，但其结论远不如以上两式简洁，这实际上是整数集$\mathbb{Z}$的自对偶性的体现。
 
 \subsection{狄拉克梳状分布的傅里叶变换}\label{sub:fourier_of_dirac_comb}
 借助泊松求和公式，可以得到$\shah$分布的傅里叶变换：
-\begin{align*}
+{\color{blue}\begin{align*}
     \left\langle \mathcal{F} \shah,\varphi \right\rangle=\left\langle \shah,\mathcal{F} \varphi\right\rangle=\sum_{k=-\infty}^{\infty}\mathcal{F} \varphi(k)=\sum_{k=-\infty}^{\infty}\varphi(k)=\left\langle \shah,\varphi\right\rangle
-\end{align*}
-即
-\begin{proposition}[$\shah$的傅里叶变换]
-\begin{align*}
-    \mathcal{F} \shah=\shah
-\end{align*}
-\end{proposition}
-可以看到，$\shah$分布的傅里叶变换具有自对偶性，即$\shah\overset{\mathcal{F} }{\longleftrightarrow}\shah$
+\end{align*}}
+{\color{red}\begin{align*}
+    \left\langle \mathcal{F} \shah_{2\pi},\varphi \right\rangle=\left\langle \shah_{2\pi},\mathcal{F} \varphi\right\rangle=\sum_{k=-\infty}^{\infty}\mathcal{F} \varphi(2\pi k)=\sum_{k=-\infty}^{\infty}\varphi(k)=\left\langle \shah,\varphi\right\rangle
+\end{align*}}
 
-利用以上结果，我们来讨论周期化在频域上的行为。对$f*\shah_T$做傅里叶变换，有
-\begin{align*}
-    \mathcal{F} (f*\shah_T)(\xi)=&\mathcal{F} f(\xi)\cdot\mathcal{F} \shah_T(\xi)\\
-    =&\mathcal{F} f(\xi)\cdot\frac{1}{T}\shah_{1/T}(\xi)\\
-    =&\frac{1}{T}\sum_{k=-\infty}^{\infty}\mathcal{F} f(k/T)\delta_{k/T}(\xi)
-\end{align*}
-可以看到，将f以周期T进行周期化时，其频谱会剩下频率为$k/T$处，也即角频率为$2\pi k/T$处的值，并且在这些频率处以$\delta$分布的形式“趋于无穷”。
+\begin{proposition}[$\shah$的傅里叶变换]
+\begin{lralign}
+    \mathcal{F} \shah=\shah
+    \switch
+    \mathcal{F} \shah_{2\pi}=\shah
+\end{lralign}
+\end{proposition}
+可以看到，$\shah$分布的傅里叶变换具有自对偶性，即{\color{blue}$\shah\overset{\mathcal{F} }{\longleftrightarrow}\shah$}。
+
+利用以上结果，我们来讨论周期化在频域上的行为。对$f*\shah_T$做频率形式的傅里叶变换，有
+{\color{blue}\begin{align*}
+    \mathcal{F} (f*\shah_T)(\xi)=\mathcal{F} f(\xi)\cdot\mathcal{F} \shah_T(\xi)=\mathcal{F} f(\xi)\cdot\frac{1}{T}\shah_{1/T}(\xi)=\frac{1}{T}\sum_{k=-\infty}^{\infty}\mathcal{F} f(k/T)\delta_{k/T}(\xi)
+\end{align*}}
+
+可以看到，\textbf{将f以周期T进行周期化时，其频谱会剩下频率为$k/T$处的值}，并且在这些频率处以$\delta$分布的形式“趋于无穷”；另一方面，\textbf{在频域以$1/T$进行采样，在时域上的表现是以$T$为周期进行周期化}，这一关系反过来也是成立的。
 
 根据分布的傅里叶变换的连续性（见\ref{sub:operation_of_distribution}最后的内容），我们还可以直接对$\shah$分布的傅里叶变换做另一种推导：
-\begin{align*}
+\begin{lralign}
      \mathcal{F} \shah&= \mathcal{F} \left(\lim_{N\to\infty}\sum_{k=-N}^{N}\delta_k\right)\\
     &=\lim_{N\to\infty}\sum_{k=-N}^{N}\mathcal{F} \delta_k\\
     &=\lim_{N\to\infty}\sum_{k=-N}^{N}e^{-2\pi ikx}\\
     &=\sum_{k=-\infty}^{\infty}e^{-2\pi ikx}
-\end{align*}
+    \switch
+    \mathcal{F} \shah&= \mathcal{F} \left(\lim_{N\to\infty}\sum_{k=-N}^{N}\delta_{k}\right)\\
+    &=\lim_{N\to\infty}\sum_{k=-N}^{N}\mathcal{F} \delta_{k}\\
+    &=\lim_{N\to\infty}\sum_{k=-N}^{N}e^{-ikx}\\
+    &=\sum_{k=-\infty}^{\infty}e^{-ikx}
+\end{lralign}
 
-结合$\shah$的傅里叶变换公式可以得到$\shah$分布作为形式上的函数的另一种定义。实际上，这就是$\shah$作为一个周期分布的傅里叶级数展开（分布的周期性是通过$\tau_1 \shah=\shah$体现的）：
+结合$\shah$的频率形式傅里叶变换公式可以得到$\shah$分布作为形式上的函数的另一种定义。实际上，这就是$\shah$作为一个周期分布的傅里叶级数展开（分布的周期性是通过$\tau_1 \shah=\shah$体现的）：
 \begin{definition}[$\shah$的傅里叶级数形式]
     \[\shah(x)=\sum_{k=-\infty}^{\infty}e^{-2\pi ikx}\]
 \end{definition}
@@ -3818,14 +3858,18 @@ $$h_0(t)*\sum_{m=0}^{M}b_m e^{(m)}(t)$$
 根据角频率形式下的$\shah$分布的傅里叶变换，可以想到$\shah$的伸缩的傅里叶变换仍具有
 $\shah$的形式，下面就来找出具体的公式：
 \begin{proposition}[$\shah_T$的傅里叶变换]
-\begin{align*}
+\begin{lralign}
     \mathcal{F} \shah_T=\frac{1}{T}\shah_{1/T}
-\end{align*}
+    \switch
+    \mathcal{F} \shah_{T}=\frac{2\pi}{T}\shah_{2\pi/T}
+\end{lralign}
 \end{proposition}
 \begin{proof}
-\begin{align*}
+\begin{lralign}
     \mathcal{F} \shah_T=\mathcal{F} \left[\frac{1}{T}\sigma_{1/T}\shah\right]=\sigma_T\shah=\frac{1}{T}\shah_{1/T}
-\end{align*}
+    \switch
+    \mathcal{F} \shah_{T}=\mathcal{F} \left[\frac{2\pi}{T}\sigma_{2\pi/T}\shah\right]=\sigma_{T/2\pi}\shah=\frac{2\pi}{T}\shah_{2\pi/T}
+\end{lralign}
 \end{proof}
 
 可以看到，傅里叶变换前后$\delta$的位置具有倒数关系。事实上，在多维傅里叶变换的理论中，我们还将看到更为深刻的关系。直观上，我们曾提出对函数和分布的一维傅里叶变换的伸缩定理：
@@ -3834,6 +3878,8 @@ $\shah$的形式，下面就来找出具体的公式：
 
 \section{理想采样}\label{sec:Ideal_Sample}
 
+本节涉及采样频率等问题，简洁起见，我们将使用频率做傅里叶变换。
+
 \subsection{带限函数}\label{sub:band_limit}
 
 \begin{definition}[时限函数与带限函数]
@@ -3841,49 +3887,56 @@ $\shah$的形式，下面就来找出具体的公式：
 \end{definition}
 
 对于带限函数，有以下恒等式：
-\[\mathcal{F} f=\chi_{[-T/2,T/2]}\mathcal{F} f\]
+\[\mathcal{F} f=\chi_{[-\nu_m,\nu_m]}\mathcal{F} f\]
 取傅里叶逆变换可得
 \begin{theorem}[采样函数的“卷积幺元”作用]
-    设带限函数$f(t)$满足$$\text{supp}\ \mathcal{F} f\subset [-T/2,T/2]$$
-    则\begin{align*}
-    f(t)=T\text{sinc}(Tt)*f(t)
-\end{align*}
-可见对于带限函数，采样信号能够起到类似$\delta$的卷积幺元的作用。
+    设带限函数$f(t)$满足$$\text{supp}\ \mathcal{F} f\subset [-\nu_m,\nu_m]$$
+    则采样信号能够起到类似$\delta$的卷积幺元的作用：\begin{align*}
+        f(t)=2\nu_m\text{sinc}(2\nu_m t)*f(t)
+    \end{align*}
 \end{theorem}
 \begin{proof}
-    由恒等式$\mathcal{F} f=\chi_{[-T/2,T/2]}\mathcal{F} f$，对两边同时取傅里叶逆变换，得到
+    由恒等式$\mathcal{F} f=\chi_{[-\nu_m,\nu_m]}\mathcal{F} f$，对两边同时取傅里叶逆变换，得到
     \begin{align*}
-        f(t)&=\mathcal{F} ^{-1}(\chi_{[-T/2,T/2]}\mathcal{F} f)(t)\\
-               &=\left(\mathcal{F} ^{-1}\chi_{[-T/2,T/2]}\right)*\left(\mathcal{F} ^{-1}\mathcal{F} f\right)(t)\\
-               &=\left(\mathcal{F} ^{-1}\chi_{[-T/2,T/2]}\right)*f(t)\\
-               &=T\text{sinc}(Tt)*f(t)
+        f(t)&=\mathcal{F} ^{-1}(\chi_{[-\nu_m,\nu_m]}\mathcal{F} f)(t)\\
+               &=\left(\mathcal{F} ^{-1}\chi_{[-\nu_m,\nu_m]}\right)*\left(\mathcal{F} ^{-1}\mathcal{F} f\right)(t)\\
+               &=\left(\mathcal{F} ^{-1}\chi_{[-\nu_m,\nu_m]}\right)*f(t)\\
+               &=2\nu_m\text{sinc}(2\nu_m t)*f(t)
     \end{align*}
 \end{proof}
 
 \subsection{香农采样定理}\label{sub:shannon}
-本小节旨在说明以下定理：
+本小节以及下一小节旨在说明以下定理：
 \begin{theorem}[香农采样定理]
     如果已知信号的频谱支于$[-\nu_m,\nu_m]$，则采样频率必须大于$2\nu_m$，即奈奎斯特频率$f_N$，才能还原出原信号\cite{brad_osgood_ee261}。
 \end{theorem}
-有时也将奈奎斯特频率称为信号的\textbf{带宽}(bandwidth)，但在另一些文献中\cite{signal_systems}，实信号的带宽不考虑负频率，值为奈奎斯特频率的一半。
-另一方面，先周期化再乘以特征函数，所得的恒等式称为\textbf{采样定理}(the Sampling theorem)：
+有时将奈奎斯特频率称为信号的\textbf{带宽}(bandwidth)，但在另一些语境下，实信号的带宽不考虑负频率，值为奈奎斯特频率的一半。
+
+香农采样定理基于以下事实：
 \begin{theorem}[采样定理]
-    \[\mathcal{F} f(x)=\chi_{[-T/2,T/2]}(\mathcal{F} f*\shah_T)(x)\]
-    其中$T=1/2\nu_m$，对应频率$f_N=1/T$被称为\textbf{奈奎斯特频率}(Nyquist frequency)。
+    设带限函数$f$的频谱支于$[-\nu_m,\nu_m]$，则有
+    \[\mathcal{F} f(x)=\chi_{[-\nu_m,\nu_m]}(\mathcal{F} f*\shah_{1/T})(x)\]
+    其中$f_s=1/T\geq 2\nu_m$为采样频率，$T$为采样间隔，临界的采样频率$f_N=2\nu_m$被称为\textbf{奈奎斯特频率}(Nyquist frequency)。
 \end{theorem}
+
+采样频率、采样间隔的名称及关系，来自于\ref{sub:fourier_of_dirac_comb}中提出的关键观点：\textbf{在时域以$f_s=1/T$进行采样，在频域上表现为以$1/T$为周期进行周期化}。这一事实实质上就是将频谱先周期化再截取低频成分。
+
 对其做傅里叶反变换，有\begin{align*}
-    f(t)&=\mathcal{F} ^{-1} [\chi_{[-T/2,T/2]}(\mathcal{F} f*\shah_T)](t)\\
-    &=T\text{sinc}(Tt)*\mathcal{F} ^{-1} \left(\mathcal{F} f*\shah_T\right)\\
-    &=\text{sinc}(Tt)*\left(\sum_{k=-\infty}^{\infty}f\left(\frac{k}{T}\right)\delta_{k/T}(t)\right)\\
-    &=\sum_{k=-\infty}^{\infty}f\left(\frac{k}{T}\right)\text{sinc}\left(T\left(t-\frac{k}{T}\right)\right)\\
-    &=\sum_{k=-\infty}^{\infty}f\left(\frac{k}{T}\right)\text{sinc}(Tt-k)
+    f(t)&=\mathcal{F} ^{-1} [\chi_{[-\nu_m,\nu_m]}(\mathcal{F} f*\shah_{1/T})](t)\\
+    &=2\nu_m\text{sinc}(2\nu_m t)*\mathcal{F} ^{-1} \left(\mathcal{F} f*\shah_{1/T}\right)\\
+    &=2\nu_m T\text{sinc}(2\nu_m t)*\left(f\cdot\shah_T\right)(t)\\
+    &=2\nu_m T\text{sinc}(2\nu_m t)*\left(\sum_{k=-\infty}^{\infty}f(kT)\delta_{kT}\right)(t)\\
+    &=2\nu_m T\sum_{k=-\infty}^{\infty}f(kT)\text{sinc}(2\nu_m (t-kT))
 \end{align*}
 因此有\begin{theorem}
-\begin{align*}
-    f(t)=\sum_{k=-\infty}^{\infty}f\left(\frac{k}{T}\right)\text{sinc}(Tt-k)
-\end{align*}
+    设带限函数$f$的频谱支于$[-\nu_m,\nu_m]$，则有
+    \begin{align*}
+        f(t)=2\nu_m T\sum_{k=-\infty}^{\infty}f(kT)\text{sinc}(2\nu_m (t-kT))\xlongequal{f_s=2\nu_m} \sum_{k=-\infty}^{\infty}f\left(kT\right)\text{sinc}\left(f_s(t-kT)\right)
+    \end{align*}
 \end{theorem}
-这正是\textbf{理想采样}下，由采样函数恢复出原函数的方法也即\textbf{香农采样定理}(Shannon Sampling theorem)中采样率取奈奎斯特频率时的极限情况。它与上一节中讨论的拉格朗日插值有一定的相似之处。$\text{sinc}$函数在非零整数点处的值为0，在0处的值为1，于是可以直接利用每个数据点处的值限定所还原出信号在这一点的值，换言之，在以下这种公式所代表的插值方式下，数据点处的值是不会产生偏移的，$\text{Sa}$函数同理。不同的是，拉格朗日插值法在数据点以外的位置往往会有误差，而以上插值方法在没有产生混叠现象时是精确的。
+这正是\textbf{理想采样}下，由采样函数恢复出原函数的方法，也即\textbf{香农采样定理}(Shannon Sampling theorem)。我们指出了采样率足够情况下的信号还原方式。
+
+它与上一节中讨论的拉格朗日插值有一定的相似之处。$\text{sinc}$函数在非零整数点处的值为0，在0处的值为1，于是可以直接利用每个数据点处的值限定所还原出信号在这一点的值，换言之，在以下这种公式所代表的插值方式下，数据点处的值是不会产生偏移的，$\text{Sa}$函数同理。不同的是，拉格朗日插值法在数据点以外的位置往往会有误差，而以上插值方法在没有产生混叠现象时是精确的。
 
 \subsection{混叠现象}\label{sub:alias}
 我们已经说明了采样率不低于奈奎斯特频率时的信号还原方法，下面来说明为什么奈奎斯特频率时极限情况。直观上，采样频率越高，所需要的成本就越高，提供的信息就越多，而如果采样频率低于$f_N$，将发生\textbf{混叠}(alias)现象，还原所得的信号将产生失真。下图展示了正弦波的混叠：
@@ -3893,12 +3946,11 @@ $\shah$的形式，下面就来找出具体的公式：
     \caption{正弦波的混叠现象}
 \end{figure}
 
-从频域上不难理解它。我们来看抽样时到底发生了什么。对$f(t)$进行采样，相当于将$f(t)$与$\shah_T$\\
-相乘，在频域上则相当于$\mathcal{F} f(\xi)$与$\mathcal{F} \shah_T(\xi)$的卷积，即
+从频域上不难理解它。我们来看抽样时到底发生了什么。以采样频率$f_s=1/T$对$f(t)$进行采样，相当于将$f(t)$与$\shah_{1/T}$相乘，在频域上则相当于$\mathcal{F} f(\xi)$与$\mathcal{F} \shah_{1/T}$的卷积，即
 \begin{align*}
-    \mathcal{F} (f\cdot\shah_T)(\xi)=\mathcal{F} f(\xi)*\mathcal{F} \shah_T(\xi)=\mathcal{F} f(\xi)*\frac{1}{T}\shah_{1/T}(\xi)=\frac{1}{T}\sum_{k=-\infty}^{\infty}\mathcal{F} f\left(\xi-\frac{k}{T}\right)
+    \mathcal{F} (f\cdot\shah_{1/T})(\xi)=\mathcal{F} f(\xi)*\mathcal{F} \shah_{1/T}(\xi)=\mathcal{F} f(\xi)*T\shah_{T}(\xi)=T\sum_{k=-\infty}^{\infty}\mathcal{F} f\left(\xi-\frac{k}{T}\right)
 \end{align*}
-可以看到，采样在频域上相当于将频谱进行周期化，采样频率为$f_s$，采样间隔$T_s=1/f_s$，它也是我们所使用的采样信号$\shah_T$的周期；频谱周期宽度为$f_s$，与$\shah_{1/T}$做卷积，相当于以$f_s=1/T_s$为周期进行周期化。如果采样频率不低于奈奎斯特频率$f_N$，则频谱在周期化的过程中未发生交叠，可以用特征函数$\chi_{[-\nu_m,\nu_m]}$还原；而如果采样频率$f_s$低于奈奎斯特频率$f_N$，则周期化后的频谱会发生重叠，如图所示：
+这就是我们反复强调的：在时域以$f_s=1/T$进行采样，在频域上表现为以$1/T$为周期进行周期化。如果采样频率不低于奈奎斯特频率$f_N=2\nu_m$，则频谱在周期化的过程中未发生交叠，可以用特征函数$\chi_{[-\nu_m,\nu_m]}$还原；而如果采样频率$f_s$低于奈奎斯特频率$f_N$，则周期化后的频谱会发生重叠，如图所示：
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{alias.jpeg}
@@ -3909,14 +3961,13 @@ $\shah$的形式，下面就来找出具体的公式：
 $$\text{supp}\ \mathcal{F} f\subset[-\nu_m,\nu_m]$$
 如果频谱在周期化时重叠，那么用先前得到的公式
 \begin{align*}
-    f(t)=\sum_{k=-\infty}^{\infty}f\left(\frac{k}{T}\right)\text{sinc}(Tt-k)
+    f(t)=\sum_{k=-\infty}^{\infty}f\left(kT\right)\text{sinc}\left(\frac{1}{T}(t-kT)\right)
 \end{align*}
-还原函数当然是有误差的，乘以$\chi_{[-\nu_m,\nu_m]}$，会丢掉一部分原有频谱，并叠加一部分平移后的频谱。
+还原函数当然是有误差的，乘以$\chi_{[-\nu_m,\nu_m]}$，会丢掉一部分原有频谱，并叠加一部分平移后的频谱。这就是混叠现象的原理，它构成香农采样定理的另一部分，即\textbf{采样频率必须不低于奈奎斯特频率才能无失真地还原信号}。
 
 \subsection{*有限采样公式}\label{sub:finite_sampling}
-本小节旨在建立带限周期信号的有限采样公式，以处理实际问题中只能进行有限次采样的情况。
+本小节旨在建立带限周期信号的有限采样公式，以处理实际问题中只能进行有限次采样的情况。注意符号$T$在本小节中表示信号的周期，而非采样间隔。
 
-我们首先引入一个引理：
 \begin{lemma}
     设$f_s,T>0$，正整数$N$为严格小于$\dfrac{T f_s}{2}$的最大整数，则$\forall t\in\mathbb{R}$，有
     \begin{align*}
@@ -3960,18 +4011,15 @@ $$\text{supp}\ \mathcal{F} f\subset[-\nu_m,\nu_m]$$
 \begin{proposition}[有限采样公式]
     设$f(t)$周期为$T$，且带限于$[-\nu_m,\nu_m]$，取$f_s$满足
     $$f_s=1/T_s=\frac{2N+1}{T}\geq 2\nu_m$$
-    $2N+1$为采样点数（可由上面对$f_s$提出的要求算得$N\geq T\nu_m-\dfrac{1}{2}$），则$f(t)$可以用一个周期内的有限个采样点$t_k=kT_s,k\in\{0,1,\cdots,2N\}$还原：
+    则$f(t)$可以用一个周期内的有限个采样点$t_k=kT_s,k\in\{0,1,\cdots,2N\}$还原：
     \begin{align*}
         f(t)=\sum_{k=0}^{2N}f(t_k)\frac{\text{sinc}\left(f_s(t-t_k)\right)}{\text{sinc}\left(\frac{1}{T}(t-t_k)\right)}
     \end{align*}
+    其中，$2N+1$为采样点数，可由上面对$f_s$提出的要求算得：
+    $$N\geq T\nu_m-\dfrac{1}{2}$$
 \end{proposition}
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.6\textwidth]{finite_Sample.jpeg}
-    \caption{有限采样公式示意图}
-\end{figure}
 \begin{proof}
-由于$f$带限，可以设$f(t)$的傅里叶级数为
+由于$f$是周期的带限函数，可以设$f(t)$的傅里叶级数为
 \begin{align*}
     f(t)=\sum_{n=-N}^{N}c_n e^{2\pi int/T}
 \end{align*}
@@ -3979,6 +4027,12 @@ $$\text{supp}\ \mathcal{F} f\subset[-\nu_m,\nu_m]$$
 \begin{align*}
     \mathcal{F}f(\xi)=\sum_{n=-N}^{N}c_n \delta\left(\xi-\frac{n}{T}\right)
 \end{align*}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{finite_Sample.jpeg}
+    \caption{有限采样公式示意图}
+\end{figure}
+
 用$\shah_{T_s}$进行采样，在频域上相当于以$f_s$为周期进行周期化，由香农采样定理，有
 \begin{align*}
     f(t)=\sum_{k=-\infty}^{\infty}f(t_k)\text{sinc}\left(f_s(t-t_k)\right)
@@ -3987,19 +4041,15 @@ $$\text{supp}\ \mathcal{F} f\subset[-\nu_m,\nu_m]$$
 \begin{align*}
     f(t)&=\sum_{m=-\infty}^{\infty}\sum_{k=0}^{2N}f\left(t_{k+m(2N+1)}\right)\text{sinc}\left(f_s(t-t_{k+m(2N+1)})\right)\\
     &=f(t_0)\sum_{m=-\infty}^{\infty}\text{sinc}\left(f_s(t-mT)\right)+f(t_1)\sum_{m=-\infty}^{\infty}\text{sinc}\left(f_s(t-mT-T_s)\right)+\cdots\\
-    &\quad +f(t_{2N})\sum_{m=-\infty}^{\infty}\text{sinc}\left(f_s(t-mT-2N T_s)\right)\\
+    &\qquad +f(t_{2N})\sum_{m=-\infty}^{\infty}\text{sinc}\left(f_s(t-mT-2N T_s)\right)\\
     &=f(t_0)\text{sinc}\left(f_s t\right)*\shah_T+f(t_1)\text{sinc}\left(f_s (t-T_s)\right)*\shah_T+\cdots\\
-    &\quad +f(t_{2N})\text{sinc}\left(f_s (t-2N T_s)\right)*\shah_T\\
+    &\qquad +f(t_{2N})\text{sinc}\left(f_s (t-2N T_s)\right)*\shah_T\\
     &=\sum_{m=0}^{2N}f(t_m)\left[\text{sinc}\left(f_s (t-m T_s)\right)*\shah_T\right]
 \end{align*}
 \end{proof}
 
-%这一节就来讨论真实系统中的插值方法，包括自然采样、零阶采样保持、一阶采样保持以及降低采样率的一些办法。最后，还将给出有限采样公式，它从数学上给出了用有限的采样点还原带限周期信号的方法。
-
-%自然采样PS6.2(4也有点意思)
-%降低采样率的想法
-%final2006.2，或许跟一阶采样保持相通？
-%零阶采样保持，一阶采样保持
+这表明，\textbf{只要信号是带限的，在有限次采样下，一定可以在局部上无失真地还原信号}，且所得信号周期（也即局部还原的大小）至多为
+\[T_{\max}=\frac{2N+1}{2\nu_m}\]
 
 \section{多维傅里叶变换}\label{sec:Multi_Fourier}
 
@@ -4026,13 +4076,11 @@ $$\text{supp}\ \mathcal{F} f\subset[-\nu_m,\nu_m]$$
 \begin{lralign}
     |\mathcal{F} f(\boldsymbol{\xi})|&=\left|\int_{\mathbb{R}^n}f(\mathbf{x})e^{-2\pi i\mathbf{x}\cdot\boldsymbol{\xi}}\,d\mathbf{x}\right|\\
     &\leq \int_{\mathbb{R}^n}|f(\mathbf{x})||e^{-2\pi i\mathbf{x}\cdot\boldsymbol{\xi}}|\,d\mathbf{x}\\
-    &= \int_{\mathbb{R}^n}|f(\mathbf{x})|\,d\mathbf{x}\\
-    &=\|f\|_1<\infty
+    &= \int_{\mathbb{R}^n}|f(\mathbf{x})|\,d\mathbf{x}=\|f\|_1<\infty
 \switch
     |\mathcal{F} f(\boldsymbol{\omega})|&=\left|\int_{\mathbb{R}^n}f(\mathbf{x})e^{-i\mathbf{x}\cdot\boldsymbol{\omega}}\,d\mathbf{x}\right|\\
     &\leq \int_{\mathbb{R}^n}|f(\mathbf{x})||e^{-i\mathbf{x}\cdot\boldsymbol{\omega}}|\,d\mathbf{x}\\
-    &= \int_{\mathbb{R}^n}|f(\mathbf{x})|\,d\mathbf{x}\\
-    &=\|f\|_1<\infty
+    &= \int_{\mathbb{R}^n}|f(\mathbf{x})|\,d\mathbf{x}=\|f\|_1<\infty
 \end{lralign}
 一致连续性：设$\boldsymbol{\xi},\boldsymbol{\eta}\in\mathbb{R}^n$，则
 \begin{lralign}
@@ -4097,7 +4145,7 @@ $$\text{supp}\ \mathcal{F} f\subset[-\nu_m,\nu_m]$$
         f(\mathbf{x})=f_1(x_1)f_2(x_2)\cdots f_n(x_n)
     \end{align*}
 \end{definition}
-$f(\mathbf{x})$的傅里叶变换为：
+$f(\mathbf{x})$的傅里叶变换为（以频率为例）：
 
 {\color{blue}
 \begin{align*}
@@ -4106,13 +4154,13 @@ $f(\mathbf{x})$的傅里叶变换为：
 &=\left(\int_{-\infty}^{\infty}f_1(x_1)e^{-2\pi i x_1\xi_1}\,dx_1\right)\left(\int_{-\infty}^{\infty}f_2(x_2)e^{-2\pi i x_2\xi_2}\,dx_2\right)\cdots \left(\int_{-\infty}^{\infty}f_n(x_n)e^{-2\pi i x_n\xi_n}\,dx_n\right)\\
 &=\mathcal{F} f_1(\xi_1)\mathcal{F} f_2(\xi_2)\cdots \mathcal{F} f_n(\xi_n)
 \end{align*}}
-{\color{red}
-\begin{align*}
-\mathcal{F} f(\boldsymbol{\omega})&=\int_{\mathbb{R}^n}f(\mathbf{x})e^{-i \mathbf{x}\cdot\boldsymbol{\omega}}\,d\mathbf{x}\\
-&=\int_{-\infty}^{\infty}\cdots \int_{-\infty}^{\infty}f_1(x_1)f_2(x_2)\cdots f_n(x_n)e^{-i (x_1\omega_1+x_2\omega_2+\cdots +x_n\omega_n)}\,dx_1 dx_2\cdots dx_n\\  
-&=\left(\int_{-\infty}^{\infty}f_1(x_1)e^{-i x_1\omega_1}\,dx_1\right)\left(\int_{-\infty}^{\infty}f_2(x_2)e^{-i x_2\omega_2}\,dx_2\right)\cdots \left(\int_{-\infty}^{\infty}f_n(x_n)e^{-i x_n\omega_n}\,dx_n\right)\\
-&=\mathcal{F} f_1(\omega_1)\mathcal{F} f_2(\omega_2)\cdots \mathcal{F} f_n(\omega_n)
-\end{align*}}
+%{\color{red}
+%\begin{align*}
+%\mathcal{F} f(\boldsymbol{\omega})&=\int_{\mathbb{R}^n}f(\mathbf{x})e^{-i \mathbf{x}\cdot\boldsymbol{\omega}}\,d\mathbf{x}\\
+%&=\int_{-\infty}^{\infty}\cdots \int_{-\infty}^{\infty}f_1(x_1)f_2(x_2)\cdots f_n(x_n)e^{-i (x_1\omega_1+x_2\omega_2+\cdots +x_n\omega_n)}\,dx_1 dx_2\cdots dx_n\\  
+%&=\left(\int_{-\infty}^{\infty}f_1(x_1)e^{-i x_1\omega_1}\,dx_1\right)\left(\int_{-\infty}^{\infty}f_2(x_2)e^{-i x_2\omega_2}\,dx_2\right)\cdots \left(\int_{-\infty}^{\infty}f_n(x_n)e^{-i x_n\omega_n}\,dx_n\right)\\
+%&=\mathcal{F} f_1(\omega_1)\mathcal{F} f_2(\omega_2)\cdots \mathcal{F} f_n(\omega_n)
+%\end{align*}}
 也就是说，空间域上可分的函数，其傅里叶变换也是可分的，且每个分量的傅里叶变换正是对应一维函数的傅里叶变换。
 
 \begin{example}[高斯函数]
@@ -4451,23 +4499,21 @@ $$\left\{\mathbf{x}\in\mathbb{R}^n \mid \mathbf{x}\cdot\boldsymbol{\xi}=k+\theta
     \end{lralign}
 \end{theorem}
 \begin{proof}
+    与一维的情况类似，我们给出更一般的结论，它实际上指出空间域与变换域上的内积的数量关系。设$f,g\in L^1(\mathbb{R}^n)\cap L^2(\mathbb{R}^n)$，则有：
     \begin{lralign}
-    &\int_{\mathbb{R}^n}|f(\mathbf{x})|^2\,d\mathbf{x}\\
-    =&\int_{\mathbb{R}^n}f(\mathbf{x})\overline{f(\mathbf{x})}\,d\mathbf{x}\\
-    =&\int_{\mathbb{R}^n}f(\mathbf{x})\cdot \mathcal{F} ^{-1}(\mathcal{F} \overline{f})(\mathbf{x})\,d\mathbf{x}\\
-    =&\int_{\mathbb{R}^n}f(\mathbf{x})\,d\mathbf{x}\int_{\mathbb{R}^n}\mathcal{F} \overline{f}(\boldsymbol{\xi})e^{2\pi i \mathbf{x}\cdot\boldsymbol{\xi}}\,d\boldsymbol{\xi}\\
-    =&\int_{\mathbb{R}^n}\mathcal{F} \overline{f}(\boldsymbol{\xi})\,d\boldsymbol{\xi}\int_{\mathbb{R}^n}f(\mathbf{x})e^{2\pi i \mathbf{x}\cdot\boldsymbol{\xi}}\,d\mathbf{x}\\
-    =&\int_{\mathbb{R}^n}\mathcal{F} \overline{f}(\boldsymbol{\xi})\cdot \overline{\mathcal{F} f(\boldsymbol{\xi})}\,d\boldsymbol{\xi}\\
-    =&\int_{\mathbb{R}^n}|\mathcal{F} f(\boldsymbol{\xi})|^2\,d\boldsymbol{\xi}
+    &\int_{\mathbb{R}^n}\mathcal{F} f(\boldsymbol{\xi})\overline{\mathcal{F} g(\boldsymbol{\xi})}\,d\mathbf{x}\\
+    =&\int_{\mathbb{R}^n}\,d\boldsymbol{\xi}\int_{\mathbb{R}^n}f(\mathbf{x})e^{-2\pi i \mathbf{x}\cdot\boldsymbol{\xi}}\,d\mathbf{x}\int_{\mathbb{R}^n}\overline{g(\mathbf{y})}e^{2\pi i \mathbf{y}\cdot\boldsymbol{\xi}}\,d\mathbf{y}\\
+    =&\int_{\mathbb{R}^n}f(\mathbf{x})\,d\mathbf{x}\int_{\mathbb{R}^n}\overline{g(\mathbf{y})}\,d\mathbf{y}\int_{\mathbb{R}^n}e^{-2\pi i (\mathbf{x}-\mathbf{y})\cdot\boldsymbol{\xi}}\,d\boldsymbol{\xi}\\
+    =&\int_{\mathbb{R}^n}f(\mathbf{x})\,d\mathbf{x}\int_{\mathbb{R}^n}\overline{g(\mathbf{y})}\delta(\mathbf{x}-\mathbf{y})\,d\mathbf{y}\\
+    =&\int_{\mathbb{R}^n}f(\mathbf{x})\overline{g(\mathbf{x})}\,d\mathbf{x}
 \switch
-    &\int_{\mathbb{R}^n}|f(\mathbf{x})|^2\,d\mathbf{x}\\
-    =&\int_{\mathbb{R}^n}f(\mathbf{x})\overline{f(\mathbf{x})}\,d\mathbf{x}\\
-    =&\int_{\mathbb{R}^n}f(\mathbf{x})\cdot \mathcal{F} ^{-1}(\mathcal{F} \overline{f})(\mathbf{x})\,d\mathbf{x}\\
-    =&\int_{\mathbb{R}^n}f(\mathbf{x})\,d\mathbf{x}\int_{\mathbb{R}^n}\mathcal{F} \overline{f}(\boldsymbol{\omega})\frac{e^{i \mathbf{x}\cdot\boldsymbol{\omega}}}{(2\pi)^n}\,d\boldsymbol{\omega}\\
-    =&\int_{\mathbb{R}^n}\mathcal{F} \overline{f}(\boldsymbol{\omega})\,d\boldsymbol{\omega}\int_{\mathbb{R}^n}f(\mathbf{x})\frac{e^{i \mathbf{x}\cdot\boldsymbol{\omega}}}{(2\pi)^n}\,d\mathbf{x}\\
-    =&\frac{1}{(2\pi)^n}\int_{\mathbb{R}^n}\mathcal{F} \overline{f}(\boldsymbol{\omega})\cdot \overline{\mathcal{F} f(\boldsymbol{\omega})}\,d\boldsymbol{\omega}\\
-    =&\frac{1}{(2\pi)^n}\int_{\mathbb{R}^n}|\mathcal{F} f(\boldsymbol{\omega})|^2\,d\boldsymbol{\omega}
+    &\int_{\mathbb{R}^n}\mathcal{F} f(\boldsymbol{\omega})\overline{\mathcal{F} g(\boldsymbol{\omega})}\,d\mathbf{x}\\
+    =&\int_{\mathbb{R}^n}\,d\boldsymbol{\omega}\int_{\mathbb{R}^n}f(\mathbf{x})e^{-i \mathbf{x}\cdot\boldsymbol{\omega}}\,d\mathbf{x}\int_{\mathbb{R}^n}\overline{g(\mathbf{y})}e^{i \mathbf{y}\cdot\boldsymbol{\omega}}\,d\mathbf{y}\\
+    =&\int_{\mathbb{R}^n}f(\mathbf{x})\,d\mathbf{x}\int_{\mathbb{R}^n}\overline{g(\mathbf{y})}\,d\mathbf{y}\int_{\mathbb{R}^n}e^{-i (\mathbf{x}-\mathbf{y})\cdot\boldsymbol{\omega}}\,d\boldsymbol{\omega}\\
+    =&\int_{\mathbb{R}^n}f(\mathbf{x})\,d\mathbf{x}\int_{\mathbb{R}^n}\overline{g(\mathbf{y})}(2\pi)^n \delta(\mathbf{x}-\mathbf{y})\,d\mathbf{y}\\
+    =&(2\pi)^n \int_{\mathbb{R}^n}f(\mathbf{x})\overline{g(\mathbf{x})}\,d\mathbf{x}
     \end{lralign}
+    取$g=f$即得所需结论。
 \end{proof}
 
 \subsection{多维施瓦兹函数与多维分布}\label{sub:muti_schwartz}
@@ -5481,7 +5527,7 @@ $\rho-\hat{\mathbf{n}}\cdot\mathbf{b}<0$的情况，将在下一性质指出处�
     &=\mathcal{F} f(\omega)*\mathcal{F} [w(t-\tau)](\omega)\\
     &=\mathcal{F} f(\omega)*\left(e^{-i \omega \tau}\mathcal{F} w(\omega)\right)
 \end{lralign}
-考虑窗函数的伸缩变换$w_a(t)=\dfrac{1}{\sqrt{a}}w\left(\dfrac{t}{a}\right)(a>0)$，容易验证这个变换保持$L^2$范数为1不变，此外，
+考虑窗函数的伸缩变换$w_a(t)=\dfrac{1}{\sqrt{a}}w\left(\dfrac{t}{a}\right)(a>0)$，容易验证这个变换保持$L^2$范数为1不变，此外，根据傅里叶变换的伸缩性质，有：
 \begin{align*}
     \mathcal{F} w_a(\xi)&=\sqrt{a}\mathcal{F} w(a\xi)
 \end{align*}
@@ -5795,7 +5841,7 @@ $\rho-\hat{\mathbf{n}}\cdot\mathbf{b}<0$的情况，将在下一性质指出处�
 \end{remark}
 
 \begin{remark}*
-    对于了解微分形式的语言的读者，可以从柯西-黎曼方程看出全纯函数$f=u+iv$相当于闭形式$u(x,y)dx+v(x,y)dy$。在单连通开集上，则闭形式也是恰当形式，1-形式$udx+vdy$相当于无旋无源场，且$udx+vdy$是某实函数$\varphi$的外导数，即$d\varphi=\frac{\partial \varphi}{\partial x}dx+\frac{\partial \varphi}{\partial y}dy=udx+vdy$；另外，根据另一柯西-黎曼方程$-v(x,y)dx+u(x,y)dy$也是闭形式、恰当形式，是某实函数$\psi$的外导数，即$d\psi=-v\,dx+u\,dy$。由于$\varphi,\psi$满足柯西-黎曼方程，可以定义全纯函数$g=\varphi+i\psi$，将$g$称为向量场$f$的\textbf{复势函数}(complex potential function)，$\frac{\partial g}{\partial z}=u-iv$与$f$互为共轭复变函数。如果将$d\psi$取为$v\,dx-u\,dy$，$g=\varphi+i\psi$，则$\frac{\partial g}{\partial z}=u+iv=f$，即单连通开集上的全纯函数$f$总是某个全纯函数$g$的导数。
+    对于了解微分形式的语言的读者，可以从柯西-黎曼方程看出全纯函数$f=u+iv$相当于闭形式$u(x,y)dx+v(x,y)dy$。在单连通开集上，则闭形式也是恰当形式，1-形式$udx+vdy$相当于无旋无源场，且$udx+vdy$是某实函数$\varphi$的外导数，即$d\varphi=\dfrac{\partial \varphi}{\partial x}dx+\dfrac{\partial \varphi}{\partial y}dy=udx+vdy$；另外，根据另一柯西-黎曼方程$-v(x,y)dx+u(x,y)dy$也是闭形式、恰当形式，是某实函数$\psi$的外导数，即$d\psi=-v\,dx+u\,dy$。由于$\varphi,\psi$满足柯西-黎曼方程，可以定义全纯函数$g=\varphi+i\psi$，将$g$称为向量场$f$的\textbf{复势函数}(complex potential function)，$\dfrac{\partial g}{\partial z}=u-iv$与$f$互为共轭复变函数。如果将$d\psi$取为$v\,dx-u\,dy$，$g=\varphi+i\psi$，则$\dfrac{\partial g}{\partial z}=u+iv=f$，即单连通开集上的全纯函数$f$总是某个全纯函数$g$的导数。
 \end{remark}
 
 \subsection{洛朗级数}\label{sub:laurant_series}
@@ -7834,6 +7880,214 @@ $$\text{Res}(f,\infty)=\dfrac{1}{2\pi i}\oint_{C^-_R}f(z)\,dz$$
 
 \section{离散时间傅里叶变换}\label{sec:DTFT}
 
+在\ref{sub:signal}中，我们介绍过以下两种特别的离散信号：
+
+\begin{definition}[离散正弦信号]
+    $x[n]=\sin(\Omega_0 n)$，其中$\Omega_0$为数字角频率。
+\end{definition}
+\begin{definition}[离散复指数信号]
+    $x[n]=e^{i\Omega_0 n}$，其中$\Omega_0$为数字角频率。
+\end{definition}
+
+与\textbf{数字角频率}相对，我们将连续信号的角频率称为\textbf{模拟角频率}。很明显，数字角频率表征了信号的某种频率信息。本节就来讨论这样两个问题：\begin{itemize}
+    \item 数字角频率$\Omega$与模拟角频率$\omega$之间有何关联？
+    \item 离散信号能否像连续信号那样进行分解与合成？
+\end{itemize}
+
+后者正是\textbf{离散时间傅里叶变换}（Discrete-Time Fourier Transform, DTFT）要解决的问题。我们将第二小节介绍它，并在第三小节讨论离散时间傅里叶变换的性质。
+
+\subsection{数字角频率}\label{sub:digital_freq}
+
+在学习\ref{sec:Sampling_Interpolation}后，我们可以另一种视角看待离散信号，即离散信号是连续信号的理想采样的结果。已知连续时间信号$f(t)$及采样间隔$T$，则采样得到的离散信号为$x[n]=f(nT)$。特别地，考虑最典型的具有数字角频率$\Omega_0$的信号
+$$x[n]=e^{i\Omega_0 n}$$
+它对应的连续时间信号为
+\[f(t)=e^{i\Omega_0 t/T}\]
+
+如果认为离散信号$x[n]=e^{i\Omega_0 n}$具有$\Omega_0$的数字角频率，则对应的连续信号正是最典型的以$\omega_0=\Omega_0/T$为模拟角频率的连续复指数信号。因此，数字角频率与模拟角频率之间的关系为：
+\[\Omega=\omega T\]
+
+可以看到，用连续信号的角频率来理解离散信号的角频率，则模拟角频率与数字角频率的关系取决于采样间隔$T$。采样间隔越大，振荡模式相同的离散信号对应的连续信号振荡越缓慢，同样的数字角频率对应的模拟角频率就越小。
+
+然而，前面的讨论忽略了
+$$e^{i(\Omega+2k\pi)n}=e^{i\Omega n},\forall k\in\mathbb{Z},n\in\mathbb{Z}$$
+
+不依赖于连续信号，无法确定离散信号背后对应着什么模拟角频率。我们在\ref{sub:alias}中曾遇到过类似的现象，在欠采样的情况下，不同的连续信号会对应同一个离散信号，这就是\textbf{混叠现象}。
+
+由于数字角频率具有$2\pi$的周期，尽管在定义离散信号时我们允许任意大小的数字角频率存在，但还是应该在分析离散信号时限定其范围。本书将以$(-\pi,\pi]$为离散信号的数字角频率范围\cite{signal_systems}，在一些文献中，也经常以$[0,2\pi)$为数字角频率范围。这两种约定方式没有本质区别。这样，以上两种角频率的关系可以理解为：
+
+\begin{proposition}
+以$T$为采样间隔，模拟角频率为$\omega$的连续信号，采样所得离散信号的数字角频率为
+\[\Omega=\omega T+2k\pi,k\in\mathbb{Z},\Omega\in(-\pi,\pi]\]
+\end{proposition}
+
+混叠是由于对信号的高频成分处理不当而产生的，混叠所得信号一定为（相对）低频的信号，因为此时错误地使用了“恒等式”来进行信号的复原：
+\[\mathcal{F} f=\chi_{[-\nu_m,\nu_m]}\cdot (\mathcal{F} f*\shah_{1/T})\]
+其中高于我们所认为的最高频率$\nu_m$的频率成分都被截掉。因此，使用$(-\pi,\pi]$作为数字角频率的范围是合理的，它直接对应着使用离散信号所能还原出的连续信号的模拟角频率范围$(-\pi/T,\pi/T]$。
+
+\begin{example}
+    离散信号$x[n]=\cos(n\pi)$的数字角频率为$\Omega=\pi$，假定采样间隔$T=1$，对应的连续信号为$f(t)=\cos(\pi t)$，其模拟角频率为$\omega=\pi$。
+
+    利用香农采样定理的方式还原信号，所得连续信号为
+    \[f_{re}(t)=\sum_{n=-\infty}^{\infty}\cos(n\pi)\text{sinc}\left(\frac{t-nT}{T}\right)=\sum_{n=-\infty}^{\infty}(-1)^n\text{sinc}\left(t-n\right)\]
+    利用$\sin\pi(t-n)=(-1)^n\sin\pi t$，可得
+    \[f_{re}(t)=\frac{\sin\pi t}{\pi}\sum_{n=-\infty}^{\infty}\frac{(-1)^n}{t-n}=\cos(\pi t)\]
+    我们用到了：$\sum_{n=-\infty}^{\infty}\dfrac{(-1)^n}{t-n}$在主值意义下收敛于$\pi\cot(\pi t)$，可以利用留数定理证明之。
+
+    还原出的信号是以$\Omega\cdot T=\pi$为模拟角频率的信号。然而，$\cos((2k+1)\pi t),k\in\mathbb{N}^*$以采样频率$T=1$采样后也会得到同样的离散信号，但由于它们的模拟角频率太高，如果不改变采样点，就无法通过采样信号还原出来。
+\end{example}
+
+\subsection{离散时间傅里叶变换}\label{sub:dtft}
+
+如何对离散信号进行分解与合成？具体来说，根据傅里叶级数和傅里叶变换的经验，我们希望能将离散信号分解为一系列不同数字角频率的\textbf{离散复指数信号}的组合，以此来表征离散信号各种频率成分的大小。
+
+在处理连续信号时，我们使用傅里叶级数来分析周期信号，类比到周期离散信号，需要取定基波数字角频率，考察各次谐波分量的大小。然而，离散信号的数字角频率有界，需要对这个方法进行一些修正，从而得到周期离散信号的分析方法，这就是下一节将讨论的\textbf{离散傅里叶变换}(Discrete Fourier Transform, DFT)；对于非周期离散信号，自然需要类比傅里叶变换，需要考察$(-\pi,\pi]$范围内所有数字角频率成分的大小，并将离散信号表示为这些频率成分与相应复指数信号的加权积分，这就是本节要介绍的\textbf{离散时间傅里叶变换}(Discrete-Time Fourier Transform, DTFT)。
+
+以$E_{\Omega}[n]=e^{i\Omega n}$表示数字角频率为$\Omega$的离散复指数信号。这样，以上分析非周期离散信号的想法可以表述为：给定$x[n]$，我们希望找到一个系数函数$\mathcal{X} (\Omega)$，它以$2\pi$为周期，使得\begin{align*}
+    x[n]&=\frac{1}{2\pi}\int_{-\pi}^{\pi}\mathcal{X} (\Omega)E_{\Omega}[n]\,d\Omega
+\end{align*}
+
+（我们很快会看到系数$1/2\pi$的作用）。
+
+为了求出系数函数$\mathcal{X} (\Omega)$，将离散信号化归为我们熟悉的连续信号：
+\begin{align*}
+    f(t)\cdot\shah&=\sum_{n=-\infty}^{\infty}x[n]\delta_{n}\\
+    &=\sum_{n=-\infty}^{\infty}\left(\frac{1}{2\pi}\int_{-\pi}^{\pi}\mathcal{X} (\Omega)E_{\Omega}[n]\,d\Omega\right)\delta_{n}
+\end{align*}
+即\begin{align*}
+    f(t)=&\frac{1}{2\pi}\int_{-\pi}^{\pi}\mathcal{X} (\Omega)e^{i\Omega t}\,d\Omega\\
+    &=\mathcal{F} ^{-1}[\mathcal{X}\cdot\chi_{[-\pi,\pi]}](t)
+\end{align*}
+
+对$f(t)\cdot\shah$做傅里叶变换。由卷积定理，有
+\begin{align*}
+    \mathcal{F} [f(t)\cdot\shah](\omega)&=\frac{1}{2\pi}\mathcal{F} f(\omega)*\mathcal{F} \shah(\omega)\\
+    &=\left(\mathcal{X} (\omega)\chi_{[-\pi,\pi]}\right)*\shah_{2\pi}\\
+    &=\mathcal{X} (\omega)
+\end{align*}
+第一行用到了\ref{sub:fourier_of_dirac_comb}中给出的$\shah$的角频率形式傅里叶变换：
+{\color{red}\begin{align*}
+    \mathcal{F} \shah&=\frac{2\pi}{T}\shah_{2\pi/T}
+\end{align*}}
+最后两行用到了$\mathcal{X} $是以$2\pi$为周期的。
+
+另一方面，$f(t)\cdot\shah=\sum_{n=-\infty}^{\infty}x[n]\delta_{n}$，由分布的傅里叶变换的连续性，有：
+\begin{align*}
+    \mathcal{F} [f(t)\cdot\shah](\omega)&=\mathcal{F} \left(\sum_{n=-\infty}^{\infty}x[n]\delta_{n}\right)(\omega)\\
+    &=\sum_{n=-\infty}^{\infty}x[n]e^{-i\omega n}
+\end{align*}
+
+综上得到：\begin{align*}
+    \mathcal{X} (\Omega)&=\sum_{n=-\infty}^{\infty}x[n]e^{-i\Omega n}\\
+    x[n]&=\frac{1}{2\pi}\int_{-\pi}^{\pi}\mathcal{X} (\Omega)E_{\Omega}[n]\,d\Omega
+\end{align*}
+
+由于$\mathcal{X} (\Omega)$可以视作变量$z=e^{i\Omega n}$的函数，我们令
+$$X(e^{i\Omega})=\mathcal{X} (\Omega)$$
+此即离散时间傅里叶变换的定义：
+
+\begin{definition}[离散时间傅里叶变换]
+    离散信号$x[n]\in l^1$的离散时间傅里叶变换定义为
+    \[X(e^{i\Omega})=\sum_{n=-\infty}^{\infty}x[n]e^{-i\Omega n}\]
+    记$x[n]\xleftrightarrow{\text{DTFT}}X(e^{i\Omega})$。其中，$\Omega $为\textbf{数字角频率}，$l^1$表示绝对可和的序列空间，即
+    \[l^1=\left\{x[n]\left|\sum_{n=-\infty}^{\infty}|x[n]|<\infty\right.\right\}\]
+\end{definition}
+
+离散时间傅里叶变换是良定义的，因为
+\[x[n]\in l^1\implies \sum_{n=-\infty}^{\infty}\left|x[n]e^{-i\Omega n}\right|\leq \sum_{n=-\infty}^{\infty}|x[n]|<\infty\]
+
+不难发现，离散时间傅里叶变换实际上是z变换在单位圆上的取值：
+\[X(e^{i\Omega})=X(z)|_{z=e^{i\Omega}}\]
+
+以上探究$x[n]$的分解与合成的过程，已经指出离散时间傅里叶变换的反演公式：
+\begin{theorem}[离散时间傅里叶反演公式]
+    设$x[n]\in l^1$的离散时间傅里叶变换为$X(e^{i\Omega})$，则$X(e^{i\Omega})$的离散时间傅里叶逆变换即为$x[n]$，即：
+    \[x[n]=\frac{1}{2\pi}\int_{-\pi}^{\pi}X(e^{i\Omega})e^{i\Omega n}\,d\Omega\]
+\end{theorem}
+
+\begin{example}[单位冲激序列的离散时间傅里叶变换]
+    求单位冲激序列$\delta[n]$的离散时间傅里叶变换。\\
+    解：由定义，
+    \begin{align*}
+        X(e^{i\Omega})&=\sum_{n=-\infty}^{\infty}\delta[n]e^{-i\Omega n}=1
+    \end{align*}
+\end{example}
+
+\begin{example}[指数序列的离散时间傅里叶变换]
+    求离散信号$x[n]=a^n u[n]$的离散时间傅里叶变换，其中$|a|<1$。\\
+    解：由等比数列求和公式，
+    \begin{align*}
+        X(e^{i\Omega})&=\sum_{n=-\infty}^{\infty}x[n]e^{-i\Omega n}=\sum_{n=0}^{\infty}a^n e^{-i\Omega n}\\
+        &=\sum_{n=0}^{\infty}(a e^{-i\Omega})^n=\frac{1}{1-a e^{-i\Omega}}
+    \end{align*}
+
+    特别地，当$a=1$时，$x[n]=u[n]\notin l^1$，但不妨写出其离散时间傅里叶变换：
+    \[X(e^{i\Omega})=\frac{1}{1-e^{-i\Omega}}\]
+    可以看到这个函数在$\Omega=0$处发散。
+
+    当$a=e^{i\Omega_0}$时，$x[n]=e^{i\Omega_0 n}u[n]$，其离散时间傅里叶变换为
+    \[X(e^{i\Omega})=\frac{1}{1-e^{i(\Omega_0-\Omega)}}\]
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.6\textwidth]{exp_dtft}
+        \caption{a取不同值时的离散时间傅里叶变换示意图}        
+    \end{figure}
+\end{example}
+
+观察离散时间傅里叶变换的定义可知：
+$$X(e^{i\Omega})|_{\Omega=0}=\sum_{n=-\infty}^{\infty}x[n],X(e^{i\Omega})|_{\Omega=\pm\pi}=\sum_{n=-\infty}^{\infty}(-1)^n x[n]$$
+也就是说，离散时间傅里叶变换在$\Omega=0$处的取值为$x[n]$的总和（或者说直流分量），在$\Omega=\pm\pi$处的取值为$x[n]$的交错和，这两个点处的离散时间傅里叶变换值必为实数。上例中，a越大，离散时间傅里叶变换在$\Omega=0$处的值越大，在$\Omega=\pm\pi$处的值越小，这符合我们的直观认识。
+
+\subsection{离散时间傅里叶变换的运算性质}\label{sub:property_of_dtft}
+
+离散时间傅里叶变换的运算性质列举如下：
+\begin{proposition}[离散时间傅里叶变换的运算性质]
+    设$x[n],y[n]\in l^1$，其离散时间傅里叶变换分别为$X(e^{i\Omega}),Y(e^{i\Omega})$，则有：\begin{itemize}
+        \item  线性：$\forall a,b\in\mathbb{C}$，有
+    \[a x[n]+b y[n]\xleftrightarrow{\text{DTFT}} a X(e^{i\Omega})+b Y(e^{i\Omega})\]
+        \item 时移性质：$x[n-n_0]\xleftrightarrow{\text{DTFT}}e^{-i\Omega n_0}X(e^{i\Omega})$
+        \item 频移性质：$e^{i\Omega_0 n}x[n]\xleftrightarrow{\text{DTFT}}X\left(e^{i(\Omega-\Omega_0)}\right)$
+        \item 共轭性质：$\overline{x[n]}\xleftrightarrow{\text{DTFT}}\overline{X\left(e^{-i\Omega}\right)}$
+        \item 时域卷积定理：$x[n]*y[n]\xleftrightarrow{\text{DTFT}}X(e^{i\Omega})Y(e^{i\Omega})$
+        \item 频域卷积定理：$x[n]y[n]\xleftrightarrow{\text{DTFT}}\dfrac{1}{2\pi}\int_{-\pi}^{\pi}X\left(e^{i\theta}\right)Y\left(e^{i(\Omega-\theta)}\right)\,d\theta$
+    \end{itemize}
+\end{proposition}
+\begin{proof}
+    利用\[X(e^{i\Omega})=X(z)|_{z=e^{i\Omega}}\]
+    以上性质除最后一条以外全部是z变换性质在单位圆上的特例。这里仅给出频域卷积定理的证明：
+    \begin{align*}
+        \frac{1}{2\pi}\int_{-\pi}^{\pi}X\left(e^{i\theta}\right)Y\left(e^{i(\Omega-\theta)}\right)\,d\theta&=\frac{1}{2\pi}\int_{-\pi}^{\pi}\left(\sum_{m=-\infty}^{\infty}x[m]e^{-i\theta m}\right)\left(\sum_{k=-\infty}^{\infty}y[k]e^{-i(\Omega-\theta) k}\right)\,d\theta\\
+        &=\frac{1}{2\pi}\sum_{m=-\infty}^{\infty}\sum_{k=-\infty}^{\infty}x[m]y[k]e^{-i\Omega k}\int_{-\pi}^{\pi}e^{-i\theta (m-k)}\,d\theta\\
+        &=\sum_{n=-\infty}^{\infty}x[n]y[n]e^{-i\Omega n}
+    \end{align*}
+    积分与求和的交换是由绝对可和性保证的。
+
+    使用z域卷积定理推出离散时间傅里叶变换的频域卷积定理也是可行的，只要做标量代换
+    $$\nu=e^{i\theta},\nu^{-1}d\nu=id\theta$$
+    即可。
+\end{proof}
+
+和z域卷积定理类似，这个卷积也不是常规意义下的卷积，但实际上，如果记
+$$\mathcal{X} (\Omega)=X(e^{i\Omega}),\mathcal{Y} (\Omega)=Y(e^{i\Omega})$$
+则右式是周期函数的卷积（见\ref{sub:conv_of_period_func}）：
+\[x[n]y[n]\xleftrightarrow{\text{DTFT}}\frac{1}{2\pi}\mathcal{X} (\Omega)*\mathcal{Y} (\Omega)=\frac{1}{2\pi}\int_{-\pi}^{\pi}\mathcal{X} (\theta)\mathcal{Y} (\Omega-\theta)\,d\theta\]
+
+此外，我们给出离散时间傅里叶变换的\textbf{帕塞瓦尔定理}(Parseval's Theorem)，它表明表明时域能量与频域能量成正比：
+\begin{theorem}[离散时间傅里叶变换的帕塞瓦尔定理]
+    设$x[n],y[n]\in l^2$，其离散时间傅里叶变换分别为$X(e^{i\Omega}),Y(e^{i\Omega})$，则有
+    \[\sum_{n=-\infty}^{\infty}x[n]\overline{y[n]}=\frac{1}{2\pi}\int_{-\pi}^{\pi}X(e^{i\Omega})\overline{Y(e^{i\Omega})}\,d\Omega\]
+    特别地，当$x[n]=y[n]$时，有
+    \[\sum_{n=-\infty}^{\infty}|x[n]|^2=\frac{1}{2\pi}\int_{-\pi}^{\pi}|X(e^{i\Omega})|^2\,d\Omega\]
+\end{theorem}
+\begin{proof}
+    由离散时间傅里叶反演公式，有
+    \begin{align*}
+        \sum_{n=-\infty}^{\infty}x[n]\overline{y[n]}&=\sum_{n=-\infty}^{\infty}x[n]\cdot\frac{1}{2\pi}\int_{-\pi}^{\pi}\overline{Y(e^{i\Omega})}e^{-i\Omega n}\,d\Omega\\
+        &=\frac{1}{2\pi}\int_{-\pi}^{\pi}\overline{Y(e^{i\Omega})}\left(\sum_{n=-\infty}^{\infty}x[n]e^{-i\Omega n}\right)\,d\Omega\\
+        &=\frac{1}{2\pi}\int_{-\pi}^{\pi}X(e^{i\Omega})\overline{Y(e^{i\Omega})}\,d\Omega
+    \end{align*}
+    积分与求和的交换是由绝对可和性保证的。
+\end{proof}
+
 \section{离散傅里叶变换}\label{sec:DFT}
 
 \chapter{离散系统的变换域分析}
@@ -8451,7 +8705,7 @@ $\int_{-\infty}^{\infty}|g(y)|\,dy<\infty$的必要条件是$\int_{\delta/\lambd
     &=\frac{1}{4}\int_{-\infty}^{\infty}|f(t)|^2\,dt^2&\text{(分部积分)}\\
     &=\frac{1}{4}&\text{(归一化)}
     \end{align*}
-    因此，$\sigma(f)\sigma(F)\geq \frac{1}{4\pi}$，得证。
+    因此，$\sigma(f)\sigma(F)\geq \dfrac{1}{4\pi}$，得证。
 \end{proof}
 
 使用方差的定义可以轻松地得到一个有用的不等式，它给出了一种基于方差估计函数集中程度的方法，这就是\textbf{切比雪夫不等式} (Chebyshev's inequality)：
