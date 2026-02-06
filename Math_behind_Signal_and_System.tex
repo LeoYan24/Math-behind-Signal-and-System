@@ -7460,7 +7460,7 @@ $$tau_p(\omega)=\dfrac{-\arctan(\omega)+\arctan(\frac{\omega}{2})}{\omega},\fora
     响应与激励的起始时刻一致，满足因果性。
 \end{example}
 
-\chapter{离散时间变换}
+\chapter{z变换与z域分析}
 
 \section{z变换}\label{sec:z_Transform}
 
@@ -7878,6 +7878,10 @@ $$\text{Res}(f,\infty)=\dfrac{1}{2\pi i}\oint_{C^-_R}f(z)\,dz$$
 %    可以猜想，$x[n]=n u[n]$。
 %\end{example}
 
+\section{离散系统的z域分析}\label{sec:Discrete_System_z_Analysis}
+
+\chapter{离散时间变换与离散系统分析}
+
 \section{离散时间傅里叶变换}\label{sec:DTFT}
 
 在\ref{sub:signal}中，我们介绍过以下两种特别的离散信号：
@@ -8088,16 +8092,14 @@ $$\mathcal{X} (\Omega)=X(e^{i\Omega}),\mathcal{Y} (\Omega)=Y(e^{i\Omega})$$
     积分与求和的交换是由绝对可和性保证的。
 \end{proof}
 
-\section{离散傅里叶变换}\label{sec:DFT}
-
-\chapter{离散系统的变换域分析}
-
 \section{离散系统的频率响应特性}\label{sec:Discrete_System_Freq_Response}
 
-\section{离散系统的z域分析}\label{sec:Discrete_System_z_Analysis}
-
 %因果性：收敛域包含$\infty$；稳定性：收敛域包含单位圆；对稳定+因果，收敛域包含$|z|\geq 1$
-%差分方程
+
+\section{离散傅里叶变换}\label{sec:DFT}
+
+
+
 
 %\chapter{离散时间变换的算法}
 %\section{离散余弦变换}\label{sec:DCT}
@@ -8106,15 +8108,8 @@ $$\mathcal{X} (\Omega)=X(e^{i\Omega}),\mathcal{Y} (\Omega)=Y(e^{i\Omega})$$
 
 %\section{压缩感知初步}\label{sec:Compress}
 
-%\chapter{其他积分变换}
-
-%\section{梅林变换}\label{sec:Mellin_Transform}
-
-%\section{拉东变换}\label{sec:Radon_Transform}
-
 %\section{离散余弦变换}\label{sec:DCT}
 
-%\section{小波变换}\label{sec:Wavelet_Transform}
 \appendix
 
 \chapter{傅里叶变换补遗}
@@ -8181,7 +8176,7 @@ $\varlimsup_{N \to \infty}S_N^R(t)>1$并不意味着狄利克雷定理失效，�
            & =\frac{e^{i(N+1)\omega t}-e^{-iN\omega t}}{e^{i\omega t}-1}                                   \\
     D_N(t) & =1+\sum_{k=1}^{N}\left(e^{ik\omega t}+e^{-ik\omega t}\right)=1+2\sum_{k=1}^{N}\cos(k\omega t)           \\
            & =1+\frac{2}{\sin(\frac{\omega t}{2})}\sum_{k=1}^{N}\cos(k\omega t)\sin\left(\frac{\omega t}{2}\right)                   \\
-           & =1+\frac{1}{\sin(\frac{\omega t}{2})}\sum_{k=1}^{N}\left(\sin\left((k+\frac{1}{2})\omega t\right)-\sin\left((k-\frac{1}{2})\omega t\right)\right) \\
+           & =1+\frac{1}{\sin(\frac{\omega t}{2})}\sum_{k=1}^{N}\left[\sin\left(\left(k+\frac{1}{2}\right)\omega t\right)-\sin\left(\left(k-\frac{1}{2}\right)\omega t\right)\right] \\
            & =1+\frac{\sin\left((N+\frac{1}{2})\omega t\right)-\sin(\frac{\omega t}{2})}{\sin(\frac{\omega t}{2})}                     \\
            & =\frac{\sin\left((N+\frac{1}{2})\omega t\right)}{\sin(\frac{\omega t}{2})}
 \end{align*}
@@ -8192,9 +8187,9 @@ $\varlimsup_{N \to \infty}S_N^R(t)>1$并不意味着狄利克雷定理失效，�
     \caption{狄利克雷核$D_N(t)$的函数图像}
 \end{figure}
 
-引入狄利克雷核后，就可以用以下恒等式研究傅里叶级数的部分和：
+傅里叶级数的部分和正比于狄利克雷核与被展开函数的卷积（周期函数的卷积，见\ref{sub:conv_of_period_func}）：
 \begin{proposition}
-    \[S_N^f(t)=\frac{1}{T}\int_{T}f(\tau)D_N(t-\tau)\,d\tau\]
+    \[S_N^f(t)=\frac{1}{T}\int_{T}f(\tau)D_N(t-\tau)\,d\tau=\frac{1}{T}f*D_N(t)\]
 \end{proposition}
 \begin{proof}
     \begin{align*}
