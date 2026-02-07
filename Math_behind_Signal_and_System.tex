@@ -218,7 +218,7 @@
     \item 放大器(amplifier)：对信号进行放大处理，与之对应的是衰减器(attenuator)。
     \item 滤波器(filter)：传感器输出的电信号多是包含信息的低频电信号，又称为基带信号(baseband signal)；在信号传输过程中，信号往往被置于某个高频频段内，这个频带称为通带(passband)；在传输前后，都需要滤波器来排除所需频带之外信号的干扰。见\ref{sub:filter}、\ref{sub:distortion}。
     \item 调制器(modulator)与解调器(demodulator)：将基带信号转化为通带信号的过程称为调制\\
-    (modulation)，将通带信号还原为基带信号的过程称为解调(demodulation)。见\ref{sec:modulation}。
+    (modulation)，将通带信号还原为基带信号的过程称为解调(demodulation)。见\ref{sub:modulation}。
     \item 振荡器(oscillator)：产生周期性信号的装置，常见的有正弦波振荡器、方波振荡器等，也用于产生高频载波信号进行调制。
     \item 模数转换器(ADC)与数模转换器(DAC)：将模拟信号转化为数字信号的装置称为模数转换器，将数字信号转化为模拟信号的装置称为数模转换器。所谓数字信号，是指在时间和幅值上均为离散的信号；而模拟信号则是在时间和幅值上均为连续的信号，用于模拟真实世界中的信号。
     \item 存储器(memory)：用于存储数字信号的装置，例如随机存取存储器(RAM)、只读存储器(RO\\
@@ -619,7 +619,7 @@ $\lbrace\mathbf{v_i}\rbrace_{i=1}^{\infty}$是V的一组基，如果
     只要承认选择公理（或左恩引理），无限维线性空间总存在基。
 \end{claim}
 
-在\ref{sec:Real_Analysis}中，我们将看到更多无穷维线性空间的例子，它们当中很多都是完备的线性赋范空间。寻找函数空间的基是困难的，但在某些情况下，我们可以找到一些特殊的正交函数系作为基函数系，从而将函数展开为这些基函数的线性组合，这就是傅里叶级数展开的基本思想，见\ref{sec:Orthognal}。
+在\ref{sec:Real_Analysis}中，我们将看到更多无穷维线性空间的例子，它们当中很多都是完备的线性赋范空间。寻找函数空间的基是困难的，但在某些情况下，我们可以找到一些特殊的正交函数系作为基函数系，从而将函数展开为这些基函数的线性组合，这就是傅里叶级数展开的基本思想，见\ref{sub:orthognal}。
 
 \section{特殊函数}\label{sec:special_function}
 
@@ -1046,7 +1046,7 @@ Littlewood的第三个观点是，\textbf{几乎处处收敛的可测函数列�
 
 \subsection{勒贝格积分}\label{sub:integral}
 
-\subsection{*函数空间}\label{sub:Lp_space}
+\subsection{函数空间}\label{sub:Lp_space}
 
 %1.$L^p([0,T])(0<p\leq \infty)$空间表示在区间$[0,T]$上$p$次勒贝格可积的函数组成的函数空间，即
 %\[L^p([0,T]):=\left\{f:[0,T]\rightarrow \mathbb{C} \left| \int_{T}|f(t)|^p\,\text dt<\infty\right.\right\}\]
@@ -1072,11 +1072,7 @@ Littlewood的第三个观点是，\textbf{几乎处处收敛的可测函数列�
 %在$L^2([0,T])$空间中，我们不区分仅在零测集（“区间长度”的总和总能取到任意小正数，例如至多可数集）上不相等的函数，换言之，$L^2([0,T])$空间不是常规意义下的函数的集合，而是\textbf{几乎处处}(almost every,a.e.)相等的函数构成的等价类，这里的$\sim$表示的是两侧的函数同属一个等价类，至于逐点收敛、一致收敛性，需要另作讨论。
 
 %可以想象，依范数收敛要求极限内的函数相当接近于0，但如果在一个点处产生了误差，不论误差多大，都不会影响积分的值。事实上，只要存在误差的点构成零测集，就不会影响积分的值，这时我们称$\sum_{i = 1}^{n}  a_i f_i(t)$几乎处处收敛于$f(t)$，只是这样弱的要求有时会导致积分在黎曼积分的意义下不存在，但勒贝格积分可以处理这种情况，读者可以参考\ref{sec:signal}连续信号与离散信号中对勒贝格积分的讨论。
-
-\chapter{傅里叶变换}%第二章
-在数学分析课程中，我们都学习过傅里叶级数的计算，所以本书将直接回顾几种情况下的傅里叶级数展开公式，然后从正交函数系的观点出发构建傅里叶级数的理论，再从傅里叶级数过渡到傅里叶变换，从对周期现象的研究转向对非周期现象的研究，介绍其运算性质、卷积性质，最后介绍分布（也即广义函数）理论，从而研究常函数、狄拉克函数、正余弦函数等在常规意义下无法进行傅里叶变换，却又十分重要的函数。
-
-\section{正交函数系}\label{sec:Orthognal}
+\subsection{正交函数系}\label{sub:orthognal}
 \begin{definition}[正交基]
     如果有内积空间$V$的一组基$\{\mathbf{v_1},\mathbf{v_2},\dots ,\mathbf{v_n}\}$，满足$\langle \mathbf{v_i},\mathbf{v_j}\rangle =0,i \neq j$，则称这组基是一组\textbf{正交基}(orthognal bases)。\\如果对$V$中任一向量$\mathbf{w}$，均有以下分解式：
 \[\mathbf{w}=\sum_{i = 1}^{n}  c_i \mathbf{v_i}\]
@@ -1126,9 +1122,12 @@ Littlewood的第三个观点是，\textbf{几乎处处收敛的可测函数列�
 
 完备性意味着$L^2([0,T])$空间中的任一函数$f(t)$均可分解为这个函数系的级数$\sum_{i = 1}^{\infty}  a_i f_i(t)$，我们沿用前文中给出的公式计算这些系数：
 \[a_i=\frac{(g,f_i)}{(f_i,f_i)}=\frac{\int_{T}g(t)f_i^*(t)\,dt}{\int_{T}|f_i(t)|^2\,dt}\]
-细心的读者可能已经发现，这里得到的公式用到了有限维线性空间中的结论，但要推广到无限维线性空间并不是显然的。我们将在下一节给出帕塞瓦尔定理之后一并讨论这个问题。
+细心的读者可能已经发现，这里得到的公式用到了有限维线性空间中的结论，但要推广到无限维线性空间并不是显然的。我们将在\ref{sub:paseval}中给出帕塞瓦尔恒等式之后一并讨论这个问题。
 
 在适当的伸缩变换下，\ref{sub:bessel}中介绍的贝塞尔函数就是一个完备正交函数，傅里叶级数理论也是建立在完备正交函数系的基础之上的。此外，典型的标准完备正交函数系还有勒让德多项式 (Legendre polynomials)、小波变换基函数 (wavelet basis functions)等，下面仅讨论三角函数系和指数函数系。
+
+\chapter{傅里叶变换}%第二章
+在数学分析课程中，我们都学习过傅里叶级数的计算，所以本书将直接回顾几种情况下的傅里叶级数展开公式，然后从正交函数系的观点出发构建傅里叶级数的理论，再从傅里叶级数过渡到傅里叶变换，从对周期现象的研究转向对非周期现象的研究，介绍其运算性质、卷积性质，最后介绍分布（也即广义函数）理论，从而研究常函数、狄拉克函数、正余弦函数等在常规意义下无法进行傅里叶变换，却又十分重要的函数。
 
 \section{傅里叶级数}\label{sec:Fourier_Series}
 
@@ -1147,7 +1146,7 @@ Littlewood的第三个观点是，\textbf{几乎处处收敛的可测函数列�
 \[b_k=\frac{2}{T}\int_T f(t)\sin(k\omega t)\,dt\]
 \[c_k=\sqrt{a_k^2+b_k^2}\]
 \end{claim}
-下面用完备标准正交函数系的观点来得到以上公式。在学习数学分析时，我们已经看到三角函数系$1,\sin(\omega t),\cos(\omega t),\sin(2\omega t),\cos(2\omega t),\dots(\omega =\frac{2\pi}{T})$是正交的（读者可以自行验证），但不是单位正交的，因为
+下面用完备标准正交函数系的观点来得到以上公式。在学习数学分析时，我们已经看到三角函数系$1,\sin(\omega t),\cos(\omega t),\sin(2\omega t),\cos(2\omega t),\dots(\omega =\dfrac{2\pi}{T})$是正交的（读者可以自行验证），但不是单位正交的，因为
 \[(\sin(k\omega t),\sin(k\omega t))=\int_{T}\sin^2(k\omega t)\,dt=\int_{T}\frac{1-\cos(2k\omega t)}{2}=\frac{T}{2}\]
 \[(\cos(k\omega t),\cos(k\omega t))=\int_{T}\cos^2(k\omega t)\,dt=\int_{T}\frac{1+\cos(2k\omega t)}{2}=\frac{T}{2}\]
 可以将它们单位化，也可以直接采用完备正交基分解的公式，
@@ -2882,9 +2881,9 @@ $$\sigma_a\delta=\delta(ax)=\frac{1}{|a|}\delta(x)$$
             to[R=$R$] (0,0);
         \end{circuitikz}
     \end{center}
-    在$t=0$时刻闭合开关，则系统的激励为$e(t)=u(t)$。如果认为电容两段的电压$u_C(t)$是系统的响应$r(t)$，则可以用$r(t)=H[e(t)]$来表示这个系统。
+    在$t=0$时刻闭合开关，则系统的激励为$e(t)=u(t)$。如果认为电容两端的电压$u_C(t)$是系统的响应$r(t)$，则可以用$r(t)=H[e(t)]$来表示这个系统。
 
-    使用三要素法分析该电路，显然初状态下有$u_C(0)=0$V，末状态下$u_C(\infty)=1$V，时间常数$\tau=RC$，因此
+    使用三要素法分析该电路。初状态下$u_C(0)=0$V，末状态下$u_C(\infty)=1$V，时间常数$\tau=RC$，因此
     \[e(t)=u_C(t)=1-e^{t/RC}\]
 \end{example}
 
@@ -2938,7 +2937,7 @@ $$\sigma_a\delta=\delta(ax)=\frac{1}{|a|}\delta(x)$$
 对于零输入响应不为0的线性系统，直接将两个响应相加将得到两倍的零输入响应，这不是我们希望看到的，因此我们其实应该定义\textbf{零状态响应有线性性的系统为线性系统}。
 
 \begin{definition}[时不变性和移不变性]
-    如果一个系统的输出不依赖于输入信号施加于系统的时间，输入信号发生时移，输出信号也发生相同的时移，即$\forall b\in\mathbb{R},H[e(t-b)]=r(t-b)$,则称该系统是\textbf{时不变系统}用第二章中定义的时移算子的符号，时不变性可以记为$H\tau_b=\tau_b H$，换言之，时移和经过系统可交换，这与我们的直观相符。
+    如果一个系统的输出不依赖于输入信号施加于系统的时间，输入信号发生时移，输出信号也发生相同的时移，即$\forall b\in\mathbb{R},H[e(t-b)]=r(t-b)$，则称该系统是\textbf{时不变系统}。用第二章中定义的时移算子的符号，时不变性可以记为$H\tau_b=\tau_b H$，换言之，时移和经过系统的次序可交换，这与我们的直观相符。
 
     如果激励和响应的自变量是空间，我们同样可以定义系统的\textbf{移不变性}(shift invariance)，这时$H\tau_b=\tau_b H$中b是空间中的向量。后文中一般不特意区分时域和空间域。
 \end{definition}
@@ -2979,7 +2978,7 @@ $r(t_0)$仅依赖于e(t)在$t<t_0$时的值（这里不等号不取等是标准�
 \begin{definition}[稳定性]
 如果一个系统在激励信号有界时，响应也是有界的，则称之为\textbf{稳定系统}(bounded-input bounded-output,BIBO)。
 \end{definition}
-工程上，一个实用系统在所有可能条件下都保持稳定时至关重要的。我们将在\ref{sub:stability_of_system}中给出线性时不变系统具有稳定性的充分必要条件。
+工程上，一个实用系统在所有可能条件下都保持稳定时至关重要的。我们将在\ref{sub:stability_of_system}和\ref{sub:z_singular_point}中给出线性时不变系统具有稳定性的充分必要条件。
 
 \begin{definition}[可逆性]
     如果H（作为映射）如果是单射，则也是双射（因为我们不关注其值域），于是H是可逆的。换句话说，一种响应仅可能对应唯一的激励。
@@ -3236,7 +3235,7 @@ $r(t)=\mathcal{F} e(t)$.
 \end{definition}
 
 那么，如何求这个单位脉冲响应呢？对于微分方程
-\[a_n r^{(n)}+a_{n-1}r^{(n-1)}+\cdot +a_1 r'+a_0 r=\delta\]
+\[a_n r^{(n)}+a_{n-1}r^{(n-1)}+\cdots +a_1 r'+a_0 r=\delta\]
 要使等式右边出现$\delta$，$r(t)$中一定含有$\delta$及其导数、积分，根据\ref{sub:general_distributions}中的结果，$u'=\delta$，而$u(t)$的各阶积分都可以用$P(t)u(t)$来表示，其中$P(t)$是t的多项式，因此可以假定$r(t)=f_1(t)u(t)+f_2(t)\delta(t)+f_3(t)\delta'(t)+\cdots$。我们知道，$\delta$具有采样性质：$\delta(t)f(t)=\delta(t)f(0)$，类似地，还推导过$\delta'$与函数的乘积：$g\delta'=g(0)\delta'-g'(0)\delta$，不难想象，$\delta$的各阶导数与函数的乘积都是类似的（可以通过归纳法验证这一点），于是刚才的$r(t)$简
 化为
 \[r(t)=f(t)u(t)+a_1\delta+a_2\delta'+\cdots\]
@@ -3313,6 +3312,18 @@ $$h_0(t)*\sum_{m=0}^{M}b_m e^{(m)}(t)$$
     \end{align*}
     所以$C=1,r_h(0)=-3,r'_h(0)=8$，注意$u(t)$的系数自然为0，这是由齐次解的性质保证的。满足上述条件的$C_1=2,C_2=-5$，因此单位脉冲响应为$h(t)=\left(2e^{-t}-5e^{-2t}\right)u(t)+\delta$。
 \end{example}
+
+\section{微分方程组与状态变量分析}\label{sec:Equation_System}
+
+\subsection{与高阶方程的对应关系}\label{sub:compare_to_high_order}
+
+%存在性与唯一性
+
+\subsection{线性方程组的解法}\label{sub:solution_of_linear_equation_system}
+
+\subsection{常系数线性方程组}\label{sub:constant_coefficient_linear_equation_system}
+
+\subsection{连续系统的状态变量分析}\label{sub:state_variable_analysis}
 
 \section{系统的频率响应特性}\label{sec:Freq_Response}
 
@@ -3407,8 +3418,9 @@ $$h_0(t)*\sum_{m=0}^{M}b_m e^{(m)}(t)$$
 我们曾在\ref{sub:convolution}中提到，滤波就是把信号中的某些成分剔除或大幅减少，相当于在频域乘以一个函数，在时域上的表现则是与这个函数的傅里叶逆变换进行卷积。从频率响应的视角来看，滤波器就是一个系统，理想滤波器的幅频特性在某些频率处接近于0，而在另一些频率处接近于1。
 
 \begin{definition}[滤波器的分类]
-    低通滤波器是指幅频特性$|H(\omega)|$近似等于$$\chi_{[-\omega_c,\omega_c]}$$的滤波器，$\omega_c$为截止频率；高通滤波器则相反，幅频特性近似$$1-\chi_{[-\omega_c,\omega_c]}$$
-    带通滤波器的幅频特性近似等于$$\chi_{[\omega_L,\omega_H]}+\chi_{[-\omega_H,-\omega_L]}$$带阻滤波器则相反，幅频特性近似为$$1-\left(\chi_{[\omega_L,\omega_H]}+\chi_{[-\omega_H,-\omega_L]}\right)$$
+    \textbf{低通滤波器}是指幅频特性$|H(\omega)|$近似等于$$\chi_{[-\omega_c,\omega_c]}$$的滤波器，$\omega_c$为截止频率；\textbf{高通滤波器}则相反，幅频特性近似$$1-\chi_{[-\omega_c,\omega_c]}$$
+    \textbf{带通滤波器}的幅频特性近似等于$$\chi_{[\omega_L,\omega_H]}+\chi_{[-\omega_H,-\omega_L]}$$
+    其中$\omega_L,\omega_H$分别称为下截频和上截频；\textbf{带阻滤波器}则相反，幅频特性近似为$$1-\left(\chi_{[\omega_L,\omega_H]}+\chi_{[-\omega_H,-\omega_L]}\right)$$
 \end{definition}
 \begin{figure}[H]
     \centering
@@ -3495,7 +3507,7 @@ $$h_0(t)*\sum_{m=0}^{M}b_m e^{(m)}(t)$$
 可以想象，能够分解成不同频率成分的信号，其各频率成分一般会产生不同的相时延，从而使得输出信号的波形发生变化，这就是相频特性不是线性函数导致的相位失真。
 
 \begin{example}[群时延]
-设输入信号为调幅信号（关于调幅信号，见\ref{sec:modulation}）：
+设输入信号为调幅信号（关于调幅信号，见\ref{sub:modulation}）：
 \[e(t)=\cos(\omega_m t)\cos(\omega_c t)\]
 其中$\omega_c$为载波角频率，$\omega_m$为被调制信号的角频率，且$\omega_c\gg \omega_m$.系统H的单位脉冲响应$h(t)$为实信号，频率响应为$H(\omega)$。求$e(t)$进入系统所得的输出信号$r(t)$。\\
 解：
@@ -3569,7 +3581,7 @@ $$h_0(t)*\sum_{m=0}^{M}b_m e^{(m)}(t)$$
 引入\textbf{波数}$k=\frac{2\pi}{\lambda}$，则简谐波可以表示为
 \[y(x,t)=A\cos(\omega t - k x)\]
 
-这里波数并不是指波的数目，而是一个将空间距离折算为相位延迟的比例系数，也可以将它理解为波的空间角频率：对简谐波$y(x,t)=A\cos(\omega t-kx)$的空间变量做傅里叶变换，将得到空间角频率仅有$\pm k$的成分，对三维空间中的平面波也有类似的结论，见\ref{sec:Multi_Fourier}。我们将宗量$\omega t-kx$称为波的\textbf{相位}(phase)，考察相位的传播速度，即令$\omega t-kx=const$（例如，振幅最大值处恒有$\omega t-kx=0$），得到
+这里波数并不是指波的数目，而是一个将空间距离折算为相位延迟的比例系数，也可以将它理解为波的空间角频率：对简谐波$y(x,t)=A\cos(\omega t-kx)$的空间变量做傅里叶变换，将得到空间角频率仅有$\pm k$的成分，对三维空间中的平面波也有类似的结论，见\ref{sub:multi_schwartz}。我们将宗量$\omega t-kx$称为波的\textbf{相位}(phase)，考察相位的传播速度，即令$\omega t-kx=const$（例如，振幅最大值处恒有$\omega t-kx=0$），得到
 \[\frac{dx}{dt}=\frac{\omega}{k}=u\]
 这个速度称为\textbf{相速度}(phase velocity)，它描述了波的相位传播的速度，可以看到相速度正是波速$u$。
 
@@ -3623,7 +3635,7 @@ $$h_0(t)*\sum_{m=0}^{M}b_m e^{(m)}(t)$$
 可以看到，波形的包络$A\left(t - k'(\omega_0)x\right)$以速度$v_g(\omega_0)=\dfrac{1}{k'(\omega_0)}$传播，因此波包速度等于群速度。
 \end{proof}
 
-\section{调制、解调与复用传输}\label{sec:modulation}
+\subsection{调制、解调与复用传输}\label{sub:modulation}
 
 现代的通信方式有两种\cite{electronic_circuits}，\textbf{有线通信}(wired communication)和\textbf{无线通信}(wireless communication)。无线通信指用电磁波作为载体的\textbf{射频通信}(radio frequency communication)，有线通信则是通过导线传输电信号，例如电话线、光纤等。尽管无线通信的信息传输效率比有线通信低一些，但无线通信配置灵活、建设速度快、通信可靠、维护方便且易于跨越复杂地形，应用广泛。
 
@@ -4516,7 +4528,7 @@ $$\left\{\mathbf{x}\in\mathbb{R}^n \mid \mathbf{x}\cdot\boldsymbol{\xi}=k+\theta
     取$g=f$即得所需结论。
 \end{proof}
 
-\subsection{多维施瓦兹函数与多维分布}\label{sub:muti_schwartz}
+\subsection{多维施瓦兹函数与多维分布}\label{sub:multi_schwartz}
 
 首先，我们将\textbf{施瓦兹函数}的定义推广到多维空间$\mathbb{R}^n$中。
 \begin{definition}[多维施瓦兹函数]
@@ -7879,6 +7891,20 @@ $$\text{Res}(f,\infty)=\dfrac{1}{2\pi i}\oint_{C^-_R}f(z)\,dz$$
 %\end{example}
 
 \section{离散系统的z域分析}\label{sec:Discrete_System_z_Analysis}
+
+\subsection{奇点与时域特性}\label{sub:z_singular_point}
+
+\subsection{单边z变换}\label{sub:single_z}
+
+\subsection{离散信号的初值定理与终值定理}\label{sub:initial_final_value}
+
+\section{差分方程与离散系统的状态变量分析}\label{sec:Difference_Equation}
+
+\subsection{常系数线性差分方程}\label{sub:difference_equation}
+
+\subsection{常系数线性差分方程组}\label{sub:difference_equation_system}
+
+\subsection{离散系统的状态变量分析}\label{sub:discrete_state_variable}
 
 \chapter{离散时间变换与离散系统分析}
 

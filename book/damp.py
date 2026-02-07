@@ -26,8 +26,7 @@ for i, R in enumerate(Rs):
         it = (E/(L*beta)) * np.exp(alpha*t) * np.sin(beta*t)
         
     axes[i].plot(t, it)
-    axes[i].set_title(titles[i])
-    axes[i].set_xlabel('t')
+    axes[i].set_title(titles[i], fontsize=20)
     axes[i].grid(True)
 
 plt.tight_layout()
