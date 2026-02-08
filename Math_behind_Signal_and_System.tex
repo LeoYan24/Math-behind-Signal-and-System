@@ -3321,8 +3321,9 @@ $$h_0(t)*\sum_{m=0}^{M}b_m e^{(m)}(t)$$
 我们在\ref{sub:cascade}中得到：单位脉冲响应是单位阶跃响应的导数，因此可以通过单位脉冲响应求出单位阶跃响应。将$u(t)$带入方程右侧，$\delta$的导数的最高阶数会底一阶，于是用待定系数法求单位阶跃响应将比直接求单位脉冲响应少处理一个待定系数。我们通过一个例子来比较这两种方法：
 \begin{example}
     设系统由微分方程\[r''(t)+3r'(t)+2r(t)=e''(t)+e(t)\]描述，求其单位脉冲响应。\\
-    解：齐次方程的特征方程为$\lambda^2+3\lambda+2=0$，$\lambda_1=-1,\lambda_2=-2$，齐次解为$r_h(t)=C_1 e^{-t}+C_2 e^{-2t}$。\\
-    将$\delta$带入右式得到$\delta''+\delta$，为了使左式也出现$\delta''$，设单位脉冲响应为$h(t)=r_h(t)u(t)+C\delta$，则$h'(t)=r_h'(t)u(t)+r_h(0)\delta+C\delta',h''(t)=r_h''(t)u(t)+r_h'(0)\delta+r_h(0)\delta'+C\delta''$
+    解：齐次方程的特征方程为$\lambda^2+3\lambda+2=0$，因此$\lambda_1=-1,\lambda_2=-2$，齐次解为$$r_h(t)=C_1 e^{-t}+C_2 e^{-2t}$$
+    首先，我们按照已有的方法直接求解单位脉冲响应。将$\delta$带入右式得到$\delta''+\delta$，为了使左式也出现$\delta''$，设单位脉冲响应为$$h(t)=r_h(t)u(t)+C\delta$$
+    则$$h'(t)=r_h'(t)u(t)+r_h(0)\delta+C\delta',h''(t)=r_h''(t)u(t)+r_h'(0)\delta+r_h(0)\delta'+C\delta''$$
     带入原方程左侧得到：\begin{align*}
         LHS=&\left(r_h''(t)u(t)+r_h'(0)\delta+r_h(0)\delta'+C\delta''\right)\\
         &\quad+3\left(r_h'(t)u(t)+r_h(0)\delta+C\delta'\right)\\
@@ -3336,13 +3337,18 @@ $$h_0(t)*\sum_{m=0}^{M}b_m e^{(m)}(t)$$
             C=1
         \end{cases}
     \end{align*}
-    所以$C=1,r_h(0)=-3,r'_h(0)=8$，注意$u(t)$的系数自然为0，这是由齐次解的性质保证的。满足上述条件的$C_1=2,C_2=-5$，因此单位脉冲响应为
+    所以$$C=1,r_h(0)=-3,r'_h(0)=8$$
+    注意$u(t)$的系数自然为0，这是由齐次解的性质保证的。满足上述条件的$C_1=2,C_2=-5$，因此单位脉冲响应为
     $$h(t)=\left(2e^{-t}-5e^{-2t}\right)u(t)+\delta$$
 
-    下面我们尝试用单位阶跃响应来求解单位脉冲响应。将$u(t)$带入右式得到$u(t)+\delta'$，为例使左式也出现$\delta'$，只需设单位阶跃响应为$h_1(t)=r_h(t)u(t)$，则$h_1'(t)=r_h'(t)u(t)+r_h(0)\delta,h_1''(t)=r_h''(t)u(t)+r_h'(0)\delta+r_h(0)\delta'$，带入原方程左侧得到：\begin{align*}
+    下面我们尝试用单位阶跃响应来求解单位脉冲响应。将$u(t)$带入右式得到$u(t)+\delta'$，为例使左式也出现$\delta'$，只需设单位阶跃响应为
+    $$h_1(t)=r_h(t)u(t)$$
+    则
+    $$h_1'(t)=r_h'(t)u(t)+r_h(0)\delta,h_1''(t)=r_h''(t)u(t)+r_h'(0)\delta+r_h(0)\delta'$$
+    带入原方程左侧得到：\begin{align*}
         LHS=&\left(r_h''(t)u(t)+r_h'(0)\delta+r_h(0)\delta'\right)\\
         &+3\left(r_h'(t)u(t)+r_h(0)\delta\right)\\
-        &+2\left(r_h(t)u(t)\right)\\
+        &+2r_h(t)u(t)\\
         =&\left(r''_h(t)+3r'_h(t)+2r_h(t)\right)u(t)+\left(r'_h(0)+3r_h(0)\right)\delta+r_h(0)\delta'
     \end{align*}
     对比$\delta$及其各阶导数的系数，得到：\begin{align*}
@@ -3351,17 +3357,108 @@ $$h_0(t)*\sum_{m=0}^{M}b_m e^{(m)}(t)$$
             r_h(0)=1\\
         \end{cases}
     \end{align*}
-    所以$r_h(0)=1,r'_h(0)=-3$，满足上述条件的$C_1=-1,C_2=2$，因此单位阶跃响应为
+    所以$$r_h(0)=1,r'_h(0)=-3$$
+    满足上述条件的$C_1=-1,C_2=2$，因此单位阶跃响应为
     $$g(t)=(-e^{-t}+2e^{-2t})u(t)$$
-    单位脉冲响应为$$h(t)=g'(t)=\left(2e^{-t}-5e^{-2t}\right)u(t)+\delta$$
+    单位脉冲响应为
+    $$h(t)=g'(t)=\left(2e^{-t}-5e^{-2t}\right)u(t)+\delta$$
     与之前的结果一致。显然，\textbf{通过单位阶跃响应求解单位脉冲响应的计算更为简洁}。
 \end{example}
 
 \section{微分方程组与状态变量分析}\label{sec:Equation_System}
 
+我们首先来看这样一个例子，在电路分析中我们曾多次遇到它：
+
+\begin{example}
+    二阶电路如图所示，以电源电压为激励信号$e(t)$，电容电压$u_C(t)$与电感电流$i_L(t)$为响应信号，建立系统的微分方程描述。
+    \begin{center}
+        \begin{circuitikz}[american]
+            \draw (0,0)
+            to[V, v=$e(t)$] (0,3)
+            to[R, l=$R$] (3,3)
+            to[L, l=$L$, i=$i_L$] (6,3)
+            to[C, l=$C$, v=$u_C$] (6,0)
+            -- (0,0);
+        \end{circuitikz}
+    \end{center}
+    解：设电感电压为$u_L(t)$，由基尔霍夫电压定律可得
+    \begin{align*}
+        e(t)=u_R(t)+u_L(t)+u_C(t)
+    \end{align*}
+    带入电容和电感的伏安关系，得到
+    \begin{align*}
+        &\frac{di_L(t)}{dt}=-\frac{R}{L}i_L(t)-\frac{1}{L}u_C(t)+\frac{1}{L}e(t)\\
+        &\frac{du_C(t)}{dt}=\frac{1}{C}i_L(t)
+    \end{align*}
+    写成矩阵形式，即\begin{align}\label{eq:3.3.1}
+        \begin{bmatrix}
+            \frac{di_L(t)}{dt}\\
+            \frac{du_C(t)}{dt}
+        \end{bmatrix}=
+        \begin{bmatrix}
+            -\frac{R}{L} & -\frac{1}{L}\\
+            \frac{1}{C} & 0
+        \end{bmatrix}
+        \begin{bmatrix}
+            i_L(t)\\
+            u_C(t)
+        \end{bmatrix}+
+        \begin{bmatrix}
+            \frac{1}{L}\\
+            0
+        \end{bmatrix}e(t)
+    \end{align}
+    将$u_C(t)$消去，得到二阶常系数线性微分方程
+    \begin{align}\label{eq:3.3.2}
+        \frac{d^2 i_L(t)}{dt^2}+\frac{R}{L}\frac{di_L(t)}{dt}+\frac{1}{LC}i_L(t)=\frac{1}{LC}e(t)
+    \end{align}
+\end{example}
+
+尽管还未引入这个定义，直观告诉我们，以上微分方程组是\textbf{常系数线性微分方程组}。通过适当的消元和代入，可以由式\ref{eq:3.3.1}得到二阶常系数线性微分方程式\ref{eq:3.3.2}；通过引入参量$u_C(t)$，又可以由式\ref{eq:3.3.2}得到微分方程组式\ref{eq:3.3.1}。我们将看到，\textbf{常系数线性的微分方程组与高阶微分方程是等价的}，它们的解法有诸多相通之处。
+
+在上例中，$i_L(t),u_C(t)$是系统的\textbf{状态变量}，给出它们的表达式就完全描述了系统的状态，因此，单独研究这种微分方程组是很有意义的。我们将在接下来的三个小节中讨论微分方程组的解法并由此获得对高阶方程的进一步认识，再在\ref{sub:state_variable_analysis}中给出状态变量的严格定义，从而引出系统的可观性和可控性。
+
 \subsection{与高阶方程的对应关系}\label{sub:compare_to_high_order}
 
-%存在性与唯一性
+显示微分方程是微分方程的一种特殊形式，也是常微分方程的经典理论中的主要研究对象，它将未知函数$y$的最高阶导数表示为自变量$t$和$y$及其低阶导数的显式函数。例如，上一节介绍的高阶常系数线性微分方程就是一种显示微分方程。下面给出显示微分方程的定义：
+
+\begin{definition}[显式微分方程]
+    将形如
+    \[\frac{d^n y}{dt^n}=F(t,y,y',\cdots,y^{(n-1)})\]
+    的微分方程称为\textbf{显式微分方程}，其中函数$F$是已知的。在变量代换
+    \[y_1=y,y_2=y',\cdots,y_n=y^{(n-1)}\]
+    下，显式微分方程可以写成如下的微分方程组：
+\begin{align*}
+    \begin{cases}
+        &\frac{dy_1}{dt}=y_2\\
+        &\frac{dy_2}{dt}=y_3\\
+        &\cdots\\
+        &\frac{dy_{n-1}}{dt}=y_n\\
+        &\frac{dy_n}{dt}=F(t,y_1,y_2,\cdots,y_{n-1})
+    \end{cases}\textbf{或}\frac{d\mathbf{y}}{dt}=\mathbf{f}(t,\mathbf{y})
+\end{align*}
+    其中
+    \[\mathbf{y}=[y_1,y_2,\cdots,y_n]^T,\mathbf{f}(t,\mathbf{y})=[y_2,y_3,\cdots,y_n,F(t,y_1,y_2,\cdots,y_{n-1})]^T\]
+    分别为$\mathbb{R}^n$中的列向量和$\mathbb{R}\times\mathbb{R}^n$中的向量值函数。这就是我们主要考虑的微分方程组的形式。
+\end{definition}
+
+对于显式微分方程，我们引入以下两个定理来描述它的解的存在性与唯一性：
+%picard,peano
+
+下面，我们给出（常系数）线性微分方程组的定义，并建立它与高阶微分方程的对应关系。
+
+\begin{definition}[线性和常系数线性微分方程组]
+    考虑微分方程组\begin{align*}
+    \frac{d\mathbf{y}}{dt}=\mathbf{f}(t,\mathbf{y})
+    \end{align*}
+    如果$\mathbf{f}(t,\mathbf{y})$是$\mathbf{y}$的线性函数，即
+    \[\mathbf{f}(t,\mathbf{y})=A(t)\mathbf{y}+\mathbf{b}(t)\]
+    其中$A(t)$是$\mathbb{R}\times\mathbb{R}^n$中的矩阵值函数，$\mathbf{b}(t)$是$\mathbb{R}\times\mathbb{R}^n$中的向量值函数，则称该微分方程组为\textbf{线性微分方程组}；如果$A(t),\mathbf{b}(t)$都是常数矩阵和常数向量，则称该微分方程组为\textbf{常系数线性微分方程组}。
+
+    对于线性微分方程组，如果$\mathbf{b}(t)\neq\mathbf{0}$，则称其为\textbf{非齐次线性微分方程组}；如果$\mathbf{b}(t)= \mathbf{0}$，则称其为\textbf{齐次线性微分方程组}，或非齐次方程组$\dfrac{d\mathbf{y}}{dt}=A(t)\mathbf{y}+\mathbf{b}'(t)$对应的齐次方程组。
+
+    将方程的个数称为方程组的\textbf{阶数}。
+\end{definition}
 
 \subsection{线性方程组的解法}\label{sub:solution_of_linear_equation_system}
 
@@ -5391,7 +5488,7 @@ $\rho-\hat{\mathbf{n}}\cdot\mathbf{b}<0$的情况，将在下一性质指出处�
 
 \begin{definition}[周期函数的卷积]
     设$f,g$为以$T$为周期的周期函数，则它们的卷积定义为：
-    \[(f*g)(x)=\int_{0}^{T}f(y)g(x-y)\,dy\]
+    \[(f*g)(x)=\frac{1}{T}\int_{0}^{T}f(y)g(x-y)\,dy\]
 \end{definition}
 
 我们自然希望，在这中定义下的卷积具有与常规函数的卷积类似的性质，例如交换律、结合律、分配律等。事实上，这些性质都成立：
@@ -5411,24 +5508,24 @@ $\rho-\hat{\mathbf{n}}\cdot\mathbf{b}<0$的情况，将在下一性质指出处�
 \end{proposition}
 \begin{proof}
     \begin{align*}
-        (f*g)^-(x)&=(f*g)(-x)\\
-        &=\int_0^{T}f(y)g(-x-y)\,dy\\
-        &=\int_0^{T}f^-( -y)g^-(x+y)\,dy\\
-        &=(f^-*g^-)(x)
+        (f^-*g^-)(x)&=\frac{1}{T}\int_0^{T}f^-(y)g^-(x-y)\,dy\\
+        &=\frac{1}{T}\int_0^{T}f(-y)g(y-x)\,dy\\
+        &=\frac{1}{T}\int_0^{T}f(z)g(-z-x)\,dz&(z=-y)\\
+        &=(f*g)(-x)=(f*g)^-(x)
     \end{align*}
 \end{proof}
 
 \begin{proposition}[“面积”关系]
     设$f,g$为以$T$为周期的周期函数，则有：
-    \[\int_0^{T}(f*g)(x)\,dx=\left(\int_0^{T}f(x)\,dx\right)\left(\int_0^{T}g(x)\,dx\right)\]
+    \[\int_0^{T}(f*g)(x)\,dx=\frac{1}{T}\left(\int_0^{T}f(x)\,dx\right)\left(\int_0^{T}g(x)\,dx\right)\]
 \end{proposition}
 \begin{proof}
     \begin{align*}
-        \int_0^{T}(f*g)(x)\,dx&=\int_0^{T}\left(\int_0^{T}f(y)g(x-y)\,dy\right)\,dx\\
-        &=\int_0^{T}f(y)\left(\int_0^{T}g(x-y)\,dx\right)\,dy\\
-        &=\int_0^{T}f(y)\left(\int_{-y}^{T - y}g(u)\,du\right)\,dy&(u=x-y)\\
-        &=\int_0^{T}f(y)\left(\int_0^{T}g(u)\,du\right)\,dy\\
-        &=\left(\int_0^{T}f(x)\,dx\right)\left(\int_0^{T}g(x)\,dx\right)
+        \int_0^{T}(f*g)(x)\,dx&=\frac{1}{T}\int_0^{T}\,dx\int_0^{T}f(y)g(x-y)\,dy\\
+        &=\frac{1}{T}\int_0^{T}f(y)\,dy\int_0^{T}g(x-y)\,dx\\
+        &=\frac{1}{T}\int_0^{T}f(y)\,dy\int_{-y}^{T-y}g(z)\,dz&(z=x-y)\\
+        &=\frac{1}{T}\int_0^{T}f(y)\,dy\int_0^{T}g(z)\,dz\\
+        &=\frac{1}{T}\left(\int_0^{T}f(x)\,dx\right)\left(\int_0^{T}g(x)\,dx\right)
     \end{align*}
 \end{proof}
 
@@ -5436,26 +5533,27 @@ $\rho-\hat{\mathbf{n}}\cdot\mathbf{b}<0$的情况，将在下一性质指出处�
 
 在\ref{sub:poisson_summation}中，我们指出，周期函数可以视作施瓦兹函数的周期延拓，并且周期函数的傅里叶级数的系数正比于紧支函数的傅里叶变换在离散点处的取值。因此，我们希望周期函数的卷积的傅里叶系数也具有类似卷积定理的性质。事实也确实如此：
 \begin{theorem}[周期函数的卷积定理]
-    设$f,g\in L^2([0,T])$，且$f,g$为以$T$为周期的周期函数，记它们的傅里叶级数系数分别为$\{a_n\},\{b_n\}$，则它们的卷积$f*g\in L^2([0,T])$，并且傅里叶级数系数$c_n=T a_n b_n$。
+    设$f,g\in L^2([0,T])$，且$f,g$为以$T$为周期的周期函数，记它们的傅里叶级数系数分别为$\{a_n\},\{b_n\}$，则它们的卷积$f*g\in L^2([0,T])$，并且傅里叶级数系数$c_n=a_n b_n$。
 \end{theorem}
 \begin{proof}
     由柯西不等式，
     \begin{align*}
-        |f*g(x)|&=\left|\int_0^{T}f(y)g(x-y)\,dy\right|\\
-        &\leq \left(\int_0^{T}|f(y)|^2\,dy\right)^{1/2}\left(\int_0^{T}|g(x-y)|^2\,dy\right)^{1/2}\\
-        &=\|f\|_2\|g\|_2<\infty
+        |f*g(x)|&=\frac{1}{T}\left|\int_0^{T}f(y)g(x-y)\,dy\right|\\
+        &\leq \frac{1}{T}\left(\int_0^{T}|f(y)|^2\,dy\right)^{1/2}\left(\int_0^{T}|g(x-y)|^2\,dy\right)^{1/2}\\
+        &=\frac{1}{T}\|f\|_2\|g\|_2<\infty
     \end{align*}
-    因此$f*g$是有界的。事实上，$f*g$还是连续的（因为连续函数在$L^2$空间中稠密），因此$$f*g\in L^2([0,T])$$
+    因此$f*g$是有界的。事实上，$f*g$还是连续的（因为连续函数在$L^2$空间中稠密），因此
+    $$f*g\in L^2([0,T])$$
 
     记$f,g$的基波角频率为$\omega=\dfrac{2\pi}{T}$，则
     \begin{align*}
         c_n&=\frac{1}{T}\int_0^{T}(f*g)(x)e^{-in\omega x}\,dx\\
-        &=\frac{1}{T}\int_0^{T}\left(\int_0^{T}f(y)g(x-y)\,dy\right)e^{-in\omega x}\,dx\\
-        &=\frac{1}{T}\int_0^{T}f(y)\left(\int_0^{T}g(x-y)e^{-in\omega x}\,dx\right)\,dy\\
-        &=\frac{1}{T}\int_0^{T}f(y)e^{-in\omega y}\left(\int_{-y}^{T - y}g(u)e^{-in\omega u}\,du\right)\,dy&(u=x-y)\\
-        &=\frac{1}{T}\int_0^{T}f(y)e^{-in\omega y}\left(\int_0^{T}g(u)e^{-in\omega u}\,du\right)\,dy\\
-        &=\left(\frac{1}{T}\int_0^{T}f(y)e^{-in\omega y}\,dy\right)\left(\int_0^{T}g(u)e^{-in\omega u}\,du\right)\\
-        &=T a_n b_n
+        &=\frac{1}{T^2}\int_0^{T}e^{-in\omega x}\,dx\int_0^{T}f(y)g(x-y)\,dy\\
+        &=\frac{1}{T^2}\int_0^{T}f(y)\,dy\int_0^{T}g(x-y)e^{-in\omega x}\,dx\\
+        &=\frac{1}{T^2}\int_0^{T}f(y)\,dy\int_{-y}^{T-y}g(z)e^{-in\omega (z+y)}\,dz&(z=x-y)\\
+        &=\frac{1}{T^2}\int_0^{T}f(y)e^{-in\omega y}\,dy\int_0^{T}g(z)e^{-in\omega z}\,dz\\
+        &=\left(\frac{1}{T}\int_0^{T}f(y)e^{-in\omega y}\,dy\right)\left(\frac{1}{T}\int_0^{T}g(z)e^{-in\omega z}\,dz\right)\\
+        &=a_n b_n
     \end{align*}
 \end{proof}
 
@@ -5769,7 +5867,7 @@ $\rho-\hat{\mathbf{n}}\cdot\mathbf{b}<0$的情况，将在下一性质指出处�
 
 \subsection{形式导数与全纯函数}\label{sub:derivative_and_holomorphic}
 我们总是用$z$表示复数$x+iy$。考虑复系数双变元多项式集$\mathbb{C}[x,y]$，通过做替换$$x=\frac{z+\overline{z}}{2},y=\frac{z-\overline{z}}{2i}$$
-可以将$\mathbb{C}[x,y]$中的多项式$f(x,y)$表示为$g(z,\overline{z})$。在一些情况下，$g(z,\overline{z})$不显含$\overline{z}$，例如$f(x,y)=x+iy$，$g(z,\overline{z})=z$。对于$f(x,y)$，我们可以用导数$\frac{\partial f}{\partial x},\frac{\partial f}{\partial y}$来描述它对$x,y$的依赖关系，同理，为了表述多项式对$z,\overline{z}$的依赖关系，我们定义:\begin{definition}[形式导数]
+可以将$\mathbb{C}[x,y]$中的多项式$f(x,y)$表示为$g(z,\overline{z})$。在一些情况下，$g(z,\overline{z})$不显含$\overline{z}$，例如$f(x,y)=x+iy$，$g(z,\overline{z})=z$。对于$f(x,y)$，我们可以用导数$\dfrac{\partial f}{\partial x},\dfrac{\partial f}{\partial y}$来描述它对$x,y$的依赖关系，同理，为了表述多项式对$z,\overline{z}$的依赖关系，我们定义:\begin{definition}[形式导数]
     设$f=u+iv\in C^1(\mathbb{C})$，$u,v$为复数域上的实值函数，则
     \begin{align*}
         \frac{\partial f}{\partial z}=\frac{1}{2}\left(\frac{\partial}{\partial x}-i\frac{\partial}{\partial y}\right)f=\frac{1}{2}\left(\frac{\partial u}{\partial x}+\frac{\partial v}{\partial y}\right)+\frac{i}{2}\left(\frac{\partial v}{\partial x}-\frac{\partial u}{\partial y}\right)\\
@@ -5780,25 +5878,25 @@ $\rho-\hat{\mathbf{n}}\cdot\mathbf{b}<0$的情况，将在下一性质指出处�
 
 这种定义可以视作复合函数求导的结果，即\[\frac{\partial f}{\partial z}=\frac{\partial f}{\partial x}\frac{\partial x}{\partial z}+\frac{\partial f}{\partial y}\frac{\partial y}{\partial z},\frac{\partial f}{\partial \overline{z}}=\frac{\partial f}{\partial x}\frac{\partial x}{\partial \overline{z}}+\frac{\partial f}{\partial y}\frac{\partial y}{\partial \overline{z}}\]
 
-读者可以自行验证，在这样的定义下有：\begin{claim}
+读者可以自行验证，在这样的定义下有：\begin{proposition}
     \begin{align*}
         \frac{\partial z}{\partial z}=\frac{\partial \overline{z}}{\partial \overline{z}}=1,\\
         \frac{\partial z}{\partial \overline{z}}=\frac{\partial \overline{z}}{\partial z}=0
     \end{align*}
-\end{claim}
+\end{proposition}
 
 这种形式导数在其他方面也很像普通的导数，甚至可以说$z,\overline{z}$构成了一组新的坐标。例如：
-\begin{claim}[莱布尼兹法则]
+\begin{theorem}[莱布尼兹法则]
     \[\frac{\partial}{\partial z}(fg)=f\frac{\partial}{\partial z}g+g\frac{\partial}{\partial z}f\]
     \[\frac{\partial}{\partial \overline{z}}(fg)=f\frac{\partial}{\partial \overline{z}}g+g\frac{\partial}{\partial \overline{z}}f\]
-\end{claim}
-\begin{claim}[链式法则]
+\end{theorem}
+\begin{theorem}[链式法则]
     设$f,g\in C^1$，$f\circ g$有定义并记$w=g(z)$，则
     \begin{align*}
         \frac{\partial}{\partial z}(f\circ g)=\frac{\partial f}{\partial w}\frac{\partial g}{\partial z}+\frac{\partial f}{\partial \overline{w}}\frac{\partial\overline{g}}{\partial z}\\
         \frac{\partial}{\partial \overline{z}}(f\circ g)=\frac{\partial f}{\partial w}\frac{\partial g}{\partial \overline{z}}+\frac{\partial f}{\partial \overline{w}}\frac{\partial\overline{g}}{\partial \overline{z}}
     \end{align*}
-\end{claim}
+\end{theorem}
 以上结论的证明略去，它们只是多元微分学的小练习。
 \begin{remark}*
     对于了解微分形式的语言的读者，可以更好地理解$z,\overline{z}$作为坐标的意义以及形式导数的意义。定义1-形式\cite{shijihuai}
@@ -5866,9 +5964,9 @@ $\rho-\hat{\mathbf{n}}\cdot\mathbf{b}<0$的情况，将在下一性质指出处�
     \end{align*}
 \end{definition}
 
-与实变函数的曲线积分一致，可以验证此复线积分不依赖于参数$t$的选取，从而是良定义的，并且有：\begin{claim}
+与实变函数的曲线积分一致，可以验证此复线积分不依赖于参数$t$的选取，从而是良定义的，并且有：\begin{proposition}
     \[f(\gamma(b))-f(\gamma(a))=\int_{a}^{b}(f\circ \gamma)'(t)\,dt=\int_{\gamma}\frac{\partial f}{\partial z}\,dz\]
-\end{claim}
+\end{proposition}
 \begin{remark}
     前一个等号直接得自微积分基本定理，后一个等号才是需要证明的，读者可以带入形式导数的定义验算。
 \end{remark}
@@ -5979,7 +6077,8 @@ $f(z)=e^{1/z}$在0处有本性奇点，$f(z)=1/\sin(\pi z)$在$z=n,n\in\mathbb{Z
 我们使用留数定理来计算一个傅里叶变换作为例子。
 \begin{example}
     计算$f(t)=\dfrac{1}{a^2+t^2}$的傅里叶变换$\mathcal{F} f(\omega)$。\\
-    解：根据定义，$\mathcal{F} f(\omega)=\int_{-\infty}^{\infty}\dfrac{1}{a^2+t^2}e^{-i\omega t}\,dt$。为了使用留数定理计算该积分，我们将其推广为复变量上的积分，注意在$\mathbb{R}$上$z=\text{Re}\,z=t$：
+    解：根据定义，$$\mathcal{F} f(\omega)=\int_{-\infty}^{\infty}\dfrac{1}{a^2+t^2}e^{-i\omega t}\,dt$$
+    为了使用留数定理计算该积分，我们将其推广为复变量上的积分，注意在$\mathbb{R}$上$z=\text{Re}\,z=t$：
     \[\mathcal{F} f(\omega)=\int_{-\infty}^{\infty}\frac{1}{a^2+z^2}e^{-i\omega z}\,dz\]
     设$f(z)=\dfrac{e^{-i\omega z}}{a^2+z^2}$，围道为：\begin{align*}
         &\gamma_1:t\mapsto t,t\in[-R,R]\\
@@ -5997,14 +6096,16 @@ $f(z)=e^{1/z}$在0处有本性奇点，$f(z)=1/\sin(\pi z)$在$z=n,n\in\mathbb{Z
 \end{example}
 
 \subsection{*唯一延拓定理}\label{sub:unique_exetension}
-\begin{theorem}*
-    设$U\in\mathbb{C}$为连通开集，$f$为$U$上的全纯函数，如果$f$的\textbf{零集}（zero set）$Z(f)=\{z\in U|f(z)=0\}$有$U$中的极限点，则$f(z)=0,\forall z\in U$。
+\begin{theorem}
+    设$U\in\mathbb{C}$为连通开集，$f$为$U$上的全纯函数，如果$f$的\textbf{零集}(zero set)
+    $$Z(f)=\{z\in U|f(z)=0\}$$
+    有$U$中的极限点，则$f(z)=0,\forall z\in U$。
 \end{theorem}
-\begin{corollary}*
+\begin{corollary}
     设$f,g$为连通开集$U\in\mathbb{C}$上的全纯函数，$S\subset U$，且$S$包含$U$中的极限点，如果$f(z)=g(z),\forall z\in S$，则$f(z)=g(z),\forall z\in U$。
 \end{corollary}
 这表明连通开集上的全纯函数环是整环。
-\begin{corollary}[*唯一延拓定理]
+\begin{corollary}[唯一延拓定理]
     整函数可以由$\mathbb{R}$上的值唯一确定，即如果整函数$f,g$满足$f(x)=g(x),\forall x\in\mathbb{R}$，则$f(z)=g(z),\forall z\in\mathbb{C}$。
 \end{corollary}
 
@@ -6418,7 +6519,9 @@ $f(z)=e^{1/z}$在0处有本性奇点，$f(z)=1/\sin(\pi z)$在$z=n,n\in\mathbb{Z
 
     又因为我们已经证明了$f$的连续性，所以$f\in\mathcal{E} $。
 
-    最后，我们证明$F(s)=\mathcal{L} f(s),\forall \text{Re}\ s>a$。上一步中，$\forall b>a$，我们都能找到常数$k$使得$|f(t)|\leq k e^{b t}$，因此可以取$b'\in(a,b)$，使得$|f(t)e^{-bt}|\leq k'e^{(b'-b)t}$，从而$f(t)e^{-bt}\in L^1(\mathbb{R})$。根据$f$的定义，有
+    最后，我们证明
+    $$F(s)=\mathcal{L} f(s),\forall \text{Re}\ s>a$$
+    上一步中，$\forall b>a$，我们都能找到常数$k$使得$|f(t)|\leq k e^{b t}$，因此可以取$b'\in(a,b)$，使得$|f(t)e^{-bt}|\leq k'e^{(b'-b)t}$，从而$f(t)e^{-bt}\in L^1(\mathbb{R})$。根据$f$的定义，有
     \begin{align*}
         f(t)e^{-b t}=\frac{1}{2\pi}\lim_{r\to\infty}\int_{-r}^{r}F(b+i\omega)e^{i\omega t}\,d\omega
         =\mathcal{F}^{-1} [F(b+i\omega)](t)
@@ -7961,10 +8064,10 @@ $$\text{Res}(f,\infty)=\dfrac{1}{2\pi i}\oint_{C^-_R}f(z)\,dz$$
 在\ref{sub:signal}中，我们介绍过以下两种特别的离散信号：
 
 \begin{definition}[离散正弦信号]
-    $x[n]=\sin(\Omega_0 n)$，其中$\Omega_0$为数字角频率。
+    $x[n]=\sin(\Omega n)$，其中$\Omega$为数字角频率。
 \end{definition}
 \begin{definition}[离散复指数信号]
-    $x[n]=e^{i\Omega_0 n}$，其中$\Omega_0$为数字角频率。
+    $E_{\Omega}[n]=e^{i\Omega n}$，其中$\Omega$为数字角频率。
 \end{definition}
 
 与\textbf{数字角频率}相对，我们将连续信号的角频率称为\textbf{模拟角频率}。很明显，数字角频率表征了信号的某种频率信息。本节就来讨论这样两个问题：\begin{itemize}
@@ -7972,16 +8075,16 @@ $$\text{Res}(f,\infty)=\dfrac{1}{2\pi i}\oint_{C^-_R}f(z)\,dz$$
     \item 离散信号能否像连续信号那样进行分解与合成？
 \end{itemize}
 
-后者正是\textbf{离散时间傅里叶变换}（Discrete-Time Fourier Transform, DTFT）要解决的问题。我们将第二小节介绍它，并在第三小节讨论离散时间傅里叶变换的性质。
+后者正是\textbf{离散时间傅里叶变换}(Discrete-Time Fourier Transform, DTFT)要解决的问题。我们将第二小节介绍它，并在第三小节讨论离散时间傅里叶变换的性质。
 
 \subsection{数字角频率}\label{sub:digital_freq}
 
-在学习\ref{sec:Sampling_Interpolation}后，我们可以另一种视角看待离散信号，即离散信号是连续信号的理想采样的结果。已知连续时间信号$f(t)$及采样间隔$T$，则采样得到的离散信号为$x[n]=f(nT)$。特别地，考虑最典型的具有数字角频率$\Omega_0$的信号
-$$x[n]=e^{i\Omega_0 n}$$
+在学习\ref{sec:Sampling_Interpolation}后，我们可以另一种视角看待离散信号，即离散信号是连续信号的理想采样的结果。已知连续时间信号$f(t)$及采样间隔$T$，则采样得到的离散信号为$x[n]=f(nT)$。特别地，考虑最典型的具有数字角频率$\Omega$的信号
+$$E_{\Omega}[n]=e^{i\Omega n}$$
 它对应的连续时间信号为
-\[f(t)=e^{i\Omega_0 t/T}\]
+\[f(t)=e^{i\Omega t/T}\]
 
-如果认为离散信号$x[n]=e^{i\Omega_0 n}$具有$\Omega_0$的数字角频率，则对应的连续信号正是最典型的以$\omega_0=\Omega_0/T$为模拟角频率的连续复指数信号。因此，数字角频率与模拟角频率之间的关系为：
+如果认为离散信号$x[n]=e^{i\Omega n}$具有$\Omega$的数字角频率，则对应的连续信号正是最典型的以$\omega=\Omega/T$为模拟角频率的连续复指数信号。因此，数字角频率与模拟角频率之间的关系为：
 \[\Omega=\omega T\]
 
 可以看到，用连续信号的角频率来理解离散信号的角频率，则模拟角频率与数字角频率的关系取决于采样间隔$T$。采样间隔越大，振荡模式相同的离散信号对应的连续信号振荡越缓慢，同样的数字角频率对应的模拟角频率就越小。
@@ -8046,7 +8149,7 @@ $$e^{i(\Omega+2k\pi)n}=e^{i\Omega n},\forall k\in\mathbb{Z},n\in\mathbb{Z}$$
 {\color{red}\begin{align*}
     \mathcal{F} \shah&=\frac{2\pi}{T}\shah_{2\pi/T}
 \end{align*}}
-最后两行用到了$\mathcal{X} $是以$2\pi$为周期的。
+后两行用到了$\mathcal{X} $是以$2\pi$为周期的。
 
 另一方面，$f(t)\cdot\shah=\sum_{n=-\infty}^{\infty}x[n]\delta_{n}$，由分布的傅里叶变换的连续性，有：
 \begin{align*}
@@ -8066,7 +8169,7 @@ $$X(e^{i\Omega})=\mathcal{X} (\Omega)$$
 \begin{definition}[离散时间傅里叶变换]
     离散信号$x[n]\in l^1$的离散时间傅里叶变换定义为
     \[X(e^{i\Omega})=\sum_{n=-\infty}^{\infty}x[n]e^{-i\Omega n}\]
-    记$x[n]\xleftrightarrow{\text{DTFT}}X(e^{i\Omega})$。其中，$\Omega $为\textbf{数字角频率}，$l^1$表示绝对可和的序列空间，即
+    记$x[n]\xleftrightarrow{\text{DTFT}}X(e^{i\Omega})$。其中，$\Omega $为\textbf{数字角频率}，$l^1$为\ref{sub:Lp_space}中介绍的绝对可和的序列空间，即
     \[l^1=\left\{x[n]\left|\sum_{n=-\infty}^{\infty}|x[n]|<\infty\right.\right\}\]
 \end{definition}
 
