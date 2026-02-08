@@ -542,7 +542,7 @@ $$d(\mathbf x,\mathbf y)=||\mathbf x-\mathbf y||$$
 这就是数学分析中的极限定义，只是将绝对值改成了范数，其余类似的极限定义不再赘述。
 
 \begin{definition}[完备的线性赋范空间]
-    如果线性赋范空间中所有柯西列都有极限，那么这个空间称为\textbf{完备的线性赋范空间}，或称为巴拿赫空间（有限维）、希尔伯特空间（无限维）\cite{zorich}.
+    如果线性赋范空间中所有柯西列都有极限，那么这个空间称为\textbf{完备的线性赋范空间}，或称为\textbf{巴拿赫空间}\cite{real_analysis}。
 \end{definition}
 
 \begin{example}
@@ -570,8 +570,15 @@ $\langle \cdot,\cdot\rangle:V\times V\rightarrow \mathbb{C} $，满足\textbf{�
               \item \textbf{可加性}：$\langle \mathbf{v} + \mathbf{w}, \mathbf{u} \rangle = \langle \mathbf{v}, \mathbf{u} \rangle + \langle \mathbf{w}, \mathbf{u} \rangle$
           \end{itemize}
 \end{enumerate}
-则称在V上定义了一种内积 (inner product)，称V为内积空间。
+则称在V上定义了一种内积 (inner product)，称V为\textbf{内积空间}(inner product space)。
 \end{definition}
+
+不难发现，只要取$\|\mathbf{v}\|^2=\langle \mathbf{v}, \mathbf{v} \rangle$，就由内积导出了一种范数，并且这种范数具有比一般的范数更强的性质；只要取$d(\mathbf{x},\mathbf{y})=\|\mathbf{x-y}\|$，就由范数导出了一种度量，并且这种度量具有比一般的度量更强的性质。因此，可以说内积空间是特殊的线性赋范空间，线性赋范空间是特殊的度量空间。
+
+\begin{definition}[希尔伯特空间]
+    具有内积，且范数由内积导出的巴纳赫空间，或者说完备的内积空间，称为\textbf{希尔伯特空间}。
+\end{definition}
+
 在内积空间上有著名的\textbf{柯西-施瓦兹不等式} (Cauchy-Shwartz inequality)：
 \begin{theorem}[柯西-施瓦兹不等式]
     \[|\langle \mathbf{a,b}\rangle| \leq \| \mathbf{a}\| \| \mathbf{b}\| \]
@@ -588,7 +595,8 @@ $\langle \cdot,\cdot\rangle:V\times V\rightarrow \mathbb{C} $，满足\textbf{�
     \[\forall \mathbf{a,b}\in V,\|\mathbf{a+b}\|\leq\|\mathbf{a}\|+\|\mathbf{b}\|\]
 \end{proposition}
 
-不难发现，只要取$\|\mathbf{v}\|^2=\langle \mathbf{v}, \mathbf{v} \rangle$，就由内积导出了一种范数，并且这种范数具有比一般的范数更强的性质；只要取$d(\mathbf{x},\mathbf{y})=\|\mathbf{x-y}\|$，就由范数导出了一种度量，并且这种度量具有比一般的度量更强的性质。因此，可以说内积空间是特殊的线性赋范空间，线性赋范空间是特殊的度量空间。
+
+\subsection{特征向量与特征值}\label{sub:eigenvector}
 
 \subsection{无穷维线性空间}\label{sub:infinite_linear}
 
@@ -2906,7 +2914,7 @@ $$\sigma_a\delta=\delta(ax)=\frac{1}{|a|}\delta(x)$$
     我们称这样的问题为\textbf{初值问题}。
 \end{definition}
 
-常微分方程的解空间是有限维的，只要给定足够的初值数量，就可以唯一确定方程的解，因此常微分方程系统都具有\textbf{即时性}。
+常微分方程的解空间是有限维的，只要给定足够的初值数量，就可以唯一确定方程的解，因此常微分方程系统都具有\textbf{即时性}。在\ref{sub:compare_to_high_order}中，我们将对线性微分方程组的解空间维数进行说明。
 
 \begin{definition}[即时性与记忆性]
 一个系统具有\textbf{即时性}（或无记忆性、Markov性），如果该系统的响应在任意时刻$t$的状态演化率完全且唯一地取决于该时刻的系统状态与激励，而不显式地依赖于任何过去时刻$t'<t$的系统状态或历史激励。换言之，如果一个初值问题的解存在且唯一，则由它描述的系统具有即时性。
@@ -2922,7 +2930,7 @@ $$\sigma_a\delta=\delta(ax)=\frac{1}{|a|}\delta(x)$$
     的方程（我们一般不将这类方程归类于微分方程），其中$\tau$是常数，它的解空间是无限维的，不可能通过某一时刻的系统状态唯一确定方程的解。这个方程描述了一个无激励的记忆系统。
 \end{example}
 
-微分方程涉及到非常庞杂的理论。在信号与系统课程中，我们通常关注的是更为特殊的微分方程，它所描述的系统是具有\textbf{线性}和\textbf{时不变性}的，这种系统我们将在\ref{sec:ODE}详细讨论。现在先来给出线性和时不变性的定义。
+微分方程涉及到非常庞杂的理论。在信号与系统课程中，我们通常关注的是更为特殊的常系数线性微分方程（组），它们所描述的系统是具有\textbf{线性}和\textbf{时不变性}的，下面给出线性和时不变性的定义。
 
 \begin{definition}[线性系统]
     如果算子H是线性的，即
@@ -2944,41 +2952,20 @@ $$\sigma_a\delta=\delta(ax)=\frac{1}{|a|}\delta(x)$$
 \begin{definition}[线性时不变系统]
     如果一个系统既是线性的又是时不变的，就说它是\textbf{线性时不变系统}(linear time-invariant system,LTI)。
 \end{definition}
-线性时不变系统是信号与系统课程中所研究的主要系统类型。
+
+线性时不变系统是信号与系统课程中所研究的主要系统类型。后两节中将介绍线性时不变系统与微分方程的关系：常系数线性微分方程（组）描述的系统是线性时不变系统，并结合微分方程的理论对这类特殊的系统进行进一步分析。
 
 \begin{definition}[单位脉冲响应与单位阶跃响应]
     当$e(t)=\delta(t)$时，$r_{zs}(t)$为\textbf{单位脉冲响应}，在不涉及零输入响应时就说$r(t)$为单位脉冲响应。当$e(t)=u(t)$时，响应$r(t)$称为\textbf{单位阶跃响应}。习惯上，将单位脉冲响应记为$h(t)$，单位阶跃响应记为$g(t)$。需要指出，对于线性系统，脉冲响应应该定义为双变量函数$h(x,y)=H[\delta(x-y)]$，见后文的讨论。
 \end{definition}
 线性时不变系统满足$r(t)=(h*e)(t)$，h为单位脉冲响应，将在\ref{sub:cascade}介绍。
 
-除了线性性与时不变性，系统还有一些其他的特性，下面一一进行说明。
-
-\begin{definition}[因果性]
-一个系统在有激励时，才会出现响应，或者说
-$r(t_0)$仅依赖于e(t)在$t<t_0$时的值（这里不等号不取等是标准的定义方式，我们马上会看到它的作用），即
-\begin{equation}
-    \forall t_0,\left(e_1(t)=e_2(t)\ for\ t<t_0\right)\implies \left(r_1(t)=r_2(t)\ for\ t<t_0\right)\label{eq:4.1}
-\end{equation}
-这个条件称为\textbf{因果性条件}(casuality condition)。
-\end{definition}
-对于线性系统，容易看出其因果性条件等价于
-\begin{equation}
-    \forall t_0,\left(e(t)=0\ for\ t<t_0\right)\implies \left(r(t)=0\ for\ t<t_0\right)\label{eq:4.2}
-\end{equation}
-如果系统还有时不变性，则因果性条件等价于
-\begin{equation}
-    \left(e(t)=0\ for\ t<0\right)\implies \left(r(t)=0\ for\ t<0\right)\label{eq:4.3}
-\end{equation}
-或者更简便的
-\begin{equation}
-    h(t)=0\ for\ t<0\label{eq:4.4}
-\end{equation}
-其中h为单位脉冲响应。只要取$t_0=0$，就从条件\ref{eq:4.2}推出条件\ref{eq:4.3}；用时不变性，条件\ref{eq:4.3}可以推出条件\ref{eq:4.2}。对于单位脉冲响应，从$\delta=0\ for\ t<0$可以推出$h(t)=0\ for\ t<0$；如果$h(t)=0,e(t)=0\ for\ t<0$,则根据\ref{sub:intuition_of_convolution}中介绍的卷积的“支集相加”性质，有$r(t)=(h*e)(t)=0\ for\ t<0$.
+除了线性性与时不变性，系统还有一些其他的特性，例如稳定性和可逆性。系统的其他特性将在后文中陆续介绍。
 
 \begin{definition}[稳定性]
 如果一个系统在激励信号有界时，响应也是有界的，则称之为\textbf{稳定系统}(bounded-input bounded-output,BIBO)。
 \end{definition}
-工程上，一个实用系统在所有可能条件下都保持稳定时至关重要的。我们将在\ref{sub:stability_of_system}和\ref{sub:z_singular_point}中给出线性时不变系统具有稳定性的充分必要条件。
+我们将在\ref{sub:stability_of_system}和\ref{sub:z_singular_point}中，分别借助拉普拉斯变换和z变换的理论，给出连续的和离散的线性时不变系统具有稳定性的充分必要条件。
 
 \begin{definition}[可逆性]
     如果H（作为映射）如果是单射，则也是双射（因为我们不关注其值域），于是H是可逆的。换句话说，一种响应仅可能对应唯一的激励。
@@ -3104,6 +3091,8 @@ $r(t)=\mathcal{F} e(t)$.
     “一个系统是线性时不变系统”等价于“响应是激励与脉冲响应的卷积”。
 \end{proposition}
 
+线性时不变系统的单位阶跃响应是单位脉冲响应的积分：
+
 \begin{proposition}[单位阶跃响应]
 线性时不变系统的单位阶跃响应$g(t)=\int_{-\infty}^{t}h(y)\,dy$，其中$h(t)$为系统的单位脉冲响应。
 \end{proposition}
@@ -3113,6 +3102,45 @@ $r(t)=\mathcal{F} e(t)$.
     &=\int_{-\infty}^{\infty}u(t-y)h(y)\,dy\\
     &=\int_{-\infty}^{t}h(y)\,dy
 \end{align*}
+\end{proof}
+
+最后，我们来说明系统的一个重要特性：\textbf{因果性}，并利用$r(t)=(h*e)(t)$给出线性时不变系统的因果性条件。
+
+\begin{definition}[因果性]
+一个系统在有激励时，才会出现响应，或者说$r(t_0)$仅依赖于$e(t)$在$t<t_0$时的值（这里不等号不取等是标准的定义方式，我们马上会看到它的作用），即
+\begin{equation}
+    \forall t_0,\left(e_1(t)=e_2(t)\ for\ t<t_0\right)\implies \left(r_1(t)=r_2(t)\ for\ t<t_0\right)\label{eq:4.1}
+\end{equation}
+这个条件称为\textbf{因果性条件}(casuality condition)。
+\end{definition}
+
+因果性表明，系统的响应不能先于激励出现，且仅仅依赖于先前的激励，从物理上讲，这样的系统才可能是可实现的。对于特殊的系统类型，因果性条件具有更加简洁的形式：
+
+\begin{proposition}
+对于线性系统，因果性条件等价于
+\begin{equation}
+    \forall t_0,\left(e(t)=0\ for\ t<t_0\right)\implies \left(r(t)=0\ for\ t<t_0\right)\label{eq:4.2}
+\end{equation}
+\end{proposition}
+\begin{proof}
+只要取$e_1(t)=e(t),e_2(t)=0$，就从条件\ref{eq:4.1}推出条件\ref{eq:4.2}；反过来，如果条件\ref{eq:4.2}成立，任意$e_1,e_2$满足$e_1(t)=e_2(t)\ for\ t<t_0$，有$e_1(t)-e_2(t)=0\ for\ t<t_0$，根据条件\ref{eq:4.2}，有$r_1(t)-r_2(t)=0\ for\ t<t_0$，即$r_1(t)=r_2(t)\ for\ t<t_0$.
+\end{proof}
+
+\begin{proposition}
+对于线性时不变系统，因果性条件等价于
+\begin{equation}
+    \left(e(t)=0\ for\ t<0\right)\implies \left(r(t)=0\ for\ t<0\right)\label{eq:4.3}
+\end{equation}
+或者更简便的
+\begin{equation}
+    h(t)=0\ for\ t<0\label{eq:4.4}
+\end{equation}
+其中h为单位脉冲响应。
+\end{proposition}
+\begin{proof}
+只要取$t_0=0$，就从条件\ref{eq:4.2}推出条件\ref{eq:4.3}；用时不变性，条件\ref{eq:4.3}可以推出条件\ref{eq:4.2}。
+
+对于单位脉冲响应，从$\delta=0\ for\ t<0$可以推出$h(t)=0\ for\ t<0$；如果$h(t)=0,e(t)=0\ for\ t<0$,则根据\ref{sub:intuition_of_convolution}中介绍的卷积的“支集相加”性质，有$r(t)=(h*e)(t)=0\ for\ t<0$.
 \end{proof}
 
 \section{常系数线性微分方程}\label{sec:ODE}
@@ -3158,12 +3186,12 @@ $r(t)=\mathcal{F} e(t)$.
 解：特征方程为$\lambda^2-3\lambda+2=0$，有两个特征根$\lambda_1=1,\lambda_2=2$，
 齐次解为$$y_h(t)=C_1e^{\lambda_1 t}+C_2e^{\lambda_2 t}$$
 根据解的线性性，可以将方程拆分为：\begin{align*}
-    y''-3y'+2y=2e^{-x}\cos x\\
-    y''-3y'+2y=e^{2x}(4x+5)
+    y''-3y'+2y=2e^{-x}\cos x,y''-3y'+2y=e^{2x}(4x+5)
 \end{align*}
 对于前一个方程，$-1+i$不是特征根，设方程特解为$y_1(t)=e^{-x}(A\cos x+B\sin x)$，带入原方程可得$A=\dfrac{1}{5},B=-\dfrac{1}{5}$，即$y_1(t)=\dfrac{1}{5}e^{-x}(\cos x-\sin x)$。\\
 对后一个方程，2是一重特征根，设方程特解为$y_2(t)=e^{2x}x(ax+b)$，带入原方程可得$a=2,b=1$，即$y_2(t)=e^{2x}x(2x+1)$。\\
-将齐次解与特解相加，得到完全解：\begin{align*}y(t)&=C_1e^{\lambda_1 t}+C_2e^{\lambda_2 t}+\frac{1}{5}e^{-x}(\cos x-\sin x)+e^{2x}x(2x+1)\\
+将齐次解与特解相加，得到完全解：\begin{align*}
+    y(t)&=C_1e^{\lambda_1 t}+C_2e^{\lambda_2 t}+\frac{1}{5}e^{-x}(\cos x-\sin x)+e^{2x}x(2x+1)\\
     &=C_1 e^{x}+\frac{1}{5}e^{-x}(\cos x-\sin x)+e^{2x}(2x^2+x+C_2)
 \end{align*}
 \end{example}
@@ -3244,34 +3272,28 @@ $r(t)=\mathcal{F} e(t)$.
 \begin{example}
     求微分方程
 \[r''(t)+3r'(t)+2r(t)=e(t)\]
-的单位脉冲响应。令$r''(t)+3r'(t)+2r(t)=\delta$，如果$r(t)$中含有$\delta'$，则
-其各阶导数会因此含有$\delta$的更高阶导数，这不是我们所需要的，因此，令
-$r(t)=f(t)u(t)+a\delta$，求出其一阶、二阶导数：\begin{align*}
-    r'(t)&=f'(t)u(t)+f(t)\delta+a\delta'\\
-    &=f'(t)u(t)+f(0)\delta+a\delta'\\
-    r''(t)&=f''(t)u(t)+f'(t)\delta+f(0)\delta'+a\delta''\\
-    &=f''(t)u(t)+f'(0)\delta+f(0)\delta'+a\delta''
+的单位脉冲响应。令$r''(t)+3r'(t)+2r(t)=\delta$，如果$r(t)$中含有$\delta$，则
+$r''(t)$中会含有$\delta''$，这不是我们所需要的，因此，令
+$r(t)=f(t)u(t)$，求出其一阶、二阶导数：\begin{align*}
+    r'(t)&=f'(t)u(t)+f(t)\delta=f'(t)u(t)+f(0)\delta\\
+    r''(t)&=f''(t)u(t)+f'(t)\delta+f(0)\delta'=f''(t)u(t)+f'(0)\delta+f(0)\delta'
 \end{align*}
 再带入原方程：\begin{align*}
     &r''(t)+3r'(t)+2r(t)\\
-    =&\left[f''(t)u(t)+f'(0)\delta+f(0)\delta'+a\delta''\right]\\
-    &+3\left[f'(t)u(t)+f(0)\delta+a\delta'\right]\\
-    &+2\left[f(t)u(t)+a\delta\right]\\
-    =&\left[f''(t)+3f'(t)+2f(t)\right]u(t)+\left[f'(0)+3f(0)+2a\right]\delta+\left[f(0)+3a\right]\delta'+a\delta''
+    =&\left[f''(t)u(t)+f'(0)\delta+f(0)\delta'\right]+3\left[f'(t)u(t)+f(0)\delta\right]+2\left[f(t)u(t)+\right]\\
+    =&\left[f''(t)+3f'(t)+2f(t)\right]u(t)+\left[f'(0)+3f(0)\right]\delta+f(0)\delta'
 \end{align*}
 对比系数，得到：\begin{align*}\begin{cases}
     &f''(t)+3f'(t)+2f(t)=0\\
-    &f'(0)+3f'(0)+2a=1\\
-    &f(0)+3a=0\\
-    &a=0
+    &f'(0)+3f(0)=1\\
+    &f(0)=0
 \end{cases}
 \end{align*}
 因此问题转化为求解微分方程
 \[f''(t)+3f'(t)+2f(t)=0,f(0)=0,f'(0)=1\]
 这个方程正是一开始的微分方程的齐次方程,可以立即得到它的解：
 \begin{align*}
-    &f(t)=e^{-t}-e^{-2t}\\
-    &h(t)=\left(e^{-t}-e^{-2t}\right)u(t)
+    f(t)=e^{-t}-e^{-2t},h(t)=\left(e^{-t}-e^{-2t}\right)u(t)
 \end{align*}
 总之，只要将齐次解乘以$u(t)$，求出对应阶导数并带回原方程对比系数，即可得到单位脉冲响应；由于单位阶跃响应形如$h(t)=y_h(t)u(t)$，满足$h(t)=0,t<0$，微分方程描述的
 系统还具有因果性。
@@ -3283,34 +3305,56 @@ $r(t)=f(t)u(t)+a\delta$，求出其一阶、二阶导数：\begin{align*}
     如果信号满足$h(t)=y_h(t)u(t)$或$h(t)=0,\forall t<0$，则称之为\textbf{因果信号}(causal signal)；而如果信号满足$h(t)=y_h(t)u(-t)$，则称之为\textbf{反因果信号}(anti-causal signal)。
 \end{definition}
 
-更一般地，由微分方程\[\sum_{n=0}^{N}a_n r^{(n)}(t)=\sum_{m=0}^{M}b_m e^{(m)}(t)\]
-描述的系统，其单位脉冲响应满足：
-\[\sum_{n=0}^{N}a_n r^{(n)}(t)=\sum_{m=0}^{M}b_m \delta^{(m)}\]
-当$r(t)$的最高次导的阶数大于$\delta$的最高阶导阶数，即$N> M$时，解为$y_h(t)u(t)$；当$r(t)$的最高次导的阶数不小于$\delta$的最高阶导阶数，即$N\leq M$时，解为$y_h(t)u(t)+\sum_{k=0}^{M-N}c_k \delta^{(k)}$。换言之，需要利用方程左侧的最高阶导，让方程右侧所需的$\delta$的最高阶导数项出现。
+更一般地，基本解的求法如下：
+\begin{theorem}
+    由微分方程
+    \[\sum_{n=0}^{N}a_n r^{(n)}(t)=\sum_{m=0}^{M}b_m e^{(m)}(t)\]
+    描述的系统，其单位脉冲响应满足：
+    \[\sum_{n=0}^{N}a_n r^{(n)}(t)=\sum_{m=0}^{M}b_m \delta^{(m)}\]
+\end{theorem}
+当$r(t)$的最高次导数的阶数大于$\delta$的最高阶导数的阶数，即$N> M$时，解为$y_h(t)u(t)$；当$r(t)$的最高次导数的阶数不小于$\delta$的最高阶导数的阶数，即$N\leq M$时，解为$y_h(t)u(t)+\sum_{k=0}^{M-N}c_k \delta^{(k)}$。换言之，\textbf{需要利用方程左侧的最高阶导，让方程右侧所需的$\delta$的最高阶导数项出现}。
 
 从数学上我们没有必要考虑这种形式的方程。只要把方程右侧看作一个新的非齐次项，它与其他微分方程没有区别。以这种视角看来，另一种单位脉冲响应的求解方法是，将基本解$h_0(t)$与非齐次项的卷积
 $$h_0(t)*\sum_{m=0}^{M}b_m e^{(m)}(t)$$
 作为系统的单位脉冲响应$h(t)$，但这样涉及$\delta$各阶导数的卷积，计算较为复杂，通过待定系数法求解往往更快。
 
-我们在\ref{sub:cascade}末尾得到：单位脉冲响应是单位阶跃响应的导数，因此可以通过单位脉冲响应求出单位阶跃响应。不过一般不会使用待定系数法求解单位阶跃响应，因为这涉及非齐次项得处理，读者可以在以下例子中，改写对比系数所得得方程组来体会这一点。
+我们在\ref{sub:cascade}中得到：单位脉冲响应是单位阶跃响应的导数，因此可以通过单位脉冲响应求出单位阶跃响应。将$u(t)$带入方程右侧，$\delta$的导数的最高阶数会底一阶，于是用待定系数法求单位阶跃响应将比直接求单位脉冲响应少处理一个待定系数。我们通过一个例子来比较这两种方法：
 \begin{example}
     设系统由微分方程\[r''(t)+3r'(t)+2r(t)=e''(t)+e(t)\]描述，求其单位脉冲响应。\\
     解：齐次方程的特征方程为$\lambda^2+3\lambda+2=0$，$\lambda_1=-1,\lambda_2=-2$，齐次解为$r_h(t)=C_1 e^{-t}+C_2 e^{-2t}$。\\
     将$\delta$带入右式得到$\delta''+\delta$，为了使左式也出现$\delta''$，设单位脉冲响应为$h(t)=r_h(t)u(t)+C\delta$，则$h'(t)=r_h'(t)u(t)+r_h(0)\delta+C\delta',h''(t)=r_h''(t)u(t)+r_h'(0)\delta+r_h(0)\delta'+C\delta''$
-    带入原方程得到：\begin{align*}
+    带入原方程左侧得到：\begin{align*}
         LHS=&\left(r_h''(t)u(t)+r_h'(0)\delta+r_h(0)\delta'+C\delta''\right)\\
-        &+3\left(r_h'(t)u(t)+r_h(0)\delta+C\delta'\right)\\
-        &+2\left(r_h(t)u(t)+C\delta\right)\\
+        &\quad+3\left(r_h'(t)u(t)+r_h(0)\delta+C\delta'\right)\\
+        &\quad+2\left(r_h(t)u(t)+C\delta\right)\\
         =&\left(r''_h(t)+3r'_h(t)+2r_h(t)\right)u(t)+\left(r'_h(0)+3r_h(0)+2C\right)\delta+\left(r_h(0)+3C\right)\delta'+C\delta''
     \end{align*}
-    对比系数，得到：\begin{align*}
+    对比$\delta$及其各阶导数的系数，得到：\begin{align*}
         \begin{cases}
             r'_h(0)+3r_h(0)+2C=1\\
             r_h(0)+3C=0\\
             C=1
         \end{cases}
     \end{align*}
-    所以$C=1,r_h(0)=-3,r'_h(0)=8$，注意$u(t)$的系数自然为0，这是由齐次解的性质保证的。满足上述条件的$C_1=2,C_2=-5$，因此单位脉冲响应为$h(t)=\left(2e^{-t}-5e^{-2t}\right)u(t)+\delta$。
+    所以$C=1,r_h(0)=-3,r'_h(0)=8$，注意$u(t)$的系数自然为0，这是由齐次解的性质保证的。满足上述条件的$C_1=2,C_2=-5$，因此单位脉冲响应为
+    $$h(t)=\left(2e^{-t}-5e^{-2t}\right)u(t)+\delta$$
+
+    下面我们尝试用单位阶跃响应来求解单位脉冲响应。将$u(t)$带入右式得到$u(t)+\delta'$，为例使左式也出现$\delta'$，只需设单位阶跃响应为$h_1(t)=r_h(t)u(t)$，则$h_1'(t)=r_h'(t)u(t)+r_h(0)\delta,h_1''(t)=r_h''(t)u(t)+r_h'(0)\delta+r_h(0)\delta'$，带入原方程左侧得到：\begin{align*}
+        LHS=&\left(r_h''(t)u(t)+r_h'(0)\delta+r_h(0)\delta'\right)\\
+        &+3\left(r_h'(t)u(t)+r_h(0)\delta\right)\\
+        &+2\left(r_h(t)u(t)\right)\\
+        =&\left(r''_h(t)+3r'_h(t)+2r_h(t)\right)u(t)+\left(r'_h(0)+3r_h(0)\right)\delta+r_h(0)\delta'
+    \end{align*}
+    对比$\delta$及其各阶导数的系数，得到：\begin{align*}
+        \begin{cases}
+            r'_h(0)+3r_h(0)=0\\
+            r_h(0)=1\\
+        \end{cases}
+    \end{align*}
+    所以$r_h(0)=1,r'_h(0)=-3$，满足上述条件的$C_1=-1,C_2=2$，因此单位阶跃响应为
+    $$g(t)=(-e^{-t}+2e^{-2t})u(t)$$
+    单位脉冲响应为$$h(t)=g'(t)=\left(2e^{-t}-5e^{-2t}\right)u(t)+\delta$$
+    与之前的结果一致。显然，\textbf{通过单位阶跃响应求解单位脉冲响应的计算更为简洁}。
 \end{example}
 
 \section{微分方程组与状态变量分析}\label{sec:Equation_System}
