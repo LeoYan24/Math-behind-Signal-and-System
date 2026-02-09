@@ -970,8 +970,7 @@ $$a_0=\frac{1}{2^\nu\Gamma(\nu+1)}$$
 
 \section{实变函数概要}\label{sec:Real_Analysis}
 
-\subsection{勒贝格测度与可测函数}\label{sub:lebesgue}
-读者可能已经注意到，并不是所有的函数都是可积的，例如$e^x$即使视为功率信号，其能量和功率也不具有意义，因此它既不属于能量信号，也不属于功率信号；另一种情况下，函数本身的性质比较差，以至于在黎曼积分的框架下说不清它是什么：
+读者可能已经注意到，并不是所有的函数都是可积的，例如$e^x$即使视为功率信号，其能量和功率也不具有意义，因此它既不属于能量信号，也不属于功率信号；另一种情况下，函数本身的性质比较差，以至于在黎曼积分的框架下说不清它的积分（或能量）是什么：
 \begin{example}[狄利克雷函数]
     \[\chi_{\mathbb{Q}}(x)=
     \begin{cases}
@@ -982,9 +981,11 @@ $$a_0=\frac{1}{2^\nu\Gamma(\nu+1)}$$
 \end{example}
 它在黎曼积分的意义下是不可积的，因为它在所有点不连续，但是这样的函数在\textbf{勒贝格积分}的意义下可积。在勒贝格积分的框架下，有理数集这样的可数集是零测度的（类似于区间长度为0），$\chi_{\mathbb{Q}}$在零测集上取1而在其余位置取0，所以其积分值为0。
 
-对于非反常积分，\textbf{勒贝格积分是黎曼积分的推广}，黎曼可积的函数一定是勒贝格可积的，并且在同样的区间上积分值相等。本小节先来建立一些实变函数中的基本概念，再在下一小节给出勒贝格积分的定义。
+对于非反常积分，\textbf{勒贝格积分是黎曼积分的推广}，黎曼可积的函数一定是勒贝格可积的，并且在同样的区间上积分值相等。
 
-本节就来介绍一些基础的实变函数理论，以便后续学习中使用。阅读本小节有困难的读者，不妨先接受一些重要结论。
+本节就来介绍一些基础的实变函数理论，以便后续学习中使用。由于篇幅原因，我们不得不略去大多数证明（证明可以参考\cite{real_analysis}），不过读者不妨先接受其中的一些重要结论。
+
+\subsection{勒贝格测度与可测函数}\label{sub:lebesgue}
 
 首先，我们给出\textbf{外测度}和\textbf{可测集}的概念。
 \begin{definition}[勒贝格外测度]
@@ -1010,12 +1011,44 @@ $$m^*\left(\bigsqcup_{k=1}^{\infty}E_k\right)\neq\sum_{k=1}^{\infty}m^*(E_k)$$
 \begin{definition}[可测集]
     集合$E$是\textbf{可测集}，如果
     $$\forall A,m^*(A)=m^*(A\cap E)+m^*(A\cap E^c)$$
-    这个条件称为称\textbf{卡氏条件}。定义可测集的\textbf{勒贝格测度}为它的勒贝格外测度，即
+    这个条件称为称\textbf{Carathéodory条件}或\textbf{卡氏条件}。定义可测集的\textbf{勒贝格测度}为它的勒贝格外测度，即
     $m(E)=m^*(E)$。
 \end{definition}
 在这个约束下，集合的不交族的勒贝格测度是可数可加的，即：
 \[m\left(\bigsqcup_{k=1}^{\infty}E_k\right)=\sum_{k=1}^{\infty}m(E_k)\]
-此外，区间都是可测的，它们的测度就等于区间的长度。我们所遇到的几乎所有集合都是可测的，但是，任意具有正测度的集合，都有不可测子集，这个子集的构造可以借助选择公理给出。
+此外，区间都是可测的，它们的测度就等于区间的长度。我们所遇到的几乎所有集合都是可测的，但是，根据Vitali定理\cite{real_analysis}，任意具有正测度的集合，都有不可测子集，这个子集的构造可以借助选择公理给出。
+
+\begin{proposition}
+    记$\mathbb{R}$上的可测集族为$\mathcal{M} $，则\\
+    \ding{172}空集$\varnothing $，全集$\mathbb{R}$均属于$\mathcal{M} $；\\
+    \ding{173}若$E\in \mathcal{M} $，则$E^c\in \mathcal{M} $；\\
+    \ding{174}可测集的可数族之并仍然是可测集，即
+    $$\{E_k\}_{k=1}^{\infty}\subset \mathcal{M}\implies\bigcup_{k=1}^{\infty}E_k\in \mathcal{M} $$
+    因此，$\mathcal{M} $构成$\mathbb{R}$上的$\sigma$-代数（我们不去定义这个概念，仅仅指出\textbf{可测集在常规的集合运算下是封闭的}）。通过以上三条性质可以推知：可测集的可数族的交仍然是可测集；两个可测集的差集仍然是可测集。
+\end{proposition}
+
+\begin{proposition}
+    外测度为0的集合都是可测的，称之为\textbf{零测集}。
+\end{proposition}
+\begin{proof}
+    设$m^*(E)=0$，则对于任意集合$A$，$A\cap E,A\cup E^c\subset E$，根据外测度的单调性，有$m^*(A\cap E),m^*(A\cap E^c)\leq m^*(E)=0$，因此$m^*(A\cap E)=m^*(A\cap E^c)=0$。
+    因此，
+    \[m^*(A)=m^*(A\cap E)+m^*(A\cap E^c)=0\]
+\end{proof}
+
+\begin{example}
+    单点集是零测集。由测度的可数可加性，可数集是零测集，特别地，$\mathbb{Q}$是可数的，因而是零测集。但是，零测集未必是可数的，对于这样的例子，可以参考\cite{real_analysis}中的康托集，它可以视为不可数单点集之并，但其测度为0。
+\end{example}
+
+\begin{definition}[几乎处处]
+    对于可测集$E$，称一个性质在$E$上\textbf{几乎处处}(almost everywhere, a.e.)成立，如果存在一个零测子集$E_0$，使得该性质对所有$x\in E\setminus E_0$成立。
+\end{definition}
+
+\begin{example}[几乎处处相等]
+    函数$f,g:E\to\mathbb{R}$在$E$上\textbf{几乎处处相等}，如果存在一个零测子集$E_0$，使得对于所有$x\in E\setminus E_0$，有$f(x)=g(x)$，记为$f=g,a.e.$或$f\sim g$。此时，我们\textbf{不区分$f$和$g$}，因为这样的两个函数性质类似，并且我们将看到$f,g$可积时积分值相等。
+\end{example}
+
+下面我们引入\textbf{可测函数}的概念。
 
 \begin{definition}[可测函数]
     定义在可测集上的函数$f:E\to\mathbb{R}$是可测的，如果
@@ -1023,7 +1056,7 @@ $$m^*\left(\bigsqcup_{k=1}^{\infty}E_k\right)\neq\sum_{k=1}^{\infty}m^*(E_k)$$
     可测函数构成线性空间。
 \end{definition}
 
-这些公理化的定义为理论推带来了方便，但对初学者而言往往难以理解。下面给出可测集和可测函数的一些刻画，以帮助读者快速建立对它们的直观。数学家Littlewood曾说\cite{real_analysis}，只要掌握了以下三个观点，就相当于掌握了实变函数的大部分基础内容。
+这些公理化的定义为理论推带来了方便，但对初学者而言往往难以理解。下面给出可测集和可测函数的一些刻画，以帮助读者快速建立对它们的直观。数学家Littlewood曾说\cite{real_analysis}，只要掌握了以下三个观点，就相当于掌握了可测集与可测函数的核心内容。
 
 首先，\textbf{可测集可以用区间的有限不交并近似}：
 
@@ -1038,13 +1071,15 @@ $$m^*\left(\bigsqcup_{k=1}^{\infty}E_k\right)\neq\sum_{k=1}^{\infty}m^*(E_k)$$
     设$f:E\to\mathbb{R}$可测，则$\forall \epsilon>0$，存在连续函数$g:E\to\mathbb{R}$及闭集$F\subset E$，使得$m(E\setminus F)<\epsilon$，且在$F$上有$f=g$。
 \end{theorem}
 
+在勒贝格测度的框架下，逐点收敛性可以减弱为\textbf{几乎处处收敛性}：
+
 \begin{definition}[几乎处处收敛]
     函数列$\{f_n:E\to\mathbb{R}\}_{n=1}^{\infty}$在$E$上几乎处处收敛于函数$f:E\to\mathbb{R}$，如果存在一个零测度集$E_0$，使得
     $$\forall x\in E\setminus E_0,\lim_{n\to\infty}f_n(x)=f(x)$$
     记为$f_n\to f,a.e.$
 \end{definition}
 
-几乎处处收敛是对逐点收敛性的减弱，它意味着函数列\textbf{零测集上不好的性质几乎不会影响到全局性质}。
+对于可测函数，若不区分几乎处处相等的函数，则几乎处处收敛就相当于逐点收敛。在这样的约定下，函数列\textbf{在零测集上不好的性质几乎不会影响到全局性质}。
 
 Littlewood的第三个观点是，\textbf{几乎处处收敛的可测函数列近似于一致收敛}：
 
@@ -1053,6 +1088,227 @@ Littlewood的第三个观点是，\textbf{几乎处处收敛的可测函数列�
 \end{theorem}
 
 \subsection{勒贝格积分}\label{sub:integral}
+
+我们首先回顾黎曼积分的定义。
+
+\begin{definition}[黎曼积分]
+    设$f:[a,b]\to\mathbb{R}$有界，$P=\{x_0,x_1,\dots,x_n\}$是区间$[a,b]$的一个划分，$a=x_0<x_1<\cdots <x_n=b$，对于每个子区间$[x_{k-1},x_k]$，定义
+    \[m_k=\inf_{x\in [x_{k-1},x_k]}f(x),M_k=\sup_{x\in [x_{k-1},x_k]}f(x)\]
+    由此定义$f$对$P$的上、下\textbf{达布和}(Darboux sum)分别为
+    \[U(f,P)=\sum_{k=1}^{n}M_k(x_k-x_{k-1}),L(f,P)=\sum_{k=1}^{n}m_k(x_k-x_{k-1})\]
+    如果
+    \[\inf_{P}U(f,P)=\sup_{P}L(f,P)\]
+    则称$f$在$[a,b]$上\textbf{黎曼可积}，并将上述公共值定义为$f$在$[a,b]$上的\textbf{黎曼积分}，为了区分于勒贝格积分，记为$(R)\int_{a}^{b}f(x)\,dx$。
+\end{definition}
+
+这个定义实质上实质上是先定义了\textbf{阶梯函数}的黎曼积分，然后通过阶梯函数对被积函数进行上、下逼近，从而定义了被积函数的黎曼积分。阶梯函数的定义如下：
+
+\begin{definition}[阶梯函数]
+    若函数$\varphi:[a,b]\to\mathbb{R}$的定义域可以被划分为子区间族$\{[x_{k-1},x_k]\}_{k=1}^{n}$（严格来说需要处理区间端点，但区间端点属于左侧、右侧的集合均没有影响），使得$\varphi$在每个子区间的内部$(x_{k-1},x_k)$为常数函数，则称$\varphi$是定义在$[a,b]$上的\textbf{阶梯函数}。
+
+    显然阶梯函数黎曼可积，并且
+    $$\int_{a}^{b}\varphi(x)\,dx=\sum_{k=1}^{n}\varphi(x)(x_k-x_{k-1})$$
+\end{definition}
+
+勒贝格定理\cite{real_analysis}表明，闭区间上的有界函数$f$黎曼可积的充要条件是$f$在$[a,b]$中的不连续点构成零测集，这对函数的要求是比较高的，例如狄利克雷函数$\chi_{\mathbb{Q}}$在$[0,1]$不连续，因此它在黎曼积分的意义下不可积，而\textbf{勒贝格积分扩展了有界区间上可积函数的范围}，这是勒贝格积分的第一条重要优势。
+
+勒贝格积分的定义是类似的，但它需要通过\textbf{简单函数}来进行逼近。
+
+\begin{definition}[简单函数]
+    若存在函数$\varphi:E\to\mathbb{R}$的定义域$E$的一个可测集划分$\{E_k\}_{k=1}^{n}$，使得$\varphi$在每个可测子集$E_k$上为常数函数，则称$\varphi$是定义在$E$上的\textbf{简单函数}。
+
+    简单函数有\textbf{典范表示}(canonical representation)，即
+    \[\varphi=\sum_{k=1}^{n}a_k\chi_{E_k},\text{其中}E_k=\varphi^{-1}(a_k)=\{x\in E|\varphi(x)=a_k\}\]
+\end{definition}
+
+显然，简单函数是可测的，并且它的勒贝格积分应该定义为
+\[\int_{E}\varphi\,dm=\sum_{k=1}^{n}a_k m(E_k)\]
+$dm$表示勒贝格测度。对于单调递增的有界变差函数$f$，可以由$f$的增量定义新的测度，并由此引出\textbf{勒贝格-斯蒂尔杰斯积分}，此时$dm$就应替换为$df$，但我们不在这里展开讨论，感兴趣的读者可以参考\cite{simple_real_analysis}，它实际上是分部积分的基础。
+
+下面，我们先通过简单函数定义有界函数的勒贝格积分，然后扩展被积函数的范围，定义非负可测函数的勒贝格积分，再由此引出任意可测函数的勒贝格积分。
+
+\begin{definition}[有界函数的勒贝格积分]
+    设$f:E\to\mathbb{R}$是有界可测函数，如果任给简单函数$\varphi\leq f$和$\psi\geq f$，$\varphi,\psi$仅在有限测度集上不为0，都有
+    \[\sup_{\varphi\leq f}\int_{E}\varphi\,dm=\inf_{\psi\geq f}\int_{E}\psi\,dm\]
+    则称$f$在$E$上\textbf{勒贝格可积}，并将上述公共值定义为$f$在$E$上的\textbf{勒贝格积分}，记为$\int_{E}f\,dm$。
+\end{definition}
+
+\begin{theorem}
+    设$f:E\to\mathbb{R}$是有界可测函数，则$f$在$E$上勒贝格可积；反之，设$m(E)<\infty$，如果有界函数$f$在$E$上勒贝格可积，则$f$在$E$上可测。
+\end{theorem}
+
+这个定理表明，可测函数是勒贝格积分理论中的主要研究对象，在多数情况下，$f$可测就等价于能够指出$f$的勒贝格积分的值，并且$m(E)<\infty$时$f$还是可积的。
+
+\begin{theorem}
+    设$f:[a,b]\to\mathbb{R}$是黎曼可积函数，则$f$也是勒贝格可积的，并且在$[a,b]$上的黎曼积分与勒贝格积分相等，即
+    \[(R)\int_{a}^{b}f(x)\,dx=\int_{a}^{b}f\,dm\]
+\end{theorem}
+
+在这个意义下，勒贝格积分是黎曼积分的推广。我们将在后文中明确区间上的勒贝格积分记为$\int_{a}^{b}f\,dm$的具体意义，但这样的记号是自然的。此外，勒贝格积分具有如下性质：
+\begin{proposition}[有界可测函数的勒贝格积分的线性性]
+    设$f,g:E\to\mathbb{R}$是有界可测函数，$\alpha,\beta\in\mathbb{R}$，如果$f,g$在$E$上勒贝格可积，则$\forall \alpha,\beta\in\mathbb{R}$，$\alpha f+\beta g$在$E$上勒贝格可积，并且
+    \[\int_{E}(\alpha f+\beta g)\,dm=\alpha\int_{E}f\,dm+\beta\int_{E}g\,dm\]
+\end{proposition}
+\begin{corollary}[有界可测函数的勒贝格积分的单调性]
+    设$f,g:E\to\mathbb{R}$是有界可测函数，如果$f,g$在$E$上勒贝格可积，并且对于所有$x\in E$，有$f(x)\leq g(x)$，则
+    \[\int_{E}f\,dm\leq \int_{E}g\,dm\]
+\end{corollary}
+\begin{corollary}[有界可测函数的勒贝格积分的区域可加性]
+    设$f:E\to\mathbb{R}$是有界可测函数，$A,B\subset E$是可测不交子集，则
+    \[\int_{A\sqcup B}f\,dm=\int_{A}f\,dm+\int_{B}f\,dm\]
+\end{corollary}
+
+勒贝格积分向误解函数的推广需要先定义非负可测函数的勒贝格积分：
+
+\begin{definition}[非负可测函数的勒贝格积分]
+    设$f:E\to[0,+\infty)$是非负可测函数，则定义$f$在$E$上的\textbf{勒贝格积分}为
+    \[\int_{E}f\,dm=\sup_{0\leq h\leq f}\int_{E}h\,dm\]
+    其中$h$为定义在$E$上的有界可测函数，并且仅在有限测度集上不为0。显然非负可测函数的勒贝格积分是非负的。
+    
+    称$f$是\textbf{可积}的，如果$\int_{E}f\,dm<\infty$。注意不可积的函数，也可指出其勒贝格积分的值为$+\infty$。
+\end{definition}
+
+如果$f$还是有界函数，则以上定义与有界函数的勒贝格积分定义是一致的，因此是良定义的。
+
+\begin{theorem}[非负可测函数的勒贝格积分的线性性]
+    设$f,g:E\to[0,+\infty)$是非负可测函数，$\forall\alpha,\beta\in[0,+\infty)$，有
+    \[\int_{E}(\alpha f+\beta g)\,dm=\alpha\int_{E}f\,dm+\beta\int_{E}g\,dm\]
+\end{theorem}
+
+它的证明相对简单，且有助于理解“简单函数的下逼近”这一概念，因此我们在这里给出证明。
+\begin{proof}
+    不妨设$\alpha=\beta=1$，其余的情况，在看完本证明后容易自行给出。记$E$上的有界、仅在有限测度集上不为0的函数为$\mathcal{F} $。
+
+    一方面，$\forall h,k\in \mathcal{F},0\leq h\leq f,0\leq k\leq g$，有$h+k\in \mathcal{F}$，且$0\leq h+k\leq f+g$，因此
+    \[\int_{E}h\,dm+\int_{E}k\,dm=\int_{E}(h+k)\,dm\leq \int_{E}(f+g)\,dm\]
+    对$h,k$取上确界，即得
+    \[\int_{E}f\,dm+\int_{E}g\,dm\leq \int_{E}(f+g)\,dm\]
+
+    另一方面，$\forall l\in \mathcal{F},0\leq l\leq f+g$，定义$h=\min\{f,l\},k=l-h$，则$0\leq h\leq f,0\leq k\leq g$，其中后一不等式可通过反证法验证：
+    \[g<k=l-h\implies l>g+h\geq g+f,\text{矛盾}\]
+    因此
+    \[\int_{E}l\,dm=\int_{E}h\,dm+\int_{E}k\,dm\leq \int_{E}f\,dm+\int_{E}g\,dm\]
+    对$l$取上确界，即得
+    \[\int_{E}(f+g)\,dm\leq \int_{E}f\,dm+\int_{E}g\,dm\]
+\end{proof}
+类似于有界可测函数，非负可测函数的勒贝格积分也具有单调性和区域可加性。
+
+下面的命题表明，如果不涉及具体的极限过程，\textbf{总有$0\cdot\infty=0$}：
+
+\begin{proposition}[$0\cdot\infty=0$]
+    设$f:E\to[0,+\infty)$是非负可测函数，则\\
+    \ding{172}$\int_{E}f\,dm=0\iff f=0,a.e.$；\\
+    \ding{173}若$E_0$是$E$的零测子集，则$\int_{E}f\,dm=\int_{E\setminus E_0}f\,dm$
+    %事实上，对广义实值的非负可测函数$f:E\to[0,+\infty]$（例如定义$f(x)=1/x,x>0$，则自然可以定义$f(0)=+\infty$），仍然可以定义勒贝格积分。此时：\\
+    %\ding{174}如果$f$可积，则$f$几乎处处有限。
+
+    %注意几乎处处有限不代表几乎处处有界。
+\end{proposition}
+
+特别地，单点集是零测集，因此考虑区间上的勒贝格积分时，区间的开闭总是没有影响的，因此，以下记号是良定义的：
+\[\int_{a}^{b}f\,dm=\int_{[a,b]}f\,dm=\int_{(a,b)}f\,dm=\int_{[a,b)}f\,dm=\int_{(a,b]}f\,dm\]
+我们当然也承认$\int_{a}^{b}f(x)\,dx$的记号。
+
+下面引入分析学中的两个重要工具。
+\begin{theorem}[Fatou引理]
+    设$\{f_n:E\to[0,+\infty)\}$是非负可测函数列，$f_n\to f,a.e.$，则
+    \[\int_{E}f\,dm\leq \liminf_{n\to\infty}\int_{E}f_n\,dm\]
+    此定理也可表述为
+    \[\int_{E}\liminf_{n\to\infty}f_n\,dm\leq \liminf_{n\to\infty}\int_{E}f_n\,dm\]
+\end{theorem}
+
+之所以称之为引理，是因为在后续的一些列定理均需要借助它来完成，但它的重要性完全不亚于其他的定理（当然，既然我们略去了多数证明，本书中没有使用Fatou引理的例子）。
+
+\begin{theorem}[Levi单调收敛定理]
+    设$\{f_n:E\to[0,+\infty)\}$是递增的非负可测函数列，且$f_n\to f,a.e.$，则
+    \[\int_{E}f\,dm=\lim_{n\to\infty}\int_{E}f_n\,dm\]
+\end{theorem}
+这表明对于非负递增的的可测函数列，总能\textbf{交换极限与积分}的顺序。特别地，对于非负可测的函数项级数$\sum_{n=1}^{\infty}f_n$，其部分和列$\{s_n=\sum_{i=1}^{n}f_i\}$递增，考虑其部分和$s_n$，如果$s_n\to s,a.e.$，则
+\[\int_{E}s\,dm=\lim_{n\to\infty}\int_{E}s_n\,dm=\lim_{n\to\infty}\int_{E}\sum_{i=1}^{n}f_i\,dm=\sum_{n=1}^{\infty}\int_{E}f_n\,dm\]
+因此，非负可测函数项级数可以\textbf{逐项积分}。
+
+本小节的最后，我们通过非负可测函数来定义任意可测函数的勒贝格积分。
+
+\begin{definition}[函数的正部与负部]
+    函数$f:E\to\mathbb{R}$的\textbf{正部}与\textbf{负部}分别定义为$$f^+(x)=\max\{f(x),0\},f^-(x)=-\min\{f(x),0\}$$
+    易见$f=f^+-f^-,|f|=f^++f^-$。
+\end{definition}
+后文中将定义函数的翻转为$f^-(x)=f(-x)$，请读者注意它们的区别，正部与负部这一概念仅在本节中使用。
+
+\begin{definition}[可测函数的勒贝格积分]
+    设$f:E\to\mathbb{R}$是可测函数，如果$f^+,f^-$均可积，则称$f$是可积的，并定义$f$在$E$上的勒贝格积分为
+    \[\int_{E}f\,dm=\int_{E}f^+\,dm-\int_{E}f^-\,dm\]
+    $f$的可积性等价于$|f|$的可积性，因为
+    \[\int_{E}|f|\,dm=\int_{E}f^+\,dm+\int_{E}f^-\,dm<\infty\]
+\end{definition}
+
+由非负可测函数积分的非负性，$f$的正部、负部的积分值均非负，因此
+\[\int_{E}f\,dm\leq \int_{E}|f|\,dm\]
+此即勒贝格积分的绝对值不等式。
+
+对于黎曼积分，绝对可积性强于可积性，并称可积却不绝对可积的函数是\textbf{条件可积}的，例如，\ref{sub:int_sin}中介绍的采样函数就是条件可积的。勒贝格可积时，其值一定等于黎曼积分的值，由此可以判定采样函数在$\mathbb{R}$上不是勒贝格可积的。
+
+类似于非负可测函数，可测函数的勒贝格积分也具有线性性、单调性和区域可加性。
+
+\begin{theorem}[比较判别法]
+    设$f,g:E\to\mathbb{R}$是可测函数，$g\geq|f|$，如果$g$可积，则$f$可积，并且
+    \[\left|\int_{E}f\,dm\right|\leq \int_{E}|f|\,dm\leq \int_{E}g\,dm\]
+\end{theorem}
+
+下面的定理是本书中\textbf{用于极限与积分换序的主要定理}：
+\begin{theorem}[Lebesgue控制收敛定理]
+    设$\{f_n:E\to\mathbb{R}\}$是可测函数列，$f_n\to f,a.e.$，如果存在一个可积函数$g:E\to[0,+\infty)$，使得对于所有$n$和$x\in E$，有$|f_n(x)|\leq g(x)$，则$f$可积，并且
+    \[\int_{E}f\,dm=\lim_{n\to\infty}\int_{E}f_n\,dm\]
+\end{theorem}
+
+作为使用控制收敛定理的例子，也作为勒贝格积分的优秀性质，我们给出以下定理：
+\begin{theorem}[勒贝格积分的可数可加性]
+    设$f:E\to\mathbb{R}$是可测函数，$\{E_k\}_{k=1}^{\infty}$是可测划分，则
+    \[\int_{E}f\,dm=\sum_{k=1}^{\infty}\int_{E_k}f\,dm\]
+\end{theorem}
+\begin{proof}
+    记$\chi_n$为区间$[-n,n]$的特征函数，则$f\cdot\chi_n\to f$，且$|f\cdot\chi_n|\leq |f|$，因此
+    \[\int_{E}f\,dm=\lim_{n\to\infty}\int_{E}f\cdot\chi_n\,dm=\lim_{n\to\infty}\sum_{k=1}^{\infty}\int_{E_k}f\cdot\chi_n\,dm=\sum_{k=1}^{\infty}\int_{E_k}f\,dm\]
+\end{proof}
+\begin{corollary}
+    设$f:E\to\mathbb{R}$可积，则\\
+    \ding{172}若$\{A_n\}_{n=1}^{\infty}$是上升的$E$的可测集子族，即$A_n\subset A_{n+1}\subset E,\forall n$，则
+    \[\int_{\bigcup_{n=1}^{\infty}A_n}f\,dm=\lim_{n\to\infty}\int_{A_n}f\,dm\]
+    \ding{173}若$\{B_n\}_{n=1}^{\infty}$是下降的$E$的可测集子族，即$B_n\supset B_{n+1}\supset E,\forall n$，且$\bigcap_{n=1}^{\infty}B_n=\emptyset$，则
+    \[\lim_{n\to\infty}\int_{B_n}f\,dm=0\]
+\end{corollary}
+\begin{proof}
+通过一个常见的手法，我们将\textbf{具有单调性的集合列转化为不交的集合列}。令$E_1=A_1,E_n=A_n\setminus A_{n-1},n\geq 2$，则$\{E_n\}_{n=1}^{\infty}$是不交的，并且$\bigcup_{n=1}^{\infty}A_n=\bigcup_{n=1}^{\infty}E_n$，由积分的可数可加性，
+\[\int_{\bigcup_{n=1}^{\infty}A_n}f\,dm=\sum_{n=1}^{\infty}\int_{E_n}f\,dm=\lim_{n\to\infty}\sum_{i=1}^{n}\int_{E_i}f\,dm=\lim_{n\to\infty}\int_{\bigcup_{i=1}^{n}A_i}f\,dm=\lim_{n\to\infty}\int_{A_n}f\,dm\]
+因此\ding{172}得证，考虑$B_n=E\setminus A_n$并用德摩根律：
+\[\bigcup_{n=1}^{\infty}B_n=\bigcup_{n=1}^{\infty}(E\setminus A_n)=E\setminus \bigcap_{n=1}^{\infty}A_n=E\]
+即可证明\ding{173}。
+\end{proof}
+
+特别地，考虑上升的集合列$\{[-n,n]\}_{n=1}^{\infty}$及$\mathbb{R}$上的可积函数$f$，有
+\[\int_{\mathbb{R}}f\,dm=\lim_{n\to\infty}\int_{[-n,n]}f\,dm\]
+这个性质也是黎曼积分不具备的。黎曼积分的无穷限反常积分需要考虑积分上下限是否有关联，例如主值意义下的积分有时不等于普通意义下的积分，而勒贝格积分则不存在这样的情况。
+
+\begin{example}
+    考虑函数$f(x)=x$，它在$\mathbb{R}$上不可积，但在区间$[-n,n]$上可积，并且\[\int_{[-n,n]}f\,dm=0\]
+    我们定义$f$在主值意义下的积分为
+    \[p.v.\int_{\mathbb{R}}f\,dm=\lim_{n\to\infty}\int_{[-n,n]}f\,dm=0\]
+    在主值意义下，$f$是可积的。但在勒贝格积分的意义下，$f$不可积，因为
+    \[\int_{\mathbb{R}}|f|\,dm=\int_{\mathbb{R}}|x|\,dm=+\infty\]
+\end{example}
+
+勒贝格积分是黎曼积分的推广，黎曼积分的计算技巧在多数情况下同样适用于勒贝格积分：
+\begin{theorem}[勒贝格积分的变量代换]
+    设$f:[a,b]\to\mathbb{R}$可积，递增函数$g:[c,d]\to \mathbb{R}$可导（事实上，只需要$g$绝对连续即可），并且$g(c)=a,g(d)=b$，则
+    \[\int_{a}^{b}f\,dm=\int_{c}^{d}f\circ g\cdot g'\,dm\]
+\end{theorem}
+
+\begin{theorem}[勒贝格积分的分部积分法]
+    设$f,g:[a,b]\to\mathbb{R}$可导（同样可减弱至绝对连续），则
+    \[\int_{a}^{b}f g'\,dm=\evalat{fg}{a}{b}-\int_{a}^{b}f' g\,dm\]
+\end{theorem}
+
+绝对连续能够保证函数几乎处处可导，因而以上积分是良定义的，但本书不准备对它做进一步说明。
 
 \subsection{函数空间}\label{sub:Lp_space}
 
