@@ -304,7 +304,7 @@
 这里T为脉冲宽度，不加角标时，默认为1。
 \end{definition}
 
-由于这些记号计较容易混淆，本书中不再使用它们，而是使用\textbf{特征函数}(indicator function)：
+由于这些记号较容易混淆，本书中不再使用它们，而是使用\textbf{特征函数}(indicator function)：
 \begin{definition}
     设集合$A\subset\mathbb{R}$，其特征函数为
     \[\chi_A(x)=\begin{cases}
@@ -1260,6 +1260,8 @@ $dm$表示勒贝格测度。对于单调递增的有界变差函数$f$，可以�
     设$\{f_n:E\to\mathbb{R}\}$是可测函数列，$f_n\to f,a.e.$，如果存在一个可积函数$g:E\to[0,+\infty)$，使得对于所有$n$和$x\in E$，有$|f_n(x)|\leq g(x)$，则$f$可积，并且
     \[\int_{E}f\,dm=\lim_{n\to\infty}\int_{E}f_n\,dm\]
 \end{theorem}
+
+\textbf{此定理容易推广到实变量的复值函数列}，只要分别考虑实部和虚部即可。
 
 作为使用控制收敛定理的例子，也作为勒贝格积分的优秀性质，我们给出以下定理：
 \begin{theorem}[勒贝格积分的可数可加性]
@@ -3347,7 +3349,7 @@ $r(t)=\mathcal{F} e(t)$.
     “一个系统是线性时不变系统”等价于“响应是激励与脉冲响应的卷积”。
 \end{proposition}
 
-线性时不变系统的单位阶跃响应是单位脉冲响应的积分：
+线性时不变系统的单位阶跃响应是单位脉冲响应的积分，可以利用此关系式进行单位脉冲响应或单位阶跃响应的求解，下一小节中将给出一个利用此方法的例子。
 
 \begin{proposition}[单位阶跃响应]
 线性时不变系统的单位阶跃响应$g(t)=\int_{-\infty}^{t}h(y)\,dy$，其中$h(t)$为系统的单位脉冲响应。
@@ -3407,7 +3409,7 @@ $r(t)=\mathcal{F} e(t)$.
 
 \begin{definition}[常系数线性微分方程]
     一个形如
-    \[a_n y^{(n)}+a_{n-1}y^{(n-1)}+\cdots +a_1 y'+a_0 y=f\]
+    \[a_n y^{(n)}(t)+a_{n-1}y^{(n-1)}(t)+\cdots +a_1 y'(t)+a_0 y(t)=f(t)\]
     称为\textbf{n阶常系数线性微分方程}，等式左侧的y和f都是t的函数，将$f(t)$称为\textbf{非齐次项}。特别地，如果$f(t)=0$，称之为\textbf{n阶常系数线性齐次微分方程}。
 \end{definition}
 
@@ -3505,7 +3507,7 @@ $r(t)=\mathcal{F} e(t)$.
 
 线性性是显然的，任给激励$e_1,e_2$及对应零状态响应$r_1,r_2$，显然$ar_1+br_2$是激励为$ae_1+be_2$时的零状态响应。
 
-对于因果性，见\ref{sub:fundamental_solution}。
+对于因果性，我们将在下一小节给出说明。
 \end{proof}
 至于零输入响应，它不会由于激励的改变而改变，不仅会破坏系统的时不变性，还会破坏系统的线性性，因为在初始状态非0时，直接将两个完全解相加，则所得信号的初始条件变为给定初始条件的两倍，但由于零输入相应是易于研究的，并且只要指出了零输入响应，就可以认为系统的初始状态为n维零向量来进行研究，最后将所得的零状态响应与零输入响应叠加，因此我们约定：
 \begin{definition}
@@ -3570,11 +3572,11 @@ $r(t)=f(t)u(t)$，求出其一阶、二阶导数：\begin{align*}
 \end{theorem}
 当$r(t)$的最高次导数的阶数大于$\delta$的最高阶导数的阶数，即$N> M$时，解为$y_h(t)u(t)$；当$r(t)$的最高次导数的阶数不小于$\delta$的最高阶导数的阶数，即$N\leq M$时，解为$y_h(t)u(t)+\sum_{k=0}^{M-N}c_k \delta^{(k)}$。换言之，\textbf{需要利用方程左侧的最高阶导，让方程右侧所需的$\delta$的最高阶导数项出现}。
 
-从数学上我们没有必要考虑这种形式的方程。只要把方程右侧看作一个新的非齐次项，它与其他微分方程没有区别。以这种视角看来，另一种单位脉冲响应的求解方法是，将基本解$h_0(t)$与非齐次项的卷积
-$$h_0(t)*\sum_{m=0}^{M}b_m e^{(m)}(t)$$
-作为系统的单位脉冲响应$h(t)$，但这样涉及$\delta$各阶导数的卷积，计算较为复杂，通过待定系数法求解往往更快。
+从基本解的形式可以看出$h(t)$总是因果信号，这就解释了上一小节中所断言的“\textbf{由常系数线性微分方程描述的系统是因果的}”。
 
-我们在\ref{sub:cascade}中得到：单位脉冲响应是单位阶跃响应的导数，因此可以通过单位脉冲响应求出单位阶跃响应。将$u(t)$带入方程右侧，$\delta$的导数的最高阶数会底一阶，于是用待定系数法求单位阶跃响应将比直接求单位脉冲响应少处理一个待定系数。我们通过一个例子来比较这两种方法：
+只有在描述系统时才需单独考虑这种非齐次项为激励及其各阶导数的线性组合的方程。如果把方程右侧看作一个新的非齐次项，就得到一个新的微分方程。以这种视角看来，另一种单位脉冲响应的求解方法是，将新微分方程的基本解$h_0(t)$与非齐次项的卷积$h_0(t)*\sum_{m=0}^{M}b_m e^{(m)}(t)$作为系统的单位脉冲响应$h(t)$，但这样涉及$\delta$各阶导数的卷积，计算较为复杂，通过待定系数法求解往往更快。
+
+这种基本解的求解方法可以进一步优化。我们在\ref{sub:cascade}中得到：单位脉冲响应是单位阶跃响应的导数，因此可以通过单位脉冲响应求出单位阶跃响应。相比带入$\delta$，将$u(t)$带入方程右侧时，所出现的$\delta$的最高阶导数会低一阶，因此用待定系数法求单位阶跃响应再求导，将比直接求单位脉冲响应少处理一个待定系数。我们通过一个例子来比较这两种方法：
 \begin{example}
     设系统由微分方程\[r''(t)+3r'(t)+2r(t)=e''(t)+e(t)\]描述，求其单位脉冲响应。\\
     解：齐次方程的特征方程为$\lambda^2+3\lambda+2=0$，因此$\lambda_1=-1,\lambda_2=-2$，齐次解为$$r_h(t)=C_1 e^{-t}+C_2 e^{-2t}$$
@@ -7331,10 +7333,6 @@ Q(s)&=a_n\left(s^{n-1}c_0 +s^{n-2}c_1 +\cdots +c_{n-1}\right)+a_{n-1}\left(s^{n-
     反变换即得$r(t)=(1.5+2e^{-t}-2.5e^{-2t})u(t)$。
 \end{example}
 
-\subsection{常系数线性方程组的拉普拉斯变换解法}\label{sub:laplace_ode_system}
-
-\section{系统的复频域分析}\label{sec:Complex_Freq_Analysis}
-
 \subsection{动态电路的复频域分析}\label{sub:laplace_circuit}
 
 本小节介绍动态电路的复频域分析方法。与\ref{sub:freq_response}节类似，对描述线性元件的微分方程做拉普拉斯变换，即可得到它们的复频域模型：
@@ -7426,7 +7424,11 @@ Q(s)&=a_n\left(s^{n-1}c_0 +s^{n-2}c_1 +\cdots +c_{n-1}\right)+a_{n-1}\left(s^{n-
     \end{figure}
 \end{example}
 
-%\subsection{零极点图与频率响应特性}\label{sub:zero_pole_characteristics}
+\subsection{常系数线性方程组的拉普拉斯变换解法}\label{sub:laplace_ode_system}
+
+\section{系统的复频域分析}\label{sec:Complex_Freq_Analysis}
+
+\subsection{零极点图与频率响应特性}\label{sub:zero_pole_characteristics}
 
 \subsection{系统流图与梅森增益公式}\label{sub:mason_gain_formula}
 
@@ -8242,9 +8244,10 @@ $$\text{Res}(f,\infty)=\dfrac{1}{2\pi i}\oint_{C^-_R}f(z)\,dz$$
     \[x[n]=\mathcal{Z} ^{-1}X[n]=\frac{1}{2\pi i}\oint_{C}X(z)z^{n-1}\,dz\]
 \end{theorem}
 
-注意$X(z)$亚纯实际上要求它是有理函数，这样，使用留数定理求逆z变换的方法就很好懂了，它的证明需要用到部分分式展开定理，形式较为复杂，这里不再赘述。围道的任意性是由柯西积分定理保证的，因为$X(z)$在$\mathcal{A} _0(r,R)$内全纯。
+注意$X(z)$亚纯实际上意味着它是有理函数，这样，使用留数定理求逆z变换的方法就很好懂了，前面的几个例子已经说明了它的道理，但严格的证明写起来较为复杂，因此本书不再单独给出证明。围道的任意性是由柯西积分定理保证的，因为$X(z)$在$\mathcal{A} _0(r,R)$内全纯。
 
 \subsection{z域卷积定理}\label{sub:z_convolution}
+
 使用逆z变换公式，我们还可以得到\textbf{z域卷积定理}:
 \begin{theorem}[z域卷积定理]
     设离散信号$x[n],y[n]$的z变换分别为$X(z),Y(z)$，收敛域分别为$\mathcal{A} _0(r_1,R_1),\mathcal{A} _0(r_2,R_2)$，则在$\mathcal{A} _0(r_1 r_2,R_1 R_2)$内取围道$C$，有
@@ -8299,13 +8302,21 @@ $$\text{Res}(f,\infty)=\dfrac{1}{2\pi i}\oint_{C^-_R}f(z)\,dz$$
 
 \section{离散系统的z域分析}\label{sec:Discrete_System_z_Analysis}
 
+\subsection{离散系统概述}\label{sub:discrete_system_overview}
+
+\subsection{离散系统的系统函数}\label{sub:discrete_system_function}
+
 \subsection{奇点与时域特性}\label{sub:z_singular_point}
+
+%因果性：收敛域包含$\infty$；稳定性：收敛域包含单位圆；对稳定+因果，收敛域包含$|z|\geq 1$
+
+
+
+\section{差分方程与离散系统的状态变量分析}\label{sec:Difference_Equation}
 
 \subsection{单边z变换}\label{sub:single_z}
 
-\subsection{离散信号的初值定理与终值定理}\label{sub:initial_final_value}
-
-\section{差分方程与离散系统的状态变量分析}\label{sec:Difference_Equation}
+%\subsection{离散信号的初值定理与终值定理}\label{sub:initial_final_value}
 
 \subsection{常系数线性差分方程}\label{sub:difference_equation}
 
@@ -8377,7 +8388,7 @@ $$e^{i(\Omega+2k\pi)n}=e^{i\Omega n},\forall k\in\mathbb{Z},n\in\mathbb{Z}$$
 
 如何对离散信号进行分解与合成？具体来说，根据傅里叶级数和傅里叶变换的经验，我们希望能将离散信号分解为一系列不同数字角频率的\textbf{离散复指数信号}的组合，以此来表征离散信号各种频率成分的大小。
 
-在处理连续信号时，我们使用傅里叶级数来分析周期信号，类比到周期离散信号，需要取定基波数字角频率，考察各次谐波分量的大小。然而，离散信号的数字角频率有界，需要对这个方法进行一些修正，从而得到周期离散信号的分析方法，这就是下一节将讨论的\textbf{离散傅里叶变换}(Discrete Fourier Transform, DFT)；对于非周期离散信号，自然需要类比傅里叶变换，需要考察$(-\pi,\pi]$范围内所有数字角频率成分的大小，并将离散信号表示为这些频率成分与相应复指数信号的加权积分，这就是本节要介绍的\textbf{离散时间傅里叶变换}(Discrete-Time Fourier Transform, DTFT)。
+在处理连续信号时，我们使用傅里叶级数来分析周期信号，类比到周期离散信号，需要取定基波数字角频率，考察各次谐波分量的大小。然而，离散信号的数字角频率有界，需要对这个方法进行一些修正，从而得到周期离散信号的分析方法，这就是\ref{sec:DFT}将讨论的\textbf{离散傅里叶变换}(Discrete Fourier Transform, DFT)；对于非周期离散信号，自然需要类比傅里叶变换，需要考察$(-\pi,\pi]$范围内所有数字角频率成分的大小，并将离散信号表示为这些频率成分与相应复指数信号的加权积分，这就是本节要介绍的\textbf{离散时间傅里叶变换}(Discrete-Time Fourier Transform, DTFT)。
 
 以$E_{\Omega}[n]=e^{i\Omega n}$表示数字角频率为$\Omega$的离散复指数信号。这样，以上分析非周期离散信号的想法可以表述为：给定$x[n]$，我们希望找到一个系数函数$\mathcal{X} (\Omega)$，它以$2\pi$为周期，使得\begin{align*}
     x[n]&=\frac{1}{2\pi}\int_{-\pi}^{\pi}\mathcal{X} (\Omega)E_{\Omega}[n]\,d\Omega
@@ -8420,7 +8431,10 @@ $$e^{i(\Omega+2k\pi)n}=e^{i\Omega n},\forall k\in\mathbb{Z},n\in\mathbb{Z}$$
 
 由于$\mathcal{X} (\Omega)$可以视作变量$z=e^{i\Omega n}$的函数，我们令
 $$X(e^{i\Omega})=\mathcal{X} (\Omega)$$
-此即离散时间傅里叶变换的定义：
+不难发现，离散时间傅里叶变换实际上是z变换在单位圆上的取值，即以上函数$X$的记号实际上就是$x[n]$的z变换的记号：
+\[X(e^{i\Omega})=X(z)|_{z=e^{i\Omega}}\]
+
+由此可以得到离散时间傅里叶变换的定义：
 
 \begin{definition}[离散时间傅里叶变换]
     离散信号$x[n]\in l^1$的离散时间傅里叶变换定义为
@@ -8432,16 +8446,13 @@ $$X(e^{i\Omega})=\mathcal{X} (\Omega)$$
 离散时间傅里叶变换是良定义的，因为
 \[x[n]\in l^1\implies \sum_{n=-\infty}^{\infty}\left|x[n]e^{-i\Omega n}\right|\leq \sum_{n=-\infty}^{\infty}|x[n]|<\infty\]
 
-不难发现，离散时间傅里叶变换实际上是z变换在单位圆上的取值：
-\[X(e^{i\Omega})=X(z)|_{z=e^{i\Omega}}\]
-
-以上探究$x[n]$的分解与合成的过程，已经指出离散时间傅里叶变换的反演公式：
+以上探究$x[n]$的分解与合成的过程，已经指出离散时间傅里叶变换的反演公式，它可以看作是逆z变换在单位圆上的特例。单位圆在收敛域内，是由$x[n]\in l^1$保证的。
 \begin{theorem}[离散时间傅里叶反演公式]
     设$x[n]\in l^1$的离散时间傅里叶变换为$X(e^{i\Omega})$，则$X(e^{i\Omega})$的离散时间傅里叶逆变换即为$x[n]$，即：
     \[x[n]=\frac{1}{2\pi}\int_{-\pi}^{\pi}X(e^{i\Omega})e^{i\Omega n}\,d\Omega\]
 \end{theorem}
 
-\begin{example}[单位冲激序列的离散时间傅里叶变换]
+\begin{example}
     求单位冲激序列$\delta[n]$的离散时间傅里叶变换。\\
     解：由定义，
     \begin{align*}
@@ -8449,7 +8460,7 @@ $$X(e^{i\Omega})=\mathcal{X} (\Omega)$$
     \end{align*}
 \end{example}
 
-\begin{example}[指数序列的离散时间傅里叶变换]
+\begin{example}
     求离散信号$x[n]=a^n u[n]$的离散时间傅里叶变换，其中$|a|<1$。\\
     解：由等比数列求和公式，
     \begin{align*}
@@ -8490,13 +8501,13 @@ $$X(e^{i\Omega})|_{\Omega=0}=\sum_{n=-\infty}^{\infty}x[n],X(e^{i\Omega})|_{\Ome
 \end{proposition}
 \begin{proof}
     利用\[X(e^{i\Omega})=X(z)|_{z=e^{i\Omega}}\]
-    以上性质除最后一条以外全部是z变换性质在单位圆上的特例。这里仅给出频域卷积定理的证明：
+    以上性质除最后一条以外全部是z变换的性质在单位圆上的特例。这里仅给出频域卷积定理的证明：
     \begin{align*}
         \frac{1}{2\pi}\int_{-\pi}^{\pi}X\left(e^{i\theta}\right)Y\left(e^{i(\Omega-\theta)}\right)\,d\theta&=\frac{1}{2\pi}\int_{-\pi}^{\pi}\left(\sum_{m=-\infty}^{\infty}x[m]e^{-i\theta m}\right)\left(\sum_{k=-\infty}^{\infty}y[k]e^{-i(\Omega-\theta) k}\right)\,d\theta\\
         &=\frac{1}{2\pi}\sum_{m=-\infty}^{\infty}\sum_{k=-\infty}^{\infty}x[m]y[k]e^{-i\Omega k}\int_{-\pi}^{\pi}e^{-i\theta (m-k)}\,d\theta\\
         &=\sum_{n=-\infty}^{\infty}x[n]y[n]e^{-i\Omega n}
     \end{align*}
-    积分与求和的交换是由绝对可和性保证的。
+    积分与求和的交换合法，是因为绝对可和能够保证以上函数项级数的一致收敛性。
 
     使用z域卷积定理推出离散时间傅里叶变换的频域卷积定理也是可行的，只要做标量代换
     $$\nu=e^{i\theta},\nu^{-1}d\nu=id\theta$$
@@ -8510,7 +8521,7 @@ $$\mathcal{X} (\Omega)=X(e^{i\Omega}),\mathcal{Y} (\Omega)=Y(e^{i\Omega})$$
 
 此外，我们给出离散时间傅里叶变换的\textbf{帕塞瓦尔定理}(Parseval's Theorem)，它表明表明时域能量与频域能量成正比：
 \begin{theorem}[离散时间傅里叶变换的帕塞瓦尔定理]
-    设$x[n],y[n]\in l^2$，其离散时间傅里叶变换分别为$X(e^{i\Omega}),Y(e^{i\Omega})$，则有
+    设$x[n],y[n]\in l^1\cap l^2$，其离散时间傅里叶变换分别为$X(e^{i\Omega}),Y(e^{i\Omega})$，则有
     \[\sum_{n=-\infty}^{\infty}x[n]\overline{y[n]}=\frac{1}{2\pi}\int_{-\pi}^{\pi}X(e^{i\Omega})\overline{Y(e^{i\Omega})}\,d\Omega\]
     特别地，当$x[n]=y[n]$时，有
     \[\sum_{n=-\infty}^{\infty}|x[n]|^2=\frac{1}{2\pi}\int_{-\pi}^{\pi}|X(e^{i\Omega})|^2\,d\Omega\]
@@ -8522,30 +8533,281 @@ $$\mathcal{X} (\Omega)=X(e^{i\Omega}),\mathcal{Y} (\Omega)=Y(e^{i\Omega})$$
         &=\frac{1}{2\pi}\int_{-\pi}^{\pi}\overline{Y(e^{i\Omega})}\left(\sum_{n=-\infty}^{\infty}x[n]e^{-i\Omega n}\right)\,d\Omega\\
         &=\frac{1}{2\pi}\int_{-\pi}^{\pi}X(e^{i\Omega})\overline{Y(e^{i\Omega})}\,d\Omega
     \end{align*}
-    积分与求和的交换是由绝对可和性保证的。
+    积分与求和的交换合法，是因为绝对可和能够保证以上函数项级数的一致收敛性。
+\end{proof}
+
+利用帕塞瓦尔定理，可以得到原信号与采样信号的能量关系：
+
+\begin{theorem}
+    设$f(t)\in L^2$是带限函数，采样频率高于奈奎斯特频率，以$T$表示采样间隔，以$E_d$表示采样信号$x[n]$的能量，以$E$表示原信号$f(t)$的能量，则它们满足以下关系：
+    \[E=TE_d,\text{即}\sum_{n=-\infty}^{\infty}|x[n]|^2=\frac{1}{T}\|f(t)\|_2^2\]
+\end{theorem}
+\begin{proof}
+    在采样频率高于奈奎斯特频率时不会发生混叠，即频域上周期化时不产生交叠，因此离散时间傅里叶变换$X(e^{i\Omega})$在$(-\pi,\pi]$范围内与原信号的傅里叶变换$\mathcal{F} f(\omega)$在$(-\pi/T,\pi/T]$范围内完全一致，即
+    \[X(e^{i\Omega})=\mathcal{F} f(\Omega/T),\Omega\in(-\pi,\pi]\]
+    因此有
+    \begin{align*}
+        E_d&=\sum_{n=-\infty}^{\infty}|x[n]|^2\\
+        &=\frac{1}{2\pi}\int_{-\pi}^{\pi}|X(e^{i\Omega})|^2\,d\Omega\\
+        &=\frac{1}{2\pi}\int_{-\pi}^{\pi}|\mathcal{F} f(\Omega/T)|^2\,d\Omega\\
+        &=\frac{1}{T}\cdot\frac{1}{2\pi}\int_{-\pi/T}^{\pi/T}|\mathcal{F} f(\omega)|^2\,d\omega&(\omega=T\Omega)\\
+        &=\frac{1}{T}\|f(t)\|_2^2=\frac{1}{T}E
+    \end{align*}
 \end{proof}
 
 \section{离散系统的频率响应特性}\label{sec:Discrete_System_Freq_Response}
 
-%因果性：收敛域包含$\infty$；稳定性：收敛域包含单位圆；对稳定+因果，收敛域包含$|z|\geq 1$
+\subsection{离散系统的频率响应特性}\label{sub:discrete_system_freq_response}
+
+\subsection{零极点与频率响应特性的关系}\label{sub:zero_pole_freq_response}
+
+\subsection{滑动平均滤波器}\label{sub:MA_filter}
 
 \section{离散傅里叶变换}\label{sec:DFT}
 
+\subsection{离散傅里叶变换的引入：离散傅里叶级数}\label{sub:intro_DFT}
 
+沿着\ref{sub:dtft}的思路，我们仿照傅里叶级数来进行周期离散信号的频谱分析。设$x[n]$是周期为$N$的离散信号，即$x[n+N]=x[n],\forall n\in\mathbb{Z}$，考虑将其表示为一组复指数信号的线性组合，则每个复指数信号也应该以$N$为周期，即
+\[E_{\Omega}[n]=e^{i\Omega n},E_{\Omega}[n+N]=E_{\Omega}[n],\forall n\in\mathbb{Z}\]
+因此复指数信号的数字角频率必须取值于有限的集合：
+\[\left\{\left.\Omega_k=\frac{2\pi k}{N}\right|k=0,1,\dots,N-1\right\}\]
+这个集合恰有$N$个元素。简便起见，这里数字角频率的范围取为$[0,2\pi)$。换言之，我们希望找到一个与$x[n]$具有相同周期的离散信号$X[k]$，使得
+\[x[n]=\frac{1}{N}\sum_{k=0}^{N-1}X[k]E_{\Omega_k}[n]=\frac{1}{N}\sum_{k=0}^{N-1}X[k]e^{i\frac{2\pi}{N}kn}\]
+（我们马上会看到系数$1/N$的作用）。
 
+为了验证这个想法的可行性，将以上公式写为矩阵形式：
+\begin{align*}
+\begin{bmatrix}x[0]  \\
+x[1]  \\
+\vdots \\
+x[N-1]
+\end{bmatrix}&=\frac{1}{N}\begin{bmatrix}1 & 1 & \cdots & 1 \\
+1 & e^{i\frac{2\pi}{N}} & \cdots & e^{i\frac{2\pi}{N}(N-1)} \\
+\vdots & \vdots & \ddots & \vdots \\
+1 & e^{i\frac{2\pi}{N}(N-1)} & \cdots & e^{i\frac{2\pi}{N}(N-1)^2}
+\end{bmatrix}\begin{bmatrix}X[0]  \\
+X[1]  \\
+\vdots \\
+X[N-1]
+\end{bmatrix}
+\end{align*}
 
-%\chapter{离散时间变换的算法}
-%\section{离散余弦变换}\label{sec:DCT}
+习惯上，将$e^{i\frac{2\pi}{N}}$记为$W_N$，则上式中的矩阵可以写为
+\begin{align*}\begin{bmatrix}1 & 1 & \cdots & 1 \\
+1 & W_N & \cdots & W_N^{N-1} \\
+\vdots & \vdots & \ddots & \vdots \\
+1 & W_N^{N-1} & \cdots & W_N^{(N-1)^2}
+\end{bmatrix}\end{align*}
 
-%\section{快速傅里叶变换}\label{sec:FFT}
+这是一个\textbf{范德蒙德矩阵} (Vandermonde Matrix)，它的行列式为
+\begin{align*}
+    \prod_{0\leq j<k\leq N-1}(W_N^k-W_N^j)\neq 0
+\end{align*}
 
-%\section{压缩感知初步}\label{sec:Compress}
+矩阵可逆，因此$X[k]$是良定义的，即存在唯一的$X[k]$使得
+\[x[n]=\frac{1}{N}\sum_{k=0}^{N-1}X[k]W_N^{kn}\]
 
-%\section{离散余弦变换}\label{sec:DCT}
+并且可以通过逆矩阵求得$X[k]$的表达式。可以验证，以上范德蒙德矩阵的逆矩阵为
+\begin{align*}
+   \frac{1}{N}\begin{bmatrix}1 & 1 & \cdots & 1 \\
+1 & W_N^{-1} & \cdots & W_N^{-(N-1)} \\
+\vdots & \vdots & \ddots & \vdots \\
+1 & W_N^{-(N-1)} & \cdots & W_N^{-(N-1)^2}
+\end{bmatrix}
+\end{align*}
+
+这样，我们就得到了\textbf{离散傅里叶级数} (Discrete Fourier Series, DFS)的定义：
+\begin{definition}[离散傅里叶级数]
+    设$x[n]$是周期为$N$的离散信号，则$x[n]$的离散傅里叶级数定义为
+    \[X[k]=\sum_{n=0}^{N-1}x[n]W_N^{-kn},k=0,1,\dots,N-1\]
+    其中$W_N=e^{i\frac{2\pi}{N}}$。
+\end{definition}
+
+尽管在分析离散信号时没有“高次谐波分量”，但从以上讨论可以看出，只要有这$N$个离散频率成分，就可以完全表征周期为$N$的离散信号的频谱特性。至此，我们完美地回答了“如何对离散信号进行分解与合成”的问题。
+
+本小节的主要目标——\textbf{离散傅里叶变换} (Discrete Fourier Transform, DFT)实质上是与离散傅里叶级数等价的概念，只是习惯上认为离散傅里叶变换是针对于\textbf{有限长离散信号}而言的\cite{dsp}，但很明显，我们\textbf{没有必要区分周期信号与有限长离散信号}，它们之间的互相转化是非常简单的。
+
+上述内容归结为以下的定义和定理：
+
+\begin{definition}[离散傅里叶变换]
+    设$x[n]$是长为$N$的离散信号，则$x[n]$的离散傅里叶变换定义为
+    \[X[k]=\sum_{n=0}^{N-1}x[n]W_N^{-kn},k=0,1,\dots,N-1\]
+    记$x[n]\xleftrightarrow{\text{DFT}}X[k]$。
+\end{definition}
+
+\begin{theorem}[离散傅里叶反演公式]
+    设$x[n]$是长为$N$的离散信号，其离散傅里叶变换为$X[k]$，则$x[n]$可以由$X[k]$通过以下公式还原：
+    \[x[n]=\frac{1}{N}\sum_{k=0}^{N-1}X[k]W_N^{kn},n=0,1,\dots,N-1\]
+\end{theorem}
+
+进一步，对于离散周期信号，其周期起点任意选取，都不会影响离散傅里叶变换及其逆变换的结果，在此意义下，离散周期信号的向量表示不唯一。
+\begin{definition}[$(\mathcal{P} ,\mathcal{Q} )-DFT$]
+    设$x[n]$是以$N$为周期的离散信号，$\mathcal{P} ,\mathcal{Q} $为任意的$N$个连续整数构成的指标集，即
+    \[\mathcal{P} =\{p,p+1,\cdots,p+N-1\},\mathcal{Q} =\{q,q+1,\cdots,q+N-1\}\]
+    则$x[n]$的$(\mathcal{P} ,\mathcal{Q} )-DFT$定义为
+    \begin{align*}
+    X_{\mathcal{P} ,\mathcal{Q} }[k]&=\sum_{n\in\mathcal{P} }x[n]W_N^{-kn},k\in\mathcal{Q}
+    \end{align*}
+\end{definition}
+\begin{proposition}
+    离散傅里叶变换不依赖于$\mathcal{P} ,\mathcal{Q} $的选取，即
+    \[X_{\mathcal{P} ,\mathcal{Q} }[k]=X[k],\forall \mathcal{P} ,\mathcal{Q} \]
+\end{proposition}
+\begin{proof}
+    记$p=rN+s$，则$\forall k\in\mathbb{Z}$，有\begin{align*}
+    X_{\mathcal{P} ,\mathcal{Q} }[k]&=\sum_{n\in\mathcal{P} }x[n]W_N^{-kn}\\
+    &=\sum_{m=p}^{p+N-1}x[m]W_N^{-km}\\
+    &=\sum_{m=0}^{N-1}x[m+p]W_N^{-k(m+p)}\\
+    &=\sum_{m=0}^{N-1}x[m+s]W_N^{-k(m+s)}\\
+    &=\sum_{m=s}^{N-1}x[m]W_N^{-km}+\sum_{m=N}^{N+s-1}x[m]W_N^{-km}\\
+    &=\sum_{m=s}^{N-1}x[m]W_N^{-km}+\sum_{m=0}^{s-1}x[m]W_N^{-km}\\
+    &=\sum_{m=0}^{N-1}x[m]W_N^{-km}=X[k]
+    \end{align*}
+    限制$k\in\mathcal{Q} $即得$X_{\mathcal{P} ,\mathcal{Q} }[k]=X[k]$。
+\end{proof}
+
+下面给出离散傅里叶变换与其他变换的关系。一方面，离散傅里叶变换可以看作是z变换在单位圆上的$N$个等间隔点处的取值，即
+\[X[k]=X(z)|_{z=W_N^{-k}}\]
+
+当然，这种理解方式同样可以解释成离散时间傅里叶变换在$N$的等间隔点的取值。离散傅里叶反演公式表明，对于有限长离散信号，只要给定了离散时间傅里叶变换在$N$个等间隔点处的取值（这相当于对离散时间傅里叶变换进行理想采样），就可以完全还原出原信号。
+
+另一方面，离散傅里叶变换可以看作是傅里叶级数展开的离散版本。具体来说，对于以$T$为周期的周期信号$f(t)\in L^2([0,T])$，记其傅里叶系数为$c_k$，如果$f(t)$连续，则有
+\[f(t)=\sum_{k=-\infty}^{\infty}c_k e^{i\frac{2\pi}{T}kt}\]
+
+特别地，在一个周期内取$N$个等间隔点作为采样点，所得离散信号为
+\[x[n]=f\left(\frac{nT}{N}\right),n=0,1,\dots,N-1\]
+
+对$f(t)$在采样点处的傅里叶级数进行分组求和，得到
+\begin{align*}
+    f\left(\frac{nT}{N}\right)&=\sum_{k=-\infty}^{\infty}c_k e^{i\frac{2\pi}{T}kn\frac{T}{N}}\\
+    &=\sum_{k=-\infty}^{\infty}c_k W_N^{kn}\\
+    &=\sum_{m=-\infty}^{\infty}\sum_{k=0}^{N-1}c_{k+mN} W_N^{(k+mN)n}\\
+    &=\sum_{k=0}^{N-1}\left(\sum_{m=-\infty}^{\infty}c_{k+mN}\right)W_N^{kn}
+\end{align*}
+
+将上式与离散傅里叶反演公式进行比较，得到
+\[X[k]=\sum_{m=-\infty}^{\infty}c_{k+mN}\]
+这正是“\textbf{时域采样，频域周期化}”的观点在傅里叶级数上的体现。求和顺序的交换的合法性，以及等式右侧的级数收敛，事实上需要更强的条件，例如$f\in PS([0,T])$，即$f$是分段连续的周期函数。在\ref{sub:uniform_converge}中，我们证明了
+$$f\in PS([0,T])\implies \sum_{k=-\infty}^{\infty}|c_k|<\infty\implies S_N^f(t)\rightrightarrows f(t)$$
+其中$S_N^f(t)=\sum_{k=-N}^{N}c_k e^{i\frac{2\pi}{T}kt}$是$f$的傅里叶级数的部分和。
+
+\subsection{离散傅里叶变换的运算性质}\label{sub:property_of_DFT}
+
+离散傅里叶变换的运算性质列举如下：
+\begin{proposition}[离散傅里叶变换的运算性质]
+    设$x[n],y[n]$是周期为$N$的离散信号，其离散傅里叶变换分别为$X[k],Y[k]$，则有：\begin{itemize}
+        \item  线性：$\forall a,b\in\mathbb{C}$，有
+    \[a x[n]+b y[n]\xleftrightarrow{\text{DFT}} a X[k]+b Y[k]\]
+        \item 周期性：$X[k+N]=X[k],Y[k+N]=Y[k]$为周期为$N$的离散信号
+        \item 时移性质：$x[(n-n_0)]\xleftrightarrow{\text{DFT}}e^{-i\frac{2\pi}{N}kn_0}X[k]$
+        \item 频移性质：$e^{i\frac{2\pi}{N}k_0 n}x[n]\xleftrightarrow{\text{DFT}}X\left[k-k_0\right]$
+        \item 共轭性质：$\overline{x[n]}\xleftrightarrow{\text{DFT}}\overline{X\left[-k\right]}$
+    \end{itemize}
+\end{proposition}
+
+以上性质全都可以直接带入定义验证，这里不再赘述。
+
+我们曾定义过离散信号的卷积和。类似\ref{sub:conv_of_period_func}，对于周期离散信号，卷积和的定义也必须修改，只是此时一般不会添加$1/N$的系数：
+\begin{definition}[周期离散信号的卷积和]
+    设$x[n],y[n]$是周期为$N$的离散信号，则它们的卷积和定义为
+    \[(x*y)[n]=\sum_{m=0}^{N-1}x[m]y[(n-m)]\]
+\end{definition}
+
+根据离散傅里叶变换的周期性，时域和频域都是周期的，下面就来表述和验证卷积和定理：
+\begin{theorem}[离散傅里叶变换的卷积和定理]
+    设$x[n],y[n]$是周期为$N$的离散信号，其离散傅里叶变换分别为$X[k],Y[k]$，则有
+    \[(x*y)[n]\xleftrightarrow{\text{DFT}}X[k]Y[k]\]
+    \[x[n]y[n]\xleftrightarrow{\text{DFT}}\frac{1}{N}(X * Y)[k]\]
+\end{theorem}
+\begin{proof}
+    \begin{align*}
+        X[k]Y[k]&=\left(\sum_{n=0}^{N-1}x[n]W_N^{-kn}\right)\left(\sum_{m=0}^{N-1}y[m]W_N^{-km}\right)\\
+        &=\sum_{n=0}^{N-1}\sum_{m=0}^{N-1}x[n]y[m]W_N^{-k(n+m)}\\
+        &=\sum_{l=0}^{N-1}\left(\sum_{n=0}^{N-1}x[n]y[l-n]\right)W_N^{-kl}&(l=n+m)\\
+        &=\text{DFT}(x*y)[k]
+    \end{align*}
+
+    可以仿照\ref{sub:convolution}，使用时域卷积定理给出频域卷积定理的证明；也可以直接带入定义验证：
+    \begin{align*}
+        \frac{1}{N}(X * Y)[k]&=\frac{1}{N}\sum_{l=0}^{N-1}X[l]Y[k-l]\\
+        &=\frac{1}{N}\sum_{l=0}^{N-1}\left(\sum_{n=0}^{N-1}x[n]W_N^{-ln}\right)\left(\sum_{m=0}^{N-1}y[m]W_N^{-k m}W_N^{lm}\right)\\
+        &=\frac{1}{N}\sum_{n=0}^{N-1}\sum_{m=0}^{N-1}x[n]y[m]W_N^{-k m}\left(\sum_{l=0}^{N-1}W_N^{l(m-n)}\right)\\
+        &=\sum_{n=0}^{N-1}x[n]y[n]W_N^{-k n}
+    \end{align*}
+    我们又一次遇到了选择函数：
+    \[\shah_N[m-n]=\sum_{l=0}^{N-1}W_N^{l(m-n)}=\begin{cases}
+    N & \text{if } m-n\equiv 0 \mod N \\
+    0 & \text{otherwise}
+    \end{cases}\]
+\end{proof}
+
+选择函数$\shah_N$的引入更多是为了方便与狄拉克梳状分布进行对比。如果不区分周期信号与有限长信号，则$\shah_N$就相当于周期离散信号的单位冲激序列。用向量的语言来说，就是
+\[\shah_N\sim\boldsymbol{\delta}=\begin{bmatrix}
+1  \\
+0  \\
+\vdots \\
+0
+\end{bmatrix}\]
+
+习惯上，将这种向量记法的各元素的序号依次取为$0,1,\dots,N-1$，而不是$1,2,\dots,N$，这样序号与离散傅里叶变换中的求和指标一致。仿照狄拉克分布的平移，选择函数的平移记为$\boldsymbol{\delta}_k[n]=\boldsymbol{\delta}[n-k]$，特别地，$\boldsymbol{\delta}_0=\boldsymbol{\delta}$。
+
+根据上一小节中指出的“离散周期信号的周期起点可任意选取”，离散信号的反转的向量表示有较为简洁的形式：
+
+\begin{definition}[离散信号的反转]
+    将离散信号$x[n]$的反转信号记为$x^-[n]=x[-n]$。特别地，将离散周期信号的反转信号写成向量形式，有：
+    \begin{align*}
+    \textbf{x}^-&=\begin{bmatrix}
+x[N-1]  \\
+x[N-2]  \\
+\vdots \\
+x[0]
+\end{bmatrix}\end{align*}
+\end{definition}
+
+类似于连续信号的傅里叶变换，离散傅里叶变换的原信号与变换域信号都是周期的，此时可以研究离散傅里叶变换的对偶性。可以观察到卷积和定理与角频率形式的傅里叶变换的卷积定理类似，因此可以仿照角频率形式的傅里叶变换的对偶性写出离散傅里叶变换的对偶性的表述：
+\begin{proposition}[离散傅里叶变换的对偶性]
+    设$x[n]$是周期为$N$的离散信号，其离散傅里叶变换为$X[k]$，则有
+    \begin{align*}
+        \text{DFT}(x^-)[k]=X^-[k]=N\cdot\text{DFT}^{-1}(x)[k]\\
+        \text{DFT}\left(\text{DFT}x\right)[n]=N x^- [n]
+    \end{align*}
+    如果$x[n]$是实信号，则有
+    \begin{align*}
+        \text{DFT}(x^-)[k]=\overline{X[k]}=N\cdot\text{DFT}^{-1}(x)[k]
+    \end{align*}
+\end{proposition}
+\begin{proof}
+    带入定义即可验证：
+    \begin{align*}
+        \text{DFT}(x^-)[k]&=\sum_{n=0}^{N-1}x^- [n]W_N^{-kn}\\
+        &=\sum_{n=0}^{N-1}x[-n]W_N^{-kn}\\
+        &=\sum_{m=0}^{N-1}x[m]W_N^{km}&(m=-n)\\
+        &=N\cdot\text{DFT}^{-1}(x)[k]
+    \end{align*}
+
+    \begin{align*}
+        \text{DFT}\left(\text{DFT}x\right)[n]&=\sum_{k=0}^{N-1}X[k]W_N^{-kn}\\
+        &=\sum_{k=0}^{N-1}\left(\sum_{m=0}^{N-1}x[m]W_N^{-km}\right)W_N^{-kn}\\
+        &=\sum_{m=0}^{N-1}x[m]\left(\sum_{k=0}^{N-1}W_N^{-k(m+n)}\right)\\
+        &=N x^- [n]
+    \end{align*}
+    我们又一次用到了选择函数。
+
+    如果$x[n]$是实信号，则有
+    \begin{align*}
+        \text{DFT}(x^-)[k]&=\sum_{n=0}^{N-1}x^- [n]W_N^{-kn}\\
+        &=\sum_{n=0}^{N-1}x[-n]W_N^{-kn}\\
+        &=\overline{\sum_{n=0}^{N-1}x[-n]W_N^{kn}}\\
+        &=\overline{X[k]}
+    \end{align*}
+\end{proof}
+
+\subsection{快速傅里叶变换}\label{sub:FFT}
 
 \appendix
 
 \chapter{傅里叶变换补遗}
+
 \section{傅里叶级数的渐进特性，吉布斯现象}\label{sec:Asymptotic_Behaviour}
 
 \subsection{收敛速度的估计}\label{sub:converge_speed}
@@ -8616,11 +8878,11 @@ $\varlimsup_{N \to \infty}S_N^R(t)>1$并不意味着狄利克雷定理失效，�
 这两种结果是相符的，读者可自行验证，并且可以从后一结果想象出狄利克雷核的函数图像，它被$\pm 1/\sin(\frac{\omega t}{2})$包络并高速振荡。函数图像如下。
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\textwidth]{Figure_3}
+    \includegraphics[width=0.8\textwidth]{Figure_3}
     \caption{狄利克雷核$D_N(t)$的函数图像}
 \end{figure}
 
-傅里叶级数的部分和正比于狄利克雷核与被展开函数的卷积（周期函数的卷积，见\ref{sub:conv_of_period_func}）：
+傅里叶级数的部分和是狄利克雷核与被展开函数的卷积（周期函数的卷积，见\ref{sub:conv_of_period_func}）：
 \begin{proposition}
     \[S_N^f(t)=\frac{1}{T}\int_{T}f(\tau)D_N(t-\tau)\,d\tau=\frac{1}{T}f*D_N(t)\]
 \end{proposition}
@@ -8656,7 +8918,7 @@ $D_N(t)$是偶函数，得证。
     \sum_{-\infty}^{\infty}|c_n|^2\leq \frac{1}{T}\int_{T}|f(t)|^2\,dt=\frac{1}{T}\|f\|_2^2
 \end{align*}
 \end{lemma}
-它给出了傅里叶系数平方和的上界的估计。收敛级数的通项必收敛，所以由此可以看出$c_n\to 0,n\to\infty$.\\
+它给出了傅里叶系数平方和的上界的估计。由此可以看出$c_n\to 0,n\to\infty$.
 \begin{proof}
     \begin{align*}
     \left|f(t)-\sum_{n=-N}^{N}c_n e^{in\omega t}\right|^2 & =\left(f(t)-\sum_{n=-N}^{N}c_n e^{in\omega t}\right)\left(f(t)-\sum_{n=-N}^{N}c_n e^{in\omega t}\right)^*                                       \\
@@ -8730,14 +8992,17 @@ f的原函数F的傅里叶系数同理，并且只要\textbf{分段连续}（见
 \end{equation*}
 \end{proposition}
 
-分段光滑还能够推出f的傅里叶级数\textbf{一致收敛}于f，从而可以逐项积分、逐项求导。回顾数学分析中的魏尔斯特拉斯M判别法\cite{zorich}\cite{xinjiang}：
-\begin{theorem}[M判别法]
-    对于函数项级数
-$\sum_{n=1}^{\infty}f_n(x)$，如果存在正项级数$\sum_{n=1}^{\infty}M_n<\infty$
-使得在区间E上$|f_n(x)|<M_n$，则$\sum_{n=1}^{\infty}f_n(x)$在E上绝对收敛且
-一致收敛。
+分段光滑还能推出傅里叶级数的\textbf{一致收敛性}
+\begin{theorem}
+$f\in PS([0,T])\implies S_N^f(t)\rightrightarrows f(t)$
 \end{theorem}
-对于上述命题，只需证明$\sum_{n=1}^{\infty}|c_n|<\infty$.直接应用贝塞尔不等式是无效的，但可以通过一个小技巧完成证明：\begin{proof}
+以下证明中，我们将使用魏尔斯特拉斯M判别法：
+\begin{theorem}[M判别法]
+    对于函数项级数$\sum_{n=1}^{\infty}f_n(x)$，如果存在正项级数$\sum_{n=1}^{\infty}M_n<\infty$使得在区间E上$|f_n(x)|<M_n$，则$\sum_{n=1}^{\infty}f_n(x)$在E上绝对收敛且一致收敛。
+\end{theorem}
+\begin{proof}
+    要证明一致收敛性，只需证明
+    $$\left|\sum_{n=-\infty}^{\infty}c_n e^{in\omega t}\right|\leq \sum_{n=-\infty}^{\infty}|c_n|<\infty$$
     记$c'_n$为$f'$的傅里叶系数，$c'_n =in\omega c_n$，
     \begin{align*}
     \sum_{n=-\infty}^{\infty}|c_n|=   |c_0|+\sum_{n\neq 0}\left| \frac{c'_n}{n}\right|\leq & |c_0|+\left(\sum_{n\neq 0}\frac{1}{n^2}\right)^{1/2}\left(\sum_{n\neq 0}|c'_n|^2\right)^{1/2}<\infty
