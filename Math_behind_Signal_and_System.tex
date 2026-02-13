@@ -3153,14 +3153,16 @@ $$\sigma_a\delta=\delta(ax)=\frac{1}{|a|}\delta(x)$$
     \[e(t)=u_C(t)=1-e^{t/RC}\]
 \end{example}
 
-一般来说，如果我们对系统进行适当的建模，则可以用函数方程来描述这个系统。函数方程不意味着我们一定能够给出响应关于激励的封闭表达式。
+本章主要介绍连续系统，即激励与响应均为连续信号的系统。与之相对，激励与响应均为离散信号的系统称为离散系统，我们将在第六章和第七章专门讨论离散系统。
+
+一般来说，如果我们对连续系统进行适当的建模，则可以用函数方程来描述这个系统。函数方程不意味着我们一定能够给出响应关于激励的封闭表达式。
 \begin{example}
 设激励$e(t)$与响应$r(t)$满足
 \[r^3(t)+4r(t)=\exp e(t)\]
 这是一个超越方程，但由于$f(x)=x^3+4x$严格单调递增，可由激励唯一确定响应的值，这也是一个系统。
 \end{example}
 
-我们特别关注能够用\textbf{微分方程}描述的系统，例如，第一个例子中的动态电路就可以用一阶微分方程来描述。
+其中，我们特别关注能够用\textbf{常系数线性微分方程（组）}描述的系统，例如，第一个例子中的动态电路就可以用一阶常系数线性微分方程来描述。我们首先给出微分方程的概念：
 \begin{definition}[微分方程]
     称如下形式的方程为\textbf{常微分方程}(ordinary differential equation,ODE)\cite{ode}：
     \[F(x,y,y',\cdots,y^{(n)})=0,n\geq 1\]
@@ -3175,20 +3177,21 @@ $$\sigma_a\delta=\delta(ax)=\frac{1}{|a|}\delta(x)$$
 常微分方程的解空间是有限维的，只要给定足够的初值数量，就可以唯一确定方程的解，因此常微分方程系统都具有\textbf{即时性}。在\ref{sub:compare_to_high_order}中，我们将对线性微分方程组的解空间维数进行说明。
 
 \begin{definition}[即时性与记忆性]
-一个系统具有\textbf{即时性}（或无记忆性、Markov性），如果该系统的响应在任意时刻$t$的状态演化率完全且唯一地取决于该时刻的系统状态与激励，而不显式地依赖于任何过去时刻$t'<t$的系统状态或历史激励。换言之，如果一个初值问题的解存在且唯一，则由它描述的系统具有即时性。
+一个系统具有\textbf{即时性}（或无记忆性、Markov性），如果该系统的响应在任意时刻$t$的状态完全且唯一地取决于该时刻的系统状态与激励，而不显式地依赖于任何过去时刻$t'<t$的系统状态或历史激励。换言之，如果一个初值问题的解存在且唯一，则由它描述的系统具有即时性。
 
 一个系统具有\textbf{记忆性}（或历史依赖性、非Markov性），如果系统的响应在任意时刻$t$的状态演化率显式地依赖于过去时刻$t'<t$的系统状态或历史激励，而不能被简化为仅依赖于当前时刻$t$的量。
 \end{definition}
+
 \begin{example}[积分方程]
     设系统由积分方程$r(t)=\int_{-\infty}^{t}e(y)\,dy$描述，则它是记忆系统。
 \end{example}
 \begin{example}[时滞系统]
-    由时滞微分方程描述的系统称为时滞系统。时滞微分方程是指类似于
-    \[y'(t)=F(y(t),y(t-\tau),t)\]
-    的方程（我们一般不将这类方程归类于微分方程），其中$\tau$是常数，它的解空间是无限维的，不可能通过某一时刻的系统状态唯一确定方程的解。这个方程描述了一个无激励的记忆系统。
+    由时滞微分方程描述的系统称为时滞系统。本书不引入这个概念，仅仅给出以下例子：
+    \[y'(t)=y(t)+y(t-\tau)\]
+    其中$\tau$是常数。一般来说，我们不将时滞微分方程归类为微分方程。时滞微分方程的解空间是无限维的，不可能通过某一时刻的系统状态唯一确定方程的解，因为我们只能指出有限个系统状态。这个方程描述了一个无激励的记忆系统。
 \end{example}
 
-微分方程涉及到非常庞杂的理论。在信号与系统课程中，我们通常关注的是更为特殊的常系数线性微分方程（组），它们所描述的系统是具有\textbf{线性}和\textbf{时不变性}的，下面给出线性和时不变性的定义。
+下面介绍一些常见的系统特性。
 
 \begin{definition}[线性系统]
     如果算子H是线性的，即
@@ -3196,11 +3199,11 @@ $$\sigma_a\delta=\delta(ax)=\frac{1}{|a|}\delta(x)$$
 就说系统是\textbf{线性系统}(linear system)，且满足叠加法则 (principle of superposition)。
 \end{definition}
 
-对于线性系统，由于系统原有的能量，即便激励$e(t)=0$，响应$r(t)$也可能不为零。根据系统的线性性，可以将$r(t)$分解为两部分：\textbf{零输入响应}(zero input response,$r_{zi}(t)$)和\textbf{零状态响应}(zero state response,$r_{zs}(t)$)。
+由于系统原有的能量，即便激励$e(t)=0$，响应$r(t)$也可能不为零。对于线性系统，可以将$r(t)$分解为两部分：
 \begin{definition}[零输入响应与零状态响应]
-    零输入响应是指$e(t)=0$时，由于系统原有能量而产生的响应；零状态响应是指将系统初始能量置零时的响应。\textbf{全响应}$r(t)=r_{zi}(t)+r_{zs}(t)$。
+   \textbf{零输入响应}(zero input response,$r_{zi}(t)$)是指$e(t)=0$时，由于系统原有能量而产生的响应；\textbf{零状态响应}(zero state response,$r_{zs}(t)$)是指将系统初始能量置零时的响应。\textbf{全响应}$r(t)=r_{zi}(t)+r_{zs}(t)$。
 \end{definition}
-对于零输入响应不为0的线性系统，直接将两个响应相加将得到两倍的零输入响应，这不是我们希望看到的，因此我们其实应该定义\textbf{零状态响应有线性性的系统为线性系统}。
+对于零输入响应不为0的线性系统，考虑以两个激励$e_1(t),e_2(t)$的线性组合作为输入，则按照先前对线性系统的定义，直接将对应的两个响应$r_1(t),r_2(t)$进行线性组合，则零输入响应被重复计算，这不是我们希望看到的，因此我们其实应该定义\textbf{零状态响应有线性性的系统为线性系统}。
 
 \begin{definition}[时不变性和移不变性]
     如果一个系统的输出不依赖于输入信号施加于系统的时间，输入信号发生时移，输出信号也发生相同的时移，即$\forall b\in\mathbb{R},H[e(t-b)]=r(t-b)$，则称该系统是\textbf{时不变系统}。用第二章中定义的时移算子的符号，时不变性可以记为$H\tau_b=\tau_b H$，换言之，时移和经过系统的次序可交换，这与我们的直观相符。
@@ -3229,17 +3232,17 @@ $$\sigma_a\delta=\delta(ax)=\frac{1}{|a|}\delta(x)$$
     如果H（作为映射）如果是单射，则也是双射（因为我们不关注其值域），于是H是可逆的。换句话说，一种响应仅可能对应唯一的激励。
 \end{definition}
 
-\subsection{常见线性系统}\label{{sub:ordinary_system}}
+\subsection{常见线性系统}\label{sub:ordinary_system}
 
 \begin{example}[时域乘积]
 \begin{equation*}
     r(t)=f(t)e(t)
 \end{equation*}
-例如描述开关开闭的系统，$f(t)=\chi_{[-T/2,T/2]}(t)$或$u(t)$，描述采样的系统，$f(t)=\shah(t)$.
+例如描述开关开闭的系统，$f(t)=\chi_{[T_1,T_2]}(t)$或$u(t)$。
 \end{example}
 
 \begin{example}[微分器与积分器]
-    积分器是由积分方程$$r(t)=\int_{-\infty}^{t}e(y)\,dy$$描述的系统；微分器是由微分方程$$r(t)=\frac{de(t)}{dt}$$描述的系统。它们可以通过运算放大器实现，见电路分析或模拟电子电路的教材，例如\cite{electronic_circuits}。
+    积分器是由积分方程$$r(t)=\int_{-\infty}^{t}e(y)\,dy$$描述的系统；微分器是由微分方程$$r(t)=\frac{de(t)}{dt}$$描述的系统。它们可以通过运算放大器实现。
 \end{example}
 
 \begin{example}[对核积分]
@@ -3248,35 +3251,31 @@ $$\sigma_a\delta=\delta(ax)=\frac{1}{|a|}\delta(x)$$
 \end{equation*}
 其中，$k(x,y)$称为核函数(kernel)，$\int_{a}^{b}k(x,y)e(y)\,dy$称为对核积分(integrating against a kernel).
 \end{example}
-对核积分非常类似于连续版本的矩阵乘积，我们同样可以定义：\begin{itemize}
+根据积分的线性性，对核积分系统也是线性的。我们将在下一小节中看到，线性系统总能描述为对核积分系统，因此它是我们考虑的主要的连续线性系统的类型。
+
+\begin{definition}[转置系统对称系统与自伴系统]
+    类比线性代数中算子的转置以及对称算子、自伴算子，我们可以定义线性系统的转置系统、对称系统和自伴系统：
+\begin{itemize}
     \item 上述系统的转置系统描述为$e(t)\mapsto\int_{a}^{b}k(y,x)e(y)\,dy$
     \item 如果$k(x,y)=k(y,x)$，称k是对称的并将系统称为\textbf{对称系统}
     \item 如果$k(x,y)=\overline{k(y,x)}$，称k是埃尔米特的并将系统称为\textbf{自伴系统}。
 \end{itemize}
+\end{definition}
 
-类似地，对于周期离散信号，矩阵乘法定义了线性系统：
-\begin{example}[矩阵乘法]
-对于n维的离散激励信号$\mathbf{v}$，\begin{equation*}
-    \mathbf{w}=A\mathbf{v},A\in M_{n\times n}(\mathbb{C})
-\end{equation*}
-例如，线性动力系统中，初值问题$\mathbf{\dot{x}}(t)=A\mathbf{x}(t)$的解为$H[\mathbf{v}]=e^{At}\mathbf{v}$。
-\end{example}
-线性代数中，如果一个线性算子L的在某一组基下的矩阵表示是A，则将L的转置定义为用$A^T$表示的线性算子，其中T表示矩阵的转置，如果矩阵A是对称的，则算子L称为对称算子；L的共轭转置定义为用$A^H$表示的线性算子，其中H表示矩阵的共轭转置，如果A是埃尔米特的(Hermitian)，即$A^H=A$，则称算子L是埃尔米特的，并说L是\textbf{自伴算子}
-(self-adjoint operator).对于矩阵乘法系统，可以根据A的性质定义
-\textbf{对称系统、自伴系统}。
+%类似地，对于周期离散信号，矩阵乘法定义了线性系统：
+%\begin{example}[矩阵乘法]
+%设离散系统的激励与响应均为$n$维离散信号，并且响应为激励的线性组合，则\begin{equation*}
+%    \mathbf{w}=A\mathbf{v},A\in M_{n\times n}(\mathbb{C})
+%\end{equation*}
+%\end{example}
+%线性代数中，如果一个线性算子L的在某一组基下的矩阵表示是A，则将L的转置定义为用$A^T$表示的线性算子，其中T表示矩阵的转置，如果矩阵A是对称的，则算子L称为对称算子；L的共轭转置定义为用$A^H$表示的线性算子，其中H表示矩阵的共轭转置，如果A是埃尔米特的(Hermitian)，即$A^H=A$，则称算子L是埃尔米特的，并说L是\textbf{自伴算子}(self-adjoint operator).对于矩阵乘法系统，可以根据A的性质定义\textbf{对称系统、自伴系统}。
 
 \begin{example}[卷积]
-    取定连续信号$g,r(t)=g*e(t)$;取定周期离散信号$\mathbf{h},r[n]=\mathbf{h*e}[n]$.
+    取定衰减足够快的连续信号$h$，$r(t)=h*e(t)$.
 \end{example}
-在标准正交基底下，卷积系统的矩阵是一个循环矩阵(circulant matrix)或托普利兹矩阵(Toepliz matrix)：\[\begin{pmatrix}
-    h[0] & h[N-1] & \cdots & h[1]\\
-    h[1] & h[0] & \cdots &  h[2]\\
-    \vdots & \vdots & \ddots & \vdots\\
-    h[N-1] & h[N-2] & \cdots & h[0]
-\end{pmatrix}\]
 
 \begin{example}[信号平移]
-    取定时延b，$r(t)=e(t-b)$;取定整数m，$r[n]=e[n-m]$.
+    取定时延b，$r(t)=e(t-b)$.
 \end{example}
 这也是时滞系统的例子，只不过不涉及微分的运算。
 
@@ -3287,24 +3286,27 @@ $r(t)=\mathcal{F} e(t)$.
 \end{example}
 
 \subsection{系统的级联}\label{sub:cascade}
-我们知道，函数与$\delta$的卷积还是它本身，这就好比信号在进入任何一个系统前，先经过了一个与$\delta$卷积的系统。这样的系统连接方式称为系统的\textbf{级联}(cascade)，下面就来研究这个话题。
+将一个系统的响应作为另一个系统的激励，这样的系统连接方式称为系统的\textbf{级联}(cascade)，下面就来研究这个话题。
 \begin{theorem}[线性系统的级联]
     设有两线性系统K,L,将两系统级联之后，所得的新系统仍是线性系统。
 \end{theorem}
 \begin{proof}
+    先利用$K$的线性性，再利用$L$的线性性，得到：
     \begin{align*}
     LK[ae_1+be_2]=L[aK[e_1]+bK[e_2]]=aLK[e_1]+bLK[e_2]
 \end{align*}
 \end{proof}
-对于周期离散信号，两个系统都是矩阵乘法，则级联系统也可以用矩阵乘法来描述，并且其矩阵是两子系统的矩阵之乘积，这正是定义矩阵乘法的原因之一；对于连续信号，如果两个系统都是对核积分系统，我们也有类似的结论：
+
+对核积分系统的级联也是对核积分系统，并且级联系统的核函数可以视作前级系统的核函数作为后级系统的激励信号输入后得到的响应函数：
 \begin{theorem}[对核积分系统的级联]
     设有两对核积分系统K，L：
     \[K[e(t)](x)=\int_{a}^{b}k(x,y)e(y)\,dy,L[e(t)](x)=\int_{c}^{d}l(x,y)e(y)\,dy\]
 则级联系统$H=LK$也是对核积分系统，并且核函数为\begin{equation*}
     h(x,z)=L_y(k(y,z))(x)=\int_{c}^{d}l(x,y)k(y,z)\,dy
 \end{equation*}
+其中$L_y$表示$k(x,y)$作为y的函数输入系统L，输出为x,y的双变量函数。
 \end{theorem}
-这里$L_y$表示$k(x,y)$作为y的函数输入系统L，输出为x,y的双变量函数。
+
 \begin{proof}\begin{align*}
     H[e(z)](x)&=LK[e(z)](x)\\
     &=\int_{c}^{d}l(x,y)\left(\int_{a}^{b}k(y,z)e(z)\,dz\right)\,dy\\
@@ -3313,11 +3315,11 @@ $r(t)=\mathcal{F} e(t)$.
 \end{align*}
 \end{proof}
 
-如果系统H是对核的无穷限积分，就有\textbf{叠加定理}(superposition thoerem)\cite{brad_osgood_ee261}，由于它是泛函分析中对应定理的特殊形式，有时也将它称为\textbf{施瓦兹核定理}(Schwartz kernel thoerem):
+如果系统H是对核的无穷限积分，就有\textbf{叠加定理}(superposition thoerem)\cite{brad_osgood_ee261}，由于它是泛函分析中对应定理的特殊形式，有时也将它称为\textbf{施瓦兹核定理}(Schwartz kernel thoerem)。我们知道，函数与$\delta$的卷积还是它本身，这就好比信号在进入任何一个系统前，先经过了一个与$\delta$卷积的系统，利用这一观点即可得到：
 \begin{theorem}[叠加定理/施瓦兹核定理]
     \begin{equation*}
-    r(x)=\int_{-\infty}^{\infty}h(x,y)e(y)\,dy
-\end{equation*}
+        r(x)=\int_{-\infty}^{\infty}h(x,y)e(y)\,dy
+    \end{equation*}
 其中$h(x,y)$是线性系统H的脉冲响应。
 \end{theorem}
 \begin{proof}\begin{align*}
@@ -3381,7 +3383,10 @@ $r(t)=\mathcal{F} e(t)$.
 \end{equation}
 \end{proposition}
 \begin{proof}
-只要取$e_1(t)=e(t),e_2(t)=0$，就从条件\ref{eq:4.1}推出条件\ref{eq:4.2}；反过来，如果条件\ref{eq:4.2}成立，任意$e_1,e_2$满足$e_1(t)=e_2(t)\ for\ t<t_0$，有$e_1(t)-e_2(t)=0\ for\ t<t_0$，根据条件\ref{eq:4.2}，有$r_1(t)-r_2(t)=0\ for\ t<t_0$，即$r_1(t)=r_2(t)\ for\ t<t_0$.
+只要取$e_1(t)=e(t),e_2(t)=0$，就从条件\ref{eq:4.1}推出条件\ref{eq:4.2}；反过来，如果条件\ref{eq:4.2}成立，则任意$e_1,e_2$满足
+$$e_1(t)=e_2(t)\ for\ t<t_0,\text{即}e_1(t)-e_2(t)=0\ for\ t<t_0$$
+根据条件\ref{eq:4.2}，有
+$$r_1(t)-r_2(t)=0\ for\ t<t_0,\text{即}r_1(t)=r_2(t)\ for\ t<t_0$$
 \end{proof}
 
 \begin{proposition}
@@ -3398,12 +3403,16 @@ $r(t)=\mathcal{F} e(t)$.
 \begin{proof}
 只要取$t_0=0$，就从条件\ref{eq:4.2}推出条件\ref{eq:4.3}；用时不变性，条件\ref{eq:4.3}可以推出条件\ref{eq:4.2}。
 
-对于单位脉冲响应，从$\delta=0\ for\ t<0$可以推出$h(t)=0\ for\ t<0$；如果$h(t)=0,e(t)=0\ for\ t<0$,则根据\ref{sub:intuition_of_convolution}中介绍的卷积的“支集相加”性质，有$r(t)=(h*e)(t)=0\ for\ t<0$.
+对于单位脉冲响应，
+$$\delta=0\ for\ t<0\implies h(t)=0\ for\ t<0$$
+反过来，如果$h(t)=0,e(t)=0\ for\ t<0$,则根据\ref{sub:intuition_of_convolution}中介绍的卷积的“支集相加”性质，有$r(t)=(h*e)(t)=0\ for\ t<0$.
 \end{proof}
 
 \section{常系数线性微分方程}\label{sec:ODE}
 
-除了上一节中提到的几种系统，还有一种典型的具有因果性的线性时不变系统是用常系数线性微分方程表示的，它是以激励$e(t)$为方程的非齐次项，以微分方程的完全解$y(t)$为响应$r(t)$的系统。我们将看到，这种系统式因果的线性时不变系统。
+上一节中提到，一种典型的具有因果性的线性时不变系统是用常系数线性微分方程表示的，它是以激励$e(t)$为方程的非齐次项，以微分方程的完全解$y(t)$为响应$r(t)$的系统。本节首先回顾数学分析中对于这种方程的处理方式，再说明为什么这种系统是因果的线性时不变系统，并借助线性时不变系统的理论给出非齐次常系数线性方程的求解方法——基本解法。
+
+在下一节，我们将高阶的常系数线性微分方程转化为常系数线性微分方程组，并由此获得对此类方程的进一步认识。
 
 \subsection{解法回顾}\label{sub:solution_of_ODE}
 
@@ -3463,12 +3472,19 @@ $r(t)=\mathcal{F} e(t)$.
 
 \begin{example}[两种响应划分方式的区别]
     由微分方程及初始条件
-\[y'+2y=10,y(0)=1\]
-描述的系统，特征方程$\lambda+2=0$的解为$\lambda=-2$，从而有齐次解$y_h(t)=Ce^{-2t}$（C为常数）及特解$y_p(t)=5$，完全解为$y(t)=y_h(t)+y_p(t)=5+Ce^{-2t}$，带入$y(0)=1$得$5+C=1,C=-4$，因此
-\[y(t)=5-4e^{-2t}\]
-求零输入响应时，应求齐次方程满足初始条件的解，即令$y_h(0)=C=1$，得到$C=1,y_{zi}(t)=e^{-2t}$；而求零状态响应时，则应该求原方程在初始条件为0时的解，即在完全解$y(t)=5+Ce^{-2t}$中，令$y(0)=5+C=0$得到$C=-5$，$y_{zs}(t)=5-5e^{-2t}$。将零输入响应、零状态响应相加，又得到了原来的解$y(t)=5-4e^{-2t}$。
+    \[y'+2y=10,y(0)=1\]
+    $\lambda+2=0$的解为$\lambda=-2$，从而有齐次解$y_h(t)=Ce^{-2t}$（C为常数）及特解$y_p(t)=5$，完全解为
+    $$y(t)=y_h(t)+y_p(t)=5+Ce^{-2t}$$
+    带入$y(0)=1$得$5+C=1,C=-4$，因此
+    \[y(t)=5-4e^{-2t}\]
 
-可见，$y_h(t)\neq y_{zi}(t),y_p(t)\neq y_{zs}(t)$。
+    求零输入响应时，应求齐次方程满足初始条件的解，即
+    $$y_{zi}(0)=C=1\implies C=1,y_{zi}(t)=e^{-2t}$$
+    而求零状态响应时，则应该求原方程在初始条件为0时的解，即在完全解$y(t)=5+Ce^{-2t}$中，令$y(0)=5+C=0$得到$C=-5$，于是
+    $$y_{zs}(t)=5-5e^{-2t}$$
+    将零输入响应、零状态响应相加，又得到了原来的解$y(t)=5-4e^{-2t}$。
+
+    可见，$y_h(t)\neq y_{zi}(t),y_p(t)\neq y_{zs}(t)$。
 \end{example}
 尽管从数学上我们先得到了齐次解和特解才进一步求出零输入响应、零状态响应，但解的这两种划分都是有意义的，后者揭示了：响应中有一部分齐次解用来使响应满足初始条件，而另一部分齐次解会与特解叠加得到无关初始条件、仅依赖于方程形式的解。
 
@@ -3522,8 +3538,11 @@ $r(t)=\mathcal{F} e(t)$.
 
 那么，如何求这个单位脉冲响应呢？对于微分方程
 \[a_n r^{(n)}+a_{n-1}r^{(n-1)}+\cdots +a_1 r'+a_0 r=\delta\]
-要使等式右边出现$\delta$，$r(t)$中一定含有$\delta$及其导数、积分，根据\ref{sub:general_distributions}中的结果，$u'=\delta$，而$u(t)$的各阶积分都可以用$P(t)u(t)$来表示，其中$P(t)$是t的多项式，因此可以假定$r(t)=f_1(t)u(t)+f_2(t)\delta(t)+f_3(t)\delta'(t)+\cdots$。我们知道，$\delta$具有采样性质：$\delta(t)f(t)=\delta(t)f(0)$，类似地，还推导过$\delta'$与函数的乘积：$g\delta'=g(0)\delta'-g'(0)\delta$，不难想象，$\delta$的各阶导数与函数的乘积都是类似的（可以通过归纳法验证这一点），于是刚才的$r(t)$简
-化为
+要使等式右边出现$\delta$，$r(t)$中一定含有$\delta$及其导数、积分，根据\ref{sub:general_distributions}中的结果，$u'=\delta$，而$u(t)$的各阶积分都可以用$P(t)u(t)$来表示，其中$P(t)$是t的多项式，因此可以假定
+$$r(t)=f_1(t)u(t)+f_2(t)\delta(t)+f_3(t)\delta'(t)+\cdots$$
+我们知道，$\delta$具有采样性质：$\delta(t)f(t)=\delta(t)f(0)$，还推导过$\delta'$与函数的乘积公式：
+$$g\delta'=g(0)\delta'-g'(0)\delta$$
+不难想象，$\delta$的各阶导数与函数的乘积都是类似的（可以通过归纳法验证这一点），于是刚才的$r(t)$简化为
 \[r(t)=f(t)u(t)+a_1\delta+a_2\delta'+\cdots\]
 我们知道，分布与函数乘积的求导也满足莱布尼兹法则，运用这一点，将上式带入激励取为$\delta$的微分方程，可以通过待定系数法求出各个系数，并得到关于$f(t)$的常规的微分方程。很明显，我们不总是需要$\delta$及其高阶导数项，为此需要研究取到$u(t)$的几阶导数就足以完成基于待定系数法的求解，我们通过一个简单的例子来说明这个问题。
 
@@ -3865,7 +3884,8 @@ $r(t)=f(t)u(t)$，求出其一阶、二阶导数：\begin{align*}
     &=2\pi H(\omega)\delta_{\omega_0}\\
     &=2\pi H(\omega_0)\delta_{\omega_0}
 \end{align*}
-因此\[r(t)=H\left[e^{i\omega_0 t}\right]=H(\omega_0)e^{i\omega_0 t}\]
+因此\[r(t)=H\left[e^{i\omega_0 t}\right]=H(\omega_0)e^{i\omega_0 t}=H(\omega_0)e(t)\]
+可见，将线性时不变系统视作一个线性算子，其特征向量为形如$e^{i\omega t}$的函数，由此定义：
 \begin{definition}[特征函数]
     给定$\omega$，将函数$e^{i\omega t}$称为系统H的\textbf{特征函数}(eigenfunction)，\textbf{特征值}(eigenvalue)为$H(\omega)$。
 \end{definition}
@@ -7430,9 +7450,90 @@ Q(s)&=a_n\left(s^{n-1}c_0 +s^{n-2}c_1 +\cdots +c_{n-1}\right)+a_{n-1}\left(s^{n-
 
 \subsection{零极点图与频率响应特性}\label{sub:zero_pole_characteristics}
 
+对于最典型的因果线性时不变系统，其系统函数为有理函数，可以将系统函数表示为：
+\begin{align*}
+    H(s)=K\frac{(s-z_1)(s-z_2)\cdots (s-z_m)}{(s-p_1)(s-p_2)\cdots (s-p_n)}
+\end{align*}
+其中$z_1,z_2,\cdots ,z_m$为系统函数的零点，$p_1,p_2,\cdots ,p_n$为系统函数的极点，$m<n$，$K$为常数。将零点和极点在复平面上表示出来，得到\textbf{零极点图}(zero-pole plot)，其中，零点用“O”表示，极点用“X”表示，高阶的零点或极点，在其旁边用数字标明其重数。下面给出一个例子：
+
+\begin{example}
+    设系统函数为
+    \[H(s)=\frac{s+2}{(s+1)^2 (s+3)}\]
+    则其零极点图如下所示：
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.5\textwidth]{zero_pole}
+        \caption{零极点图(1)}
+    \end{figure}
+\end{example}
+
+根据\ref{sub:stability_of_system}中提出的系统的稳定性条件，因果的线性时不变系统是稳定的，当且仅当其系统函数的收敛域包含虚轴，此时系统函数的所有极点均位于左半平面$\text{Re}\ s<0$，\textbf{系统的频率响应特性即系统函数在虚轴上的限制}。此时，如果零极点图较为简单，则可以由零极点图判断系统的滤波特性，即判断系统函数在虚轴上不同位置的幅值大小。
+
+零点通常会使得附近的系统函数幅值减小，特别地，如果虚轴上存在零点，则可直接判断该点处的幅频特性值为0：
+
+\begin{example}
+    设系统的零极点图如下图所示：\begin{figure}[H]
+        \centering
+        \includegraphics[width=0.5\textwidth]{zero_pole1}
+        \caption{零极点图(2)}
+    \end{figure}
+    可以看到系统函数在原点处由一个一阶零点，这表明系统的频率相应特性在低频处有一个零点，意味着系统对低频信号有抑制作用；系统的极点均位于实轴上，这意味系统函数形如
+    \[H(s)=\frac{K(s-z)}{(s+p_1)(s+p_2)}\]
+    考虑它在虚轴上的限制的幅值：
+    \[|H(i\omega)|=\frac{K\sqrt{\omega^2+z^2}}{\sqrt{(\omega^2+p_1^2)(\omega^2+p_2^2)}}\]
+    当$\omega\to\infty$时，$|H(i\omega)|\to 0$，这表明系统对高频信号有抑制作用。因此，该系统具有带通滤波特性。
+
+    可以定性地画出其幅频特性曲线，如下所示：
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.5\textwidth]{amplitude_response}
+        \caption{幅频特性曲线(1)}
+    \end{figure}
+\end{example}
+
+极点通常会使得附近的系统函数幅值增大：
+\begin{example}
+    设系统的零极点图如图所示：\begin{figure}[H]
+        \centering
+        \includegraphics[width=0.5\textwidth]{zero_pole2}
+        \caption{零极点图(3)}
+    \end{figure}
+
+    系统函数的分母在虚轴左侧有一对共轭复根，这意味着系统函数形如
+    \[H(s)=\frac{K}{(s-p)(s-\bar{p})}=\frac{K}{s^2-2\text{Re}(p)s+|p|^2}\]
+    考虑它在虚轴上的限制的幅值：
+    \[|H(i\omega)|=\frac{K}{\sqrt{(\omega^2-2\text{Re}(p)\omega+|p|^2)}}\]
+    由于$\text{Re}(p)<0$，因此容易求得幅频特性在$\omega=\pm \text{Im}(p)$处取得极大值，这表明系统对该频率附近的信号有增强作用。因此，该系统具有带通滤波特性。
+    
+    可以定性地画出其幅频特性曲线，如下所示：
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.5\textwidth]{amplitude_response1}
+        \caption{幅频特性曲线(2)}
+    \end{figure}
+\end{example}
+
+以上推断系统函数的形式的过程，可以进一步简化。对于给定位置的零点$z$，其系统函数分子必然包含$s-z$这一因子，从而幅频特性是系统函数的其他部分与一个\textbf{起点为$z$，终点为$i\omega$的向量长度}的积；对于给定位置的极点$p$，其系统函数分分母必然包含$s-p$这一因子，从而幅频特性是系统函数的其他部分与一个\textbf{起点为$p$，终点为$i\omega$的向量长度}的商。
+
+\begin{example}
+    设系统的零极点图如图所示：\begin{figure}[H]
+        \centering
+        \includegraphics[width=0.5\textwidth]{zero_pole_vector}
+        \caption{零极点图及向量分析法}
+    \end{figure}
+
+    考虑不同角频率处的各向量长度，当角频率较小时，各向量的长度都较小；随角频率增大，极点向量的长度增长较快，且极点有两个，因此系统的幅频特性大小随角频率增大而减小，系统具有低通滤波特性。
+    
+    可以定性地画出其幅频特性曲线：\begin{figure}[H]
+        \centering
+        \includegraphics[width=0.5\textwidth]{amplitude_response2}
+        \caption{幅频特性曲线(3)}
+    \end{figure}
+\end{example}
+
 \subsection{系统流图与梅森增益公式}\label{sub:mason_gain_formula}
 
-系统的\textbf{信号流图}(signal flow graph)由香农在1942年发明，后经梅森(J.E. Mason)推广完善，成为分析线性时不变系统的有力工具，因此又称为\textbf{梅森信号流图}(Mason signal flow graph)或\textbf{梅森图}(Mason graph)。
+本小节讨论多个系统进行组合时的表现，信号流图是研究此问题的有力工具。系统的\textbf{信号流图}(signal flow graph)由香农在1942年发明，后经梅森(J.E. Mason)推广完善，成为分析线性时不变系统的有力工具，因此又称为\textbf{梅森信号流图}(Mason signal flow graph)或\textbf{梅森图}(Mason graph)。
 
 信号流图可以看作是系统框图的另一种表示形式。由于系统框图不能很好地展示出系统的数学模型，本书中未涉及系统框图的概念，感兴趣的读者可以参考\cite{oppenheim1997signals}\cite{signal_systems}。
 
@@ -7448,7 +7549,79 @@ Q(s)&=a_n\left(s^{n-1}c_0 +s^{n-2}c_1 +\cdots +c_{n-1}\right)+a_{n-1}\left(s^{n-
 \end{itemize}
 \end{definition}
 
-\begin{example}[信号流图]
+信号流图与电路有一定的相似之处。两个系统“串联”时，实际上是将两个系统级联，完整系统的系统函数为两个子系统的系统函数之积，乘法交换律告诉我们\textbf{线性时不变系统总是可交换的}；两个系统“并联”时，完整系统的系统函数为两个子系统的系统函数之和（因为激励独立地经过两个系统再在输出端相加）。
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \begin{tikzpicture}[auto, >=Stealth, node distance=1.5cm]
+            \tikzset{signode/.style={circle, draw, minimum size=2mm, inner sep=0pt, line width=0.6pt}}
+            \node[signode, label=left:$x(t)$] (x) {};
+            \node[signode, right=of x, label=below:$w(t)$] (w) {};
+            \node[signode, right=of w, label=right:$y(t)$] (y) {};
+            \draw[->] (x) -- node {$H_1(s)$} (w);
+            \draw[->] (w) -- node {$H_2(s)$} (y);
+        \end{tikzpicture}
+        \caption{串联}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \begin{tikzpicture}[auto, >=Stealth, node distance=2.5cm]
+            \tikzset{signode/.style={circle, draw, minimum size=2mm, inner sep=0pt, line width=0.6pt}}
+            \node[signode, label=left:$x(t)$] (x) {};
+            \node[signode, right=of x, label=right:$y(t)$] (y) {};
+            \draw[->] (x) to[bend left=45] node {$H_1(s)$} (y);
+            \draw[->] (x) to[bend right=45] node[swap] {$H_2(s)$} (y);
+        \end{tikzpicture}
+        \caption{并联}
+    \end{minipage}
+\end{figure}
+
+此外，还可以引入反馈回路，根据是否有反馈回路，系统分为开环系统和闭环系统。
+\begin{definition}[开环系统与闭环系统]
+    如果系统取后级响应为反馈信号输入到前级，则该系统称为\textbf{闭环系统}，否则称为\textbf{开环系统}。
+\end{definition}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[auto, >=Stealth, node distance=1.5cm]
+        \tikzset{signode/.style={circle, draw, minimum size=2mm, inner sep=0pt, line width=0.6pt}}
+        
+        \node[signode, label=left:$x(t)$] (x) {};
+        \node[signode, right=of x] (e) {};
+        \node[signode, right=of e] (pre_y) {};
+        \node[signode, right=of pre_y, label=right:$y(t)$] (y) {};
+        
+        \draw[->] (x) -- (e);
+        \draw[->] (e) -- node {$H_1(s)$} (pre_y);
+        \draw[->] (pre_y) -- (y);
+        \draw[->] (pre_y) to[bend left=50] node {$H_2(s)$} (e);
+    \end{tikzpicture}
+    \caption{闭环系统}
+\end{figure}
+
+上图展示了一个最简单的闭环系统的信号流图。我们将$H_1(s)$称为\textbf{开环增益}，表示不考虑反馈回路时系统的增益，与之相对，将考虑反馈回路后的增益称为\textbf{闭环增益}。
+
+计算该系统的闭环增益：
+\begin{align*}
+    Y(s)&=H_1(s)E(s)\\
+    E(s)&=X(s)-H_2(s)Y(s)\\
+    \implies Y(s)&=H_1(s)\left[X(s)-H_2(s)Y(s)\right]\\
+    \implies Y(s)&=\frac{H_1(s)}{1+H_1(s)H_2(s)}X(s)\\
+    \implies H(s)&=\frac{Y(s)}{X(s)}=\frac{H_1(s)}{1+H_1(s)H_2(s)}
+\end{align*}
+
+\begin{definition}[反馈深度与反馈类型]
+将$1+H_1(s)H_2(s)$称为\textbf{反馈深度}，它是引入反馈回路导致的增益下降的倍率。
+
+如果反馈深度大于1，则系统的输出更加稳定，但增益下降，此时反馈为\textbf{负反馈}，特别地，如果反馈深度远大于1，称为\textbf{深度负反馈}，此时$1+H_1(s)H_2(s)\approx H_1(s)H_2(s)$，增益近似等于$1/H_2(s)$（即反馈回路系统的逆系统），与开环增益无关。
+
+如果反馈深度小于1，则系统的输出不稳定，但增益变高，称为\textbf{正反馈}，多用于振荡器；如果反馈深度近似为0，系统将进入\textbf{自激振荡状态}，通常电路无法正常工作，需要消除这种状态。
+\end{definition}
+
+\begin{example}
     设$X_1,X_2$为输入节点，$Y_1,Y_2$为输出节点，其他节点为混合节点。
     \begin{figure}[H]
         \centering
@@ -7592,7 +7765,7 @@ Q(s)&=a_n\left(s^{n-1}c_0 +s^{n-2}c_1 +\cdots +c_{n-1}\right)+a_{n-1}\left(s^{n-
 \begin{theorem}[梅森增益公式，图论形式]
     设系统有$n$个中间节点$M_1,M_2,\cdots,M_n$，激励$X$接入节点$M_1$，响应$Y$取自节点$M_n$，则
     \[H=\frac{Y}{X}=\frac{\sum_{k}g_k\Delta_k}{\Delta}\]
-    其中$g_k$为从源点到阱点的第$k$条前向通路增益，$\Delta_k$为去掉与第$k$条前向通路接触的所有环路后的特征行列式。
+    其中$g_k$为从源点到阱点的第$k$条前向通路增益，$\Delta_k$为去掉与第$k$条前向通路接触的所有节点后的特征行列式。
 
     特征行列式可由以下公式计算：
     $$\Delta=1-\sum_a L_a+\sum_{b,c}L_b L_c-\sum_{d,e,f}L_d L_e L_f+\cdots$$
@@ -7747,6 +7920,54 @@ $$M_1\to M_3\to M_4\to M_1,M_2\to M_5\to M_2$$
     前向通路共有两条，增益分别为$g_1=H_{13}$和$g_2=H_{12}H_{23}$，去掉前向通路中的节点后没有环路，因此$\Delta_1=\Delta_2=1$。根据梅森增益公式，有
     \[H=\frac{g_1\Delta_1+g_2\Delta_2}{\Delta}=\frac{H_{13}+H_{12}H_{23}}{1-G_{21}H_{12}-G_{31}H_{13}-G_{32}H_{23}-G_{21}G_{32}H_{13}-G_{31}H_{23}H_{12}}\]
 \end{example}
+
+我们同样能够根据系统函数画出信号流图，但是一个的系统函数可以对应多种信号流图，例如两个系统的级联是可交换的。下面给出一种仅仅使用乘法器和积分器（系统函数为$s^{-1}$）将有理系统函数化为信号流图的标准方法，使用这种方法画出的信号流图是唯一的，并且具有相似的结构。
+
+考虑如下信号流图：
+
+\begin{center}
+\begin{tikzpicture}[>=Stealth, node distance=1.6cm, auto]
+    % 节点：M1 为矩形，其余中间节点用直径为2的小圆圈表示，节点内部不显示编号
+    \node (x) {$x(t)$};
+    \node[draw, circle, minimum size=2mm, inner sep=0pt] (M1) [right=of x] {};
+    \node[circle, draw, minimum size=2mm, inner sep=0pt] (M2) [right=of M1] {};
+    \node[circle, draw, minimum size=2mm, inner sep=0pt] (M3) [right=of M2] {};
+    \node (dots) [right=of M3] {$\cdots$};
+    \node[circle, draw, minimum size=2mm, inner sep=0pt] (Mn_2) [right=of dots] {};
+    \node[circle, draw, minimum size=2mm, inner sep=0pt] (Mn_1) [right=of Mn_2] {};
+    \node[circle, draw, minimum size=2mm, inner sep=0pt] (Mn) [right=of Mn_1] {};
+    \node (y) [right=of Mn] {$y(t)$};
+
+    % 串联 s^{-1} 通路（链路上方标注，避免与其他箭头重叠）
+    \draw[->] (x) -- (M1);
+    \draw[->] (M1) -- node[above] {$s^{-1}$} (M2);
+    \draw[->] (M2) -- node[above] {$s^{-1}$} (M3);
+    \draw[->] (M3) -- node[above] {$s^{-1}$} (dots);
+    \draw[->] (dots) -- node[below] {$s^{-1}$} (Mn_2);
+    \draw[->] (Mn_2) -- node[below] {$s^{-1}$} (Mn_1);
+    \draw[->] (Mn_1) -- node[below] {$b_n$} (Mn);
+    \draw[->] (Mn) -- (y);
+
+    % 直接到 Mn 的前向通路，标签放在上方并调整弯度避免重叠
+    \draw[->, bend left=60] (M1) to node[above, yshift=1pt] {$b_0$} (Mn);
+    \draw[->, bend left=50] (M2) to node[above, yshift=1pt] {$b_1$} (Mn);
+    \draw[->, bend left=40] (M3) to node[above, yshift=1pt] {$b_2$} (Mn);
+    \draw[->, bend left=30] (Mn_2) to node[above, yshift=1pt] {$b_{\,n-1}$} (Mn);
+
+    % 反馈回到 M1（画在下方，标签置于弧线下方并微调，避免文字与箭头相交）
+    \draw[->, bend left=30] (M2) to node[below, yshift=-1pt] {$-a_1$} (M1);
+    \draw[->, bend left=40] (M3) to node[below, yshift=-1pt] {$-a_2$} (M1);
+    \draw[->, bend left=50] (Mn_2) to node[below, yshift=-1pt] {$-a_{n-1}$} (M1);
+    \draw[->, bend left=60] (Mn_1) to node[below, yshift=-1pt] {$-a_{n}$} (M1);
+\end{tikzpicture}
+\end{center}
+
+注意到这个信号流图的所有前向通路和环路均经过节点$M_1$，去掉节点$M_1$后不再有环路，因此不含$M_1$的子图的特征行列式$\Delta_k$均为1。利用梅森增益公式，可以计算出系统增益为
+\begin{align*}
+    H(s)&=\frac{Y(s)}{X(s)}=\frac{b_0 + b_1 s^{-1} + b_2 s^{-2} + \cdots + b_n s^{-n}}{1 + a_1 s^{-1} + a_2 s^{-2} + \cdots + a_n s^{-n}}
+\end{align*}
+
+可见，对于任意有理系统函数，都可以使用上述信号流图表示。注意系数$a_k,b_k$是可以为0的，因此即便分子分母不是相同度数的多项式，也可以使用该信号流图表示。
 
 \subsection{最小相位系统}\label{sub:min_phase}
 
@@ -8300,9 +8521,23 @@ $$\text{Res}(f,\infty)=\dfrac{1}{2\pi i}\oint_{C^-_R}f(z)\,dz$$
 %    可以猜想，$x[n]=n u[n]$。
 %\end{example}
 
-\section{离散系统的z域分析}\label{sec:Discrete_System_z_Analysis}
+\section{离散系统与z域分析}\label{sec:Discrete_System_z_Analysis}
+
+离散系统是指激励与响应均为离散信号的系统。本节中，我们将介绍离散系统的基本特性并介绍由z变换引出的离散系统的系统函数。
+
+典型的离散系统是通过差分方程来描述的，差分方程就是我们所熟知的数列递推式的一种推广。其中，常系数线性差分方程是我们主要关注的线性时不变离散系统，我们将在下一节介绍差分方程。
+
+更为特殊的情况下，激励与响应都是周期信号，称之为周期离散系统。此时不妨将激励与响应都视作有限维的向量，用矩阵乘法描述线性系统。这种系统将在\ref{sub:period_discrete_system}介绍。
 
 \subsection{离散系统概述}\label{sub:discrete_system_overview}
+
+仿照\ref{sub:cascade}分析离散系统的级联。显然，线性系统的级联仍然是线性的，时不变系统的级联仍然是时不变的，因果系统的级联仍然是因果的。对于离散系统，“对核积分”就相当于加权求和，“对核卷积”就相当于卷积和，可以想象，叠加定理对于离散系统仍成立。
+
+\begin{theorem}[叠加定理]
+    
+\end{theorem}
+
+
 
 \subsection{离散系统的系统函数}\label{sub:discrete_system_function}
 
@@ -8751,6 +8986,15 @@ $$f\in PS([0,T])\implies \sum_{k=-\infty}^{\infty}|c_k|<\infty\implies S_N^f(t)\
 
 习惯上，将这种向量记法的各元素的序号依次取为$0,1,\dots,N-1$，而不是$1,2,\dots,N$，这样序号与离散傅里叶变换中的求和指标一致。仿照狄拉克分布的平移，选择函数的平移记为$\boldsymbol{\delta}_k[n]=\boldsymbol{\delta}[n-k]$，特别地，$\boldsymbol{\delta}_0=\boldsymbol{\delta}$。
 
+类似狄拉克分布，容易验证单位脉冲序列具有取样性质和卷积性质：
+\begin{proposition}
+    设$x[n]$是周期为$N$的离散信号，则有
+    \begin{align*}
+        x[n]\boldsymbol{\delta}_k[n]&=x[k]\boldsymbol{\delta}_k[n]\\
+        x[n]*\boldsymbol{\delta}_k[n]&=x[n-k]
+    \end{align*}
+\end{proposition}
+
 根据上一小节中指出的“离散周期信号的周期起点可任意选取”，离散信号的反转的向量表示有较为简洁的形式：
 
 \begin{definition}[离散信号的反转]
@@ -8768,8 +9012,8 @@ x[0]
 \begin{proposition}[离散傅里叶变换的对偶性]
     设$x[n]$是周期为$N$的离散信号，其离散傅里叶变换为$X[k]$，则有
     \begin{align*}
-        \text{DFT}(x^-)[k]=X^-[k]=N\cdot\text{DFT}^{-1}(x)[k]\\
-        \text{DFT}\left(\text{DFT}x\right)[n]=N x^- [n]
+        &\text{DFT}(x^-)[k]=X^-[k]=N\cdot\text{DFT}^{-1}(x)[k]\\
+        &\text{DFT}\left(\text{DFT}x\right)[n]=N x^- [n]
     \end{align*}
     如果$x[n]$是实信号，则有
     \begin{align*}
@@ -8802,7 +9046,34 @@ x[0]
     \end{align*}
 \end{proof}
 
+另外，离散傅里叶变换是一种\textbf{正交变换}。记周期为$N$的离散傅里叶变换对应的矩阵为$\mathcal{F} _N$，则$\mathcal{F} _N$是正交矩阵（但不是单位正交矩阵）：
+\begin{align*}
+\mathcal{F}_N \mathcal{F}_N^H = N\cdot I_N
+\end{align*}
+其中$H$为埃尔米特算子，表示取矩阵的共轭转置，$I_N$为$N$阶单位矩阵。正交变换保持向量的内积，即$\forall \mathbf{x,y}\in\mathbb{C}^N$，有
+\begin{align*}
+    \mathbf{x}\cdot\mathbf{y}&=\frac{1}{N}\mathcal{F} _N \mathbf{x}\cdot\mathcal{F} _N \mathbf{y}
+\end{align*}
+由此可得离散傅里叶变换的帕塞瓦尔定理：
+\begin{theorem}[离散傅里叶变换的帕塞瓦尔定理]
+    设$x[n],y[n]$是长为$N$的离散信号，其离散傅里叶变换分别为$X[k],Y[k]$，则有
+    \[\sum_{n=0}^{N-1}x[n]\overline{y[n]}=\frac{1}{N}\sum_{k=0}^{N-1}X[k]\overline{Y[k]}\]
+    特别地，当$x[n]=y[n]$时，有
+    \[\sum_{n=0}^{N-1}|x[n]|^2=\frac{1}{N}\sum_{k=0}^{N-1}|X[k]|^2\]
+\end{theorem}
+
 \subsection{快速傅里叶变换}\label{sub:FFT}
+
+\subsection{周期离散系统分析}\label{sub:period_discrete_system}
+
+在标准正交基底下，卷积系统的矩阵是一个循环矩阵(circulant matrix)或托普利兹矩阵(Toepliz matrix)：\[\begin{pmatrix}
+    h[0] & h[N-1] & \cdots & h[1]\\
+    h[1] & h[0] & \cdots &  h[2]\\
+    \vdots & \vdots & \ddots & \vdots\\
+    h[N-1] & h[N-2] & \cdots & h[0]
+\end{pmatrix}\]
+
+%特征函数与周期矩阵的对角化
 
 \appendix
 
