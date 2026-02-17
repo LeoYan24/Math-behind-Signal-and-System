@@ -286,6 +286,10 @@
         1 & x>0
     \end{cases}\]
 \end{definition}
+
+通过对$x$的正负进行分类讨论，可以得到含单位阶跃函数的积分公式，后面会多次使用它：
+\[\int_{-\infty}^{x}u(y)f(y)\,dy=u(x)\int_{0}^{x}f(y)\,dy\]
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{Figure_1}
@@ -3177,7 +3181,7 @@ $$\sigma_a\delta=\delta(ax)=\frac{1}{|a|}\delta(x)$$
 常微分方程的解空间是有限维的，只要给定足够的初值数量，就可以唯一确定方程的解，因此常微分方程系统都具有\textbf{即时性}。在\ref{sub:compare_to_high_order}中，我们将对线性微分方程组的解空间维数进行说明。
 
 \begin{definition}[即时性与记忆性]
-一个系统具有\textbf{即时性}（或无记忆性、Markov性），如果该系统的响应在任意时刻$t$的状态完全且唯一地取决于该时刻的系统状态与激励，而不显式地依赖于任何过去时刻$t'<t$的系统状态或历史激励。换言之，如果一个初值问题的解存在且唯一，则由它描述的系统具有即时性。
+一个系统具有\textbf{即时性}（或无记忆性、Markov性），如果该系统在任意时刻$t$的状态完全且唯一地取决于该时刻的系统状态与激励，而不显式地依赖于任何过去时刻$t'<t$的系统状态或历史激励。换言之，如果一个初值问题的解存在且唯一，则由它描述的系统具有即时性。
 
 一个系统具有\textbf{记忆性}（或历史依赖性、非Markov性），如果系统的响应在任意时刻$t$的状态演化率显式地依赖于过去时刻$t'<t$的系统状态或历史激励，而不能被简化为仅依赖于当前时刻$t$的量。
 \end{definition}
@@ -3203,28 +3207,28 @@ $$\sigma_a\delta=\delta(ax)=\frac{1}{|a|}\delta(x)$$
 \begin{definition}[零输入响应与零状态响应]
    \textbf{零输入响应}(zero input response,$r_{zi}(t)$)是指$e(t)=0$时，由于系统原有能量而产生的响应；\textbf{零状态响应}(zero state response,$r_{zs}(t)$)是指将系统初始能量置零时的响应。\textbf{全响应}$r(t)=r_{zi}(t)+r_{zs}(t)$。
 \end{definition}
-对于零输入响应不为0的线性系统，考虑以两个激励$e_1(t),e_2(t)$的线性组合作为输入，则按照先前对线性系统的定义，直接将对应的两个响应$r_1(t),r_2(t)$进行线性组合，则零输入响应被重复计算，这不是我们希望看到的，因此我们其实应该定义\textbf{零状态响应有线性性的系统为线性系统}。
+对于零输入响应不为0的线性系统，考虑以两个激励$e_1(t),e_2(t)$的线性组合作为输入，则按照先前对线性系统的定义，直接将对应的两个响应$r_1(t),r_2(t)$进行线性组合，则零输入响应被重复计算，这不是我们希望看到的，因此我们其实应该定义\textbf{零状态响应有线性性的系统为线性系统}。后文中，如无特殊说明，响应总应理解为零状态响应，而零输入响应仅仅在分析给定系统时单独研究。
 
 \begin{definition}[时不变性和移不变性]
-    如果一个系统的输出不依赖于输入信号施加于系统的时间，输入信号发生时移，输出信号也发生相同的时移，即$\forall b\in\mathbb{R},H[e(t-b)]=r(t-b)$，则称该系统是\textbf{时不变系统}。用第二章中定义的时移算子的符号，时不变性可以记为$H\tau_b=\tau_b H$，换言之，时移和经过系统的次序可交换，这与我们的直观相符。
-
-    如果激励和响应的自变量是空间，我们同样可以定义系统的\textbf{移不变性}(shift invariance)，这时$H\tau_b=\tau_b H$中b是空间中的向量。后文中一般不特意区分时域和空间域。
+    如果一个系统的输出不依赖于输入信号施加于系统的时间，输入信号发生时移，输出信号也发生相同的时移，即
+    $$\forall b\in\mathbb{R},H[e(t-b)]=r(t-b),\text{即}H[\tau_b e(t)]=\tau_b r(t)$$
+    则称该系统是\textbf{时不变的}(time-invariant)。如果激励和响应的自变量是空间，我们同样可以定义系统的\textbf{移不变性}(shift-invariance)，这时$b$是空间中的向量。后文中一般不特意区分时域和空间域。
 \end{definition}
 \begin{definition}[线性时不变系统]
     如果一个系统既是线性的又是时不变的，就说它是\textbf{线性时不变系统}(linear time-invariant system,LTI)。
 \end{definition}
 
-线性时不变系统是信号与系统课程中所研究的主要系统类型。后两节中将介绍线性时不变系统与微分方程的关系：常系数线性微分方程（组）描述的系统是线性时不变系统，并结合微分方程的理论对这类特殊的系统进行进一步分析。
+线性时不变系统是信号与系统课程中所研究的主要系统类型。下面两节中我们将看到，常系数线性微分方程（组）描述的系统是线性时不变系统。对于线性时不变系统，定义：
 
 \begin{definition}[单位脉冲响应与单位阶跃响应]
-    当$e(t)=\delta(t)$时，$r_{zs}(t)$为\textbf{单位脉冲响应}，在不涉及零输入响应时就说$r(t)$为单位脉冲响应。当$e(t)=u(t)$时，响应$r(t)$称为\textbf{单位阶跃响应}。习惯上，将单位脉冲响应记为$h(t)$，单位阶跃响应记为$g(t)$。需要指出，对于线性系统，脉冲响应应该定义为双变量函数$h(x,y)=H[\delta(x-y)]$，见后文的讨论。
+    当$e(t)=\delta(t)$时，零状态响应$r_{zs}(t)$为\textbf{单位脉冲响应}；当$e(t)=u(t)$时，零状态响应$r_{zs}(t)$称为\textbf{单位阶跃响应}。习惯上，将单位脉冲响应记为$h(t)$，单位阶跃响应记为$g(t)$。
 \end{definition}
-线性时不变系统满足$r(t)=(h*e)(t)$，h为单位脉冲响应，将在\ref{sub:cascade}介绍。
 
 除了线性性与时不变性，系统还有一些其他的特性，例如稳定性和可逆性。系统的其他特性将在后文中陆续介绍。
 
 \begin{definition}[稳定性]
-如果一个系统在激励信号有界时，响应也是有界的，则称之为\textbf{稳定系统}(bounded-input bounded-output,BIBO)。
+如果一个系统在激励信号有界时，响应也是有界的，则称之为\textbf{稳定系统}(bounded-input bounded-output,BIBO)，即
+\[e(t)\in L^1(\mathbb{R})\implies r(t)\in L^1(\mathbb{R})\]
 \end{definition}
 我们将在\ref{sub:stability_of_system}和\ref{sub:z_singular_point}中，分别借助拉普拉斯变换和z变换的理论，给出连续的和离散的线性时不变系统具有稳定性的充分必要条件。
 
@@ -3249,16 +3253,18 @@ $$\sigma_a\delta=\delta(ax)=\frac{1}{|a|}\delta(x)$$
 \begin{equation*}
     r(t)=\int_{a}^{b}k(x,y)e(y)\,dy
 \end{equation*}
-其中，$k(x,y)$称为核函数(kernel)，$\int_{a}^{b}k(x,y)e(y)\,dy$称为对核积分(integrating against a kernel).
+其中，$k(x,y)$称为\textbf{核函数}(kernel)，$\int_{a}^{b}k(x,y)e(y)\,dy$称为\textbf{对核函数积分}(integrating against a kernel)，简称\textbf{对核积分}。
 \end{example}
-根据积分的线性性，对核积分系统也是线性的。我们将在下一小节中看到，线性系统总能描述为对核积分系统，因此它是我们考虑的主要的连续线性系统的类型。
+根据积分的线性性，对核积分系统也是线性的。习惯上将核函数的符号取为$k$。我们将在下一小节中看到，线性系统总能描述为对核积分系统，因此它是我们考虑的主要的连续线性系统的类型。利用核函数可以定义：
 
 \begin{definition}[转置系统对称系统与自伴系统]
-    类比线性代数中算子的转置以及对称算子、自伴算子，我们可以定义线性系统的转置系统、对称系统和自伴系统：
+    类比线性代数中算子的转置以及对称算子、自伴算子，对于对核积分系统
+    $r(t)=\int_{a}^{b}k(x,y)e(y)\,dy$
+    有：
 \begin{itemize}
-    \item 上述系统的转置系统描述为$e(t)\mapsto\int_{a}^{b}k(y,x)e(y)\,dy$
-    \item 如果$k(x,y)=k(y,x)$，称k是对称的并将系统称为\textbf{对称系统}
-    \item 如果$k(x,y)=\overline{k(y,x)}$，称k是埃尔米特的并将系统称为\textbf{自伴系统}。
+    \item 转置系统$H^T$描述为$H^T[e(t)]=\int_{a}^{b}k(y,x)e(y)\,dy$
+    \item 如果$k(x,y)=k(y,x)$，称k是\textbf{对称的}并将系统称为\textbf{对称系统}
+    \item 如果$k(x,y)=\overline{k(y,x)}$，称k是\textbf{埃尔米特的}并将系统称为\textbf{自伴系统}。
 \end{itemize}
 \end{definition}
 
@@ -3282,7 +3288,7 @@ $$\sigma_a\delta=\delta(ax)=\frac{1}{|a|}\delta(x)$$
 \begin{example}[傅里叶变换]
 $r(t)=\mathcal{F} e(t)$.
 
-在一些光学仪器中可以实现空间上的傅里叶变换，这时变量t是多维的空间变量，例如矩孔夫琅禾费衍射装置。作为径向对称函数的傅里叶变换的特例，零阶汉克尔变换可以用圆孔夫琅禾费衍射装置实现。对于这两个变换，见\ref{sub:multi_fourier}和\ref{sub:hankel}.
+在一些光学仪器中可以实现空间上的傅里叶变换，这时变量t是多维的空间变量，例如矩孔夫琅禾费衍射装置。
 \end{example}
 
 \subsection{系统的级联}\label{sub:cascade}
@@ -3298,14 +3304,14 @@ $r(t)=\mathcal{F} e(t)$.
 \end{proof}
 
 对核积分系统的级联也是对核积分系统，并且级联系统的核函数可以视作前级系统的核函数作为后级系统的激励信号输入后得到的响应函数：
-\begin{theorem}[对核积分系统的级联]
+\begin{proposition}[对核积分系统的级联]
     设有两对核积分系统K，L：
     \[K[e(t)](x)=\int_{a}^{b}k(x,y)e(y)\,dy,L[e(t)](x)=\int_{c}^{d}l(x,y)e(y)\,dy\]
 则级联系统$H=LK$也是对核积分系统，并且核函数为\begin{equation*}
     h(x,z)=L_y(k(y,z))(x)=\int_{c}^{d}l(x,y)k(y,z)\,dy
 \end{equation*}
 其中$L_y$表示$k(x,y)$作为y的函数输入系统L，输出为x,y的双变量函数。
-\end{theorem}
+\end{proposition}
 
 \begin{proof}\begin{align*}
     H[e(z)](x)&=LK[e(z)](x)\\
@@ -3315,46 +3321,53 @@ $r(t)=\mathcal{F} e(t)$.
 \end{align*}
 \end{proof}
 
-如果系统H是对核的无穷限积分，就有\textbf{叠加定理}(superposition thoerem)\cite{brad_osgood_ee261}，由于它是泛函分析中对应定理的特殊形式，有时也将它称为\textbf{施瓦兹核定理}(Schwartz kernel thoerem)。我们知道，函数与$\delta$的卷积还是它本身，这就好比信号在进入任何一个系统前，先经过了一个与$\delta$卷积的系统，利用这一观点即可得到：
+函数与$\delta$的卷积还是它本身，这就好比信号在进入任何一个系统前，先经过了一个与$\delta$卷积的系统，利用这一观点即可得到\textbf{叠加定理}(superposition thoerem)\cite{brad_osgood_ee261}，由于它是泛函分析中对应定理的特殊形式，有时也将它称为\textbf{施瓦兹核定理}(Schwartz kernel thoerem)。
 \begin{theorem}[叠加定理/施瓦兹核定理]
     \begin{equation*}
-        r(x)=\int_{-\infty}^{\infty}h(x,y)e(y)\,dy
+        r(x)=\int_{-\infty}^{\infty}k(x,y)e(y)\,dy
     \end{equation*}
-其中$h(x,y)$是线性系统H的脉冲响应。
+其中$k(x,y)$是线性系统H的核函数。
 \end{theorem}
 \begin{proof}\begin{align*}
     H[e(y)]&=H[e*\delta(y)]\\
     &=H\left[\int_{-\infty}^{\infty}\delta(x-y)e(y)\,dy\right]\\
-    &=\int_{-\infty}^{\infty}H[\delta(x-y)]e(y)\,dy\\
-    &=\int_{-\infty}^{\infty}h(x,y)e(y)\,dy
+    &=\int_{-\infty}^{\infty}H[\delta(x-y)]e(y)\,dy
 \end{align*}
+令$k(x,y)=H[\delta(x-y)]$即得。
 \end{proof}
-反过来，如果一个系统是激励信号与脉冲响应的含参积分，那么这个系统也是线性的，这得自积分的线性性。至此我们有了充分的动机去定义：
-\begin{definition}[线性系统的脉冲响应]
-    线性系统H的\textbf{脉冲响应}定义为$h(x,y)=H_x[\delta(x-y)]$，其中$H_x$表示$\delta(x-y)$作为x的函数输入系统，输出为x,y的双变量函数。
-\end{definition}
+
+特别地，有限区间上的对核积分系统也满足叠加定理，此时核函数满足：
+\[k(x,y)=k(x,y)\chi_{[a,b]}(y)\]
+
+由于对核积分系统是线性的，系统的线性性就等价于系统能够用对核积分来描述，并且核函数总为
+$$k(x,y)=H_x[\delta(x-y)]$$
+
 \begin{proposition}[线性系统的等价定义]
-    “一个系统是线性系统”等价于“响应是激励对脉冲响应积分”。
+    “系统$H$是线性系统”等价于“响应是激励对核$k(x,y)$积分”。
 \end{proposition}
 
-对于时不变系统，这个定理具有更加优美的形式。将系统视为线性系统，其脉冲响应为
-\[h(x,y)=H_x[\delta(x-y)]=H[\tau_y\delta(x)]=\tau_y H[\delta(x)]\]
-按照单变量的脉冲响应的定义，这就是$\tau_y h(x)=h(x-y)$，它只依赖于x、y的差值，带入叠加定理：\begin{align*}
+对于时不变系统，这个定理具有更加优美的形式。将系统视为线性系统，其核函数为
+\[k(x,y)=H_x[\delta(x-y)]=H[\tau_y\delta(x)]=\tau_y H[\delta(x)]=h(x-y)\]
+其中$h$表示系统的单位脉冲响应。带入叠加定理，即得：
+\begin{align*}
     r(x)&=\int_{-\infty}^{\infty}h(x-y)e(y)\,dy\\
     &=(h*e)(t)
 \end{align*}
-也就是说，信号经过线性时不变系统相当于与这个系统的单位脉冲响应做卷积。下面来验证，如果一个系统是激励信号与脉冲响应的卷积，那么这个系统也是线性时不变系统。线性性是显然的，我们来验证$H\tau_b=\tau_b H$:\begin{align*}
+
+也就是说，\textbf{信号经过线性时不变系统相当于与这个系统的单位脉冲响应做卷积}，这样，对线性时不变系统的研究归结为对单位脉冲响应的研究，极大地降低了研究的难度。另一方面，卷积描述的系统也是线性时不变的：\begin{align*}
     H[\tau_b e(y)](x)=(h*\tau_b e)(x)=\tau_b(h*e)(x)=\tau_b H[e(y)]
 \end{align*}
-总之，我们有：
+而线性性是显然的。总之，我们有：
 \begin{proposition}[线性时不变系统的等价定义]
-    “一个系统是线性时不变系统”等价于“响应是激励与脉冲响应的卷积”。
+    “系统$H$是线性时不变系统”等价于“响应是激励与单位脉冲响应$h$的卷积”，即$r(t)=(h*e)(t)$。
 \end{proposition}
 
 线性时不变系统的单位阶跃响应是单位脉冲响应的积分，可以利用此关系式进行单位脉冲响应或单位阶跃响应的求解，下一小节中将给出一个利用此方法的例子。
 
 \begin{proposition}[单位阶跃响应]
-线性时不变系统的单位阶跃响应$g(t)=\int_{-\infty}^{t}h(y)\,dy$，其中$h(t)$为系统的单位脉冲响应。
+线性时不变系统的单位阶跃响应为
+$$g(t)=\int_{-\infty}^{t}h(y)\,dy$$
+其中$h(t)$为系统的单位脉冲响应。
 \end{proposition}
 \begin{proof}
 \begin{align*}
@@ -8527,17 +8540,73 @@ $$\text{Res}(f,\infty)=\dfrac{1}{2\pi i}\oint_{C^-_R}f(z)\,dz$$
 
 典型的离散系统是通过差分方程来描述的，差分方程就是我们所熟知的数列递推式的一种推广。其中，常系数线性差分方程是我们主要关注的线性时不变离散系统，我们将在下一节介绍差分方程。
 
+\begin{example}
+    设离散系统的激励$e[n]$与响应$r[n]$满足差分方程
+    \[r[n]-\frac{1}{2}r[n-1]=e[n]\]
+    该系统是一个因果的离散线性时不变系统。
+\end{example}
+
 更为特殊的情况下，激励与响应都是周期信号，称之为周期离散系统。此时不妨将激励与响应都视作有限维的向量，用矩阵乘法描述线性系统。这种系统将在\ref{sub:period_discrete_system}介绍。
 
 \subsection{离散系统概述}\label{sub:discrete_system_overview}
 
-仿照\ref{sub:cascade}分析离散系统的级联。显然，线性系统的级联仍然是线性的，时不变系统的级联仍然是时不变的，因果系统的级联仍然是因果的。对于离散系统，“对核积分”就相当于加权求和，“对核卷积”就相当于卷积和，可以想象，叠加定理对于离散系统仍成立。
+本小节中，我们先列举一些离散系统的基本特性，然后讨论离散系统的级联。
+
+\begin{definition}[离散系统的基本特性]
+    设离散系统的激励为$e[n]$，响应为$r[n]$，则该系统具有以下基本特性：
+    \begin{itemize}
+        \item \textbf{线性性}：满足叠加定理，即对于任意激励$e_1[n],e_2[n]$及任意常数$a,b\in\mathbb{C}$，有
+        \[H(ae_1[n]+be_2[n])=aHr_1[n]+bHr_2[n]\]
+        其中$r_1[n],r_2[n]$分别为$e_1[n],e_2[n]$经过系统后的响应。
+        \item \textbf{时不变性}：系统的作用不依赖于时间，即对于任意激励$e[n]$及任意整数$k\in\mathbb{Z}$，有
+        \[H(\tau_k e[n])=\tau_k H(e[n])\]
+        其中$\tau_k$表示时间平移算子，即$\tau_k e[n]=e[n-k]$。
+        \item \textbf{因果性}：系统的响应不早于激励，即
+        \[\forall e[n],e[n]=0,n<0\implies Hr[n]=0,n<0\]
+        \item \textbf{稳定性}：激励信号有界时，响应也是有界的，即
+        \[\forall e[n]\in l^{\infty}(\mathbb{Z}),Hr[n]\in l^{\infty}(\mathbb{Z})\]
+        \item \textbf{可逆性}：如果$H$是双射，则称系统可逆，此时存在一个系统$H^{-1}$使得对于任意激励$e[n]$，有
+        \[H^{-1}Hr[n]=e[n]\]
+        \item \textbf{即时性}与\textbf{记忆性}：如果该系统在任意时刻$t$的状态完全且唯一地取决于该时刻的系统状态与激励，而不显式地依赖于任何过去时刻$t'<t$的系统状态或历史激励，则称该系统为即时的；否则称该系统为有记忆的。
+    \end{itemize}
+\end{definition}
+
+显然，线性系统的级联仍然是线性的，时不变系统的级联仍然是时不变的，因果系统的级联仍然是因果的。对于离散系统，“对核积分”就相当于加权求和，“对核卷积”就相当于卷积和，可以想象，叠加定理对于离散系统仍成立。
+
+\begin{definition}[离散线性系统的脉冲响应]
+    离散线性系统$H$的\textbf{核函数}定义为$k[m,n]=H_m(\delta[m-n])$，其中$H_m$表示$\delta[m-n]$作为$m$的函数输入系统，输出为$m,n$的双变量函数
+\end{definition}
 
 \begin{theorem}[叠加定理]
-    
+    \[r[m]=\sum_{n=-\infty}^{\infty}k[m,n]e[n]\]
+    其中$k[m,n]$为系统的核函数。
 \end{theorem}
+\begin{proof}
+    离散信号也可以视为它与单位脉冲信号的卷积：
+    \[e[m]=(e*\delta)[m]=\sum_{n=-\infty}^{\infty}e[n]\delta[m-n]\]
+    根据系统的线性性，有
+    \begin{align*}
+        r[m]&=H(e[m])=H_m\left(\sum_{n=-\infty}^{\infty}e[n]\delta[m-n]\right)\\
+        &=\sum_{n=-\infty}^{\infty}e[n]H_m(\delta[m-n])
+    \end{align*}
+    令$k[m,n]=H_m(\delta[m-n])$即得。
+\end{proof}
 
+另一方面，由加权求和描述的系统显然也是线性的，因此我们可以得到：
+\begin{proposition}[离散线性系统的等价定义]
+    一个离散系统是线性系统当且仅当响应是激励的加权求和。
+\end{proposition}
 
+类似连续系统，只要系统有线性性，就可以将系统原有能量引起的\textbf{零输入响应}$r_{zi}[n]$与单纯由激励引起的\textbf{零状态响应}$r_{zs}[n]$分开考虑。进一步，如果系统还具有时不变性，则可定义：
+\begin{definition}[单位脉冲响应与单位阶跃响应]
+    当$e[n]=\delta[n]$时，系统的响应称为\textbf{单位脉冲响应}，记为$h[n]$；当$e[n]=u[n]$时，系统的响应称为\textbf{单位阶跃响应}，记为$s[n]$。
+\end{definition}
+
+这样，核函数可以用单位脉冲响应来表示，线性时不变系统的响应可以用卷积和来表示：
+\[k[m,n]=H_m[\delta[m-n]]=H(\tau_n \delta[m])=\tau_n H(\delta[m])=h[m-n]\]
+\[r[n]=\sum_{m=-\infty}^{\infty}h[n-m]e[m]=(h*e)[n]\]
+
+可见对于离散系统，仍有“线性时不变”当且仅当“卷积和系统”。
 
 \subsection{离散系统的系统函数}\label{sub:discrete_system_function}
 
