@@ -1344,31 +1344,31 @@ $dm$表示勒贝格测度。对于单调递增的有界变差函数$f$，可以�
 %可以想象，依范数收敛要求极限内的函数相当接近于0，但如果在一个点处产生了误差，不论误差多大，都不会影响积分的值。事实上，只要存在误差的点构成零测集，就不会影响积分的值，这时我们称$\sum_{i = 1}^{n}  a_i f_i(t)$几乎处处收敛于$f(t)$，只是这样弱的要求有时会导致积分在黎曼积分的意义下不存在，但勒贝格积分可以处理这种情况，读者可以参考\ref{sec:signal}连续信号与离散信号中对勒贝格积分的讨论。
 \subsection{正交函数系}\label{sub:orthognal}
 \begin{definition}[正交基]
-    如果有内积空间$V$的一组基$\{\mathbf{v_1},\mathbf{v_2},\dots ,\mathbf{v_n}\}$，满足$\langle \mathbf{v_i},\mathbf{v_j}\rangle =0,i \neq j$，则称这组基是一组\textbf{正交基}(orthognal bases)。\\如果对$V$中任一向量$\mathbf{w}$，均有以下分解式：
-\[\mathbf{w}=\sum_{i = 1}^{n}  c_i \mathbf{v_i}\]
+    如果有内积空间$V$的一组基$\{\mathbf{v}_1,\mathbf{v}_2,\dots ,\mathbf{v}_n\}$，满足$\langle \mathbf{v}_i,\mathbf{v}_j\rangle =0,i \neq j$，则称这组基是一组\textbf{正交基}(orthognal bases)。\\如果对$V$中任一向量$\mathbf{w}$，均有以下分解式：
+    \[\mathbf{w}=\sum_{i = 1}^{n}  c_i \mathbf{v}_i\]
 则这组基是\textbf{完备正交基}(complete orthognal bases)。\\
-如果$\{\mathbf{v_1},\mathbf{v_2},\dots ,\mathbf{v_n}\}$还满足$\langle \mathbf{v_i},\mathbf{v_i}\rangle =1,i \in \{1,2,\dots ,n\}$，称这组基是\textbf{标准完备正交基} (complete othornormal bases)，此时空间中任意向量均有分解式
+如果$\{\mathbf{v}_1,\mathbf{v}_2,\dots ,\mathbf{v}_n\}$还满足$\langle \mathbf{v}_i,\mathbf{v}_i\rangle =1,i \in \{1,2,\dots ,n\}$，称这组基是\textbf{标准完备正交基} (complete othornormal bases)，此时空间中任意向量均有分解式
 \begin{align*}
-    \mathbf{w}=\sum_{i=1}^{n}\langle \mathbf{w},\mathbf{v_i}\rangle \mathbf{v_i}
+    \mathbf{w}=\sum_{i=1}^{n}\langle \mathbf{w},\mathbf{v}_i\rangle \mathbf{v}_i
 \end{align*}
 \end{definition}
-我们对向量在标准正交基下的分解式做一些解释。在$\{\mathbf{v_1},\mathbf{v_2},\dots ,\mathbf{v_n}\}$是完备正交基的情况下，就可以将$\mathbf{w}=\sum_{i = 1}^{n}  c_i \mathbf{v_i}$两边同时对$\mathbf{v_j}$做内积，得到
+我们对向量在标准正交基下的分解式做一些解释。在$\{\mathbf{v}_1,\mathbf{v}_2,\dots ,\mathbf{v}_n\}$是完备正交基的情况下，就可以将$\mathbf{w}=\sum_{i = 1}^{n}  c_i \mathbf{v}_i$两边同时对$\mathbf{v}_j$做内积，得到
 \begin{align*}
-    \langle \mathbf{w},\mathbf{v_j} \rangle=\left\langle \sum_{i = 1}^{n}  c_i \mathbf{v_i},\mathbf{v_j} \right\rangle =c_j\left\langle \mathbf{v_j},\mathbf{v_j} \right\rangle \\
-    c_j=\frac{\langle \mathbf{w},\mathbf{v_j} \rangle}{\langle \mathbf{v_j},\mathbf{v_j} \rangle},
-    \mathbf{w}=\sum_{j = 1}^{n}  \frac{\langle \mathbf{w},\mathbf{v_j} \rangle}{\langle \mathbf{v_j},\mathbf{v_j} \rangle} \mathbf{v_j}
+    \langle \mathbf{w},\mathbf{v}_j \rangle=\left\langle \sum_{i = 1}^{n}  c_i \mathbf{v}_i,\mathbf{v}_j \right\rangle =c_j\left\langle \mathbf{v}_j,\mathbf{v}_j \right\rangle \\
+    c_j=\frac{\langle \mathbf{w},\mathbf{v}_j \rangle}{\langle \mathbf{v}_j,\mathbf{v}_j \rangle},
+    \mathbf{w}=\sum_{j = 1}^{n}  \frac{\langle \mathbf{w},\mathbf{v}_j \rangle}{\langle \mathbf{v}_j,\mathbf{v}_j \rangle} \mathbf{v}_j
 \end{align*}
-而标准正交基是$\langle \mathbf{v_j},\mathbf{v_j} \rangle=1$的情况。
+而标准正交基是$\langle \mathbf{v}_j,\mathbf{v}_j \rangle=1$的情况。
 
 给出了标准完备正交基后，就可以得到以下命题，它是勾股定理的高维推广。
 \begin{proposition}[勾股定理/毕达哥拉斯恒等式]
-    \[|\mathbf{w}|^2=\sum_{i=1}^{n}|\langle\mathbf{w,v_i}\rangle|^2|\mathbf{v_i}|^2=\sum_{i=1}^{n}|\langle\mathbf{w,v_i}\rangle|^2\]
+    \[|\mathbf{w}|^2=\sum_{i=1}^{n}|\langle\mathbf{w,v}_i\rangle|^2|\mathbf{v}_i|^2=\sum_{i=1}^{n}|\langle\mathbf{w,v}_i\rangle|^2\]
 \end{proposition}
 直接将$\mathbf{w}$与自己做内积并将之前得到的分解式带入，很容易证明这个命题。
 \begin{proof}\begin{align*}
-    |\mathbf{w}|^2 & =\left\langle \sum_{i=1}^{n}\langle \mathbf{w},\mathbf{v_i}\rangle \mathbf{v_i},\sum_{i=1}^{n}\langle \mathbf{w},\mathbf{v_i}\rangle \mathbf{v_i}\right\rangle                                           \\
-                   & =\sum_{i=1}^{n}|\langle\mathbf{w,v_i}\rangle|^2\langle\mathbf{v_i,v_i}\rangle+\sum_{1\leq i<j\leq n}\langle \mathbf{w,v_i}\rangle\langle \mathbf{w,v_j}\rangle\langle \mathbf{v_i,v_j}\rangle \\
-                   & =\sum_{i=1}^{n}|\langle\mathbf{w,v_i}\rangle|^2|\mathbf{v_i}|^2=\sum_{i=1}^{n}|\langle\mathbf{w,v_i}\rangle|^2
+    |\mathbf{w}|^2 & =\left\langle \sum_{i=1}^{n}\langle \mathbf{w},\mathbf{v}_i\rangle \mathbf{v}_i,\sum_{i=1}^{n}\langle \mathbf{w},\mathbf{v}_i\rangle \mathbf{v}_i\right\rangle                                           \\
+                   & =\sum_{i=1}^{n}|\langle\mathbf{w,v}_i\rangle|^2\langle\mathbf{v}_i,\mathbf{v}_i\rangle+\sum_{1\leq i<j\leq n}\langle \mathbf{w,v}_i\rangle\langle \mathbf{w,v}_j\rangle\langle \mathbf{v}_i,\mathbf{v}_j\rangle \\
+                   & =\sum_{i=1}^{n}|\langle\mathbf{w,v}_i\rangle|^2|\mathbf{v}_i|^2=\sum_{i=1}^{n}|\langle\mathbf{w,v}_i\rangle|^2
 \end{align*}\end{proof}
 可见做正交基分解能够极大地简化对线性赋范空间的研究。
 
@@ -1416,7 +1416,7 @@ $dm$表示勒贝格测度。对于单调递增的有界变差函数$f$，可以�
 \[b_k=\frac{2}{T}\int_T f(t)\sin(k\omega t)\,dt\]
 \[c_k=\sqrt{a_k^2+b_k^2}\]
 \end{claim}
-下面用完备标准正交函数系的观点来得到以上公式。在学习数学分析时，我们已经看到三角函数系$1,\sin(\omega t),\cos(\omega t),\sin(2\omega t),\cos(2\omega t),\dots(\omega =\dfrac{2\pi}{T})$是正交的（读者可以自行验证），但不是单位正交的，因为
+下面用完备标准正交函数系的观点来得到以上公式。在学习数学分析时，我们已经看到三角函数系$1,\sin(\omega t),\cos(\omega t),\sin(2\omega t),\cos(2\omega t),\dots\left(\omega =\dfrac{2\pi}{T}\right)$是正交的（读者可以自行验证），但不是单位正交的，因为
 \[(\sin(k\omega t),\sin(k\omega t))=\int_{T}\sin^2(k\omega t)\,dt=\int_{T}\frac{1-\cos(2k\omega t)}{2}=\frac{T}{2}\]
 \[(\cos(k\omega t),\cos(k\omega t))=\int_{T}\cos^2(k\omega t)\,dt=\int_{T}\frac{1+\cos(2k\omega t)}{2}=\frac{T}{2}\]
 可以将它们单位化，也可以直接采用完备正交基分解的公式，
@@ -1484,12 +1484,14 @@ $dm$表示勒贝格测度。对于单调递增的有界变差函数$f$，可以�
 \end{definition}
 容易验证$\{e^{ik\omega t}\}_{k=0}^{\infty}$是完备正交函数系：
 \begin{align*}
-    (e^{ik_1\omega t},e^{ik_2\omega t}) & =\int_{T}e^{ik_1\omega t}(e^{ik_2\omega t})^*\,dt                 \\
-                                        & =\int_{T}e^{i(k_1-k_2)\omega t}                                   \\
-                                        & =\frac{2}{i\omega (k_1-k_2)}\evalat{e^{i(k_1-k_2)\omega t}}{0}{T} \\
-                                        & =0(k_1,k_2\in \mathbb{Z},k_1\neq k_2)                             \\
-    (e^{ik\omega t},e^{ik\omega t})     & =\int_{T}e^{ik\omega t}(e^{ik\omega t})^*\,dt                     \\
-                                        & =\int_{T}\,dt=T(k\in \mathbb{Z} )
+    (e^{ik_1\omega t},e^{ik_2\omega t})&=\int_{T}e^{ik_1\omega t}(e^{ik_2\omega t})^*\,dt\\
+    &=\int_{T}e^{i(k_1-k_2)\omega t}\\
+    &=\frac{2}{i\omega (k_1-k_2)}\evalat{e^{i(k_1-k_2)\omega t}}{0}{T}\\
+    &=0(k_1,k_2\in \mathbb{Z},k_1\neq k_2)
+\end{align*}
+\begin{align*}
+    (e^{ik\omega t},e^{ik\omega t})&=\int_{T}e^{ik\omega t}(e^{ik\omega t})^*\,dt\\
+    &=\int_{T}\,dt=T(k\in \mathbb{Z} )
 \end{align*}
 和三角函数系的情况一样，我们得到$c_k$的计算公式：
 \begin{align*}
@@ -1497,13 +1499,25 @@ $dm$表示勒贝格测度。对于单调递增的有界变差函数$f$，可以�
         & =\frac{1}{T}\int_{T}f(t)(e^{ik\omega t})^*\,dt                 \\
         & =\frac{1}{T}\int_{T}f(t)e^{-ik\omega t}\,dt
 \end{align*}
-有时也将$c_k$记作$\hat{f}(k\omega)$或$\hat{F}(k)$，表示f在频域中的点$k\omega$处的值。一般而言，我们只将最小正周期称为一个函数的周期，但周期为T的函数可以有多个频率$k\omega(k \in \mathbb{Z})$，绘制频谱时，由于难以画出复数，常用\textbf{幅度谱}$|\hat{f}(k\omega)|-\omega$和\textbf{相位谱}$\phi_k-\omega$来表征函数，其中$\phi_k=\arg\hat{f}(k\omega)$。对于实信号，
-\[c_k=(c_{-k})^*,|\hat{f}(k\omega)|=|\hat{f}(-k\omega)|,\phi_{-k}=-\phi_k\]
-即幅度谱为偶函数，相位谱为奇函数，所以实信号的频谱中有一半是冗余的，按照展开式
+有时也将$c_k$记作$\hat{f}(k\omega)$或$\hat{F}(k)$，表示f在频域中的点$k\omega$处的值。一般而言，我们只将最小正周期称为一个函数的周期，\textbf{但周期为T的函数可以有多个频率$k\omega(k \in \mathbb{Z})$}。
+
+为了直观地看出周期信号的各个频率分量的大小与相位，我们通常会绘制\textbf{频谱} (spectrum)来表征函数的频域信息：
+
+\begin{definition}[频谱]
+    \textbf{频谱} (spectrum)指函数频域图像，通常用其指数形式的傅里叶系数$c_k$来表征。由于难以画出复数，常用\textbf{幅度谱}$|\hat{f}(k\omega)|-\omega$和\textbf{相位谱}$\phi_k-\omega$，其中$\phi_k=\arg \hat{f}(k\omega)$。
+\end{definition}
+
+对于实信号，
+\[\hat{f}(k\omega)=\hat{f}(-k\omega)^*\implies |\hat{f}(k\omega)|=|\hat{f}(-k\omega)|,\phi_{-k}=-\phi_k\]
+即幅度谱为偶函数，相位谱为奇函数，所以实信号的频谱中有一半是冗余的。因此，有时也按照三角形式的傅里叶展开式
 \[\frac{c_0}{2}+\sum_{k = 1}^{\infty} c_k\cos(k\omega t+\varphi _k)\]
-绘制的频谱$c_k-\omega$（注意不是指数函数形式的傅里叶系数）和$\phi_k-\omega$称为\textbf{单边频谱}，而完整的频谱称为\textbf{双边频谱}，从
-\[\cos(k\omega t+\varphi _k)=\frac{e^{i(k\omega t+\varphi_k)}+e^{-i(k\omega t+\varphi_k)}}{2}\]
-可知单边频谱相比双边频谱，在给定正频率处的幅值加倍，相位不变。这里的频率实际上是角频率$\omega$，用频率f画频谱只涉及图像的横向伸缩，此处不再赘述。
+绘制频谱$|c_k|-\omega$（注意此时$c_k$不是指数函数形式的傅里叶系数）和$\phi_k-\omega$，称之为\textbf{单边频谱}，而完整的频谱称为\textbf{双边频谱}，根据欧拉公式，
+\begin{align*}
+    c_k\cos(k\omega t+\varphi _k)&=\frac{c_k}{2}e^{i(k\omega t+\varphi_k)}+\frac{c_k}{2}e^{-i(k\omega t+\varphi_k)}\\
+    &=\frac{c_k}{2}e^{i(k\omega t+\varphi_k)}+\frac{c_{-k}^*}{2}e^{i(-k\omega t+\varphi_{-k})}\\
+    \implies c_k&=2\hat{f}(k\omega),k>0
+\end{align*}
+因此\textbf{对于实函数，单边频谱相比双边频谱，在正频率处的幅值加倍，相位不变，展示频域信息的效果不变，但没有冗余}。
 
 \begin{example}[周期矩形脉冲信号的傅里叶级数展开和频谱图]
 脉冲宽度为$\tau$，脉冲幅度为E，周期为$T (\tau<T)$的周期矩形脉冲信号$f(t)=E\chi_{[-\tau/2,\tau/2]}$，基波角频率$\omega=\dfrac{2\pi}{T}$，傅里叶级数展开为
@@ -1525,7 +1539,55 @@ $dm$表示勒贝格测度。对于单调递增的有界变差函数$f$，可以�
 \end{definition}
 
 \subsection{傅里叶级数的收敛性}\label{sub:fourier_series_convergency}
-我们根据内积空间的理论写出了函数的傅里叶级数展开式，但这并不能保证傅里叶级数存在且收敛（换言之，前文所述的展开式中等号不能保证相等，只能保证后者是前者的展开式，尽管在多数情况下等号是正确的），保证这一点需要\textbf{狄利克雷条件}：
+
+我们根据内积空间的理论写出了函数的傅里叶级数展开式，但这并不能保证傅里叶级数存在且逐点收敛于原函数，换言之，前文所述的展开式中使用等号是不严谨的做法，我们只能保证后者是前者的展开式，尽管在多数情况下等号是正确的。
+
+本小节从两个角度来考察傅里叶级数的收敛性：我们将证明傅里叶级数依范数收敛（即均方收敛），并指出一些与逐点收敛性有关的经典结论。
+
+回顾依范数收敛的定义：
+\begin{definition}
+    在内积空间$L^2([0,T])$中，函数项级数$\sum_{i = 1}^{n}  a_i f_i(t)$依范数收敛于$f(t)$，如果
+    \[\lim_{n \to \infty} \left\| f(t)-\sum_{i = 1}^{n}  a_i f_i(t)\right\|_2=0\]
+    其中
+    \[\left\|f\right\|_2^2=(f,f)=\int_{0}^{T}|f(t)|^2\,dt,\forall f\in L^2([0,T])\]
+\end{definition}
+
+作为一个引理，我们首先来证明（指数形式的）傅里叶级数是完备正交基$\{e^{ik\omega t}\}_{k=0}^{\infty}$意义下的最佳逼近：
+\begin{lemma}
+    设$f\in L^2([0,T])$，指数形式的傅里叶系数为$c_k(k\in\mathbb{Z} )$，则对于任意的正整数N和任意的复数列$\{\alpha_k\}_{k=-\infty}^{\infty}$，都有
+    \[\left\|f(t)-\sum_{k=-N}^{N}c_k e^{ik\omega t}\right\|_2\leq\left\|f(t)-\sum_{k=-N}^{N}\alpha_k e^{ik\omega t}\right\|_2\]
+    取等条件为$\alpha_k=c_k,k=-N,\cdots,N$。
+\end{lemma}
+\begin{proof}
+    利用正交基的定义，$c_k$是函数$f$在基函数$e^{ik\omega t}$上投影分量的大小，因此，
+    \[\left(f-\sum_{k=-N}^{N}c_k e^{ik\omega t},e^{ik\omega t}\right)=0,k=-N,\cdots,N\]
+    对下式
+    \[f(t)-\sum_{k=-N}^{N}\alpha_k e^{ik\omega t}=\left(f(t)-\sum_{k=-N}^{N}c_k e^{ik\omega t}\right)+\sum_{k=-N}^{N}(c_k-\alpha_k) e^{ik\omega t}\]
+    用勾股定理，得到
+    \begin{align*}
+        \left\|f(t)-\sum_{k=-N}^{N}\alpha_k e^{ik\omega t}\right\|_2^2&=\left\|f(t)-\sum_{k=-N}^{N}c_k e^{ik\omega t}\right\|_2^2+\left\|\sum_{k=-N}^{N}(c_k-\alpha_k) e^{ik\omega t}\right\|_2^2\\
+        &\geq \left\|f(t)-\sum_{k=-N}^{N}c_k e^{ik\omega t}\right\|_2^2
+    \end{align*}
+    取等条件为$\alpha_k=c_k,k=-N,\cdots,N$。
+\end{proof}
+
+为了证明依范数收敛性，必须引入一个结论：
+\begin{claim}
+    三角多项式（即形如傅里叶级数部分和的函数）在$L^2([0,T])$空间中是稠密的，即$\forall f\in L^2([0,T]),\forall \varepsilon >0$，存在一个三角多项式$P(t)$使得$\|f-P\|_2<\varepsilon$。
+\end{claim}
+
+由于傅里叶级数是$f$的最佳逼近，只要指出一个$M$次的三角多项式，使得$\|f-P\|_2<\varepsilon$，就有
+\begin{align*}
+    \|f-S_N\|_2 & \leq \|f-P\|_2<\epsilon,\forall N>M
+\end{align*}
+综上我们证明了：
+\begin{theorem}[傅里叶级数的依范数收敛性]
+    设$f\in L^2([0,T])$，指数形式的傅里叶系数为$c_k(k\in\mathbb{Z} )$，则
+    \[\lim_{N \to \infty} \left\| f(t)-\sum_{k=-N}^{N}c_k e^{ik\omega t}\right\|_2=0\]
+\end{theorem}
+
+对于逐点收敛性，狄利克雷给出了它的一个充分条件，称之为\textbf{狄利克雷条件}，满足这个条件的函数的傅里叶级数在任意点收敛于其左右极限的平均值。在此之前给出两个概念：
+
 \begin{definition}[狄利克雷条件]
     \quad
     \begin{itemize}[nosep, left=0pt]
@@ -1542,11 +1604,16 @@ $dm$表示勒贝格测度。对于单调递增的有界变差函数$f$，可以�
     满足狄利克雷条件时，f的傅里叶级数展开在在任意点收敛到其左右极限的平均值：
     \[\forall t\in \mathbb{R},\sum_{k=\infty}^{\infty}c_k e^{2\pi ikt}=\frac{f(t+)+f(t-)}{2}\]
 \end{theorem}
-最后一个条件实际上相当于要求f是有界变差函数(Bounded Variatioin Function)，感兴趣的读者可以在实变函数的教材（如\cite{real_analysis}）中了解这种函数。在\ref{sub:uniform_converge}中我们将讨论另外的更易理解的条件：
+
+如果函数在有限个点处不连续，我们的确无法将这一结论加强到逐点收敛，因为在不连续点处函数的取值不影响积分值，也就不影响傅里叶系数，当然也就得不到不连续点处的收敛性，但是如果将分段连续函数在不连续点处的取值定义为左右极限的平均值，这样就能够得到逐点收敛性了。
+
+最后一个条件实际上相当于要求f是有界变差函数，感兴趣的读者可以参考实变函数的教材（如\cite{simple_real_analysis}，\cite{real_analysis}）。在\ref{sub:uniform_converge}中我们将讨论另外的更易理解的条件：
 \begin{definition}[分段光滑]
     在区间$[a,b]$上，函数$f$称为\textbf{分段光滑} (piecewise smooth)，如果存在区间的划分$a=x_0<x_1<\dots <x_n=b$，使得在每个子区间$(x_{i-1},x_i)$上f可微，且区间端点处$f$的左右导数存在，记作$f\in PS[a,b]$。
 \end{definition}
-看起来，可导性比连续性强不少，但在大部分情况下，我们讨论的函数都是分段光滑。在分段光滑的条件下，我们可以证明傅里叶级数是一致收敛于原函数的。
+在分段光滑的条件下，我们可以证明傅里叶级数是\textbf{一致收敛}于原函数的。
+
+此外，逐点收敛性可以推广为\textbf{Cesàro收敛}或\textbf{Abel收敛}，逐点收敛性强于这两种收敛性，但是，只要函数$f\in L^1([0,T])\cap L^2([0,T])$，就能保证$f$的傅里叶级数在任意点处Cesàro收敛于$f(t)$，而Cesàro收敛又能推出Abel收敛。这一条件比狄利克雷条件弱一些。对于这两种收敛性的定义及其证明，可以参考\cite{stein2011fourier}。
 
 \subsection{帕塞瓦尔恒等式}\label{sub:paseval}
 类比有限维线性空间中的勾股定理，有
@@ -1555,7 +1622,7 @@ $dm$表示勒贝格测度。对于单调递增的有界变差函数$f$，可以�
 即\[P=\frac{1}{T}\int_{T}|f(t)|^2\,dt=\sum_{k=1}^{\infty}c_k^2\]
 其中P为平均功率。
 \end{theorem}
-至此，我们得到了傅里叶系数的公式和帕塞瓦尔定理，但其实证明用到的结论是基于有限维线性空间的，现在就来填补这个逻辑漏洞，对此不感兴趣的读者可以忽略这部分内容。以下设$\{\phi_n\}_{n=1}^{\infty}$是$L^2(a,b)$的标准正交基，$f\in L^2(a,b)$（注意这里已经不局限于讨论傅里叶级数，并且与前文未标准化的正交基略有形式上的差别）。
+至此，我们提出了傅里叶系数的公式和帕塞瓦尔定理，但所用到的勾股定理是基于有限维线性空间的，现在就来填补这个逻辑漏洞，对此不感兴趣的读者可以忽略这部分内容。以下设$\{\phi_n\}_{n=1}^{\infty}$是$L^2(a,b)$的标准正交基，$f\in L^2(a,b)$（注意这里已经不局限于讨论傅里叶级数，并且与前文未标准化的正交基略有形式上的差别）。
 
 \begin{lemma}[*贝塞尔不等式]
 \[\sum_{n=1}^{\infty}|(f,\phi_n)|^2\leq\|f\|_2^2\]
@@ -1652,16 +1719,17 @@ $3\implies 1$：$(f,\phi_n)=0\implies\|f\|_2=0\implies f\sim 0$.
 
 傅里叶变换没有最好的符号，在不引起歧义时采用最简洁和便于理解的即可。注意在傅里叶变换的理论中，要求$f\in L^1(\mathbb{R})$而不是$L^2(\mathbb{R})$。
 
-下面解释“乘T，认为$k\omega$或$k\xi$为自变量”的本质。我们来看上一节中\ref{sub:tri_exp_series}的例2.2.1，为了体现双边频谱与采样函数的相似性，我们取了一个较为特殊的周期矩形脉冲信号，它的基波角频率应为图中两相邻竖直线间的间隔，即\textbf{谱线间隔}，可见其频率极小、周期极大，与我们研究非周期现象所用到的极限情况$T\to\infty$是一致的，换言之，令$T\to\infty$自动地使“傅里叶系数”在频谱中的间隔变小，\textbf{周期信号趋向非周期信号的过程自动地使离散频谱趋向连续频谱}。这样，乘T就不难理解了，它的作用是“除以$\dfrac{1}{T}$”，$\dfrac{1}{T}$是所在频率成分处小矩形的宽（类似于黎曼积分），换言之，以频率$\xi$为横坐标，\textbf{谱系数}$c_n$是$\dfrac{n}{T}=n\xi$处的小矩形面积，$Tc_n$是f中对应频率成分的含量，可以理解为单位频段内的谱系数，即频谱密度；以角频率$\omega$为横坐标，$c_n$是$\dfrac{2\pi n}{T}=n\omega$处的小矩形面积，$Tc_n$是f中对应角频率成分的含量。因此，$F(\xi)$或$F(\omega)$也称为频谱密度函数。
+下面解释“乘T，认为$k\omega$或$k\xi$为自变量”的本质。我们来看上一节中的例2.1.1，为了体现双边频谱与采样函数的相似性，我们取了一个较为特殊的周期矩形脉冲信号，它的基波角频率应为图中两相邻竖直线间的间隔，即\textbf{谱线间隔}，可见其频率极小、周期极大，与我们研究非周期现象所用到的极限情况$T\to\infty$是一致的，换言之，令$T\to\infty$自动地使“傅里叶系数”在频谱中的间隔变小，\textbf{周期信号趋向非周期信号的过程自动地使离散频谱趋向连续频谱}。这样，乘T就不难理解了，它的作用是“除以$\dfrac{1}{T}$”，$\dfrac{1}{T}$是所在频率成分处小矩形的宽（类似于黎曼积分），换言之，以频率$\xi$为横坐标，\textbf{谱系数}$c_n$是$\dfrac{n}{T}=n\xi$处的小矩形面积，$Tc_n$是f中对应频率成分的含量，可以理解为单位频段内的谱系数，即频谱密度；以角频率$\omega$为横坐标，$c_n$是$\dfrac{2\pi n}{T}=n\omega$处的小矩形面积，$Tc_n$是f中对应角频率成分的含量。因此，$F(\xi)$或$F(\omega)$也称为频谱密度函数。
 
 实际上，从这个角度出发，可以立即得到\textbf{傅里叶逆变换} (Inverse Fourier Tansform,IFT)的公式，因为我们已经将f展开为傅里叶级数，这对应着由f的傅里叶变换$\mathcal{F} f$还原出f。我们知道
-\lr{
-f(t)&=\sum_{n=-\infty}^{\infty}c_n e^{2\pi i\xi t}\\
+\begin{lralign}
+    f(t)&=\sum_{n=-\infty}^{\infty}c_n e^{2\pi i\xi t}\\
 &=\frac{1}{T}\sum_{n=-\infty}^{\infty}\left(\int_{T}f(t)e^{-2\pi i\xi t}\,dt\right)e^{2\pi i\xi t}
-}{
+\switch
 f(t)&=\sum_{n=-\infty}^{\infty}c_n e^{i\omega t}\\
 &=\frac{1}{T}\sum_{n=-\infty}^{\infty}\left(\int_{T}f(t)e^{-i\omega t}\,dt\right)e^{i\omega t}
-}
+\end{lralign}
+
 根据前文所述的对应关系，做以下替换（注意$T\to\infty$）：
 \lr{
     &\frac{1}{T}\rightarrow d\xi,\int_{T}f(t)e^{-2\pi i\xi t}\,dt\rightarrow \mathcal{F} f(\xi)\\
@@ -2125,10 +2193,12 @@ $\evalat{e^{-2\pi i\xi t}f(t)}{-\infty}{\infty},\evalat{e^{-i\omega t}f(t)}{-\in
 
 下面就来找出这个运算。设$f\overset{\mathcal{F} }{\longleftrightarrow}F,g\overset{\mathcal{F} }{\longleftrightarrow}G$,
 \begin{lralign}
-    F(\xi)G(\xi)=&\int_{-\infty}^{\infty}f(x)e^{-2\pi i\xi x}\,dx\int_{-\infty}^{\infty}g(y)e^{-2\pi i\xi y}\,dy\\
+    &F(\xi)G(\xi)\\
+    =&\int_{-\infty}^{\infty}f(x)e^{-2\pi i\xi x}\,dx\int_{-\infty}^{\infty}g(y)e^{-2\pi i\xi y}\,dy\\
     =&\iint\limits_{\mathbb{R}^2}f(x)g(y)e^{-2\pi i\xi(x+y)}\,dx\,dy
 \switch
-    F(\omega)G(\omega)=&\int_{-\infty}^{\infty}f(x)e^{-i\omega x}\,dx\int_{-\infty}^{\infty}g(y)e^{-i\omega y}\,dy\\
+    &F(\omega)G(\omega)\\
+    =&\int_{-\infty}^{\infty}f(x)e^{-i\omega x}\,dx\int_{-\infty}^{\infty}g(y)e^{-i\omega y}\,dy\\
     =&\iint\limits_{\mathbb{R}^2}f(x)g(y)e^{-i\omega(x+y)}\,dx\,dy
 \end{lralign}
 令$z=x+y$，则积分区域仍为$\mathbb{R}^2$，
@@ -2138,12 +2208,12 @@ $\evalat{e^{-2\pi i\xi t}f(t)}{-\infty}{\infty},\evalat{e^{-i\omega t}f(t)}{-\in
     \end{vmatrix}\right| dxdy=dxdy\]
 \lr{
 F(\xi)G(\xi)=&\iint\limits_{\mathbb{R}^2}f(x)g(z-x)e^{-2\pi i\xi z}\,dx\,dz\\
-&=\int_{-\infty}^{\infty}e^{-2\pi i\xi z}\,dz\int_{-\infty}^{\infty}f(x)g(z-x)dx\\
-&=\mathcal{F} \left[\int_{-\infty}^{\infty}f(x)g(z-x)dx\right](\xi)
+=&\int_{-\infty}^{\infty}e^{-2\pi i\xi z}\,dz\int_{-\infty}^{\infty}f(x)g(z-x)dx\\
+=&\mathcal{F} \left[\int_{-\infty}^{\infty}f(x)g(z-x)dx\right](\xi)
 }{
 F(\omega)G(\omega)=&\iint\limits_{\mathbb{R}^2}f(x)g(z-x)e^{-i\omega z}\,dx\,dz\\
-&=\int_{-\infty}^{\infty}e^{-i\omega z}\,dz\int_{-\infty}^{\infty}f(x)g(z-x)dx\\
-&=\mathcal{F} \left[\int_{-\infty}^{\infty}f(x)g(z-x)dx\right](\omega)
+=&\int_{-\infty}^{\infty}e^{-i\omega z}\,dz\int_{-\infty}^{\infty}f(x)g(z-x)dx\\
+=&\mathcal{F} \left[\int_{-\infty}^{\infty}f(x)g(z-x)dx\right](\omega)
 }
 
 因此我们定义\begin{definition}[卷积]
@@ -2647,7 +2717,7 @@ $\mathcal{F}\varphi$仍然是测试函数。这个测试函数空间正是\textb
 }{
     \mathcal{F}\delta_a =e^{-i a x}
 }
-根据阿贝尔-狄利克雷判别法（A-D判别法，见数学分析教材如\cite{xinjiang}），$\langle e^{-i a x},\varphi\rangle$
+根据阿贝尔-狄利克雷判别法（A-D判别法，见数学分析教材，如\cite{xinjiang}），$\langle e^{-i a x},\varphi\rangle$
 作为一个反常积分是有意义的。可以看出这与函数的傅里叶变换的平移定理很相似，我们将在后面
 给出分布的平移、伸缩，并由此得到一些分布的傅里叶变换的性质。
 \end{example}
@@ -3094,8 +3164,7 @@ $$\sigma_a\delta=\delta(ax)=\frac{1}{|a|}\delta(x)$$
 \begin{example}[与$\delta$卷积]
     分布$T*\delta$必然有定义，并且$T*\delta=T$.
 \begin{align*}
-    \left\langle T*\delta,\varphi\right\rangle & =\left\langle T(y),\left\langle \delta(x),\varphi(x+y)\right\rangle\right\rangle \\
-                                    & =\left\langle T,\varphi\right\rangle
+    \left\langle T*\delta,\varphi\right\rangle & =\left\langle T(y),\left\langle \delta(x),\varphi(x+y)\right\rangle\right\rangle=\left\langle T,\varphi\right\rangle
 \end{align*}
 \end{example}
 
@@ -3112,8 +3181,8 @@ $$\sigma_a\delta=\delta(ax)=\frac{1}{|a|}\delta(x)$$
     \left\langle f*\delta_a,\varphi\right\rangle & =\left\langle \delta_a,(f^-)*\varphi\right\rangle                  \\
                                       & =(f^-)*\varphi(a)                                       \\
                                       & =\int_{-\infty}^{\infty}f(-x)\varphi(a-x)\,dx & (a-x=y) \\
-                                      & =\int_{-\infty}^{\infty}f(y-a)\varphi(y)\,dy            \\
-                                      & =\left\langle \tau_a f,\varphi\right\rangle
+                                      & =\int_{-\infty}^{\infty}f(y-a)\varphi(y)\,dy\\
+                                      &=\left\langle \tau_a f,\varphi\right\rangle
 \end{align*}
 因此\[f*\delta_a=\tau_a f\]
 \end{example}
@@ -8165,11 +8234,11 @@ $$tau_p(\omega)=\dfrac{-\arctan(\omega)+\arctan(\frac{\omega}{2})}{\omega},\fora
 \end{definition}
 以上定义对于$r=0$或$R=\infty$或$r\geq R$的退化情况同样适用。特别地，我们指出：
 \begin{itemize}
-    \item 若 \( x[n] = 0,\ n < 0 \)，则 \( r = 0 \)，双边 z 变换退化为单边 z 变换；
+    \item 若 \( x[n] = 0,\ n < 0 \)，则 \( r = 0 \)，双边 z 变换退化为单边 z 变换（见\ref{sub:single_z}）；
     \item 若 \( x[n] = 0,\ n > 0 \)，则 \( R = \infty \)；
-    \item 若 \( x[n] \) 是有限长序列，则 \( r = 0,\ R = \infty \)，z 变换在整个复平面（除 \( z = 0 \) 和 \( z = \infty \) 外）解析；
-    \item 若 \( |x[n]| \) 在 \( n \to \pm \infty \) 时分别以 \( |a|^n \) 的速率增长，则其双边 z 变换的收敛域可能为空。除了前面三种情况外，典型的非空收敛域例子如 \( x[n] = \alpha^{|n|} \)（\( |\alpha| < 1 \)），其收敛域为
-     \[|\alpha| < |z| < \dfrac{1}{|\alpha|} \]
+    \item 若 \( x[n] \) 是有限长序列，则 \( r = 0,\ R = \infty \)，z 变换在除 \( z = 0 \) 和 \( z = \infty \) 外的整个复平面解析；
+    \item 若 \( |x[n]| \) 在 \( n \to \pm \infty \) 时分别以 \( |a|^n \) 的速率增长，则其双边 z 变换的收敛域可能为空。除了前面三种情况外，典型的z变换具有非空收敛域的例子如 \( x[n] = \alpha^{|n|} \)（\( |\alpha| < 1 \)），其收敛域为
+     \[\left\{z\in\mathbb{C}\left| |\alpha| < |z| < \dfrac{1}{|\alpha|}\right. \right\}\]
 \end{itemize}
 
 和洛朗级数一样，更常用的确定收敛域的方法是分析$X(z)$的奇点位置。在z变换中，我们需要结合信号特征确定收敛域的范围。
@@ -8606,7 +8675,7 @@ $$\text{Res}(f,\infty)=\dfrac{1}{2\pi i}\oint_{C^-_R}f(z)\,dz$$
 \[k[m,n]=H_m[\delta[m-n]]=H(\tau_n \delta[m])=\tau_n H(\delta[m])=h[m-n]\]
 \[r[n]=\sum_{m=-\infty}^{\infty}h[n-m]e[m]=(h*e)[n]\]
 
-可见对于离散系统，仍有“线性时不变”当且仅当“卷积和系统”。
+可见对于离散系统，“线性时不变系统”与“卷积和系统”仍然是等价的概念。
 
 \subsection{离散系统的系统函数}\label{sub:discrete_system_function}
 
@@ -8641,12 +8710,12 @@ $$\text{Res}(f,\infty)=\dfrac{1}{2\pi i}\oint_{C^-_R}f(z)\,dz$$
     $E_{\Omega}[n]=e^{i\Omega n}$，其中$\Omega$为数字角频率。
 \end{definition}
 
-与\textbf{数字角频率}相对，我们将连续信号的角频率称为\textbf{模拟角频率}。很明显，数字角频率表征了信号的某种频率信息。本节就来讨论这样两个问题：\begin{itemize}
+与\textbf{数字角频率}相对，我们将连续信号的角频率称为\textbf{模拟角频率}。很明显，数字角频率表征了信号的某种频率信息。本章要讨论这样两个问题：\begin{itemize}
     \item 数字角频率$\Omega$与模拟角频率$\omega$之间有何关联？
     \item 离散信号能否像连续信号那样进行分解与合成？
 \end{itemize}
 
-后者正是\textbf{离散时间傅里叶变换}(Discrete-Time Fourier Transform, DTFT)要解决的问题。我们将第二小节介绍它，并在第三小节讨论离散时间傅里叶变换的性质。
+我们将在下一小节解决第一个问题，而后一个问题是\textbf{离散时间傅里叶变换}(Discrete-Time Fourier Transform, DTFT)与\textbf{离散傅里叶变换}(Discrete Fourier Transform)要解决的，我们将在第一、第三节分别介绍它们。
 
 \subsection{数字角频率}\label{sub:digital_freq}
 
@@ -8855,7 +8924,7 @@ $$\mathcal{X} (\Omega)=X(e^{i\Omega}),\mathcal{Y} (\Omega)=Y(e^{i\Omega})$$
         &=\frac{1}{2\pi}\int_{-\pi}^{\pi}|X(e^{i\Omega})|^2\,d\Omega\\
         &=\frac{1}{2\pi}\int_{-\pi}^{\pi}|\mathcal{F} f(\Omega/T)|^2\,d\Omega\\
         &=\frac{1}{T}\cdot\frac{1}{2\pi}\int_{-\pi/T}^{\pi/T}|\mathcal{F} f(\omega)|^2\,d\omega&(\omega=T\Omega)\\
-        &=\frac{1}{T}\|f(t)\|_2^2=\frac{1}{T}E
+        &=\frac{1}{T}\|f(t)\|_2^2=\frac{E}{T}
     \end{align*}
 \end{proof}
 
@@ -8865,7 +8934,7 @@ $$\mathcal{X} (\Omega)=X(e^{i\Omega}),\mathcal{Y} (\Omega)=Y(e^{i\Omega})$$
 
 \subsection{零极点与频率响应特性的关系}\label{sub:zero_pole_freq_response}
 
-\subsection{滑动平均滤波器}\label{sub:MA_filter}
+\subsection{数字滤波器概述}\label{sub:digital_filter}
 
 \section{离散傅里叶变换}\label{sec:DFT}
 
@@ -8897,27 +8966,29 @@ X[N-1]
 \end{align*}
 
 习惯上，将$e^{i\frac{2\pi}{N}}$记为$W_N$，则上式中的矩阵可以写为
-\begin{align*}\begin{bmatrix}1 & 1 & \cdots & 1 \\
-1 & W_N & \cdots & W_N^{N-1} \\
-\vdots & \vdots & \ddots & \vdots \\
-1 & W_N^{N-1} & \cdots & W_N^{(N-1)^2}
-\end{bmatrix}\end{align*}
+\begin{align*}
+    \mathcal{F} =\begin{bmatrix}1 & 1 & \cdots & 1 \\
+        1 & W_N & \cdots & W_N^{N-1} \\
+        \vdots & \vdots & \ddots & \vdots \\
+        1 & W_N^{N-1} & \cdots & W_N^{(N-1)^2}
+    \end{bmatrix}
+\end{align*}
 
 这是一个\textbf{范德蒙德矩阵} (Vandermonde Matrix)，它的行列式为
 \begin{align*}
-    \prod_{0\leq j<k\leq N-1}(W_N^k-W_N^j)\neq 0
+    \det\mathcal{F}=\prod_{0\leq j<k\leq N-1}(W_N^k-W_N^j)\neq 0
 \end{align*}
 
-矩阵可逆，因此$X[k]$是良定义的，即存在唯一的$X[k]$使得
+矩阵$\mathcal{F}$可逆，因此$X[k]$是良定义的，即存在唯一的$X[k]$使得
 \[x[n]=\frac{1}{N}\sum_{k=0}^{N-1}X[k]W_N^{kn}\]
 
-并且可以通过逆矩阵求得$X[k]$的表达式。可以验证，以上范德蒙德矩阵的逆矩阵为
+并且可以通过逆矩阵求得$X[k]$的表达式。可以验证，$\mathcal{F} $为正交矩阵，$\mathcal{F} \mathcal{F} ^H=N\cdot I$，其中$\mathcal{F} ^H$为$\mathcal{F} $的共轭转置矩阵，因此
 \begin{align*}
-   \frac{1}{N}\begin{bmatrix}1 & 1 & \cdots & 1 \\
-1 & W_N^{-1} & \cdots & W_N^{-(N-1)} \\
-\vdots & \vdots & \ddots & \vdots \\
-1 & W_N^{-(N-1)} & \cdots & W_N^{-(N-1)^2}
-\end{bmatrix}
+    \mathcal{F} ^{-1}=\frac{1}{N}\mathcal{F} ^H=\frac{1}{N}\begin{bmatrix}1 & 1 & \cdots & 1 \\
+    1 & W_N^{-1} & \cdots & W_N^{-(N-1)} \\
+    \vdots & \vdots & \ddots & \vdots \\
+    1 & W_N^{-(N-1)} & \cdots & W_N^{-(N-1)^2}
+    \end{bmatrix}
 \end{align*}
 
 这样，我们就得到了\textbf{离散傅里叶级数} (Discrete Fourier Series, DFS)的定义：
@@ -8936,16 +9007,16 @@ X[N-1]
 \begin{definition}[离散傅里叶变换]
     设$x[n]$是长为$N$的离散信号，则$x[n]$的离散傅里叶变换定义为
     \[X[k]=\sum_{n=0}^{N-1}x[n]W_N^{-kn},k=0,1,\dots,N-1\]
-    记$x[n]\xleftrightarrow{\text{DFT}}X[k]$。
+    记$x[n]\xleftrightarrow{\text{DFT}}X[k],X[k]=\text{DFT}(x[n])$。
 \end{definition}
 
 \begin{theorem}[离散傅里叶反演公式]
-    设$x[n]$是长为$N$的离散信号，其离散傅里叶变换为$X[k]$，则$x[n]$可以由$X[k]$通过以下公式还原：
-    \[x[n]=\frac{1}{N}\sum_{k=0}^{N-1}X[k]W_N^{kn},n=0,1,\dots,N-1\]
+    设$x[n]$是长为$N$的离散信号，其离散傅里叶变换为$X[k]$，则$x[n]$可以由$X[k]$通过离散傅里叶逆变换还原：
+    \[x[n]=\text{DFT}^{-1}(X[k])=\frac{1}{N}\sum_{k=0}^{N-1}X[k]W_N^{kn},n=0,1,\dots,N-1\]
 \end{theorem}
 
 进一步，对于离散周期信号，其周期起点任意选取，都不会影响离散傅里叶变换及其逆变换的结果，在此意义下，离散周期信号的向量表示不唯一。
-\begin{definition}[$(\mathcal{P} ,\mathcal{Q} )-DFT$]
+\begin{definition}[$(\mathcal{P} ,\mathcal{Q} )$-DFT]
     设$x[n]$是以$N$为周期的离散信号，$\mathcal{P} ,\mathcal{Q} $为任意的$N$个连续整数构成的指标集，即
     \[\mathcal{P} =\{p,p+1,\cdots,p+N-1\},\mathcal{Q} =\{q,q+1,\cdots,q+N-1\}\]
     则$x[n]$的$(\mathcal{P} ,\mathcal{Q} )-DFT$定义为
@@ -8954,7 +9025,7 @@ X[N-1]
     \end{align*}
 \end{definition}
 \begin{proposition}
-    离散傅里叶变换不依赖于$\mathcal{P} ,\mathcal{Q} $的选取，即
+    $(\mathcal{P} ,\mathcal{Q} )$-DFT的定义不依赖于$\mathcal{P} ,\mathcal{Q} $的选取，即
     \[X_{\mathcal{P} ,\mathcal{Q} }[k]=X[k],\forall \mathcal{P} ,\mathcal{Q} \]
 \end{proposition}
 \begin{proof}
@@ -9014,7 +9085,7 @@ $$f\in PS([0,T])\implies \sum_{k=-\infty}^{\infty}|c_k|<\infty\implies S_N^f(t)\
 我们曾定义过离散信号的卷积和。类似\ref{sub:conv_of_period_func}，对于周期离散信号，卷积和的定义也必须修改，只是此时一般不会添加$1/N$的系数：
 \begin{definition}[周期离散信号的卷积和]
     设$x[n],y[n]$是周期为$N$的离散信号，则它们的卷积和定义为
-    \[(x*y)[n]=\sum_{m=0}^{N-1}x[m]y[(n-m)]\]
+    \[(x*y)[n]=\sum_{m=0}^{N-1}x[m]y[n-m]\]
 \end{definition}
 
 根据离散傅里叶变换的周期性，时域和频域都是周期的，下面就来表述和验证卷积和定理：
@@ -9045,7 +9116,7 @@ $$f\in PS([0,T])\implies \sum_{k=-\infty}^{\infty}|c_k|<\infty\implies S_N^f(t)\
     \end{cases}\]
 \end{proof}
 
-选择函数$\shah_N$的引入更多是为了方便与狄拉克梳状分布进行对比。如果不区分周期信号与有限长信号，则$\shah_N$就相当于周期离散信号的单位冲激序列。用向量的语言来说，就是
+选择函数$\shah_N$的引入更多是为了方便与狄拉克梳状分布进行对比。如果不区分周期信号与有限长信号，则$\shah_N$就相当于周期离散信号中的单位冲激序列。用向量的语言来说，就是
 \[\shah_N\sim\boldsymbol{\delta}=\begin{bmatrix}
 1  \\
 0  \\
