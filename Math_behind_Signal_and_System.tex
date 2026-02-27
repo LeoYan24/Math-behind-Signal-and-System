@@ -528,6 +528,20 @@ $d(\cdot,\cdot):V\times V\rightarrow \mathbb{R}  $，满足\textbf{度量公理}
     则$d$满足度量公理，称为离散度量。
 \end{example}
 
+在度量空间中可以定义极限：
+\[\lim_{n\to\infty}x_n=x\iff \forall \epsilon>0\exists N\in\mathbb{N} (\forall n>N,d(x_n,x)<\epsilon)\]
+\[\lim_{x\to x_0}f(x)=A\iff \forall \epsilon>0\exists \delta>0(\forall x\in V,d(x,x_0)<\delta\Rightarrow d(f(x),f(x_0))<\epsilon)\]
+这就是数学分析中的极限定义，只是将绝对值改成了度量。
+
+在数学分析中，一个实数列的收敛性等价于该序列是柯西列，这实际上是依赖于实数的完备性的。柯西列描述了一个“应当收敛”的序列所具有的性质，而不依赖于最终的极限是否在我们所讨论的空间中。
+\begin{definition}[柯西列]
+    在度量空间$(V,d)$中，序列$\{x_n\}$称为柯西列，如果对于任意$\epsilon>0$，存在$N\in\mathbb{N}$使得对所有$m,n>N$都有$d(x_m,x_n)<\epsilon$。
+\end{definition}
+
+\begin{definition}[完备度量空间]
+    如果度量空间中所有柯西列都有极限，那么这个空间称为\textbf{完备度量空间}。
+\end{definition}
+
 \begin{definition}[范数]
     如果定义了运算
 $\|\cdot \| :V\rightarrow \mathbb{R} $，满足\textbf{范数公理}
@@ -541,9 +555,11 @@ $\|\cdot \| :V\rightarrow \mathbb{R} $，满足\textbf{范数公理}
 \end{definition}
 特别地，在$\mathbb{C}$ -线性空间$V$上定义范数后，可以自然地诱导出一种度量：
 $$d(\mathbf x,\mathbf y)=||\mathbf x-\mathbf y||$$
-在线性赋范空间上可以定义极限：
+在线性赋范空间上，可以利用范数导出的度量定义极限：
+\[\lim_{n\to\infty}x_n=x:=\forall \epsilon>0\exists N\in\mathbb{N}(\forall n>N,||x_n-x||<\epsilon)\]
 \[\lim_{x \to x_0} f(x)=A:=\forall \epsilon>0\exists \delta>0(||x-x_0||<\delta\Rightarrow ||f(x)-f(x_0)||<\epsilon) \]
-这就是数学分析中的极限定义，只是将绝对值改成了范数，其余类似的极限定义不再赘述。
+
+线性赋范空间中的柯西列定义类似。
 
 \begin{definition}[完备的线性赋范空间]
     如果线性赋范空间中所有柯西列都有极限，那么这个空间称为\textbf{完备的线性赋范空间}，或称为\textbf{巴拿赫空间}\cite{real_analysis}。
@@ -987,7 +1003,7 @@ $$a_0=\frac{1}{2^\nu\Gamma(\nu+1)}$$
 
 对于非反常积分，\textbf{勒贝格积分是黎曼积分的推广}，黎曼可积的函数一定是勒贝格可积的，并且在同样的区间上积分值相等。
 
-本节就来介绍一些基础的实变函数理论，以便后续学习中使用。由于篇幅原因，我们不得不略去大多数证明（证明可以参考\cite{real_analysis}），不过读者不妨先接受其中的一些重要结论。
+本节就来介绍一些基础的实变函数理论，以便后续学习中使用。由于篇幅原因，我们不得不略去大多数证明（证明可以参考\cite{real_analysis}），不过读者不妨先接受其中的一些重要结论，尤其是有黑体字阐释的定理。
 
 \subsection{勒贝格测度与可测函数}\label{sub:lebesgue}
 
@@ -1127,7 +1143,7 @@ Littlewood的第三个观点是，\textbf{几乎处处收敛的可测函数列�
 
 显然，简单函数是可测的，并且它的勒贝格积分应该定义为
 \[\int_{E}\varphi\,dm=\sum_{k=1}^{n}a_k m(E_k)\]
-$dm$表示勒贝格测度。对于单调递增的有界变差函数$f$，可以由$f$的增量定义新的测度，并由此引出\textbf{勒贝格-斯蒂尔杰斯积分}，此时$dm$就应替换为$df$，但我们不在这里展开讨论，感兴趣的读者可以参考\cite{simple_real_analysis}，它实际上是分部积分的基础。
+$dm$表示勒贝格测度。对于单调递增的有界变差函数$f$，可以由$f$的增量定义新的测度，并由此引出\textbf{勒贝格-斯蒂尔杰斯积分}，此时$dm$就应替换为$df$，但我们不在这里展开讨论，感兴趣的读者可以参考\cite{simple_real_analysis}或\cite{chentianquan}，它实际上是分部积分的基础。
 
 下面，我们先通过简单函数定义有界函数的勒贝格积分，然后扩展被积函数的范围，定义非负可测函数的勒贝格积分，再由此引出任意可测函数的勒贝格积分。
 
@@ -1303,7 +1319,7 @@ $dm$表示勒贝格测度。对于单调递增的有界变差函数$f$，可以�
     \[\int_{\mathbb{R}}|f|\,dm=\int_{\mathbb{R}}|x|\,dm=+\infty\]
 \end{example}
 
-勒贝格积分是黎曼积分的推广，黎曼积分的计算技巧在多数情况下同样适用于勒贝格积分：
+\textbf{黎曼积分的计算技巧在多数情况下同样适用于勒贝格积分}：
 \begin{theorem}[勒贝格积分的变量代换]
     设$f:[a,b]\to\mathbb{R}$可积，递增函数$g:[c,d]\to \mathbb{R}$可导（事实上，只需要$g$绝对连续即可），并且$g(c)=a,g(d)=b$，则
     \[\int_{a}^{b}f\,dm=\int_{c}^{d}f\circ g\cdot g'\,dm\]
@@ -1316,32 +1332,63 @@ $dm$表示勒贝格测度。对于单调递增的有界变差函数$f$，可以�
 
 绝对连续能够保证函数几乎处处可导，因而以上积分是良定义的，但本书不准备对它做进一步说明。
 
-\subsection{函数空间}\label{sub:Lp_space}
+\subsection{常用的线性赋范空间}\label{sub:Lp_space}
 
-%1.$L^p([0,T])(0<p\leq \infty)$空间表示在区间$[0,T]$上$p$次勒贝格可积的函数组成的函数空间，即
-%\[L^p([0,T]):=\left\{f:[0,T]\rightarrow \mathbb{C} \left| \int_{T}|f(t)|^p\,\text dt<\infty\right.\right\}\]
-%$L^p([0,T])$具有性质：
-%\begin{itemize}
-%    \item \raggedright{} $L^p([0,T])$是线性空间\\
-%    \item 当$1\leq p \leq \infty$时，$L^p([0,T])$是线性赋范空间，
-%          $\| f \|_{p} := \left( \int_{T} |f(t)|^p \, dt \right)^{1/p}$，
-%          称之为$L^p$范数,次可加性由闵可夫斯基不等式保证
-%\end{itemize}
-%2.要求$f(t)$平方可积是为了保证$(f,f)=\int_{T}|f(t)|^2\,dt<\infty$，$f(t)$平
-%方可积能够推出$f(t)$是绝对可积的，从而是可积的（有限区间I上有$L^p(I)\supset  L^q(I),p<q$，无限区间上它们互不包含）\\
-%3.尽管对函数空间做了一些限制，我们研究的范围依旧是足够大的，闭区间上的平方可积是一个比较弱的条件\\
-%4.柯西-施瓦兹不等式和三角不等式（它是闵可夫斯基不等式的特例）自然成立，它们证明的过程不涉及空间的维数是否有限。
+本小节主要介绍两类常用的线性赋范空间：$L^p$空间和$l^p$空间$(1\leq p\leq \infty)$，前者是处理连续信号的，而后者是处理离散信号的。
 
-%利用内积导出的范数，可以定义函数项级数依范数收敛的概念：
-%\begin{definition}[依范数收敛]
-%    如果\[\lim_{n \to \infty} \left\| f(t)-\sum_{i = 1}^{n}  a_i f_i(t)\right\|=0\]
-%就认为级数$\sum_{i = 1}^{n}  a_i f_i(t)$是$f(t)$在这个正交函数系下的分解，此时记$f\sim\sum_{n=1}^{\infty}a_n f_n$
-%\end{definition}
-%
-%注意，它并不意味着等式右侧的函数项级数在某一点收敛于$f$。
-%在$L^2([0,T])$空间中，我们不区分仅在零测集（“区间长度”的总和总能取到任意小正数，例如至多可数集）上不相等的函数，换言之，$L^2([0,T])$空间不是常规意义下的函数的集合，而是\textbf{几乎处处}(almost every,a.e.)相等的函数构成的等价类，这里的$\sim$表示的是两侧的函数同属一个等价类，至于逐点收敛、一致收敛性，需要另作讨论。
+\begin{definition}[$L^p$空间]
+    设$E$是可测集，$L^p(E)(0<p<\infty)$空间表示在$E$上$p$次勒贝格可积的函数组成的函数空间，即
+    \[L^p(E):=\left\{f:E\rightarrow \mathbb{C} \left| \int_{E}|f(t)|^p\,dm<\infty\right.\right\}\]
+\end{definition}
 
-%可以想象，依范数收敛要求极限内的函数相当接近于0，但如果在一个点处产生了误差，不论误差多大，都不会影响积分的值。事实上，只要存在误差的点构成零测集，就不会影响积分的值，这时我们称$\sum_{i = 1}^{n}  a_i f_i(t)$几乎处处收敛于$f(t)$，只是这样弱的要求有时会导致积分在黎曼积分的意义下不存在，但勒贝格积分可以处理这种情况，读者可以参考\ref{sec:signal}连续信号与离散信号中对勒贝格积分的讨论。
+\begin{definition}[$L^{\infty}$空间]
+    设$E$是可测集，$L^{\infty}(E)$空间表示在$E$上\textbf{本性有界}(essentially bounded)的函数组成的函数空间，即
+    \[L^{\infty}(E):=\left\{f:E\rightarrow \mathbb{C} \left|\exists M<\infty,|f|\leq M,a.e.\right.\right\}\]
+\end{definition}
+
+\begin{definition}[$l^p$空间]
+    设$E$是可数集，$l^p(E)(0<p<\infty)$空间表示在可数集$E$上$p$次可和的函数组成的函数空间，即
+    \[l^p(E):=\left\{f:E\rightarrow \mathbb{C} \left| \sum_{t\in E}|f(t)|^p<\infty\right.\right\}\]
+\end{definition}
+
+一般而言，在考虑$l^p$空间时，可数集$E$取为$\mathbb{N}$，$\mathbb{N} ^*$（数列）或$\mathbb{Z}$（离散信号）。本小节的后续内容中，默认取$E=\mathbb{N}$。
+
+\begin{definition}[$l^{\infty}$空间]
+    $l^{\infty}$表示有界数列空间，即
+    \[l^{\infty}:=\left\{\{x_n\}_{n=0}^{\infty} \left|\exists M<\infty,|x_n|\leq M,\forall n\in \mathbb{N}\right.\right\}\]
+\end{definition}
+
+不难证明以下引理：
+\begin{lemma}
+    $\forall a,b\in\mathbb{C}$，当$p\geq 1$时，有
+    \[|a+b|^p\leq 2^{p-1}(|a|^p+|b|^p)\]
+    当$0<p<1$时，有
+    \[|a+b|^p\leq |a|^p+|b|^p\]
+\end{lemma}
+
+由此可以推出以上几种空间都是线性空间。此外，在$0<p<1$时，$L^p(E)$和$l^p$空间是度量空间，它们的度量分别为
+\[d(f,g)=\int_{E}|f-g|^p\,dm\]
+\[d(\{x_n\},\{y_n\})=\sum_{n=0}^{\infty}|x_n-y_n|^p\]
+
+不过，$0<p<1$的情况不是我们的主要目标，因为它们不构成范数空间。下面，我们给出以上几种空间在$1\leq p \leq \infty$时的范数定义，再通过Minkowski不等式证明这些范数满足三角不等式，从而证明它们是线性赋范空间。简介起见，我们主要讨论$L^p(E)$空间，$l^p$空间的情况与之类似。
+
+\begin{definition}[$L^p$空间的范数]
+    设$E$是可测集，如果$1\leq p<\infty$，定义
+    \[\|f\|_p=\left(\int_{E}|f(t)|^p\,dm\right)^{1/p}\]
+    如果$p=\infty$，定义
+    \[\|f\|_{\infty}=\inf\{M<\infty:|f|\leq M,a.e.\}\]
+    即$f$的本性上确界。
+\end{definition}
+
+\begin{definition}[$l^p$空间的范数]
+    设$1\leq p<\infty$，对于$\{x_n\}\in l^p$，定义
+    \[\|\{x_n\}\|_p=\left(\sum_{n=0}^{\infty}|x_n|^p\right)^{1/p}\]
+    对于$\{x_n\}\in l^{\infty}$，定义
+    \[\|\{x_n\}\|_{\infty}=\sup_{n\in \mathbb{N}}|x_n|\]
+\end{definition}
+
+下面逐步建立几个不等式，来说明这种范数定义的合理性。
+
 \subsection{正交函数系}\label{sub:orthognal}
 \begin{definition}[正交基]
     如果有内积空间$V$的一组基$\{\mathbf{v}_1,\mathbf{v}_2,\dots ,\mathbf{v}_n\}$，满足$\langle \mathbf{v}_i,\mathbf{v}_j\rangle =0,i \neq j$，则称这组基是一组\textbf{正交基}(orthognal bases)。\\如果对$V$中任一向量$\mathbf{w}$，均有以下分解式：
@@ -1613,7 +1660,7 @@ $dm$表示勒贝格测度。对于单调递增的有界变差函数$f$，可以�
 \end{definition}
 在分段光滑的条件下，我们可以证明傅里叶级数是\textbf{一致收敛}于原函数的。
 
-此外，逐点收敛性可以推广为\textbf{Cesàro收敛}或\textbf{Abel收敛}，逐点收敛性强于这两种收敛性，但是，只要函数$f\in L^1([0,T])\cap L^2([0,T])$，就能保证$f$的傅里叶级数在任意点处Cesàro收敛于$f(t)$，而Cesàro收敛又能推出Abel收敛。这一条件比狄利克雷条件弱一些。对于这两种收敛性的定义及其证明，可以参考\cite{stein2011fourier}。
+此外，逐点收敛性可以推广为\textbf{Cesàro收敛}或\textbf{Abel收敛}，逐点收敛性强于这两种收敛性，但是，只要函数$f\in L^1([0,T])\cap L^2([0,T])$，就能保证$f$的傅里叶级数在$f$的连续点处Cesàro收敛于$f(t)$，而Cesàro收敛又能推出Abel收敛。这一条件比狄利克雷条件弱一些。对于这两种收敛性的定义及其证明，可以参考\cite{stein2011fourier}。
 
 \subsection{帕塞瓦尔恒等式}\label{sub:paseval}
 类比有限维线性空间中的勾股定理，有
@@ -1622,7 +1669,7 @@ $dm$表示勒贝格测度。对于单调递增的有界变差函数$f$，可以�
 即\[P=\frac{1}{T}\int_{T}|f(t)|^2\,dt=\sum_{k=1}^{\infty}c_k^2\]
 其中P为平均功率。
 \end{theorem}
-至此，我们提出了傅里叶系数的公式和帕塞瓦尔定理，但所用到的勾股定理是基于有限维线性空间的，现在就来填补这个逻辑漏洞，对此不感兴趣的读者可以忽略这部分内容。以下设$\{\phi_n\}_{n=1}^{\infty}$是$L^2(a,b)$的标准正交基，$f\in L^2(a,b)$（注意这里已经不局限于讨论傅里叶级数，并且与前文未标准化的正交基略有形式上的差别）。
+至此，我们提出了傅里叶系数的公式和帕塞瓦尔定理，但所用到的勾股定理是基于有限维线性空间的，现在就来填补这个逻辑漏洞，对此不感兴趣的读者可以忽略这部分内容。设$\{\phi_n\}_{n=1}^{\infty}$是内积空间$L^2(a,b)$的标准正交基，$f\in L^2(a,b)$（注意这里已经不局限于讨论傅里叶级数）。
 
 \begin{lemma}[*贝塞尔不等式]
 \[\sum_{n=1}^{\infty}|(f,\phi_n)|^2\leq\|f\|_2^2\]
@@ -2305,7 +2352,7 @@ f*g&=\mathcal{F} ^{-1}\left(\mathcal{F} f\mathcal{F} g\right)
 
 \noindent 2.\textbf{卷积函数的支集}
 
-我们首先引入\textbf{支集}(support)的概念，读者只需理解其直观，真正理解它需要一些拓扑学的基础。
+%我们首先引入\textbf{支集}(support)的概念，读者只需理解其直观，真正理解它需要一些拓扑学的基础。
 \begin{definition}[支集]
     设$f:\mathbb{R}\to \mathbb{R}$，f的\textbf{支集}
 $\text{supp}\ f=\overline{\left\{x\in\mathbb{R}\left|f(x)\neq 0\right.\right\}}$
@@ -2318,14 +2365,19 @@ $\text{supp}\ f=\overline{\left\{x\in\mathbb{R}\left|f(x)\neq 0\right.\right\}}$
 对于p次连续可导的函数$f\in C^p(\mathbb{R})$，我们记其中具有紧支集的函数构成的集合为$C_0^p(\mathbb{R})$。
 \end{definition}
 
-卷积能够将两个函数的支集“相加”，即：\begin{align*}
-\text{supp}\ f\in [a,b],\text{supp}\ g\in [c,d]\implies&\text{supp}\ (f*g)\in [a+c,b+d]
-\end{align*}
+\begin{proposition}
+    卷积能够将两个函数的支集“相加”，即：\begin{align*}
+    \text{supp}\ f\in [a,b],\text{supp}\ g\in [c,d]\implies&\text{supp}\ (f*g)\in [a+c,b+d]
+    \end{align*}
+\end{proposition}
+
 带入定义容易验证这一点：
 \begin{align*}
      & (f*g)(x) =\int_{-\infty}^{\infty}f(y)g(x-y)\,dy                               \\
      & \text{积分值非0}\implies y\in [a,b],x-y\in [c,d]\iff x\in [a+c,b+d]
 \end{align*}
+
+当区间退化为单点集或区间端点为$\pm\infty$时，这一性质也是成立的。
 
 \noindent 3.\textbf{函数变换下的卷积}
 \begin{proposition}[信号反转下的卷积]
@@ -2452,6 +2504,10 @@ $\rho(f,g)=\pm 1$时两信号\textbf{线性相关}；$\rho(f,g)=0$时两信号\t
 \end{align*}
 \end{proof}
 
+一些文献（如\cite{signal_systems}）也将互相关函数定义为
+$$R_{fg}(x)=\int_{-\infty}^{\infty}f(y)\overline{g(x-y)}\,dy=\int_{-\infty}^{\infty}f(x+y)g(y)\,dy$$
+这与上面讨论的互相关没有本质区别。
+
 对于功率信号，我们需要对以上互相关的定义略作修改，以避免趋于无穷的情况发生。
 \begin{definition}[功率信号的互相关]
     对于功率信号$f,g$，定义互相关函数为
@@ -2459,24 +2515,26 @@ $\rho(f,g)=\pm 1$时两信号\textbf{线性相关}；$\rho(f,g)=0$时两信号\t
     (f\star g)(x)=\lim_{T\to\infty}\frac{1}{2T}\int_{-T}^{T}f(y)\overline{g(x+y)}\,dy
 \end{equation}
 \end{definition}
-其性质不再单独讨论。
-
-一些文献（如\cite{signal_systems}）也将互相关函数定义为$$R_{fg}(x)=\int_{-\infty}^{\infty}f(y)\overline{g(x-y)}\,dy=\int_{-\infty}^{\infty}f(x+y)g(y)\,dy$$
-功率信号同理。这与上面讨论的互相关没有本质区别。
+其性质不再单独讨论。我们仅验证这个互相关函数是良定义的：
+\begin{align*}
+    \left|\frac{1}{2T}\int_{-T}^{T}f(y)\overline{g(x+y)}\,dy\right|& \leq \frac{1}{2T}\sqrt{\int_{-T}^{T}|f(y)|^2\,dy\int_{-T}^{T}\left|\overline{g(x+y)}\right|^2\,dy}\\
+    & =\sqrt{\frac{1}{2T}\int_{-T}^{T}|f(y)|^2\,dy\cdot\frac{1}{2T}\int_{-T}^{T}|g(x+y)|^2\,dy}\\
+    & =\sqrt{\frac{1}{2T}\int_{-T}^{T}|f(y)|^2\,dy\cdot\frac{1}{2T}\int_{-T}^{T}|g(y)|^2\,dy}\to \sqrt{P_f P_g}
+\end{align*}
+其中$P_f,P_g$分别是f,g的功率：\begin{align*}
+P_f&=\lim_{T\to\infty}\frac{1}{2T}\int_{-T}^{T}|f(y)|^2\,dy,P_g=\lim_{T\to\infty}\frac{1}{2T}\int_{-T}^{T}|g(y)|^2\,dy
+\end{align*}
 
 最后我们给出一个互相关的应用\cite{brad_osgood_ee261}。
 \begin{example}[雷达测距]
-    设雷达发射了一个信号$f(t)$，经过时间T信号接触到
-物体并发生反射，再经过时间T信号回到雷达，雷达接收到的信号$f_r(t)=\alpha (\tau_{2T}f(t))+n(t)$,
-其中$\alpha\in(0,1)$，表示信号在传播过程中衰减；$n(t)$为噪声信号。我们
-希望确定时间T，以计算雷达到物体间的距离。对于噪声信号$n(t)$，它满足
-\[(f\star n)(t)=C\]
-C为常数，因此可以考虑求发射信号与接收信号的互相关函数：\begin{align*}
-    (f\star f_r)(t)&=\alpha(f\star \tau_{2T}f)(t)+(f\star n)(t)\\
-    &=\alpha\tau_{2T}(f\star f)(t)+\alpha C
-\end{align*}
-根据前面得到的性质4，$(f\star f)(t)$在0处取最大值，因此$(f\star f_r)(t)$在$2T$
-处取最大值，于是我们只需要观察这个互相关函数的最大值点，就可以得到T。
+    设雷达发射了一个信号$f(t)$，经过时间T信号接触到物体并发生反射，再经过时间T信号回到雷达，雷达接收到的信号$f_r(t)=\alpha (\tau_{2T}f(t))+n(t)$,其中$\alpha\in(0,1)$，表示信号在传播过程中衰减；$n(t)$为噪声信号。我们希望确定时间T，以计算雷达到物体间的距离。对于噪声信号$n(t)$，它满足
+    \[(f\star n)(t)=C\]
+    C为常数，因此可以考虑求发射信号与接收信号的互相关函数：
+    \begin{align*}
+        (f\star f_r)(t)&=\alpha(f\star \tau_{2T}f)(t)+(f\star n)(t)\\
+        &=\alpha\tau_{2T}(f\star f)(t)+\alpha C
+    \end{align*}
+    根据前面得到的性质4，$(f\star f)(t)$在0处取最大值，因此$(f\star f_r)(t)$在$2T$处取最大值，于是我们只需要观察这个互相关函数的最大值点，就可以得到T。
 \end{example}
 
 \section{分布及其傅里叶变换}\label{sec:Distributions}
@@ -2689,10 +2747,8 @@ $\mathcal{F}\varphi$仍然是测试函数。这个测试函数空间正是\textb
 \begin{example}[$\delta$的傅里叶变换]
     现在可以严谨地求出$\delta$的傅里叶变换：
 \begin{align*}
-    \left\langle\mathcal{F}\delta,\varphi\right\rangle=\left\langle \delta,\mathcal{F}\varphi\right\rangle=\mathcal{F}\varphi(0)=\int_{-\infty}^{\infty}\varphi(x)\,dx=\left\langle \mathds{1},\varphi\right\rangle
+    \left\langle\mathcal{F}\delta,\varphi\right\rangle=\left\langle \delta,\mathcal{F}\varphi\right\rangle=\mathcal{F}\varphi(0)=\int_{-\infty}^{\infty}\varphi(x)\,dx=\left\langle \mathds{1},\varphi\right\rangle\implies\mathcal{F}\delta=\mathds{1}
 \end{align*}
-因此
-\[\mathcal{F}\delta=\mathds{1}\]
 \end{example}
 \begin{example}[$\delta$的平移的傅里叶变换]
     $\delta$的平移$\delta_a$作为一种分布，定义为
@@ -2935,15 +2991,49 @@ $$\delta(ax)=\dfrac{1}{|a|}\delta(x)$$
 它与分布的伸缩定义相符：
 $$\sigma_a\delta=\delta(ax)=\frac{1}{|a|}\delta(x)$$
 
-但是，如果分布本身是由不属于$L^1(\mathbb{R})$的函数定义的正则分布，那么它的伸缩就不等于该函数的伸缩，因此必须明确伸缩算子所处的语境。
+但是，如果分布本身是由不属于$L^1(\mathbb{R})$的函数定义的正则分布，那么它的伸缩就不等于该函数的伸缩，因此\textbf{必须明确伸缩算子所处的语境}。排除$L^1(\mathbb{R})$中的函数，是因为我们不需要用分布理论来讨论其伸缩。
 
 \begin{example}
     函数$\mathds{1}\notin L^1(\mathbb{R})$，作为一个分布，它的伸缩为：
 \begin{align*}
     \sigma_a\mathds{1}&=\frac{1}{|a|}\mathds{1}
 \end{align*}
-但是，直观上，常函数1不论如何伸缩，仍然是常函数1，因此不能认为$\sigma_a\mathds{1}=\mathds{1}(ax)$。
+但作为函数，不论如何伸缩，常函数1仍是它本身。
 \end{example}
+
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}[scale=1, every node/.style={font=\small}]
+        % 将圆心与半径调整为重叠布局（确保交集存在并包围中间文字）
+        \def\Lcx{-1.0} \def\Rcx{1.0} \def\Cr{2}
+
+        % 绘制圆轮廓
+        \draw (\Lcx,0) circle (\Cr cm);
+        \draw (\Rcx,0) circle (\Cr cm);
+
+        % 箭头接触点设为左右两侧（与圆水平接触）
+        \coordinate (Lto) at ({\Lcx-\Cr},0);
+        \coordinate (Rto) at ({\Rcx+\Cr},0);
+
+        % 箭头起点置于接触点外侧并略微上移，保证对称
+        \coordinate (Lstart) at ($(Lto)+(-1.5,0)$);
+        \coordinate (Rstart) at ($(Rto)+(1.5,0)$);
+
+        % 起点标签：左改为“函数”，右保持“分布”说明
+        \node[align=center] (Llabel) at (Lstart) {\textbf{函数/正则分布}\\\small (函数的伸缩有定义)};
+        \node[align=center] (Rlabel) at (Rstart) {\textbf{其余分布}\\\small{(分布的伸缩有定义)}};
+
+        % 圆内标签：左侧非交叠区为 L^1(\mathbb{R})，右侧非交叠区为 奇异分布
+        \node at ({\Lcx-0.7},0)  {$L^1(\mathbb{R})$};
+        \node at ({\Rcx+0.7},0)  {奇异分布};
+
+        % 交集处放置“正则分布”说明（尽量放在交集中心）
+        \node at (0,0) {其余正则分布};
+    \end{tikzpicture}
+    \caption{伸缩的定义范围示意图}
+\end{figure}
+
+上图中，像$\delta$这样的从形式上定义的函数，应该归类于奇异分布。在\ref{sub:ordinary_signal}中给出$\delta(ax)$的定义时，我们实际上考察的是它作为分布的伸缩性质，这也是为什么$\delta$的两种伸缩定义看起来是一致的。
 
 有了分布的平移和伸缩的定义，就可以建立分布的傅里叶变换的平移和尺度变换定理：
 \begin{theorem}[分布的傅里叶变换的平移和尺度变换]
@@ -3299,7 +3389,7 @@ $$\sigma_a\delta=\delta(ax)=\frac{1}{|a|}\delta(x)$$
 如果一个系统在激励信号有界时，响应也是有界的，则称之为\textbf{稳定系统}(bounded-input bounded-output,BIBO)，即
 \[e(t)\in L^1(\mathbb{R})\implies r(t)\in L^1(\mathbb{R})\]
 \end{definition}
-我们将在\ref{sub:stability_of_system}和\ref{sub:z_singular_point}中，分别借助拉普拉斯变换和z变换的理论，给出连续的和离散的线性时不变系统具有稳定性的充分必要条件。
+我们将在\ref{sub:stability_of_system}和\ref{sub:discrete_system_function}中，分别借助拉普拉斯变换和z变换的理论，给出连续的和离散的线性时不变系统具有稳定性的充分必要条件。
 
 \begin{definition}[可逆性]
     如果H（作为映射）如果是单射，则也是双射（因为我们不关注其值域），于是H是可逆的。换句话说，一种响应仅可能对应唯一的激励。
@@ -7175,7 +7265,7 @@ $$f(t)=e^{at},a\in\mathbb{R}^*,F(s)=\dfrac{1}{s-a}$$
 \end{definition}
 
 对于线性时不变系统，稳定性有充要条件：
-\begin{proposition}[稳定性的时域判据]
+\begin{proposition}[稳定性的时域判则]
     设线性时不变系统的冲激响应为$h(t)$，则系统稳定的充分必要条件是$\int_{-\infty}^{\infty}|h(t)|\,dt<\infty$。
 \end{proposition}
 \begin{proof}
@@ -7205,7 +7295,7 @@ $$f(t)=e^{at},a\in\mathbb{R}^*,F(s)=\dfrac{1}{s-a}$$
 对$r(t)=h(t)*e(t)$两边同时进行拉普拉斯变换，有
 \[\mathcal{L} r(s)=\mathcal{L} h(s)\mathcal{L} e(s),\text{即}R(s)=H(s)E(s)\]
 
-\begin{proposition}[稳定性的复频域判据]
+\begin{proposition}[稳定性的复频域判则]
     设因果线性时不变系统的冲激响应为$h(t)\in\mathcal{E}$，系统函数为$H(s)=\mathcal{L} h(s)$，则稳定性的充分必要条件是$H(s)$的所有奇点均位于复平面的左半平面$\text{Re}\ s<0$上。
 \end{proposition}
 \begin{proof}
@@ -8113,7 +8203,7 @@ $$M_1\to M_3\to M_4\to M_1,M_2\to M_5\to M_2$$
     因此，最小相位系统$\tilde{H}(s)$的相时延和群时延均小于非最小相位系统$H(s)$的相时延和群时延。
 \end{proof}
 
-需要指出，这个证明并不严谨。其一，这个证明无法涵盖虚轴上存在零点的情况；其二，这个证明仅适用于有理函数。但是，更一般的情况需要用到哈代空间中函数的内外分解，我没能找到既严谨又通俗的证明。
+需要指出，这个证明并不严谨。其一，这个证明没有说明为什么最小相位系统要求系统函数在虚轴上也不存在零点；其二，这个证明仅适用于有理函数。但是，更一般的情况需要用到哈代空间中函数的内外分解，我没能找到既严谨又通俗的证明，只能说这个证明能够提供一些直观的理解。
 
 在最小相位系统的约束下，其\textbf{逆系统}也是因果且稳定的连续线性时不变系统。这是因为最小相位系统的系统函数$H(s)$的零点均位于复平面的左半平面，因此其倒数$H^{-1}(s)$的极点也均位于复平面的左半平面，从而保证了逆系统的因果性和稳定性。
 
@@ -8382,12 +8472,12 @@ $$tau_p(\omega)=\dfrac{-\arctan(\omega)+\arctan(\frac{\omega}{2})}{\omega},\fora
 对扩展复平面$\hat{\mathbb{C}}=\mathbb{C}\cup\{\infty\}$，标准的做法是通过球极投影将扩展平面同胚映射至单位球，即黎曼球面，采用球面拓扑来定义扩展复平面的拓扑。本书不详细讲述这一点，感兴趣的读者请自行阅读复变函数的教材。简单来说，对于无穷远点，我们定义：
 \begin{definition}[无穷远点的邻域]
     无穷远点$\infty$的邻域定义为
-    \[U(\infty)=\left\{\left.z\in\hat{\mathbb{C}} \right||z|>R\right\}\cup\{\infty\},R>0\]
+    \[U(\infty)=\left\{\left.z\in\mathbb{C} \right||z|>R\right\}\cup\{\infty\},R>0\]
     $\infty$是集合$S\cup\{\infty\}$的极限点当且仅当$S$中存在点列$\{z_n\}$，使得$\lim_{n\to\infty}|z_n|=\infty$。
 \end{definition}
 基于以上定义，我们可以给出扩展复平面上的亚纯函数定义：
 \begin{definition}[扩展复平面上的亚纯函数]
-    设$U\subset\hat{\mathbb{C}}$为开集，$S\subset U$没有极限点，函数$f:U\backslash S\to\hat{\mathbb{C}}$称为\textbf{亚纯函数}(meromorphic functions)，如果$f$在$U\backslash S$内全纯，且在$S$中没有本性奇点。
+    设$U\subset\hat{\mathbb{C}}$为开集，$U$的子集$S$没有极限点，函数$f:U\backslash S\to\hat{\mathbb{C}}$称为\textbf{亚纯函数}(meromorphic functions)，如果$f$在$U\backslash S$内全纯，且在$S$中没有本性奇点。
 \end{definition}
 \begin{example}
     对于有理函数$f(z)=\dfrac{P(z)}{Q(z)}$，其中$P(z),Q(z)$为多项式，$f(z)$在$\hat{\mathbb{C}}$上亚纯。其中，如果$\text{deg}P\leq\text{deg}Q$，则$f(z)$在$\infty$处有可去奇点；如果$\text{deg}P>\text{deg}Q$，则$f(z)$在$\infty$处有$\text{deg}P-\text{deg}Q$阶极点。
@@ -8622,20 +8712,19 @@ $$\text{Res}(f,\infty)=\dfrac{1}{2\pi i}\oint_{C^-_R}f(z)\,dz$$
 本小节中，我们先列举一些离散系统的基本特性，然后讨论离散系统的级联。
 
 \begin{definition}[离散系统的基本特性]
-    设离散系统的激励为$e[n]$，响应为$r[n]$，则该系统具有以下基本特性：
+    设离散系统的激励为$e[n]$，响应为$r[n]=H(e[n])$，则该系统具有以下基本特性：
     \begin{itemize}
         \item \textbf{线性性}：满足叠加定理，即对于任意激励$e_1[n],e_2[n]$及任意常数$a,b\in\mathbb{C}$，有
-        \[H(ae_1[n]+be_2[n])=aHr_1[n]+bHr_2[n]\]
-        其中$r_1[n],r_2[n]$分别为$e_1[n],e_2[n]$经过系统后的响应。
+        \[H(ae_1[n]+be_2[n])=aH(e_1[n])+bH(e_2[n])\]
         \item \textbf{时不变性}：系统的作用不依赖于时间，即对于任意激励$e[n]$及任意整数$k\in\mathbb{Z}$，有
         \[H(\tau_k e[n])=\tau_k H(e[n])\]
         其中$\tau_k$表示时间平移算子，即$\tau_k e[n]=e[n-k]$。
         \item \textbf{因果性}：系统的响应不早于激励，即
-        \[\forall e[n],e[n]=0,n<0\implies Hr[n]=0,n<0\]
+        \[\forall e[n],e[n]=0,n<0\implies r[n]=0,n<0\]
         \item \textbf{稳定性}：激励信号有界时，响应也是有界的，即
-        \[\forall e[n]\in l^{\infty}(\mathbb{Z}),Hr[n]\in l^{\infty}(\mathbb{Z})\]
+        \[\forall e[n]\in l^{\infty}(\mathbb{Z}),r[n]\in l^{\infty}(\mathbb{Z})\]
         \item \textbf{可逆性}：如果$H$是双射，则称系统可逆，此时存在一个系统$H^{-1}$使得对于任意激励$e[n]$，有
-        \[H^{-1}Hr[n]=e[n]\]
+        \[H^{-1}r[n]=e[n]\]
         \item \textbf{即时性}与\textbf{记忆性}：如果该系统在任意时刻$t$的状态完全且唯一地取决于该时刻的系统状态与激励，而不显式地依赖于任何过去时刻$t'<t$的系统状态或历史激励，则称该系统为即时的；否则称该系统为有记忆的。
     \end{itemize}
 \end{definition}
@@ -8679,11 +8768,74 @@ $$\text{Res}(f,\infty)=\dfrac{1}{2\pi i}\oint_{C^-_R}f(z)\,dz$$
 
 \subsection{离散系统的系统函数}\label{sub:discrete_system_function}
 
-\subsection{奇点与时域特性}\label{sub:z_singular_point}
+在上一小节中，我们得到$r[n]=(h*e)[n]$，对等式两边做z变换，得到
+\[R(z)=H(z)E(z)\]
+其中$H(z)=\mathcal{Z} h[n]$记为离散系统的系统函数，它也是响应与激励的z变换之比：
+\begin{definition}[离散系统的系统函数]
+    设离散系统的激励为$e[n]$，响应为$r[n]$，它们的z变换分别为$E(z),R(z)$，则系统函数定义为
+    \[H(z)=\frac{R(z)}{E(z)}\]
+\end{definition}
 
-%因果性：收敛域包含$\infty$；稳定性：收敛域包含单位圆；对稳定+因果，收敛域包含$|z|\geq 1$
+离散系统与连续系统的系统函数是类似的：一般来说，我们考虑的离散系统的系统函数为有理函数（例如下一节将介绍的常系数线性差分方程所描述的系统），因此可以绘制离散系统的系统函数的零极点图，并通过它来分析系统的滤波特性、稳定性、因果性等时域特性；此外，系统流图与梅森增益公式对于离散系统仍然适用，系统的串联（级联）、并联与反馈的定义与连续系统完全一致，\ref{sub:mason_gain_formula}中介绍的信号流图的标准型也仍然适用于离散系统，因此这部分内容不再单独讨论。
 
+与连续系统不同的是，连续系统的分析通常使用单边拉普拉斯变换，其收敛域是复平面的右边$\text{Re}s>\sigma_c$；而离散系统的分析通常使用双边z变换，其收敛域是环状区域$r<|z|<R$。这使得离散系统的稳定性的z域判则不同于连续系统。此外，双边z变换并不要求单位脉冲响应$h[n]$是因果的，因此因果性也具有z域判则。本小节就来探讨离散系统的系统函数与因果性、稳定性之间的关系。对于离散系统的滤波特性，将在下一章介绍离散系统的频率响应特性后进行讨论。
 
+\begin{proposition}[因果性的时域判则]
+    一个离散系统是因果系统当且仅当其单位脉冲响应为因果信号，即$h[n]=0,n<0$。
+\end{proposition}
+\begin{proof}
+    类比连续系统，容易理解因果性与上述条件的等价性，首先来验证卷积和也具有类似于卷积的“支集相加”性质：设离散信号$x[n],y[n]$分别在区间$[n_1,n_2]$与$[m_1,m_2]$内非零，而在其他位置均为0，则
+    \begin{align*}
+        (x*y)[n]=\sum_{k=-\infty}^{\infty}x[k]y[n-k]
+    \end{align*}
+    \begin{align*}
+        (x*y)[n]\neq 0\iff k\in[n_1,n_2],n-k\in[m_1,m_2]\iff n\in[n_1+m_1,n_2+m_2]
+    \end{align*}
+    
+    对于离散系统，如果它是因果的，那么对于任意激励信号$e[n]$，响应$r[n]$都满足$r[n]=0,n<0$，因此单位脉冲响应也满足$h[n]=0,n<0$；反之，如果单位脉冲响应满足$h[n]=0,n<0$，则对于任意激励信号$e[n]$，响应$r[n]=(h*e)[n]$在$n<0$时为0，因此系统是因果的。
+\end{proof}
+
+\begin{proposition}[因果性的z域判则]
+    一个离散系统是因果系统当且仅当其系统函数的收敛域包含$\infty$。
+\end{proposition}
+
+这一判则是显然的，因为因果信号的z变换是只有负幂次项，收敛域包含无穷远点自然也就与单位脉冲响应的因果性等价。
+
+\begin{proposition}[稳定性的时域判则]
+    一个离散系统是稳定系统当且仅当$h\in l^1(\mathbb{Z})$。
+\end{proposition}
+\begin{proof}
+    一方面，对于有界激励$e\in l^{\infty}(\mathbb{Z})$，如果单位脉冲响应满足$h[n]\in l^1(\mathbb{Z})$，则
+    \begin{align*}
+        |r[n]|&=|(h*e)[n]|=\left|\sum_{m=-\infty}^{\infty}h[n-m]e[m]\right|\\
+        &\leq \sum_{m=-\infty}^{\infty}|h[n-m]||e[m]|\\
+        &\leq \|e\|_{\infty}\sum_{m=-\infty}^{\infty}|h[n-m]|\\
+        &=\|e\|_{\infty}\|h\|_1<\infty
+    \end{align*}
+    即$r\in l^{\infty}(\mathbb{Z})$，系统是稳定的。
+    
+    另一方面，设$h$不是绝对可和的，取有界激励信号$e[n]=\text{sgn}(h[-n])$，则
+    \begin{align*}
+        |r[0]|&=|(h*e)[0]|\\
+        &=\left|\sum_{m=-\infty}^{\infty}h[m]e[-m]\right|\\
+        &=\sum_{m=-\infty}^{\infty}|h[m]|\\
+        &=\|h\|_1=\infty
+    \end{align*}
+    $e\in l^{\infty}(\mathbb{Z})$，但$r\notin l^{\infty}(\mathbb{Z})$，系统不稳定。
+\end{proof}
+
+对稳定性的时域判据做z变换，立即得到：
+
+\begin{proposition}[稳定性的z域判则]
+    一个离散系统是稳定系统当且仅当其系统函数的收敛域包含单位圆。
+\end{proposition}
+
+综上，对于离散线性时不变系统，因果且稳定就等价于其系统函数的收敛域包含以下区域：
+\[\left\{\left.z\in\hat{\mathbb{C}}\right||z|>1\right\}\]
+
+可以说，对于离散系统的系统函数而言，复平面上的单位圆与连续情况下复平面上的虚轴是地位相当的，离散情况下单位圆的外侧与连续情况下虚轴的右侧是相当的。它们都是系统的稳定性的分界线，因果信号在变换域上的收敛域都位于分界线的一侧。此外，在下一章中我们将看到，离散系统的频率响应就是系统函数在单位圆上的限制，这与连续系统的频率响应是系统函数在虚轴上的限制也是相当的。
+
+%这种对应关系可以进一步扩展，即规定走向可以同时描述“外侧”与“右侧”，“低频到高频”，在频响里再介绍。
 
 \section{差分方程与离散系统的状态变量分析}\label{sec:Difference_Equation}
 
