@@ -3791,14 +3791,14 @@ $$\delta=0\ for\ t<0\implies h(t)=0\ for\ t<0$$
 
 \begin{definition}[常系数线性微分方程]
     一个形如
-    \[a_n y^{(n)}(t)+a_{n-1}y^{(n-1)}(t)+\cdots +a_1 y'(t)+a_0 y(t)=f(t)\]
-    称为\textbf{n阶常系数线性微分方程}，等式左侧的y和f都是t的函数，将$f(t)$称为\textbf{非齐次项}。特别地，如果$f(t)=0$，称之为\textbf{n阶常系数线性齐次微分方程}。
+    \[y^{(n)}(t)+a_{1}y^{(n-1)}(t)+\cdots +a_{n-1} y'(t)+a_n y(t)=f(t)\]
+    称为\textbf{n阶常系数线性微分方程}，其中$f(t)\in C(a,b)$，将$f(t)$称为\textbf{非齐次项}。特别地，如果$f(t)=0$，称之为\textbf{n阶常系数线性齐次微分方程}。
 \end{definition}
 
 不难看出，如果找到了n阶常系数线性齐次微分方程的两个解$y_1,y_2$，则$ay_1+by_2$也是齐次方程的解；另外，如果带入$y=e^{\lambda t}$并消去这一项，则微分方程化为其\textbf{特征方程}：
 \begin{definition}[特征方程]
     上述方程对应的特征方程为
-    \[a_n\lambda^n+a_{n-1}\lambda^{n-1}+\cdots+a_1\lambda+a_0=0\]
+    \[\lambda^n+a_{1}\lambda^{n-1}+\cdots+a_{n-1}\lambda+a_n=0\]
 \end{definition}
 
 根据代数基本定理，$\lambda$在复数域$\mathbb{C}$中有n个解（称之为\textbf{特征根}），即微分方程对应的齐次方程一定有n个形如$e^{\lambda t}$的解。因此，对于常系数线性微分方程，我们的标准处理方法是：
@@ -3885,12 +3885,12 @@ $$\delta=0\ for\ t<0\implies h(t)=0\ for\ t<0$$
 \end{proposition}
 \begin{proof}
     设一个系统描述为
-\[a_n r^{(n)}+a_{n-1}r^{(n-1)}+\cdots +a_1 r'+a_0 r=e\]
+\[r^{(n)}+a_{1}r^{(n-1)}+\cdots +a_{n-1} r'+a_n r=e\]
 考察零状态响应，令起始状态为0，对于任意激励信号$e(t)$，响应$r(t)$满足上述微分方程。现在考察激励信号延时b后的系统响应：
 \begin{align*}
-    \tau_b e&=\tau_b(a_n r^{(n)}+a_{n-1}r^{(n-1)}+\cdots +a_1 r'+a_0 r)\\
-    &=a_n \tau_b r^{(n)}+a_{n-1}\tau_b r^{(n-1)}+\cdots +a_1 \tau_b r'+a_0 \tau_b r\\
-    &=a_n (\tau_b r)^{(n)}+a_{n-1}(\tau_b r)^{(n-1)}+\cdots +a_1 (\tau_b r)'+a_0 (\tau_b r)
+    \tau_b e&=\tau_b(r^{(n)}+a_{1}r^{(n-1)}+\cdots +a_{n-1} r'+a_n r)\\
+    &=\tau_b r^{(n)}+a_{1}\tau_b r^{(n-1)}+\cdots +a_{n-1} \tau_b r'+a_n \tau_b r\\
+    &= (\tau_b r)^{(n)}+a_{1}(\tau_b r)^{(n-1)}+\cdots +a_{n-1} (\tau_b r)'+a_n (\tau_b r)
 \end{align*}
 即激励产生延时b时，零状态响应也产生延时b，系统是时不变的。
 
@@ -3910,7 +3910,7 @@ $$\delta=0\ for\ t<0\implies h(t)=0\ for\ t<0$$
 \end{definition}
 
 那么，如何求这个单位脉冲响应呢？对于微分方程
-\[a_n r^{(n)}+a_{n-1}r^{(n-1)}+\cdots +a_1 r'+a_0 r=\delta\]
+\[r^{(n)}+a_{1}r^{(n-1)}+\cdots +a_{n-1} r'+a_n r=\delta\]
 要使等式右边出现$\delta$，$r(t)$中一定含有$\delta$及其导数、积分，根据\ref{sub:general_distributions}中的结果，$u'=\delta$，而$u(t)$的各阶积分都可以用$P(t)u(t)$来表示，其中$P(t)$是t的多项式，因此可以假定
 $$r(t)=f_1(t)u(t)+f_2(t)\delta(t)+f_3(t)\delta'(t)+\cdots$$
 我们知道，$\delta$具有采样性质：$\delta(t)f(t)=\delta(t)f(0)$，还推导过$\delta'$与函数的乘积公式：
@@ -3958,15 +3958,15 @@ $r(t)=f(t)u(t)$，求出其一阶、二阶导数：\begin{align*}
 更一般地，基本解的求法如下：
 \begin{theorem}
     由微分方程
-    \[\sum_{n=0}^{N}a_n r^{(n)}(t)=\sum_{m=0}^{M}b_m e^{(m)}(t)\]
-    描述的系统，其单位脉冲响应满足：
-    \[\sum_{n=0}^{N}a_n r^{(n)}(t)=\sum_{m=0}^{M}b_m \delta^{(m)}\]
+    \[\sum_{k=0}^{n}a_{k} r^{(n-k)}(t)=\sum_{l=0}^{m}b_{l} e^{(n-l)}(t)\]
+    描述的系统（其中$a_0=b_0=1$），其单位脉冲响应满足：
+    \[\sum_{k=0}^{n}a_{k} r^{(n-k)}(t)=\sum_{l=0}^{m}b_{l} \delta^{(n-l)}\]
 \end{theorem}
-当$r(t)$的最高次导数的阶数大于$\delta$的最高阶导数的阶数，即$N> M$时，解为$y_h(t)u(t)$；当$r(t)$的最高次导数的阶数不小于$\delta$的最高阶导数的阶数，即$N\leq M$时，解为$y_h(t)u(t)+\sum_{k=0}^{M-N}c_k \delta^{(k)}$。换言之，\textbf{需要利用方程左侧的最高阶导，让方程右侧所需的$\delta$的最高阶导数项出现}。
+当$r(t)$的最高次导数的阶数大于$\delta$的最高阶导数的阶数，即$n>m$时，解为$y_h(t)u(t)$；当$r(t)$的最高次导数的阶数不小于$\delta$的最高阶导数的阶数，即$n\leq m$时，解为$y_h(t)u(t)+\sum_{k=0}^{m-n}c_k \delta^{(k)}$。换言之，\textbf{需要利用方程左侧的最高阶导，让方程右侧所需的$\delta$的最高阶导数项出现}。
 
 从基本解的形式可以看出$h(t)$总是因果信号，这就解释了上一小节中所断言的“\textbf{由常系数线性微分方程描述的系统是因果的}”。
 
-只有在描述系统时才需单独考虑这种非齐次项为激励及其各阶导数的线性组合的方程。如果把方程右侧看作一个新的非齐次项，就得到一个新的微分方程。以这种视角看来，另一种单位脉冲响应的求解方法是，将新微分方程的基本解$h_0(t)$与非齐次项的卷积$h_0(t)*\sum_{m=0}^{M}b_m e^{(m)}(t)$作为系统的单位脉冲响应$h(t)$，但这样涉及$\delta$各阶导数的卷积，计算较为复杂，通过待定系数法求解往往更快。
+只有在描述系统时才需单独考虑这种非齐次项为激励及其各阶导数的线性组合的方程。如果把方程右侧看作一个新的非齐次项，就得到一个新的微分方程。以这种视角看来，另一种单位脉冲响应的求解方法是，将新微分方程的基本解$h_0(t)$与非齐次项的卷积$h_0(t)*\sum_{l=0}^{m}b_l e^{(m-l)}(t)$作为系统的单位脉冲响应$h(t)$，但这样涉及$\delta$各阶导数的卷积，计算较为复杂，通过待定系数法求解往往更快。
 
 这种基本解的求解方法可以进一步优化。我们在\ref{sub:cascade}中得到：单位脉冲响应是单位阶跃响应的导数，因此可以通过单位脉冲响应求出单位阶跃响应。相比带入$\delta$，将$u(t)$带入方程右侧时，所出现的$\delta$的最高阶导数会低一阶，因此用待定系数法求单位阶跃响应再求导，将比直接求单位脉冲响应少处理一个待定系数。我们通过一个例子来比较这两种方法：
 \begin{example}
@@ -4070,47 +4070,120 @@ $r(t)=f(t)u(t)$，求出其一阶、二阶导数：\begin{align*}
 
 \subsection{与高阶方程的对应关系}\label{sub:compare_to_high_order}
 
-上一节中我们讨论的常系数线性高阶微分方程，必然可以转化为常系数线性微分方程组。更一般地，通过相同的手法，任何显式微分方程都可以转化为微分方程组。显示微分方程是微分方程的一种特殊形式，也是常微分方程理论中的主要研究对象。
+上一节中我们讨论的常系数线性高阶微分方程，必然可以转化为常系数线性微分方程组；更一般的，即便系数是依赖于时间$t$的函数，也可以进行转化。通常来说，同样可以由线性微分方程组得到线性微分方程。
 
-\begin{definition}[显式微分方程]
-    将形如
-    \[\frac{d^n y}{dt^n}=F(t,y,y',\cdots,y^{(n-1)})\]
-    的微分方程称为\textbf{显式微分方程}，其中函数$F$是已知的。
+\begin{definition}[线性微分方程组]
+    设矩阵函数$A(t)$和向量值函数$\mathbf{b}(t)$在区间$(a,b)$上连续，则形如\begin{align*}
+    \frac{d\mathbf{y}}{dt}=A(t)\mathbf{y}+\mathbf{b}(t)
+    \end{align*}
+    的微分方程组则称该微分方程组为\textbf{线性微分方程组}；如果$A(t),\mathbf{b}(t)$是常数矩阵和常数向量，则称该微分方程组为\textbf{常系数线性微分方程组}。
 \end{definition}
 
-显然，常系数线性微分方程都是显示微分方程。
+\begin{definition}
+    对于线性微分方程组，如果$\mathbf{b}(t)\neq\mathbf{0}$，则称其为\textbf{非齐次线性微分方程组}；如果$\mathbf{b}(t)= \mathbf{0}$，则称其为\textbf{齐次线性微分方程组}，或非齐次方程组$\dfrac{d\mathbf{y}}{dt}=A(t)\mathbf{y}+\mathbf{b}'(t)$对应的齐次方程组。
+\end{definition}
+\begin{definition}
+    对于线性微分方程组，将方程的个数称为方程组的\textbf{阶数}。
+\end{definition}
 
-在变量代换
+称$\frac{d\mathbf{y}}{dt}=A(t)\mathbf{y}+\mathbf{b}(t)$是线性微分方程，是因为函数$A(t)\mathbf{y}$对$\mathbf{y}$的每个分量都是线性的。以$\mathbf{b}(t)$为系统的激励，以初始条件为零向量时的解作为这个系统的零状态响应，则容易看出系统是线性的，但由于系数矩阵$A(t)$随时间变化，系统不具备时不变性。
+
+在常微分方程的理论中，常系数线性微分方程组是线性方程组的特殊情况，前者解法可以视作后者的特例。在信号与系统课程中，我们更关注常系数线性微分方程组，因为与之等价的常系数方程描述了线性时不变系统。第二小节中，我们将直接讨论线性方程组，再在第三小节专门讨论常系数方程组。
+
+下面说明由线性方程向线性方程组转化的标准流程。设
+\[y^{(n)}+a_{1}(t)y^{(n-1)}+\cdots +a_{n-1}(t)y'+a_n(t)y=f(t)\]
+通过变量代换
 \[y_1=y,y_2=y',\cdots,y_n=y^{(n-1)}\]
-下，显式微分方程可以写成如下的微分方程组：
-\begin{align*}
+得到\begin{align*}
     \begin{cases}
-        &\frac{dy_1}{dt}=y_2\\
-        &\frac{dy_2}{dt}=y_3\\
+        \frac{dy_1}{dt}&=y_2\\
+        \frac{dy_2}{dt}&=y_3\\
         &\cdots\\
-        &\frac{dy_{n-1}}{dt}=y_n\\
-        &\frac{dy_n}{dt}=F(t,y_1,y_2,\cdots,y_{n-1})
-    \end{cases}\textbf{或}\frac{d\mathbf{y}}{dt}=\mathbf{f}(t,\mathbf{y})
+        \frac{dy_{n-1}}{dt}&=y_n\\
+        \frac{dy_n}{dt}&=-a_{1}(t)y_{n}-\cdots -a_{n-1}(t)y_2-a_n(t)y_1+f(t)
+    \end{cases}
 \end{align*}
-其中
-\[\mathbf{y}=[y_1,y_2,\cdots,y_n]^T,\mathbf{f}(t,\mathbf{y})=[y_2,y_3,\cdots,y_n,F(t,y_1,y_2,\cdots,y_{n-1})]^T\]
-分别为$\mathbb{R}^n$中的列向量和$\mathbb{R}\times\mathbb{R}^n$中的向量值函数。这就是\textbf{显示微分方程向微分方程组转化的标准手法}。相应的，形如
-$$\frac{d\mathbf{y}}{dt}=\mathbf{f}(t,\mathbf{y})$$
-的方程是常微分方程理论中主要研究的微分方程组类型。
+写成矩阵的形式，即\begin{align*}
+    \frac{d\mathbf{y}}{dt}=\begin{bmatrix}
+    0 & 1 & 0 & \cdots & 0\\
+    0 & 0 & 1 & \cdots & 0\\
+    \vdots & \vdots & \vdots & \ddots & \vdots\\
+    0 & 0 & 0 & \cdots & 1\\
+    -a_n(t) & -a_{n-1}(t) & -a_{n-2}(t) & \cdots & -a_1(t)
+    \end{bmatrix}\mathbf{y}+\begin{bmatrix}
+    0\\
+    0\\
+    \vdots\\
+    0\\
+    f(t)
+    \end{bmatrix}
+\end{align*}
 
-%\begin{definition}[柯西问题]
-%    带有初值条件$\mathbf{y}(t_0)=\mathbf{y}_0$的微分方程组$\frac{d\mathbf{y}}{dt}=\mathbf{f}(t,\mathbf{y})$的求解问题，称为\textbf{柯西问题}。
-%\end{definition}
+熟悉多项式理论的读者不难发现，上面的矩阵恰为原方程的特征多项式的友矩阵，它的行列式即为特征多项式。
 
-%对于柯西问题，我们引入以下两个定理来描述它的解的存在性与唯一性：
-%\begin{claim}[Picard定理]
-%    设$\mathbf{f}$在有界闭区域
-%    $$D:|t-t_0|\leq a,|\mathbf{y}-\mathbf{y}_0|\leq b$$
-%    上连续，且对$\mathbf{y}$满足Lipschitz条件，即
-%    $$\exists L>0,\forall (t,\mathbf{y}_1),(t,\mathbf{y})\in D,\|\mathbf{f}(t,\mathbf{y}_1)-\mathbf{f}(t,\mathbf{y}_2)\|\leq L\|\mathbf{y}_1-\mathbf{y}_2\|$$
-%    （其中范数就是高维欧几里得空间$\mathbb{R}^d$中的向量长度），则柯西问题的解在$|t-t_0|\leq h$上存在且唯一，其中
-%    $$h=\min\left\{a,\frac{b}{\max_{(t,\mathbf{y})\in D}|\mathbf{f}(t,\mathbf{y})|}\right\}$$
-%\end{claim}
+将线性微分方程组转化为线性微分方程也总是可行的。对于方程组\begin{align*}
+    \frac{d\mathbf{y}}{dt}=A(t)\mathbf{y}+\mathbf{b}(t)
+\end{align*}
+令$A=PJP^{-1}$，其中$J$为$A$的Jordan标准型，做换元$\mathbf{z}=P^{-1}\mathbf{y}$，则以上方程化为\begin{align*}
+    \frac{d\mathbf{z}}{dt}=J\mathbf{z}+P^{-1}\mathbf{b}(t)
+\end{align*}
+$J$是块对角矩阵，每个块为一个Jordan块，可以通过代入消元的方式将上述方程组转化为高阶微分方程，每一次代入消元都将使方程的阶数加一（在下面的例子中将会看到这一点）。如果$J$仅由单个Jordan块组成，则这个代入消元的过程可以一直进行到最后，$n-1$次代入消元使得方程的阶数由1上升至$n$，因此\textbf{方程组的阶数与方程的阶数定义是相符的}，即能够相互转化的方程与方程组，阶数也相同。
+
+在$J$中含有多个Jordan块的情况下，我们的确无法得到一个$n$阶的微分方程，而是只能得到一系列阶数之和为$n$的微分方程，但是，这种情况表明原方程在适当的换元下可以拆解为几个相互独立的小方程组（即解耦合的子系统），每个小方程组对应一个Jordan块，从而可以转化为一个高阶微分方程。因此，一般来说仅需考虑$J$由单个Jordan块组成的情况。
+
+下面通过三阶Jordan块的例子来说明转化的过程：
+
+\begin{example}
+    设\begin{align*}
+            \frac{d}{dt}\begin{bmatrix}
+                z_1\\
+                z_2\\
+                z_3
+            \end{bmatrix}=\begin{bmatrix}
+            \lambda & 1 & 0\\
+            0 & \lambda & 1\\
+            0 & 0 & \lambda
+            \end{bmatrix}\begin{bmatrix}
+                z_1\\
+                z_2\\
+                z_3
+            \end{bmatrix}
+        \end{align*}
+        利用第一个方程得到
+        $$z_2=\frac{dz_1}{dt}-\lambda z_1$$
+        代入第二个方程得到：\begin{align*}
+            \frac{d}{dt}\left(\frac{dz_1}{dt}-\lambda z_1\right)=\lambda\left(\frac{dz_1}{dt}-\lambda z_1\right)+z_3
+        \end{align*}
+        即\begin{align*}
+            z_3=\frac{d^2 z_1}{dt^2}-2\lambda\frac{dz_1}{dt}+\lambda^2 z_1
+        \end{align*}
+        代入第三个方程得到\begin{align*}
+            \frac{d}{dt}\left(\frac{d^2 z_1}{dt^2}-2\lambda\frac{dz_1}{dt}+\lambda^2 z_1\right)=\lambda\left(\frac{d^2 z_1}{dt^2}-2\lambda\frac{dz_1}{dt}+\lambda^2 z_1\right)
+        \end{align*}
+        即\begin{align*}
+            \frac{d^3 z_1}{dt^3}-3\lambda\frac{d^2 z_1}{dt^2}+3\lambda^2\frac{dz_1}{dt}-\lambda^3 z_1=0
+        \end{align*}
+        这是一个关于$z_1$的三阶方程。
+\end{example}
+
+不论$A$中的元素是$t$的函数还是常数，都可以执行上述流程，换言之，如果方程组本身不可以分解为一系列更小的方程组，那么\textbf{线性微分方程组可以与同阶的线性微分方程相互转化，常系数线性微分方程组可以与同阶的常系数线性微分方程相互转化}。
+
+\subsection{线性微分方程组的解空间}\label{sub:solution_of_linear_equation_system}
+
+本小节旨在刻画线性微分方程组的解空间。根据上一小节的转化关系，本小节的内容同样适用于线性微分方程，以及我们最关注的的常系数线性微分方程（组）。
+
+\begin{definition}[柯西问题]
+    带有初始条件$\mathbf{y}(t_0)=\mathbf{y}_0$的微分方程组$\frac{d\mathbf{y}}{dt}=A(t)\mathbf{y}+\mathbf{b}(t)$的求解问题，称为\textbf{柯西问题}(Cauchy problem)。
+\end{definition}
+
+\begin{claim}[Picard定理]
+    设$\mathbf{f}$在有界闭区域
+    $$D:|t-t_0|\leq a,|\mathbf{y}-\mathbf{y}_0|\leq b$$
+    上连续，且对$\mathbf{y}$满足Lipschitz条件，即
+    $$\exists L>0,\forall (t,\mathbf{y}_1),(t,\mathbf{y})\in D,\|\mathbf{f}(t,\mathbf{y}_1)-\mathbf{f}(t,\mathbf{y}_2)\|\leq L\|\mathbf{y}_1-\mathbf{y}_2\|$$
+    （其中范数就是高维欧几里得空间$\mathbb{R}^d$中的向量长度），则柯西问题的解在$|t-t_0|\leq h$上存在且唯一，其中
+    $$h=\min\left\{a,\frac{b}{\max_{(t,\mathbf{y})\in D}|\mathbf{f}(t,\mathbf{y})|}\right\}$$
+\end{claim}
 %\begin{claim}[Peano定理]
 %    设$\mathbf{f}$在有界闭区域
 %    $$D:|t-t_0|\leq a,|\mathbf{y}-\mathbf{y}_0|\leq b$$
@@ -4118,87 +4191,380 @@ $$\frac{d\mathbf{y}}{dt}=\mathbf{f}(t,\mathbf{y})$$
 %    $$h=\min\left\{a,\frac{b}{\max_{(t,\mathbf{y})\in D}|\mathbf{f}(t,\mathbf{y})|}\right\}$$
 %\end{claim}
 
-%可以看出，Picard定理的条件比Peano定理更强，前者给出了柯西问题的解唯一存在的充分条件，而后者给出了解存在的充分条件。尽管这两个定理的表述较为复杂，但对于我们所关注的线性方程（组），
+%可以看出，Picard定理的条件比Peano定理更强，前者给出了柯西问题的解唯一存在的充分条件，而后者给出了解存在的充分条件。
 
-下面，我们给出（常系数）线性微分方程组的定义，并建立它与高阶微分方程的对应关系。
+引入Picard定理是为了说明以下事实：
+\begin{proposition}
+    取定初始条件的线性微分方程组，解是存在且唯一的
+\end{proposition}
 
-\begin{definition}[线性和常系数线性微分方程组]
-    考虑微分方程组\begin{align*}
-    \frac{d\mathbf{y}}{dt}=\mathbf{f}(t,\mathbf{y})
-    \end{align*}
-    如果$\mathbf{f}(t,\mathbf{y})$是$\mathbf{y}$的线性函数，即
-    \[\mathbf{f}(t,\mathbf{y})=A(t)\mathbf{y}+\mathbf{b}(t)\]
-    其中$A(t)$是$\mathbb{R}\times\mathbb{R}^n$中的矩阵值函数，$\mathbf{b}(t)$是$\mathbb{R}\times\mathbb{R}^n$中的向量值函数，则称该微分方程组为\textbf{线性微分方程组}；如果$A(t),\mathbf{b}(t)$都是常数矩阵和常数向量，则称该微分方程组为\textbf{常系数线性微分方程组}。
+Picard定理适用范围很广，但我们仅仅关注线性微分方程组，由于在其定义中要求了系数矩阵$A(t)$和非齐次项$\mathbf{b}(t)$关于$t$的连续性，这种方程在每个初值点$(t_0,\mathbf{y}_0)\in\mathbb{R} \times \mathbb{R}^n$处都满足Picard定理的条件，而初值点的小邻域内的唯一解，又提供了其他点处的额外的“初始条件”，事实上，我们总能将这个唯一的解延伸至整个时间轴上。
 
-    对于线性微分方程组，如果$\mathbf{b}(t)\neq\mathbf{0}$，则称其为\textbf{非齐次线性微分方程组}；如果$\mathbf{b}(t)= \mathbf{0}$，则称其为\textbf{齐次线性微分方程组}，或非齐次方程组$\dfrac{d\mathbf{y}}{dt}=A(t)\mathbf{y}+\mathbf{b}'(t)$对应的齐次方程组。
+下面我们首先考虑齐次方程，再通过常数变易法来处理非齐次方程。
 
-    将方程的个数称为方程组的\textbf{阶数}。
+利用前一命题，可以进一步说明：
+\begin{theorem}
+    $n$阶齐次线性方程组的解集$S$构成$n$维实线性空间。
+\end{theorem}
+\begin{proof}
+    线性性是显然的。我们通过构造一个同构映射来说明解空间的维数是$n$。
+
+    定义$\mathbf{H}:\mathbb{R}^n\to S,\mathbf{y}_0\mapsto \mathbf{y}(t)$，其中$\mathbf{y}(t)$是满足初始条件$\mathbf{y}(t_0)=\mathbf{y}_0$的解。下验证$\mathbf{H}$是一个线性空间同构映射：
+
+    首先，$\mathbf{H}$是线性的。$\forall \mathbf{y}_0,\mathbf{z}_0\in\mathbb{R}^n,\forall \alpha,\beta\in\mathbb{R}$，$\alpha\mathbf{H}(\mathbf{y}_0)+\beta\mathbf{H}(\mathbf{z}_0)$是满足初始条件$\mathbf{y}(t_0)=\alpha\mathbf{y}_0+\beta\mathbf{z}_0$的解，根据解的唯一性，$$\mathbf{H}(\alpha\mathbf{y}_0+\beta\mathbf{z}_0)=\alpha\mathbf{H}(\mathbf{y}_0)+\beta\mathbf{H}(\mathbf{z}_0)$$
+
+    其次，$\mathbf{H}$是单射。设$\mathbf{y}_0\neq\mathbf{z}_0$，它们对应的解分别为$\mathbf{y}=\mathbf{H}(\mathbf{y}_0)$和$\mathbf{z}=\mathbf{H}(\mathbf{z}_0)$，则$\mathbf{y}(t_0)\neq\mathbf{z}(t_0)$，因此$\mathbf{y}\neq\mathbf{z}$。
+
+    最后，$\mathbf{H}$是满射。对于任意$\mathbf{y}(t)\in S$，$\mathbf{y}_0=\mathbf{y}(t_0)$满足$\mathbf{H}(\mathbf{y}_0)=\mathbf{y}(t)$。
+
+    综上，$\mathbf{H}$是一个线性空间同构映射，解空间的维数为$\dim \mathbb{R}^n=n$。
+\end{proof}
+
+这个同构映射具有优美的几何意义：如下图所示，$\mathbb{R}\times\mathbb{R}^n$构成了一个$n+1$维的空间，取定超平面$t=t_0$，在这个超平面上每个点$\mathbf{y}_0$都对应着一个初值点$(t_0,\mathbf{y}_0)$，从而对应唯一的解，即图中的解曲线$\mathbf{y}=\mathbf{y}(t)$。显然，所有解曲线不相交，并且构成空间$\mathbb{R}^n\times\mathbb{R}$的一个划分。
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{solution_space}
+    \caption{解空间的几何意义}
+\end{figure}
+
+特别地，根据线性方程与线性方程组之间的对应关系，这个定理解释了上一节中提到的“确定$n$个不相关的初始条件，就能唯一确定常系数线性微分方程的解”。在$n$维空间中，$n$个不相关的初始条件对应着$n$个不相关的线性方程，其解空间是0维的，即$\mathbb{R}^n$中的一个点。
+
+\begin{definition}
+    称向量值函数$\boldsymbol{\phi}_1(t),\boldsymbol{\phi}_2(t),\cdots,\boldsymbol{\phi}_n(t)$在区间$(a,b)$上是\textbf{线性相关}的，如果存在不全为零的常数$c_1,c_2,\cdots,c_n$，使得
+    \[c_1\boldsymbol{\phi}_1(t)+c_2\boldsymbol{\phi}_2(t)+\cdots+c_n\boldsymbol{\phi}_n(t)=0,\forall t\in(a,b)\]
+    否则称它们是\textbf{线性无关}的。
 \end{definition}
+
+从上一个定理可知，齐次线性方程组有$n$个线性无关的解，通解为\begin{align*}
+    \mathbf{y}(t)=c_1\boldsymbol{\phi}_1(t)+c_2\boldsymbol{\phi}_2(t)+\cdots+c_n\boldsymbol{\phi}_n(t)
+\end{align*}
+将$\{\boldsymbol{\phi}_k(t)\}_{k=1}^n$称为齐次线性方程组的\textbf{基本解组}，它张成了$n$维的线性空间，因此只要给出一个基本解组，就相当于确定了齐次线性方程组的解空间。
+
+由于同构映射保持向量的线性无关性，通过解空间与初值空间之间的同构映射$\mathbf{H}$，只要在$t=t_0$处这$n$个解的值$\boldsymbol{\phi}_1(t_0),\boldsymbol{\phi}_2(t_0),\cdots,\boldsymbol{\phi}_n(t_0)$线性无关，那么它们就应当对应着在同构意义下线性无关的解。事实上，通过Wronsky行列式可以证明，$\{\boldsymbol{\phi}_k(t)\}_{k=1}^n$线性无关的确就等价于在某一点$t_0\in(a,b)$处，$\boldsymbol{\phi}_1(t_0),\boldsymbol{\phi}_2(t_0),\cdots,\boldsymbol{\phi}_n(t_0)$线性无关，这解释了以上定义的合理性。
+
+\begin{definition}[Wronsky行列式]
+    设\begin{align*}
+    \boldsymbol{\phi}_1(t)=\begin{bmatrix}
+    \phi_{11}(t)\\
+    \phi_{12}(t)\\
+    \vdots\\
+    \phi_{1n}(t)
+    \end{bmatrix},\boldsymbol{\phi}_2(t)=\begin{bmatrix}
+    \phi_{21}(t)\\
+    \phi_{22}(t)\\
+    \vdots\\
+    \phi_{2n}(t)
+    \end{bmatrix},\cdots,\boldsymbol{\phi}_n(t)=\begin{bmatrix}
+    \phi_{n1}(t)\\
+    \phi_{n2}(t)\\
+    \vdots\\
+    \phi_{nn}(t)
+    \end{bmatrix}
+    \end{align*}
+    是$n$个向量值函数，定义它们的\textbf{Wronsky行列式}为
+    \[W(t)=\det\begin{bmatrix}
+    \boldsymbol{\phi}_{11}(t) & \boldsymbol{\phi}_{21}(t) & \cdots & \boldsymbol{\phi}_{n1}(t)\\
+    \boldsymbol{\phi}_{12}(t) & \boldsymbol{\phi}_{22}(t) & \cdots & \boldsymbol{\phi}_{n2}(t)\\
+    \vdots & \vdots & \ddots & \vdots\\
+    \boldsymbol{\phi}_{1n}(t) & \boldsymbol{\phi}_{2n}(t) & \cdots & \boldsymbol{\phi}_{nn}(t)
+    \end{bmatrix}\]
+\end{definition}
+
+\begin{theorem}[Liouville公式]
+    $\forall t_0\in (a,b)$，有
+    \begin{align*}
+        W(t)=W(t_0)e^{-\int_{t_0}^t \mathrm{tr}A(s)\,ds},\forall t\in(a,b)
+    \end{align*}
+\end{theorem}
+
+这个定理的证明比较繁琐，可以在\cite{ode}等常微分方程的教材中找到，此处略去证明。它表明，$W(t)$要么在整个区间$(a,b)$上恒为零，要么在整个区间$(a,b)$上恒不为零。因此，\begin{align*}
+    &\{\boldsymbol{\phi}_k(t)\}_{k=1}^n\text{线性无关}\\
+    \iff& \forall t\in(a,b),W(t)\neq 0\\
+    \iff& \exists t_0\in(a,b),W(t_0)\neq 0\\
+    \iff& \exists t_0\in(a,b),\{\boldsymbol{\phi}_k(t_0)\}_{k=1}^n\text{线性无关}
+\end{align*}
+
+以上的定义和定理实际上适用于更一般的齐次微分方程组
+$$\frac{d\mathbf{y}}{dt}=\mathbf{f}(t,\mathbf{y})$$
+而不仅仅是线性的情况。
+
+考虑由齐次线性微分方程转化而来的齐次线性微分方程组，则我们实际上只需要向量值函数$\boldsymbol{\phi}_1(t),\boldsymbol{\phi}_2(t),\cdots,\boldsymbol{\phi}_n(t)$的第一个分量，而后续的分量是前一分量的导数。这启发我们对数量值函数定义：
+\begin{definition}
+    函数$\phi_1(t),\phi_2(t),\cdots,\phi_n(t)$在区间$(a,b)$上是\textbf{线性相关}的，如果存在不全为零的常数$c_1,c_2,\cdots,c_n$，使得
+    \[c_1\phi_1(t)+c_2\phi_2(t)+\cdots+c_n\phi_n(t)=0,\forall t\in(a,b)\]
+    否则称它们是\textbf{线性无关}的。
+\end{definition}
+
+齐次线性微分方程的解空间是$n$维的，因此只要给出$n$个线性无关的解$\phi_1(t),\phi_2(t),\cdots,\phi_n(t)$，就能得到通解：\begin{align*}
+    y(t)=c_1\phi_1(t)+c_2\phi_2(t)+\cdots+c_n\phi_n(t),\forall \mathbf{c}\in\mathbb{R}^n
+\end{align*}
+
+我们同样将$n$个线性无关的解$\{\phi_k(t)\}_{k=1}^n$称为齐次线性微分方程的\textbf{基本解组}。
+
+\begin{definition}[Wronsky行列式]
+    函数$\phi_1(t),\phi_2(t),\cdots,\phi_n(t)$的Wronsky行列式定义为
+    \[W(t)=\det\begin{bmatrix}
+    \phi_1(t) & \phi_2(t) & \cdots & \phi_n(t)\\
+    \phi'_1(t) & \phi'_2(t) & \cdots & \phi'_n(t)\\
+    \vdots & \vdots & \ddots & \vdots\\
+    \phi_1^{(n-1)}(t) & \phi_2^{(n-1)}(t) & \cdots & \phi_n^{(n-1)}(t)
+    \end{bmatrix}\]
+\end{definition}
+
+我们知道，这种方程组的矩阵具有特殊的形式，它的迹恰为原方程的$-a_1(t)$，代入Liouville公式得到\begin{align*}
+    W(t)=W(t_0)e^{-\int_{t_0}^t a_1(s)\,ds},\forall t\in(a,b)
+\end{align*}
+
+可见，对于齐次线性微分方程，与方程组类似，\begin{align*}
+    &\{\phi_k(t)\}_{k=1}^n\text{线性无关}\\
+    \iff& \forall t\in(a,b),W(t)\neq 0\\
+    \iff& \exists t_0\in(a,b),W(t_0)\neq 0\\
+    \iff& \exists t_0\in(a,b),\{\phi_k(t_0)\}_{k=1}^n\text{线性无关}
+\end{align*}
+
+\begin{definition}[解矩阵]
+    齐次线性微分方程组\begin{align*}
+    \frac{d\mathbf{y}}{dt}=A(t)\mathbf{y}
+    \end{align*}
+    的解组$\boldsymbol{\phi}_1(t),\boldsymbol{\phi}_2(t),\cdots,\boldsymbol{\phi}_n(t)$为列向量的矩阵称为\textbf{解矩阵}(solution matrix)：
+    \[\Phi(t)=[\boldsymbol{\phi}_1(t),\boldsymbol{\phi}_2(t),\cdots,\boldsymbol{\phi}_n(t)]\]
+    解矩阵满足\begin{align*}
+        \frac{d\Phi(t)}{dt}=A(t)\Phi(t)
+    \end{align*}
+    如果$\{\boldsymbol{\phi}_k(t)\}_{k=1}^n$是基本解组，则解矩阵$\Phi(t)$是可逆的，称之为\textbf{基本解矩阵}(fundamental solution matrix)。
+\end{definition}
+\begin{proposition}
+    $n$阶线性齐次微分方程组的通解形如$\mathbf{y}(t)=\Phi(t)\mathbf{c}$，其中$\mathbf{c}\in\mathbb{R}^n$是任意常数向量；
+
+    矩阵$\Psi(t)$是基本解矩阵的充要条件是存在可逆矩阵$C$，使得$\Psi(t)=\Phi(t)C$。
+\end{proposition}
+
+在处理一阶线性微分方程时，我们总是先求出齐次解，再通过常数变易法来求得通解。对于方程组，可以做类似的处理。已知解矩阵$\Phi(t)$，设\begin{align*}
+    \mathbf{y}(t)=\Phi(t)\mathbf{c}(t)
+\end{align*}
+代入非齐次方程组
+\begin{align*}
+    \frac{d\mathbf{y}}{dt}=A(t)\mathbf{y}+\mathbf{b}(t)
+\end{align*}
+得到
+\begin{align*}
+    \Phi(t)\frac{d\mathbf{c}(t)}{dt}=\mathbf{b}(t)
+\end{align*}
+由于基本解矩阵可逆，有
+\begin{align*}
+    \frac{d\mathbf{c}(t)}{dt}=\Phi^{-1}(t)\mathbf{b}(t)
+\end{align*}
+积分得到
+\begin{align*}
+    \mathbf{c}(t)=\int_{t_0}^t \Phi^{-1}(s)\mathbf{b}(s)\,ds
+\end{align*}
+因此，非齐次方程组有特解
+\begin{align*}
+    \mathbf{y}(t)=\Phi(t)\int_{t_0}^t \Phi^{-1}(s)\mathbf{b}(s)\,ds
+\end{align*}
+\begin{theorem}
+    设$\Phi(t)$是齐次线性微分方程组
+    $$\frac{d\mathbf{y}}{dt}=A(t)\mathbf{y}$$
+    的基本解矩阵，则非齐次方程组
+    $$\frac{d\mathbf{y}}{dt}=A(t)\mathbf{y}+\mathbf{b}(t)$$
+    的通解为\begin{align*}
+    \mathbf{y}(t)=\Phi(t)\left(\mathbf{c}+\int_{t_0}^t \Phi^{-1}(s)\mathbf{b}(s)\,ds\right)
+    \end{align*}
+\end{theorem}
+
+\begin{corollary}
+    非齐次方程组满足初始条件$\mathbf{y}(t_0)=\mathbf{y}_0$的解为\begin{align*}
+    \mathbf{y}(t)=\Phi(t)\left(\Phi^{-1}(t_0)\mathbf{y}_0+\int_{t_0}^t \Phi^{-1}(s)\mathbf{b}(s)\,ds\right)
+    \end{align*}
+\end{corollary}
+
+\begin{proof}
+    令\begin{align*}
+    \mathbf{y}(t_0)=\Phi(t_0)\mathbf{c}=\mathbf{y}_0
+    \end{align*}
+    可得\begin{align*}
+    \mathbf{c}=\Phi^{-1}(t_0)\mathbf{y}_0
+    \end{align*}    
+    代入前一公式即证。
+\end{proof}
+
+\begin{example}
+    求解柯西问题\begin{align*}
+    \frac{d\mathbf{y}}{dt}=\begin{bmatrix}
+    \cos 6t+1 & \sin 6t-3\\
+    \sin 6t+3 & 1-\cos 6t
+    \end{bmatrix}\mathbf{y}+\begin{bmatrix}
+        \cos 3t\\
+        \sin 3t
+    \end{bmatrix},\mathbf{y}(0)=\begin{bmatrix}
+    0\\
+    1
+    \end{bmatrix}
+    \end{align*}
+
+    解：可以验证\begin{align*}
+        \Phi(t)=\begin{bmatrix}
+        e^{2t}\cos 3t & -\sin 3t\\
+        e^{2t}\sin 3t & \cos 3t
+        \end{bmatrix}
+    \end{align*}
+    是齐次方程组的基本解矩阵，并且\begin{align*}
+        \Phi^{-1}(t)=\begin{bmatrix}
+        e^{-2t}\cos 3t & -e^{-2t}\sin 3t\\
+        \sin 3t & \cos 3t
+        \end{bmatrix}
+    \end{align*}
+    利用以上定理中的通解公式，可知非齐次方程组的通解为\begin{align*}
+    \mathbf{y}(t)&=\Phi(t)\left(\Phi^{-1}(0)\mathbf{y}_0+\int_{0}^t \Phi^{-1}(s)\begin{bmatrix}
+        \cos 3s\\
+        \sin 3s
+    \end{bmatrix}\,ds\right)\\
+    &=\Phi(t)\left(\begin{bmatrix}0\\1\end{bmatrix}+\int_{0}^t \begin{bmatrix}
+        e^{-2s}\cos 6s\\
+        1
+        \end{bmatrix}\,ds\right)\\
+    &=\Phi(t)\begin{bmatrix}
+        \frac{1}{2}(e^{-2t}-1)\cos 6t+\frac{3}{10}(e^{-2t}-1)\sin 6t\\
+        t+1
+        \end{bmatrix}\\
+    &=\begin{bmatrix}
+        \frac{1}{2}(e^{2t}-1)\cos 3t-\sin 3t\\
+        \frac{1}{2}(e^{2t}-1)\sin 3t+\cos 3t
+    \end{bmatrix}
+    \end{align*}
+\end{example}
+
+\subsection{常系数线性微分方程组}\label{sub:constant_coefficient_linear_equation_system}
 
 简洁起见，如无其他说明，下文中“方程”总指代常系数线性微分方程，“方程组”总指代常系数线性微分方程组。
 
-前文中已经指出了将方程转化为方程组的标准手法。要将方程组转化为方程也总是可行的。为了使叙述更加简洁清晰，我们通过一个例子来说明这个转化流程：
-\begin{example}
-    设方程组为\begin{align*}
-        \frac{d}{dt}\begin{bmatrix}
-            y_1\\
-            y_2\\
-            y_3
-        \end{bmatrix}=A\begin{bmatrix}
-            y_1\\
-            y_2\\
-            y_3
-        \end{bmatrix}
+上一小节中对线性方程组的求解，全部都建立在已知基本解矩阵的基础上，然而，并不存在一个行之有效的方法，使得对于任意的线性方程组，都能够求出其基本解矩阵。而本小节将系数矩阵$A$限制为常数矩阵，我们将看到，常系数线性方程组的基本解矩阵可以通过矩阵指数函数来求得。
+
+\begin{theorem}
+    齐次方程组\begin{align*}
+    \frac{d\mathbf{y}}{dt}=A\mathbf{y}
     \end{align*}
-    令$A=PJP^{-1}$，其中$J$为$A$的Jordan标准型，做换元$\mathbf{z}=P^{-1}\mathbf{y}$，则以上方程化为\begin{align*}
-        \frac{d}{dt}\begin{bmatrix}
-            z_1\\
-            z_2\\
-            z_3
-        \end{bmatrix}=J\begin{bmatrix}
-            z_1\\
-            z_2\\
-            z_3
-        \end{bmatrix}
+    的基本解矩阵为\begin{align*}
+    \Phi(t)=e^{At}=\sum_{k=0}^{\infty}\frac{(At)^k}{k!}
     \end{align*}
-    以三阶Jordan块为例：
+\end{theorem}
+\begin{proof}
+    $\Phi(t)$在$\mathbb{R}$上内闭一致收敛，可以逐项求导，得到：
     \begin{align*}
-        \frac{d}{dt}\begin{bmatrix}
-            z_1\\
-            z_2\\
-            z_3
-        \end{bmatrix}=\begin{bmatrix}
-        \lambda & 1 & 0\\
-        0 & \lambda & 1\\
-        0 & 0 & \lambda
-        \end{bmatrix}\begin{bmatrix}
-            z_1\\
-            z_2\\
-            z_3
+    \frac{d\Phi(t)}{dt}=\sum_{k=1}^{\infty}\frac{A^k t^{k-1}}{(k-1)!}=A\sum_{k=0}^{\infty}\frac{A^k t^k}{k!}=A\Phi(t)
+    \end{align*}
+    又因为$\Phi(0)=I$，$[\Phi(t)]^{-1}=e^{-At}$，因此$\Phi(t)$是基本解矩阵。
+\end{proof}
+
+除此之外，线性方程组是否是常系数的，在求解流程上并没有很显著的区别。代入非齐次方程的通解计算公式，可得：
+\begin{theorem}
+    设$\Phi(t)=e^{At}$是齐次线性微分方程组
+    $$\frac{d\mathbf{y}}{dt}=A\mathbf{y}$$
+    的基本解矩阵，则非齐次方程组
+    $$\frac{d\mathbf{y}}{dt}=A\mathbf{y}+\mathbf{b}(t)$$
+    的通解为\begin{align*}
+    \mathbf{y}(t)=e^{At}\left(\mathbf{c}+\int_{t_0}^t e^{-As}\mathbf{b}(s)\,ds\right)=e^{At}\mathbf{c}+\int_{t_0}^t e^{A(t-s)}\mathbf{b}(s)\,ds
+    \end{align*}
+\end{theorem}
+
+很明显，以线性时不变系统的视角来看，以上公式中前半部分为零输入响应，后半部分为零状态响应，它有些类似于“基本解矩阵与激励的卷积”，在下一小节中，我们将看到它与卷积的联系。
+
+\begin{corollary}
+    非齐次方程组满足初始条件$\mathbf{y}(t_0)=\mathbf{y}_0$的解为\begin{align*}
+    \mathbf{y}(t)=e^{A(t-t_0)}\mathbf{y}_0+\int_{t_0}^t e^{A(t-s)}\mathbf{b}(s)\,ds
+    \end{align*}
+\end{corollary}
+
+这一推论的证明是类似的，留予读者练习。
+
+下面考虑方程及由方程转化而来的方程组。我们已经知道，$n$阶方程的解空间是$n$维的，因此只要给出$n$个线性无关的解$\phi_1(t),\phi_2(t),\cdots,\phi_n(t)$，就能得到通解；线性无关性可以通过Wronsky行列式来判断；给出$n$个无关的条件，就能唯一确定一个解，特别地，这个条件经常为初始条件，它包含函数及其前$n-1$阶导数在某一点处的值。
+
+现在，我们只关心$\mathbf{y}(t)$中第一个分量的值。根据前一定理可得：
+\begin{theorem}
+    设齐次方程的基本解组为$\{\phi_k(t)\}_{k=1}^n$，则非齐次方程\begin{align*}
+    y^{(n)}+a_{n-1}y^{(n-1)}+\cdots+a_1y'+a_0y=f(t)
+    \end{align*}
+    的通解为\begin{align*}
+    y(t)=\sum_{k=1}^n c_k\phi_k(t)+\sum_{k=1}^n \phi_k(t)\int_{t_0}^t \frac{W_k(s)}{W(s)}f(s)\,ds
+    \end{align*}
+    其中$W(t)$是$\{\phi_k(t)\}_{k=1}^n$的Wronsky行列式，$W_k(t)$是$W(t)$的第$n$行第$k$列的元素的代数余子式。
+\end{theorem}
+\begin{proof}
+    已知\begin{align*}
+        \Phi(t)=\begin{bmatrix}
+        \phi_1(t) & \phi_2(t) & \cdots & \phi_n(t)\\
+        \phi'_1(t) & \phi'_2(t) & \cdots & \phi'_n(t)\\
+        \vdots & \vdots & \ddots & \vdots\\
+        \phi_1^{(n-1)}(t) & \phi_2^{(n-1)}(t) & \cdots & \phi_n^{(n-1)}(t)
+        \end{bmatrix},\mathbf{b}(t)=\begin{bmatrix}
+        0\\
+        \vdots\\
+        0\\
+        f(t)
         \end{bmatrix}
     \end{align*}
-    利用第一个方程得到
-    $$z_2=\frac{dz_1}{dt}-\lambda z_1$$
-    代入第二个方程得到：\begin{align*}
-        \frac{d}{dt}\left(\frac{dz_1}{dt}-\lambda z_1\right)=\lambda\left(\frac{dz_1}{dt}-\lambda z_1\right)+z_3
+    而$\Phi(t)$的逆矩阵可以表示为以下形式：\begin{align*}
+        \Phi^{-1}(t)=\frac{1}{W(t)}\begin{bmatrix}
+        * & \cdots & * & W_1(t)\\
+        * &  \cdots & * & W_2(t)\\
+        \vdots & \vdots & \vdots & \vdots\\
+        * &  \cdots & * & W_n(t)
+        \end{bmatrix}
     \end{align*}
-    即\begin{align*}
-        z_3=\frac{d^2 z_1}{dt^2}-2\lambda\frac{dz_1}{dt}+\lambda^2 z_1
+    其中“*”表示我们不关注的元素，出现这种元素是因为只需要计算$\mathbf{y}$的第一个分量。代入前一定理进行计算：\begin{align*}
+        \Phi(t)\int_{t_0}^t \Phi^{-1}(s)\mathbf{b}(s)\,ds&=\int_{t_0}^t \frac{\Phi(t)}{W(s)}\begin{bmatrix}
+        * & \cdots & * & W_1(t)\\
+        * &  \cdots & * & W_2(t)\\
+        \vdots & \vdots & \vdots & \vdots\\
+        * &  \cdots & * & W_n(t)
+        \end{bmatrix}\begin{bmatrix}
+        0\\
+        \vdots\\
+        0\\
+        f(t)
+        \end{bmatrix}\,ds\\
+        &=\int_{t_0}^t \frac{f(s)}{W(s)}\begin{bmatrix}
+        \phi_1(t) & \phi_2(t) & \cdots & \phi_n(t)\\
+        * & * & \cdots & *\\
+        \vdots & \vdots & \ddots & \vdots\\
+        * & * & \cdots & *
+        \end{bmatrix}\begin{bmatrix}
+        W_1(s)\\
+        W_2(s)\\
+        \vdots\\
+        W_n(s)
+        \end{bmatrix}\,ds\\
+        &=\sum_{k=1}^n \phi_k(t)\int_{t_0}^t \frac{W_k(s)}{W(s)}f(s)\,ds
     \end{align*}
-    带入第三个方程得到\begin{align*}
-        \frac{d}{dt}\left(\frac{d^2 z_1}{dt^2}-2\lambda\frac{dz_1}{dt}+\lambda^2 z_1\right)=\frac{d^2 z_1}{dt^2}-2\lambda\frac{dz_1}{dt}+\lambda^2 z_1
-    \end{align*}
-    即\begin{align*}
-        \frac{d^3 z_1}{dt^3}-(2\lambda+1)\frac{d^2 z_1}{dt^2}+(\lambda^2-2\lambda)z_1-\lambda^2 z_1=0
-    \end{align*}
-    这是一个关于$z_1$的三阶方程
-\end{example}
+\end{proof}
+\begin{remark}
+    尽管从逻辑上可以获得这个结果，但我们通常不愿意计算大量的矩阵和行列式。应该说，上一节中展示的方程求解办法就已经较为完善了，而进一步的求解方法需要用到拉普拉斯变换，见\ref{sec:Laplace_ODE}。将方程对应到方程组的意义，从数学上讲，是为了得到对解空间的理解和好用的Wronsky行列式；从信号与系统的角度来讲，则是为了导出系统的状态变量分析这一主题。
+\end{remark}
 
-可以看出，每一次带入消元都将使方程的阶数加一，因此方程组的阶数与方程的阶数定义是相符的，即能相互转化的方程与方程组，阶数也相同。
+至于如何计算$\Phi(t)=e^{At}$，标准的做法是将$A$进行Jordan分解，并利用\begin{align*}
+    e^{At}=e^{PJP^{-1}}=Pe^{Jt}P^{-1}
+\end{align*}
+进行计算，因为$J$是块对角矩阵，每个Jordan块的矩阵指数函数可以单独计算，并且这种计算相对来说比较简单。对于一个$n$阶的Jordan块：\begin{align*}
+    J=\begin{bmatrix}
+    \lambda & 1 & 0 & \cdots & 0\\
+    0 & \lambda & 1 & \cdots & 0\\
+    \vdots & \vdots & \vdots & \ddots & \vdots\\
+    0 & 0 & 0 & \cdots & 1\\
+    0 & 0 & 0 & \cdots & \lambda
+    \end{bmatrix}
+\end{align*}
+它的矩阵指数函数为\begin{align*}
+    e^{Jt}=\begin{bmatrix}
+    e^{\lambda t} & te^{\lambda t} & \frac{t^2}{2!}e^{\lambda t} & \cdots & \frac{t^{n-1}}{(n-1)!}e^{\lambda t}\\
+    0 & e^{\lambda t} & te^{\lambda t} & \cdots & \frac{t^{n-2}}{(n-2)!}e^{\lambda t}\\
+    \vdots & \vdots & \vdots & \ddots & \vdots\\
+    0 & 0 & 0 & \cdots & te^{\lambda t}\\
+    0 & 0 & 0 & \cdots & e^{\lambda t}
+    \end{bmatrix}
+\end{align*}
 
-\subsection{线性方程组的解法}\label{sub:solution_of_linear_equation_system}
-
-\subsection{常系数线性方程组}\label{sub:constant_coefficient_linear_equation_system}
+不过，本书不打算详细讲解这种计算方法，因为在\ref{sec:Laplace_ODE}中我们将适用拉普拉斯变换给出更为简洁有效的计算方式。对此感兴趣的读者可以参考常微分方程\cite{ode}或矩阵论的教材。
 
 \subsection{连续系统的状态变量分析}\label{sub:state_variable_analysis}
 
