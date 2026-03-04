@@ -4841,6 +4841,49 @@ $$\frac{d\mathbf{y}}{dt}=\mathbf{f}(t,\mathbf{y})$$
     \end{align*}
     是行满秩的。对于有$n$个状态变量的系统，行满秩意味着秩为$n$。
 \end{theorem}
+\begin{proof}
+    不妨设起始状态为$\mathbf{q}(0-)=\mathbf{0}$。
+
+    根据状态变量的解的公式，\begin{align*}
+    \mathbf{q}(T)=\int_0^T e^{A(T-s)}B\mathbf{e}(s)\,ds
+    \end{align*}
+
+    将矩阵指数函数$e^{A(T-s)}$展开为幂级数，根据该级数的内闭一致收敛性，可以交换积分与求和的顺序，得到：\begin{align*}
+    \mathbf{q}(T)=&\int_0^T \sum_{k=0}^\infty \frac{A^k(T-s)^k}{k!}B\mathbf{e}(s)\,ds\\
+    =&\sum_{k=0}^\infty A^k B\int_0^T \frac{(T-s)^k}{k!} \mathbf{e}(s)\,ds
+    \end{align*}
+
+    在适当的激励选取下，列向量
+    $$\int_0^T \frac{(T-s)^k}{k!} \mathbf{e}(s)\,ds$$
+    可以取$\mathbb{R}^n$中的任意值。矩阵右乘一个列向量，相当于对矩阵进行列变换，因此$\mathbf{q}(T)$可以取$\mathbb{R}^n$中的任意值当且仅当矩阵列$\{A^k B\}_{k=0}^\infty$的列向量能够张成全空间$\mathbb{R}^n$。
+
+    由Cayley-Hamilton定理，$A$满足它的特征多项式，因此存在一个$n$阶多项式$p(x)$使得
+    $$p(A)=A^n+a_1 A^{n-1}+\cdots+a_{n-1}A+a_n I=0$$
+    即
+    $$A^n=-a_1 A^{n-1}-\cdots-a_{n-1}A-a_n I$$
+    这表明$\forall k\geq n$，$A^k$都可以表示为$A^0,A^1,\cdots,A^{n-1}$的线性组合。因此，$\{A^k B\}_{k=0}^\infty$的列向量能够张成全空间$\mathbb{R}^n$当且仅当$\{A^k B\}_{k=0}^{n-1}$的列向量能够张成全空间$\mathbb{R}^n$，而这一条件就等价于可控矩阵\begin{align*}
+    \begin{bmatrix}
+    B & AB & A^2B & \cdots & A^{n-1}B
+    \end{bmatrix}
+    \end{align*}
+    列空间的秩为$n$，由于系统矩阵$A$一定是$n$阶矩阵，而输入矩阵$B$的行数为$n$，可控阵的行数也为$n$，因此可控性等价于可控阵行满秩。
+\end{proof}
+
+通过对偶系统，可以由可控性的满秩判别法得到可观性的满秩判别法。对偶系统定义为：
+\begin{definition}[对偶系统]
+    设系统的状态矩阵、输入矩阵和输出矩阵分别为$A,B,C$，则其\textbf{对偶系统}的状态矩阵、输入矩阵和输出矩阵分别为$A^T,C^T,B^T$。
+\end{definition}
+
+对偶系统可以看作是原系统的时间反演，即时间倒流的情况下，原系统的输入、输出分别变为对偶系统的输出、输入。可控性要求“未来的状态由过去的输入决定”，而可观性要求“过去的初始状态由未来的输出决定”。因此，我们从物理直观上解释了：
+
+\begin{theorem}
+    原系统的可控性等价于对偶系统的可观性，原系统的可观性等价于对偶系统的可控性。
+\end{theorem}
+\begin{proof}
+    利用前面对Jordan块与可控性、可观性关系的讨论可知，可控性要求输入作用在最后一个状态（链尾），而可观性要求输出取自第一个状态（链首）。由于对偶系统将矩阵转置，原系统每个模态的链尾与链首在对偶系统中位置互换，因此原系统每个模态的链尾可控等价于对偶系统对应模态的链首可观，原系统每个模态的链首可观等价于对偶系统对应模态的链尾可控。
+\end{proof}
+
+利用对偶系统的可控性的满秩判别法可得原系统的可观性的满秩判别法：
 
 \begin{theorem}[可观性的满秩判别法]
     系统是可观的当且仅当\textbf{可观矩阵}
@@ -4855,6 +4898,24 @@ $$\frac{d\mathbf{y}}{dt}=\mathbf{f}(t,\mathbf{y})$$
     \end{align*}
     是列满秩的。对于有$n$个状态变量的系统，列满秩意味着秩为$n$。
 \end{theorem}
+\begin{proof}
+    设系统的状态矩阵、输入矩阵和输出矩阵分别为$A,B,C$，则其对偶系统的状态矩阵、输入矩阵和输出矩阵分别为$A^T,C^T,B^T$。根据可控性的满秩判别法，对偶系统是可控的当且仅当\textbf{可控矩阵}
+    \begin{align*}
+    \begin{bmatrix}
+    C^T & A^TC^T & (A^T)^2C^T & \cdots & (A^T)^{n-1}C^T
+    \end{bmatrix}
+    \end{align*}
+    是行满秩的。而该矩阵恰为可观矩阵\begin{align*}
+    \begin{bmatrix}
+    C\\
+    CA\\
+    CA^2\\
+    \vdots\\
+    CA^{n-1}
+    \end{bmatrix}
+    \end{align*}
+    的转置。由于系统的可观性等价于其对偶系统的可控性，因此系统是可观的当且仅当可观矩阵是列满秩的。
+\end{proof}
 
 \section{系统的频率响应特性}\label{sec:Freq_Response}
 
