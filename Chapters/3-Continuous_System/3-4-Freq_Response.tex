@@ -3,7 +3,8 @@
 由于这两节中，绝大部分文献和教材都采用角频率进行讨论，并且涉及大量的三角函数运算时，角频率也更加方便，本章的这两个小节将直接使用角频率形式的傅里叶变换。
 
 \subsection{频率响应特性的引出}\label{sub:freq_response}
-在上一节中我们得到了$r(t)=(h*e)(t)$，看到卷积的结构，自然会想到对其做傅里叶变换，即\[R(\omega)=H(\omega)E(\omega)\]
+在上一节中我们得到了$r(t)=(h*e)(t)$。在$r(t),e(t),h(t)\in L^1(\mathbb{R})$的条件下（事实上，可以允许$h(t)$或$e(t)$中一者为缓增的正则分布），利用傅里叶变换的卷积定理，有：
+\[R(\omega)=H(\omega)E(\omega)\]
 \begin{definition}[频率响应]
     将$H(\omega)$称为$r(t)$的\textbf{频率响应}，简称\textbf{频响}。
 \end{definition}
@@ -39,7 +40,8 @@
 
 在分析电路时曾见过频率响应的另一种引入方式\cite{electronic_circuits}：
 \begin{definition}[频率响应]
-    $H(\omega)=Y(\omega)/X(\omega)$，其中$Y(\omega)$是输出端口信号的频域形式，$X(\omega)$是输入端口信号的频域形式
+    $$H(\omega)=Y(\omega)/X(\omega)$$
+    其中$X(\omega)$是输入端口信号的频域形式（也就是激励），$Y(\omega)$是输出端口信号的频域形式（也就是响应）。
 \end{definition}
 它与我们用傅里叶变换的理论给出的定义没有区别，但是展示了另一种求频率响应的视角。在学习电路分析时，我们知道线性的电感、电容在相量法下可以与线性电阻等同处理，统一地用\textbf{阻抗}来描述其电压电流关系。感值为L的电感，阻抗为$\mathrm{i}\omega L$，容值为C的电容，阻抗为$1/(\mathrm{i}\omega C)$，而阻值为R的电阻，阻抗就是R，这种分析方法实际上正是基于傅里叶变换的。
 \begin{example}
@@ -175,7 +177,8 @@
 的线性时不变系统的输出信号$r(t)$。\\
 解：我们已经在前面得到：\[r(t)=H\left[\mathrm{e}^{\mathrm{i}\omega_0 t}\right]=H(\omega_0)\mathrm{e}^{\mathrm{i}\omega_0 t}\]
 可以看到，输出信号仍然是单频复指数信号，其幅值被放大了$|H(\omega_0)|$倍，相位
-延迟了$\varphi(\omega_0)$，折合到时间上，就得到相时延为$\tau_p(\omega_0)=-\varphi(\omega_0)/\omega_0$。
+延迟了$\varphi(\omega_0)$，折合到时间上，就得到相时延为
+$$\tau_p(\omega_0)=-\frac{\varphi(\omega_0)}{\omega_0}$$
 \end{example}
 
 可以想象，能够分解成不同频率成分的信号，其各频率成分一般会产生不同的相时延，从而使得输出信号的波形发生变化，这就是相频特性不是线性函数导致的相位失真。
@@ -215,23 +218,24 @@
     =&\frac{1}{2}|H(\omega_c+\omega_m)|\cos((\omega_c+\omega_m)t+\varphi(\omega_c+\omega_m))\\
     &+\frac{1}{2}\left|H(\omega_c-\omega_m)\right|\cos\left((\omega_c-\omega_m)t+\varphi(\omega_c-\omega_m)\right)
 \end{align*}
-由于$\omega_c\gg \omega_m$，可以对$|H(\omega)|$和$\varphi(\omega)$在$\omega_c$处做泰勒展开：
+由于$\omega_c\gg \omega_m$，可以将$|H(\omega)|$近似为$|H(\omega_c)|$，将$\varphi(\omega)$在$\omega_c$处做泰勒展开：
 \begin{align*}
-    |H(\omega_c+\omega)|&\approx |H(\omega_c)|+\left.\frac{d|H(\omega)|}{d\omega}\right|_{\omega=\omega_c}\omega\\
-    \varphi(\omega_c+ \omega)&\approx \varphi(\omega_c)+\left.\frac{d\varphi(\omega)}{d\omega}\right|_{\omega=\omega_c}\omega
+    \varphi(\omega_c+ \omega)\approx \varphi(\omega_c)+\left.\frac{d\varphi(\omega)}{d\omega}\right|_{\omega=\omega_c}\omega
 \end{align*}
 将其带入$r(t)$中，得到
 \begin{align*}
-    r(t)=&\frac{1}{2}\left[|H(\omega_c)|+\left.\frac{d|H(\omega)|}{d\omega}\right|_{\omega=\omega_c}\omega_m\right]\cos\left((\omega_c+\omega_m)t+\varphi(\omega_c)+\left.\frac{d\varphi(\omega)}{d\omega}\right|_{\omega=\omega_c}\omega_m\right)\\
-    &+\frac{1}{2}\left[|H(\omega_c)|-\left.\frac{d|H(\omega)|}{d\omega}\right|_{\omega=\omega_c}\omega_m\right]\cos\left((\omega_c-\omega_m)t+\varphi(\omega_c)-\left.\frac{d\varphi(\omega)}{d\omega}\right|_{\omega=\omega_c}\omega_m\right)\\
-    \approx&\frac{1}{2}|H(\omega_c)|\left[\cos\left((\omega_c+\omega_m)t+\varphi(\omega_c)+\left.\frac{d\varphi(\omega)}{d\omega}\right|_{\omega=\omega_c}\omega_m\right)\right.\\
+    r(t)\approx&\frac{1}{2}|H(\omega_c)|\left[\cos\left((\omega_c+\omega_m)t+\varphi(\omega_c)+\left.\frac{d\varphi(\omega)}{d\omega}\right|_{\omega=\omega_c}\omega_m\right)\right.\\
     &\qquad\qquad\left.+\cos\left((\omega_c-\omega_m)t+\varphi(\omega_c)-\left.\frac{d\varphi(\omega)}{d\omega}\right|_{\omega=\omega_c}\omega_m\right)\right]\\
     =&|H(\omega_c)|\cos(\omega_c t+\varphi(\omega_c))\cos\left(\omega_m\left[t+\left.\frac{d\varphi(\omega)}{d\omega}\right|_{\omega=\omega_c}\right]\right)
 \end{align*}
-对比输入信号
+相比输入信号
 \[e(t)=\cos(\omega_m t)\cos(\omega_c t)\]
-可以看到，输出信号的幅度大约变为$|H(\omega_c)|$倍，载波信号的相位延迟了$\varphi(\omega_c)$，调制信号的相位延迟了$\omega_m\left.\dfrac{d\varphi(\omega)}{d\omega}\right|_{\omega=\omega_c}$，折合到时间上，就是群时延$\tau_g(\omega_c)=-\left.\dfrac{d\varphi(\omega)}{d\omega}\right|_{\omega=\omega_c}$。因此，群时延描述了系统对调制信号的包络造成的延时。从信号的图像上来看，高频的载波信号的延时是不会造成很明显的变化的，而低频的调制信号的时延则会明显地反映在图像上，就像一个“信号群”在传播过程中整体产生了一段时延，群时延的名称就由此而来。
+输出信号的幅度大约变为$|H(\omega_c)|$倍，载波信号的相位延迟了$\varphi(\omega_c)$，调制信号的相位延迟了$\omega_m\left.\dfrac{d\varphi(\omega)}{d\omega}\right|_{\omega=\omega_c}$，折合到时间上，就是群时延
+$$\tau_g(\omega_c)=-\left.\dfrac{d\varphi(\omega)}{d\omega}\right|_{\omega=\omega_c}$$
+因此，群时延描述了系统对调制信号的包络造成的延时。从信号的图像上来看，高频的载波信号的延时是不会造成很明显的变化的，而低频的调制信号的时延则会明显地反映在图像上，就像一个“信号群”在传播过程中整体产生了一段时延，群时延的名称就由此而来。
 \end{example}
+
+有时，信号的信息是蕴含在其包络特性当中的，而载波信号则是为了方便信号传输，因此我们更关心系统对包络信号造成的时延，而不关心系统对载波信号造成的时延，这时群时延就显得尤为重要了。
 
 \subsection{*色散}\label{sub:dispersion}
 \begin{definition}[色散介质]

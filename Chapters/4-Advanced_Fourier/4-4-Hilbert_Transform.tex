@@ -19,7 +19,7 @@
     我们没有对$f$所属的函数空间做出限制。实际上，希尔伯特变换可以定义在多种函数空间上，经典的希尔伯特变换建立在$L^1(\mathbb{R})$上，并且要求函数$f$是赫德尔连续的（我们没有介绍这个概念），希尔伯特变换还可以定义在$L^p(\mathbb{R}),1<p<\infty$上，或者更广义的分布空间上。专著\cite{hilbert_transform}详细讨论了$f$的范围。
 \end{remark}
 
-在\ref{sub:fourier_of_signal}中，我们求出了函数$\dfrac{1}{x}$的傅里叶变换，并在建立了分布的理论后能够严格证明：
+将函数$\dfrac{1}{x}$作为缓增的正则分布，可以求出其傅里叶变换：
 \begin{lralign}
     \mathcal{F} \left[\frac{1}{\pi x}\right](\xi)= -\mathrm{i}\,\text{sgn}(\xi)
     \switch
@@ -28,7 +28,7 @@
 
 借助这个结论，我们可以通过傅里叶变换来研究希尔伯特变换的性质。简洁起见，本小节主要使用频率形式的傅里叶变换。
 
-由卷积定理（见\ref{sub:properties_of_convolution}），我们可以得到希尔伯特变换的傅里叶变换表达式：
+由分布与函数的卷积定理（见\ref{sub:operation_of_distribution}），我们可以得到希尔伯特变换的傅里叶变换表达式：
     \[\mathcal{F} [\mathcal{H} f](\xi)=-\mathrm{i}\,\text{sgn}(\xi)\mathcal{F} f(\xi)\]
 可以看到，希尔伯特变换在频域上对应乘以$-\mathrm{i}\,\text{sgn}(\xi)$，这表明希尔伯特变换是一个全通滤波器，它将正频率成分的相位延迟$\pi/2$，将负频率成分的相位超前$\pi/2$，而不改变任意频率成分的幅度。
 
