@@ -122,7 +122,7 @@ $$f(t)=\mathrm{e}^{at},a\in\mathbb{R}^*,F(s)=\dfrac{1}{s-a}$$
 \end{example}
 
 总之，对于相当大范围的函数，我们可以\textbf{通过分析其拉普拉斯变换的奇点来确定收敛横坐标}$\sigma_c$，从而确定拉普拉斯变换的最大收敛域。在前面我们已经证明：$$f\in\mathcal{E}\implies \sigma_c=\varlimsup_{t\to\infty}\frac{ln|f(t)|}{t}$$
-因此我们可以\textbf{通过分析拉普拉斯变换的奇点来确定$f(t)$的增长速率}，也可以\textbf{通过分析$f(t)$的增长速率来确定拉普拉斯变换的奇点位置}。
+因此我们可以\textbf{通过分析拉普拉斯变换的奇点来确定$f(t)$的增长速率}（的上确界），也可以\textbf{通过分析$f(t)$的增长速率来确定拉普拉斯变换的奇点位置}。
 
 \subsection{系统的稳定性}\label{sub:stability_of_system}
 基于以上结论，我们可以使用拉普拉斯变换分析系统的\textbf{稳定性}。在\ref{sub:concepts_of_system}中曾介绍，系统的稳定性是指：
@@ -182,7 +182,6 @@ $$f(t)=\mathrm{e}^{at},a\in\mathbb{R}^*,F(s)=\dfrac{1}{s-a}$$
     设$f\in PS[0,\infty),f,f'\in\mathcal{E},F(s)=\mathcal{L} f(s)$，则
     \[f(0)=\lim_{\text{Re}\ s\to\infty}sF(s)\]
 \end{theorem}
-这表明系统的高频响应对应时域的瞬时的初始行为。
 \begin{proof}
     由拉普拉斯变换的时域微分性质，有
     \[sF(s)=s\mathcal{L} f(s)=\mathcal{L} f'(s)+f(0)\]
@@ -197,7 +196,7 @@ $$f(t)=\mathrm{e}^{at},a\in\mathbb{R}^*,F(s)=\dfrac{1}{s-a}$$
     设$f\in\mathcal{E} $，$F(s)=\mathcal{L} f(s)$在$s=0$处有简单极点，且其余奇点均位于左半平面$\text{Re}\ s<0$上，则
     \[\lim_{t\to\infty}f(t)=\lim_{s\to 0}sF(s)\]
 \end{theorem}
-这表明系统的低频响应对应时域的稳态行为。
+通过将$s$限制在虚轴上，这个定理可以解释为：\textbf{频域上的低频成分对应时域的稳态行为}。
 \begin{remark}
 多数文献中，这个定理的允许$s=0$不是奇点，但由于$\sigma_s<0$时，多数情况下有$\sigma_c<0$，从而$f(t)\to 0$，因此这里我们只考虑非平凡情形。此外高阶极点对应的$\lim_{t\to\infty}f(t)=\infty$同样可以用以下方法证明。
 \end{remark}

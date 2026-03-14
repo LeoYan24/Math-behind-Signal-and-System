@@ -1,6 +1,66 @@
-\section{差分方程组与状态变量分析}\label{sec:Difference_Equation}
+\section{线性差分方程组与状态变量分析}\label{sec:Difference_Equation}
 
-\subsection{常系数线性差分方程组}\label{sub:difference_equation_system}
+\subsection{线性差分方程组与常系数线性差分方程组}\label{sub:linear_difference_equation}
+
+\begin{definition}[一阶线性差分方程组]
+    设$A[n]$为$N\times N$的实矩阵值函数，$\mathbf{f}[n]$为$N$维实向量值函数，则形如
+    \begin{align*}
+        \mathbf{y}[n+1] = A[n] \mathbf{y}[n] + \mathbf{f}[n]
+    \end{align*}
+    的方程组称为\textbf{一阶线性差分方程组}，其中$\mathbf{f}[n]$为\textbf{非齐次项}。
+
+    特别地，如果$\mathbf{f}[n]=\mathbf{0}$，则称之为\textbf{齐次线性差分方程组}；如果$A[n]$为常数矩阵，则称为\textbf{常系数线性差分方程组}。
+
+    将方程的个数$N$称为方程组的\textbf{阶数}。
+\end{definition}
+
+不难看出，类似于\ref{sub:compare_to_high_order}中微分方程组与微分方程的关系，\textbf{差分方程组也能与同阶的（多个）差分方程相互转化}，这里不再重复这个转化流程。
+
+任给正整数$k$，可以通过迭代法求出\begin{align*}
+    \mathbf{y}[k] &= A[k-1]\mathbf{y}[k-1] + \mathbf{f}[k-1]\\
+    &= A[k-1](A[k-2]\mathbf{y}[k-2] + \mathbf{f}[k-2]) + \mathbf{f}[k-1]\\
+    &\vdots\\
+    &= A[k-1]A[k-2]\cdots A[0]\mathbf{y}[0] + \sum_{i=0}^{k-1} A[k-1]A[k-2]\cdots A[i+1]\mathbf{f}[i]
+\end{align*}
+因此，给定初始值$\mathbf{y}[0]$，就可以\textbf{唯一确定}任意时刻的$\mathbf{y}[k]$。特别地，如果$A[n]$为常数矩阵，则\begin{align*}
+    \mathbf{y}[k] = A^k \mathbf{y}[0] + \sum_{i=0}^{k-1} A^{k-1-i} \mathbf{f}[i]
+\end{align*}
+
+利用解的存在性与唯一性，可以仿照\ref{sub:solution_of_linear_equation_system}中的方法进一步说明：
+\begin{theorem}
+    $N$阶线性差分方程组的解空间$S$构成$N$维实线性空间。
+\end{theorem}
+\begin{proof}
+    线性性是显然的。我们构造一个同构映射来说明解空间的维数是$N$。
+
+    定义$\mathbf{H}:\mathbb{R}^N\to S,\mathbf{y}_0\mapsto \mathbf{y}[n]$，其中$\mathbf{y}[n]$是满足初始条件$\mathbf{y}[0]=\mathbf{y}_0$的解。下验证$\mathbf{H}$是一个线性空间同构映射：
+
+    首先，$\mathbf{H}$是线性的。$\forall \mathbf{y}_0,\mathbf{z}_0\in\mathbb{R}^N,\alpha,\beta\in\mathbb{R}$，$\alpha \mathbf{H}(\mathbf{y}_0) + \beta \mathbf{H}(\mathbf{z}_0)$是满足初始条件$\alpha \mathbf{y}_0 + \beta \mathbf{z}_0$的解，根据解的唯一性，
+    $$\mathbf{H}(\alpha \mathbf{y}_0 + \beta \mathbf{z}_0) = \alpha \mathbf{H}(\mathbf{y}_0) + \beta \mathbf{H}(\mathbf{z}_0)$$
+
+    其次，$\mathbf{H}$是单射。设$\mathbf{y}_0\neq\mathbf{z}_0$，它们对应的解分别为$\mathbf{y}=\mathbf{H}(\mathbf{y}_0)$和$\mathbf{z}=\mathbf{H}(\mathbf{z}_0)$，则$\mathbf{y}[0]\neq\mathbf{z}[0]$，因此$\mathbf{y}\neq\mathbf{z}$。
+
+    最后，$\mathbf{H}$是满射。对于任意$\mathbf{y}[n]\in S$，$\mathbf{y}_0=\mathbf{y}[0]$满足$\mathbf{H}(\mathbf{y}_0)=\mathbf{y}[n]$。
+
+    综上，$\mathbf{H}$是一个线性空间的同构映射，解空间的维数为$\dim \mathbb{R}^N=N$。
+\end{proof}
+
+由于高阶线性差分方程总能转化为同阶的线性差分方程组，因此高阶线性差分方程的解空间也是一个维数为$N$的线性空间，这就解释了为什么上一节中我们总是给出$N$个初始值来唯一确定一个高阶线性差分方程的解。
+
+前面说明解的存在性与唯一性时，已经给出了通解的表达式，只是在$A[n]$不为常数值矩阵时，这个解的计算非常困难。和线性微分方程组的情况类似，一般而言，没有什么比较好的办法能够处理解的计算问题，除非$A[n]$具有某些特殊的结构，例如对角矩阵、上三角矩阵等，但这个问题在常系数线性差分方程组中是易于解决的。
+
+对于常系数线性差分方程组，我们也已经给出了通解的表达式：
+$$\mathbf{y}[k] = A^k \mathbf{y}[0] + \sum_{i=0}^{k-1} A^{k-1-i} \mathbf{f}[i]$$
+因此，求解常系数线性差分方程组的关键在于求出$A^k$的表达式。由于在多数问题中，我们只需要求出有限的几个$\mathbf{y}[k]$，因此除了Jordan分解，我们还可以通过Cayley-Hamilton定理来求出$A^k$的表达式。Cayley-Hamilton定理表明，$A$是其特征多项式的根，即
+$$p(\lambda)=\det(\lambda I - A)=\sum_{i=0}^{N} c_i \lambda^i$$
+$$p(A)=\sum_{i=0}^{N} c_i A^i=0$$
+因此，$A^N$可以表示为$A^0,A^1,\cdots,A^{N-1}$的线性组合，即
+$$A^N = -\sum_{i=0}^{N-1} c_i A^i$$
+这样，对于任意的$k\geq N$，我们都可以通过递归的方式将$A^k$表示为$A^0,A^1,\cdots,A^{N-1}$的线性组合，从而求出$\mathbf{y}[k]$的表达式。
+
+我们仍不打算介绍$A^k$的Jordan分解求法，它往往是计算机来进行计算的。下面，我们给出两种求解方法的计算复杂度。
+
+\subsection{常系数线性差分方程组的单边z变换解法}\label{sub:difference_equation_system}
 
 \subsection{*离散系统的状态变量分析}\label{sub:discrete_state_variable}
 

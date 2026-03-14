@@ -4,7 +4,7 @@
 
 在下一节，我们将高阶的常系数线性微分方程转化为常系数线性微分方程组，并由此获得对此类方程的进一步认识。
 
-\subsection{解法回顾}\label{sub:solution_of_ODE}
+\subsection{常系数线性微分方程的经典解法}\label{sub:solution_of_ODE}
 
 \begin{definition}[常系数线性微分方程]
     一个形如
@@ -237,10 +237,10 @@ $$y_h(t)u(t)+\sum_{k=0}^{m-n}c_k \delta^{(k)}$$
     $$g(t)=(-\mathrm{e}^{-t}+2\mathrm{e}^{-2t})u(t)$$
     单位脉冲响应为
     $$h(t)=g'(t)=\left(2\mathrm{e}^{-t}-5\mathrm{e}^{-2t}\right)u(t)+\delta$$
-    与之前的结果一致。显然，\textbf{通过单位阶跃响应求解单位脉冲响应的计算更为简洁}。
+    与之前的结果一致。显然，当单位脉冲响应中含有$\delta$时，\textbf{通过单位阶跃响应求解单位脉冲响应的计算更为简洁}。
 \end{example}
 
-利用“全响应=可以提出常系数线性微分方程的通解公式：
+利用“全响应=零输入响应+零状态响应”，可以提出常系数线性微分方程的通解公式：
 \begin{theorem}
     设$h(t)$为微分方程
     \[\sum_{k=0}^{n}a_{k} r^{(n-k)}(t)=\sum_{l=0}^{m}b_{l} \mathrm{e}^{(n-l)}(t)\]
