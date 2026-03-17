@@ -538,7 +538,9 @@ $$\frac{d\mathbf{y}}{dt}=\mathbf{f}(t,\mathbf{y})$$
 \subsection{*连续系统的状态变量分析}\label{sub:state_variable_analysis}
 
 \begin{definition}[状态变量]
-    \textbf{状态变量}(state variable)是指能够唯一确定系统状态的一组变量，其中删去任意一个变量都会导致无法唯一确定系统状态。只要知道$t=t_0$时刻的状态变量值及$t\geq t_0$时的激励，就能完全确定系统在$t\geq t_0$时的行为，包括状态$\mathbf{q}(t)$、状态变化率$\dfrac{d\mathbf{q}}{dt}$和响应$\mathbf{y}(t)$。
+    \textbf{状态变量}(state variable)是指能够唯一确定系统状态的最小的一组变量。只要知道$t=t_0$时刻的状态变量值及$t\geq t_0$时的激励，就能完全确定系统在$t\geq t_0$时的行为，包括状态$\mathbf{q}(t)$、状态变化率$\dfrac{d\mathbf{q}}{dt}$和响应$\mathbf{y}(t)$。
+
+    将状态变量的个数$n$称为系统的\textbf{阶数}。
 \end{definition}
 
 \begin{definition}[状态矢量]
@@ -598,9 +600,9 @@ $$\frac{d\mathbf{y}}{dt}=\mathbf{f}(t,\mathbf{y})$$
 上一节中，我们已经给出了关于状态变量的方程组的求解方法。已知初始条件$\mathbf{q}(0)$，则状态变量的解为\begin{align*}
     \mathbf{q}(t)=\mathrm{e}^{A(t-t_0)}\mathbf{q}(0)+\int_{0}^t \mathrm{e}^{A(t-s)}B\mathbf{e}(s)\,ds
 \end{align*}
-其中，基本解矩阵$\mathrm{e}^{At}$在分析状态变量时又称为\textbf{状态转移矩阵}(state transition matrix)，它与激励共同决定了状态矢量在状态空间中的移动情况。
+因此又将方程的基本解矩阵$\mathrm{e}^{At}$称为\textbf{状态转移矩阵}(state transition matrix)，它与激励共同决定了状态矢量在状态空间中的移动情况。
 
-考虑将系统矩阵做Jordan分解：$A=PJP^{-1}$，则状态矢量应该变为$\mathbf{z}(t)=P^{-1}\mathbf{q}(t)$，其中$\mathbf{z}(t)$满足$\frac{d\mathbf{z}}{dt}=J\mathbf{z}(t)+P^{-1}B\mathbf{e}(t)$，相应地，输出方程也要随之变化，描述系统的方程变为：\begin{align*}
+考虑将系统矩阵做Jordan分解：$A=PJP^{-1}$，则状态矢量应该变为$\mathbf{z}(t)=P^{-1}\mathbf{q}(t)$，描述系统的方程变为：\begin{align*}
     \frac{d\mathbf{z}}{dt}&=J\mathbf{z}(t)+P^{-1}B\mathbf{e}(t)\\
     \mathbf{r}(t)&=CP\mathbf{z}(t)+D\mathbf{e}(t)
 \end{align*}
@@ -705,7 +707,7 @@ $$\frac{d\mathbf{y}}{dt}=\mathbf{f}(t,\mathbf{y})$$
     \end{align*}
 \end{example}
 
-可见，\textbf{每个模态的最后一个状态变量与输入耦合，就等价于该模态是可控的}。
+可见，\textbf{每个模态的最后一个状态变量（链尾）与输入耦合，就等价于该模态是可控的}。
 
 与之类似的还有系统的\textbf{可观性}(observability)，它要求\textbf{状态变量与输出耦合}：
 
@@ -751,23 +753,21 @@ $$\frac{d\mathbf{y}}{dt}=\mathbf{f}(t,\mathbf{y})$$
     如果响应是与$z_2(t)$耦合而不与$z_1(t)$耦合的，则不妨设$r(t)=z_2(t)$，此时只能求出$z_2(0-)=\lim_{t\to 0} \mathrm{e}^{-\lambda t}r(t)$，而无法求出$z_1(0-)$。
 \end{example}
 
-可见，\textbf{只要模态内的第一个状态变量与输出耦合，就等价于该模态是可观的}。
+可见，\textbf{只要模态内的第一个状态变量（链首）与输出耦合，就等价于该模态是可观的}。
 
 系统的可控性与可观性还可以通过满秩判别法来判断：
 
 \begin{theorem}[可控性的满秩判别法]
-    系统是可控的当且仅当\textbf{可控矩阵}
+    一个$n$阶系统是可控的，当且仅当它的\textbf{可控矩阵}(controllable matrix)
     \begin{align*}
-    \begin{bmatrix}
+    \mathcal{C} =\begin{bmatrix}
     B & AB & A^2B & \cdots & A^{n-1}B
     \end{bmatrix}
     \end{align*}
-    是行满秩的。对于有$n$个状态变量的系统，行满秩意味着秩为$n$。
+    是行满秩的，即$\mathrm{rank}\mathcal{C}=n$。
 \end{theorem}
 \begin{proof}
-    不妨设起始状态为$\mathbf{q}(0-)=\mathbf{0}$。
-
-    根据状态变量的解的公式，\begin{align*}
+    不妨设起始状态为$\mathbf{q}(0-)=\mathbf{0}$。根据状态变量的解的公式，\begin{align*}
     \mathbf{q}(T)=\int_0^T \mathrm{e}^{A(T-s)}B\mathbf{e}(s)\,ds
     \end{align*}
 
@@ -811,9 +811,9 @@ $$\frac{d\mathbf{y}}{dt}=\mathbf{f}(t,\mathbf{y})$$
 利用对偶系统的可控性的满秩判别法可得原系统的可观性的满秩判别法：
 
 \begin{theorem}[可观性的满秩判别法]
-    系统是可观的当且仅当\textbf{可观矩阵}
+    一个$n$阶系统是可观的，当且仅当它的\textbf{可观矩阵}(observable matrix)
     \begin{align*}
-    \begin{bmatrix}
+    \mathcal{O} =\begin{bmatrix}
     C\\
     CA\\
     CA^2\\
@@ -821,7 +821,7 @@ $$\frac{d\mathbf{y}}{dt}=\mathbf{f}(t,\mathbf{y})$$
     CA^{n-1}
     \end{bmatrix}
     \end{align*}
-    是列满秩的。对于有$n$个状态变量的系统，列满秩意味着秩为$n$。
+    是列满秩的，即$\mathrm{rank}\mathcal{O}=n$。
 \end{theorem}
 \begin{proof}
     设系统的状态矩阵、输入矩阵和输出矩阵分别为$A,B,C$，则其对偶系统的状态矩阵、输入矩阵和输出矩阵分别为$A^T,C^T,B^T$。根据可控性的满秩判别法，对偶系统是可控的当且仅当\textbf{可控矩阵}

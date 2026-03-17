@@ -333,10 +333,10 @@ $$\mathcal{L}^{-1} \left[(sI-A)^{-1}\right](t)=\phi(t)u(t)=\mathrm{e}^{At}u(t)$$
 
 考虑一个$q$输入、$p$输出的线性时不变系统，其状态变量方程为
 \begin{align*}
-    \frac{d\mathbf{q}}{dt}=&A\mathbf{q}+B\mathbf{e},\\
+    \frac{d\mathbf{q}}{dt}=&A\mathbf{q}+B\mathbf{e}\\
     \mathbf{r}=&C\mathbf{q}+D\mathbf{e}
 \end{align*}
-其中$A$为$n$阶矩阵，$n$为系统的状态变量个数；$B,C,D$分别为$n\times q$、$p\times n$和$p\times q$的矩阵。
+起始状态为$\mathbf{q}(0-)$，其中$A$为$n$阶矩阵，$n$为系统的状态变量个数；$B,C,D$分别为$n\times q$、$p\times n$和$p\times q$的矩阵。
 
 要求其系统函数，使用输出与输入的复频域形式之比的定义较为方便。对状态变量方程两边进行拉普拉斯变换，有
 \begin{align*}
@@ -354,7 +354,7 @@ $$\mathcal{L}^{-1} \left[(sI-A)^{-1}\right](t)=\phi(t)u(t)=\mathrm{e}^{At}u(t)$$
 \end{align*}
 因此系统函数为
 \begin{align*}
-    H(s)=\frac{R_{zs}(s)}{E(s)}=C\Phi(s)B+D
+    H(s)=C\Phi(s)B+D
 \end{align*}
 这是一个$p\times q$的矩阵值函数。特别地，对于单输入单输出系统，系统函数为一个分式函数。
 
@@ -362,11 +362,11 @@ $$\mathcal{L}^{-1} \left[(sI-A)^{-1}\right](t)=\phi(t)u(t)=\mathrm{e}^{At}u(t)$$
 \begin{claim}
     设单输入单输出系统的状态变量方程为
     \begin{align*}
-        \frac{d\mathbf{q}}{dt}=&A\mathbf{q}+B e,r=C\mathbf{q}
+        \frac{d\mathbf{q}}{dt}=&A\mathbf{q}+B \mathbf{e},\mathbf{r}=C\mathbf{q}
     \end{align*}
     则系统的系统函数为
     \begin{align*}
-        H(s)=\frac{R_{zs}(s)}{E(s)}=C\Phi(s)B
+        H(s)=C\Phi(s)B
     \end{align*}
     如果在系统函数的计算过程中，没有出现零极点的抵消，即系统函数的分子和分母没有公共因子，则系统是可控且可观的，否则系统不完全可控或不完全可观。
 \end{claim}

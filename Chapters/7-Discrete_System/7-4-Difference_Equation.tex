@@ -141,7 +141,7 @@ $$\mathbf{y}[k+1] = A \mathbf{y}[k] + \mathbf{f}[k]$$
 解矩阵在差分方程组理论中，仍然扮演着“基本解”的角色。以非齐次项$\mathbf{f}[n]$为激励，方程组\begin{align*}
     \mathbf{y}[n+1] = A \mathbf{y}[n] + \mathbf{f}[n],\mathbf{y}_0 = \mathbf{y}[0]
 \end{align*}
-的解$\mathbf{y}[n]$为响应，则方程描述了一个离散的因果线性时不变系统，类比\ref{sub:constant_coefficient_linear_equation_system}中的常系数线性微分方程组，可以猜想零状态响应可以表示为卷积和，然而，我们实际上应该使用$\phi[n-1]u[n-1]$做卷积才能得到正确的结论，我们暂时不做解释。\begin{align*}
+的解$\mathbf{y}[n]$为响应，则方程描述了一个离散的因果线性时不变系统，类比\ref{sub:constant_coefficient_linear_equation_system}中的常系数线性微分方程组，可以猜想零状态响应可以表示为卷积和，然而，我们实际上应该使用$\phi[n-1]u[n-1]$做卷积才能得到正确的结论，我们将在下一小节中看到这样做的原因。\begin{align*}
     \mathbf{y}_{zs}[n] = (\phi[n-1]u[n-1]) * \mathbf{f}[n]=\sum_{i=0}^{n-1} \phi[n-1-i]\mathbf{f}[i]=\sum_{i=0}^{n-1} A^{n-1-i} \mathbf{f}[i]
 \end{align*}
 求和范围的改变是因为我们认为激励$\mathbf{f}[n]$是在$n=0$时刻施加于系统的。这与上一小节中用迭代法得到的通解公式一致。
@@ -207,14 +207,13 @@ $$\mathbf{y}[k+1] = A \mathbf{y}[k] + \mathbf{f}[k]$$
 \end{align*}
 利用单边z变换的移位性质以及卷积定理，得到\begin{align*}
     \mathcal{Z}^{-1} \left\{z^{-1}\mathcal{Z}\{\phi[n]u[n]\} \mathbf{F}(z)\right\}&=(\phi[n-1]u[n-1]) * (\mathbf{f}[n]u[n])\\
-    &=\sum_{i=0}^{n} \phi[n-1-i] \mathbf{f}[i]\\
-    & = \sum_{i=0}^{n} A^{n-1-i} \mathbf{f}[i]
+    &=\sum_{i=0}^{n-1} \phi[n-1-i] \mathbf{f}[i]\\
+    & = \sum_{i=0}^{n-1} A^{n-1-i} \mathbf{f}[i]
 \end{align*}
 
 综上，我们得到了常系数线性差分方程组的通解公式，它与之前推导的公式相一致：
 \begin{align*}
-    \mathbf{y}[n]& = \phi[n]\mathbf{y}_0 + \sum_{i=0}^{n} \phi[n-1-i]\mathbf{f}[i]\\
-    & = A^n \mathbf{y}_0 + \sum_{i=0}^{n} A^{n-1-i} \mathbf{f}[i]
+    \mathbf{y}[n]= \phi[n]\mathbf{y}_0 + \sum_{i=0}^{n-1} \phi[n-1-i]\mathbf{f}[i]= A^n \mathbf{y}_0 + \sum_{i=0}^{n-1} A^{n-1-i} \mathbf{f}[i]
 \end{align*}
 
 \begin{example}
@@ -314,4 +313,194 @@ $$\mathbf{y}[k+1] = A \mathbf{y}[k] + \mathbf{f}[k]$$
 
 \subsection{*离散系统的状态变量分析}\label{sub:discrete_state_variable}
 
+对离散系统重复\ref{sub:state_variable_analysis}中的定义：
 
+\begin{definition}[状态变量]
+    \textbf{状态变量}(state variable)是指能够唯一确定系统状态的最小的一组变量。只要知道$n=n_0$时刻的状态变量以及$n\geq n_0$时的激励，就能够完全确定系统在$n\geq n_0$时的行为，包括状态$\mathbf{q}[n]$和响应$\mathbf{y}[n]$。
+
+    将状态变量的个数$N$称为系统的\textbf{阶数}。
+\end{definition}
+
+\begin{definition}[状态矢量]
+    \textbf{状态矢量}(state vector)是由系统的状态变量组成的向量，通常记为$\mathbf{q}[n]$。
+\end{definition}
+    
+\begin{definition}[状态空间和状态轨迹]
+    状态矢量所处的空间称为\textbf{状态空间}(state space)。有$n$个状态变量的系统，状态空间为$n$维实线性空间。
+    
+    随时间变化，状态向量$\mathbf{q}[n]$在状态空间中形成的轨迹称为系统的\textbf{状态轨迹}(state trajectory)。
+\end{definition}
+
+一般地，一个因果的线性时不变系统系统的激励$\mathbf{e}[n]$、响应$\mathbf{r}[n]$与状态变量$\mathbf{q}[n]$满足以下常系数线性性差分方程组：
+\begin{align*}
+    \mathbf{q}[n+1]&=A\mathbf{q}[n]+B\mathbf{e}[n]\\
+    \mathbf{r}[n]&=C\mathbf{q}[n]+D\mathbf{e}[n]
+\end{align*}
+其中矩阵$A$、$B$、$C$、$D$为常数矩阵，分别称它们为系统的\textbf{状态矩阵}(state matrix)、\textbf{输入矩阵}(input matrix)、\textbf{输出矩阵}(output matrix)和\textbf{直接传递矩阵}(direct transmission matrix)。
+
+根据前面几个小节的内容可知，已知状态变量的初始值$\mathbf{q}[0]$，关于状态变量的差分方程组的解为
+$$\mathbf{q}[n]=A^n\mathbf{q}[0]+\sum_{i=0}^{n-1}A^{n-1-i}B\mathbf{e}[i]$$
+因此又将方程的解矩阵$\phi[n]=A^n$称为\textbf{状态转移矩阵}(state transition matrix)，它与激励共同决定了状态矢量在状态空间中的移动情况。
+
+考虑将系统矩阵做Jordan分解：$A=PJP^{-1}$，则状态矢量应该变为$\mathbf{w}[n]=P^{-1}\mathbf{q}[n]$，描述系统的方程变为：\begin{align*}
+    \mathbf{w}[n+1]&=J\mathbf{w}[n]+P^{-1}B\mathbf{e}[n]\\
+    \mathbf{r}[n]&=CP\mathbf{w}[n]+D\mathbf{e}[n]
+\end{align*}
+
+将状态变量进行上述的可逆线性变换后，\textbf{可以根据Jordan块的结构将系统拆分为若干互不耦合}（即互相独立）\textbf{的子系统的并联}，将这种操作称为状态变量的\textbf{对角化}(diagonalization)，这种分析方法称为系统的\textbf{模态分析}(modal analysis)，每个子系统称为一个\textbf{模态}(mode)。变换矩阵$P$又称为系统的\textbf{模态矩阵}(modal matrix)。
+
+习惯上，将状态变量对角化后的系统的方程组记为\begin{align*}
+    \mathbf{w}[n+1]&=\hat{A}\mathbf{w}[n]+\hat{B}\mathbf{e}[n]\\
+    \mathbf{r}[n]&=\hat{C}\mathbf{w}[n]+\hat{D}\mathbf{e}[n]
+\end{align*}
+其中\begin{align*}
+    \hat{A}=P^{-1}AP=J,\hat{B}=P^{-1}B,\hat{C}=CP,\hat{D}=D
+\end{align*}
+
+特别地，如果$A$是可对角化的，则每个子系统都是一阶的，状态变量的方程为\begin{align*}
+    w_k[n+1]=\lambda_k w_k[n]+\mathbf{p}_k^T B\mathbf{e}[n],k=1,2,\cdots,N
+\end{align*}
+其中$\lambda_k$是$A$的第$k$个特征值，$\mathbf{p}_k^T$是$P^{-1}$的第$k$行，$\mathbf{p}_k^T B$是$\hat{B}$的第$k$行。每个子系统的状态变量$w_k[n]$的解为\begin{align*}
+    w_k[n]=\lambda_k^n w_k(0)+\sum_{i=0}^{n-1} \lambda_k^{n-1-i}\mathbf{p}_k^TB\mathbf{e}[n]
+\end{align*}
+
+在$\hat{B}$的第$k$行不全为0的情况下，通过适当地选取激励信号$\mathbf{e}[n]$，不论状态变量$z_k[n]$的初始值如何，都可以使得$w_k[n]$在有限的时间内达到任意的值，这表明系统的第$k$个模态是可以通过激励控制的，即该模态与输入\textbf{耦合}。系统的\textbf{可控性}(controllability)要求状态向量可以被适当的激励引向状态空间中的特定位置：
+
+\begin{definition}[可控性]
+    如果对于任意初始值$\mathbf{q}[0]$和任意目标状态$\mathbf{q}_f$，存在激励信号$\mathbf{e}[n]$能够在有限时间内使得状态矢量到达$\mathbf{q}_f$，则称系统是\textbf{可控}的。
+
+    如果只有部分模态是可控的，则称系统是\textbf{部分可控}的。
+\end{definition}
+
+\textbf{可控性要求状态变量与输入耦合}，仅仅取决于$\hat{A}$和$\hat{B}$。如果系统矩阵$A$可对角化，则所有状态变量相互独立，\textbf{$\hat{B}$的第$k$行不全为0，就等价于第$k$个模态是可控的}；如果系统矩阵不可对角化，则每个模态由多个状态变量描述，子系统的系统矩阵为Jordan块：
+\begin{align*}
+    \begin{bmatrix}
+    w_k[n+1]\\
+    w_{k+1}[n+1]\\
+    \vdots\\
+    w_{k+m-1}[n+1]
+    \end{bmatrix}=\begin{bmatrix}
+    \lambda & 1 & 0 & \cdots & 0\\
+    0 & \lambda & 1 & \cdots & 0\\
+    \vdots & \vdots & \vdots & \ddots & \vdots\\
+    0 & 0 & 0 & \cdots & 1\\
+    0 & 0 & 0 & \cdots & \lambda
+    \end{bmatrix}\begin{bmatrix}
+    w_k[n]\\
+    w_{k+1}[n]\\
+    \vdots\\
+    w_{k+m-1}[n]
+    \end{bmatrix}+\begin{bmatrix}
+    \mathbf{p}_k^T B\mathbf{e}[n]\\
+    \mathbf{p}_{k+1}^T B\mathbf{e}[n]\\
+    \vdots\\
+    \mathbf{p}_{k+m-1}^T B\mathbf{e}[n]
+    \end{bmatrix}
+\end{align*}
+此时模态内的最后一个状态变量由一阶方程描述，而其余状态变量受自身、激励以及下一个状态变量的控制，因此\textbf{每个模态的可控性等价于最后一个状态变量（链尾）与输入耦合}。在\ref{sub:state_variable_analysis}中，我们已经展示过这一结论对二阶Jordan块对应的模态的正确性，读者可以自行构造一个类似的例子，这里不再重复。
+
+与之类似的还有系统的\textbf{可观性}(observability)，它要求\textbf{状态变量与输出耦合}：
+
+\begin{definition}[可观性]
+    如果给定激励信号$\mathbf{e}[n]$，总能根据系统在有限时间$n_0$内的响应$\mathbf{r}[n],t\in[0,n_0]$唯一确定所有状态变量的起始状态$\mathbf{q}[n]$，则称系统是\textbf{可观}的。
+
+    如果只能确定部分状态变量的起始状态，则称系统是\textbf{部分可观}的。
+\end{definition}
+
+类似地，可观性仅仅取决于$\hat{A}$和$\hat{C}$。考虑输出方程\begin{align*}
+    \mathbf{r}[n]&=\hat{C}\mathbf{w}[n]+\hat{D}\mathbf{e}[n]\\
+    \mathbf{r}_k[n]&=\sum_{j=1}^N \hat{C}_{kj} w_j[n]+\sum_{j=1}^m \hat{D}_{kj} e_j[n]
+\end{align*}
+如果系统矩阵$A$可对角化，则所有状态变量相互独立，\textbf{$\hat{C}$的第$k$行不全为0，就等价于第$k$个模态是可观的}，即该模态对应的子系统是可观的；如果系统矩阵不可对角化，则每个模态由多个状态变量描述，子系统的系统矩阵为Jordan块，此时模态内的后一状态变量可以由前一状态变量观测，因此\textbf{每个模态的可观性等价于第一个状态变量（链首）与输出耦合}。
+
+下面给出离散系统的可控性与可观性的满秩判别法。
+
+\begin{theorem}[可控性的满秩判别法]
+    一个$N$阶系统是可控的，当且仅当它的\textbf{可控矩阵}(controllable matrix)
+    \begin{align*}
+    \mathcal{C} =\begin{bmatrix}
+    B & AB & A^2B & \cdots & A^{N-1}B
+    \end{bmatrix}
+    \end{align*}
+    是行满秩的，即$\mathrm{rank}\mathcal{C}=N$。
+\end{theorem}
+\begin{proof}
+    不妨设$\mathbf{q}[0]=0$。根据状态变量的解的公式，\begin{align*}
+        \mathbf{q}[n_0]=\sum_{i=0}^{n_0-1}A^{n_0-1-i}B\mathbf{e}[i]=\begin{bmatrix}
+            B & AB & A^2B & \cdots & A^{N-1}B
+        \end{bmatrix}\begin{bmatrix}
+            e_1[n]\\
+            e_2[n]\\
+            \vdots\\
+            e_N[n]
+        \end{bmatrix}
+    \end{align*}
+    矩阵右乘一个列向量，相当于对矩阵进行列变换，因此$\mathbf{q}[n_0]$的取值范围就等于矩阵\begin{align*}
+    \mathcal{C} =\begin{bmatrix}
+    B & AB & A^2B & \cdots & A^{N-1}B
+    \end{bmatrix}
+    \end{align*}
+    的列空间$C(\mathcal{C})$，因此$\mathbf{q}[n_0]$可以取$\mathbb{R}^N$中的任意值就等价于
+    $$\dim C(\mathcal{C} )=\mathrm{rank}(\mathcal{C} )=\dim\mathbb{R}^N=N$$
+\end{proof}
+
+与连续系统一样，通过对偶系统，可以由可控性的满秩判别法得到可观性的满秩判别法。
+\begin{definition}[对偶系统]
+    设系统的状态矩阵、输入矩阵和输出矩阵分别为$A,B,C$，则其\textbf{对偶系统}的状态矩阵、输入矩阵和输出矩阵分别为$A^T,C^T,B^T$。
+\end{definition}
+
+\begin{theorem}
+    原系统的可控性等价于对偶系统的可观性，原系统的可观性等价于对偶系统的可控性。
+\end{theorem}
+
+\begin{theorem}[可观性的满秩判别法]
+    一个$N$阶系统是可观的，当且仅当它的\textbf{可观矩阵}(observable matrix)
+    \begin{align*}
+    \mathcal{O} =\begin{bmatrix}
+    C\\
+    CA\\
+    CA^2\\
+    \vdots\\
+    CA^{N-1}
+    \end{bmatrix}
+    \end{align*}
+    是列满秩的，即$\mathrm{rank}\mathcal{O}=N$。
+\end{theorem}
+
+以上两个定理的证明都与\ref{sub:state_variable_analysis}中一致。
+
+最后，我们使用单边z变换来分析由状态变量方程描述的系统。对方程组
+\begin{align*}
+    \mathbf{q}[n+1]&=A\mathbf{q}[n]+B\mathbf{e}[n]\\
+    \mathbf{r}[n]&=C\mathbf{q}[n]+D\mathbf{e}[n]\\
+    \mathbf{q}[0]&=\mathbf{q}_0
+\end{align*}
+两边同时乘以$u[n]$并做单边z变换，有\begin{align*}
+    z\mathbf{Q}(z)-z\mathbf{q}_0&=A\mathbf{Q}(z)+B\mathbf{E}(z)\\
+    \mathbf{R}(z)&=C\mathbf{Q}(z)+D\mathbf{E}(z)
+\end{align*}
+由前一方程，\begin{align*}
+    \mathbf{Q}(z)=z(zI-A)^{-1}\mathbf{q}_0+(zI-A)^{-1}B\mathbf{E}(z)=z\Phi(z)\mathbf{q}_0+\Phi(z)B\mathbf{E}(z)
+\end{align*}
+代入后一方程，得到\begin{align*}
+    \mathbf{R}(z)&=C\left[z\Phi(z)\mathbf{q}_0+\Phi(z)B\mathbf{E}(z)\right]+D\mathbf{E}(z)\\
+    &=zC\Phi(z)\mathbf{q}_0+[C\Phi(z)B+D]\mathbf{E}(z)
+\end{align*}
+因此系统函数为
+$$H(z)=C\Phi(z)B+D$$
+
+对于一个$q$输入、$p$输出的线性时不变系统，其系统函数为$p\times q$的矩阵值函数。特别地，对于单输入单输出系统，系统函数为一个分式函数。
+
+利用系统函数同样可以判断系统的可控性与可观性：
+
+\begin{claim}
+    设单输入单输出系统的状态变量方程为
+    \begin{align*}
+        \mathbf{q}[n]=&A\mathbf{q}[n]+B \mathbf{e}[n],\mathbf{r}[n]=C\mathbf{q}[n]
+    \end{align*}
+    则系统的系统函数为
+    \begin{align*}
+        H(s)=C\Phi(s)B
+    \end{align*}
+    如果在系统函数的计算过程中，没有出现零极点的抵消，即系统函数的分子和分母没有公共因子，则系统是可控且可观的，否则系统不完全可控或不完全可观。
+\end{claim}

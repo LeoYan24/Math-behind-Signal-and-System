@@ -210,11 +210,11 @@ $\text{supp}\ f=\overline{\left\{x\in\mathbb{R}\left|f(x)\neq 0\right.\right\}}$
 \begin{definition}[相关系数]
 设$f,g\in L^2(\mathbb{R})$，它们的相关系数定义为
 \begin{equation*}
-    \rho(f,g)=\frac{\langle f,g\rangle}{\|f\|\cdot\|g\|}
+    \rho(f,g)=\frac{(f,g)}{\|f\|\cdot\|g\|}
 \end{equation*}
 \end{definition}
-其中$\langle f,g\rangle=\int_{-\infty}^{\infty}f(x)\overline{g(x)}dx$是$f$和
-$g$的内积，$\|f\|=\sqrt{\langle f,f\rangle}$是$f$的范数。根据柯西-施瓦茨不等式，
+其中$(f,g)=\int_{-\infty}^{\infty}f(x)\overline{g(x)}dx$是$f$和
+$g$的内积，$\|f\|=\sqrt{(f,f)}$是$f$的范数。根据柯西-施瓦茨不等式，
 相关系数的绝对值不超过1，且当且仅当$f$与$g$几乎处处成比例时取等，因此我们说，
 $\rho(f,g)=\pm 1$时两信号\textbf{线性相关}；$\rho(f,g)=0$时两信号\textbf{线性无关}，
 这相当于两函数正交。
