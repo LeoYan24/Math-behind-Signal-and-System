@@ -48,7 +48,7 @@ $$\mathrm{e}^{\mathrm{i}(\Omega+2k\pi)n}=\mathrm{e}^{\mathrm{i}\Omega n},\forall
     离散信号$x[n]=\cos(n\pi)$的数字角频率为$\Omega=\pi$，假定采样间隔$T=1$，对应的连续信号为$f(t)=\cos(\pi t)$，其模拟角频率为$\omega=\pi$。
 
     利用香农采样定理的方式还原信号，所得连续信号为
-    \[f_{re}(t)=\sum_{n=-\infty}^{\infty}\cos(n\pi)\text{sinc}\left(\frac{t-nT}{T}\right)=\sum_{n=-\infty}^{\infty}(-1)^n\text{sinc}\left(t-n\right)\]
+    \[f_{re}(t)=\sum_{n=-\infty}^{\infty}\cos(n\pi)\mathrm{sinc}\left(\frac{t-nT}{T}\right)=\sum_{n=-\infty}^{\infty}(-1)^n\mathrm{sinc}\left(t-n\right)\]
     利用$\sin\pi(t-n)=(-1)^n\sin\pi t$，可得
     \[f_{re}(t)=\frac{\sin\pi t}{\pi}\sum_{n=-\infty}^{\infty}\frac{(-1)^n}{t-n}=\cos(\pi t)\]
     我们用到了：$\sum_{n=-\infty}^{\infty}\dfrac{(-1)^n}{t-n}$在主值意义下收敛于$\pi\cot(\pi t)$，可以利用留数定理证明之。
@@ -112,7 +112,7 @@ $$X(\mathrm{e}^{\mathrm{i}\Omega})=\mathcal{X} (\Omega)$$
 \begin{definition}[离散时间傅里叶变换]
     离散信号$x[n]\in l^1$的离散时间傅里叶变换定义为
     \[X(\mathrm{e}^{\mathrm{i}\Omega})=\sum_{n=-\infty}^{\infty}x[n]\mathrm{e}^{-\mathrm{i}\Omega n}\]
-    记$x[n]\xleftrightarrow{\text{DTFT}}X(\mathrm{e}^{\mathrm{i}\Omega})$。其中，$\Omega $为\textbf{数字角频率}，$l^1$为\ref{sub:Lp_space}中介绍的绝对可和的序列空间，即
+    记$x[n]\xleftrightarrow{\mathrm{DTFT}}X(\mathrm{e}^{\mathrm{i}\Omega})$。其中，$\Omega $为\textbf{数字角频率}，$l^1$为\ref{sub:Lp_space}中介绍的绝对可和的序列空间，即
     \[l^1=\left\{x[n]\left|\sum_{n=-\infty}^{\infty}|x[n]|<\infty\right.\right\}\]
 \end{definition}
 
@@ -166,28 +166,27 @@ $$X(\mathrm{e}^{\mathrm{i}\Omega})|_{\Omega=0}=\sum_{n=-\infty}^{\infty}x[n],X(\
 离散时间傅里叶变换的运算性质列举如下：
 \begin{proposition}[离散时间傅里叶变换的运算性质]
     设$x[n],y[n]\in l^1$，其离散时间傅里叶变换分别为$X(\mathrm{e}^{\mathrm{i}\Omega}),Y(\mathrm{e}^{\mathrm{i}\Omega})$，则有：\begin{itemize}
-        \item  线性：$\forall a,b\in\mathbb{C}$，有$a x[n]+b y[n]\xleftrightarrow{\text{DTFT}} a X(\mathrm{e}^{\mathrm{i}\Omega})+b Y(\mathrm{e}^{\mathrm{i}\Omega})$
-        \item 时移性质：$x[n-n_0]\xleftrightarrow{\text{DTFT}}\mathrm{e}^{-\mathrm{i}\Omega n_0}X(\mathrm{e}^{\mathrm{i}\Omega})$
-        \item 频移性质：$\mathrm{e}^{\mathrm{i}\Omega_0 n}x[n]\xleftrightarrow{\text{DTFT}}X\left(\mathrm{e}^{\mathrm{i}(\Omega-\Omega_0)}\right)$
-        \item 共轭性质：$\overline{x[n]}\xleftrightarrow{\text{DTFT}}\overline{X\left(\mathrm{e}^{-\mathrm{i}\Omega}\right)}$
-        \item 时域卷积和定理：$x[n]*y[n]\xleftrightarrow{\text{DTFT}}X(\mathrm{e}^{\mathrm{i}\Omega})Y(\mathrm{e}^{\mathrm{i}\Omega})$
-        \item 频域卷积定理：$x[n]y[n]\xleftrightarrow{\text{DTFT}}\dfrac{1}{2\pi}\int_{-\pi}^{\pi}X\left(\mathrm{e}^{\mathrm{i}\theta}\right)Y\left(\mathrm{e}^{\mathrm{i}(\Omega-\theta)}\right)\,d\theta$
+        \item  线性：$\forall a,b\in\mathbb{C}$，有$a x[n]+b y[n]\xleftrightarrow{\mathrm{DTFT}} a X(\mathrm{e}^{\mathrm{i}\Omega})+b Y(\mathrm{e}^{\mathrm{i}\Omega})$
+        \item 时移性质：$x[n-n_0]\xleftrightarrow{\mathrm{DTFT}}\mathrm{e}^{-\mathrm{i}\Omega n_0}X(\mathrm{e}^{\mathrm{i}\Omega})$
+        \item 频移性质：$\mathrm{e}^{\mathrm{i}\Omega_0 n}x[n]\xleftrightarrow{\mathrm{DTFT}}X\left(\mathrm{e}^{\mathrm{i}(\Omega-\Omega_0)}\right)$
+        \item 共轭性质：$\overline{x[n]}\xleftrightarrow{\mathrm{DTFT}}\overline{X\left(\mathrm{e}^{-\mathrm{i}\Omega}\right)}$
+        \item 时域卷积和定理：$x[n]*y[n]\xleftrightarrow{\mathrm{DTFT}}X(\mathrm{e}^{\mathrm{i}\Omega})Y(\mathrm{e}^{\mathrm{i}\Omega})$
+        \item 频域卷积定理：$x[n]y[n]\xleftrightarrow{\mathrm{DTFT}}\dfrac{1}{2\pi}\int_{-\pi}^{\pi}X\left(\mathrm{e}^{\mathrm{i}\theta}\right)Y\left(\mathrm{e}^{\mathrm{i}(\Omega-\theta)}\right)\,d\theta$
+        \item 频域微分性质：$nx[n]\xleftrightarrow{\mathrm{DTFT}}\mathrm{i}\dfrac{dX(\mathrm{e}^{\mathrm{i}\Omega})}{d\Omega}$
     \end{itemize}
 \end{proposition}
 \begin{proof}
     利用\[X(\mathrm{e}^{\mathrm{i}\Omega})=X(z)|_{z=\mathrm{e}^{\mathrm{i}\Omega}}\]
-    以上性质除最后一条以外全部是z变换的性质在单位圆上的特例。这里仅给出频域卷积定理的证明：
+    以上性质除最后一条以外全部是z变换的性质在单位圆上的特例。这里仅给出频域微分性质的证明。由于
     \begin{align*}
-        &\frac{1}{2\pi}\int_{-\pi}^{\pi}X\left(\mathrm{e}^{\mathrm{i}\theta}\right)Y\left(\mathrm{e}^{\mathrm{i}(\Omega-\theta)}\right)\,d\theta\\
-        =&\frac{1}{2\pi}\int_{-\pi}^{\pi}\left(\sum_{m=-\infty}^{\infty}x[m]\mathrm{e}^{-\mathrm{i}\theta m}\right)\left(\sum_{k=-\infty}^{\infty}y[k]\mathrm{e}^{-\mathrm{i}(\Omega-\theta) k}\right)\,d\theta\\
-        =&\frac{1}{2\pi}\sum_{m=-\infty}^{\infty}\sum_{k=-\infty}^{\infty}x[m]y[k]\mathrm{e}^{-\mathrm{i}\Omega k}\int_{-\pi}^{\pi}\mathrm{e}^{-\mathrm{i}\theta (m-k)}\,d\theta\\
-        =&\sum_{n=-\infty}^{\infty}x[n]y[n]\mathrm{e}^{-\mathrm{i}\Omega n}
+        \left|X(\mathrm{e}^{\mathrm{i}\Omega})\right|=\left|\sum_{n=-\infty}^{\infty}x[n]\mathrm{e}^{-\mathrm{i}\Omega n}\right|\leq \sum_{n=-\infty}^{\infty}|x[n]|=\|x[n]\|_1<\infty
     \end{align*}
-    积分与求和的交换合法，是因为绝对可和能够保证以上函数项级数的一致收敛性。
-
-    使用z域卷积定理推出离散时间傅里叶变换的频域卷积定理也是可行的，只要做变量代换
-    $$\nu=\mathrm{e}^{\mathrm{i}\theta},\nu^{-1}d\nu=\mathrm{i}d\theta$$
-    即可。
+    $X(\mathrm{e}^{\mathrm{i}\Omega})$作为一个函数项级数是一致收敛的，因此可以逐项求导：
+    \begin{align*}
+        \mathrm{i}\dfrac{dX(\mathrm{e}^{\mathrm{i}\Omega})}{d\Omega}&=\mathrm{i}\sum_{n=-\infty}^{\infty}x[n]\frac{d}{d\Omega}\mathrm{e}^{-\mathrm{i}\Omega n}\\
+        &=\sum_{n=-\infty}^{\infty}nx[n]\mathrm{e}^{-\mathrm{i}\Omega n}
+    \end{align*}
+    它与z域微分性质的形式不同，是因为涉及到复合函数的求导。
 \end{proof}
 
 作为共轭性质的推论，我们有：
@@ -198,7 +197,7 @@ $$X(\mathrm{e}^{\mathrm{i}\Omega})|_{\Omega=0}=\sum_{n=-\infty}^{\infty}x[n],X(\
 频域卷积定理的名称可以这样理解：如果记
 $$\mathcal{X} (\Omega)=X(\mathrm{e}^{\mathrm{i}\Omega}),\mathcal{Y} (\Omega)=Y(\mathrm{e}^{\mathrm{i}\Omega})$$
 则右式是周期函数的卷积（见\ref{sub:conv_of_period_func}）：
-\[x[n]y[n]\xleftrightarrow{\text{DTFT}}\frac{1}{2\pi}\mathcal{X} (\Omega)*\mathcal{Y} (\Omega)=\frac{1}{2\pi}\int_{-\pi}^{\pi}\mathcal{X} (\theta)\mathcal{Y} (\Omega-\theta)\,d\theta\]
+\[x[n]y[n]\xleftrightarrow{\mathrm{DTFT}}\frac{1}{2\pi}\mathcal{X} (\Omega)*\mathcal{Y} (\Omega)=\frac{1}{2\pi}\int_{-\pi}^{\pi}\mathcal{X} (\theta)\mathcal{Y} (\Omega-\theta)\,d\theta\]
 
 此外，我们给出离散时间傅里叶变换的\textbf{帕塞瓦尔定理}(Parseval's Theorem)，它表明表明时域能量与频域能量成正比：
 \begin{theorem}[离散时间傅里叶变换的帕塞瓦尔定理]

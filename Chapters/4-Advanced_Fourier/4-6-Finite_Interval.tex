@@ -67,12 +67,12 @@
 
     记$f,g$的基波角频率为$\omega=\dfrac{2\pi}{T}$，则
     \begin{align*}
-        c_n&=\frac{1}{T}\int_0^{T}(f*g)(x)\mathrm{e}^{-in\omega x}\,dx\\
-        &=\frac{1}{T^2}\int_0^{T}\mathrm{e}^{-in\omega x}\,dx\int_0^{T}f(y)g(x-y)\,dy\\
-        &=\frac{1}{T^2}\int_0^{T}f(y)\,dy\int_0^{T}g(x-y)\mathrm{e}^{-in\omega x}\,dx\\
-        &=\frac{1}{T^2}\int_0^{T}f(y)\,dy\int_{-y}^{T-y}g(z)\mathrm{e}^{-in\omega (z+y)}\,dz&(z=x-y)\\
-        &=\frac{1}{T^2}\int_0^{T}f(y)\mathrm{e}^{-in\omega y}\,dy\int_0^{T}g(z)\mathrm{e}^{-in\omega z}\,dz\\
-        &=\left(\frac{1}{T}\int_0^{T}f(y)\mathrm{e}^{-in\omega y}\,dy\right)\left(\frac{1}{T}\int_0^{T}g(z)\mathrm{e}^{-in\omega z}\,dz\right)\\
+        c_n&=\frac{1}{T}\int_0^{T}(f*g)(x)\mathrm{e}^{-\mathrm{i}n\omega x}\,dx\\
+        &=\frac{1}{T^2}\int_0^{T}\mathrm{e}^{-\mathrm{i}n\omega x}\,dx\int_0^{T}f(y)g(x-y)\,dy\\
+        &=\frac{1}{T^2}\int_0^{T}f(y)\,dy\int_0^{T}g(x-y)\mathrm{e}^{-\mathrm{i}n\omega x}\,dx\\
+        &=\frac{1}{T^2}\int_0^{T}f(y)\,dy\int_{-y}^{T-y}g(z)\mathrm{e}^{-\mathrm{i}n\omega (z+y)}\,dz&(z=x-y)\\
+        &=\frac{1}{T^2}\int_0^{T}f(y)\mathrm{e}^{-\mathrm{i}n\omega y}\,dy\int_0^{T}g(z)\mathrm{e}^{-\mathrm{i}n\omega z}\,dz\\
+        &=\left(\frac{1}{T}\int_0^{T}f(y)\mathrm{e}^{-\mathrm{i}n\omega y}\,dy\right)\left(\frac{1}{T}\int_0^{T}g(z)\mathrm{e}^{-\mathrm{i}n\omega z}\,dz\right)\\
         &=a_n b_n
     \end{align*}
 \end{proof}

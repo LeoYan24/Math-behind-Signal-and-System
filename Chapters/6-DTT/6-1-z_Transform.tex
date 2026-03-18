@@ -96,14 +96,14 @@
 \begin{proposition}[z变换的运算性质]
     设$x[n],y[n]$的z变换分别为$X(z),Y(z)$，则有：
     \begin{itemize}
-        \item 线性：在$X(z)$与$Y(z)$共同的收敛域内，$a x[n]+b y[n]\xleftrightarrow{\mathcal{Z}} a X(z)+b Y(z)$
-        \item 移位：$x[n-n_0]\xleftrightarrow{\mathcal{Z}} z^{-n_0}X(z)$
-        \item 共轭：$\overline{x[n]}\xleftrightarrow{\mathcal{Z}} \overline{X(\overline{z})}$
-        \item 指数加权：$a^{n} x[n]\xleftrightarrow{\mathcal{Z}} X\left(\dfrac{z}{a}\right)(z\neq 0)$，收敛域变为$|a|r<|z|<|a|R$
-        \item 反转：$x[-n]\xleftrightarrow{\mathcal{Z}} X\left(\dfrac{1}{z}\right)$
-        \item 升采样：$x[n/L]\xleftrightarrow{\mathcal{Z}} X\left(z^{L}\right)$，收敛域变为$r^{1/L}<|z|<R^{1/L}$
-        \item 降采样：$x[nM]\xleftrightarrow{\mathcal{Z}} \dfrac{1}{M}\sum_{k=0}^{M-1}X\left(z^{\frac{1}{M}}\mathrm{e}^{-\mathrm{i}\frac{2\pi}{M}k}\right)$，收敛域为$r^{M}<|z|<R^{M}$
-        \item z域微分：$n x[n]\xleftrightarrow{\mathcal{Z}} -z\dfrac{dX(z)}{dz}$
+        \item 线性性：在$X(z)$与$Y(z)$共同的收敛域内，$a x[n]+b y[n]\xleftrightarrow{\mathcal{Z}} a X(z)+b Y(z)$
+        \item 移位性质：$x[n-n_0]\xleftrightarrow{\mathcal{Z}} z^{-n_0}X(z)$
+        \item 共轭性质：$\overline{x[n]}\xleftrightarrow{\mathcal{Z}} \overline{X(\overline{z})}$
+        \item 指数加权性质：$a^{n} x[n]\xleftrightarrow{\mathcal{Z}} X\left(\dfrac{z}{a}\right)(z\neq 0)$，收敛域变为$|a|r<|z|<|a|R$
+        \item 反转性质：$x[-n]\xleftrightarrow{\mathcal{Z}} X\left(\dfrac{1}{z}\right)$
+        \item 升采样定理：$x[n/L]\xleftrightarrow{\mathcal{Z}} X\left(z^{L}\right)$，收敛域变为$r^{1/L}<|z|<R^{1/L}$
+        \item 降采样定理：$x[nM]\xleftrightarrow{\mathcal{Z}} \dfrac{1}{M}\sum_{k=0}^{M-1}X\left(z^{\frac{1}{M}}\mathrm{e}^{-\mathrm{i}\frac{2\pi}{M}k}\right)$，收敛域为$r^{M}<|z|<R^{M}$
+        \item z域微分性质：$n x[n]\xleftrightarrow{\mathcal{Z}} -z\dfrac{dX(z)}{dz}$
     \end{itemize}
 \end{proposition}
 \begin{proof}
@@ -113,7 +113,7 @@
         \mathcal{Z}\left[x[nM]\right]=\sum_{n=-\infty}^{\infty}x[nM]z^{-n}=\sum_{m=nM}x[m]z^{-m/M}\quad(m=nM)
     \end{align*}
     为了处理$m$只能取$n$的整数倍的情况，我们引入\textbf{选择函数}：
-    \[\shah_M[n]=\frac{1}{M}\sum_{k=0}^{M-1}\mathrm{e}^{\mathrm{i}\frac{2\pi}{M}kn}=\begin{cases}
+    \[\shah_M[m]=\frac{1}{M}\sum_{k=0}^{M-1}\mathrm{e}^{\mathrm{i}\frac{2\pi}{M}km}=\begin{cases}
         1 & \text{if }m=nM\\
         0 & \text{otherwise}
     \end{cases}\]

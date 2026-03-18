@@ -31,14 +31,14 @@
 \end{theorem}
 
 \begin{proof}
-我们假设$\text{supp}\ f\in[-T/2,T/2],\text{supp}\ \mathcal{F} f\in[-\Omega/2,\Omega/2]$，证明$f=0$。
+我们假设$\mathrm{supp}\ f\in[-T/2,T/2],\mathrm{supp}\ \mathcal{F} f\in[-\Omega/2,\Omega/2]$，证明$f=0$。
 
 \textbf{法一}：
 \begin{align*}
     f(t)&=\frac{1}{2\pi}\int_{-\infty}^{\infty}\mathcal{F} f(\omega)\mathrm{e}^{\mathrm{i}\omega t}\,d\omega\\
     &=\frac{1}{2\pi}\int_{-\Omega/2}^{\Omega/2}\mathcal{F} f(\omega)\mathrm{e}^{\mathrm{i}\omega t}\,d\omega
 \end{align*}
-由于$\text{supp}\ f\in[-T/2,T/2]$，所以$f(t)$在$|t|>T/2$时恒为0，故\[\int_{-\Omega/2}^{\Omega/2}\mathcal{F} f(\omega)\mathrm{e}^{\mathrm{i}\omega t}\,d\omega=0,\forall |t|>T/2\]
+由于$\mathrm{supp}\ f\in[-T/2,T/2]$，所以$f(t)$在$|t|>T/2$时恒为0，故\[\int_{-\Omega/2}^{\Omega/2}\mathcal{F} f(\omega)\mathrm{e}^{\mathrm{i}\omega t}\,d\omega=0,\forall |t|>T/2\]
 对以上恒等式两边同时求n阶导数，得到\[\int_{-\Omega/2}^{\Omega/2}(\mathrm{i}\omega)^n \mathcal{F} f(\omega)\mathrm{e}^{\mathrm{i}\omega t}\,d\omega=0,\forall |t|>T/2\]
 取定$t_0>T/2$，有\begin{align*}
     f(t)=&\frac{1}{2\pi}\int_{-\Omega/2}^{\Omega/2}\mathcal{F} f(\omega)\mathrm{e}^{\mathrm{i}\omega t_0}\mathrm{e}^{\mathrm{i}\omega (t-t_0)}\,d\omega
@@ -52,11 +52,11 @@
 \end{align*}
 这表明只有恒零函数才能做到时域、频域均紧支。
 
-\textbf{法二}：利用解析延拓的唯一性。设$\text{supp}\ f\in[-T/2,T/2]$，则\begin{align*}
+\textbf{法二}：利用解析延拓的唯一性。设$\mathrm{supp}\ f\in[-T/2,T/2]$，则\begin{align*}
     \mathcal{F} f(\omega)&=\int_{-\infty}^{\infty}f(t)\mathrm{e}^{-\mathrm{i}\omega t}\,dt\\
     &=\int_{-T/2}^{T/2}f(t)\mathrm{e}^{-\mathrm{i}\omega t}\,dt
 \end{align*}
-这是一个可导的实变函数，可以将其做全纯延拓。我们在\ref{sub:introduction_of_laplace}中已经介绍过拉普拉斯变换，不过那时使用的是单边拉普拉斯变换，这里为了涵盖$\text{supp}\ f\in[-T/2,T/2]$的情形，我们使用双边拉普拉斯变换：
+这是一个可导的实变函数，可以将其做全纯延拓。我们在\ref{sub:introduction_of_laplace}中已经介绍过拉普拉斯变换，不过那时使用的是单边拉普拉斯变换，这里为了涵盖$\mathrm{supp}\ f\in[-T/2,T/2]$的情形，我们使用双边拉普拉斯变换：
 \begin{align*}
     F(s)=\int_{-\infty}^{\infty}f(t)\mathrm{e}^{-st}\,dt=\int_{-T/2}^{T/2}f(t)\mathrm{e}^{-st}\,dt,F(\mathrm{i}\omega)=\mathcal{F} f(\omega)
 \end{align*}
@@ -155,19 +155,19 @@
 \begin{proof}
     不妨设$\varphi=\mathcal{F} \varphi=0$。由傅里叶变换的微分性质（见\ref{sub:general_distributions}），
     \begin{align*}
-    \mathcal{F}\left[\left((-it)^n\varphi_k\right)^{(m)}\right](\omega)&=(\mathrm{i}\omega)^m \mathcal{F}\left[(-it)^n \varphi_k\right](\omega)\\
+    \mathcal{F}\left[\left((-\mathrm{i}t)^n\varphi_k\right)^{(m)}\right](\omega)&=(\mathrm{i}\omega)^m \mathcal{F}\left[(-\mathrm{i}t)^n \varphi_k\right](\omega)\\
     &=(\mathrm{i}\omega)^m (\mathcal{F} \varphi_k)^{(n)}(\omega)\\
     \|\mathcal{F} \varphi_k\|_{m,n}&=\sup_{\omega\in\mathbb{R} }|\omega|^m\left|(\mathcal{F} \varphi_k)^{(n)}(\omega)\right|\\
-    &=\sup_{\omega\in\mathbb{R} }\left|\mathcal{F}\left[((-it)^n \varphi_k)^{(m)}\right](\omega)\right|
+    &=\sup_{\omega\in\mathbb{R} }\left|\mathcal{F}\left[((-\mathrm{i}t)^n \varphi_k)^{(m)}\right](\omega)\right|
 \end{align*}
-令$\phi_k=\left((-it)^n \varphi_k\right)^{(m)}\in\mathcal{S} $，则
+令$\phi_k=\left((-\mathrm{i}t)^n \varphi_k\right)^{(m)}\in\mathcal{S} $，则
 \begin{align*}
     \|\mathcal{F} \varphi_k\|_{m,n}&=\sup_{\omega\in\mathbb{R} }\left|\mathcal{F} \phi_k(\omega)\right|\leq \int_{-\infty}^{\infty}|\phi_k(t)|\,dt
 \end{align*}
 问题转化为证明\[\int_{-\infty}^{\infty}|\phi_k(t)|\,dt\to 0\]
 考虑利用$\varphi_k\in\mathcal{S} ,\|\varphi_k\|_{m,n}\to 0,\forall m,n\in\mathbb{N}$给出$|\phi_k(t)|$的估计。利用莱布尼兹求导法则，有：
 \begin{align*}
-    |\phi_k(t)|&=\left|\left((-it)^n \varphi_k\right)^{(m)}(t)\right|\\
+    |\phi_k(t)|&=\left|\left((-\mathrm{i}t)^n \varphi_k\right)^{(m)}(t)\right|\\
 &=\left|\sum_{j=0}^{m}\binom{m}{j}(t^n)^{(j)}\varphi_k^{(m-j)}(t)\right|\\
     &\leq \sum_{j=0}^{\min(m,n)}\binom{m}{j}\frac{n!}{(n-j)!}|t|^{n-j}\left|\varphi_k^{(m-j)}(t)\right|
 \end{align*}
@@ -192,10 +192,13 @@
 
 其实，如果我们考虑$L^1(\mathbb{R})\cap L^2(\mathbb{R})$中傅里叶变换的连续性，可以得到类似的结论，但证明要简单得多，因为$L^1(\mathbb{R})\cap L^2(\mathbb{R})$中有普朗歇尔定理（见\ref{sub:fourier_operation_properties}）。
 \begin{theorem}[$L^1(\mathbb{R})\cap L^2(\mathbb{R})$上傅里叶变换的连续性]
-    设$f_k$在$L^2$范数下收敛到$f$，则$\mathcal{F} f_k$在$L^2$范数下收敛到$\mathcal{F} f$。
+    设
+    $$\lim_{k\to\infty}\|f_k-f\|_2=0$$
+    则
+    $$\lim_{k\to\infty}\|\mathcal{F}f_k-\mathcal{F}f\|_2=0$$
 \end{theorem}
 \begin{remark}
-    尽管$L^1(\mathbb{R})\cap L^2(\mathbb{R})$是比$\mathcal{S} $更大的空间，但这个定理也有一定的局限性：其一，依$L^2$范数收敛不能保证依半范数收敛，即证得的收敛性会减弱；其二，$L^1(\mathbb{R})\cap L^2(\mathbb{R})$并不是傅里叶变换下的封闭空间，因此我们无法保证傅里叶逆变换的连续性。
+    尽管$L^1(\mathbb{R})\cap L^2(\mathbb{R})$是比$\mathcal{S} $更大的空间，但这个定理有一定的局限性：其一，依$L^2$范数收敛不能保证依半范数收敛，即证得的收敛性会减弱；其二，$L^1(\mathbb{R})\cap L^2(\mathbb{R})$并不是傅里叶变换下的封闭空间，因此我们无法保证傅里叶逆变换的连续性。
 \end{remark}
 \begin{proof}
     由普朗歇尔定理，有

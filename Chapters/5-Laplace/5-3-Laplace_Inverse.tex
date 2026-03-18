@@ -4,21 +4,21 @@
 我们仍然令$\tilde{f}(t)=f(t)\mathrm{e}^{-\sigma t}$，从而将傅里叶反演公式推广到拉普拉斯反演公式：
 \begin{theorem}[拉普拉斯反演公式]
     设$f\in\mathcal{E}\cap PS[0,\infty) $，则
-    \[f(t)=\frac{1}{2\pi \mathrm{i}}\lim_{r\to\infty}\int_{b-ir}^{b +ir}\mathcal{L} f(s)\mathrm{e}^{st}\,ds\]
+    \[f(t)=\frac{1}{2\pi \mathrm{i}}\lim_{r\to\infty}\int_{b-\mathrm{i}r}^{b +\mathrm{i}r}\mathcal{L} f(s)\mathrm{e}^{st}\,ds\]
     其中$b>a$，$a$为$f$的拉普拉斯变换的收敛域下界。
 \end{theorem}
 \begin{remark}
     严格来说，我们只能得到
-    \[\frac{f(t-)+f(t+)}{2}=\frac{1}{2\pi \mathrm{i}}\lim_{r\to\infty}\int_{b-ir}^{b +ir}\mathcal{L} f(s)\mathrm{e}^{st}\,ds\]
+    \[\frac{f(t-)+f(t+)}{2}=\frac{1}{2\pi \mathrm{i}}\lim_{r\to\infty}\int_{b-\mathrm{i}r}^{b +\mathrm{i}r}\mathcal{L} f(s)\mathrm{e}^{st}\,ds\]
     不过，我们仍不关心不连续点处的值，因此后文中将直接使用上面的结论。要求分段光滑是为了保证傅里叶反演公式成立，在\ref{sub:fourier_inversion}中，对应我们给出的第二个版本的傅里叶反演公式（定理A.2.6.）。读者也可参考其他版本的傅里叶反演公式来替换对$f$和$\mathcal{L} f$的要求，从而得到不同版本的拉普拉斯反演公式。
 \end{remark}
 \begin{remark}
-    这里的积分\[\lim_{r\to\infty}\int_{b-ir}^{b +ir}\mathcal{L} f(s)\mathrm{e}^{st}\,ds\]
-    应该理解为沿着复平面上的直线$\text{Re}\ z=b$从$b-\mathrm{i}\infty$到$b+\mathrm{i}\infty$的复线积分。由于全纯函数的路径无关性，我们也可以选择其他路径，甚至可以添加一些路径，再使用留数定理计算拉普拉斯逆变换，见本节后续的讨论。
+    这里的积分\[\lim_{r\to\infty}\int_{b-\mathrm{i}r}^{b +\mathrm{i}r}\mathcal{L} f(s)\mathrm{e}^{st}\,ds\]
+    应该理解为沿着复平面上的直线$\mathrm{Re}\ z=b$从$b-\mathrm{i}\infty$到$b+\mathrm{i}\infty$的复线积分。由于全纯函数的路径无关性，我们也可以选择其他路径，甚至可以添加一些路径，再使用留数定理计算拉普拉斯逆变换，见本节后续的讨论。
 \end{remark}
 \begin{proof}
     \begin{align*}
-        \frac{1}{2\pi \mathrm{i}}\lim_{r\to\infty}\int_{b-ir}^{b +ir}\mathcal{L} f(s)\mathrm{e}^{st}\,ds&=\frac{1}{2\pi \mathrm{i}}\lim_{r\to\infty}\int_{-ir}^{ir}\mathcal{L} f(b +\mathrm{i}\omega)\mathrm{e}^{(b +\mathrm{i}\omega)t}\mathrm{i}\,d\omega\\
+        \frac{1}{2\pi \mathrm{i}}\lim_{r\to\infty}\int_{b-\mathrm{i}r}^{b +\mathrm{i}r}\mathcal{L} f(s)\mathrm{e}^{st}\,ds&=\frac{1}{2\pi \mathrm{i}}\lim_{r\to\infty}\int_{-\mathrm{i}r}^{\mathrm{i}r}\mathcal{L} f(b +\mathrm{i}\omega)\mathrm{e}^{(b +\mathrm{i}\omega)t}\mathrm{i}\,d\omega\\
         &=\frac{\mathrm{e}^{b t}}{2\pi}\lim_{r\to\infty}\int_{-r}^{r}\mathcal{F} \tilde{f}(\omega)\mathrm{e}^{\mathrm{i}\omega t}\,d\omega\\
         &=\mathrm{e}^{b t}\tilde{f}(t)=f(t)
     \end{align*}
@@ -26,13 +26,13 @@
 
 通过这个定理可以看出，拉普拉斯逆变换一定能还原出$f(t)$（在不考虑间断点函数值的意义下），因此拉普拉斯变换是双射。
 
-但是，以上证明已经假定了$F(s)=\mathcal{L} f(s)$是某个函数$f\in\mathcal{E} $的拉普拉斯变换。从另一个角度出发，假设有一个在右半平面$\text{Re}\ s>a$上全纯的函数$F(s)$，就需要考虑它是否是某个函数的拉普拉斯变换，以及如何求出这个函数。为此，我们给出以下定理\cite{distribution}：
+但是，以上证明已经假定了$F(s)=\mathcal{L} f(s)$是某个函数$f\in\mathcal{E} $的拉普拉斯变换。从另一个角度出发，假设有一个在右半平面$\mathrm{Re}\ s>a$上全纯的函数$F(s)$，就需要考虑它是否是某个函数的拉普拉斯变换，以及如何求出这个函数。为此，我们给出以下定理\cite{distribution}：
 \begin{theorem}[*拉普拉斯反演公式]
-    设$F(s)$在$\text{Re}\ s>a$上全纯，且满足：
-    \[|F(s)|\leq C|s|^{-\alpha},\alpha>1,\forall \text{Re}\ s>a\]
+    设$F(s)$在$\mathrm{Re}\ s>a$上全纯，且满足：
+    \[|F(s)|\leq C|s|^{-\alpha},\alpha>1,\forall \mathrm{Re}\ s>a\]
     则$\forall b>a$，函数
-    \[f(t)=\frac{1}{2\pi \mathrm{i}}\lim_{r\to\infty}\int_{b-ir}^{b +ir}F(s)\mathrm{e}^{st}\,ds\]
-    属于$\mathcal{E} $，且$F(s)=\mathcal{L} f(s),\forall \text{Re}\ s>a$。
+    \[f(t)=\frac{1}{2\pi \mathrm{i}}\lim_{r\to\infty}\int_{b-\mathrm{i}r}^{b +\mathrm{i}r}F(s)\mathrm{e}^{st}\,ds\]
+    属于$\mathcal{E} $，且$F(s)=\mathcal{L} f(s),\forall \mathrm{Re}\ s>a$。
 \end{theorem}
 \begin{remark}
     这里的条件$\alpha>1$保证了$F(b+\mathrm{i}\omega)\in L^1(\mathbb{R})$（作为$\omega$的函数），尽管$b=0$时，
@@ -40,10 +40,10 @@
     这是因为$F$是全纯函数，在$\omega=0$处不会出现奇点。换言之，我们给出了$F$“尾部”的估计。事实上，$\alpha>\dfrac{1}{2}$即可保证定理成立，但这样证明会非常复杂\cite{folland}。
 \end{remark}
 \begin{proof}
-    首先，我们证明由积分$\dfrac{1}{2\pi \mathrm{i}}\lim_{r\to\infty}\int_{b-ir}^{b +ir}F(s)\mathrm{e}^{st}\,ds$定义的函数$f(t)$是良定义的。一方面，由于$|F(s)|\leq C|s|^{-\alpha}$，有
-    \[\left|\lim_{r\to\infty}\int_{b -ir}^{b +ir}F(s)\mathrm{e}^{st}\,ds\right|=\left|\int_{-\infty}^{\infty}F(b+\mathrm{i}\omega)\mathrm{e}^{(b+\mathrm{i}\omega)t}\mathrm{i}\,d\omega\right|\leq \mathrm{e}^{b t}\int_{-\infty}^{\infty}|F(b+\mathrm{i}\omega)|\,d\omega<\infty\]
+    首先，我们证明由积分$\dfrac{1}{2\pi \mathrm{i}}\lim_{r\to\infty}\int_{b-\mathrm{i}r}^{b +\mathrm{i}r}F(s)\mathrm{e}^{st}\,ds$定义的函数$f(t)$是良定义的。一方面，由于$|F(s)|\leq C|s|^{-\alpha}$，有
+    \[\left|\lim_{r\to\infty}\int_{b -\mathrm{i}r}^{b +\mathrm{i}r}F(s)\mathrm{e}^{st}\,ds\right|=\left|\int_{-\infty}^{\infty}F(b+\mathrm{i}\omega)\mathrm{e}^{(b+\mathrm{i}\omega)t}\mathrm{i}\,d\omega\right|\leq \mathrm{e}^{b t}\int_{-\infty}^{\infty}|F(b+\mathrm{i}\omega)|\,d\omega<\infty\]
 
-    另一方面，我们验证$$f_b(t)=\frac{1}{2\pi \mathrm{i}}\lim_{r\to\infty}\int_{b-ir}^{b +ir}F(s)\mathrm{e}^{st}\,ds$$与$b$无关。设$b_1,b_2>a$，选择以$b_1\pm ir,b_2\pm ir$为顶点的矩形围道$C_r$，则由于$|F(s)|\leq C|s|^{-\alpha}$，矩形顶边、底边的积分趋于0，而$F(s)$在$\text{Re}\ s>a$上全纯，由柯西积分定理知$\int_{C_r}F(s)\mathrm{e}^{st}\,ds=0$，因此$f_{b_1}(t)=f_{b_2}(t)$。
+    另一方面，我们验证$$f_b(t)=\frac{1}{2\pi \mathrm{i}}\lim_{r\to\infty}\int_{b-\mathrm{i}r}^{b +\mathrm{i}r}F(s)\mathrm{e}^{st}\,ds$$与$b$无关。设$b_1,b_2>a$，选择以$b_1\pm \mathrm{i}r,b_2\pm \mathrm{i}r$为顶点的矩形围道$C_r$，则由于$|F(s)|\leq C|s|^{-\alpha}$，矩形顶边、底边的积分趋于0，而$F(s)$在$\mathrm{Re}\ s>a$上全纯，由柯西积分定理知$\int_{C_r}F(s)\mathrm{e}^{st}\,ds=0$，因此$f_{b_1}(t)=f_{b_2}(t)$。
 
     注意到以上证明并不依赖于$t$的取值，极限过程$\lim_{r\to\infty}$对$t\in\mathbb{R}$是内闭一致收敛的，因此可以由被积函数$F(s)\mathrm{e}^{st}$的连续性推出$f(t)$的连续性。
 
@@ -53,7 +53,7 @@
         \includegraphics[width=0.6\textwidth]{contour2}
         \caption{拉普拉斯逆变换的围道}
     \end{figure}
-    其中$\gamma_1$为$b+ir$到$b -ir$的直线段，$\gamma_2$为以原点为圆心，$b -ir$到$b+ir$的圆弧，半径$R=\sqrt{b^2+r^2}$。由柯西积分定理，有
+    其中$\gamma_1$为$b+\mathrm{i}r$到$b -\mathrm{i}r$的直线段，$\gamma_2$为以原点为圆心，$b -\mathrm{i}r$到$b+\mathrm{i}r$的圆弧，半径$R=\sqrt{b^2+r^2}$。由柯西积分定理，有
     \[\int_{\gamma_1+\gamma_2}F(s)\mathrm{e}^{st}\,ds=0\]
     对$\gamma_2$，有
     \[\left|\int_{\gamma_2}F(s)\mathrm{e}^{st}\,ds\right|\leq \int_{\gamma_2}|F(s)||\mathrm{e}^{st}|\,|ds|\leq C\int_{\gamma_2}|s|^{-\alpha}\mathrm{e}^{b t}\,|ds|\leq C|R|^{-\alpha}\cdot \pi R\to 0,r\to\infty\]
@@ -62,13 +62,13 @@
 
     另一方面，取$b>a$，有
     \begin{align*}
-        |f(t)|=\left|\frac{1}{2\pi \mathrm{i}}\lim_{r\to\infty}\int_{b -ir}^{b +ir}F(s)\mathrm{e}^{st}\,ds\right|\leq \frac{\mathrm{e}^{b t}}{2\pi}\int_{-\infty}^{\infty}|F(b+\mathrm{i}\omega)|\,d\omega=k \mathrm{e}^{b t},k\text{为常数}
+        |f(t)|=\left|\frac{1}{2\pi \mathrm{i}}\lim_{r\to\infty}\int_{b -ir}^{b +ir}F(s)\mathrm{e}^{st}\,ds\right|\leq \frac{\mathrm{e}^{b t}}{2\pi}\int_{-\infty}^{\infty}|F(b+\mathrm{i}\omega)|\,d\omega=k \mathrm{e}^{b t},k\mathrm{为常数}
     \end{align*}
 
     又因为我们已经证明了$f$的连续性，所以$f\in\mathcal{E} $。
 
     最后，我们证明
-    $$F(s)=\mathcal{L} f(s),\forall \text{Re}\ s>a$$
+    $$F(s)=\mathcal{L} f(s),\forall \mathrm{Re}\ s>a$$
     上一步中，$\forall b>a$，我们都能找到常数$k$使得$|f(t)|\leq k \mathrm{e}^{b t}$，因此可以取$b'\in(a,b)$，使得$|f(t)\mathrm{e}^{-bt}|\leq k'\mathrm{e}^{(b'-b)t}$，从而$f(t)\mathrm{e}^{-bt}\in L^1(\mathbb{R})$。根据$f$的定义，有
     \begin{align*}
         f(t)\mathrm{e}^{-b t}=\frac{1}{2\pi}\lim_{r\to\infty}\int_{-r}^{r}F(b+\mathrm{i}\omega)\mathrm{e}^{\mathrm{i}\omega t}\,d\omega
@@ -156,20 +156,20 @@
     令$s=-\mathrm{i}$，有
     \[-C \mathrm{i}+D=\lim_{s\to -i}(s+\mathrm{i})F(s)=\lim_{s\to -i}\frac{(s+\mathrm{i})}{(s+1)^2(s+2)(s^2+1)}=\frac{\mathrm{i}}{5}\]
     解得$C=-\frac{1}{5},D=0$，因此
-    \[F(s)=\frac{1/2}{s+1}+\frac{1}{(s+1)^2}+\frac{1/3}{s+2}+\frac{-\frac{1}{5}s}{s^2+1}\]
+    \[F(s)=\frac{1}{2(s+1)}+\frac{1}{(s+1)^2}+\frac{1}{3(s+2)}-\frac{s}{5(s^2+1)}\]
 \end{example}
 
 进行部分分式展开后，真分式函数就化为若干个分母为一次因式、二次因式的分式函数之和，这样，容易通过指数多项式和三角函数的拉普拉斯变换公式，以及拉普拉斯变换的时移性质计算出拉普拉斯逆变换。下面给出一个例子：
 \begin{example}[部分分式展开法求拉普拉斯逆变换]
     设\[F(s)=\frac{1}{(s+1)^2(s+2)(s^2+1)}\]
     在上例中，我们已经得到：
-    \[F(s)=\frac{1/2}{s+1}+\frac{1}{(s+1)^2}+\frac{1/3}{s+2}+\frac{-\frac{1}{5}s}{s^2+1}\]
+    \[F(s)=\frac{1}{2(s+1)}+\frac{1}{(s+1)^2}+\frac{1}{3(s+2)}-\frac{s}{5(s^2+1)}\]
     因此
     \[f(t)=\mathcal{L}^{-1}F(s)=\frac{1}{2}\mathrm{e}^{-t}+te^{-t}+\frac{1}{3}\mathrm{e}^{-2t}-\frac{1}{5}\cos t\]
 \end{example}
 
 \subsection{使用留数定理计算拉普拉斯逆变换}\label{sub:residue_laplace_inverse}
-本小节介绍使用留数定理计算拉普拉斯逆变换的方法。一般地，我们选择由$b\pm ir,-r\pm ir$组成的矩形围道，其中$b>0$需保证$F(s)$在$\text{Re}\ s>b$上全纯（因此在$r\to\infty$时极点全部位于围道内），见下方左图：
+本小节介绍使用留数定理计算拉普拉斯逆变换的方法。一般地，我们选择由$b\pm \mathrm{i}r,-r\pm \mathrm{i}r$组成的矩形围道，其中$b>0$需保证$F(s)$在$\mathrm{Re}\ s>b$上全纯（因此在$r\to\infty$时极点全部位于围道内），见下方左图：
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{contour}
@@ -180,23 +180,23 @@
     $\Gamma_r$为上方左图所示的矩形围道，$b>0$，我们来论证当$r\to\infty$时，另三条线段上的积分趋于0，从而
     \begin{align*}
         f(t)&=\mathcal{L}^{-1} F(s)\\
-        &=\frac{1}{2\pi \mathrm{i}}\lim_{r\to\infty}\int_{b -ir}^{b +ir}F(s)\mathrm{e}^{st}\,ds\\
+        &=\frac{1}{2\pi \mathrm{i}}\lim_{r\to\infty}\int_{b -\mathrm{i}r}^{b +\mathrm{i}r}F(s)\mathrm{e}^{st}\,ds\\
         &=\frac{1}{2\pi \mathrm{i}}\lim_{r\to\infty}\oint_{\Gamma_r}F(s)\mathrm{e}^{st}\,ds
     \end{align*}
 
     当$t>0$时，对于矩形的上边（下边同理），有
     \begin{align*}
-        \left|\int_{top}F(s)\mathrm{e}^{st}\mathrm{i}\,ds\right|&\leq \sup_{x\leq b}|F(x+ir)\mathrm{e}^{(x+ir)t}|\int_{-\infty}^{b}\mathrm{e}^{xt}\,dx\\
-        &\leq \frac{\mathrm{e}^{bt}}{t}\sup_{x\leq b}|F(x+ir)|
+        \left|\int_{top}F(s)\mathrm{e}^{st}\mathrm{i}\,ds\right|&\leq \sup_{x\leq b}|F(x+\mathrm{i}r)\mathrm{e}^{(x+\mathrm{i}r)t}|\int_{-\infty}^{b}\mathrm{e}^{xt}\,dx\\
+        &\leq \frac{\mathrm{e}^{bt}}{t}\sup_{x\leq b}|F(x+\mathrm{i}r)|
     \end{align*}
-    在前面的引理中，我们已经证明了$|F(x+ir)|\to 0,|r|\to\infty$，因此上边的积分趋于0。对于矩形的左边，$|\mathrm{e}^{st}|=\mathrm{e}^{-rt}$，以指数函数的速度衰减至0，积分当然趋于0。
+    在前面的引理中，我们已经证明了$|F(x+\mathrm{i}r)|\to 0,|r|\to\infty$，因此上边的积分趋于0。对于矩形的左边，$|\mathrm{e}^{st}|=\mathrm{e}^{-rt}$，以指数函数的速度衰减至0，积分当然趋于0。
 
-    当$t<0$时，$\mathrm{e}^{st}$在$\text{Re}\ s$充分大时有较小的模值，因此我们可以使用上面右图中的围道来论证$f(t)=0$。而$t=0$的值则不需要考虑。
+    当$t<0$时，$\mathrm{e}^{st}$在$\mathrm{Re}\ s$充分大时有较小的模值，因此我们可以使用上面右图中的围道来论证$f(t)=0$。而$t=0$的值则不需要考虑。
     
     根据留数定理，有
     \begin{align*}
-        f(t)&=\sum \text{Res}[F(s)\mathrm{e}^{st},s_k]\\
-        &=\text{Res}\left[\frac{2s+5}{(s+1)(s+2)}\mathrm{e}^{st},-1\right]+\text{Res}\left[\frac{2s+5}{(s+1)(s+2)}\mathrm{e}^{st},-2\right]\\
+        f(t)&=\sum \mathrm{Res}[F(s)\mathrm{e}^{st},s_k]\\
+        &=\mathrm{Res}\left[\frac{2s+5}{(s+1)(s+2)}\mathrm{e}^{st},-1\right]+\mathrm{Res}\left[\frac{2s+5}{(s+1)(s+2)}\mathrm{e}^{st},-2\right]\\
         &=\lim_{s\to -1}(s+1)\frac{2s+5}{(s+1)(s+2)}\mathrm{e}^{st}+\lim_{s\to -2}(s+2)\frac{2s+5}{(s+1)(s+2)}\mathrm{e}^{st}\\
         &=3\mathrm{e}^{-t}-\mathrm{e}^{-2t}
     \end{align*}
@@ -214,17 +214,17 @@
 
     在$in(n\in\mathbb{Z}\backslash\{0\})$处，留数为
     \begin{align*}
-        \text{Res}[F(s)\mathrm{e}^{st},in]&=\lim_{s\to in}(s-in)F(s)\mathrm{e}^{st}\\
-        &=\lim_{s\to in}\frac{\mathrm{e}^{st}}{s}\cdot\frac{-\pi(s-in)}{\sinh(\pi s)}\\
-        &=\lim_{s\to in}\frac{\mathrm{e}^{int}}{in}\cdot\frac{-1}{\cosh(\pi in)}\\
-        &=\frac{(-1)^{n+1}\mathrm{e}^{int}}{in}
+        \mathrm{Res}[F(s)\mathrm{e}^{st},\mathrm{i}n]&=\lim_{s\to \mathrm{i}n}(s-\mathrm{i}n)F(s)\mathrm{e}^{st}\\
+        &=\lim_{s\to \mathrm{i}n}\frac{\mathrm{e}^{st}}{s}\cdot\frac{-\pi(s-\mathrm{i}n)}{\sinh(\pi s)}\\
+        &=\lim_{s\to \mathrm{i}n}\frac{\mathrm{e}^{\mathrm{i}nt}}{\mathrm{i}n}\cdot\frac{-1}{\cosh(\pi \mathrm{i}n)}\\
+        &=\frac{(-1)^{n+1}\mathrm{e}^{\mathrm{i}nt}}{\mathrm{i}n}
     \end{align*}
-    其中$\cosh(\pi in)=\cos(n\pi)=(-1)^n$。由留数定理，有
+    其中$\cosh(\pi \mathrm{i}n)=\cos(n\pi)=(-1)^n$。由留数定理，有
     \begin{align*}
         f(t)&=\mathcal{L}^{-1} F(s)\\
         &=\frac{1}{2\pi \mathrm{i}}\lim_{N\to\infty}\oint_{\Gamma_{N+0.5}}F(s)\mathrm{e}^{st}\,ds\\
-        &=\sum_{n\in\mathbb{Z}\backslash\{0\}}\text{Res}[F(s)\mathrm{e}^{st},in]\\
-        &=\sum_{n\in\mathbb{Z}\backslash\{0\}}\frac{(-1)^{n+1}\mathrm{e}^{int}}{in}\\
+        &=\sum_{n\in\mathbb{Z}\backslash\{0\}}\mathrm{Res}[F(s)\mathrm{e}^{st},\mathrm{i}n]\\
+        &=\sum_{n\in\mathbb{Z}\backslash\{0\}}\frac{(-1)^{n+1}\mathrm{e}^{\mathrm{i}nt}}{\mathrm{i}n}\\
         &=2\sum_{n=1}^{\infty}\frac{(-1)^{n+1}}{n}\sin(nt)
     \end{align*}
     它是锯齿波信号$f(t)=-t,t\in(-\pi,\pi)$的周期化延拓的傅里叶级数展开。

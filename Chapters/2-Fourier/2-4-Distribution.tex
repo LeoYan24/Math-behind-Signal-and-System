@@ -157,10 +157,10 @@ $\mathcal{F}\varphi$仍然是测试函数。这个测试函数空间正是\textb
 
 设$f,\varphi\in\mathcal{S} ,T_f\in\mathcal{T} $，则
 \begin{align*}
-    \left\langle\mathcal{F}T_f,\varphi\right\rangle & =\int_{-\infty}^{\infty}\mathcal{F}f(x)\varphi(x)\,dx                                       \\
-                                         & =\int_{-\infty}^{\infty}\varphi(x)\,dx\int_{-\infty}^{\infty}f(y)\mathrm{e}^{-2\pi ixy}\,dy          \\
-                                         & =\int_{-\infty}^{\infty}f(y)\,dy\int_{-\infty}^{\infty}\varphi(x)\mathrm{e}^{-2\pi ixy}\,dx          \\
-                                         & =\int_{-\infty}^{\infty}f(y)\mathcal{F}\varphi(y)\,dy=\left\langle T_f,\mathcal{F}\varphi\right\rangle
+    \left\langle\mathcal{F}T_f,\varphi\right\rangle&=\int_{-\infty}^{\infty}\mathcal{F}f(x)\varphi(x)\,dx\\
+    &=\int_{-\infty}^{\infty}\varphi(x)\,dx\int_{-\infty}^{\infty}f(y)\mathrm{e}^{-2\pi\mathrm{i}xy}\,dy\\
+    & =\int_{-\infty}^{\infty}f(y)\,dy\int_{-\infty}^{\infty}\varphi(x)\mathrm{e}^{-2\pi \mathrm{i}xy}\,dx\\
+    & =\int_{-\infty}^{\infty}f(y)\mathcal{F}\varphi(y)\,dy=\left\langle T_f,\mathcal{F}\varphi\right\rangle
 \end{align*}
 因此我们定义\begin{definition}[分布的傅里叶变换]
     \begin{align*}
@@ -350,14 +350,14 @@ $\mathcal{F}\varphi$仍然是测试函数。这个测试函数空间正是\textb
     \mathcal{F} \mathds{1}=2\pi\mathcal{F} ^{-1}\mathds{1}^- =2\pi\delta^- =2\pi\delta
 }
 \end{example}
-\begin{example}[复指数函数$\mathrm{e}^{iat}$的傅里叶变换]
-作为函数当然不能求$\mathrm{e}^{iat}$的傅里叶变换，我们甚至无法确定它在0处的傅里叶变换：$\int_{-\infty}^{\infty}\mathrm{e}^{iat}\,dt$不存在。
-但它可以视为一个缓增分布，前文中已经提到$\langle \mathrm{e}^{iat},\varphi\rangle$是收敛
+\begin{example}[复指数函数$\mathrm{e}^{\mathrm{i}at}$的傅里叶变换]
+作为函数当然不能求$\mathrm{e}^{\mathrm{i}at}$的傅里叶变换，我们甚至无法确定它在0处的傅里叶变换：$\int_{-\infty}^{\infty}\mathrm{e}^{\mathrm{i}at}\,dt$不存在。
+但它可以视为一个缓增分布，前文中已经提到$\langle \mathrm{e}^{\mathrm{i}at},\varphi\rangle$是收敛
 的。下面应用对偶性求它的傅里叶变换：
 \lr{
-\mathcal{F} [e^{2\pi iat}]=\mathcal{F}^{-1}[e^{2\pi iat}]^-=\delta_{a}^-=\delta_{-a}
+\mathcal{F} [e^{2\pi \mathrm{i}at}]=\mathcal{F}^{-1}[e^{2\pi \mathrm{i}at}]^-=\delta_{a}^-=\delta_{-a}
 }{
-\mathcal{F} [e^{iat}]=2\pi\mathcal{F}^{-1}[e^{iat}]^- =2\pi\delta_{a}^- =2\pi\delta_{-a}
+\mathcal{F} [e^{\mathrm{i}at}]=2\pi\mathcal{F}^{-1}[e^{\mathrm{i}at}]^- =2\pi\delta_{a}^- =2\pi\delta_{-a}
 }
 （请读者自行验证$\delta_{a}^-= \delta_{-a}$）
 \end{example}
@@ -393,9 +393,9 @@ $\mathcal{F}\varphi$仍然是测试函数。这个测试函数空间正是\textb
 有了共轭就可以仿照复数定义分布的实部、虚部以及实分布、纯虚分布：
 \begin{definition}[分布的实部、虚部]
     设$T\in\mathcal{T} $，则
-    \[\text{Re}\ T=\frac{T+\overline{T}}{2}\]
+    \[\mathrm{Re}\ T=\frac{T+\overline{T}}{2}\]
     称为T的\textbf{实部}，
-    \[\text{Im}\ T=\frac{T-\overline{T}}{2}\]
+    \[\mathrm{Im}\ T=\frac{T-\overline{T}}{2}\]
     称为T的\textbf{虚部}。
 \end{definition}
 \begin{definition}[实分布与纯虚分布]
@@ -499,16 +499,16 @@ $$\sigma_a\delta=\delta(ax)=\frac{1}{|a|}\delta(x)$$
 有了分布的平移和伸缩的定义，就可以建立分布的傅里叶变换的平移和尺度变换定理：
 \begin{theorem}[分布的傅里叶变换的平移和尺度变换]
 \begin{align*}
-    &\mathcal{F}(\tau_b T)=\mathcal{F}(\mathrm{e}^{2\pi ibx})T\\
+    &\mathcal{F}(\tau_b T)=\mathcal{F}(\mathrm{e}^{2\pi \mathrm{i}bx})T\\
     &\mathcal{F}(\sigma_a T)=\frac{1}{|a|}\mathcal{F}(\sigma_a T)
 \end{align*}
 \end{theorem}
 \begin{proof}
     对于前者，
         \begin{align*}
-    \left\langle\mathcal{F}(\tau_b T),\varphi\right\rangle =\left\langle \tau_b T,\mathcal{F}\varphi\right\rangle=\left\langle T,\tau_{-b}\mathcal{F}\varphi\right\rangle=\left\langle T,\mathrm{e}^{2\pi ibx}\mathcal{F}\varphi\right\rangle=\left\langle \mathcal{F}(\mathrm{e}^{2\pi ibx}T),\varphi\right\rangle
+    \left\langle\mathcal{F}(\tau_b T),\varphi\right\rangle =\left\langle \tau_b T,\mathcal{F}\varphi\right\rangle=\left\langle T,\tau_{-b}\mathcal{F}\varphi\right\rangle=\left\langle T,\mathrm{e}^{2\pi \mathrm{i}bx}\mathcal{F}\varphi\right\rangle=\left\langle \mathcal{F}(\mathrm{e}^{2\pi\mathrm{i}bx}T),\varphi\right\rangle
 \end{align*}
-即\[\mathcal{F}(\tau_b T)=\mathcal{F}(\mathrm{e}^{2\pi ibx}T)\]
+即\[\mathcal{F}(\tau_b T)=\mathcal{F}(\mathrm{e}^{2\pi\mathrm{i}bx}T)\]
 对于后者，
 \begin{align*}
     \left\langle\mathcal{F}(\sigma_a T),\varphi\right\rangle =\left\langle \sigma_a T,\mathcal{F}\varphi\right\rangle=\left\langle T,\frac{1}{|a|}\sigma_{\frac{1}{a}}\mathcal{F}\varphi\right\rangle=\left\langle T,\frac{1}{|a|}\mathcal{F}\sigma_a \varphi\right\rangle=\left\langle \frac{1}{|a|}\mathcal{F}(\sigma_a T),\varphi\right\rangle
@@ -543,13 +543,13 @@ $$\sigma_a\delta=\delta(ax)=\frac{1}{|a|}\delta(x)$$
 \switch
     \left\langle(\mathcal{F} T)',\varphi\right\rangle&=\left\langle T,-\mathcal{F} (\varphi)'\right\rangle\\
     &=\left\langle T,-\mathrm{i}\omega\mathcal{F} \varphi\right\rangle\\
-    &=\left\langle -\mathcal{F} (itT),\varphi\right\rangle
+    &=\left\langle -\mathcal{F} (\mathrm{i}tT),\varphi\right\rangle
 \end{lralign}
 因此
 \begin{lralign}
     (\mathcal{F} T)'=-\mathcal{F} (2\pi \mathrm{i} tT)
 \switch
-    (\mathcal{F} T)'=-\mathcal{F} (itT)
+    (\mathcal{F} T)'=-\mathcal{F} (\mathrm{i}tT)
 \end{lralign}
 也即
 \begin{lralign}
@@ -566,7 +566,7 @@ $$\sigma_a\delta=\delta(ax)=\frac{1}{|a|}\delta(x)$$
     &\mathcal{F} (tT)=\frac{\mathrm{i}}{2\pi}(\mathcal{F} T)'
 \switch
     &\mathcal{F} (T')=\mathrm{i}\omega\mathcal{F}T \\
-    &(\mathcal{F} T)'=-\mathcal{F} (itT) \\
+    &(\mathcal{F} T)'=-\mathcal{F} (\mathrm{i}tT) \\
     &\mathcal{F} (tT)=\mathrm{i}(\mathcal{F} T)'
     \end{lralign}
     
@@ -737,9 +737,10 @@ $$\sigma_a\delta=\delta(ax)=\frac{1}{|a|}\delta(x)$$
 \end{align*}
 因此\[f*\delta_a=\tau_a f\]
 \end{example}
-在\ref{sub:fourier_of_signal}中，我们已经从形式上得到了$sgn,u,1/t$，的傅里叶变换，现在有了分布的工具，就可以借助分布的傅里叶变换的对偶性说明之前的结论是严谨的。
+在\ref{sub:fourier_of_signal}中，我们已经从形式上得到了$\mathrm{sgn},u,1/t$，的傅里叶变换，现在有了分布的工具，就可以借助分布的傅里叶变换的对偶性说明之前的结论是严谨的。
 
-最后，我们指出，分布的傅里叶变换具有连续性，即：
+\subsection{分布的傅里叶变换的连续性}\label{sub:continuity_of_distribution}
+
 \begin{theorem}[分布的傅里叶变换的连续性]
     设$\{T_n\}\subset\mathcal{T} $，$T\in\mathcal{T} $，如果$T_n\to T$，则$\mathcal{F} T_n\to\mathcal{F} T$.
 \end{theorem}
@@ -751,4 +752,6 @@ $$\sigma_a\delta=\delta(ax)=\frac{1}{|a|}\delta(x)$$
 \end{align*}
 \end{proof}
 
-然而，要证明施瓦兹函数的傅里叶变换的连续性，要困难得多，我们将在\ref{sub:fourier_continuous}中给出其证明。
+分布的傅里叶变换的连续性是在弱收敛的意义下定义的，也就是说，作为一个分布，我们总是能够交换极限或求和与傅里叶变换的顺序（我们将会多次使用到这一结论），但是对于正则分布列$f_n\to f$，尽管$T_{f_n}\to T_f$，也不能认为$\mathcal{F}f_n$作为一个函数列收敛于$\mathcal{F}f$。在\ref{sec:Sampling_Interpolation}中我们将看到，通过分布的傅里叶变换的连续性，$\shah$分布能表示成傅里叶级数的形式，然而这个展开式是几乎处处不收敛的函数项级数。
+
+事实上，施瓦兹函数的傅里叶变换也是具有连续性的。然而，证明它要困难得多，我们将证明放在\ref{sub:fourier_continuous}中。

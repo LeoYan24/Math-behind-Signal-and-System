@@ -114,7 +114,7 @@ f(t)&=\sum_{n=-\infty}^{\infty}c_n \mathrm{e}^{\mathrm{i}\omega t}\\
 \begin{theorem}[傅里叶变换的运算性质]
     以下默认$f\in L^1(\mathbb{R})$。
     \begin{itemize}   
-    \item \textbf{对偶性}：记$f$的反转信号 (the reversed siganl)为$f^-$，即$f^-(t)=f(-t)$，则
+    \item 对偶性：记$f$的反转信号 (the reversed siganl)为$f^-$，即$f^-(t)=f(-t)$，则
           \lr{(\mathcal{F}f)^-=\mathcal{F} (f^-)=\mathcal{F} ^{-1}f
           }{
             (\mathcal{F}f)^-=\mathcal{F} (f^-)=2\pi\mathcal{F} ^{-1}f
@@ -132,10 +132,10 @@ f(t)&=\sum_{n=-\infty}^{\infty}c_n \mathrm{e}^{\mathrm{i}\omega t}\\
           \begin{remark}
             时域反转，频域也反转，因此我们可以不区分$(\mathcal{F}f)^-=\mathcal{F} (f^-)$，将它们全部写作$\mathcal{F} f^-$。
           \end{remark}
-    \item \textbf{对称性}：$\mathcal{F} f$与f奇偶性相同；f是实函数时，如果f还是偶函数，则$\mathcal{F} f$也是实函数，
+    \item 对称性：$\mathcal{F} f$与f奇偶性相同；f是实函数时，如果f还是偶函数，则$\mathcal{F} f$也是实函数，
           如果f还是奇函数，则$\mathcal{F} $是纯虚函数
-    \item \textbf{线性性}：$\forall f,g\in L^1(\mathbb{R}),\mathcal{F} (af+bg)=a\mathcal{F} f+b\mathcal{F} g$，即$\mathcal{F} $是线性算子
-    \item \textbf{平移定理}：\lr{
+    \item 线性性：$\forall f,g\in L^1(\mathbb{R}),\mathcal{F} (af+bg)=a\mathcal{F} f+b\mathcal{F} g$，即$\mathcal{F} $是线性算子
+    \item 平移定理：\lr{
           &\mathcal{F} [f(t-b)](\xi)=\mathrm{e}^{-2\pi \mathrm{i} \xi b}\mathcal{F} f(\xi)\\
           &\mathcal{F} \left[f(t)\mathrm{e}^{2\pi \mathrm{i} \xi t}\right](\xi)=\mathcal{F} f(\xi-b)
           }{
@@ -145,7 +145,7 @@ f(t)&=\sum_{n=-\infty}^{\infty}c_n \mathrm{e}^{\mathrm{i}\omega t}\\
           \begin{remark}
           可见信号时移不改变$|\mathcal{F} f|$，而仅改变$\mathcal{F} f$的相位。
           \end{remark}
-    \item \textbf{伸缩定理}：\lr{
+    \item 伸缩定理：\lr{
               &\mathcal{F} [f(at)](\xi)=\frac{1}{|a|}\mathcal{F} f\left(\frac{\xi}{a}\right)\\
               &\mathcal{F} f(a\xi)=\frac{1}{|a|}\mathcal{F} \left[f\left(\frac{t}{a}\right)\right]
           }{
@@ -157,7 +157,7 @@ f(t)&=\sum_{n=-\infty}^{\infty}c_n \mathrm{e}^{\mathrm{i}\omega t}\\
           \[2\pi\xi=\omega,\textcolor{blue}{\mathcal{F}}(2\pi\xi)=\textcolor{red}{\mathcal{F}}(\omega)\]
           $a>1$，时域收缩，频域舒张、变矮；$0<a<1$，时域舒张，频域收缩、变高；$a<0$，时域和频域都额外做一次反转。
           \end{remark}
-    \item \textbf{微分性质}：若$f$可导，且$f'\in L^1(\mathbb{R})$，则有\lr{
+    \item 微分性质：若$f$可导，且$f'\in L^1(\mathbb{R})$，则有\lr{
               \mathcal{F} (f')(\xi)=2\pi \mathrm{i}\xi\mathcal{F} f(\xi)
           }{
               \mathcal{F} (f')(\omega)=\mathrm{i}\omega\mathcal{F} f(\omega)
@@ -297,7 +297,7 @@ $\evalat{\mathrm{e}^{-2\pi \mathrm{i}\xi t}f(t)}{-\infty}{\infty},\evalat{\mathr
 取$g=f$即证。注意我们并不要求$g$是实信号，$\overline{\mathcal{F} g}\neq\mathcal{F} ^{-1}g$.
 \end{proof}
 
-这说明，傅里叶变换是$L^1(\mathbb{R})\cap L^2(\mathbb{R})$上保持$L^2(\mathbb{R})$内积的变换。
+这说明，傅里叶变换是$L^1(\mathbb{R})\cap L^2(\mathbb{R})$上\textbf{保持$L^2(\mathbb{R})$内积的变换}。
 
 \subsection{常用信号的傅里叶变换}\label{sub:fourier_of_signal}
 

@@ -13,7 +13,7 @@
 
 在不涉及收敛性的问题时，可以将$\omega$推广为复数$s=\sigma+\mathrm{i}\omega$，根据含参变量积分的求导法则，这样的积分变换可以对$s$求导，从而是全纯函数。这个积分变换就是\textbf{双边拉普拉斯变换}：
 \begin{definition}[双边拉普拉斯变换]
-    设函数$f$局部可积，$\exists a,b\in\mathbb{R},a<b$（我们允许$a=-\infty$和$b=\infty$），使得$f(t)\mathrm{e}^{-at}$和$f(t)\mathrm{e}^{-bt}$均绝对可积，则对$\text{Re}\ s\in[a,b]$，$f$的双边拉普拉斯变换定义为
+    设函数$f$局部可积，$\exists a,b\in\mathbb{R},a<b$（我们允许$a=-\infty$和$b=\infty$），使得$f(t)\mathrm{e}^{-at}$和$f(t)\mathrm{e}^{-bt}$均绝对可积，则对$\mathrm{Re}\ s\in[a,b]$，$f$的双边拉普拉斯变换定义为
     \[\mathcal{L}f(s)=\int_{-\infty}^{\infty}f(t)\mathrm{e}^{-st}\,dt\]
 \end{definition}
 “局部可积”即$f$在任意有限区间上可积，这个条件是为了保证在添加适当的收敛因子$\mathrm{e}^{-st}$后，拉普拉斯积分收敛，从而拉普拉斯变换有定义。
@@ -53,11 +53,11 @@
     \end{align*}
 尽管积分只在$\sigma>0$时收敛，但$\mathcal{L} f(s)$可以延拓为$\mathbb{C}\backslash\{0\}$上的全纯函数。
 \begin{remark}
-    其实，这个公式对实部大于$-1$的$\nu$都成立。尽管$-1<\text{Re}\ \nu<0$时，$f(t)=t^\nu$\\
+    其实，这个公式对实部大于$-1$的$\nu$都成立。尽管$-1<\mathrm{Re}\ \nu<0$时，$f(t)=t^\nu$\\
     在$t=0$处无界，但由于
 \[\left|\int_{0}^{1}t^{\nu}\mathrm{e}^{-st}\,dt\right|\leq \int_0^1 t^\nu\,dt=\frac{1}{\nu+1},\sigma>0\]
 \[\left|\int_{1}^{\infty}t^{\nu}\mathrm{e}^{-st}\,dt\right|\leq \int_1^\infty \mathrm{e}^{-\sigma t}\,dt=\frac{\mathrm{e}^{-\sigma}}{\sigma},\sigma>0\]
-其拉普拉斯变换是存在的。因此，我们可以认为$t^\nu\in\mathcal{E},\text{Re}\ \nu>-1$.
+其拉普拉斯变换是存在的。因此，我们可以认为$t^\nu\in\mathcal{E},\mathrm{Re}\ \nu>-1$.
 \end{remark}
 \end{example}
 
@@ -65,8 +65,8 @@
 \begin{proposition}[$\mathcal{E} $中的卷积]
     设$f,g\in\mathcal{E} $，则它们的卷积为
     \[(f*g)(t)=\begin{cases}
-    0                   & \text{if } t<0 \\
-    \int_0^t f(x)g(t-x)\,dx & \text{if } t\geq 0
+    0                   & \mathrm{if } t<0 \\
+    \int_0^t f(x)g(t-x)\,dx & \mathrm{if } t\geq 0
     \end{cases}\]
 \end{proposition}
 这是因为$x\geq 0,t-x\geq 0$时，$f(x),g(t-x)$才不恒为0，这相当于积分区间为$[0,t]$。
@@ -169,7 +169,7 @@
 \subsection{常用函数的拉普拉斯变换}\label{sub:ordinary_laplace}
 
 \begin{example}[指数多项式]
-    设$f(t)=t^\nu \mathrm{e}^{a t}u(t),\text{Re}\ \nu>-1$，利用拉普拉斯变换的频移性质，有
+    设$f(t)=t^\nu \mathrm{e}^{a t}u(t),\mathrm{Re}\ \nu>-1$，利用拉普拉斯变换的频移性质，有
     \begin{align*}
         \mathcal{L} f(s)&=\mathcal{L}\left[t^\nu \mathrm{e}^{a t}u(t)\right](s)\\
         &=\mathcal{L} \left[t^\nu u(t)\right](s-a)\\
@@ -234,10 +234,10 @@
 \end{example}
 
 \begin{example}[正弦积分函数]
-    $$\frac{\sin(\omega_0 t)}{t}\leq Ce^{a t},a>0\implies \text{Si}(\omega_0 t)\leq \frac{C}{a}\mathrm{e}^{a t}\implies \text{Si}(\omega_0 t)\in\mathcal{E}$$
+    $$\frac{\sin(\omega_0 t)}{t}\leq Ce^{a t},a>0\implies \mathrm{Si}(\omega_0 t)\leq \frac{C}{a}\mathrm{e}^{a t}\implies \mathrm{Si}(\omega_0 t)\in\mathcal{E}$$
     利用正弦函数的拉普拉斯变换和拉普拉斯变换的时域积分性质，有
     \begin{align*}
-        \mathcal{L} [\text{Si}(\omega_0 t)](s)&=\mathcal{L} \left[\int_0^{\omega_0 t} \frac{\sin(x)}{x}\,dx\right](s)\\
+        \mathcal{L} [\mathrm{Si}(\omega_0 t)](s)&=\mathcal{L} \left[\int_0^{\omega_0 t} \frac{\sin(x)}{x}\,dx\right](s)\\
         &=\mathcal{L} \left[\int_0^{t} \frac{\sin(\omega_0 x)}{x}\,dx\right](s)\\
         &=\frac{1}{s}\mathcal{L} \left[\frac{\sin(\omega_0 t)}{t}\right](s)\\
         &=\frac{1}{s}\arctan\left(\frac{\omega_0}{s}\right),\sigma>0
@@ -248,16 +248,16 @@
 我们知道，多项式的拉普拉斯变换都可以通过$$\mathcal{L} [t^n](s)=\dfrac{\Gamma(n+1)}{s^{n+1}}$$来计算，那么对于一些可以展开为幂级数的函数，不难想到逐项求拉普拉斯变换，下面讨论这种操作的适用范围。在此之前，我们先介绍一个引理：
 \begin{lemma}
     设$f\in\mathcal{E} ,|f(t)|\leq Ce^{at}$，则\begin{itemize}
-        \item $\forall x>a,\mathcal{L} f(x+iy)\to 0,|y|\to\infty$
-        \item $\forall y,\mathcal{L} f(x+iy)\to 0,x\to\infty$
+        \item $\forall x>a,\mathcal{L} f(x+\mathrm{i}y)\to 0,|y|\to\infty$
+        \item $\forall y,\mathcal{L} f(x+\mathrm{i}y)\to 0,x\to\infty$
     \end{itemize}
 \end{lemma}
 \begin{proof}
     1.令$g(t)=f(t)\mathrm{e}^{-x t}$，则$|g(t)|\leq Ce^{-(x-a)t}$，因此$g\in L^1(\mathbb{R} )$，根据Riemann-Lebesgue引理，有
-    \[\mathcal{L} f(x+iy)=\mathcal{F} g(y)\to 0,|y|\to\infty\]
-    2.利用海涅归并原理，任取实部趋于无穷的序列$\{z_n\}$，满足$\mathcal{L} f(z_n)$存在（这要求$\text{Re}\ z>a$），我们要证明序列$\mathcal{L} f(z_n)\to 0$。由控制收敛定理，有
+    \[\mathcal{L} f(x+\mathrm{i}y)=\mathcal{F} g(y)\to 0,|y|\to\infty\]
+    2.利用海涅归并原理，任取实部趋于无穷的序列$\{z_n\}$，满足$\mathcal{L} f(z_n)$存在（这要求$\mathrm{Re}\ z>a$），我们要证明序列$\mathcal{L} f(z_n)\to 0$。由控制收敛定理，有
     \begin{align*}
-        &\int_{0}^{\infty}|f(t)\mathrm{e}^{-z_n t}|\,dt\leq \int_0^{\infty}Ce^{at}\mathrm{e}^{-Re(z_n) t}\,dt=C\int_0^{\infty}\mathrm{e}^{-(Re(z_n)-a)t}\,dt=\frac{C}{\text{Re}\ z_n-a}<\infty\\
+        &\int_{0}^{\infty}|f(t)\mathrm{e}^{-z_n t}|\,dt\leq \int_0^{\infty}Ce^{at}\mathrm{e}^{-Re(z_n) t}\,dt=C\int_0^{\infty}\mathrm{e}^{-(Re(z_n)-a)t}\,dt=\frac{C}{\mathrm{Re}\ z_n-a}<\infty\\
         &\lim_{n\to\infty}\mathcal{L} f(z_n)=\lim_{n\to\infty}\int_0^{\infty}f(t)\mathrm{e}^{-z_n t}\,dt=\int_0^{\infty}\lim_{n\to\infty}f(t)\mathrm{e}^{-z_n t}\,dt=0
     \end{align*}
 \end{proof}
@@ -277,7 +277,7 @@
         &|a_n \Gamma(n+1)\omega_0^{-n}|\to 0, n\to\infty\\
         \implies &|a_n|\leq C\frac{\omega_0^{n}}{\Gamma(n+1)}\\
         \implies &|f(t)|\leq \sum_{n=0}^{\infty}|a_n|t^n\leq C\sum_{n=0}^{\infty}\frac{(\omega_0 t)^{n}}{\Gamma(n+1)}=Ce^{\omega_0 t}\\
-        \implies &\forall s,\text{Re}\ s=\omega_0+\phi>\omega_0,|f(t)\mathrm{e}^{-s t}|\leq Ce^{-\phi t}
+        \implies &\forall s,\mathrm{Re}\ s=\omega_0+\phi>\omega_0,|f(t)\mathrm{e}^{-s t}|\leq Ce^{-\phi t}
     \end{align*}
     控制收敛定理的条件成立，换序即证。
 \end{proof}

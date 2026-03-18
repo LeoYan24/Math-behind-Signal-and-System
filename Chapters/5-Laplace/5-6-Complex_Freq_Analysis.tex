@@ -19,7 +19,7 @@
     \end{figure}
 \end{example}
 
-根据\ref{sub:stability_of_system}中提出的系统的稳定性条件，因果的线性时不变系统是稳定的，当且仅当其系统函数的收敛域包含虚轴，此时系统函数的所有极点均位于左半平面$\text{Re}\ s<0$，\textbf{系统的频率响应特性即系统函数在虚轴上的限制}。
+根据\ref{sub:stability_of_system}中提出的系统的稳定性条件，因果的线性时不变系统是稳定的，当且仅当其系统函数的收敛域包含虚轴，此时系统函数的所有极点均位于左半平面$\mathrm{Re}\ s<0$，\textbf{系统的频率响应特性即系统函数在虚轴上的限制}。
 
 此时，如果零极点图较为简单，则可以由零极点图判断系统的滤波特性，即判断系统函数在虚轴上不同位置的幅值大小。
 
@@ -51,10 +51,10 @@
     \end{figure}
 
     系统函数的分母在虚轴左侧有一对共轭复根，这意味着系统函数形如
-    \[H(s)=\frac{K}{(s-p)(s-\bar{p})}=\frac{K}{s^2-2\text{Re}(p)s+|p|^2}\]
+    \[H(s)=\frac{K}{(s-p)(s-\bar{p})}=\frac{K}{s^2-2\mathrm{Re}(p)s+|p|^2}\]
     考虑它在虚轴上的限制的幅值：
-    \[|H(\mathrm{i}\omega)|=\frac{K}{\sqrt{(\omega^2-2\text{Re}(p)\omega+|p|^2)}}\]
-    由于$\text{Re}(p)<0$，因此容易求得幅频特性在$\omega=\pm \text{Im}(p)$处取得极大值，这表明系统对该频率附近的信号有增强作用。因此，该系统具有带通滤波特性。
+    \[|H(\mathrm{i}\omega)|=\frac{K}{\sqrt{(\omega^2-2\mathrm{Re}(p)\omega+|p|^2)}}\]
+    由于$\mathrm{Re}(p)<0$，因此容易求得幅频特性在$\omega=\pm \mathrm{Im}(p)$处取得极大值，这表明系统对该频率附近的信号有增强作用。因此，该系统具有带通滤波特性。
     
     可以定性地画出其幅频特性曲线，如上图(b)所示。
 \end{example}
@@ -316,8 +316,8 @@
 \end{theorem}
 
 下面来解释为什么行列式展开具有几何意义。首先，根据行列式的公式：
-\[\det S=\sum_{\sigma\in S_n}\text{sgn}(\sigma)\prod_{i=1}^{n}s_{i,\sigma(i)}\]
-其中$S_n$为所有$n$个元素的排列组成的集合，$\text{sgn}(\sigma)$为排列$\sigma$的符号。对于$S=I-A$，对角元为$s_{ii}=1-a_{ii}$，非对角元为$s_{ij}=-a_{ij}$。
+\[\det S=\sum_{\sigma\in S_n}\mathrm{sgn}(\sigma)\prod_{i=1}^{n}s_{i,\sigma(i)}\]
+其中$S_n$为所有$n$个元素的排列组成的集合，$\mathrm{sgn}(\sigma)$为排列$\sigma$的符号。对于$S=I-A$，对角元为$s_{ii}=1-a_{ii}$，非对角元为$s_{ij}=-a_{ij}$。
 
 我们知道，每个置换都可以分解为不相交循环的乘积，例如，$$\sigma(1)=3,\sigma(3)=4,\sigma(4)=1,\sigma(2)=5,\sigma(5)=2$$
 可以表示为
@@ -326,10 +326,10 @@ $$\sigma=(1\ 3\ 4)(2\ 5)$$
 $$M_1\to M_3\to M_4\to M_1,M_2\to M_5\to M_2$$
 因此，行列式的每一项$\prod_{i=1}^{n}s_{i,\sigma(i)}$都可以看作是由若干个不接触环路增益的乘积。如果环路中出现不动点$\sigma(\mathrm{i})=\mathrm{i}$，则对应的$s_{ii}=1-a_{ii}$中的1，表示该节点不参与任何环路；如果考虑自环，则对应$-a_{ii}$。
 
-其次，考虑正负号的问题。对于k-循环，它对$\text{sgn}(\sigma)$的贡献为$(-1)^{k-1}$，而每个增益对应一个$-a_{ij}$，因此k-循环对行列式的贡献为$(-1)^{k-1}(-1)^k=-1$。因此，$l$个互不接触的环路增益之积的符号应为$(-1)^l$。
+其次，考虑正负号的问题。对于k-循环，它对$\mathrm{sgn}(\sigma)$的贡献为$(-1)^{k-1}$，而每个增益对应一个$-a_{ij}$，因此k-循环对行列式的贡献为$(-1)^{k-1}(-1)^k=-1$。因此，$l$个互不接触的环路增益之积的符号应为$(-1)^l$。
 \begin{example}
     考虑具有六个中间节点的信号流图，我们来计算$\sigma=(1)(2)(3\ 4\ 5\ 6)$对应的行列式项：
-    \[\text{sgn}(\sigma)\prod_{i=1}^{6}s_{i,\sigma(i)}=s_{1,1}s_{2,2}s_{3,4}s_{4,5}s_{5,6}s_{6,3}=(1-a_{11})(1-a_{22})a_{34}a_{45}a_{56}a_{63}\]
+    \[\mathrm{sgn}(\sigma)\prod_{i=1}^{6}s_{i,\sigma(i)}=s_{1,1}s_{2,2}s_{3,4}s_{4,5}s_{5,6}s_{6,3}=(1-a_{11})(1-a_{22})a_{34}a_{45}a_{56}a_{63}\]
     将因式$(1-a_{11})(1-a_{22})$展开，得到
     \[a_{34}a_{45}a_{56}a_{63}-a_{11}\cdot a_{34}a_{45}a_{56}a_{63}-a_{22}\cdot a_{34}a_{45}a_{56}a_{63}+a_{11}\cdot a_{22}\cdot a_{34}a_{45}a_{56}a_{63}\]
     记环路$L:M_3\to M_4\to M_5\to M_6\to M_3$，这四项分别对应以下四种情况：\begin{itemize}
@@ -519,7 +519,7 @@ $$M_1\to M_3\to M_4\to M_1,M_2\to M_5\to M_2$$
 根据\ref{sub:stability_of_system}，对于因果且稳定的连续线性时不变系统，系统函数$H(s)$的所有极点均位于复平面的左半平面。如果我们还希望系统具有最小的相位延迟特性，从而具有最小的时延特性，则需要系统函数$H(s)$的所有零点也位于复平面的左半平面，这样的系统称为\textbf{最小相位系统}(minimum-phase system)。
 
 \begin{definition}[最小相位系统]
-    设因果且稳定的连续线性时不变系统的系统函数为$H(s)$，记$H(s)$的零点集为$\{z_k\}$，如果$\forall k,\text{Re}(z_k)<0$，则称该系统为\textbf{最小相位系统}。
+    设因果且稳定的连续线性时不变系统的系统函数为$H(s)$，记$H(s)$的零点集为$\{z_k\}$，如果$\forall k,\mathrm{Re}(z_k)<0$，则称该系统为\textbf{最小相位系统}。
 \end{definition}
 
 为了说明为什么这样的系统具有最小的延时特性，我们首先考虑一个例子：
@@ -583,13 +583,13 @@ $$M_1\to M_3\to M_4\to M_1,M_2\to M_5\to M_2$$
         =&2\arctan\left(\frac{\omega-\omega_k}{\sigma_k}\right)-\pi
     \end{align*}
     因此\begin{align*}
-        \varphi_{A,\text{unwrapped}}(\omega)&=2\sum_{k=1}^m \arctan\left(\frac{\omega-\omega_k}{\sigma_k}\right)-m\pi
+        \varphi_{A,\mathrm{unwrapped}}(\omega)&=2\sum_{k=1}^m \arctan\left(\frac{\omega-\omega_k}{\sigma_k}\right)-m\pi
     \end{align*}
 
     计算全通系统的相时延和群时延：
     \begin{align*}
-        \tau_{A,p}(\omega)&=-\frac{\varphi_{A,\text{unwrapped}}(\omega)}{\omega}=\frac{1}{\omega}\sum_{k=1}^m \left[2\arctan\left(\frac{\omega-\omega_k}{\sigma_k}\right)-\pi\right]<0\\
-        \tau_{A,g}(\omega)&=-\frac{d\varphi_{A,\text{unwrapped}}(\omega)}{d\omega}=-2\sum_{k=1}^m \frac{\sigma_k}{\sigma_k^2+(\omega-\omega_k)^2}<0
+        \tau_{A,p}(\omega)&=-\frac{\varphi_{A,\mathrm{unwrapped}}(\omega)}{\omega}=\frac{1}{\omega}\sum_{k=1}^m \left[2\arctan\left(\frac{\omega-\omega_k}{\sigma_k}\right)-\pi\right]<0\\
+        \tau_{A,g}(\omega)&=-\frac{d\varphi_{A,\mathrm{unwrapped}}(\omega)}{d\omega}=-2\sum_{k=1}^m \frac{\sigma_k}{\sigma_k^2+(\omega-\omega_k)^2}<0
     \end{align*}
     也就是说，全通系统的相时延和群时延均为负值。因此，级联系统的相时延和群时延均小于原系统。
 \end{proof}
@@ -608,10 +608,10 @@ $$M_1\to M_3\to M_4\to M_1,M_2\to M_5\to M_2$$
     设因果且稳定的连续线性时不变系统的系统函数及单位脉冲响应为
     \[H(s)=\frac{s+1}{s+2},h(t)=\delta(t)-\mathrm{e}^{-2t}u(t)\]
     则其逆系统的系统函数及单位脉冲响应为
-    \[H^{-1}(s)=\frac{s+2}{s+1},h_{\text{inv}}(t)=\delta(t)+\mathrm{e}^{-t}u(t)\]
+    \[H^{-1}(s)=\frac{s+2}{s+1},h_{\mathrm{inv}}(t)=\delta(t)+\mathrm{e}^{-t}u(t)\]
     该逆系统也是因果且稳定的连续线性时不变系统。将两个系统级联，其单位脉冲响应为
 \begin{align*}
-    h_{eq}(t)&=h(t)*h_{\text{inv}}(t)\\
+    h_{eq}(t)&=h(t)*h_{\mathrm{inv}}(t)\\
     &=\delta(t)-\mathrm{e}^{-2t}u(t)+\mathrm{e}^{-t}u(t)-(\mathrm{e}^{-2t}u(t))*(\mathrm{e}^{-t}u(t))\\
     &=\delta(t)-\mathrm{e}^{-2t}u(t)+\mathrm{e}^{-t}u(t)-u(t)\int_0^t \mathrm{e}^{-2\tau}\mathrm{e}^{-(t-\tau)}d\tau\\
     &=\delta(t)
@@ -623,14 +623,14 @@ $$M_1\to M_3\to M_4\to M_1,M_2\to M_5\to M_2$$
 为了明白这一点，我们首先考察上例中的情况。这个例子中，已经算出原系统的单位脉冲响应，它们都是因果信号，因此系统也是因果的。考虑它们的相频特性：
 \begin{align*}
     \varphi(\omega)&=\arg(H(\mathrm{i}\omega))=\arctan(\omega)-\arctan\left(\frac{\omega}{2}\right)\\
-    \varphi_{\text{inv}}(\omega)&=\arg(H^{-1}(\mathrm{i}\omega))=\arctan\left(\frac{\omega}{2}\right)-\arctan(\omega)
+    \varphi_{\mathrm{inv}}(\omega)&=\arg(H^{-1}(\mathrm{i}\omega))=\arctan\left(\frac{\omega}{2}\right)-\arctan(\omega)
 \end{align*}
 因此，相时延和群时延分别为
 \begin{align*}
     \tau_p(\omega)&=-\frac{\varphi(\omega)}{\omega}=\frac{-\arctan(\omega)+\arctan\left(\frac{\omega}{2}\right)}{\omega}<0\\
-    \tau_{p,\text{inv}}(\omega)&=-\frac{\varphi_{\text{inv}}(\omega)}{\omega}=\frac{-\arctan\left(\frac{\omega}{2}\right)+\arctan(\omega)}{\omega}>0\\
+    \tau_{p,\mathrm{inv}}(\omega)&=-\frac{\varphi_{\mathrm{inv}}(\omega)}{\omega}=\frac{-\arctan\left(\frac{\omega}{2}\right)+\arctan(\omega)}{\omega}>0\\
     \tau_g(\omega)&=-\frac{d\varphi(\omega)}{d\omega}=-\frac{1}{1+\omega^2}+\frac{2}{4+\omega^2}<0\\
-    \tau_{g,\text{inv}}(\omega)&=-\frac{d\varphi_{\text{inv}}(\omega)}{d\omega}=-\frac{d(-\varphi(\omega))}{d\omega}=\frac{1}{1+\omega^2}-\frac{2}{4+\omega^2}>0
+    \tau_{g,\mathrm{inv}}(\omega)&=-\frac{d\varphi_{\mathrm{inv}}(\omega)}{d\omega}=-\frac{d(-\varphi(\omega))}{d\omega}=\frac{1}{1+\omega^2}-\frac{2}{4+\omega^2}>0
 \end{align*}
 
 那么，为什么负的延时不会使得系统违反因果性呢？实际上，这是因为单频正弦信号“提前出现”并不破坏因果性，因为当我们考虑系统的激励为正弦信号时，实际上假定这是一个\textbf{稳态}信号，即该正弦信号从$t=-\infty$时刻就已经存在了，我们观察到的相位“提前”，\textbf{实际上是相位延迟}，而级联所得的恒等变换系统总延迟为0，实际上是两个系统的相位延迟相互抵消了。因此，并不存在违反因果性的情况。

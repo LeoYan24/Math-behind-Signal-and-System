@@ -37,7 +37,7 @@
 以上结论的证明略去，它们只是多元微分学的小练习。
 \begin{remark}*
     对于了解微分形式的语言的读者，可以更好地理解$z,\overline{z}$作为坐标的意义以及形式导数的意义。定义1-形式\cite{shijihuai}
-    $$dz=dx+idy,d\overline{z}=dx-idy$$
+    $$dz=dx+\mathrm{i}dy,d\overline{z}=dx-\mathrm{i}dy$$
     则$dz\wedge d\overline{z}=-2\mathrm{i} dx\wedge dy$。定义算子
     $$\partial f=\frac{\partial f}{\partial z}dz,\overline{\partial} f=\frac{\partial f}{\partial \overline{z}}d\overline{z}$$
     作用于1-形式时，有
@@ -50,7 +50,7 @@
         \begin{cases}
         \frac{\partial u}{\partial x}=\frac{\partial v}{\partial y}\\
         \frac{\partial v}{\partial x}=-\frac{\partial u}{\partial y}
-        \end{cases},\text{或}\frac{\partial f}{\partial y}= \mathrm{i}\frac{\partial f}{\partial x}
+        \end{cases},\mathrm{或}\frac{\partial f}{\partial y}= \mathrm{i}\frac{\partial f}{\partial x}
     \end{align*}
 \end{definition}
 \begin{definition}[整函数]
@@ -58,7 +58,7 @@
 \end{definition}
 
 全纯等价于极限\[\lim_{\zeta\to z}\frac{f(\zeta)-f(z)}{\zeta-z}\]
-存在，即全纯等价于复可导性，并且由此定义的导数$f'(z)=\frac{\partial f}{\partial z}$；全纯函数还是无限阶可导的，其各阶导数也是全纯函数，并且全纯性等价于解析性，即其泰勒级数在收敛域内一定收敛于这个函数本身：
+存在，即全纯等价于复可导性，并且由此定义的导数$f'(z)=\dfrac{\partial f}{\partial z}$；全纯函数还是无限阶可导的，其各阶导数也是全纯函数，并且全纯性等价于解析性，即其泰勒级数在收敛域内一定收敛于这个函数本身：
 \begin{definition}[复变函数的泰勒级数展开]
     设$f$为开集$U\in\mathbb{C}$上的全纯函数，$D(a,R)\in U$，则$\forall z\in D(a,R)$，有
     \[f(z)=\sum_{n=0}^{\infty}\frac{f^{(n)}(a)}{n!}(z-a)^n\]
@@ -77,8 +77,8 @@
 对实变函数，即便无限阶可导，泰勒级数也未必收敛于函数本身，即未必解析：
 \begin{example}
     设$$f(x)=\begin{cases}
-    \mathrm{e}^{-1/x}&\text{,if\ }x> 0\\
-    0&\text{,if\ }x\leq 0
+    \mathrm{e}^{-1/x}&\mathrm{,if\ }x> 0\\
+    0&\mathrm{,if\ }x\leq 0
     \end{cases}$$
     则$f(x)$在$x=0$处各阶导数都是0，泰勒展开式也为0，收敛域为$\mathbb{R}$，但$f(x)\neq 0,x>0$，它不是解析函数。
 \end{example}
@@ -109,7 +109,7 @@
 \end{remark}
 实际上还能将曲线推广至分段一阶可导，即$\gamma\in PS[a,b]$，只要分区间使用微积分基本定理，就能得到与上面一致的结论，但为了叙述的简洁性，下面不再提及这一点。
 
-后续内容中，我们用符号$D(z_0,r)$表示复平面上以$z_0=x_0+iy_0$为圆心，$r$为半径的开圆盘，即$D(z_0,r)=\{x+iy\in\mathbb{C}\big| (x-x_0)^2+(y-y_0)^2<r\}$；用符号$\mathcal{A} _a(r,R)=\{z\in\mathbb{C}|r<|z-a|<R\}$表示以$a$为圆心，内半径$r$，外半径$R$的开圆环。
+后续内容中，我们用符号$D(z_0,r)$表示复平面上以$z_0=x_0+\mathrm{i}y_0$为圆心，$r$为半径的开圆盘，即$D(z_0,r)=\{x+\mathrm{i}y\in\mathbb{C}\big| (x-x_0)^2+(y-y_0)^2<r\}$；用符号$\mathcal{A} _a(r,R)=\{z\in\mathbb{C}|r<|z-a|<R\}$表示以$a$为圆心，内半径$r$，外半径$R$的开圆环。
 \begin{theorem}[柯西积分公式]
     设开集$U\in\mathbb{C}$，$\gamma$为$C^1$闭曲线，且$$f\in C^1(U),D(z_0,r)\in U,\gamma:[a,b]\to D(z_0,r)$$则
     \[\forall z\in D(z_0,r),f(z)=\frac{1}{2\pi \mathrm{i}}\oint_{\gamma}\frac{f(\zeta)}{\zeta-z}\,d\zeta\]
@@ -122,8 +122,8 @@
     \textbf{单连通}(single connected)是一个拓扑学概念，直观上讲，它表示$U$道路连通且“没有洞”，例如单位圆是单连通的，而圆环$\mathcal{A}_0(1,2)$不是单连通的。
 \end{remark}
 \begin{example}
-设$f(z)=1/z$，则$f$在$\mathbb{C}\backslash\{0\}$上全纯，但$\mathbb{C}\backslash\{0\}$不是单连通的，它在单位圆$\gamma(t)=\mathrm{e}^{it},t\in[0,2\pi]$上积分为\begin{align*}
-    \oint_{\gamma}f(z)\,dz=\int_0^{2\pi}f(\gamma(t))\gamma'(t)\,dt=\int_0^{2\pi}\frac{1}{\mathrm{e}^{it}}ie^{it}\,dt=\int_0^{2\pi}\mathrm{i}\,dt=2\pi \mathrm{i}\neq 0
+设$f(z)=1/z$，则$f$在$\mathbb{C}\backslash\{0\}$上全纯，但$\mathbb{C}\backslash\{0\}$不是单连通的，它在单位圆$\gamma(t)=\mathrm{e}^{\mathrm{i}t},t\in[0,2\pi]$上积分为\begin{align*}
+    \oint_{\gamma}f(z)\,dz=\int_0^{2\pi}f(\gamma(t))\gamma'(t)\,dt=\int_0^{2\pi}\frac{1}{\mathrm{e}^{\mathrm{i}t}}\mathrm{i}e^{it}\,dt=\int_0^{2\pi}\mathrm{i}\,dt=2\pi \mathrm{i}\neq 0
 \end{align*}
 \end{example}
 
@@ -145,16 +145,16 @@
 
     将它的负幂次项部分视为$w=1/(z-a)$下的幂级数，则可用柯西-阿达马公式确定它的收敛域为圆环$\mathcal{A} _a(r,R)$，其中$r,R$分别称为洛朗级数的\textbf{外半径}(outer radius)和\textbf{内半径}(inner radius)，满足：
     \[r=\varlimsup_{n\to\infty}|c_{-n}|^{1/n},R=\left(\varlimsup_{n\to\infty}|c_n|^{1/n}\right)^{-1}\]
-    在$\text{ROC}=\mathcal{A} _a(r,R)$上，洛朗级数是绝对收敛且内闭一致收敛的。
+    在$\mathrm{ROC}=\mathcal{A} _a(r,R)$上，洛朗级数是绝对收敛且内闭一致收敛的。
 \end{definition}
 事实上，对任意的全纯函数$f:U\to\mathbb{C}$，及孤立奇点$a\in U$，$f$在$a$处存在且有唯一的洛朗级数展开式。
 
 借助洛朗级数的一致收敛性，可以建立一个对柯西积分公式的直观认识：记$f_n(z)=1/z^n,n\in\mathbb{Z}$，则在逆时针绕0一周的闭曲线$\gamma$上，有
 \[\oint_{\gamma}f_n(z)\,dz=\begin{cases}0&n\neq 1\\2\pi \mathrm{i}&n=1\end{cases}\]
-我们已经在前面说明了路径无关性，下面设$\gamma(t)=\mathrm{e}^{it},t\in[0,2\pi]$，则
+我们已经在前面说明了路径无关性，下面设$\gamma(t)=\mathrm{e}^{\mathrm{i}t},t\in[0,2\pi]$，则
 \begin{align*}
     \oint_{\gamma}f_n(z)\,dz&=\int_0^{2\pi}f_n(\gamma(t))\gamma'(t)\,dt\\
-    &=\int_0^{2\pi}\frac{1}{(\mathrm{e}^{it})^n} ie^{it}\,dt\\
+    &=\int_0^{2\pi}\frac{1}{(\mathrm{e}^{\mathrm{i}t})^n} \mathrm{i}e^{\mathrm{i}t}\,dt\\
     &=\mathrm{i}\int_0^{2\pi}\mathrm{e}^{\mathrm{i}(1-n)t}\,dt\\
     &=\begin{cases}
         \mathrm{i}\int_0^{2\pi}\,dt=2\pi \mathrm{i}&n=1\\
@@ -163,7 +163,7 @@
 \end{align*}
 
 为了验证柯西积分公式
-\[f(z)=\frac{1}{2\pi \mathrm{i}}\oint_{\gamma}\frac{f(\zeta)}{\zeta-z}\,d\zeta,\gamma:t\mapsto z+re^{it},t\in[0,2\pi]\]将$f$展开为$z$处的洛朗级数$f(\zeta)=\sum_{n=0}^{\infty}c_n (\zeta-z)^n$，由于洛朗级数在闭曲线$\gamma$上一致收敛，可以交换求和与积分的次序，得到
+\[f(z)=\frac{1}{2\pi \mathrm{i}}\oint_{\gamma}\frac{f(\zeta)}{\zeta-z}\,d\zeta,\gamma:t\mapsto z+re^{\mathrm{i}t},t\in[0,2\pi]\]将$f$展开为$z$处的洛朗级数$f(\zeta)=\sum_{n=0}^{\infty}c_n (\zeta-z)^n$，由于洛朗级数在闭曲线$\gamma$上一致收敛，可以交换求和与积分的次序，得到
 \begin{align*}
     \oint_{\gamma}\frac{f(\zeta)}{\zeta-z}\,dz&=\oint_{\gamma}\sum_{n=0}^{\infty}c_n (\zeta-z)^{n-1}\,d\zeta\\
     &=\sum_{n=0}^{\infty}c_n\oint_{\gamma}(\zeta-z)^{n-1}\,d\zeta\\
@@ -190,10 +190,10 @@ $f(z)=\mathrm{e}^{1/z}$在0处有本性奇点，$f(z)=1/\sin(\pi z)$在$z=n,n\in
 柯西积分公式中，$\dfrac{f(\zeta)}{\zeta-z}$这一结构相当于为$f(\zeta)$添加了一个简单极点。\textbf{留数定理}(residue theorem)就是描述复线积分的值与被积函数在闭曲线内部的“$1/z$”系数关系的定理：
 \begin{theorem}[留数定理]
     设$f$为开集$U\in\mathbb{C}$上的全纯函数，$a_1,a_2,\cdots,a_n$为$f$在$U$内的极点，$\gamma:[a,b]\to U$为包含所有$a_k$的$C^1$闭曲线，则
-    \[\oint_{\gamma}f(z)\,dz=2\pi \mathrm{i}\sum_{k=1}^{n}\text{Res}(f,a_k)\text{Ind}_{\gamma}(a_k)\]
-    其中$\text{Res}(f,a_k)$称为$f$在$a_k$处的\textbf{留数}(residue)，它等于$f$在$a_k$处洛朗级数展开式中$(z-a_k)^{-1}$项的系数；$\text{Ind}_{\gamma}(a_k)$称为$\gamma$绕点$a_k$的\textbf{环绕数}(winding number)，它表示$\gamma$绕$a_k$转了多少圈。
+    \[\oint_{\gamma}f(z)\,dz=2\pi \mathrm{i}\sum_{k=1}^{n}\mathrm{Res}(f,a_k)\mathrm{Ind}_{\gamma}(a_k)\]
+    其中$\mathrm{Res}(f,a_k)$称为$f$在$a_k$处的\textbf{留数}(residue)，它等于$f$在$a_k$处洛朗级数展开式中$(z-a_k)^{-1}$项的系数；$\mathrm{Ind}_{\gamma}(a_k)$称为$\gamma$绕点$a_k$的\textbf{环绕数}(winding number)，它表示$\gamma$绕$a_k$转了多少圈。
 \end{theorem}
-注意计算环绕数时，以逆时针为正向，例如$\gamma(t)=\mathrm{e}^{it},t\in[0,2\pi]$绕原点的环绕数为1，而$\gamma(t)=\mathrm{e}^{-it},t\in[0,2\pi]$绕原点的环绕数为-1。希望了解环绕数严格定义的读者可以参考复变函数或拓扑学的教材。在留数定理的语境下又将积分路径称为\textbf{围道}(contour)。
+注意计算环绕数时，以逆时针为正向，例如$\gamma(t)=\mathrm{e}^{\mathrm{i}t},t\in[0,2\pi]$绕原点的环绕数为1，而$\gamma(t)=\mathrm{e}^{-\mathrm{i}t},t\in[0,2\pi]$绕原点的环绕数为-1。希望了解环绕数严格定义的读者可以参考复变函数或拓扑学的教材。在留数定理的语境下又将积分路径称为\textbf{围道}(contour)。
 
 要找到$f$在极点$a$处的留数的计算公式，可以将$f$视同其在$a$处的洛朗级数展开式：
 \[f(z)=\sum_{n=-k}^{\infty}c_n(z-a)^n\]
@@ -206,29 +206,29 @@ $f(z)=\mathrm{e}^{1/z}$在0处有本性奇点，$f(z)=1/\sin(\pi z)$在$z=n,n\in
 \end{align*}
 令$z\to a$，就得到留数的计算公式：\begin{proposition}
     设$f$在$a$处有k阶极点，则
-    \[\text{Res}(f,a)=\frac{1}{(k-1)!}\lim_{z\to a}\frac{d^{(k-1)}}{dz^{(k-1)}}((z-a)^k f(z))\]
+    \[\mathrm{Res}(f,a)=\frac{1}{(k-1)!}\lim_{z\to a}\frac{d^{(k-1)}}{dz^{(k-1)}}((z-a)^k f(z))\]
     特别地，对于简单极点，有
-    \[\text{Res}(f,a)=\lim_{z\to a}(z-a)f(z)\]
+    \[\mathrm{Res}(f,a)=\lim_{z\to a}(z-a)f(z)\]
 \end{proposition}
 
 我们使用留数定理来计算一个傅里叶变换作为例子。
 \begin{example}
     计算$f(t)=\dfrac{1}{a^2+t^2}$的傅里叶变换$\mathcal{F} f(\omega)$。\\
     解：根据定义，$$\mathcal{F} f(\omega)=\int_{-\infty}^{\infty}\dfrac{1}{a^2+t^2}\mathrm{e}^{-\mathrm{i}\omega t}\,dt$$
-    为了使用留数定理计算该积分，我们将其推广为复变量上的积分，注意在$\mathbb{R}$上$z=\text{Re}\,z=t$：
+    为了使用留数定理计算该积分，我们将其推广为复变量上的积分，注意在$\mathbb{R}$上$z=\mathrm{Re}\,z=t$：
     \[\mathcal{F} f(\omega)=\int_{-\infty}^{\infty}\frac{1}{a^2+z^2}\mathrm{e}^{-\mathrm{i}\omega z}\,dz\]
     设$f(z)=\dfrac{\mathrm{e}^{-\mathrm{i}\omega z}}{a^2+z^2}$，围道为：\begin{align*}
         &\gamma_1:t\mapsto t,t\in[-R,R]\\
-        &\gamma_2:t\mapsto Re^{-it},t\in[0,\pi]
+        &\gamma_2:t\mapsto Re^{-\mathrm{i}t},t\in[0,\pi]
     \end{align*}
     则$\int_{\gamma_1}f(z)\,dz=\int_{-R}^{R}\frac{1}{a^2+t^2}\mathrm{e}^{-\mathrm{i}\omega t}\,dt$，当$R\to\infty$时，$\int_{\gamma_1}f(z)\,dz\to \mathcal{F} f(\omega)$。经验上，另一条趋向无穷远处的围道上的积分将变成0，我们来验证这一点：\begin{align*}
-        \left|\int_{\gamma_2}f(z)\,dz\right|&=\left|-\int_0^{\pi}\frac{1}{a^2+R^2\mathrm{e}^{-2it}}\mathrm{e}^{\mathrm{i}\omega Re^{it}}iRe^{-it}\,dt\right|\\
-        &\leq \sup_{t\in[0,\pi]}\left|\frac{1}{a^2+R^2\mathrm{e}^{2it}}\mathrm{e}^{\mathrm{i}\omega Re^{it}}iRe^{it}\right|\mu(\gamma_2)\\
+        \left|\int_{\gamma_2}f(z)\,dz\right|&=\left|-\int_0^{\pi}\frac{1}{a^2+R^2\mathrm{e}^{-2it}}\mathrm{e}^{\mathrm{i}\omega Re^{\mathrm{i}t}}\mathrm{i}Re^{-\mathrm{i}t}\,dt\right|\\
+        &\leq \sup_{t\in[0,\pi]}\left|\frac{1}{a^2+R^2\mathrm{e}^{2\mathrm{i}t}}\mathrm{e}^{\mathrm{i}\omega Re^{\mathrm{i}t}}\mathrm{i}Re^{\mathrm{i}t}\right|\mu(\gamma_2)\\
         &\leq \frac{\pi Re^{-\omega R\sin t}}{R^2+a^2}\to 0&(R\to\infty)
     \end{align*}
-    这里的$\mu(\gamma_2)$表示$\gamma_2$的长度。围道内仅有一个简单极点$-ai$，环绕数为-1，根据留数定理，有
+    这里的$\mu(\gamma_2)$表示$\gamma_2$的长度。围道内仅有一个简单极点$-a\mathrm{i}$，环绕数为-1，根据留数定理，有
     \begin{align*}
-        \oint_{\gamma}f(z)\,dz=-2\pi \mathrm{i}\text{Res}(f,-ai)=-2\pi \mathrm{i}\lim_{z\to -ai}(z+ai)\frac{\mathrm{e}^{-\mathrm{i}\omega z}}{a^2+z^2}=\frac{\pi}{a}\mathrm{e}^{a\omega}
+        \oint_{\gamma}f(z)\,dz=-2\pi \mathrm{i}\mathrm{Res}(f,-a\mathrm{i})=-2\pi \mathrm{i}\lim_{z\to -a\mathrm{i}}(z+a\mathrm{i})\frac{\mathrm{e}^{-\mathrm{i}\omega z}}{a^2+z^2}=\frac{\pi}{a}\mathrm{e}^{a\omega}
     \end{align*}
 \end{example}
 

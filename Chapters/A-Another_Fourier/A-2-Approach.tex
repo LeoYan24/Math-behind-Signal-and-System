@@ -1,9 +1,9 @@
 \section{分布的逼近，傅里叶反演公式}\label{sec:Approach}
 
 \subsection{分布的逼近}\label{sub:approach}
-在\ref{sub:shannon}中，我们对带限函数提出了公式：如果$\text{supp}\ \mathcal{F} f\subset[-\frac{T}{2},\frac{T}{2}]$，则有
+在\ref{sub:shannon}中，我们对带限函数提出了公式：如果$\mathrm{supp}\ \mathcal{F} f\subset[-\frac{T}{2},\frac{T}{2}]$，则有
 \begin{equation*}
-    f(t)=T\text{sinc}(Tt)*f(t)
+    f(t)=T\mathrm{sinc}(Tt)*f(t)
 \end{equation*}
 
 如果希望对更一般的函数$f(x)$，找到一个函数$g(x)$，使得$f(x)=g*f(x)$，自然会想到狄拉克$\delta$分布，然而它是一个奇异分布，我们只能从形式上定义一个$\delta$函数。事实上，不存在$g,f*g=f,\forall f$，但很容易构造一个函数列$g_n$，使得$f*g_n\to f$\cite{folland}。回忆我们在\ref{sub:intuition_of_convolution}中提到的“平均化”卷积，设$g_a(x)=\frac{1}{2a}\chi_{[-a,a]}$，则$g_a*f$是$f$在区间$[x-a,x+a]$上的平均值，即$\frac{1}{2a}f*g_a(t)=\int_{x-a}^{x+a}f(x)\,dx$，若$f\in C(\mathbb{R})$，则$g_a*f\to f,a\to 0$。
@@ -54,7 +54,7 @@ $\int_{-\infty}^{\infty}|g(y)|\,dy<\infty$的必要条件是$\int_{\delta/\lambd
 \end{itemize}
 
 作为以上定理的推论，可以得到一个非常好用的定理：\begin{corollary}[*魏尔斯特拉斯逼近定理]
-    设$f\in C([a,b]),-\infty<a<b<\infty$，则$f$是某个多项式序列在$[a,b]$上的一致极限，即\[\forall \epsilon>0,\exists \text{多项式}P,\sup_{a\leq x\leq b}|f(x)-P(x)|<\epsilon\]
+    设$f\in C([a,b]),-\infty<a<b<\infty$，则$f$是某个多项式序列在$[a,b]$上的一致极限，即\[\forall \epsilon>0,\exists \mathrm{多项式}P,\sup_{a\leq x\leq b}|f(x)-P(x)|<\epsilon\]
 \end{corollary}
 在处理分析问题时，类似分段光滑函数可由三角级数一致逼近，将连续函数用多项式一致逼近是一个很强大的工具。
 \begin{proof}
@@ -143,12 +143,12 @@ $\int_{-\infty}^{\infty}|g(y)|\,dy<\infty$的必要条件是$\int_{\delta/\lambd
 以上过程利用了高斯函数的速降性质，保证了积分的绝对收敛性，从而可以进行积分换序。内层的积分恰为傅里叶变换：
 \lr{
     &\int_{-\infty}^{\infty}\mathrm{e}^{2\pi \mathrm{i}\xi (x-y)}\mathrm{e}^{-\pi^2 \lambda^2 \xi^2}\,d\xi\\
-    =&\mathcal{F}^{-1}[\mathrm{e}^{-\pi^2 \lambda^2 \xi^2}](x-y)\\
+    =&\mathcal{F}^{-1}\left[\mathrm{e}^{-\pi^2 \lambda^2 \xi^2}\right](x-y)\\
     =&\frac{1}{\sqrt{\pi}\lambda}\mathrm{e}^{-(x-y)^2/\lambda^2}\\
     =&G_{\lambda}(x-y)
 }{
     &\frac{1}{2\pi}\int_{-\infty}^{\infty}\mathrm{e}^{\mathrm{i}\omega (x-y)}\mathrm{e}^{-\lambda^2\omega^2/4}\,d\omega\\
-    =&\mathcal{F}^{-1}[\mathrm{e}^{-\lambda^2\omega^2/4}](x-y)\\
+    =&\mathcal{F}^{-1}\left[\mathrm{e}^{-\lambda^2\omega^2/4}\right](x-y)\\
     =&\frac{1}{\sqrt{\pi}\lambda}\mathrm{e}^{-(x-y)^2/\lambda^2}\\
     =&G_{\lambda}(x-y)
 }
@@ -164,9 +164,11 @@ $\int_{-\infty}^{\infty}|g(y)|\,dy<\infty$的必要条件是$\int_{\delta/\lambd
 }
 我们知道，$\lim_{\lambda\to 0}f*G_{\lambda}(x)=\frac{f(x+)+f(x-)}{2}$，因此
 \begin{lralign}
-    &\lim_{\lambda\to 0}\int_{-\infty}^{\infty}\mathrm{e}^{2\pi \mathrm{i}\xi x}\mathcal{F} f(\xi)\mathrm{e}^{-\pi^2 \lambda^2 \xi^2}\,d\xi=\frac{f(x+)+f(x-)}{2}
+    &\lim_{\lambda\to 0}\int_{-\infty}^{\infty}\mathrm{e}^{2\pi \mathrm{i}\xi x}\mathcal{F} f(\xi)\mathrm{e}^{-\pi^2 \lambda^2 \xi^2}\,d\xi\\
+    =&\frac{f(x+)+f(x-)}{2}
 \switch
-    &\lim_{\lambda\to 0}\frac{1}{2\pi}\int_{-\infty}^{\infty}\mathrm{e}^{\mathrm{i}\omega x}\mathcal{F} f(\omega)\mathrm{e}^{-\lambda^2\omega^2/4}\,d\omega=\frac{f(x+)+f(x-)}{2}
+    &\lim_{\lambda\to 0}\frac{1}{2\pi}\int_{-\infty}^{\infty}\mathrm{e}^{\mathrm{i}\omega x}\mathcal{F} f(\omega)\mathrm{e}^{-\lambda^2\omega^2/4}\,d\omega\\
+    =&\frac{f(x+)+f(x-)}{2}
 \end{lralign}
 现在，只需要证明$\lim_{\lambda\to 0}$与积分号可以交换顺序。我们有：\lr{
     \left|\mathrm{e}^{2\pi \mathrm{i}\xi x}\mathcal{F} f(\xi)\mathrm{e}^{-\pi^2 \lambda^2 \xi^2}\right|\leq & |\mathcal{F} f(\xi)|\in L^1(\mathbb{R})
@@ -196,9 +198,9 @@ $\int_{-\infty}^{\infty}|g(y)|\,dy<\infty$的必要条件是$\int_{\delta/\lambd
     }
 \end{theorem}
 等式右侧的积分与反常积分是有区别的，无穷限的反常积分要求积分上下限以二重极限的方式趋于无穷，而这里给出的是\textbf{主值意义下的积分}，即
-\[\int_{-\infty}^{\infty}f(x)\,dx=\lim_{a\to-\infty,b\to\infty}\int_{a}^{b}f(x)\,dx\neq \lim_{R\to\infty}\int_{-R}^{R}f(x)\,dx=\text{p.v.}\int_{-\infty}^{\infty}f(x)\,dx\]
+\[\int_{-\infty}^{\infty}f(x)\,dx=\lim_{a\to-\infty,b\to\infty}\int_{a}^{b}f(x)\,dx\neq \lim_{R\to\infty}\int_{-R}^{R}f(x)\,dx=\mathrm{p.v.}\int_{-\infty}^{\infty}f(x)\,dx\]
 \begin{example}
-    设$f(x)=x$，则$\int_{-\infty}^{\infty}f(x)\,dx$发散，但$\text{p.v.}\int_{-\infty}^{\infty}f(x)\,dx=0$
+    设$f(x)=x$，则$\int_{-\infty}^{\infty}f(x)\,dx$发散，但$\mathrm{p.v.}\int_{-\infty}^{\infty}f(x)\,dx=0$
 \end{example}
 \begin{proof}
     我们有\lr{
@@ -221,7 +223,7 @@ $\int_{-\infty}^{\infty}|g(y)|\,dy<\infty$的必要条件是$\int_{\delta/\lambd
     =&\int_{-\infty}^{\infty}f(y)\frac{\sin(R (x-y))}{\pi (x-y)}\,dy\\
     =&f*\left(\frac{\sin(R x)}{\pi x}\right)
 \end{lralign}
-但是，由于$\text{sinc}\notin L^1(\mathbb{R})$，无法保证$\lim_{R\to \infty} f(x)*\text{sinc}(R x)=f(x)$，因此需要条件$f\in L^1(\mathbb{R})\cup PS(\mathbb{R})$，做更细致的估计：
+但是，由于$\mathrm{sinc}\notin L^1(\mathbb{R})$，无法保证$\lim_{R\to \infty} f(x)*\mathrm{sinc}(R x)=f(x)$，因此需要条件$f\in L^1(\mathbb{R})\cup PS(\mathbb{R})$，做更细致的估计：
 \lr{
     &\int_{-R}^{R}\mathrm{e}^{2\pi \mathrm{i}\xi x}\mathcal{F} f(\xi)\,d\xi-\frac{f(x+)+f(x-)}{2}\\
     =&\int_{-\infty}^{\infty}f(y)\frac{\sin(2\pi R (x-y))}{\pi (x-y)}\,dy-\frac{f(x+)+f(x-)}{2}\\
@@ -254,7 +256,7 @@ $\int_{-\infty}^{\infty}|g(y)|\,dy<\infty$的必要条件是$\int_{\delta/\lambd
 对于$\int_{0}^{K}$部分，定义\begin{align*}
     g(y)=\begin{cases}
     \dfrac{f(x-y)-f(x-)}{\pi y},&y\in [0,K]\\
-    0,&\text{otherwise}
+    0,&\mathrm{otherwise}
     \end{cases}
 \end{align*}
 则\begin{lralign}
@@ -275,10 +277,10 @@ $\int_{-\infty}^{\infty}|g(y)|\,dy<\infty$的必要条件是$\int_{\delta/\lambd
     设$f\in L^1(\mathbb{R})$，则
     \lr{
         &\frac{f(x+)+f(x-)}{2}\\
-        =&\lim_{\lambda\to 0}\int_{-\infty}^{\infty}\mathrm{e}^{2\pi \mathrm{i}\xi x}\mathcal{F} f(\xi)\mathrm{e}^{-\pi^2 \lambda^2 \xi^2}\,d\xi,\text{a.e.}
+        =&\lim_{\lambda\to 0}\int_{-\infty}^{\infty}\mathrm{e}^{2\pi \mathrm{i}\xi x}\mathcal{F} f(\xi)\mathrm{e}^{-\pi^2 \lambda^2 \xi^2}\,d\xi,\mathrm{a.e.}
     }{
         &\frac{f(x+)+f(x-)}{2}\\
-        =&\lim_{\lambda\to 0}\frac{1}{2\pi}\int_{-\infty}^{\infty}\mathrm{e}^{\mathrm{i}\omega x}\mathcal{F} f(\omega)\mathrm{e}^{-\lambda^2\omega^2/4}\,d\omega,\text{a.e.}
+        =&\lim_{\lambda\to 0}\frac{1}{2\pi}\int_{-\infty}^{\infty}\mathrm{e}^{\mathrm{i}\omega x}\mathcal{F} f(\omega)\mathrm{e}^{-\lambda^2\omega^2/4}\,d\omega,\mathrm{a.e.}
     }
     a.e.表示几乎处处成立，即在勒贝格测度为0的集合以外，上式都是成立的。
 \end{theorem}

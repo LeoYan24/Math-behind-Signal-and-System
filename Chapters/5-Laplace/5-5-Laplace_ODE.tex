@@ -34,7 +34,7 @@
 
 不过，我们可以通过另一种方式，几乎完全避开分布的问题。在本节中，我们将（单边）拉普拉斯变换的定义修改为：
 \begin{definition}[拉普拉斯变换，改进版]
-    设函数$f$局部可积，且$\exists a\in\mathbb{R}$，使得$f(t)\mathrm{e}^{-at}$绝对可积，则对$\text{Re}\ s\in[a,\infty)$，$f$的拉普拉斯变换定义为
+    设函数$f$局部可积，且$\exists a\in\mathbb{R}$，使得$f(t)\mathrm{e}^{-at}$绝对可积，则对$\mathrm{Re}\ s\in[a,\infty)$，$f$的拉普拉斯变换定义为
     \[\mathcal{L} f(s)=\int_{0-}^{\infty}f(t)\mathrm{e}^{-st}\,dt\]
 \end{definition}
 这里，积分限中的“0-”的含义是：
@@ -42,10 +42,10 @@
 
 在这种定义下，拉普拉斯变换的各种运算性质仍成立，但两个性质略有差别：
 \begin{proposition}[改进的拉普拉斯变换的性质]
-    设$f\in C^1[0,\infty),f'$局部可积，且$\exists a\in\mathbb{R}$，使得$f(t)\mathrm{e}^{-at}$绝对可积，则对$\text{Re}\ s\in[a,\infty)$，有：
+    设$f\in C^1[0,\infty),f'$局部可积，且$\exists a\in\mathbb{R}$，使得$f(t)\mathrm{e}^{-at}$绝对可积，则对$\mathrm{Re}\ s\in[a,\infty)$，有：
     \begin{itemize}
         \item 时域微分性质：\[\mathcal{L} [f'](s)=s\mathcal{L} f(s)-f(0-)\]
-        \item 初值定理：$$f(0-)=\lim_{\text{Re}\ s\to\infty}sF(s)$$
+        \item 初值定理：$$f(0-)=\lim_{\mathrm{Re}\ s\to\infty}sF(s)$$
     \end{itemize}
 \end{proposition}
 \begin{proof}
@@ -228,7 +228,7 @@ Q(s)&=a_n\left(s^{n-1}c_0 +s^{n-2}c_1 +\cdots +c_{n-1}\right)+a_{n-1}\left(s^{n-
 拉普拉斯变换同样能够处理常系数线性微分方程组，并且能够一并处理初始条件。我们首先对矩阵值函数定义改进版的拉普拉斯变换：
 \begin{definition}[矩阵值函数的拉普拉斯变换]
     设矩阵值函数$A(t)$的每个分量局部可积，并且对于每个分量$a_{ij}(t)$，$\exists \alpha_{ij}\in\mathbb{R}$，使得$a_{ij}(t)\mathrm{e}^{-\alpha_{ij} t}$绝对可积，则在所有分量的公共收敛域
-    $$\text{Re}\ s\geq \max\{\alpha_{ij}|1\leq \mathrm{i}\leq m,1\leq j\leq n\}$$上，矩阵值函数$A(t)$的拉普拉斯变换是每个分量的拉普拉斯变换构成的矩阵：
+    $$\mathrm{Re}\ s\geq \max\{\alpha_{ij}|1\leq i\leq m,1\leq j\leq n\}$$上，矩阵值函数$A(t)$的拉普拉斯变换是每个分量的拉普拉斯变换构成的矩阵：
     \[\mathcal{L} A(s)=\int_{0-}^{\infty}A(t)\mathrm{e}^{-st}\,dt\]
 \end{definition}
 
@@ -349,8 +349,7 @@ $$\mathcal{L}^{-1} \left[(sI-A)^{-1}\right](t)=\phi(t)u(t)=\mathrm{e}^{At}u(t)$$
 \end{align*}
 代入后一方程，得到
 \begin{align*}
-    \mathbf{R}(s)=&C\left[\Phi(s)\mathbf{q}(0-)+\Phi(s)B\mathbf{E}(s)\right]+D\mathbf{E}(s)\\
-    =&C\Phi(s)\mathbf{q}(0-)+\left[C\Phi(s)B+D\right]\mathbf{E}(s)
+    \mathbf{R}(s)=&C\left[\Phi(s)\mathbf{q}(0-)+\Phi(s)B\mathbf{E}(s)\right]+D\mathbf{E}(s)=C\Phi(s)\mathbf{q}(0-)+\left[C\Phi(s)B+D\right]\mathbf{E}(s)
 \end{align*}
 因此系统函数为
 \begin{align*}
