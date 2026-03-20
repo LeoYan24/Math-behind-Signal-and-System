@@ -309,20 +309,20 @@ $\evalat{\mathrm{e}^{-2\pi \mathrm{i}\xi t}f(t)}{-\infty}{\infty},\evalat{\mathr
 &=E\int_{-T/2}^{T/2}\mathrm{e}^{-2\pi \mathrm{i}\xi t}\,dt\\
 &=-\frac{E}{2\pi \mathrm{i}\xi}\evalat{\mathrm{e}^{-2\pi \mathrm{i}\xi t}}{-T/2}{T/2}\\
 &=\frac{\mathrm{e}^{\pi \mathrm{i}\xi T}-\mathrm{e}^{-\pi \mathrm{i}\xi T}}{2\mathrm{i}}\frac{E}{\pi\xi}\\
-&=\frac{E}{\pi\xi}\sin(\pi T\xi)=ET\text{sinc}(T\xi)
+&=\frac{E}{\pi\xi}\sin(\pi T\xi)=ET\mathrm{sinc}(T\xi)
 \switch
 \mathcal{F} f(\omega)&=\int_{-\infty}^{\infty}f(t)\mathrm{e}^{-\mathrm{i}\omega t}\,dt\\
 &=E\int_{-\infty}^{\infty}\chi_{[-T/2,T/2]}(t)\mathrm{e}^{-\mathrm{i}\omega t}\,dt\\
 &=E\int_{-T/2}^{T/2}\mathrm{e}^{-\mathrm{i}\omega t}\,dt\\
 &=-\frac{E}{\mathrm{i}\omega}\evalat{\mathrm{e}^{-\mathrm{i}\omega t}}{-T/2}{T/2}\\
 &=\frac{\mathrm{e}^{\mathrm{i}\omega T/2}-\mathrm{e}^{-\mathrm{i}\omega T/2}}{2\mathrm{i}}\frac{2E}{\pi\omega}\\
-&=\frac{2E}{\omega}\sin\left(\frac{T\omega}{2}\right)=ET\text{Sa}\left(\frac{T\omega}{2}\right)
+&=\frac{2E}{\omega}\sin\left(\frac{T\omega}{2}\right)=ET\mathrm{Sa}\left(\frac{T\omega}{2}\right)
 \end{lralign}
 即
 \begin{lralign}
-    \mathcal{F} \chi_{[-T/2,T/2]}(\xi)&=T\text{sinc}(T\xi)
+    \mathcal{F} \chi_{[-T/2,T/2]}(\xi)&=T\mathrm{sinc}(T\xi)
 \switch
-    \mathcal{F} \chi_{[-T/2,T/2]}(\omega)&=T\text{Sa}\left(\frac{T\omega}{2}\right)
+    \mathcal{F} \chi_{[-T/2,T/2]}(\omega)&=T\mathrm{Sa}\left(\frac{T\omega}{2}\right)
 \end{lralign}
 \end{example}
 将矩形函数周期化，傅里叶系数与矩形函数的傅里叶变换在一列等间距的点上取值成正比，这一关系的解释将在\ref{sub:poisson_summation}中给出。
@@ -330,9 +330,9 @@ $\evalat{\mathrm{e}^{-2\pi \mathrm{i}\xi t}f(t)}{-\infty}{\infty},\evalat{\mathr
 由傅里叶反演公式得到：
 \begin{corollary}[采样函数的傅里叶变换]
     \begin{lralign}
-        \mathcal{F} \left[\text{sinc}(Tt)\right](\xi)&=\frac{1}{T}\chi_{[-T/2,T/2]}\left(\frac{\xi}{T}\right)
+        \mathcal{F} \left[\mathrm{sinc}(Tt)\right](\xi)&=\frac{1}{T}\chi_{[-T/2,T/2]}\left(\frac{\xi}{T}\right)
 \switch
-        \mathcal{F}\left[\text{Sa}(Tt)\right](\omega)&=\frac{\pi}{T}\chi_{[-T,T]}(\omega)
+        \mathcal{F}\left[\mathrm{Sa}(Tt)\right](\omega)&=\frac{\pi}{T}\chi_{[-T,T]}(\omega)
     \end{lralign}
 \end{corollary}
 
@@ -342,15 +342,15 @@ $\evalat{\mathrm{e}^{-2\pi \mathrm{i}\xi t}f(t)}{-\infty}{\infty},\evalat{\mathr
 \end{corollary}
 \begin{proof}
     令$T=1$，则\begin{lralign}
-        \mathcal{F} \left[\text{sinc}(t)\right](\xi)&=\chi_{[-1/2,1/2]}\left(\xi\right)
+        \mathcal{F} \left[\mathrm{sinc}(t)\right](\xi)&=\chi_{[-1/2,1/2]}\left(\xi\right)
 \switch
-        \mathcal{F} \left[\text{Sa}(t)\right](\omega)&=\pi\chi_{[-1,1]}(\omega)
+        \mathcal{F} \left[\mathrm{Sa}(t)\right](\omega)&=\pi\chi_{[-1,1]}(\omega)
     \end{lralign}
     取$\xi=0$或$\omega=0$，根据傅里叶变换的定义，得到采样函数直流分量的大小：
     \begin{lralign}
-        \int_{-\infty}^{\infty}\text{sinc}(t)\,dt&=1
+        \int_{-\infty}^{\infty}\mathrm{sinc}(t)\,dt&=1
 \switch
-        \int_{-\infty}^{\infty}\text{Sa}(t)\,dt&=\pi
+        \int_{-\infty}^{\infty}\mathrm{Sa}(t)\,dt&=\pi
     \end{lralign}
     以上两个结果都与狄利克雷积分等价。
 \end{proof}
@@ -392,39 +392,39 @@ $\evalat{\mathrm{e}^{-2\pi \mathrm{i}\xi t}f(t)}{-\infty}{\infty},\evalat{\mathr
     \mathcal{F} [t^n](\omega)&=2\pi \mathrm{i}^n\delta^{(n)}(\omega)\\
 }\end{corollary}
 
-我们还希望从$u'(t)=\delta(t),\text{sgn}'(t)=2\delta(t)$得到单位阶跃函数$u(t)$和符号函数\text{sgn}$(t)$的傅里叶变换，但在考虑$\delta$的不定积分时，必须处理积分常数“C”，它将导致频域中出现$C\delta$或$2\pi C\delta$项。
+我们还希望从$u'(t)=\delta(t),\mathrm{sgn}'(t)=2\delta(t)$得到单位阶跃函数$u(t)$和符号函数$\mathrm{sgn}(t)$的傅里叶变换，但在考虑$\delta$的不定积分时，必须处理积分常数“C”，它将导致频域中出现$C\delta$或$2\pi C\delta$项。
 
-注意到$\text{sgn}(t)$是奇函数，其傅里叶变换应为纯虚的奇函数，我们可以由此确定它和单位阶跃函数的傅里叶变换中C的值，从而得到正确的结果:
+注意到$\mathrm{sgn}(t)$是奇函数，其傅里叶变换应为纯虚的奇函数，我们可以由此确定它和单位阶跃函数的傅里叶变换中C的值，从而得到正确的结果:
 \begin{corollary}
     \quad
     \lr{
-    \mathcal{F} \text{sgn}(\xi)&=\frac{1}{\pi \mathrm{i}\xi}
+    \mathcal{F} \mathrm{sgn}(\xi)&=\frac{1}{\pi \mathrm{i}\xi}
 }{
-    \mathcal{F} \text{sgn}(\omega)&=\frac{2}{\mathrm{i}\omega}
+    \mathcal{F} \mathrm{sgn}(\omega)&=\frac{2}{\mathrm{i}\omega}
 }
 \begin{lralign}
-    \mathcal{F} u(\xi)&=\mathcal{F} \left[\frac{1}{2}(\text{sgn}(t)+1)\right]\\
+    \mathcal{F} u(\xi)&=\mathcal{F} \left[\frac{1}{2}(\mathrm{sgn}(t)+1)\right]\\
     &=\frac{1}{2}\left(\delta+\frac{1}{\pi \mathrm{i}\xi}\right)\\
 \switch
-    \mathcal{F} u(\omega)&=\mathcal{F} \left[\frac{1}{2}(\text{sgn}(t)+1)\right]\\
+    \mathcal{F} u(\omega)&=\mathcal{F} \left[\frac{1}{2}(\mathrm{sgn}(t)+1)\right]\\
     &=\pi\delta+\frac{1}{\mathrm{i}\omega}\\
 \end{lralign}
 \end{corollary}
 
 由傅里叶反演公式可得：%\begin{lralign}
-%    \mathcal{F} \mathcal{F} \text{sgn}&=2\pi \text{sgn}^-=-2\pi \text{sgn}\\
+%    \mathcal{F} \mathcal{F} \mathrm{sgn}&=2\pi \mathrm{sgn}^-=-2\pi \mathrm{sgn}\\
 %    &=\mathcal{F} \left[\frac{1}{\pi \mathrm{i}\xi}\right]
 %\switch
-%    \mathcal{F} \mathcal{F} \text{sgn}&=2\pi \text{sgn}^-=-2\pi \text{sgn}\\
+%    \mathcal{F} \mathcal{F} \mathrm{sgn}&=2\pi \mathrm{sgn}^-=-2\pi \mathrm{sgn}\\
 %    &=\mathcal{F} \left[\frac{2}{\mathrm{i}\omega}\right]
 %\end{lralign}
 %由此可得
 \begin{corollary}
     \quad
 \lr{
-    \mathcal{F} \left[\frac{1}{t}\right](\xi)&=-\pi i sgn(\xi)\\
+    \mathcal{F} \left[\frac{1}{t}\right](\xi)&=-\pi \mathrm{i} sgn(\xi)\\
 }{
-    \mathcal{F} \left[\frac{1}{t}\right](\omega)&=-\pi i sgn(\omega)\\
+    \mathcal{F} \left[\frac{1}{t}\right](\omega)&=-\pi \mathrm{i} sgn(\omega)\\
 }
 \end{corollary}
 
@@ -478,11 +478,11 @@ $\evalat{\mathrm{e}^{-2\pi \mathrm{i}\xi t}f(t)}{-\infty}{\infty},\evalat{\mathr
 运用对偶性，立即得到
 \lr{
 \mathcal{F} g(\xi)&=\mathcal{F} f(\xi)+\overline{\mathcal{F} f(\xi)}\\
-&=2\text{Re}\ {\mathcal{F} f(\xi)}\\
+&=2\mathrm{Re}\ {\mathcal{F} f(\xi)}\\
 &=\frac{2a}{a^2 + 4\pi^2 \xi^2}
 }{
 \mathcal{F} g(\omega)&=\mathcal{F} f(\omega)+\overline{\mathcal{F} f(\omega)}\\
-&=2\text{Re}\ {\mathcal{F} f(\omega)}\\
+&=2\mathrm{Re}\ {\mathcal{F} f(\omega)}\\
 &=\frac{2a}{a^2 +\omega^2}
 }
 \end{example} 

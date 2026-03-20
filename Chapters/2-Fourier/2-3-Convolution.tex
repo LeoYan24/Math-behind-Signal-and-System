@@ -223,49 +223,67 @@ $\rho(f,g)=\pm 1$时两信号\textbf{线性相关}；$\rho(f,g)=0$时两信号\t
 们之间的相关程度。
 \begin{definition}[互相关]
 设$f,g\in L^2(\mathbb{R})$，它们的互相关定义为
-\begin{equation}
-    (f\star g)(x)=\int_{-\infty}^{\infty}f(y)\overline{g(x+y)}\,dy
-\end{equation}
-同样可以定义f的自相关$(f\star f)(x)$
+\begin{equation*}
+    R_{fg}(x)=(f\star g)(x)=\int_{-\infty}^{\infty}f(y)\overline{g(x+y)}\,dy
+\end{equation*}
+同样可以定义f的自相关$R_f(x)=(f\star f)(x)$
 \end{definition}
+
+我们给出了两种相关的符号，其中$R_{fg}$在信号与系统教材中被广泛使用，但$(f\star g)$更便于讨论相关的性质。
+
 互相关具有以下性质：
 \begin{proposition}[互相关的性质]
 \begin{enumerate}
-    \quad
+    设$f,g\in L^2(\mathbb{R})$，则
     \item $(f\star g) =f^-* \overline{g}=\overline{(g\star f)^-}$，如果$f,g$都是实信号，则$f\star g = (g\star f)^- =f^- *g=(f*g^-)^-$.
-    \item $\mathcal{F} (f\star g) =\mathcal{F} f\overline{\mathcal{F} g}$，特别地，
-          $\mathcal{F} (f\star f) =|\mathcal{F} f|^2$，这个结果称为\textbf{维纳-辛钦定理}(Wiener-Khinchin theorem)
+    \item (维纳-辛钦定理)设$f,g\in L^1(\mathbb{R})$，则$\mathcal{F} (f\star g) =\mathcal{F} f\overline{\mathcal{F} g}$
     \item $f\star (\tau_b g)=\tau_{b} (f\star g)=(\tau_{-b}f)\star g$
     \item $(f\star g)\leq\|f\|_2\|g\|_2$，特别地，$(f\star f)(x)\leq (f\star f)(0)=\|f\|_2^2$
 \end{enumerate}
 \end{proposition}
+\begin{remark}
+    一般来说，\textbf{维纳-辛钦定理}(Wiener-Khinchin Theorem)是指第二条性质的特殊情况，即令$f=g$，得到
+    $$\mathcal{F}(R_f)=|\mathcal{F} f|^2$$
+\end{remark}
+
 \begin{proof}
+    1.
 \begin{align*}
-    1.(f\star g)(x)               & =\int_{-\infty}^{\infty}f(y)\overline{g(x+y)}\,dy                                                                   \\
-                                  & =\int_{-\infty}^{\infty}f(-y)\overline{g(x-y)}\,dy                                                                  \\
-                                  & =\int_{-\infty}^{\infty}f^-(y)\overline{g(x-y)}\,dy                                                                  \\
-                                  & = (f^- * \overline{g})(x)                                                                                           \\
-    (f\star g)(x)                 & =\int_{-\infty}^{\infty}f(y)\overline{g(x+y)}\,dy                                                                   \\
-                                  & =\overline{\int_{-\infty}^{\infty}g(x+y)\overline{f(y)}\,dy}                                                        \\
-                                  & =\overline{(g\star f)(-x)}=\overline{(g\star f)^-(x)}                                                               \\
-    2.\mathcal{F} (f\star g)(\xi) & =\int_{-\infty}^{\infty}(f\star g)(x)\mathrm{e}^{-2\pi \mathrm{i}\xi x}\,dx                                                           \\
-                                  & =\int_{-\infty}^{\infty}\mathrm{e}^{-2\pi \mathrm{i}\xi x}\,dx\int_{-\infty}^{\infty}f(y)\overline{g(x+y)}\,dy                        \\
-                                  & =\iint\limits_{\mathbb{R}^2}f(y)\overline{g(x+y)}\mathrm{e}^{-2\pi \mathrm{i}\xi x}\,dy\,dx                                           \\
-                                  & =\int_{-\infty}^{\infty}f(y)\,dy\int_{-\infty}^{\infty}\overline{g(x+y)}\mathrm{e}^{-2\pi \mathrm{i}\xi x}\,dx                        \\
-                                  & =\int_{-\infty}^{\infty}f(y)\mathrm{e}^{2\pi \mathrm{i}\xi y}\,dy\int_{-\infty}^{\infty}\overline{g(u)}\mathrm{e}^{-2\pi \mathrm{i}\xi u}\,du & (u=x+y) \\
-                                  & =\mathcal{F} f(\xi)\overline{\mathcal{F} g(\xi)}
-\end{align*}这里不涉及频率、角频率的问题，读者可以自行验证。
+    (f\star g)(x)&=\int_{-\infty}^{\infty}f(y)\overline{g(x+y)}\,dy\\
+    &=\int_{-\infty}^{\infty}f(-y)\overline{g(x-y)}\,dy\\
+    &=\int_{-\infty}^{\infty}f^-(y)\overline{g(x-y)}\,dy\\
+    &=(f^- * \overline{g})(x)\\
+    (f\star g)(x)& =\int_{-\infty}^{\infty}f(y)\overline{g(x+y)}\,dy\\
+    &=\overline{\int_{-\infty}^{\infty}g(x+y)\overline{f(y)}\,dy}\\
+    &=\overline{(g\star f)(-x)}=\overline{(g\star f)^-(x)}
+\end{align*}
+这里不涉及频率、角频率的问题，读者可以自行验证。
+
+2.
 \begin{align*}
-    3.\left(f\star (\tau_b g)\right)(x)  & =\int_{-\infty}^{\infty}f(y)\overline{(\tau_b g)(x+y)}\,dy                                                  \\
-                              & =\int_{-\infty}^{\infty}f(y)\overline{g(x+y-b)}\,dy                                                         \\
-                              & =(f\star g)(x-b)=\tau_{b} (f\star g)(x)                                                                     \\
-    ( (\tau_{-b}f)\star g)(x) & =\int_{-\infty}^{\infty}(\tau_{-b}f)(y)\overline{g(x+y)}\,dy                                                \\
-                              & =\int_{-\infty}^{\infty}f(y+b)\overline{g(x+y)}\,dy                                                         \\
-                              & =\int_{-\infty}^{\infty}f(z)\overline{g(x+z-b)}\,dz                                               & (z=y+b) \\
-                              & =(f\star g)(x-b)=\tau_{b} (f\star g)(x)                                                                     \\
-    4. (f\star g)(x)          & =\int_{-\infty}^{\infty}f(y)\overline{g(x+y)}\,dy                                                           \\
-                              & \leq \sqrt{\int_{-\infty}^{\infty}|f(y)|^2\,dy\int_{-\infty}^{\infty}\left|\overline{g(x+y)}\right|^2\,dy  }           \\
-                              & =\sqrt{\|f\|_2^2\|g\|_2^2}=\|f\|_2\cdot\|g\|_2                                              
+    \mathcal{F} (f\star g)(\xi) & =\int_{-\infty}^{\infty}(f\star g)(x)\mathrm{e}^{-2\pi \mathrm{i}\xi x}\,dx\\
+    & =\int_{-\infty}^{\infty}\mathrm{e}^{-2\pi \mathrm{i}\xi x}\,dx\int_{-\infty}^{\infty}f(y)\overline{g(x+y)}\,dy\\
+    & =\iint\limits_{\mathbb{R}^2}f(y)\overline{g(x+y)}\mathrm{e}^{-2\pi \mathrm{i}\xi x}\,dy\,dx\\
+    & =\int_{-\infty}^{\infty}f(y)\,dy\int_{-\infty}^{\infty}\overline{g(x+y)}\mathrm{e}^{-2\pi \mathrm{i}\xi x}\,dx\\
+    & =\int_{-\infty}^{\infty}f(y)\mathrm{e}^{2\pi \mathrm{i}\xi y}\,dy\int_{-\infty}^{\infty}\overline{g(u)}\mathrm{e}^{-2\pi \mathrm{i}\xi u}\,du & (u=x+y) \\
+    & =\mathcal{F} f(\xi)\overline{\mathcal{F} g(\xi)}
+\end{align*}
+
+3.
+\begin{align*}
+    \left(f\star (\tau_b g)\right)(x)&=\int_{-\infty}^{\infty}f(y)\overline{(\tau_b g)(x+y)}\,dy\\
+    & =\int_{-\infty}^{\infty}f(y)\overline{g(x+y-b)}\,dy\\
+    & =(f\star g)(x-b)=\tau_{b} (f\star g)(x)\\
+    ( (\tau_{-b}f)\star g)(x) & =\int_{-\infty}^{\infty}(\tau_{-b}f)(y)\overline{g(x+y)}\,dy\\
+    & =\int_{-\infty}^{\infty}f(y+b)\overline{g(x+y)}\,dy\\
+    & =\int_{-\infty}^{\infty}f(z)\overline{g(x+z-b)}\,dz& (z=y+b) \\
+    & =(f\star g)(x-b)=\tau_{b} (f\star g)(x)
+\end{align*}
+
+4.\begin{align*}
+    (f\star g)(x)& =\int_{-\infty}^{\infty}f(y)\overline{g(x+y)}\,dy\\
+    & \leq \sqrt{\int_{-\infty}^{\infty}|f(y)|^2\,dy\int_{-\infty}^{\infty}\left|\overline{g(x+y)}\right|^2\,dy  }\\
+    &=\sqrt{\|f\|_2^2\|g\|_2^2}=\|f\|_2\cdot\|g\|_2  
 \end{align*}
 \end{proof}
 
@@ -276,19 +294,11 @@ $$R_{fg}(x)=\int_{-\infty}^{\infty}f(y)\overline{g(x-y)}\,dy=\int_{-\infty}^{\in
 对于功率信号，我们需要对以上互相关的定义略作修改，以避免趋于无穷的情况发生。
 \begin{definition}[功率信号的互相关]
     对于功率信号$f,g$，定义互相关函数为
-\begin{equation}
-    (f\star g)(x)=\lim_{T\to\infty}\frac{1}{2T}\int_{-T}^{T}f(y)\overline{g(x+y)}\,dy
-\end{equation}
+\begin{equation*}
+    R_{fg}=(f\star g)(x)=\lim_{T\to\infty}\frac{1}{2T}\int_{-T}^{T}f(y)\overline{g(x+y)}\,dy
+\end{equation*}
 \end{definition}
-其性质不再单独讨论。我们仅验证这个互相关函数是良定义的：
-\begin{align*}
-    \left|\frac{1}{2T}\int_{-T}^{T}f(y)\overline{g(x+y)}\,dy\right|& \leq \frac{1}{2T}\sqrt{\int_{-T}^{T}|f(y)|^2\,dy\int_{-T}^{T}\left|\overline{g(x+y)}\right|^2\,dy}\\
-    & =\sqrt{\frac{1}{2T}\int_{-T}^{T}|f(y)|^2\,dy\cdot\frac{1}{2T}\int_{-T}^{T}|g(x+y)|^2\,dy}\\
-    & =\sqrt{\frac{1}{2T}\int_{-T}^{T}|f(y)|^2\,dy\cdot\frac{1}{2T}\int_{-T}^{T}|g(y)|^2\,dy}\to \sqrt{P_f P_g}
-\end{align*}
-其中$P_f,P_g$分别是f,g的功率：\begin{align*}
-P_f&=\lim_{T\to\infty}\frac{1}{2T}\int_{-T}^{T}|f(y)|^2\,dy,P_g=\lim_{T\to\infty}\frac{1}{2T}\int_{-T}^{T}|g(y)|^2\,dy
-\end{align*}
+我们将在\ref{sub:power_corelation}中讨论它。
 
 最后我们给出一个互相关的应用\cite{brad_osgood_ee261}。
 \begin{example}[雷达测距]

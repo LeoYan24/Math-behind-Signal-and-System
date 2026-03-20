@@ -1,6 +1,6 @@
 \section{实变函数概要}\label{sec:Real_Analysis}
 
-读者可能已经注意到，并不是所有的函数都是可积的，例如$\mathrm{e}^x$即使视为功率信号，其能量和功率也不具有意义，因此它既不属于能量信号，也不属于功率信号；另一种情况下，函数本身的性质比较差，以至于在黎曼积分的框架下说不清它的积分（或能量）是什么：
+读者可能已经注意到，并不是所有的函数都是可积的，例如$\mathrm{e}^x$的能量与功率都是无限的，因此它既不属于能量信号，也不属于功率信号；另一种情况下，函数本身的性质比较差，以至于在黎曼积分的框架下说不清它的积分（或能量）是什么：
 \begin{example}[狄利克雷函数]
     \[\chi_{\mathbb{Q}}(x)=
     \begin{cases}
@@ -9,7 +9,7 @@
     \end{cases}\]
 （其中$\mathbb{Q}$ 表示有理数集，上标c表示取补集）
 \end{example}
-它在黎曼积分的意义下是不可积的，因为它在所有点不连续，但是这样的函数在\textbf{勒贝格积分}的意义下可积。在勒贝格积分的框架下，有理数集这样的可数集是零测度的（类似于区间长度为0），$\chi_{\mathbb{Q}}$在零测集上取1而在其余位置取0，所以其积分值为0。
+它在黎曼积分的意义下是不可积的，因为它在所有点不连续，但是这样的函数在\textbf{勒贝格积分}的意义下可积。尽管工程上我们很少考虑这样的函数，但由勒贝格积分描述的函数空间（见\ref{sub:Lp_space}）具有很好的性质，这是黎曼积分做不到的。
 
 对于非反常积分，\textbf{勒贝格积分是黎曼积分的推广}，黎曼可积的函数一定是勒贝格可积的，并且在相同的区间上积分值相等。
 
@@ -75,7 +75,7 @@ $$m^*\left(\bigsqcup_{k=1}^{\infty}E_k\right)\neq\sum_{k=1}^{\infty}m^*(E_k)$$
 \end{definition}
 
 \begin{example}[几乎处处相等]
-    函数$f,g:E\to\mathbb{R}$在$E$上\textbf{几乎处处相等}，如果存在一个零测子集$E_0$，使得对于所有$x\in E\setminus E_0$，有$f(x)=g(x)$，记为$f=g,\text{a.e.}$或$f\sim g$。此时，我们\textbf{不区分$f$和$g$}，因为这样的两个函数性质类似，并且我们将看到$f,g$可积时积分值相等。
+    函数$f,g:E\to\mathbb{R}$在$E$上\textbf{几乎处处相等}，如果存在一个零测子集$E_0$，使得对于所有$x\in E\setminus E_0$，有$f(x)=g(x)$，记为$f=g,\mathrm{a.e.}$或$f\sim g$。此时，我们\textbf{不区分$f$和$g$}，因为这样的两个函数性质类似，并且我们将看到$f,g$可积时积分值相等。
 \end{example}
 
 下面我们引入\textbf{可测函数}的概念。
@@ -109,7 +109,7 @@ $$m^*\left(\bigsqcup_{k=1}^{\infty}E_k\right)\neq\sum_{k=1}^{\infty}m^*(E_k)$$
 \begin{definition}[几乎处处收敛]
     函数列$\{f_n:E\to\mathbb{R}\}_{n=1}^{\infty}$在$E$上几乎处处收敛于函数$f:E\to\mathbb{R}$，如果存在一个零测度集$E_0$，使得
     $$\forall x\in E\setminus E_0,\lim_{n\to\infty}f_n(x)=f(x)$$
-    记为$f_n\to f,\text{a.e.}$
+    记为$f_n\to f,\mathrm{a.e.}$
 \end{definition}
 
 \begin{example}
@@ -243,7 +243,7 @@ $dm$表示勒贝格测度。
 
 \begin{proposition}[$0\cdot\infty=0$]
     设$f:E\to[0,+\infty)$是非负可测函数，则\\
-    \ding{172}$\int_{E}f\,dm=0\iff f=0,\text{a.e.}$；\\
+    \ding{172}$\int_{E}f\,dm=0\iff f=0,\mathrm{a.e.}$；\\
     \ding{173}若$E_0$是$E$的零测子集，则$\int_{E}f\,dm=\int_{E\setminus E_0}f\,dm$
     %事实上，对广义实值的非负可测函数$f:E\to[0,+\infty]$（例如定义$f(x)=1/x,x>0$，则自然可以定义$f(0)=+\infty$），仍然可以定义勒贝格积分。此时：\\
     %\ding{174}如果$f$可积，则$f$几乎处处有限。
@@ -257,7 +257,7 @@ $dm$表示勒贝格测度。
 
 下面引入分析学中的两个重要工具。
 \begin{theorem}[Fatou引理]
-    设$\{f_n:E\to[0,+\infty)\}$是非负可测函数列，$f_n\to f,\text{a.e.}$，则
+    设$\{f_n:E\to[0,+\infty)\}$是非负可测函数列，$f_n\to f,\mathrm{a.e.}$，则
     \[\int_{E}f\,dm\leq \liminf_{n\to\infty}\int_{E}f_n\,dm\]
     此定理也可表述为
     \[\int_{E}\liminf_{n\to\infty}f_n\,dm\leq \liminf_{n\to\infty}\int_{E}f_n\,dm\]
@@ -266,10 +266,10 @@ $dm$表示勒贝格测度。
 之所以称之为引理，是因为在后续的一些列定理均需要借助它来完成，但它的重要性完全不亚于其他的定理（当然，既然我们略去了多数证明，本书中没有使用Fatou引理的例子）。
 
 \begin{theorem}[Levi单调收敛定理]
-    设$\{f_n:E\to[0,+\infty)\}$是递增的非负可测函数列，且$f_n\to f,\text{a.e.}$，则
+    设$\{f_n:E\to[0,+\infty)\}$是递增的非负可测函数列，且$f_n\to f,\mathrm{a.e.}$，则
     \[\int_{E}f\,dm=\lim_{n\to\infty}\int_{E}f_n\,dm\]
 \end{theorem}
-后文中将它简称为“单调收敛定理”。它表明对于非负递增的的可测函数列，总能\textbf{交换极限与积分}的顺序。特别地，对于非负可测的函数项级数$\sum_{n=1}^{\infty}f_n$，其部分和列$\{s_n=\sum_{i=1}^{n}f_i\}$递增，考虑其部分和$s_n$，如果$s_n\to s,\text{a.e.}$，则
+后文中将它简称为“单调收敛定理”。它表明对于非负递增的的可测函数列，总能\textbf{交换极限与积分}的顺序。特别地，对于非负可测的函数项级数$\sum_{n=1}^{\infty}f_n$，其部分和列$\{s_n=\sum_{i=1}^{n}f_i\}$递增，考虑其部分和$s_n$，如果$s_n\to s,\mathrm{a.e.}$，则
 \[\int_{E}s\,dm=\lim_{n\to\infty}\int_{E}s_n\,dm=\lim_{n\to\infty}\int_{E}\sum_{i=1}^{n}f_i\,dm=\sum_{n=1}^{\infty}\int_{E}f_n\,dm\]
 因此，非负可测函数项级数可以\textbf{逐项积分}。
 
@@ -303,7 +303,7 @@ $dm$表示勒贝格测度。
 
 下面的定理是本书中\textbf{用于极限与积分换序的主要定理}：
 \begin{theorem}[Lebesgue控制收敛定理]
-    设$\{f_n:E\to\mathbb{R}\}$是可测函数列，$f_n\to f,\text{a.e.}$，如果存在一个可积函数$g:E\to[0,+\infty)$，使得对于所有$n$和$x\in E$，有$|f_n(x)|\leq g(x)$，则$f$可积，并且
+    设$\{f_n:E\to\mathbb{R}\}$是可测函数列，$f_n\to f,\mathrm{a.e.}$，如果存在一个可积函数$g:E\to[0,+\infty)$，使得对于所有$n$和$x\in E$，有$|f_n(x)|\leq g(x)$，则$f$可积，并且
     \[\int_{E}f\,dm=\lim_{n\to\infty}\int_{E}f_n\,dm\]
 \end{theorem}
 
@@ -340,7 +340,7 @@ $dm$表示勒贝格测度。
 \begin{example}
     考虑函数$f(x)=x$，它在$\mathbb{R}$上不可积，但在区间$[-n,n]$上可积，并且\[\int_{[-n,n]}f\,dm=0\]
     我们定义$f$在主值意义下的积分为
-    \[\text{p.v.}\int_{\mathbb{R}}f\,dm=\lim_{n\to\infty}\int_{[-n,n]}f\,dm=0\]
+    \[\mathrm{p.v.}\int_{\mathbb{R}}f\,dm=\lim_{n\to\infty}\int_{[-n,n]}f\,dm=0\]
     在主值意义下，$f$是可积的。但在勒贝格积分的意义下，$f$不可积，因为
     \[\int_{\mathbb{R}}|f|\,dm=\int_{\mathbb{R}}|x|\,dm=+\infty\]
 \end{example}
@@ -400,7 +400,7 @@ $dm$表示勒贝格测度。
     设$E$是可测集，如果$1\leq p<\infty$，定义
     \[\|f\|_p=\left(\int_{E}|f(t)|^p\,dm\right)^{1/p}\]
     如果$p=\infty$，定义
-    \[\|f\|_{\infty}=\inf\{M<\infty||f|\leq M,\text{a.e.}\}\]
+    \[\|f\|_{\infty}=\inf\{M<\infty||f|\leq M,\mathrm{a.e.}\}\]
     即$f$的本性上确界。
 \end{definition}
 
@@ -411,7 +411,7 @@ $dm$表示勒贝格测度。
     \[\|\{x_n\}\|_{\infty}=\sup_{n\in \mathbb{N}}|x_n|\]
 \end{definition}
 
-在$L^p$空间中，我们\textbf{不区分几乎处处相等的函数}，即如果$f=g,\text{a.e.}$则$f$与$g$在$L^p$空间中是等价的，记作$f\sim g$，因此，以上范数定义中的函数$f$可以理解为等价类中的任意一个代表元。在这个意义下，范数的同一性是成立的。容易验证，非负性和齐次性也是成立的。
+在$L^p$空间中，我们\textbf{不区分几乎处处相等的函数}，即如果$f=g,\mathrm{a.e.}$则$f$与$g$在$L^p$空间中是等价的，记作$f\sim g$，因此，以上范数定义中的函数$f$可以理解为等价类中的任意一个代表元。在这个意义下，范数的同一性是成立的。容易验证，非负性和齐次性也是成立的。
 
 通过实数的三角不等式，可以直接证明$p=1$和$p=\infty$情况下的范数满足三角不等式。对于$1<p<\infty$的情况，我们逐步建立以下不等式。
 
@@ -460,7 +460,7 @@ $1/p+1/q=1$的关系，我们还会多次见到。在实分析中，通常称$p,
 \begin{theorem}[Hölder不等式]
     设$f\in L^p(E),g\in L^q(E)$，有$f\cdot g\in L^1(E)$，并且
     \[\int_{E}|fg|\,dm\leq \|f\|_p\cdot \|g\|_q\]
-    取等条件为存在$\lambda>0$使得$|f|^p=\lambda |g|^q,\text{a.e.}$
+    取等条件为存在$\lambda>0$使得$|f|^p=\lambda |g|^q,\mathrm{a.e.}$
 \end{theorem}
 特别地，在$p=q=2$的情况下，Hölder不等式退化为Cauchy-Schwarz不等式：\begin{align*}
     f,g\in L^2(E)\implies f\cdot g\in L^1(E),\int_{E}|fg|\,dm\leq \|f\|_2\cdot \|g\|_2
@@ -481,19 +481,19 @@ $1/p+1/q=1$的关系，我们还会多次见到。在实分析中，通常称$p,
 为了证明Minkowski不等式，我们还需要以下引理：
 \begin{lemma}
     设$f\in L^p(E),g\in L^q(E)$。在$p<\infty$时，$f$有对偶函数
-    $$f^*=\|f\|_p^{1-p}\cdot\text{sgn}(f)\cdot |f|^{p-1}$$
+    $$f^*=\|f\|_p^{1-p}\cdot\mathrm{sgn}(f)\cdot |f|^{p-1}$$
     满足：\begin{itemize}
         \item $f^*\in L^q(E)$，且$\|f^*\|_q=1$；
         \item $\|f\|_p=\int_{E}f\cdot f^*\,dm$。
     \end{itemize}
 \end{lemma}
 
-在$p=1$时，$f$的对偶函数就是$\text{sgn}(f)$。这个引理直接带入即可验证。
+在$p=1$时，$f$的对偶函数就是$\mathrm{sgn}(f)$。这个引理直接带入即可验证。
 
 \begin{theorem}[Minkowski不等式]
     $\forall f,g\in L^p(E)$，有$f+g\in L^p(E)$，并且
     \[\|f+g\|_p\leq \|f\|_p+\|g\|_p\]
-    取等条件为存在$\lambda>0$使得$|f|=\lambda |g|,\text{a.e.}$
+    取等条件为存在$\lambda>0$使得$|f|=\lambda |g|,\mathrm{a.e.}$
 \end{theorem}
 \begin{proof}
     $p=1$或$p=\infty$的情况显然成立，下面我们证明$1<p<\infty$的情况。
@@ -547,6 +547,10 @@ $L^p$空间的完备性证明较为复杂，我们仅仅给出结论：
 为了区分于分布理论的符号，本书中总是用$(\cdot,\cdot)$来表示$L^2(E)$空间的内积。
 
 显然，$L^2(E)$空间的范数可以由这个内积导出。因此，\textbf{$L^2(E)$空间构成完备的内积空间，即希尔伯特空间}。
+
+令$f=g$，有
+$$(f,f)=\int_{E}|f|^2\,dm=E$$
+其中$E$为$f$的能量。因此，如果不考虑$(f,f)=0$的情况，则我们在第一节中定义的能量信号恰好就是$L^2(\mathbb{R})$。工程上要求能量信号的能量非零、功率信号的功率非零是自然的，但却带来了数学上的麻烦，因此，\textbf{本书的后续内容中不特意区分能量信号、功率信号的能量和功率是否为0}。
 
 %下面考虑$L^p(E)$空间的对偶空间。由Hölder不等式可知，任取$L^q(E)$中的函数$g$，$g$都定义了一个$L^p(E)$的泛函：\begin{align*}
 %    \Phi(f)=\int_{E}f\cdot g\,dm,\forall f\in L^p(E)
