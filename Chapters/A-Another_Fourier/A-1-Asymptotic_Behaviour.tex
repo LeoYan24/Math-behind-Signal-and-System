@@ -2,13 +2,13 @@
 
 \subsection{收敛速度的估计}\label{sub:converge_speed}
 在用计算机模拟函数的傅里叶级数展开时，只能取有限项，自然要问计算到多少项时误差足够小，为此，我们不加证明地给出以下定理\cite{brad_osgood_ee261}：
-\begin{theorem}
+\begin{claim}
     设$f\in C^p(\mathbb{R} )(p\geq1)$是周期函数，其傅里叶系数为$c_k$，部分和
     \[S_N^f(t)=\sum_{k=-N}^{N}c_k \mathrm{e}^{\mathrm{i}k\omega t}\]
     在$\mathbb{R} $上逐点收敛、内闭一致收敛，且
     \[\max\left|f(t)-S_N^f(t)\right|<\frac{1}{N^{p-\frac{1}{2}}}\]
 其中$C^p(\mathbb{R} )$表示p次连续可导的函数集。
-\end{theorem}
+\end{claim}
 
 \subsection{吉布斯现象}\label{sub:gibbs_phenomenon}
 当$f(t)$不连续时，傅里叶级数的会在间断点处产生\textbf{吉布斯现象} (Gibbs' Phenomenon)：

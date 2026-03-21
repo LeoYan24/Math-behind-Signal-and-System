@@ -33,7 +33,7 @@ $$\left\|[f]_{\sim}\right\|_{p}=0\iff f=0,\mathrm{a.e.}\iff f\sim 0$$
 也就是说，$L^p(\mathbb{R})$实际上是$p$次可积函数空间的\textbf{商空间}(factor space)，商空间中元素的范数定义为该元素的任意一个代表元的范数，在这个意义下，$L^p(\mathbb{R})$构成线性赋范空间，只是我们通常不特意区分函数$f$及其所在的等价类$[f]_{\sim}$，也不为商空间和代表元引入额外的记号。
 
 类似地，在功率信号空间中，我们不妨定义以下等价关系：
-$$f\sim g\iff \|f-g\|_{\mathrm{pwr}}=0\iff f-g\in L^p(\mathbb{R})$$
+$$f\sim g\iff \|f-g\|_{\mathrm{pwr}}=0\iff f-g\in L^2(\mathbb{R})$$
 
 这样，通过功率值定义的半范数也就成为了范数。$B^2$甚至还是一个内积空间，它的内积定义为：
 \begin{definition}[$B^2$的内积]
@@ -45,25 +45,25 @@ $$f\sim g\iff \|f-g\|_{\mathrm{pwr}}=0\iff f-g\in L^p(\mathbb{R})$$
 \begin{align*}
     (f,g)_{\mathrm{pwr}}&=\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}f\cdot\overline{g}\,dm\\
     &\leq \lim_{T\to\infty}\frac{1}{T}\left(\int_{-T/2}^{T/2}|f|^2\,dm\cdot\int_{-T/2}^{T/2}|g|^2\,dm\right)^{1/2}\\
-    &=\left(\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}|f|^2\,dm\right)^{1/2}\cdot\left(\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}|f|^2\,dm\right)^{1/2}\\
+    &=\left(\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}|f|^2\,dm\right)^{1/2}\cdot\left(\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}|g|^2\,dm\right)^{1/2}\\
     &=\sqrt{P_f\cdot P_g}<\infty
 \end{align*}
 
 内积所需要满足的其余性质是容易证明的，这里不再一一列举。
 
-数学上，我们将内积空间$B^2$称为\textbf{贝希科维奇空间}(Besicovitch space)，它与我们修正定义后的功率信号是等价的概念。
+数学上，我们将内积空间$B^2$称为\textbf{贝希科维奇空间}(Besicovitch space)，它与我们修正定义后的功率信号空间是等价的概念。
 
 很容易从功率信号联想到周期信号：周期信号在时间上不断重复，如果将一个周期信号在一个周期内的功率定义为$E_T$，则它在全时域上的平均功率$P$就等于$E_T$。事实上，这也是定义“功率”这一概念的核心动机，因为\textbf{在足够大的时间尺度上，周期信号的能量正比于时间}，它们的比值也就应当具备物理意义。
 
-不过，功率信号未必是周期信号。通常来说，只要一个信号中含有周期性的成分，他就是功率信号，例如$\sin t+\sin\sqrt{2}t$，我们称这种信号是\textbf{几乎周期的}(almost periodic)：
+不过，功率信号未必是周期信号。通常来说，只要一个信号中含有周期性的成分，它就是功率信号，例如$\sin (2\pi t)+\sin(2\sqrt{2}\pi t)$，我们称这种信号是\textbf{几乎周期的}(almost periodic)：
 \begin{definition}[几乎周期函数]
     称函数$f$是几乎周期函数，如果
     $$\forall\epsilon>0,\exists T>0,\forall x\in\mathbb{R},|f(x+T)-f(x)|<\epsilon$$
 \end{definition}
 
-我们总是可以取适当的周期信号使得它与这种信号充分靠近，例如$\sin t+\sin\sqrt{2}t$与周期信号$\sin t+\sin(1.414t)$非常相似，后者以$707$为周期。这种近似的可行性是由$\mathbb{Q}$在$\mathbb{R}$中的稠密性保证的。
+我们总是可以取适当的周期信号使得它与这种信号充分靠近，例如$\sin (2\pi t)+\sin(2\sqrt{2}\pi t)$与周期信号$\sin(2\pi t)+\sin(2\pi\cdot 1.414t)$非常相似，后者以$707$为周期。这种近似的可行性是由$\mathbb{Q}$在$\mathbb{R}$中的稠密性保证的。
 
-几乎周期函数理论由丹麦数学家波尔(Harald Bohr)开创。1930年，维纳在其论文Generalized Harmonic Analysis开创了用时间平均研究功率谱的先河，为两年后的贝希科维奇的著作Almost Periodic Functions奠定了基础。在这一著作中，贝希科维奇扩展了波尔的几乎周期函数理论，定义了各类几乎周期函数$B^p$，其中就包括我们前面通过商空间构造内积空间$B^2$的过程。\textbf{贝希科维奇空间实际上是几乎周期函数空间的完备化扩张}，不过工程上处理的通常只是其中的几乎周期函数。
+几乎周期函数理论由丹麦数学家波尔(Harald Bohr)开创。1930年，维纳在其论文《Generalized Harmonic Analysis》中开创了用时间平均研究功率谱的先河，为两年后贝希科维奇的著作《Almost Periodic Functions》奠定了基础。在这一著作中，贝希科维奇扩展了波尔的几乎周期函数理论，定义了各类几乎周期函数$B^p$，前面通过商空间构造内积空间$B^2$的过程就是在这本著作中首次提出的。\textbf{贝希科维奇空间实际上是几乎周期函数空间的完备化扩张}，不过工程上处理的通常只是其中的几乎周期函数。
 
 \subsection{能量谱与功率谱}\label{sub:power_spectrum}
 
@@ -77,7 +77,7 @@ $$f\sim g\iff \|f-g\|_{\mathrm{pwr}}=0\iff f-g\in L^p(\mathbb{R})$$
 因此，$f\in L^1(\mathbb{R})\cap L^2(\mathbb{R})$的能量可以看作是分布在各个频率分量上的。类比概率密度函数，我们定义：
 
 \begin{definition}[能量谱密度]
-    $f$的\textbf{能量谱密度}(energy spectral density)为$|F(\xi)|^2$。
+    $f$的\textbf{能量谱密度}(energy spectral density,ESD)为$|F(\xi)|^2$。
 \end{definition}
 图像$|F(\xi)|^2-\xi$与$\xi$轴围成的面积就是$f$的功率。
 
@@ -93,11 +93,11 @@ $$P_f=\int_{\mathbb{R}}\lim_{T\to\infty}\frac{|F_T(\xi)|^2}{T}\,d\xi$$
 由此我们定义：
 
 \begin{definition}[功率谱密度]
-    功率信号$f$的\textbf{功率谱密度}(power spectral density)为
+    功率信号$f$的\textbf{功率谱密度}(power spectral density,PSD)为
     $$S_f(\xi)=\lim_{T\to\infty}\frac{|F_T(\xi)|^2}{T}$$
 \end{definition}
 
-从以上定义$S_f(\xi)$的过程可以看出，它的计算是非常麻烦的，并且它还常常含有冲击项$\delta$。下面的例子说明了这一点：
+$S_f(\xi)$的计算是非常麻烦的，并且它还常常含有冲击项$\delta$。下面的例子说明了这一点：
 
 \begin{example}
     设功率信号$f(t)=\cos (2\pi t)$，则$f_T(t)=\chi_{[-T/2,T/2]}\cos (2\pi t)$，它的傅里叶变换为\begin{align*}
@@ -128,7 +128,7 @@ $$\left\langle S_f,\varphi\right\rangle=\left\langle \lim_{T\to\infty}\frac{|F_T
 
 将能量与功率的概念推广到两个信号之间：
 \begin{definition}[互能量与互功率]
-    如果$f,g\in L^2(\mathbb{R})$，则它们的\textbf{互能量}定义为它们的内积：
+    如果$f,g\in L^2(\mathbb{R})$，则它们的\textbf{互能量}定义为：
     $$E_{fg}=(f,g)=\int_{\mathbb{R}}f\cdot \overline{g}\,dm$$
     如果$f,g\in B^2$，则它们的\textbf{互功率}定义为：
     $$P_{fg}=(f,g)_{\mathrm{pwr}}=\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}f\cdot\overline{g}\,dm$$
@@ -141,11 +141,11 @@ $$E_{fg}=\int_{\mathbb{R}}\mathcal{F}f(\xi)\overline{\mathcal{F}g}(\xi)\,d\xi$$
 因此，可以定义：
 
 \begin{definition}[互功率谱密度]
-    设能量信号$f,g\in L^1(\mathbb{R})\cap L^2(\mathbb{R})$，则它们的\textbf{互能量谱密度}(cross energy spectrum density)为$\mathcal{F}f(\xi)\overline{\mathcal{F}g}(\xi)$。
+    设能量信号$f,g\in L^1(\mathbb{R})\cap L^2(\mathbb{R})$，则它们的\textbf{互能量谱密度}(cross energy spectrum density,CESD)为$\mathcal{F}f(\xi)\overline{\mathcal{F}g}(\xi)$。
 \end{definition}
 它给出了互能量$E_{fg}$在各个频率成分上的分布情况。
 
-将这一定义类比到功率信号，可以定义\textbf{互功率谱密度}(cross power spectrum density)。考虑截短信号
+将这一定义类比到功率信号，可以定义\textbf{互功率谱密度}(cross power spectrum density,CPSD)。考虑截短信号
 $$f_T(t)=f(t)\chi_{[-T/2,T/2]},g_T(t)=g(t)\chi_{[-T/2,T/2]}$$
 它们的傅里叶变换分别记为$F_T(t)$和$G_T(t)$，由帕塞瓦尔定理，有
 $$\int_{-T/2}^{T/2}f(t)\overline{g(t)}\,dt=\int_{-\infty}^{\infty}f_T(t)\overline{g_T(t)}\,dt=\int_{-\infty}^{\infty}F_T(\xi)\overline{G_T}(\xi)\,d\xi$$
@@ -171,7 +171,7 @@ $$P_{fg}=\int_{-\infty}^{\infty}\lim_{T\to\infty}\frac{1}{T}F_T(\xi)\overline{G_
 \end{equation*}
 \end{definition}
 
-互相关函数是良定义的：
+自相关与互相关函数是良定义的：
 \begin{align*}
     \left|\frac{1}{T}\int_{-T/2}^{T/2}f(y)\overline{g(x+y)}\,dy\right|& \leq \frac{1}{T}\sqrt{\int_{-T/2}^{T/2}|f(y)|^2\,dy\int_{-T/2}^{T/2}\left|\overline{g(x+y)}\right|^2\,dy}\\
     & =\sqrt{\frac{1}{T}\int_{-T/2}^{T/2}|f(y)|^2\,dy\cdot\frac{1}{T}\int_{-T/2}^{T/2}|g(x+y)|^2\,dy}\\
@@ -182,7 +182,6 @@ $$R_f(x)=\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}f(y)\overline{f(x+y)}\,dy\
 其中$P_f,P_g$分别是f,g的功率：\begin{align*}
 P_f&=\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}|f(y)|^2\,dy,P_g=\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}|g(y)|^2\,dy
 \end{align*}
-自相关函数同理。
 
 $R_f(0)=P_f,R_{fg}(0)=P_{fg}$，因此，相关是能量（功率）的推广，互相关是互能量（互功率）的推广。
 

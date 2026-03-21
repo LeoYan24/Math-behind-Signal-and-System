@@ -484,15 +484,15 @@ $$\sigma_a\delta=\delta(ax)=\frac{1}{|a|}\delta(x)$$
         \coordinate (Rstart) at ($(Rto)+(1.5,0)$);
 
         % 起点标签：左改为“函数”，右保持“分布”说明
-        \node[align=center] (Llabel) at (Lstart) {\textbf{函数/正则分布}\\\small (函数的伸缩有定义)};
-        \node[align=center] (Rlabel) at (Rstart) {\textbf{其余分布}\\\small{(分布的伸缩有定义)}};
+        \node[align=center] (Llabel) at (Lstart) {\textbf{$L^1(\mathbb{R})$函数/正则分布}\\\small (函数的伸缩有定义)};
+        \node[align=center] (Rlabel) at (Rstart) {\textbf{分布}\\\small{(分布的伸缩有定义)}};
 
         % 圆内标签：左侧非交叠区为 L^1(\mathbb{R})，右侧非交叠区为 奇异分布
         \node at ({\Lcx-0.7},0)  {$L^1(\mathbb{R})$};
         \node at ({\Rcx+0.7},0)  {奇异分布};
 
         % 交集处放置“正则分布”说明（尽量放在交集中心）
-        \node at (0,0) {其余正则分布};
+        \node at (0,0) {正则分布};
     \end{tikzpicture}
     \caption{伸缩的定义范围示意图}
 \end{figure}

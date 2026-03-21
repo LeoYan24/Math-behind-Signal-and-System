@@ -245,7 +245,7 @@ $$g(t)=\int_{-\infty}^{t}h(y)\,dy$$
 \begin{definition}[因果性]
 一个系统在有激励时，才会出现响应，或者说$r(t_0)$仅依赖于$e(t)$在$t<t_0$时的值（这里不等号不取等是标准的定义方式，我们马上会看到它的作用），即
 \begin{equation}
-    \forall t_0,\left(e_1(t)=e_2(t)\ for\ t<t_0\right)\implies \left(r_1(t)=r_2(t)\ for\ t<t_0\right)\label{eq:4.1}
+    \forall t_0,\left(e_1(t)=e_2(t)\ \mathrm{for}\ t<t_0\right)\implies \left(r_1(t)=r_2(t)\ \mathrm{for}\ t<t_0\right)\label{eq:4.1}
 \end{equation}
 这个条件称为\textbf{因果性条件}(casuality condition)。
 \end{definition}
@@ -255,24 +255,24 @@ $$g(t)=\int_{-\infty}^{t}h(y)\,dy$$
 \begin{proposition}
 对于线性系统，因果性条件等价于
 \begin{equation}
-    \forall t_0,\left(e(t)=0\ for\ t<t_0\right)\implies \left(r(t)=0\ for\ t<t_0\right)\label{eq:4.2}
+    \forall t_0,\left(e(t)=0\ \mathrm{for}\ t<t_0\right)\implies \left(r(t)=0\ \mathrm{for}\ t<t_0\right)\label{eq:4.2}
 \end{equation}
 \end{proposition}
 \begin{proof}
 只要取$e_1(t)=e(t),e_2(t)=0$，就从条件\ref{eq:4.1}推出条件\ref{eq:4.2}；反过来，如果条件\ref{eq:4.2}成立，则任意$e_1,e_2$满足
-$$e_1(t)=e_2(t)\ for\ t<t_0,\text{即}e_1(t)-e_2(t)=0\ for\ t<t_0$$
+$$e_1(t)=e_2(t)\ \mathrm{for}\ t<t_0,\text{即}e_1(t)-e_2(t)=0\ \mathrm{for}\ t<t_0$$
 根据条件\ref{eq:4.2}，有
-$$r_1(t)-r_2(t)=0\ for\ t<t_0,\text{即}r_1(t)=r_2(t)\ for\ t<t_0$$
+$$r_1(t)-r_2(t)=0\ \mathrm{for}\ t<t_0,\text{即}r_1(t)=r_2(t)\ \mathrm{for}\ t<t_0$$
 \end{proof}
 
 \begin{proposition}
 对于线性时不变系统，因果性条件等价于
 \begin{equation}
-    \left(e(t)=0\ for\ t<0\right)\implies \left(r(t)=0\ for\ t<0\right)\label{eq:4.3}
+    \left(e(t)=0\ \mathrm{for}\ t<0\right)\implies \left(r(t)=0\ \mathrm{for}\ t<0\right)\label{eq:4.3}
 \end{equation}
 或者更简便的
 \begin{equation}
-    h(t)=0\ for\ t<0\label{eq:4.4}
+    h(t)=0\ \mathrm{for}\ t<0\label{eq:4.4}
 \end{equation}
 其中h为单位脉冲响应。
 \end{proposition}
@@ -280,6 +280,6 @@ $$r_1(t)-r_2(t)=0\ for\ t<t_0,\text{即}r_1(t)=r_2(t)\ for\ t<t_0$$
 只要取$t_0=0$，就从条件\ref{eq:4.2}推出条件\ref{eq:4.3}；用时不变性，条件\ref{eq:4.3}可以推出条件\ref{eq:4.2}。
 
 对于单位脉冲响应，
-$$\delta=0\ for\ t<0\implies h(t)=0\ for\ t<0$$
-反过来，如果$h(t)=0,e(t)=0\ for\ t<0$,则根据\ref{sub:intuition_of_convolution}中介绍的卷积的“支集相加”性质，有$r(t)=(h*e)(t)=0\ for\ t<0$.
+$$\delta=0\ \mathrm{for}\ t<0\implies h(t)=0\ \mathrm{for}\ t<0$$
+反过来，如果$h(t)=0,e(t)=0\ \mathrm{for}\ t<0$,则根据\ref{sub:intuition_of_convolution}中介绍的卷积的“支集相加”性质，有$r(t)=(h*e)(t)=0\ \mathrm{for}\ t<0$.
 \end{proof}

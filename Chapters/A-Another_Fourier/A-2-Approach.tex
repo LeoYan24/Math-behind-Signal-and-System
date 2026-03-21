@@ -273,7 +273,7 @@ $\int_{-\infty}^{\infty}|g(y)|\,dy<\infty$的必要条件是$\int_{\delta/\lambd
 \end{proof}
 
 此外，还有一种类似的的傅里叶反演公式，我们仅仅给出其表述\cite{folland}：
-\begin{theorem}[傅里叶反演公式]
+\begin{claim}[傅里叶反演公式]
     设$f\in L^1(\mathbb{R})$，则
     \lr{
         &\frac{f(x+)+f(x-)}{2}\\
@@ -282,4 +282,4 @@ $\int_{-\infty}^{\infty}|g(y)|\,dy<\infty$的必要条件是$\int_{\delta/\lambd
         &\frac{f(x+)+f(x-)}{2}\\
         =&\lim_{\lambda\to 0}\frac{1}{2\pi}\int_{-\infty}^{\infty}\mathrm{e}^{\mathrm{i}\omega x}\mathcal{F} f(\omega)\mathrm{e}^{-\lambda^2\omega^2/4}\,d\omega,\mathrm{a.e.}
     }
-\end{theorem}
+\end{claim}
