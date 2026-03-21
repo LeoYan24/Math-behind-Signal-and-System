@@ -293,9 +293,10 @@ $\mathcal{F}\varphi$仍然是测试函数。这个测试函数空间正是\textb
 和常规的函数一样，现在也可以不区分反转与傅里叶变换的先后，而统一地记作$\mathcal{F} T^-$.
 \begin{proof}
     \begin{align*}
-    \left\langle\mathcal{F}(T^-),\varphi\right\rangle=\left\langle T^-,\mathcal{F}\varphi\right\rangle=\left\langle T,\mathcal{F} \varphi^-\right\rangle=\left\langle\mathcal{F}T,\varphi^-\right\rangle=\left\langle(\mathcal{F}T)^-,\varphi\right\rangle \\
-    \Rightarrow\mathcal{F}(T^-)= (\mathcal{F}T)^-
+    \left\langle\mathcal{F}(T^-),\varphi\right\rangle=\left\langle T^-,\mathcal{F}\varphi\right\rangle=\left\langle T,\mathcal{F} \varphi^-\right\rangle=\left\langle\mathcal{F}T,\varphi^-\right\rangle=\left\langle(\mathcal{F}T)^-,\varphi\right\rangle
 \end{align*}
+因此
+$$\mathcal{F}(T^-)= (\mathcal{F}T)^-$$
 考察反转与傅里叶逆变换的关系：
 \lr{
     \left\langle\mathcal{F}T^-,\varphi\right\rangle&=\left\langle T,\mathcal{F}\varphi^-\right\rangle\\
@@ -312,7 +313,9 @@ $\mathcal{F}\varphi$仍然是测试函数。这个测试函数空间正是\textb
     \mathcal{F}T^-= 2\pi\mathcal{F}^{-1}T
 }
 \end{proof}
-这与前文中函数的傅里叶变换对偶性完全一样。有了对偶性，就可以得到：
+这与前文中函数的傅里叶变换对偶性完全一样。
+
+利用分布的傅里叶变换的定义及其对偶性，可以立即得到：
 \begin{theorem}[帕塞瓦尔恒等式/普朗歇尔定理]
     \quad
     \lr{
@@ -333,13 +336,13 @@ $\mathcal{F}\varphi$仍然是测试函数。这个测试函数空间正是\textb
 }
 取$g=f$即证。
 \end{proof}
-看上去，这里只是将\ref{sub:fourier_operation_properties}中的证明换了一种符号，并没有用到刚才建立的分布的傅里叶变换的对偶性，然而，现在我们可以得到正则分布的帕塞瓦尔恒等式。我们不仅扩大了证明适用的范围，还得到了比积分换序的方法简单得多的证明。
+相比\ref{sub:fourier_operation_properties}中的帕塞瓦尔定理，这个证明适用于$f$是正则分布而$g$是施瓦兹函数的情况，它的证明要简单得多。
 
 \begin{example}[$\delta$是偶分布]
     \begin{align*}
-    \left\langle \delta^-,\varphi\right\rangle & =\left\langle \delta,\varphi^-\right\rangle=\varphi^-(0)=\varphi(0)=\left\langle \delta,\varphi\right\rangle \\
-    \Rightarrow \delta^-            & =\delta
+    \left\langle \delta^-,\varphi\right\rangle & =\left\langle \delta,\varphi^-\right\rangle=\varphi^-(0)=\varphi(0)=\left\langle \delta,\varphi\right\rangle
 \end{align*}
+因此$\delta^-=\delta$.
 \end{example}
 
 \begin{example}[分布$\mathds{1}$的傅里叶逆变换]
