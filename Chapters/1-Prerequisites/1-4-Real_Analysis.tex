@@ -367,7 +367,7 @@ $dm$表示勒贝格测度。
 
 \begin{definition}[$L^{\infty}$空间]
     设$E$是可测集，$L^{\infty}(E)$空间表示在$E$上\textbf{本性有界}(essentially bounded)的函数组成的函数空间，即
-    \[L^{\infty}(E):=\left\{f:E\rightarrow \mathbb{C} \left|\exists M<\infty,|f|\leq M,a.e.\right.\right\}\]
+    \[L^{\infty}(E):=\left\{f:E\rightarrow \mathbb{C} \left|\exists M<\infty,|f|\leq M,\mathrm{a.e.}\right.\right\}\]
 \end{definition}
 
 \begin{definition}[$l^p$空间]
@@ -391,8 +391,7 @@ $dm$表示勒贝格测度。
 \end{lemma}
 
 由此可以推出以上几种空间都是线性空间。此外，在$0<p<1$时，$L^p(E)$和$l^p$空间是度量空间，它们的度量分别为
-\[d(f,g)=\int_{E}|f-g|^p\,dm\]
-\[d(\{x_n\},\{y_n\})=\sum_{n=0}^{\infty}|x_n-y_n|^p\]
+\[d(f,g)=\int_{E}|f-g|^p\,dm,d(\{x_n\},\{y_n\})=\sum_{n=0}^{\infty}|x_n-y_n|^p\]
 
 不过，$0<p<1$的情况不是我们的主要目标，因为它们不构成范数空间。下面，我们给出以上几种空间在$1\leq p \leq \infty$时的范数定义，再通过Minkowski不等式证明这些范数满足三角不等式，从而证明它们是线性赋范空间。
 
@@ -404,14 +403,14 @@ $dm$表示勒贝格测度。
     即$f$的本性上确界。
 \end{definition}
 
+在$L^p$空间中，我们\textbf{不区分几乎处处相等的函数}，即如果$f=g,\mathrm{a.e.}$则$f$与$g$在$L^p$空间中是等价的，记作$f\sim g$，因此，以上范数定义中的函数$f$可以理解为等价类中的任意一个代表元。在这个意义下，范数的同一性是成立的。容易验证，非负性和齐次性也是成立的。
+
 \begin{definition}[$l^p$空间的范数]
     设$1\leq p<\infty$，对于$\{x_n\}\in l^p$，定义
     \[\|\{x_n\}\|_p=\left(\sum_{n=0}^{\infty}|x_n|^p\right)^{1/p}\]
     对于$\{x_n\}\in l^{\infty}$，定义
     \[\|\{x_n\}\|_{\infty}=\sup_{n\in \mathbb{N}}|x_n|\]
 \end{definition}
-
-在$L^p$空间中，我们\textbf{不区分几乎处处相等的函数}，即如果$f=g,\mathrm{a.e.}$则$f$与$g$在$L^p$空间中是等价的，记作$f\sim g$，因此，以上范数定义中的函数$f$可以理解为等价类中的任意一个代表元。在这个意义下，范数的同一性是成立的。容易验证，非负性和齐次性也是成立的。
 
 通过实数的三角不等式，可以直接证明$p=1$和$p=\infty$情况下的范数满足三角不等式。对于$1<p<\infty$的情况，我们逐步建立以下不等式。
 
@@ -422,7 +421,7 @@ $dm$表示勒贝格测度。
     如果等号成立当且仅当$x_1=x_2$，则称$\phi$是\textbf{严格凸}(strictly convex)的。
 \end{definition}
 
-凸函数的左、右导数必然存在，并且满足$\phi'(\alpha-)\leq \phi'(\alpha+)$。利用切线放缩的想法，可以证明Jensen不等式。
+凸函数的左、右导数必然存在，并且满足$\phi'(\alpha-)\leq \phi'(\alpha+)$。
 
 \begin{theorem}[Jensen不等式]
     设$\phi:\mathbb{R}\to\mathbb{R}$是凸函数，$f:[0,1]\to\mathbb{R}$和$\phi\circ f:[0,1]\to\mathbb{R}$可积，则

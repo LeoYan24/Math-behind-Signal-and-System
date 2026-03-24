@@ -1,0 +1,62 @@
+\documentclass{ctexbook}
+\input{note-setup-frame.tex}
+%自行添加的包
+\input{packages.tex}
+%子文件支持
+\usepackage{subfiles}
+
+\title{信号与系统中的数学}
+\author{严子竣\quad 王怀宇}
+\date{\today}
+
+\begin{document}
+\makecover{bnds2}
+
+%前言
+\subfile{./Chapters/0-Preface_Acknowledge.tex}
+
+\vfill 
+
+%LICENSE
+\begin{center}
+    {\huge\faCreativeCommons\ \faCreativeCommonsBy\ \faCreativeCommonsNc\ \faCreativeCommonsNd} \\[1em]
+    {\large 本作品采用知识共享 署名-非商业性使用-禁止演绎 4.0 国际 许可协议进行许可。} \\
+    {\small 访问 \url{https://creativecommons.org/licenses/by-nc-nd/4.0/} 查看该许可协议。}
+\end{center}
+
+% ===== 分为“简要目录”和“详尽目录” =====
+% 使用 etoc 提供的局部控制目录深度，避免修改 \l@subsection 导致的副作用
+\newpage
+\renewcommand{\contentsname}{简要目录}
+\etocsetnexttocdepth{1}% 1=section
+\tableofcontents
+
+\clearpage
+
+% 详尽目录：显示到 subsection（默认样式，使用全局 tocloft 设置）
+\renewcommand{\contentsname}{详尽目录}
+\setcounter{tocdepth}{2}
+\tableofcontents%目录（详尽）
+\mainmatter%正文
+
+\subfile{./Chapters/1-Prerequisites.tex}
+
+\subfile{./Chapters/2-Fourier.tex}
+
+\subfile{./Chapters/3-Continuous_System.tex}
+
+\subfile{./Chapters/4-Advanced_Fourier.tex}
+
+\subfile{./Chapters/5-Laplace.tex}
+
+\subfile{./Chapters/6-DTT.tex}
+
+\subfile{./Chapters/7-Discrete_System.tex}
+
+\subfile{./Chapters/8-MIMO.tex}
+
+\subfile{./Chapters/A-Another_Fourier.tex}
+
+\printbibliography[heading=bibintoc, title={参考文献}]
+
+\end{document}
