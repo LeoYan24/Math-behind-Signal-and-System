@@ -105,7 +105,7 @@ f*g&=\mathcal{F} ^{-1}\left(\mathcal{F} f\mathcal{F} g\right)
 \subsection{卷积的直观}\label{sub:intuition_of_convolution}
 初次接触卷积时，往往会对它的定义感到疑惑，因为在数学分析的课程中我们很少见到这种“翻转、平移、相乘、积分”的结构。需要指出，卷积并不只有“时域相乘，频域卷积；时域卷积，频域相乘”的物理意义，例如概率论中两独立的连续型随机变量X,Y之和作为一种新的随机变量Z，其概率密度函数$f_Z(z)$正是两个独立的随机变量的概率密度函数的卷积$f_X*f_Y(z)$.类似于用“求曲线下方的面积”或“已知速度求位移”引入积分，尽管我们用一种较为自然的方式引入了卷积，但不应该认为它只有单一的意义。不过，还是可以建立一些卷积的性质来辅助我们理解卷积。
 
-\noindent 1.\textbf{卷积是一种起“平均化”作用的运算}
+\subsubsection{卷积是一种起“平均化”作用的运算}
 \begin{definition}[加权均值]
     给定区间$[a,b]$和权函数$w(x)$，$f(x)$的加权均值为\[\frac{\int_{a}^{b}f(x)w(x)\,dx}{\int_{a}^{b}w(x)\,dx}\]
 \end{definition}
@@ -115,7 +115,7 @@ f*g&=\mathcal{F} ^{-1}\left(\mathcal{F} f\mathcal{F} g\right)
 特别地，如果$g(x)=\frac{1}{2a}\chi_{[-a,a]}$，则$f*g(x)$是$f(x)$在区间$[x-a,x+a]$上的平均值：
 \[(f*g)(x)=\int_{-\infty}^{\infty}f(y)g(x-y)\,dy=\frac{1}{2a}\int_{x-a}^{x+a}f(y)\,dy\]
 
-\noindent 2.\textbf{卷积函数的支集}
+\subsubsection{卷积函数的支集}
 
 %我们首先引入\textbf{支集}(support)的概念，读者只需理解其直观，真正理解它需要一些拓扑学的基础。
 \begin{definition}[支集]
@@ -144,7 +144,7 @@ $\mathrm{supp}\ f=\overline{\left\{x\in\mathbb{R}\left|f(x)\neq 0\right.\right\}
 
 当区间退化为单点集或区间端点为$\pm\infty$时，这一性质也是成立的。
 
-\noindent 3.\textbf{函数变换下的卷积}
+\subsubsection{函数变换下的卷积}
 \begin{proposition}[信号反转下的卷积]
     \[(f^-)*(g^-)=(f*g)^-\]
 \end{proposition}
@@ -186,7 +186,7 @@ $\mathrm{supp}\ f=\overline{\left\{x\in\mathbb{R}\left|f(x)\neq 0\right.\right\}
 和傅里叶变换的伸缩定理类似，这里也需要讨论a的正负，但不再赘述。
 \end{proof}
 
-\noindent 4.\textbf{“面积”关系}
+\subsubsection{“面积”关系}
 
 我们已经提到，概率论中两个独立随机变量之和的概率密度函数是它们各自概率密度函数的卷积，这当
 然要求两个概率密度函数在$\mathbb{R}$上的积分值为1时，它们的卷积在$\mathbb{R}$上的积
