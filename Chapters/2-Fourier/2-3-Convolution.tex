@@ -224,78 +224,80 @@ $\rho(f,g)=\pm 1$时两信号\textbf{线性相关}；$\rho(f,g)=0$时两信号\t
 \begin{definition}[互相关]
 设$f,g\in L^2(\mathbb{R})$，它们的互相关定义为
 \begin{equation*}
-    R_{fg}(x)=(f\star g)(x)=\int_{-\infty}^{\infty}f(y)\overline{g(x+y)}\,dy
+    R_{fg}(x)=\int_{-\infty}^{\infty}f(x+y)\overline{g(y)}\,dy
 \end{equation*}
-同样可以定义f的自相关$R_f(x)=(f\star f)(x)$
+同样可以定义f的\textbf{自相关}(auto-correlation)$R_f(x)$
 \end{definition}
 
-我们给出了两种相关的符号，其中$R_{fg}$在信号与系统教材中被广泛使用，但$(f\star g)$更便于讨论相关的性质。
-
 互相关具有以下性质：
-\begin{proposition}[互相关的性质]
-\begin{enumerate}
+\begin{proposition}
     设$f,g\in L^2(\mathbb{R})$，则
-    \item $(f\star g) =f^-* \overline{g}=\overline{(g\star f)^-}$，如果$f,g$都是实信号，则$f\star g = (g\star f)^- =f^- *g=(f*g^-)^-$.
-    \item (维纳-辛钦定理)设$f,g\in L^1(\mathbb{R})$，则$\mathcal{F} (f\star g) =\mathcal{F} f\overline{\mathcal{F} g}$
-    \item $f\star (\tau_b g)=\tau_{b} (f\star g)=(\tau_{-b}f)\star g$
-    \item $(f\star g)\leq\|f\|_2\|g\|_2$，特别地，$(f\star f)(x)\leq (f\star f)(0)=\|f\|_2^2$
+\begin{enumerate}
+    \item $R_{fg}=f* \overline{g^-}=\overline{R_{gf}^-}$，如果$f,g$都是实信号，则$f\star g = (g\star f)^- =f^- *g=(f*g^-)^-$.
+    \item (维纳-辛钦定理)设$f,g\in L^1(\mathbb{R})$，则$\mathcal{F} R_{fg} =\mathcal{F} f\overline{\mathcal{F} g}$
+    \item $R_{\tau_b f,g}=\tau_{b}R_{fg}=R_{f,\tau_{-b}g}$
+    \item $R_{fg}\leq\|f\|_2\|g\|_2$，特别地，$R_f(x)\leq R_f(0)=\|f\|_2^2$
 \end{enumerate}
 \end{proposition}
 \begin{remark}
     一般来说，\textbf{维纳-辛钦定理}(Wiener-Khinchin Theorem)是指第二条性质的特殊情况，即令$f=g$，得到
     $$\mathcal{F}(R_f)=|\mathcal{F} f|^2$$
+    但是，用这个名称来指代更一般的定理$\mathcal{F}R_{fg}=\mathcal{F}f\overline{\mathcal{F}g}$是方便的，因此本书总是这样做。
 \end{remark}
 
 \begin{proof}
     1.
 \begin{align*}
-    (f\star g)(x)&=\int_{-\infty}^{\infty}f(y)\overline{g(x+y)}\,dy\\
-    &=\int_{-\infty}^{\infty}f(-y)\overline{g(x-y)}\,dy\\
-    &=\int_{-\infty}^{\infty}f^-(y)\overline{g(x-y)}\,dy\\
-    &=(f^- * \overline{g})(x)\\
-    (f\star g)(x)& =\int_{-\infty}^{\infty}f(y)\overline{g(x+y)}\,dy\\
-    &=\overline{\int_{-\infty}^{\infty}g(x+y)\overline{f(y)}\,dy}\\
-    &=\overline{(g\star f)(-x)}=\overline{(g\star f)^-(x)}
+    R_{fg}(x)&=\int_{-\infty}^{\infty}f(x+y)\overline{g(y)}\,dy\\
+    &=\int_{-\infty}^{\infty}f(x-y)\overline{g(-y)}\,dy&(y\to -y)\\
+    &=f*\overline{g^-}
 \end{align*}
-这里不涉及频率、角频率的问题，读者可以自行验证。
+\begin{align*}
+    R_{fg}(x)& =\int_{-\infty}^{\infty}f(x+y)\overline{g(y)}\,dy\\
+    &=\overline{\int_{-\infty}^{\infty}\overline{f(y)}g(y-x)\,dy}&(y\to y-x)\\
+    &=\overline{\overline{f}*g(x)}\\
+    &=\overline{\int_{-\infty}^{\infty}g(y-x)\overline{f(y)}\,dy}\\
+    &=\overline{R_{gf}}(-x)
+\end{align*}
+
+由于不涉及频率、角频率的问题，我们仅给出一种符号下的证明：
 
 2.
 \begin{align*}
-    \mathcal{F} (f\star g)(\xi) & =\int_{-\infty}^{\infty}(f\star g)(x)\mathrm{e}^{-2\pi \mathrm{i}\xi x}\,dx\\
-    & =\int_{-\infty}^{\infty}\mathrm{e}^{-2\pi \mathrm{i}\xi x}\,dx\int_{-\infty}^{\infty}f(y)\overline{g(x+y)}\,dy\\
-    & =\iint\limits_{\mathbb{R}^2}f(y)\overline{g(x+y)}\mathrm{e}^{-2\pi \mathrm{i}\xi x}\,dy\,dx\\
-    & =\int_{-\infty}^{\infty}f(y)\,dy\int_{-\infty}^{\infty}\overline{g(x+y)}\mathrm{e}^{-2\pi \mathrm{i}\xi x}\,dx\\
-    & =\int_{-\infty}^{\infty}f(y)\mathrm{e}^{2\pi \mathrm{i}\xi y}\,dy\int_{-\infty}^{\infty}\overline{g(u)}\mathrm{e}^{-2\pi \mathrm{i}\xi u}\,du & (u=x+y) \\
+    \mathcal{F} R_{fg}(\xi) & =\int_{-\infty}^{\infty}R_{fg}(x)\mathrm{e}^{-2\pi \mathrm{i}\xi x}\,dx\\
+    & =\int_{-\infty}^{\infty}\mathrm{e}^{-2\pi \mathrm{i}\xi x}\,dx\int_{-\infty}^{\infty}f(x+y)\overline{g(y)}\,dy\\
+    & =\int_{-\infty}^{\infty}\overline{g(y)}\,dy\int_{-\infty}^{\infty}f(x+y)\mathrm{e}^{-2\pi \mathrm{i}\xi x}\,dx\\
+    & =\int_{-\infty}^{\infty}\overline{g(y)}\mathrm{e}^{2\pi \mathrm{i}\xi y}\,dy\int_{-\infty}^{\infty}f(u)\mathrm{e}^{-2\pi \mathrm{i}\xi u}\,du & (u=x+y) \\
+    &=\overline{\int_{-\infty}^{\infty}g(y)\mathrm{e}^{-2\pi \mathrm{i}\xi y}\,dy}\int_{-\infty}^{\infty}f(u)\mathrm{e}^{-2\pi \mathrm{i}\xi u}\,du\\
     & =\mathcal{F} f(\xi)\overline{\mathcal{F} g(\xi)}
 \end{align*}
 
 3.
 \begin{align*}
-    \left(f\star (\tau_b g)\right)(x)&=\int_{-\infty}^{\infty}f(y)\overline{(\tau_b g)(x+y)}\,dy\\
-    & =\int_{-\infty}^{\infty}f(y)\overline{g(x+y-b)}\,dy\\
-    & =(f\star g)(x-b)=\tau_{b} (f\star g)(x)\\
-    ( (\tau_{-b}f)\star g)(x) & =\int_{-\infty}^{\infty}(\tau_{-b}f)(y)\overline{g(x+y)}\,dy\\
-    & =\int_{-\infty}^{\infty}f(y+b)\overline{g(x+y)}\,dy\\
-    & =\int_{-\infty}^{\infty}f(z)\overline{g(x+z-b)}\,dz& (z=y+b) \\
-    & =(f\star g)(x-b)=\tau_{b} (f\star g)(x)
+    R_{\tau_b f,g}(x)&=\int_{-\infty}^{\infty}\tau_b f(x+y)\overline{g(y)}\,dy\\
+    & =\int_{-\infty}^{\infty}f(x+y-b)\overline{g(y)}\,dy\\
+    & =R_{fg}(x-b)=\tau_{b} R_{fg}(x)\\
+    &=\int_{-\infty}^{\infty}f(x+u)\overline{g(u+b)}\,du&(u=y-b)\\
+    &=R_{f,\tau_{-b}g}
 \end{align*}
 
 4.\begin{align*}
-    (f\star g)(x)& =\int_{-\infty}^{\infty}f(y)\overline{g(x+y)}\,dy\\
-    & \leq \sqrt{\int_{-\infty}^{\infty}|f(y)|^2\,dy\int_{-\infty}^{\infty}\left|\overline{g(x+y)}\right|^2\,dy  }\\
-    &=\sqrt{\|f\|_2^2\|g\|_2^2}=\|f\|_2\cdot\|g\|_2  
+    R_{fg}(x)& =\int_{-\infty}^{\infty}f(x+y)\overline{g(y)}\,dy\\
+    & \leq \sqrt{\int_{-\infty}^{\infty}|f(x+y)|^2\,dy\int_{-\infty}^{\infty}\left|\overline{g(y)}\right|^2\,dy  }\\
+    &=\sqrt{\|f\|_2^2\|g\|_2^2}\\
+    &=\|f\|_2\cdot\|g\|_2  
 \end{align*}
 \end{proof}
 
-一些文献（如\cite{signal_systems}）也将互相关函数定义为
-$$R_{fg}(x)=\int_{-\infty}^{\infty}f(y)\overline{g(x-y)}\,dy=\int_{-\infty}^{\infty}f(x+y)\overline{g(y)}\,dy$$
-这与上面讨论的互相关没有本质区别。
+一些文献（例如\cite{brad_osgood_ee261}）将互相关函数定义为
+$$R_{fg}(x)=\int_{-\infty}^{\infty}f(y)\overline{g(x+y)}\,dy$$
+这与上面讨论的互相关没有太大的区别，但维纳-辛钦定理的形式会更加复杂。
 
 对于功率信号，我们需要对以上互相关的定义略作修改，以避免趋于无穷的情况发生。
 \begin{definition}[功率信号的互相关]
     对于功率信号$f,g$，定义互相关函数为
 \begin{equation*}
-    R_{fg}=(f\star g)(x)=\lim_{T\to\infty}\frac{1}{2T}\int_{-T}^{T}f(y)\overline{g(x+y)}\,dy
+    R_{fg}=R_{fg}(x)=\lim_{T\to\infty}\frac{1}{2T}\int_{-T}^{T}f(x+y)\overline{g(y)}\,dy
 \end{equation*}
 \end{definition}
 我们将在\ref{sub:power_corelation}中讨论它。
@@ -303,11 +305,11 @@ $$R_{fg}(x)=\int_{-\infty}^{\infty}f(y)\overline{g(x-y)}\,dy=\int_{-\infty}^{\in
 最后我们给出一个互相关的应用\cite{brad_osgood_ee261}。
 \begin{example}[雷达测距]
     设雷达发射了一个信号$f(t)$，经过时间T信号接触到物体并发生反射，再经过时间T信号回到雷达，雷达接收到的信号$f_r(t)=\alpha (\tau_{2T}f(t))+n(t)$,其中$\alpha\in(0,1)$，表示信号在传播过程中衰减；$n(t)$为噪声信号。我们希望确定时间T，以计算雷达到物体间的距离。对于噪声信号$n(t)$，它满足
-    \[(f\star n)(t)=C\]
-    C为常数，因此可以考虑求发射信号与接收信号的互相关函数：
+    \[R_{fn}(t)=C\]
+    C为常数（对于随机信号来说，这是可以做到的），因此可以考虑求发射信号与接收信号的互相关函数：
     \begin{align*}
-        (f\star f_r)(t)&=\alpha(f\star \tau_{2T}f)(t)+(f\star n)(t)\\
-        &=\alpha\tau_{2T}(f\star f)(t)+\alpha C
+        R_{f,f_r}(t)&=R_{f,\tau_{2T}f}(t)+R_{fn}(t)\\
+        &=\alpha\tau_{2T}R_f(t)+\alpha C
     \end{align*}
-    根据前面得到的性质4，$(f\star f)(t)$在0处取最大值，因此$(f\star f_r)(t)$在$2T$处取最大值，于是我们只需要观察这个互相关函数的最大值点，就可以得到T。
+    根据前面得到的性质4，$R_f(t)$在0处取最大值，因此$R_{f,f_r}(t)$在$2T$处取最大值，于是我们只需要观察这个互相关函数的最大值点，就可以得到T。
 \end{example}

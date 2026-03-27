@@ -164,21 +164,21 @@ $$P_{fg}=\int_{-\infty}^{\infty}\lim_{T\to\infty}\frac{1}{T}F_T(\xi)\overline{G_
 
 \begin{definition}[功率信号的相关]
     功率信号$f\in B^2$的自相关函数为
-    $$R_f(x)=(f\star f)(x)=\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}f(y)\overline{f(x+y)}\,dy$$
+    $$R_f(x)=\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}f(x+y)\overline{f(y)}\,dy$$
     功率信号$f,g\in B^2$的互相关函数为
 \begin{equation*}
-    R_{f,g}=(f\star g)(x)=\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}f(y)\overline{g(x+y)}\,dy
+    R_{f,g}=\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}f(x+y)\overline{g(y)}\,dy
 \end{equation*}
 \end{definition}
 
 自相关与互相关函数是良定义的：
 \begin{align*}
-    \left|\frac{1}{T}\int_{-T/2}^{T/2}f(y)\overline{g(x+y)}\,dy\right|& \leq \frac{1}{T}\sqrt{\int_{-T/2}^{T/2}|f(y)|^2\,dy\int_{-T/2}^{T/2}\left|\overline{g(x+y)}\right|^2\,dy}\\
-    & =\sqrt{\frac{1}{T}\int_{-T/2}^{T/2}|f(y)|^2\,dy\cdot\frac{1}{T}\int_{-T/2}^{T/2}|g(x+y)|^2\,dy}\\
+    \left|\frac{1}{T}\int_{-T/2}^{T/2}f(x+y)\overline{g(y)}\,dy\right|& \leq \frac{1}{T}\sqrt{\int_{-T/2}^{T/2}|f(x+y)|^2\,dy\int_{-T/2}^{T/2}\left|\overline{g(y)}\right|^2\,dy}\\
+    & =\sqrt{\frac{1}{T}\int_{-T/2}^{T/2}|f(x+y)|^2\,dy\cdot\frac{1}{T}\int_{-T/2}^{T/2}|g(y)|^2\,dy}\\
     & =\sqrt{\frac{1}{T}\int_{-T/2}^{T/2}|f(y)|^2\,dy\cdot\frac{1}{T}\int_{-T/2}^{T/2}|g(y)|^2\,dy}
 \end{align*}
 令$T\to\infty$，得到
-$$R_f(x)=\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}f(y)\overline{f(x+y)}\,dy\leq\sqrt{P_f P_g}$$
+$$R_f(x)=\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}f(x+y)\overline{f(y)}\,dy\leq\sqrt{P_f P_g}$$
 其中$P_f,P_g$分别是f,g的功率：\begin{align*}
 P_f&=\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}|f(y)|^2\,dy,P_g=\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}|g(y)|^2\,dy
 \end{align*}
@@ -196,7 +196,7 @@ $$\mathcal{F}R_{fg}=\mathcal{F}f\overline{\mathcal{F}g}$$
 \end{theorem}
 \begin{proof}
     定义截短所得能量信号$f_T$和$g_T$的互相关函数为
-    $$R_T(x)=(f_T\star g_T)=\int_{-T/2}^{T/2}f(y)\overline{g(x+y)}\,dy$$
+    $$R_T(x)=(f_T\star g_T)=\int_{-T/2}^{T/2}f(x+y)\overline{g(x)}\,dy$$
     由维纳-辛钦定理，有
     $$\mathcal{F}R_T(x)=F_T(\xi)\overline{G_T(\xi)}$$
     等式两边同时除以$T$并与测试函数$\varphi\in\mathcal{S}$配对：
@@ -211,9 +211,10 @@ $$\mathcal{F}R_{fg}=\mathcal{F}f\overline{\mathcal{F}g}$$
 
 \begin{example}
     设功率信号$f(t)=\cos (2\pi t)$，则$f_T(t)=\chi_{[-T/2,T/2]}\cos (2\pi t)$，它的自相关函数为\begin{align*}
-        R_{T}(x)&=\int_{-\infty}^{\infty}f_T(y)f_T(x+y)\,dy\\
-        &=\int_{-\infty}^{\infty}\cos(2\pi y)\chi_{[-T/2,T/2]}\cdot\cos(2\pi(x+y))\chi_{[-x-T/2,-x+T/2]}\,dy\\
-        &=\int_{\max\{-T/2,-x-T/2\}}^{\min\{T/2,-x+T/2\}}\cos(2\pi y)\cos(2\pi(x+y))\,dy\\
+        R_{T}(x)&=\int_{-\infty}^{\infty}f_T(x+y)f_T(y)\,dy\\
+        &=\int_{-\infty}^{\infty}\cos(2\pi (x
+        +y))\chi_{[-T/2,T/2]}\cdot\cos(2\pi y)\chi_{[-x-T/2,-x+T/2]}\,dy\\
+        &=\int_{\max\{-T/2,-x-T/2\}}^{\min\{T/2,-x+T/2\}}\cos(2\pi(x+y))\cos(2\pi y)\,dy\\
         &=\frac{1}{2}\int_{\max\{-T/2,-x-T/2\}}^{\min\{T/2,-x+T/2\}}[\cos(2\pi(x+2y))+\cos(2\pi x)]\,dy
     \end{align*}
     当$|x|>T$时，两个截短信号的支集错开，积分区间变为空集，$R_T(x)=0$；当$0\leq x\leq T$时，上式等于\begin{align*}
@@ -311,3 +312,17 @@ $$S_f=\left(\frac{1}{2}\right)^2\delta_1+\left(\frac{1}{2}\right)^2\delta_{-1}=\
     它的功率谱密度为
     $$S_f=\frac{1}{4}(\delta_1-\delta_{-1}+\delta_{\sqrt{2}}-\delta_{\sqrt{2}})$$
 \end{example}
+
+回顾功率谱密度的定义：
+$$S_{fg}=\lim_{T\to\infty}\frac{1}{T}F_T(\xi)\overline{G_T}(\xi)$$
+利用$\delta$分布的取样性质，不妨认为
+$$\delta(0)=\infty,\delta(x)=0,x\neq 0\implies\delta\cdot\delta=\infty\cdot\delta,\delta_a\cdot\delta_b=0,a\neq b$$
+那么，以上功率谱密度的计算方法可以不严谨地由以下事实推出：
+$$\lim_{T\to\infty}\frac{1}{T}\delta^2=\delta,\lim_{T\to\infty}F_T(\xi)=F(\xi),\lim_{T\to\infty}G_T(\xi)=G(\xi)$$
+即：
+\begin{align*}
+    S_{fg}&=\lim_{T\to\infty}\frac{1}{T}F_T(\xi)\overline{G_T}(\xi)\\
+    &=\lim_{T\to\infty}\frac{1}{T}\left(\sum_{n}a_n\delta_{\xi_n}\right)\left(\sum_{n}b_n\delta_{\xi_n}\right)\\
+    &=\sum_{n}a_n b_n\lim_{T\to\infty}\frac{1}{T}\delta^2_{\xi_n}\\
+    &=\sum_{n}a_n b_n\delta_{\xi_n}
+\end{align*}
