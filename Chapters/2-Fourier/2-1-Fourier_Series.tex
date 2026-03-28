@@ -10,18 +10,18 @@
 \end{align*}
 （其中$\omega =\frac{2\pi }{T}$为\textbf{基波角频率}，$k\omega (k>1,k\in \mathbb{Z} )$
 为k次\textbf{谐波角频率}）
-\begin{claim}[三角函数形式的傅里叶系数公式]
+\begin{theorem}[三角函数形式的傅里叶系数公式]
 \[a_k=\frac{2}{T}\int_T f(t)\cos(k\omega t)\,dt\]
 \[b_k=\frac{2}{T}\int_T f(t)\sin(k\omega t)\,dt\]
 \[c_k=\sqrt{a_k^2+b_k^2}\]
-\end{claim}
+\end{theorem}
 下面用完备标准正交函数系的观点来得到以上公式。在学习数学分析时，我们已经看到三角函数系$1,\sin(\omega t),\cos(\omega t),\sin(2\omega t),\cos(2\omega t),\dots\left(\omega =\dfrac{2\pi}{T}\right)$是正交的（读者可以自行验证），但不是单位正交的，因为
 \[(\sin(k\omega t),\sin(k\omega t))=\int_{T}\sin^2(k\omega t)\,dt=\int_{T}\frac{1-\cos(2k\omega t)}{2}=\frac{T}{2}\]
 \[(\cos(k\omega t),\cos(k\omega t))=\int_{T}\cos^2(k\omega t)\,dt=\int_{T}\frac{1+\cos(2k\omega t)}{2}=\frac{T}{2}\]
 可以将它们单位化，也可以直接采用完备正交基分解的公式，
-\[a_k=\frac{(f(t),\cos(k\omega t))}{(\cos(k\omega t),\cos(k\omega t))}=\frac{\int_{T}f(t)\cos(k\omega t)^*(t)\,dt}{\int_{T}|\cos(k\omega t)|^2\,dt}
+\[a_k=\frac{(f(t),\cos(k\omega t))}{(\cos(k\omega t),\cos(k\omega t))}=\frac{\int_{T}f(t)\overline{\cos(k\omega t)(t)}\,dt}{\int_{T}|\cos(k\omega t)|^2\,dt}
     =\frac{2}{T}\int_{T}f(t)\cos(k\omega t)(t)\,dt\]
-\[b_k=\frac{(f(t),\sin(k\omega t))}{(\sin(k\omega t),\sin(k\omega t))}=\frac{\int_{T}f(t)\sin(k\omega t)^*(t)\,dt}{\int_{T}|\sin(k\omega t)|^2\,dt}
+\[b_k=\frac{(f(t),\sin(k\omega t))}{(\sin(k\omega t),\sin(k\omega t))}=\frac{\int_{T}f(t)\overline{\sin(k\omega t)(t)}\,dt}{\int_{T}|\sin(k\omega t)|^2\,dt}
     =\frac{2}{T}\int_{T}f(t)\sin(k\omega t)(t)\,dt\]
 
 如果将傅里叶级数展开式写为
@@ -35,19 +35,21 @@
 \end{align*}
 
 容易利用对称性得到：
-\begin{claim}[偶函数的傅里叶展开]
+\begin{theorem}[偶函数的傅里叶展开]
 当$f(t)$为偶函数，或者由$f(t)$做偶延拓时,展开式为
 \[f(t)=\frac{a_0}{2}+\sum_{k = 1}^{\infty} a_k\cos(k\omega t)\]
 其中
 \[a_k=\frac{4}{T}\int_{0}^{T/2} f(t)\cos(k\omega t)\,dt\]
 \[b_k=0\]
-\end{claim}\begin{claim}[奇函数的傅里叶展开]
+\end{theorem}
+
+\begin{theorem}[奇函数的傅里叶展开]
 当$f(t)$为奇函数，或者由$f(t)$做奇延拓时,展开式为
 \[f(t)=\sum_{k = 1}^{\infty} b_k \sin(k\omega t)\]
 其中
 \[a_k=0\]
 \[b_k=\frac{4}{T}\int_{0}^{T/2} f(t)\sin(k\omega t)\,dt\]
-\end{claim}
+\end{theorem}
 
 除了奇偶性，还可以从奇次谐波、偶次谐波的角度来理解函数。
 \begin{definition}[奇谐函数]
@@ -76,9 +78,10 @@
 
 由欧拉公式$\mathrm{e}^{\mathrm{i}k\omega t}=\cos(k\omega t)+\mathrm{i}\sin(k\omega t)$，得到
 \[\cos(k\omega t)=\frac{\mathrm{e}^{\mathrm{i}k\omega t}+\mathrm{e}^{-\mathrm{i}k\omega t}}{2},\sin(k\omega t)=\frac{\mathrm{e}^{\mathrm{i}k\omega t}-\mathrm{e}^{-\mathrm{i}k\omega t}}{2\mathrm{i}}\]
-故函数$f(t)$也可在指数函数系下展开：\begin{definition}[指数形式傅里叶展开]
-    \[f(t)=\sum_{k = 0}^{\infty}  c_k \mathrm{e}^{\mathrm{i}k\omega t} ,c_k=\frac{a_k-\mathrm{i}b_k}{2},c_{-k}=\frac{a_k+\mathrm{i}b_k}{2}=c_k^*,k\in \mathbb{N}\]
-（特别地，$c_0=c_0^*\implies c_0\in\mathbb{R} $）
+故函数$f(t)$也可在指数函数系下展开：
+\begin{definition}[指数形式傅里叶展开]
+    \[f(t)=\sum_{k = 0}^{\infty}  c_k \mathrm{e}^{\mathrm{i}k\omega t} ,c_k=\frac{a_k-\mathrm{i}b_k}{2},c_{-k}=\frac{a_k+\mathrm{i}b_k}{2}=\overline{c_k},k\in \mathbb{N}\]
+特别地，$c_0=\overline{c_0}\implies c_0\in\mathbb{R} $.
 \end{definition}
 容易验证$\{\mathrm{e}^{\mathrm{i}k\omega t}\}_{k=0}^{\infty}$是完备正交函数系：
 \begin{align*}
@@ -88,13 +91,13 @@
     &=0(k_1,k_2\in \mathbb{Z},k_1\neq k_2)
 \end{align*}
 \begin{align*}
-    (\mathrm{e}^{\mathrm{i}k\omega t},\mathrm{e}^{\mathrm{i}k\omega t})&=\int_{T}\mathrm{e}^{\mathrm{i}k\omega t}(\mathrm{e}^{\mathrm{i}k\omega t})^*\,dt\\
+    (\mathrm{e}^{\mathrm{i}k\omega t},\mathrm{e}^{\mathrm{i}k\omega t})&=\int_{T}\mathrm{e}^{\mathrm{i}k\omega t}\overline{\mathrm{e}^{\mathrm{i}k\omega t}}\,dt\\
     &=\int_{T}\,dt=T(k\in \mathbb{Z} )
 \end{align*}
 和三角函数系的情况一样，我们得到$c_k$的计算公式：
 \begin{align*}
     c_k & =\frac{(f(t),\mathrm{e}^{\mathrm{i}k\omega t})}{(\mathrm{e}^{\mathrm{i}k\omega t},\mathrm{e}^{\mathrm{i}k\omega t})} \\
-        & =\frac{1}{T}\int_{T}f(t)(\mathrm{e}^{\mathrm{i}k\omega t})^*\,dt                 \\
+        & =\frac{1}{T}\int_{T}f(t)\overline{\mathrm{e}^{\mathrm{i}k\omega t}}\,dt                 \\
         & =\frac{1}{T}\int_{T}f(t)\mathrm{e}^{-\mathrm{i}k\omega t}\,dt
 \end{align*}
 有时也将$c_k$记作$\hat{f}(k\omega)$或$\hat{F}(k)$，表示f在频域中的点$k\omega$处的值。一般而言，我们只将最小正周期称为一个函数的周期，\textbf{但周期为T的函数可以有多个频率$k\omega(k \in \mathbb{Z})$}。

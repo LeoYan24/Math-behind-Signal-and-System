@@ -111,9 +111,9 @@ $D_N(t)$是偶函数，得证。
 它给出了傅里叶系数平方和的上界的估计。由此可以看出$c_n\to 0,n\to\infty$.
 \begin{proof}
     \begin{align*}
-    \left|f(t)-\sum_{n=-N}^{N}c_n \mathrm{e}^{\mathrm{i}n\omega t}\right|^2 & =\left(f(t)-\sum_{n=-N}^{N}c_n \mathrm{e}^{\mathrm{i}n\omega t}\right)\left(f(t)-\sum_{n=-N}^{N}c_n \mathrm{e}^{\mathrm{i}n\omega t}\right)^*\\
-    & =\left(f(t)-\sum_{n=-N}^{N}c_n \mathrm{e}^{\mathrm{i}n\omega t}\right)\left(f^*(t)-\sum_{n=-N}^{N}c_n \mathrm{e}^{-\mathrm{i}n\omega t}\right)\\
-    & =|f(t)|^2-\sum_{n=-N}^{N}\left(c_n^*f(t)\mathrm{e}^{\mathrm{i}n\omega t}+c_n f^*(t)\mathrm{e}^{-\mathrm{i}n\omega t}\right)+\sum_{m,n=-N}^{N}c_m c_n^*\mathrm{e}^{\mathrm{i}(m-n)\omega t}
+    \left|f(t)-\sum_{n=-N}^{N}c_n \mathrm{e}^{\mathrm{i}n\omega t}\right|^2 & =\left(f(t)-\sum_{n=-N}^{N}c_n \mathrm{e}^{\mathrm{i}n\omega t}\right)\overline{\left(f(t)-\sum_{n=-N}^{N}c_n \mathrm{e}^{\mathrm{i}n\omega t}\right)}\\
+    & =\left(f(t)-\sum_{n=-N}^{N}c_n \mathrm{e}^{\mathrm{i}n\omega t}\right)\left(\overline{f(t)}-\sum_{n=-N}^{N}c_n \mathrm{e}^{-\mathrm{i}n\omega t}\right)\\
+    & =|f(t)|^2-\sum_{n=-N}^{N}\left(\overline{c_n}f(t)\mathrm{e}^{\mathrm{i}n\omega t}+c_n \overline{f(t)}\mathrm{e}^{-\mathrm{i}n\omega t}\right)+\sum_{m,n=-N}^{N}c_m \overline{c_n}\mathrm{e}^{\mathrm{i}(m-n)\omega t}
 \end{align*}
 将上式在一个周期上积分，我们知道
 \[\int_{T}f(t)\mathrm{e}^{\mathrm{i}n\omega t}\,dt=Tc_n,\int_{T}\mathrm{e}^{\mathrm{i}(m-n)\omega t}\,dt=\begin{cases}
@@ -121,8 +121,8 @@ $D_N(t)$是偶函数，得证。
         T & \text{if }m=n
     \end{cases}\]
 故\begin{align*}
-      & \int_{T}|f(t)|^2\,dt-\sum_{n=-N}^{N}\left(c_n^*\int_{T}f(t)\mathrm{e}^{\mathrm{i}n\omega t}\,dt+c_n \int_{T}f^*(t)\mathrm{e}^{-\mathrm{i}n\omega t}\,dt\right)+\sum_{m,n=-N}^{N}c_m c_n^*\int_{T}\mathrm{e}^{\mathrm{i}(m-n)\omega t}\,dt \\
-    = & \int_{T}|f(t)|^2\,dt-T\sum_{n=-N}^{N}(c_n^* c_n+c_n c_n^*)+T\sum_{n=-N}^{N}c_n^* c_n\\
+      & \int_{T}|f(t)|^2\,dt-\sum_{n=-N}^{N}\left(\overline{c_n}\int_{T}f(t)\mathrm{e}^{\mathrm{i}n\omega t}\,dt+c_n \int_{T}\overline{f(t)}\mathrm{e}^{-\mathrm{i}n\omega t}\,dt\right)+\sum_{m,n=-N}^{N}c_m \overline{c_n}\int_{T}\mathrm{e}^{\mathrm{i}(m-n)\omega t}\,dt \\
+    = & \int_{T}|f(t)|^2\,dt-T\sum_{n=-N}^{N}(\overline{c_n} c_n+c_n \overline{c_n})+T\sum_{n=-N}^{N}\overline{c_n} c_n\\
     = & \int_{T}|f(t)|^2\,dt-T\sum_{n=-N}^{N}|c_n|^2
 \end{align*}
 这是非负函数的积分，积分值非负，即\begin{align*}

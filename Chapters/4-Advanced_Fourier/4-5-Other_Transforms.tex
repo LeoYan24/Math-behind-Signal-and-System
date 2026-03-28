@@ -74,9 +74,7 @@
     \[(f\star g)(x)=\int_0^{\infty}f\left(\frac{x}{t}\right)g(t)\frac{dt}{t}\]
 \end{definition}
 
-符号$\star$与\ref{sub:correlation}中的互相关符号相同，但我们很少同时用到它们，必要时将指出它的具体含义。
-
-%我们还将在\ref{sub:z_convolution}看到类似的卷积方式，并且梅林变换的定义与性质与z变换有一定的相似之处，不过，z变换是用来处理离散信号的，而梅林卷积处理的是连续信号。它们的相似性或许可以解释为，它们都可以看作是特定情况下的双边拉普拉斯变换。
+梅林卷积是变换域乘法在时域中的体现：
 
 \begin{proposition}[梅林卷积的变换性质]
     设$f,g\in L^1(\mathbb{R}^+)$，则有
@@ -127,7 +125,7 @@
 其中$ds$为弧长微元。也就是说，线脉冲作为泛函作用于二元函数$f(x,y)$，相当于$f$在直线$L(\rho,\phi)$上的线积分。实际上，它是以下定理的推论，不过我们不在这里进行证明。
 \begin{claim}
     设有平面曲线$\gamma:F(x,y)=0$，$F$连续可微，且$|\nabla F|\neq 0$，其中
-    \[\nabla F=\text{grad}F=\begin{bmatrix}
+    \[\nabla F=\mathrm{grad}F=\begin{bmatrix}
         \frac{\partial F}{\partial x}\\
         \frac{\partial F}{\partial y}        
     \end{bmatrix}\]
