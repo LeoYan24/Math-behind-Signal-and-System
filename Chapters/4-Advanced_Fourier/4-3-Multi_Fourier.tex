@@ -141,15 +141,15 @@ $f(\mathbf{x})$的傅里叶变换为（以频率为例）：
     \end{align*}
     n维矩形函数记为$\chi_I$。简洁起见，这里计算一个特殊的矩形函数$\chi_I$，其中$I=[-T/2,T/2]^n$。已知一维矩形函数的傅里叶变换为：
     \begin{lralign}
-    \mathcal{F} \left(\chi_{[-T/2,T/2]}\right)(\xi)&=T\text{sinc}(T\xi)
+    \mathcal{F} \left(\chi_{[-T/2,T/2]}\right)(\xi)&=T\mathrm{sinc}(T\xi)
 \switch
-    \mathcal{F} \left(\chi_{[-T/2,T/2]}\right)(\omega)&=T\text{Sa}\left(\frac{T\omega}{2}\right)
+    \mathcal{F} \left(\chi_{[-T/2,T/2]}\right)(\omega)&=T\mathrm{Sa}\left(\frac{T\omega}{2}\right)
     \end{lralign}
     因此，n维矩形函数的傅里叶变换为：
     \begin{lralign}
-    \mathcal{F} \chi_I(\boldsymbol{\xi})&=T^n \prod_{j=1}^n \text{sinc}(T\xi_j)
+    \mathcal{F} \chi_I(\boldsymbol{\xi})&=T^n \prod_{j=1}^n \mathrm{sinc}(T\xi_j)
 \switch
-    \mathcal{F} \chi_I(\boldsymbol{\omega})&=T^n \prod_{j=1}^n \text{Sa}\left(\frac{T\omega_j}{2}\right)
+    \mathcal{F} \chi_I(\boldsymbol{\omega})&=T^n \prod_{j=1}^n \mathrm{Sa}\left(\frac{T\omega_j}{2}\right)
     \end{lralign}
 \end{example}
 
@@ -169,7 +169,7 @@ $$\left\{\mathbf{x}\in\mathbb{R}^n \mid \mathbf{x}\cdot\boldsymbol{\xi}=k+\theta
 
 \subsection{多维傅里叶变换的运算性质}\label{sub:operation_of_multi_fourier}
 
-多维傅里叶变换的运算性质相较一维比较丰富，本小节中将分条列举这些性质。由于
+多维傅里叶变换的运算性质相较一维比较丰富，本小节中将分条列举这些性质。
 
 \begin{proposition}[对偶性]
     设$f(\mathbf{x}):\mathbb{R}^n\to\mathbb{C}$，则有：
@@ -206,9 +206,9 @@ $$\left\{\mathbf{x}\in\mathbb{R}^n \mid \mathbf{x}\cdot\boldsymbol{\xi}=k+\theta
     &=\overline{\int_{\mathbb{R}^n}f(\mathbf{x})\mathrm{e}^{-2\pi \mathrm{i} \mathbf{x}\cdot\boldsymbol{\xi}}\,d\mathbf{x}}\\
     &=\overline{\mathcal{F} f(\boldsymbol{\xi})}
 \switch
-    \mathcal{F} f^-(\mathbf{\omega})&=\int_{\mathbb{R}^n}f(-\mathbf{x})\mathrm{e}^{-\mathrm{i} \mathbf{x}\cdot\mathbf{\omega}}\,d\mathbf{x}\\
-    &=\overline{\int_{\mathbb{R}^n}f(\mathbf{x})\mathrm{e}^{\mathrm{i} \mathbf{x}\cdot\mathbf{\omega}}\,d\mathbf{x}}\\
-    &=(2\pi)^n \overline{\mathcal{F} f(\mathbf{\omega})}
+    \mathcal{F} f^-(\boldsymbol{\omega})&=\int_{\mathbb{R}^n}f(-\mathbf{x})\mathrm{e}^{-\mathrm{i} \mathbf{x}\cdot\boldsymbol{\omega}}\,d\mathbf{x}\\
+    &=\overline{\int_{\mathbb{R}^n}f(\mathbf{x})\mathrm{e}^{\mathrm{i} \mathbf{x}\cdot\boldsymbol{\omega}}\,d\mathbf{x}}\\
+    &=(2\pi)^n \overline{\mathcal{F} f(\boldsymbol{\omega})}
     \end{lralign}
 \end{proof}
 
@@ -276,7 +276,7 @@ $$\left\{\mathbf{x}\in\mathbb{R}^n \mid \mathbf{x}\cdot\boldsymbol{\xi}=k+\theta
     \switch
     \mathcal{F} \left[f(A\mathbf{x})\right](\boldsymbol{\omega})&=\frac{1}{|\det A|}\mathcal{F} f\left(A^{-T}\boldsymbol{\omega}\right)
     \end{lralign}
-    特别地，当$A$是对角阵时，设$A=\text{diag}(a_1,a_2,\cdots,a_n)$，则有：
+    特别地，当$A$是对角阵时，设$A=\mathrm{diag}(a_1,a_2,\cdots,a_n)$，则有：
     \begin{lralign}
     &\mathcal{F} \left[f(a_1 x_1,a_2 x_2,\cdots,a_n x_n)\right](\boldsymbol{\xi})\\
     =&\frac{1}{|a_1 a_2\cdots a_n|}\mathcal{F} f\left(\frac{\xi_1}{a_1},\frac{\xi_2}{a_2},\cdots,\frac{\xi_n}{a_n}\right)
@@ -353,26 +353,26 @@ $$\left\{\mathbf{x}\in\mathbb{R}^n \mid \mathbf{x}\cdot\boldsymbol{\xi}=k+\theta
     \end{align*}
     场论中，梯度、散度、旋度等运算都可以用$\nabla$表示：
     \begin{itemize}
-        \item 梯度：$\nabla f=\text{grad}f$
-        \item 散度：$\nabla\cdot \mathbf{F}=\text{div}\mathbf{F}$，其中$\mathbf{F}=(F_1,F_2,\cdots,F_n)$
-        \item 旋度（仅在$\mathbb{R}^3$中定义）：$\nabla\times \mathbf{F}=\text{curl}\mathbf{F}$（一些文献中也将旋度算子记为$\text{rot}$）
+        \item 梯度：$\nabla f=\mathrm{grad}f$
+        \item 散度：$\nabla\cdot \mathbf{F}=\mathrm{div}\mathbf{F}$，其中$\mathbf{F}=(F_1,F_2,\cdots,F_n)$
+        \item 旋度（仅在$\mathbb{R}^3$中定义）：$\nabla\times \mathbf{F}=\mathrm{curl}\mathbf{F}$（一些文献中也将旋度算子记为$\mathrm{rot}$）
     \end{itemize}
 \end{definition}
 
 \begin{corollary}[场论中的微分性质]
-    由微分性质，我们依次对比向量值函数的各个分量。对于梯度$\nabla f=\text{grad}f$，有：
+    由微分性质，我们依次对比向量值函数的各个分量。对于梯度$\nabla f=\mathrm{grad}f$，有：
     \begin{lralign}
     \mathcal{F} \left(\nabla f\right)(\boldsymbol{\xi})&=2\pi \mathrm{i} \boldsymbol{\xi} \mathcal{F} f(\boldsymbol{\xi})
 \switch
     \mathcal{F} \left(\nabla f\right)(\boldsymbol{\omega})&=\mathrm{i} \boldsymbol{\omega} \mathcal{F} f(\boldsymbol{\omega})
     \end{lralign}
-    对于散度$\nabla\cdot \mathbf{F}=\text{div}\mathbf{F}$，其中$\mathbf{F}=(F_1,F_2,\cdots,F_n)$，有：
+    对于散度$\nabla\cdot \mathbf{F}=\mathrm{div}\mathbf{F}$，其中$\mathbf{F}=(F_1,F_2,\cdots,F_n)$，有：
     \begin{lralign}
     \mathcal{F} \left(\nabla\cdot \mathbf{F}\right)(\boldsymbol{\xi})&=2\pi \mathrm{i} \boldsymbol{\xi}\cdot \mathcal{F} \mathbf{F}(\boldsymbol{\xi})
 \switch
     \mathcal{F} \left(\nabla\cdot \mathbf{F}\right)(\boldsymbol{\omega})&=\mathrm{i} \boldsymbol{\omega}\cdot \mathcal{F} \mathbf{F}(\boldsymbol{\omega})
     \end{lralign}
-    在$\mathbb{R}^3$中，对于旋度$\nabla\times \mathbf{F}=\text{curl}\mathbf{F}$，有：
+    在$\mathbb{R}^3$中，对于旋度$\nabla\times \mathbf{F}=\mathrm{curl}\mathbf{F}$，有：
     \begin{lralign}
     \mathcal{F} \left(\nabla\times \mathbf{F}\right)(\boldsymbol{\xi})&=2\pi \mathrm{i} \boldsymbol{\xi}\times \mathcal{F} \mathbf{F}(\boldsymbol{\xi})
 \switch
@@ -385,6 +385,8 @@ $$\left\{\mathbf{x}\in\mathbb{R}^n \mid \mathbf{x}\cdot\boldsymbol{\xi}=k+\theta
     \mathcal{F} \left(\Delta f\right)(\boldsymbol{\omega})&=-|\boldsymbol{\omega}|^2 \mathcal{F} f(\boldsymbol{\omega})
     \end{lralign}
 \end{corollary}
+
+换言之，频域上，$\nabla=2\pi\mathrm{i}\boldsymbol{\xi}=\mathrm{i}\boldsymbol{\omega}$。
 
 我们还可以定义n维空间$\mathbb{R}^n$上的\textbf{卷积}。与一维的情况类似，由于卷积的存在性可以由多种充分条件保证，我们直接从形式上给出卷积的定义，而不讨论$f,g$具体的范围。
 \begin{definition}[卷积]
@@ -748,48 +750,48 @@ $\shah_{\mathcal{L} }$的$\delta$分布位于格$\mathcal{L} $的格点上，而
 最后，我们来讨论二维信号的采样与重建问题。
 \begin{definition}[二维带限函数]
     设$f\in L^1(\mathbb{R}^2)$，如果存在矩形区域$$B=\{( \xi_1,\xi_2)\left| |\xi_1|\leq \xi_{m1},|\xi_2|\leq \xi_{m2}\right.\}$$
-    使得$\text{supp} \mathcal{F}f \subset B$，就说$f$为二维\textbf{带限函数}(bandlimited function)，带宽为$(\xi_{m1},\xi_{m2})$。
+    使得$\mathrm{supp} \mathcal{F}f \subset B$，就说$f$为二维\textbf{带限函数}(bandlimited function)，带宽为$(\xi_{m1},\xi_{m2})$。
 \end{definition}
 特别地，我们考虑
-$$\text{supp}\mathcal{F} f\subset\left\{( \xi_1,\xi_2)\left| |\xi_1|\leq \dfrac{1}{2},|\xi_2|\leq \dfrac{1}{2}\right.\right\}$$
+$$\mathrm{supp}\mathcal{F} f\subset\left\{( \xi_1,\xi_2)\left| |\xi_1|\leq \dfrac{1}{2},|\xi_2|\leq \dfrac{1}{2}\right.\right\}$$
 的情况。由恒等式
 \[\mathcal{F} f(\boldsymbol{\xi})=\chi_{[-1/2,1/2]^2}(\boldsymbol{\xi})(\mathcal{F} f(\boldsymbol{\xi})*\shah)\]
-取傅里叶逆变换，由\ref{sub:multi_fourier}中的结果可知$\mathcal{F} ^{-1}\chi_{[-1/2,1/2]}(\mathbf{x})=\text{sinc}(\mathbf{x})$，我们得到：\begin{align*}
+取傅里叶逆变换，由\ref{sub:multi_fourier}中的结果可知$\mathcal{F} ^{-1}\chi_{[-1/2,1/2]}(\mathbf{x})=\mathrm{sinc}(\mathbf{x})$，我们得到：\begin{align*}
     f(\mathbf{x})&=\mathcal{F} ^{-1}[\chi_{[-1/2,1/2]^2}(\boldsymbol{\xi})(\mathcal{F} f(\boldsymbol{\xi})*\shah)](\mathbf{x})\\
     &=\mathcal{F} ^{-1}\chi_{[-1/2,1/2]^2}(\mathbf{x})*(f(\mathbf{x})*\shah(\mathbf{x}))\\
-    &=\text{sinc}(\mathbf{x})*(f(\mathbf{x})*\shah(\mathbf{x}))\\
-    &=\sum_{\mathbf{k}\in\mathbb{Z}^2}f(\mathbf{k})\text{sinc}(x_1-k_1)\text{sinc}(x_2-k_2)
+    &=\mathrm{sinc}(\mathbf{x})*(f(\mathbf{x})*\shah(\mathbf{x}))\\
+    &=\sum_{\mathbf{k}\in\mathbb{Z}^2}f(\mathbf{k})\mathrm{sinc}(x_1-k_1)\mathrm{sinc}(x_2-k_2)
 \end{align*}
 最后一行用到了卷积的结合律，见\ref{sub:properties_of_convolution}。综上得到以下引理：
 \begin{lemma}[方形采样公式]
-    设$$f\in L^1(\mathbb{R}^2),\text{supp}\mathcal{F} f\subset\left\{( \xi_1,\xi_2)\left| |\xi_1|\leq \dfrac{1}{2},|\xi_2|\leq \dfrac{1}{2}\right.\right\}$$
+    设$$f\in L^1(\mathbb{R}^2),\mathrm{supp}\mathcal{F} f\subset\left\{( \xi_1,\xi_2)\left| |\xi_1|\leq \dfrac{1}{2},|\xi_2|\leq \dfrac{1}{2}\right.\right\}$$
     则有
-    \[f(\mathbf{x})=\sum_{\mathbf{k}\in\mathbb{Z}^2}f(\mathbf{k})\text{sinc}(x_1-k_1)\text{sinc}(x_2-k_2)\]
+    \[f(\mathbf{x})=\sum_{\mathbf{k}\in\mathbb{Z}^2}f(\mathbf{k})\mathrm{sinc}(x_1-k_1)\mathrm{sinc}(x_2-k_2)\]
 \end{lemma}
 
-更一般地，我们考虑$\text{supp}\mathcal{F} f$属于格$\mathcal{L} =A(\mathbb{Z}^2),A=[\mathbf{u}_1,\mathbf{u}_2]$的某个基本平行四边形内。显而易见，带限等价于存在这样一个平行四边形，使得频域信号$\mathcal{F} f$支于它。由于我们通常考虑实信号，不妨设这个基本平行四边形是关于原点对称的。
+更一般地，我们考虑$\mathrm{supp}\mathcal{F} f$属于格$\mathcal{L} =A(\mathbb{Z}^2),A=[\mathbf{u}_1,\mathbf{u}_2]$的某个基本平行四边形内。显而易见，带限等价于存在这样一个平行四边形，使得频域信号$\mathcal{F} f$支于它。由于我们通常考虑实信号，不妨设这个基本平行四边形是关于原点对称的。
 
 我们希望利用已经得到的方形采样公式来推导格采样公式。为此，考虑将频域信号$\mathcal{F} f$进行伸缩变换，这对应时域上“对偶”的伸缩变换：
 \[\mathcal{F} f(A\boldsymbol{\xi})=\frac{1}{|\det A|}\mathcal{F}[f(A^{-T}\mathbf{x})](\boldsymbol{\xi})\]
 
-令$g(\mathbf{x})=f(A^{-T}\mathbf{x})$，则$\text{supp}\mathcal{F} g\in[-1/2,1/2]^2$，因此可以应用方形采样公式：
-\[g(\mathbf{x})=\sum_{\mathbf{k}\in\mathbb{Z}^2}g(\mathbf{k})\text{sinc}(x_1-k_1)\text{sinc}(x_2-k_2)\]
+令$g(\mathbf{x})=f(A^{-T}\mathbf{x})$，则$\mathrm{supp}\mathcal{F} g\in[-1/2,1/2]^2$，因此可以应用方形采样公式：
+\[g(\mathbf{x})=\sum_{\mathbf{k}\in\mathbb{Z}^2}g(\mathbf{k})\mathrm{sinc}(x_1-k_1)\mathrm{sinc}(x_2-k_2)\]
 将$g$的定义代入上式，得到：
-\[f(A^{-T}\mathbf{x})=\sum_{\mathbf{k}\in\mathbb{Z}^2}f(A^{-T}\mathbf{k})\text{sinc}(x_1-k_1)\text{sinc}(x_2-k_2)\]
+\[f(A^{-T}\mathbf{x})=\sum_{\mathbf{k}\in\mathbb{Z}^2}f(A^{-T}\mathbf{k})\mathrm{sinc}(x_1-k_1)\mathrm{sinc}(x_2-k_2)\]
 
 以上结果可以改写为\textbf{格采样公式}：
 \begin{theorem}[格采样公式]
-    设$$f\in L^1(\mathbb{R}^2),\text{supp}\mathcal{F} f\subset\left\{( \xi_1,\xi_2)\left| \mathbf{\xi}=A\boldsymbol{\eta},\boldsymbol{\eta}\in[-1/2,1/2]^2\right.\right\}$$
+    设$$f\in L^1(\mathbb{R}^2),\mathrm{supp}\mathcal{F} f\subset\left\{( \xi_1,\xi_2)\left| \mathbf{\xi}=A\boldsymbol{\eta},\boldsymbol{\eta}\in[-1/2,1/2]^2\right.\right\}$$
     则有
-    \[f(\mathbf{y})=\sum_{k_1,k_2\in\mathbb{Z}}f(k_1\mathbf{u}^*_1+k_2\mathbf{u}^*_2)\text{sinc}(\mathbf{u}_1\cdot \mathbf{y}-k_1)\text{sinc}(\mathbf{u}_2\cdot \mathbf{y}-k_2)\]
+    \[f(\mathbf{y})=\sum_{k_1,k_2\in\mathbb{Z}}f(k_1\mathbf{u}^*_1+k_2\mathbf{u}^*_2)\mathrm{sinc}(\mathbf{u}_1\cdot \mathbf{y}-k_1)\mathrm{sinc}(\mathbf{u}_2\cdot \mathbf{y}-k_2)\]
 \end{theorem}
 \begin{proof}
     令$\mathbf{y}=A^{-T}\mathbf{x}$，则$\mathbf{x}=A^T\mathbf{y}$，于是
     \[x_1=\mathbf{u}_1\cdot \mathbf{y},x_2=\mathbf{u}_2\cdot \mathbf{y}\]
     对$A^{-T}\mathbf{k}$，我们知道$A^{-T}$的行向量分别为$\mathbf{u}^*_1,\mathbf{u}^*_2$，因此$A^{-T}\mathbf{k}=k_1\mathbf{u}^*_1+k_2\mathbf{u}^*_2$。综上得到：
     \begin{align*}
-        f(\mathbf{y})&=\sum_{\mathbf{k}\in\mathbb{Z}^2}f(A^{-T}\mathbf{k})\text{sinc}(\mathbf{u}_1\cdot \mathbf{y}-k_1)\text{sinc}(\mathbf{u}_2\cdot \mathbf{y}-k_2)\\
-        &=\sum_{k_1,k_2\in\mathbb{Z}}f(k_1\mathbf{u}^*_1+k_2\mathbf{u}^*_2)\text{sinc}(\mathbf{u}_1\cdot \mathbf{y}-k_1)\text{sinc}(\mathbf{u}_2\cdot \mathbf{y}-k_2)
+        f(\mathbf{y})&=\sum_{\mathbf{k}\in\mathbb{Z}^2}f(A^{-T}\mathbf{k})\mathrm{sinc}(\mathbf{u}_1\cdot \mathbf{y}-k_1)\mathrm{sinc}(\mathbf{u}_2\cdot \mathbf{y}-k_2)\\
+        &=\sum_{k_1,k_2\in\mathbb{Z}}f(k_1\mathbf{u}^*_1+k_2\mathbf{u}^*_2)\mathrm{sinc}(\mathbf{u}_1\cdot \mathbf{y}-k_1)\mathrm{sinc}(\mathbf{u}_2\cdot \mathbf{y}-k_2)
     \end{align*}
 \end{proof}
 
