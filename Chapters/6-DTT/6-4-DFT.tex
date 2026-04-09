@@ -150,8 +150,8 @@ $$\mathcal{F} \mathcal{F} ^H=N\cdot I$$
         \item 线性性：$\forall a,b\in\mathbb{C}$，有
     \[a x[n]+b y[n]\xleftrightarrow{\mathrm{DFT}} a X[k]+b Y[k]\]
         \item 周期性：$X[k+N]=X[k],Y[k+N]=Y[k]$为周期为$N$的离散信号
-        \item 时移性质：$x[(n-n_0)]\xleftrightarrow{\mathrm{DFT}}\mathrm{e}^{-\mathrm{i}\frac{2\pi}{N}kn_0}X[k]$
-        \item 频移性质：$\mathrm{e}^{\mathrm{i}\frac{2\pi}{N}k_0 n}x[n]\xleftrightarrow{\mathrm{DFT}}X\left[k-k_0\right]$
+        \item 时移性质：$x[n-n_0]\xleftrightarrow{\mathrm{DFT}}\mathrm{e}^{-\mathrm{i}\frac{2\pi}{N}kn_0}X[k]=W_N^{-kn_0 }X[k]$
+        \item 频移性质：$\mathrm{e}^{\mathrm{i}\frac{2\pi}{N}k_0 n}x[n]=W_N^{k_0 n}x[n]\xleftrightarrow{\mathrm{DFT}}X\left[k-k_0\right]$
         \item 共轭性质：$\overline{x[n]}\xleftrightarrow{\mathrm{DFT}}\overline{X\left[-k\right]}$
     \end{itemize}
 \end{proposition}
