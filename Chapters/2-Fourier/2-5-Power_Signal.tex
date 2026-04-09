@@ -157,7 +157,7 @@ $$P_{fg}=\int_{-\infty}^{\infty}\lim_{T\to\infty}\frac{1}{T}F_T(\xi)\overline{G_
 
 \begin{definition}[互功率谱密度]
     功率信号$f,g\in B^2$的互功率谱密度为
-    $$S_{fg}=\lim_{T\to\infty}\frac{1}{T}F_T(\xi)\overline{G_T}(\xi)$$
+    $$S_{fg}(\xi)=\lim_{T\to\infty}\frac{1}{T}F_T(\xi)\overline{G_T}(\xi)$$
 \end{definition}
 
 \subsection{功率信号的相关}\label{sub:power_corelation}
@@ -167,7 +167,7 @@ $$P_{fg}=\int_{-\infty}^{\infty}\lim_{T\to\infty}\frac{1}{T}F_T(\xi)\overline{G_
     $$R_f(x)=\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}f(x+y)\overline{f(y)}\,dy$$
     功率信号$f,g\in B^2$的互相关函数为
 \begin{equation*}
-    R_{f,g}=\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}f(x+y)\overline{g(y)}\,dy
+    R_{fg}(x)=\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}f(x+y)\overline{g(y)}\,dy
 \end{equation*}
 \end{definition}
 
@@ -192,17 +192,17 @@ $$\mathcal{F}R_{fg}=\mathcal{F}f\overline{\mathcal{F}g}$$
 我们自然希望功率信号也有类似的性质：
 \begin{theorem}[功率信号的维纳-辛钦定理]
     设$f,g\in B^2$，则
-    $$\mathcal{F}R_{fg}=S_{fg}=\lim_{T\to\infty}\frac{1}{T}F_T(\xi)\overline{G_T}(\xi)$$
+    $$\mathcal{F}R_{fg}(\xi)=S_{fg}(\xi)=\lim_{T\to\infty}\frac{1}{T}F_T(\xi)\overline{G_T}(\xi)$$
 \end{theorem}
 \begin{proof}
     定义截短所得能量信号$f_T$和$g_T$的互相关函数为
     $$R_T(x)=(f_T\star g_T)=\int_{-T/2}^{T/2}f(x+y)\overline{g(x)}\,dy$$
     由维纳-辛钦定理，有
-    $$\mathcal{F}R_T(x)=F_T(\xi)\overline{G_T(\xi)}$$
+    $$\mathcal{F}R_T(\xi)=F_T(\xi)\overline{G_T(\xi)}$$
     等式两边同时除以$T$并与测试函数$\varphi\in\mathcal{S}$配对：
-    $$\left\langle \mathcal{F}\left[\frac{R_T(\xi)}{T}\right],\varphi\right\rangle=\left\langle \frac{\mathcal{F}R_T(\xi)}{T},\varphi\right\rangle=\left\langle \frac{F_T\overline{G_T}}{T},\varphi\right\rangle$$
+    $$\left\langle \mathcal{F}\left[\frac{R_T}{T}\right],\varphi\right\rangle=\left\langle \frac{\mathcal{F}R_T}{T},\varphi\right\rangle=\left\langle \frac{F_T\overline{G_T}}{T},\varphi\right\rangle$$
     令$T\to\infty$，由分布的傅里叶变换的连续性，左式等于：
-    $$\lim_{T\to\infty}\left\langle \mathcal{F}\left[\frac{R_T(\xi)}{T}\right],\varphi\right\rangle=\left\langle \mathcal{F}\left[\lim_{T\to\infty}\frac{R_T(\xi)}{T}\right],\varphi\right\rangle=\langle \mathcal{F}R_{fg},\varphi\rangle$$
+    $$\lim_{T\to\infty}\left\langle \mathcal{F}\left[\frac{R_T}{T}\right],\varphi\right\rangle=\left\langle \mathcal{F}\left[\lim_{T\to\infty}\frac{R_T}{T}\right],\varphi\right\rangle=\langle \mathcal{F}R_{fg},\varphi\rangle$$
     右式等于
     $$\lim_{T\to\infty}\left\langle \frac{F_T\overline{G_T}}{T},\varphi\right\rangle=\langle S_{fg},\varphi\rangle$$
     综上，我们证明了
@@ -249,7 +249,7 @@ $$\lim_{T\to\infty}\frac{1}{T}\left[\frac{\sin^2\left(\pi T(\xi-1)\right)}{4\pi^
 的处理，但计算起来还是比较麻烦。下面我们提出一种更简便的方法。
 
 我们知道，能量信号的互功率谱密度就是两个信号的傅里叶变换共轭相乘：
-$$f,g\in L^1(\mathbb{R})\cap L^2(\mathbb{R}),\mathcal{F}R_fg=\mathcal{F}f\overline{\mathcal{F}g}$$
+$$f,g\in L^1(\mathbb{R})\cap L^2(\mathbb{R}),\mathcal{F}R_{fg}=\mathcal{F}f\overline{\mathcal{F}g}$$
 特别地，当$f=g$时，有$\mathcal{F}R_f=|\mathcal{F}f|^2$。观察我们处理过的功率信号$f(t)=\cos(2\pi t)$，它的傅里叶变换为
 $$\mathcal{F}f=\frac{1}{2}\delta_1+\frac{1}{2}\delta_{-1}$$
 尽管$\delta^2$无定义，但如果仅仅将$\delta$的强度平方，则恰好得到功率谱密度：
@@ -322,7 +322,7 @@ $$\lim_{T\to\infty}\frac{1}{T}\delta^2=\delta,\lim_{T\to\infty}F_T(\xi)=F(\xi),\
 即：
 \begin{align*}
     S_{fg}&=\lim_{T\to\infty}\frac{1}{T}F_T(\xi)\overline{G_T}(\xi)\\
-    &=\lim_{T\to\infty}\frac{1}{T}\left(\sum_{n}a_n\delta_{\xi_n}\right)\left(\sum_{n}b_n\delta_{\xi_n}\right)\\
-    &=\sum_{n}a_n b_n\lim_{T\to\infty}\frac{1}{T}\delta^2_{\xi_n}\\
-    &=\sum_{n}a_n b_n\delta_{\xi_n}
+    &=\lim_{T\to\infty}\frac{1}{T}\left(\sum_{n}a_n\delta_{\xi_n}\right)\left(\sum_{n}\overline{b_n}\delta_{\xi_n}\right)\\
+    &=\sum_{n}a_n \overline{b_n}\lim_{T\to\infty}\frac{1}{T}\delta^2_{\xi_n}\\
+    &=\sum_{n}a_n \overline{b_n}\delta_{\xi_n}
 \end{align*}
