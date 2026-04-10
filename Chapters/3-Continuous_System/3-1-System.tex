@@ -108,10 +108,6 @@
 例如描述开关开闭的系统，$f(t)=\chi_{[T_1,T_2]}(t)$或$u(t)$。
 \end{example}
 
-\begin{example}[微分器与积分器]
-    积分器是由积分方程$$r(t)=\int_{-\infty}^{t}e(y)\,dy$$描述的系统；微分器是由微分方程$$r(t)=\frac{de(t)}{dt}$$描述的系统。它们可以通过运算放大器实现。
-\end{example}
-
 \begin{example}[对核积分]
 \begin{equation*}
     r(t)=\int_{a}^{b}k(x,y)e(y)\,dy
@@ -131,6 +127,12 @@
 \end{itemize}
 \end{definition}
 
+\begin{example}[傅里叶变换]
+$r(t)=\mathcal{F} e(t)$.
+
+在一些光学仪器中可以实现空间上的傅里叶变换，这时变量t是多维的空间变量，例如矩孔夫琅禾费衍射装置。
+\end{example}
+
 %类似地，对于周期离散信号，矩阵乘法定义了线性系统：
 %\begin{example}[矩阵乘法]
 %设离散系统的激励与响应均为$n$维离散信号，并且响应为激励的线性组合，则\begin{equation*}
@@ -139,19 +141,18 @@
 %\end{example}
 %线性代数中，如果一个线性算子L的在某一组基下的矩阵表示是A，则将L的转置定义为用$A^T$表示的线性算子，其中T表示矩阵的转置，如果矩阵A是对称的，则算子L称为对称算子；L的共轭转置定义为用$A^H$表示的线性算子，其中H表示矩阵的共轭转置，如果A是埃尔米特的(Hermitian)，即$A^H=A$，则称算子L是埃尔米特的，并说L是\textbf{自伴算子}(self-adjoint operator).对于矩阵乘法系统，可以根据A的性质定义\textbf{对称系统、自伴系统}。
 
+下面给出三个线性时不变系统的例子：
+
 \begin{example}[卷积]
     取定衰减足够快的连续信号$h$，$r(t)=h*e(t)$.
 \end{example}
 
 \begin{example}[信号平移]
-    取定时延b，$r(t)=e(t-b)$.
+    取定时延b，$r(t)=e(t-b)$.它也是时滞系统，只不过不涉及微分的运算。
 \end{example}
-这也是时滞系统的例子，只不过不涉及微分的运算。
 
-\begin{example}[傅里叶变换]
-$r(t)=\mathcal{F} e(t)$.
-
-在一些光学仪器中可以实现空间上的傅里叶变换，这时变量t是多维的空间变量，例如矩孔夫琅禾费衍射装置。
+\begin{example}[微分器与积分器]
+    积分器是由积分方程$$r(t)=\int_{-\infty}^{t}e(y)\,dy$$描述的系统；微分器是由微分方程$$r(t)=\frac{de(t)}{dt}$$描述的系统。它们可以通过运算放大器实现。
 \end{example}
 
 \subsection{系统的级联}\label{sub:cascade}
@@ -171,9 +172,9 @@ $r(t)=\mathcal{F} e(t)$.
     设有两对核积分系统K，L：
     \[K[e(t)](x)=\int_{a}^{b}k(x,y)e(y)\,dy,L[e(t)](x)=\int_{c}^{d}l(x,y)e(y)\,dy\]
 则级联系统$H=LK$也是对核积分系统，并且核函数为\begin{equation*}
-    h(x,z)=L_y(k(y,z))(x)=\int_{c}^{d}l(x,y)k(y,z)\,dy
+    h(x,z)=L_y[k(y,z)](x)=\int_{c}^{d}l(x,y)k(y,z)\,dy
 \end{equation*}
-其中$L_y$表示$k(x,y)$作为y的函数输入系统L，输出为x,y的双变量函数。
+其中$L_y[k(y,z)]$表示$k(x,y)$作为y的函数输入系统L，输出为$x,z$的双变量函数。
 \end{proposition}
 
 \begin{proof}\begin{align*}
@@ -184,7 +185,7 @@ $r(t)=\mathcal{F} e(t)$.
 \end{align*}
 \end{proof}
 
-函数与$\delta$的卷积还是它本身，这就好比信号在进入任何一个系统前，先经过了一个与$\delta$卷积的系统，利用这一观点即可得到\textbf{叠加定理}(superposition thoerem)\cite{brad_osgood_ee261}，由于它是泛函分析中对应定理的特殊形式，有时也将它称为\textbf{施瓦兹核定理}(Schwartz kernel thoerem)。
+函数与$\delta$的卷积还是它本身，这就好比信号在进入任何一个系统前，先经过了一个与$\delta$卷积的线性时不变系统，利用这一观点即可得到\textbf{叠加定理}(superposition thoerem)\cite{brad_osgood_ee261}，由于它是泛函分析中对应定理的特殊形式，有时也将它称为\textbf{施瓦兹核定理}(Schwartz kernel thoerem)。
 \begin{theorem}[叠加定理/施瓦兹核定理]
     \begin{equation*}
         r(x)=\int_{-\infty}^{\infty}k(x,y)e(y)\,dy
@@ -202,19 +203,18 @@ $r(t)=\mathcal{F} e(t)$.
 特别地，有限区间上的对核积分系统也满足叠加定理，此时核函数满足：
 \[k(x,y)=k(x,y)\chi_{[a,b]}(y)\]
 
-由于对核积分系统是线性的，系统的线性性就等价于系统能够用对核积分来描述，并且核函数总为
+至此可以看出，系统的线性性就等价于系统能够用对核积分来描述，并且核函数总为
 $$k(x,y)=H_x[\delta(x-y)]$$
 
 \begin{proposition}[线性系统的等价定义]
-    “系统$H$是线性系统”等价于“响应是激励对核$k(x,y)$积分”。
+    “系统$H$是线性系统”等价于“响应是激励对核$k(x,y)$的无穷限积分”。
 \end{proposition}
 
-对于时不变系统，这个定理具有更加优美的形式。将系统视为线性系统，其核函数为
+对于线性时不变系统，叠加定理具有更加优美的形式。作为线性系统而定义的核函数$k(x,y)$，恰为平移后的单位脉冲响应$h(x-y)$：
 \[k(x,y)=H_x[\delta(x-y)]=H[\tau_y\delta(x)]=\tau_y H[\delta(x)]=h(x-y)\]
-其中$h$表示系统的单位脉冲响应。带入叠加定理，即得：
+带入叠加定理，即得：
 \begin{align*}
-    r(x)&=\int_{-\infty}^{\infty}h(x-y)e(y)\,dy\\
-    &=(h*e)(t)
+    r(x)=\int_{-\infty}^{\infty}h(x-y)e(y)\,dy=(h*e)(t)
 \end{align*}
 
 也就是说，\textbf{信号经过线性时不变系统相当于与这个系统的单位脉冲响应做卷积}，这样，对线性时不变系统的研究归结为对单位脉冲响应的研究，极大地降低了研究的难度。另一方面，卷积描述的系统也是线性时不变的：\begin{align*}
