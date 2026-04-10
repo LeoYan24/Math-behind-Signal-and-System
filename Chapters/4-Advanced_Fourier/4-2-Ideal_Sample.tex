@@ -79,16 +79,15 @@
     \caption{混叠的频域分析}
 \end{figure}
 
-在建立采样定理时我们曾要求
-$$\mathrm{supp}\ \mathcal{F} f\subset[-\nu_m,\nu_m]$$
-如果频谱在周期化时重叠，那么用先前得到的公式
+在建立采样定理时我们曾要求$\mathrm{supp}\ \mathcal{F} f\subset[-\nu_m,\nu_m]$.如果频谱在周期化时重叠，那么用先前得到的公式
 \begin{align*}
     f(t)=\sum_{k=-\infty}^{\infty}f\left(kT\right)\mathrm{sinc}\left(\frac{1}{T}(t-kT)\right)
 \end{align*}
 还原函数当然是有误差的，乘以$\chi_{[-\nu_m,\nu_m]}$，会丢掉一部分原有频谱，并叠加一部分平移后的频谱。这就是混叠现象的原理，它构成香农采样定理的另一部分，即\textbf{采样频率必须不低于奈奎斯特频率才能无失真地还原信号}。
 
 \subsection{*有限采样公式}\label{sub:finite_sampling}
-本小节旨在建立带限周期信号的有限采样公式，以处理实际问题中只能进行有限次采样的情况。注意符号$T$在本小节中表示信号的周期，而非采样间隔。
+
+本小节旨在建立带限周期信号的有限采样公式。工程上，常假设实际信号是带限的，并且只关注有限的时间范围，借助有限采样公式，只需要有限的采样点数（相比之下，无限多的采样点数是无法实现的）即可还原信号。注意符号$T$在本小节中表示信号的周期，而非采样间隔。
 
 \begin{lemma}
     设$f_s,T>0$，正整数$N$为严格小于$\dfrac{T f_s}{2}$的最大整数，则$\forall t\in\mathbb{R}$，有
@@ -104,7 +103,7 @@ $$\mathrm{supp}\ \mathcal{F} f\subset[-\nu_m,\nu_m]$$
     取$f_s=T=1,N=0$，可得$\mathrm{sinc}(t)*\shah=1$。这里给出前$N$项和的图像：
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.8\textwidth]{sinc_shah.jpeg}
+        \includegraphics[width=0.75\textwidth]{sinc_shah.jpeg}
         \caption{$\mathrm{sinc}(t)*\shah$的前N项和}
     \end{figure}
     它与方波很接近，并且出现了吉布斯现象。将部分和$S_N(t)=\sum_{k=-N}^{N}\mathrm{sinc}(t-k)$视为采样率为1的情况下，对时宽为$2N$的方波进行还原的结果，则随着$N$的增大，采样点增多，结果越来越接近$\mathds{1}$。方波不是带限信号，吉布斯现象可以视为混叠的结果，但由于频带能量集中于低频，所以在大部分区域上，这种还原结果仍然较好地逼近了方波。
@@ -168,7 +167,7 @@ $$\mathrm{supp}\ \mathcal{F} f\subset[-\nu_m,\nu_m]$$
     &\qquad +f(t_{2N})\mathrm{sinc}\left(f_s (t-2N T_s)\right)*\shah_T\\
     &=\sum_{m=0}^{2N}f(t_m)\left[\mathrm{sinc}\left(f_s (t-m T_s)\right)*\shah_T\right]
 \end{align*}
+再使用本小节前面的引理即证。
 \end{proof}
 
-这表明，\textbf{只要信号是带限的，在有限次采样下，一定可以在局部上无失真地还原信号}，且所得信号周期（也即局部还原的大小）至多为
-\[T_{\max}=\frac{2N+1}{2\nu_m}\]
+这表明，\textbf{只要信号是带限的，在有限次采样下，一定可以在局部上无失真地还原信号}，且所得信号周期（也即\textbf{局部还原的长度}）至多为$T_{\max}=(2N+1)/2\nu_m$，采样点数越多、带宽越小，还原出的信号就越长。从另一个角度理解，这表明\textbf{带限周期信号仅仅具有$2N+1=2T\nu_m$个自由度}。
