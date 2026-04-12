@@ -30,8 +30,8 @@ def draw_contour():
 
     # 标记点 b+ir, b-ir
     # plt.plot([b, b], [r, -r], 'ko', markersize=3)
-    plt.text(b + 0.2, r, r'$b+ir$', fontsize=12)
-    plt.text(b + 0.2, -r, r'$b-ir$', fontsize=12)
+    plt.text(b , r+0.2, r'$b+\mathrm{i}r$', fontsize=18)
+    plt.text(b , -r-0.5, r'$b-\mathrm{i}r$', fontsize=18)
     
     # 绘制虚线连接原点和圆弧上一点
     mid_angle = theta_top / 2
@@ -39,7 +39,7 @@ def draw_contour():
     mid_y = R * np.sin(mid_angle)
     plt.plot([0, mid_x], [0, mid_y], 'k--', linewidth=1)
     # 标记半径 R，稍微偏移以避免重叠
-    plt.text(mid_x / 2 - 0.2, mid_y / 2 + 0.2, r'$R$', fontsize=12)
+    plt.text(mid_x / 2 - 0.2, mid_y / 2 + 0.2, r'$R$', fontsize=18)
 
     # 设置比例相等
     plt.axis('equal')

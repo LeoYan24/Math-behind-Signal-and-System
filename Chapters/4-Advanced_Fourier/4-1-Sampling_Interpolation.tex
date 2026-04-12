@@ -127,16 +127,16 @@
     \mathcal{F} \shah_{2\pi}=\shah
 \end{lralign}
 \end{proposition}
-可以看到，$\shah$分布的傅里叶变换具有自对偶性，即{\color{blue}$\shah\overset{\mathcal{F} }{\longleftrightarrow}\shah$}。
+$\shah$分布的傅里叶变换具有自对偶性，即{\color{blue}$\shah\overset{\mathcal{F} }{\longleftrightarrow}\shah$}。有关于采样的问题，使用频率形式的傅里叶变化要简洁得多，但我们还是同时给出角频率形式的推导以便第六章使用。
 
 利用以上结果，我们来讨论周期化在频域上的行为。对$f*\shah_T$做频率形式的傅里叶变换，有
 {\color{blue}\begin{align*}
     \mathcal{F} (f*\shah_T)(\xi)=\mathcal{F} f(\xi)\cdot\mathcal{F} \shah_T(\xi)=\mathcal{F} f(\xi)\cdot\frac{1}{T}\shah_{1/T}(\xi)=\frac{1}{T}\sum_{k=-\infty}^{\infty}\mathcal{F} f(k/T)\delta_{k/T}(\xi)
 \end{align*}}
 
-可以看到，\textbf{将f以周期T进行周期化时，其频谱会剩下频率为$k/T$处的值}，并且在这些频率处以$\delta$分布的形式“趋于无穷”；另一方面，\textbf{在频域以$1/T$进行采样，在时域上的表现是以$T$为周期进行周期化}，这一关系反过来也是成立的。
+可以看到，\textbf{将$f$以周期$T$进行周期化，相当于在频域上以$1/T$的采样间隔进行采样}（还需要乘以常数$1/T$，但它不改变这一观点的本质）；结合傅里叶反演公式，容易推知：\textbf{在频域以周期$T$进行周期化，在时域上的表现是以$1/T$为采样间隔进行采样}。它们是整个信号与系统课程最核心的观点，我们还将在后面反复使用。
 
-根据分布的傅里叶变换的连续性（见\ref{sub:operation_of_distribution}最后的内容），我们还可以直接对$\shah$分布的傅里叶变换做另一种推导：
+根据分布的傅里叶变换的连续性（见\ref{sub:continuity_of_distribution}），我们还可以直接对$\shah$分布的傅里叶变换做另一种推导：
 \begin{lralign}
      \mathcal{F} \shah&= \mathcal{F} \left(\lim_{N\to\infty}\sum_{k=-N}^{N}\delta_k\right)\\
     &=\lim_{N\to\infty}\sum_{k=-N}^{N}\mathcal{F} \delta_k\\

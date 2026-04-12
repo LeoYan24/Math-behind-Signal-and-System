@@ -10,11 +10,11 @@
 \begin{remark}
     严格来说，我们只能得到
     \[\frac{f(t-)+f(t+)}{2}=\frac{1}{2\pi \mathrm{i}}\lim_{r\to\infty}\int_{b-\mathrm{i}r}^{b +\mathrm{i}r}\mathcal{L} f(s)\mathrm{e}^{st}\,ds\]
-    不过，我们仍不关心不连续点处的值，因此后文中将直接使用上面的结论。要求分段光滑是为了保证傅里叶反演公式成立，在\ref{sub:fourier_inversion}中，对应我们给出的第二个版本的傅里叶反演公式（定理A.2.6.）。读者也可参考其他版本的傅里叶反演公式来替换对$f$和$\mathcal{L} f$的要求，从而得到不同版本的拉普拉斯反演公式。
+    不过，我们仍不关心不连续点处的值，，并且常常将其定义为左右极限的算术平均值，因此后文中将直接使用上面的结论。要求分段光滑是为了保证傅里叶反演公式成立，在\ref{sub:fourier_inversion}中，对应我们给出的第二个版本的傅里叶反演公式（定理A.2.6.）。读者也可参考其他版本的傅里叶反演公式来替换对$f$和$\mathcal{L} f$的要求，从而得到不同版本的拉普拉斯反演公式。
 \end{remark}
 \begin{remark}
     这里的积分\[\lim_{r\to\infty}\int_{b-\mathrm{i}r}^{b +\mathrm{i}r}\mathcal{L} f(s)\mathrm{e}^{st}\,ds\]
-    应该理解为沿着复平面上的直线$\mathrm{Re}\ z=b$从$b-\mathrm{i}\infty$到$b+\mathrm{i}\infty$的复线积分。由于全纯函数的路径无关性，我们也可以选择其他路径，甚至可以添加一些路径，再使用留数定理计算拉普拉斯逆变换，见本节后续的讨论。
+    应该理解为沿着复平面上的直线$\mathrm{Re}\ z=b$从$b-\mathrm{i}\infty$到$b+\mathrm{i}\infty$的复线积分，它往往是难以直接计算的。但是，由于全纯函数的路径无关性，我们也可以选择其他路径，甚至可以添加一些路径，再使用留数定理计算拉普拉斯逆变换，见本节后续的讨论。
 \end{remark}
 \begin{proof}
     \begin{align*}
@@ -26,7 +26,7 @@
 
 通过这个定理可以看出，拉普拉斯逆变换一定能还原出$f(t)$（在不考虑间断点函数值的意义下），因此拉普拉斯变换是双射。
 
-但是，以上证明已经假定了$F(s)=\mathcal{L} f(s)$是某个函数$f\in\mathcal{E} $的拉普拉斯变换。从另一个角度出发，假设有一个在右半平面$\mathrm{Re}\ s>a$上全纯的函数$F(s)$，就需要考虑它是否是某个函数的拉普拉斯变换，以及如何求出这个函数。为此，我们给出以下定理\cite{distribution}：
+但是，以上证明已经假定了$F(s)=\mathcal{L} f(s)$是某个函数$f\in\mathcal{E} $的拉普拉斯变换。一般地，假设有一个在右半平面$\mathrm{Re}\ s>a$上全纯的函数$F(s)$，我们需要考虑它是否是某个函数的拉普拉斯变换，以及$F(s)=\mathcal{L}f(s)$时，如何求出$f(t)$。为此，我们给出以下定理\cite{distribution}：
 \begin{theorem}[*拉普拉斯反演公式]
     设$F(s)$在$\mathrm{Re}\ s>a$上全纯，且满足：
     \[|F(s)|\leq C|s|^{-\alpha},\alpha>1,\forall \mathrm{Re}\ s>a\]
@@ -37,7 +37,7 @@
 \begin{remark}
     这里的条件$\alpha>1$保证了$F(b+\mathrm{i}\omega)\in L^1(\mathbb{R})$（作为$\omega$的函数），尽管$b=0$时，
     $$|s|^{-\alpha}=\dfrac{1}{|b+\mathrm{i}\omega|^{\alpha}}=\frac{1}{\omega^{\alpha}}\notin L^1(\mathbb{R})$$
-    这是因为$F$是全纯函数，在$\omega=0$处不会出现奇点。换言之，我们给出了$F$“尾部”的估计。事实上，$\alpha>\dfrac{1}{2}$即可保证定理成立，但这样证明会非常复杂\cite{folland}。
+    这是因为$F$是全纯函数，在$\omega=0$处不会出现奇点。换言之，我们给出了$F$“尾部”的估计。事实上，$\alpha>\dfrac{1}{2}$即可保证定理成立，但这样证明会非常复杂，可以参考\cite{folland}。
 \end{remark}
 \begin{proof}
     首先，我们证明由积分$\dfrac{1}{2\pi \mathrm{i}}\lim_{r\to\infty}\int_{b-\mathrm{i}r}^{b +\mathrm{i}r}F(s)\mathrm{e}^{st}\,ds$定义的函数$f(t)$是良定义的。一方面，由于$|F(s)|\leq C|s|^{-\alpha}$，有
@@ -169,15 +169,18 @@
 \end{example}
 
 \subsection{使用留数定理计算拉普拉斯逆变换}\label{sub:residue_laplace_inverse}
-本小节介绍使用留数定理计算拉普拉斯逆变换的方法。一般地，我们选择由$b\pm \mathrm{i}r,-r\pm \mathrm{i}r$组成的矩形围道，其中$b>0$需保证$F(s)$在$\mathrm{Re}\ s>b$上全纯（因此在$r\to\infty$时极点全部位于围道内），见下方左图：
+
+一般来说，我们无法直接计算复线积分来求解拉普拉斯逆变换，而部分分式展开法的计算量比较大。本小节介绍使用留数定理计算拉普拉斯逆变换的方法。尽管将拉普拉斯逆变换转化为留数的计算需要相当繁琐的准备工作，但我们将看到，这个流程是适用于所有真分式函数的，因此留数定理是求解拉普拉斯逆变换的有力工具。
+
+我们选择由$b\pm \mathrm{i}r,-r\pm \mathrm{i}r$组成的矩形围道$\Gamma_r$，其中$b>0$需保证$F(s)$在$\mathrm{Re}\ s>b$上全纯（因此在$r\to\infty$时\textbf{极点全部位于围道$\Gamma_r$内}），如图5.2(a)：
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{contour}
+    \includegraphics[width=0.75\textwidth]{contour}
     \caption{拉普拉斯逆变换的围道}
 \end{figure}
 \begin{example}[真分式函数，留数定理方法]
     设\[F(s)=\frac{2s+5}{s^2+3s+2}\]
-    $\Gamma_r$为上方左图所示的矩形围道，$b>0$，我们来论证当$r\to\infty$时，另三条线段上的积分趋于0，从而
+    $\Gamma_r$为图5.2(a)所示的矩形围道，$b>0$，从$b-\mathrm{i}r$到$b+\mathrm{i}r$的路径对应拉普拉斯逆变换。我们来论证当$r\to\infty$时，另三条路径上的积分趋于0，从而
     \begin{align*}
         f(t)&=\mathcal{L}^{-1} F(s)\\
         &=\frac{1}{2\pi \mathrm{i}}\lim_{r\to\infty}\int_{b -\mathrm{i}r}^{b +\mathrm{i}r}F(s)\mathrm{e}^{st}\,ds\\
@@ -186,40 +189,112 @@
 
     当$t>0$时，对于矩形的上边（下边同理），有
     \begin{align*}
-        \left|\int_{top}F(s)\mathrm{e}^{st}\mathrm{i}\,ds\right|&\leq \sup_{x\leq b}|F(x+\mathrm{i}r)\mathrm{e}^{(x+\mathrm{i}r)t}|\int_{-\infty}^{b}\mathrm{e}^{xt}\,dx\\
-        &\leq \frac{\mathrm{e}^{bt}}{t}\sup_{x\leq b}|F(x+\mathrm{i}r)|
+        &\left|\int_{\mathrm{top}}F(s)\mathrm{e}^{st}\,ds\right|\\
+        \leq&\int_{-r}^{b}\left|F(x+\mathrm{i}r)\mathrm{e}^{x+\mathrm{i}r}\mathrm{i}\right|\,dx\\
+        \leq& \sup_{x\leq b}\left|F(x+\mathrm{i}r)\right|\int_{-\infty}^{b}\mathrm{e}^{xt}\,dx\\
+        \leq& \frac{\mathrm{e}^{bt}}{t}\sup_{x\leq b}\left|F(x+\mathrm{i}r)\right|
     \end{align*}
-    在前面的引理中，我们已经证明了$|F(x+\mathrm{i}r)|\to 0,|r|\to\infty$，因此上边的积分趋于0。对于矩形的左边，$|\mathrm{e}^{st}|=\mathrm{e}^{-rt}$，以指数函数的速度衰减至0，积分当然趋于0。
+    真分式函数必然满足$|F(x+\mathrm{i}r)|\to 0,|r|\to\infty$，因此上边的积分趋于0。对于矩形的左边，$|\mathrm{e}^{st}|=\mathrm{e}^{-rt}$，被积函数以指数函数的速度衰减至0，积分当然趋于0。
 
-    当$t<0$时，$\mathrm{e}^{st}$在$\mathrm{Re}\ s$充分大时有较小的模值，因此我们可以使用上面右图中的围道来论证$f(t)=0$。而$t=0$的值则不需要考虑。
+    当$t<0$时，可以考虑图5.2(b)中的围道。我们说明右边三条路径的积分都将随着$r\to\infty$趋于$0$，而这个围道内是没有极点的，这样能就说明$f(t)=0,\forall t<0$.
+
+    对于矩形的上边（下边同理），有\begin{align*}
+        &\left|\int_{\mathrm{top}}F(s)\mathrm{e}^{st}\,ds\right|\\
+        \leq&\int_{b}^{r}\left|F(x+\mathrm{i}r)\mathrm{e}^{x+\mathrm{i}r}\mathrm{i}\right|\,dx\\
+        \leq& \sup_{x\geq b}\left|F(x+\mathrm{i}r)\right|\int_{b}^{\infty}\mathrm{e}^{xt}\,dx\\
+        \leq& -\frac{\mathrm{e}^{bt}}{t}\sup_{x\geq b}\left|F(x+\mathrm{i}r)\right|
+    \end{align*}
+    再利用$|F(x+\mathrm{i}r)|\to 0,|r|\to\infty$即证。对于矩形的右边，$|\mathrm{e}^{st}|=\mathrm{e}^{rt}$，被积函数以指数函数的速度衰减至0，积分当然趋于0。
     
-    根据留数定理，有
+    综上，拉普拉斯逆变换的计算归结于计算
+    \[\frac{1}{2\pi \mathrm{i}}\lim_{r\to\infty}\oint_{\Gamma_r}F(s)\mathrm{e}^{st}\,ds\]
+    $F(s)$有两个简单极点$-1,-2$。根据留数定理，有
     \begin{align*}
-        f(t)&=\sum \mathrm{Res}[F(s)\mathrm{e}^{st},s_k]\\
-        &=\mathrm{Res}\left[\frac{2s+5}{(s+1)(s+2)}\mathrm{e}^{st},-1\right]+\mathrm{Res}\left[\frac{2s+5}{(s+1)(s+2)}\mathrm{e}^{st},-2\right]\\
-        &=\lim_{s\to -1}(s+1)\frac{2s+5}{(s+1)(s+2)}\mathrm{e}^{st}+\lim_{s\to -2}(s+2)\frac{2s+5}{(s+1)(s+2)}\mathrm{e}^{st}\\
+        f(t)&=\mathrm{Res}\left[\frac{2s+5}{(s+1)(s+2)}\mathrm{e}^{st},-1\right]+\mathrm{Res}\left[\frac{2s+5}{(s+1)(s+2)}\mathrm{e}^{st},-2\right]\\
+        &=\lim_{s\to -1}\frac{2s+5}{(s+2)}\mathrm{e}^{st}+\lim_{s\to -2}\frac{2s+5}{(s+1)}\mathrm{e}^{st}\\
         &=3\mathrm{e}^{-t}-\mathrm{e}^{-2t}
     \end{align*}
 \end{example}
 
-最后，我们再给出一个计算有无穷多极点的函数拉普拉斯逆变换的例子\cite{folland}。
+从以上的例子可以看出，对于我们最为关注的真分式函数，留数定理总是能够求解拉普拉斯逆变换，这样就能避开计算量很大的部分分式展开。我们将这种方法总结为以下定理：
+\begin{theorem}[真分式函数的拉普拉斯逆变换，留数定理方法]
+    设$F(s)$是真分式函数，极点集为$\{s_k\}_{k=1}^{N}$，则其拉普拉斯逆变换为$F(s)\mathrm{e}^{st}$在复平面上所有极点的留数之和：
+    \begin{align*}
+        f(t)&=\frac{u(t)}{2\pi \mathrm{i}}\lim_{r\to\infty}\oint_{\Gamma_r}F(s)\mathrm{e}^{st}\,ds\\
+        &=u(t)\sum_{k=1}^{N}\mathrm{Res}[F(s)\mathrm{e}^{st},s_k]
+    \end{align*}
+    其中$\Gamma_r$为图5.2(a)中的矩形围道，$b>0$使得$F(s)$的所有极点都在$\Gamma_r$内部。
+\end{theorem}
+
+这一定理的证明方法已经在上面的例子中展示了。值得一提的是，我们实际上只需要两个假设即可保证定理成立：
+\begin{itemize}
+    \item $F(s)$满足$|F(x+\mathrm{i}r)|\to 0,|r|\to\infty$
+    \item $F(s)$在$\mathbb{C}$上没有本性奇点，并且极点只有有限多个，因此我们总能选取充分大的$b$，使得图5.2中左边的围道在$r\to\infty$的条件下能够包围$F(s)$的所有极点
+\end{itemize}
+不过，除了真分式函数以外，满足以上两个条件的初等函数几乎只有形如$F(s)=G(s)\mathrm{e}^{-as}$的函数，其中$G(s)$为真分式函数，$a\in\mathbb{R}$为常数，但利用拉普拉斯变换的时移性质，容易看出$F(s)$就是$g(t-1)u(t-1)$的拉普拉斯变换。因此，没有什么必要去减弱这一定理的条件。
+
+\begin{example}
+    设
+    $$F(s) = \dfrac{1}{(s+1)^3(s+2)}$$
+    则
+    \[
+    f(t) = \operatorname{Res}\!\left[F(s)e^{st},\; -1\right] + \operatorname{Res}\!\left[F(s)e^{st},\; -2\right]
+    \]
+
+    极点 $s=-2$ 处的留数为：
+    \begin{align*}
+    &\operatorname{Res}\left[\frac{e^{st}}{(s+1)^3(s+2)}; -2\right] \\
+    = &\lim_{s\to -2}\frac{e^{st}}{(s+1)^3} \\
+    = &\frac{e^{-2t}}{(-2+1)^3} \\
+    =& -e^{-2t}
+    \end{align*}
+
+    极点 $s=-1$ 处的留数为：
+    \begin{align*}
+    &\operatorname{Res}\left[\frac{e^{st}}{(s+1)^3(s+2)},\; -1\right]\\
+    =& \frac{1}{2} \lim_{s\to -1} \frac{d^2}{ds^2}\!\left(\frac{e^{st}}{s+2}\right) \\
+    =& \frac{1}{2} \lim_{s\to -1} \frac{d}{ds}\!\left( \frac{t e^{st}(s+2) - e^{st}}{(s+2)^2} \right) \\
+    =& \frac{1}{2} \lim_{s\to -1} \frac{ \bigl(t^2 e^{st}(s+2) - t e^{st}\bigr)(s+2)^2 - 2(s+2)\bigl(t e^{st}(s+2) - e^{st}\bigr) }{(s+2)^4} \\
+    =& \frac{1}{2} e^{-t} \bigl( t^2 - t - 2t + 2 \bigr) 
+    = \frac{1}{2} e^{-t} (t^2 - 3t + 2)
+    \end{align*}
+    因此
+    \[
+    f(t) =\left[ -e^{-2t} + \frac{1}{2} e^{-t}(t^2 - 3t + 2)\right]u(t)
+    \]
+\end{example}
+
+最后，我们再给出一个计算有无穷多极点的函数拉普拉斯逆变换的例子\cite{folland}。这个例子表明，留数定理是一种适用范围相当广泛的方法，对于一些相当奇怪的函数，还是可以尝试将拉普拉斯逆变换转化为围道$\Gamma_r$内的留数的计算（尽管此时做准备工作的成本会比真分式函数高一些）。
+
 \begin{example}*
     设\[F(s)=\frac{1}{s^2}-\frac{\pi}{s\sinh(\pi s)}\]
-    则$F(s)$在$s=ni,n\in\mathbb{Z}\backslash\{0\}$处有简单极点，而0是一个可去奇点：\[F(s)=\frac{\sinh(\pi s)-\pi s}{s^2 \sinh(\pi s)}=\frac{[(\pi s)+(\pi^3s^3/3!)+\cdots]-\pi s}{s^2 \cdot(\pi s)}=\frac{\pi^2}{3},s\to 0\]
+    则$F(s)$在$s=\mathrm{i}n,n\in\mathbb{Z}\backslash\{0\}$处有简单极点。下面判断$s=0$处的奇点类型。$\sinh(x)$在$x=0$处的泰勒展开式为
+    \begin{align*}
+        \sinh(x)&=\sum_{n=0}^{\infty}\frac{x^{2n+1}}{(2n+1)!}\\
+        &=x+\frac{x^3}{6}+\cdots,\forall x\in\mathbb{R}
+    \end{align*}
+    根据\ref{sub:unique_exetension}中的唯一延拓定理，泰勒展开式在复数域上仍成立，因此
+    \begin{align*}
+        F(s)&=\frac{\sinh(\pi s)-\pi s}{s^2 \sinh(\pi s)}\\
+        &=\frac{[(\pi s)+(\pi^3s^3/3!)+\cdots]-\pi s}{s^2 \cdot(\pi s)}=\frac{\pi^2}{3},s\to 0
+    \end{align*}
 
-    我们使用与上面左图类似的围道$\Gamma_r$（$b>0$）来计算拉普拉斯逆变换，但这里需要选取$r=N+0.5,N\in\mathbb{N} $以保证所有围道上被积函数的全纯性。
+    我们使用与图5.2(a)类似的围道$\Gamma_r$（$b>0$）来计算拉普拉斯逆变换，但这里需要选取$r=N+0.5,N\in\mathbb{N} $以保证所有围道上被积函数的全纯性。
 
-    我们有\[\sinh\pi\left[x\pm \mathrm{i}\left(N+\frac{1}{2}\right)\right]=\pm(-1)^N \mathrm{i}\cosh\pi x,\left|F\left(x\pm \mathrm{i}\left(N+\frac{1}{2}\right)\right)\right|\leq \frac{1}{N^2}+\frac{\pi}{N\cosh x}\]
+    我们有
+    \[\sinh\pi\left[x\pm \mathrm{i}\left(N+\frac{1}{2}\right)\right]=\pm(-1)^N \mathrm{i}\cosh\pi x\]
+    \[\left|F\left(x\pm \mathrm{i}\left(N+\frac{1}{2}\right)\right)\right|\leq \frac{1}{N^2}+\frac{\pi}{N\cosh x}\]
     因此可以用类似上例的方法论证当$N\to\infty$时，围道的其余三条边上的积分趋于0。
 
-    在$in(n\in\mathbb{Z}\backslash\{0\})$处，留数为
+    在$\mathrm{i}n(n\in\mathbb{Z}\backslash\{0\})$处，留数为
     \begin{align*}
-        \mathrm{Res}[F(s)\mathrm{e}^{st},\mathrm{i}n]&=\lim_{s\to \mathrm{i}n}(s-\mathrm{i}n)F(s)\mathrm{e}^{st}\\
-        &=\lim_{s\to \mathrm{i}n}\frac{\mathrm{e}^{st}}{s}\cdot\frac{-\pi(s-\mathrm{i}n)}{\sinh(\pi s)}\\
-        &=\lim_{s\to \mathrm{i}n}\frac{\mathrm{e}^{\mathrm{i}nt}}{\mathrm{i}n}\cdot\frac{-1}{\cosh(\pi \mathrm{i}n)}\\
-        &=\frac{(-1)^{n+1}\mathrm{e}^{\mathrm{i}nt}}{\mathrm{i}n}
+        &\mathrm{Res}[F(s)\mathrm{e}^{st},\mathrm{i}n]\\
+        =&\lim_{s\to \mathrm{i}n}(s-\mathrm{i}n)F(s)\mathrm{e}^{st}\\
+        =&\lim_{s\to \mathrm{i}n}\frac{\mathrm{e}^{st}}{s}\cdot\frac{-\pi(s-\mathrm{i}n)}{\sinh(\pi s)}\\
+        =&\lim_{s\to \mathrm{i}n}\frac{\mathrm{e}^{\mathrm{i}nt}}{\mathrm{i}n}\cdot\frac{-1}{\cosh(\pi \mathrm{i}n)}\\
+        =&\frac{(-1)^{n+1}\mathrm{e}^{\mathrm{i}nt}}{\mathrm{i}n}
     \end{align*}
-    其中$\cosh(\pi \mathrm{i}n)=\cos(n\pi)=(-1)^n$。由留数定理，有
+    其中$\cosh(\pi \mathrm{i}n)=\cos(n\pi)=(-1)^n$.由留数定理，有
     \begin{align*}
         f(t)&=\mathcal{L}^{-1} F(s)\\
         &=\frac{1}{2\pi \mathrm{i}}\lim_{N\to\infty}\oint_{\Gamma_{N+0.5}}F(s)\mathrm{e}^{st}\,ds\\
