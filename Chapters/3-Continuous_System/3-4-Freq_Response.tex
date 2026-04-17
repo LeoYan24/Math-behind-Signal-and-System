@@ -279,10 +279,10 @@ $$\tau_g(\omega_c)=-\left.\dfrac{d\varphi(\omega)}{d\omega}\right|_{\omega=\omeg
 
 典型的色散现象如一束白光通过三棱镜时，不同频率的光波由于波速不同而发生空间分离，形成彩虹色带。在无线电通信中，电离层对不同频率的电磁波有不同的折射率，导致信号传播速度不同，从而引起信号失真。
 
-为了讨论方便，我们假设波动是一维的，$x$处的质点在时刻$t$的位置为$y(x,t)$，波速为$u$，$y(x,t)$\\
+为了讨论方便，我们假设波动是一维的，$x$处的质点在时刻$t$的位置为$y(x,t)$，$y(x,t)$\\
 满足的动力学方程称为\textbf{波动方程}，具有如下统一形式：
 \[\frac{\partial^2 y}{\partial x^2}=\frac{1}{u^2}\frac{\partial^2 y}{\partial t^2}\]
-波动方程的解具有形式$y(x,t)=f(x-ut)+g(x+ut)$，其中$f$和$g$分别表示向x轴正方向和负方向传播的波。
+其中常数$u$具有波速的物理意义。波动方程的解具有形式$y(x,t)=f(x-ut)+g(x+ut)$，其中$f$和$g$分别表示向x轴正方向和负方向传播的波的波形，数学上，它们可以是任意的无限阶可导函数。
 
 特别地，对于简谐波，有
 \[y(x,t)=A\cos\omega\left(t-\frac{x}{u}\right)=A\cos\left(\frac{2\pi t}{T}-\frac{2\pi x}{\lambda}\right)\]
@@ -290,8 +290,10 @@ $$\tau_g(\omega_c)=-\left.\dfrac{d\varphi(\omega)}{d\omega}\right|_{\omega=\omeg
 \[y(x,t)=A\cos(\omega t - k x)\]
 
 这里波数并不是指波的数目，而是一个将空间距离折算为相位延迟的比例系数，也可以将它理解为波的空间角频率：对简谐波$y(x,t)=A\cos(\omega t-kx)$的空间变量做傅里叶变换，将得到空间角频率仅有$\pm k$的成分，对三维空间中的平面波也有类似的结论，见\ref{sub:multi_schwartz}。我们将宗量$\omega t-kx$称为波的\textbf{相位}(phase)，考察相位的传播速度，即令$\omega t-kx=const$（例如，振幅最大值处恒有$\omega t-kx=0$），得到
-\[\frac{dx}{dt}=\frac{\omega}{k}=u\]
-这个速度称为\textbf{相速度}(phase velocity)，它描述了波的相位传播的速度，可以看到相速度正是波速$u$。
+\begin{align*}
+    \frac{dx}{dt}=\frac{\omega}{k}=u\tag{$*$}
+\end{align*}
+这个速度称为\textbf{相速度}(phase velocity)，记为$v_p$，它描述了波的相位传播的速度，可以看到相速度正是波速$u$。
 
 借助傅里叶级数或傅里叶变换的理论，可以认为任意的波形都是若干不同频率的简谐波的叠加。
 
@@ -299,7 +301,7 @@ $$\tau_g(\omega_c)=-\left.\dfrac{d\varphi(\omega)}{d\omega}\right|_{\omega=\omeg
 \[r(t)=y(L,t)=e\left(t - \frac{L}{u}\right)=\cos\left(\omega \left(t-\frac{L}{u}\right)\right)\]
 因此可以对给定的$\omega$求出频率响应为
 \[H(\omega)=\mathrm{e}^{-\mathrm{i}\omega \frac{L}{u}}=\mathrm{e}^{-\mathrm{i}kL},k=\frac{\omega}{u}\]
-可以看出，$k$实际上是关于$\omega$的函数$k(\omega)=\omega/u$，但在研究单频正弦波时看不出这一点。
+我们用到了波速$u$的定义式($*$)。可以看出，$k$实际上是关于$\omega$的函数$k(\omega)=\omega/u$，但在研究单频正弦波时看不出这一点。
 \begin{definition}[色散关系]
     介质中波数$k$与角频率$\omega$之间的函数关系$k(\omega)$称为\textbf{色散关系}(dispersion relation)。
 \end{definition}
@@ -311,7 +313,7 @@ $$\tau_g(\omega_c)=-\left.\dfrac{d\varphi(\omega)}{d\omega}\right|_{\omega=\omeg
     \quad\\
     相速度为\[v_p(\omega)=\frac{\omega}{k(\omega)}\]
     群速度为\[v_g(\omega)=\frac{d\omega}{dk}=\frac{1}{k'(\omega)}\]
-    $v_p>v_g$时称为\textbf{正常色散}(normal dispersion)，$v_p<v_g$时称为\textbf{反常色散}(anomalous dispersion)。
+    $v_p>v_g$时称为\textbf{正常色散}(normal dispersion)，前面介绍的波形展宽现象就是正常色散下的情况，而$v_p<v_g$时称为\textbf{反常色散}(anomalous dispersion)。
 \end{definition}
 另一方面，介质作为一个系统，其相时延和群时延分别为
 \begin{align*}
