@@ -211,16 +211,16 @@ $$\mathcal{F} \mathcal{F} ^H=N\cdot I$$
     \end{align*}
 \end{proposition}
 
-根据上一小节中指出的“离散周期信号的周期起点可任意选取”，离散信号的反转的向量表示有较为简洁的形式：
-
 \begin{definition}[离散信号的反转]
-    将离散信号$x[n]$的反转信号记为$x^-[n]=x[-n]$。特别地，将离散周期信号的反转信号写成向量形式，有：
+    将离散信号$x[n]$的反转信号$x[-n]$记为$x^-[n]$。特别地，将离散周期信号的反转信号写成向量形式，有：
     \begin{align*}
     \textbf{x}^-&=\begin{bmatrix}
+x[0]  \\
 x[N-1]  \\
-x[N-2]  \\
+x[N-2]\\
 \vdots \\
-x[0]
+x[2]\\
+x[1]
 \end{bmatrix}\end{align*}
 \end{definition}
 
