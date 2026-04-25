@@ -16,7 +16,7 @@
         其中$\tau_k$表示时间平移算子，即
         $$\tau_k e[n]=e[n-k]$$
         \item \textbf{因果性}：系统的响应不早于激励，即
-        \[\forall e[n],e[n]=0,n<0\implies r[n]=0,n<0\]
+        \[\forall e[n],e[n]=0,n<n_0\implies r[n]=0,n<n_0\]
         \item \textbf{稳定性}：激励信号有界时，响应也是有界的，即
         \[\forall e[n]\in l^{\infty}(\mathbb{Z}),r[n]\in l^{\infty}(\mathbb{Z})\]
         \item \textbf{可逆性}：如果$H$是双射，则称系统可逆，此时存在一个系统$H^{-1}$使得对于任意激励$e[n]$，有
