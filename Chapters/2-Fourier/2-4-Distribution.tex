@@ -358,11 +358,11 @@ $$\mathcal{F}(T^-)= (\mathcal{F}T)^-$$
 但它可以视为一个缓增分布，前文中已经提到$\langle \mathrm{e}^{\mathrm{i}at},\varphi\rangle$是收敛
 的。下面应用对偶性求它的傅里叶变换：
 \lr{
-\mathcal{F} [e^{2\pi \mathrm{i}at}]=\mathcal{F}^{-1}[e^{2\pi \mathrm{i}at}]^-=\delta_{a}^-=\delta_{-a}
+\mathcal{F} [e^{2\pi \mathrm{i}at}]=\mathcal{F}^{-1}[e^{2\pi \mathrm{i}at}]^-=\delta_{-a}^-=\delta_{a}
 }{
-\mathcal{F} [e^{\mathrm{i}at}]=2\pi\mathcal{F}^{-1}[e^{\mathrm{i}at}]^- =2\pi\delta_{a}^- =2\pi\delta_{-a}
+\mathcal{F} [e^{\mathrm{i}at}]=2\pi\mathcal{F}^{-1}[e^{\mathrm{i}at}]^- =2\pi\delta_{-a}^- =2\pi\delta_{a}
 }
-（请读者自行验证$\delta_{a}^-= \delta_{-a}$）
+（请读者自行验证$\delta_{-a}^-= \delta_{a}$）
 \end{example}
 
 \begin{example}[正弦、余弦函数的傅里叶变换]
@@ -370,14 +370,14 @@ $$\mathcal{F}(T^-)= (\mathcal{F}T)^-$$
 有\[\cos(x)=\frac{\mathrm{e}^{ix}+\mathrm{e}^{-ix}}{2},\sin(x)=\frac{\mathrm{e}^{ix}-\mathrm{e}^{-ix}}{2\mathrm{i}}\]因此
 \lr{
     \mathcal{F} [\cos(2\pi ax)]&=\frac{1}{2}(\mathcal{F} [\mathrm{e}^{2\pi \mathrm{i}ax}]+\mathcal{F} [\mathrm{e}^{-2\pi \mathrm{i}ax}])\\
-    &=\frac{1}{2}(\delta_{-a}+\delta_{a}) \\
+    &=\frac{1}{2}(\delta_{a}+\delta_{-a}) \\
     \mathcal{F} [\sin(2\pi ax)]&=\frac{1}{2\mathrm{i}}(\mathcal{F} [\mathrm{e}^{2\pi \mathrm{i}ax}]-\mathcal{F} [\mathrm{e}^{-2\pi \mathrm{i}ax}])\\
-    &=\frac{1}{2\mathrm{i}}(\delta_{-a}-\delta_{a})
+    &=\frac{1}{2\mathrm{i}}(\delta_{a}-\delta_{-a})
 }{
     \mathcal{F} [\cos(ax)]&=\frac{1}{2}(\mathcal{F} [\mathrm{e}^{\mathrm{i}ax}]+\mathcal{F} [\mathrm{e}^{-\mathrm{i}ax}])\\
-    &=\pi(\delta_{-a}+\delta_{a}) \\
+    &=\pi(\delta_{a}+\delta_{-a}) \\
     \mathcal{F} [\sin(ax)]&=\frac{1}{2\mathrm{i}}(\mathcal{F} [\mathrm{e}^{\mathrm{i}ax}]-\mathcal{F} [\mathrm{e}^{-\mathrm{i}ax}])\\
-    &=-\mathrm{i}\pi(\delta_{-a}-\delta_{a})
+    &=-\mathrm{i}\pi(\delta_{a}-\delta_{-a})
 }
 \end{example}
 
