@@ -27,38 +27,38 @@ X[N-1]
 \end{bmatrix}
 \end{align*}
 
-习惯上，将$\mathrm{e}^{\mathrm{i}\frac{2\pi}{N}}$记为$W_N$，则上式中的矩阵可以写为
+习惯上，将$\mathrm{e}^{-\mathrm{i}\frac{2\pi}{N}}$记为$W_N$，则上式中的矩阵可以写为
 \begin{align*}
     \mathcal{F} =\begin{bmatrix}1 & 1 & \cdots & 1 \\
-        1 & W_N & \cdots & W_N^{N-1} \\
+        1 & W_N^{-1} & \cdots & W_N^{-(N-1)} \\
         \vdots & \vdots & \ddots & \vdots \\
-        1 & W_N^{N-1} & \cdots & W_N^{(N-1)^2}
+        1 & W_N^{-(N-1)} & \cdots & W_N^{-(N-1)^2}
     \end{bmatrix}
 \end{align*}
 
 这是一个\textbf{范德蒙德矩阵} (Vandermonde Matrix)，它的行列式为
 \begin{align*}
-    \det\mathcal{F}=\prod_{0\leq j<k\leq N-1}(W_N^k-W_N^j)\neq 0
+    \det\mathcal{F}=\prod_{0\leq j<k\leq N-1}(W_N^{-k}-W_N^{-j})\neq 0
 \end{align*}
 
 矩阵$\mathcal{F}$可逆，因此$X[k]$是良定义的，即存在唯一的$X[k]$使得
-\[x[n]=\frac{1}{N}\sum_{k=0}^{N-1}X[k]W_N^{kn}\]
+\[x[n]=\frac{1}{N}\sum_{k=0}^{N-1}X[k]W_N^{-kn}\]
 
 并且可以通过逆矩阵求得$X[k]$的表达式。可以验证，$\mathcal{F} $为正交矩阵：
 $$\mathcal{F} \mathcal{F} ^H=N\cdot I$$
 其中$\mathcal{F} ^H$为$\mathcal{F} $的共轭转置矩阵，因此
 \begin{align*}
-    \mathcal{F} ^{-1}=\frac{1}{N}\mathcal{F} ^H=\frac{1}{N}\begin{bmatrix}1 & 1 & \cdots & 1 \\
-    1 & W_N^{-1} & \cdots & W_N^{-(N-1)} \\
+    \mathcal{F} ^{-1}=\frac{1}{N}\mathcal{F}^H=\frac{1}{N}\begin{bmatrix}1 & 1 & \cdots & 1 \\
+    1 & W_N & \cdots & W_N^{N-1} \\
     \vdots & \vdots & \ddots & \vdots \\
-    1 & W_N^{-(N-1)} & \cdots & W_N^{-(N-1)^2}
+    1 & W_N^{N-1} & \cdots & W_N^{(N-1)^2}
     \end{bmatrix}
 \end{align*}
 
 这样，我们就得到了\textbf{离散傅里叶级数} (Discrete Fourier Series, DFS)的定义：
 \begin{definition}[离散傅里叶级数]
     设$x[n]$是周期为$N$的离散信号，则$x[n]$的离散傅里叶级数定义为
-    \[x[n]=\frac{1}{N}\sum_{k=0}^{N-1}X[k]W_N^{kn}\]
+    \[x[n]=\frac{1}{N}\sum_{k=0}^{N-1}X[k]W_N^{-kn}\]
     其中$W_N=\mathrm{e}^{\mathrm{i}\frac{2\pi}{N}}$，$X[k]=\sum_{n=0}^{N-1}x[n]W_N^{-kn}$。
 \end{definition}
 
@@ -70,13 +70,13 @@ $$\mathcal{F} \mathcal{F} ^H=N\cdot I$$
 
 \begin{definition}[离散傅里叶变换]
     设$x[n]$是长为$N$的离散信号，则$x[n]$的离散傅里叶变换定义为
-    \[X[k]=\sum_{n=0}^{N-1}x[n]W_N^{-kn},k=0,1,\dots,N-1\]
+    \[X[k]=\sum_{n=0}^{N-1}x[n]W_N^{kn},k=0,1,\dots,N-1\]
     记$x[n]\xleftrightarrow{\mathrm{DFT}}X[k],X[k]=\mathrm{DFT}(x[n])$。
 \end{definition}
 
 \begin{theorem}[离散傅里叶反演公式]
     设$x[n]$是长为$N$的离散信号，其离散傅里叶变换为$X[k]$，则$x[n]$可以由$X[k]$通过离散傅里叶逆变换还原：
-    \[x[n]=\mathrm{DFT}^{-1}(X[k])=\frac{1}{N}\sum_{k=0}^{N-1}X[k]W_N^{kn},n=0,1,\dots,N-1\]
+    \[x[n]=\mathrm{DFT}^{-1}(X[k])=\frac{1}{N}\sum_{k=0}^{N-1}X[k]W_N^{-kn},n=0,1,\dots,N-1\]
 \end{theorem}
 
 进一步，对于离散周期信号，其周期起点任意选取，都不会影响离散傅里叶变换及其逆变换的结果，在此意义下，离散周期信号的向量表示不唯一。
@@ -85,7 +85,7 @@ $$\mathcal{F} \mathcal{F} ^H=N\cdot I$$
     \[\mathcal{P} =\{p,p+1,\cdots,p+N-1\},\mathcal{Q} =\{q,q+1,\cdots,q+N-1\}\]
     则$x[n]$的$(\mathcal{P} ,\mathcal{Q} )-DFT$定义为
     \begin{align*}
-    X_{\mathcal{P} ,\mathcal{Q} }[k]&=\sum_{n\in\mathcal{P} }x[n]W_N^{-kn},k\in\mathcal{Q}
+    X_{\mathcal{P} ,\mathcal{Q} }[k]&=\sum_{n\in\mathcal{P} }x[n]W_N^{kn},k\in\mathcal{Q}
     \end{align*}
 \end{definition}
 \begin{proposition}
@@ -94,12 +94,12 @@ $$\mathcal{F} \mathcal{F} ^H=N\cdot I$$
 \end{proposition}
 \begin{proof}
     记$p=rN+s$，则$\forall k\in\mathbb{Z}$，有\begin{align*}
-    X_{\mathcal{P} ,\mathcal{Q} }[k]&=\sum_{n\in\mathcal{P} }x[n]W_N^{-kn}\\
-    &=\sum_{m=p}^{p+N-1}x[m]W_N^{-km}\\
-    &=\sum_{m=0}^{N-1}x[m+s]W_N^{-k(m+s)}\\
-    &=\sum_{m=s}^{N-1}x[m]W_N^{-km}+\sum_{m=N}^{N+s-1}x[m]W_N^{-km}\\
-    &=\sum_{m=s}^{N-1}x[m]W_N^{-km}+\sum_{m=0}^{s-1}x[m]W_N^{-km}\\
-    &=\sum_{m=0}^{N-1}x[m]W_N^{-km}=X[k]
+    X_{\mathcal{P} ,\mathcal{Q} }[k]&=\sum_{n\in\mathcal{P} }x[n]W_N^{kn}\\
+    &=\sum_{m=p}^{p+N-1}x[m]W_N^{km}\\
+    &=\sum_{m=0}^{N-1}x[m+s]W_N^{k(m+s)}\\
+    &=\sum_{m=s}^{N-1}x[m]W_N^{km}+\sum_{m=N}^{N+s-1}x[m]W_N^{km}\\
+    &=\sum_{m=s}^{N-1}x[m]W_N^{km}+\sum_{m=0}^{s-1}x[m]W_N^{km}\\
+    &=\sum_{m=0}^{N-1}x[m]W_N^{km}=X[k]
     \end{align*}
     限制$k\in\mathcal{Q} $即得$X_{\mathcal{P} ,\mathcal{Q} }[k]=X[k]$。
 \end{proof}
@@ -113,10 +113,10 @@ $$\mathcal{F} \mathcal{F} ^H=N\cdot I$$
             X[1]  \\
             X[2]  \\
             X[3]
-        \end{bmatrix}=&\begin{bmatrix}1 & 1 & 1 & 1 \\
-        1 & W_4^{-1} & W_4^{-2} & W_4^{-3} \\
-        1 & W_4^{-2} & W_4^{-4} & W_4^{-6} \\
-        1 & W_4^{-3} & W_4^{-6} & W_4^{-9}
+        \end{bmatrix}&=\begin{bmatrix}1 & 1 & 1 & 1 \\
+        1 & W_4 & W_4^{2} & W_4^{3} \\
+        1 & W_4^{2} & W_4^{4} & W_4^{6} \\
+        1 & W_4^{3} & W_4^{6} & W_4^{9}
         \end{bmatrix}\begin{bmatrix}
             1  \\
             2  \\
@@ -150,8 +150,8 @@ $$\mathcal{F} \mathcal{F} ^H=N\cdot I$$
         \item 线性性：$\forall a,b\in\mathbb{C}$，有
     \[a x[n]+b y[n]\xleftrightarrow{\mathrm{DFT}} a X[k]+b Y[k]\]
         \item 周期性：$X[k+N]=X[k],Y[k+N]=Y[k]$为周期为$N$的离散信号
-        \item 时移性质：$x[n-n_0]\xleftrightarrow{\mathrm{DFT}}\mathrm{e}^{-\mathrm{i}\frac{2\pi}{N}kn_0}X[k]=W_N^{-kn_0 }X[k]$
-        \item 频移性质：$\mathrm{e}^{\mathrm{i}\frac{2\pi}{N}k_0 n}x[n]=W_N^{k_0 n}x[n]\xleftrightarrow{\mathrm{DFT}}X\left[k-k_0\right]$
+        \item 时移性质：$x[n-n_0]\xleftrightarrow{\mathrm{DFT}}\mathrm{e}^{-\mathrm{i}\frac{2\pi}{N}kn_0}X[k]=W_N^{kn_0}X[k]$
+        \item 频移性质：$\mathrm{e}^{\mathrm{i}\frac{2\pi}{N}k_0 n}x[n]=W_N^{-k_0 n}x[n]\xleftrightarrow{\mathrm{DFT}}X\left[k-k_0\right]$
         \item 共轭性质：$\overline{x[n]}\xleftrightarrow{\mathrm{DFT}}\overline{X\left[-k\right]}$
     \end{itemize}
 \end{proposition}
@@ -172,21 +172,21 @@ $$\mathcal{F} \mathcal{F} ^H=N\cdot I$$
 \end{theorem}
 \begin{proof}
     \begin{align*}
-        X[k]Y[k]&=\left(\sum_{n=0}^{N-1}x[n]W_N^{-kn}\right)\left(\sum_{m=0}^{N-1}y[m]W_N^{-km}\right)\\
-        &=\sum_{n=0}^{N-1}\sum_{m=0}^{N-1}x[n]y[m]W_N^{-k(n+m)}\\
-        &=\sum_{l=0}^{N-1}\left(\sum_{n=0}^{N-1}x[n]y[l-n]\right)W_N^{-kl}&(l=n+m)\\
+        X[k]Y[k]&=\left(\sum_{n=0}^{N-1}x[n]W_N^{kn}\right)\left(\sum_{m=0}^{N-1}y[m]W_N^{km}\right)\\
+        &=\sum_{n=0}^{N-1}\sum_{m=0}^{N-1}x[n]y[m]W_N^{k(n+m)}\\
+        &=\sum_{l=0}^{N-1}\left(\sum_{n=0}^{N-1}x[n]y[l-n]\right)W_N^{kl}&(l=n+m)\\
         &=\mathrm{DFT}(x*y)[k]
     \end{align*}
 
     可以仿照\ref{sub:convolution}，使用时域卷积定理给出频域卷积定理的证明；也可以直接带入定义验证：
     \begin{align*}
         \frac{1}{N}(X * Y)[k]&=\frac{1}{N}\sum_{l=0}^{N-1}X[l]Y[k-l]\\
-        &=\frac{1}{N}\sum_{l=0}^{N-1}\left(\sum_{n=0}^{N-1}x[n]W_N^{-ln}\right)\left(\sum_{m=0}^{N-1}y[m]W_N^{-k m}W_N^{lm}\right)\\
-        &=\frac{1}{N}\sum_{n=0}^{N-1}\sum_{m=0}^{N-1}x[n]y[m]W_N^{-k m}\left(\sum_{l=0}^{N-1}W_N^{l(m-n)}\right)\\
-        &=\sum_{n=0}^{N-1}x[n]y[n]W_N^{-k n}
+        &=\frac{1}{N}\sum_{l=0}^{N-1}\left(\sum_{n=0}^{N-1}x[n]W_N^{ln}\right)\left(\sum_{m=0}^{N-1}y[m]W_N^{k m}W_N^{-lm}\right)\\
+        &=\frac{1}{N}\sum_{n=0}^{N-1}\sum_{m=0}^{N-1}x[n]y[m]W_N^{k m}\left(\sum_{l=0}^{N-1}W_N^{l(n-m)}\right)\\
+        &=\sum_{n=0}^{N-1}x[n]y[n]W_N^{k n}
     \end{align*}
     我们又一次遇到了选择函数：
-    \[\shah_N[m-n]=\sum_{l=0}^{N-1}W_N^{l(m-n)}=\begin{cases}
+    \[\shah_N[m-n]=\sum_{l=0}^{N-1}W_N^{l(n-m)}=\begin{cases}
     N & \mathrm{if } m-n\equiv 0 \mod N \\
     0 & \mathrm{otherwise}
     \end{cases}\]
@@ -239,25 +239,25 @@ x[1]
 \begin{proof}
     带入定义即可验证：
     \begin{align*}
-        \mathrm{DFT}(x^-)[k]&=\sum_{n=0}^{N-1}x^- [n]W_N^{-kn}\\
-        &=\sum_{n=0}^{N-1}x[-n]W_N^{-kn}\\
-        &=\sum_{m=0}^{N-1}x[m]W_N^{km}&(m=-n)\\
+        \mathrm{DFT}(x^-)[k]&=\sum_{n=0}^{N-1}x^- [n]W_N^{kn}\\
+        &=\sum_{n=0}^{N-1}x[-n]W_N^{kn}\\
+        &=\sum_{m=0}^{N-1}x[m]W_N^{-km}&(m=-n)\\
         &=N\cdot\mathrm{DFT}^{-1}(x)[k]
     \end{align*}
 
     \begin{align*}
-        \mathrm{DFT}\left(\mathrm{DFT}x\right)[n]&=\sum_{k=0}^{N-1}X[k]W_N^{-kn}\\
-        &=\sum_{k=0}^{N-1}\left(\sum_{m=0}^{N-1}x[m]W_N^{-km}\right)W_N^{-kn}\\
-        &=\sum_{m=0}^{N-1}x[m]\left(\sum_{k=0}^{N-1}W_N^{-k(m+n)}\right)\\
+        \mathrm{DFT}\left(\mathrm{DFT}x\right)[n]&=\sum_{k=0}^{N-1}X[k]W_N^{kn}\\
+        &=\sum_{k=0}^{N-1}\left(\sum_{m=0}^{N-1}x[m]W_N^{km}\right)W_N^{kn}\\
+        &=\sum_{m=0}^{N-1}x[m]\left(\sum_{k=0}^{N-1}W_N^{k(m+n)}\right)\\
         &=N x^- [n]
     \end{align*}
     我们又一次用到了选择函数。
 
     如果$x[n]$是实信号，则有
     \begin{align*}
-        \mathrm{DFT}(x^-)[k]&=\sum_{n=0}^{N-1}x^- [n]W_N^{-kn}\\
-        &=\sum_{n=0}^{N-1}x[-n]W_N^{-kn}\\
-        &=\overline{\sum_{n=0}^{N-1}x[-n]W_N^{kn}}\\
+        \mathrm{DFT}(x^-)[k]&=\sum_{n=0}^{N-1}x^- [n]W_N^{kn}\\
+        &=\sum_{n=0}^{N-1}x[-n]W_N^{kn}\\
+        &=\overline{\sum_{n=0}^{N-1}x[-n]W_N^{-kn}}\\
         &=\overline{X[k]}
     \end{align*}
 \end{proof}
@@ -290,14 +290,14 @@ x[1]
 
 对$f(t)$在采样点处的傅里叶级数进行分组求和，得到
 \begin{align*}
-    f\left(\frac{nT}{N}\right)&=\sum_{k=-\infty}^{\infty}c_k \mathrm{e}^{\mathrm{i}\frac{2\pi}{T}kn\frac{T}{N}}\\
-    &=\sum_{k=-\infty}^{\infty}c_k W_N^{kn}\\
-    &=\sum_{m=-\infty}^{\infty}\sum_{k=0}^{N-1}c_{k+mN} W_N^{(k+mN)n}\\
-    &=\sum_{k=0}^{N-1}\left(\sum_{m=-\infty}^{\infty}c_{k+mN}\right)W_N^{kn}
+    x[n]=f\left(\frac{nT}{N}\right)&=\sum_{k=-\infty}^{\infty}c_k \mathrm{e}^{\mathrm{i}\frac{2\pi}{T}kn\frac{T}{N}}\\
+    &=\sum_{k=-\infty}^{\infty}c_k W_N^{-kn}\\
+    &=\sum_{m=-\infty}^{\infty}\sum_{k=0}^{N-1}c_{k+mN} W_N^{-(k+mN)n}\\
+    &=\sum_{k=0}^{N-1}\left(\sum_{m=-\infty}^{\infty}c_{k+mN}\right)W_N^{-kn}
 \end{align*}
 
 将上式与离散傅里叶反演公式进行比较，得到
-\[X[k]=\sum_{m=-\infty}^{\infty}c_{k+mN}\]
+\[X[k]=N\sum_{m=-\infty}^{\infty}c_{k+mN}\]
 
 这正是“\textbf{时域采样，频域周期化}”的观点在傅里叶级数上的体现。
 
@@ -372,17 +372,17 @@ $$X(\mathrm{e}^{\mathrm{i}\Omega})=\mathcal{F} f\left(\frac{\Omega}{T}\right),\O
 
 设$x[n]$是长为$N$的离散信号，$N=2^m$，将$x[n]$的离散傅里叶变换按$n$的奇偶性进行分组求和，得到
 \begin{align*}
-X[k]&=\sum_{n=0}^{N-1}x[n]W_N^{-kn}\\
-&=\sum_{n=0}^{N/2-1}x[2n]W_N^{-k(2n)}+\sum_{n=0}^{N/2-1}x[2n+1]W_N^{-k(2n+1)}\\
-&=\sum_{n=0}^{N/2-1}x[2n]W_{N/2}^{-kn}+W_N^{-k}\sum_{n=0}^{N/2-1}x[2n+1]W_{N/2}^{-kn}
+X[k]&=\sum_{n=0}^{N-1}x[n]W_N^{kn}\\
+&=\sum_{n=0}^{N/2-1}x[2n]W_N^{k(2n)}+\sum_{n=0}^{N/2-1}x[2n+1]W_N^{k(2n+1)}\\
+&=\sum_{n=0}^{N/2-1}x[2n]W_{N/2}^{kn}+W_N^{-k}\sum_{n=0}^{N/2-1}x[2n+1]W_{N/2}^{kn}
 \end{align*}
 
-$x[n]$的奇数项和偶数项都是长度为$N/2$的离散信号，他们的离散傅里叶变换分别为$$X_1[k]=\sum_{n=0}^{N/2-1}x[2n]W_{N/2}^{-kn}$$
-$$X_2[k]=\sum_{n=0}^{N/2-1}x[2n+1]W_{N/2}^{-kn}$$
+$x[n]$的奇数项和偶数项都是长度为$N/2$的离散信号，他们的离散傅里叶变换分别为$$X_1[k]=\sum_{n=0}^{N/2-1}x[2n]W_{N/2}^{kn}$$
+$$X_2[k]=\sum_{n=0}^{N/2-1}x[2n+1]W_{N/2}^{kn}$$
 代入得
 \begin{align*}
-X[k]&=X_1[k]+W_N^{-k}X_2[k]\\
-X[k+N/2]&=X_1[k]-W_N^{-k}X_2[k]
+X[k]&=X_1[k]+W_N^{k}X_2[k]\\
+X[k+N/2]&=X_1[k]-W_N^{k}X_2[k]
 \end{align*}
 
 因此，$X[k]$的计算可以通过计算$X_1[k]$和$X_2[k]$来实现，而$X_1[k]$和$X_2[k]$又是长度为$N/2$的离散信号的离散傅里叶变换。通过递归地将信号长度不断减半，最终可以将离散傅里叶变换的计算复杂度降低到$O(N\log N)$。
@@ -391,17 +391,17 @@ X[k+N/2]&=X_1[k]-W_N^{-k}X_2[k]
 
 设$x[n]$是长为$N$的离散信号，$N=2^m$，将$x[n]$的离散傅里叶变换分为前后两组进行求和，得到
 \begin{align*}
-X[k]&=\sum_{n=0}^{N/2-1}x[n]W_N^{-kn}+\sum_{n=N/2}^{N-1}x[n]W_N^{-kn}\\
-&=\sum_{n=0}^{N/2-1}x[n]W_N^{-kn}+W_N^{-kN/2}\sum_{n=0}^{N/2-1}x[n+N/2]W_N^{-kn}\\
-&=\sum_{n=0}^{N/2-1}x[n]W_N^{-kn}+W_N^{-kN/2}\sum_{n=0}^{N/2-1}x[n+N/2]W_N^{-kn}
+X[k]&=\sum_{n=0}^{N/2-1}x[n]W_N^{kn}+\sum_{n=N/2}^{N-1}x[n]W_N^{kn}\\
+&=\sum_{n=0}^{N/2-1}x[n]W_N^{kn}+W_N^{-kN/2}\sum_{n=0}^{N/2-1}x[n+N/2]W_N^{kn}\\
+&=\sum_{n=0}^{N/2-1}x[n]W_N^{kn}+W_N^{-kN/2}\sum_{n=0}^{N/2-1}x[n+N/2]W_N^{kn}
 \end{align*}
 
-$x[n]$的前半部分和后半部分都是长度为$N/2$的离散信号，他们的离散傅里叶变换分别为$$X_1[k]=\sum_{n=0}^{N/2-1}x[n]W_N^{-kn}$$
-$$X_2[k]=\sum_{n=0}^{N/2-1}x[n+N/2]W_N^{-kn}$$
+$x[n]$的前半部分和后半部分都是长度为$N/2$的离散信号，他们的离散傅里叶变换分别为$$X_1[k]=\sum_{n=0}^{N/2-1}x[n]W_N^{kn}$$
+$$X_2[k]=\sum_{n=0}^{N/2-1}x[n+N/2]W_N^{kn}$$
 代入得
 \begin{align*}
-X[k]&=X_1[k]+W_N^{-kN/2}X_2[k]\\
-X[k+N/2]&=X_1[k]-W_N^{-kN/2}X_2[k]
+X[k]&=X_1[k]+W_N^{kN/2}X_2[k]\\
+X[k+N/2]&=X_1[k]-W_N^{kN/2}X_2[k]
 \end{align*}
 
 因此，$X[k]$的计算可以通过计算$X_1[k]$和$X_2[k]$来实现，而$X_1[k]$和$X_2[k]$又是长度为$N/2$的离散信号的离散傅里叶变换。通过递归地将信号长度不断减半，最终可以将离散傅里叶变换的计算复杂度降低到$O(N\log N)$。
