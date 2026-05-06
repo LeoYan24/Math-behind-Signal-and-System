@@ -54,7 +54,7 @@ $\int_{-\infty}^{\infty}|g(y)|\,dy<\infty$的必要条件是$\int_{\delta/\lambd
 \end{itemize}
 
 作为以上定理的推论，可以得到一个非常好用的定理：\begin{corollary}[*魏尔斯特拉斯逼近定理]
-    设$f\in C([a,b]),-\infty<a<b<\infty$，则$f$是某个多项式序列在$[a,b]$上的一致极限，即\[\forall \epsilon>0,\exists \mathrm{多项式}P,\sup_{a\leq x\leq b}|f(x)-P(x)|<\epsilon\]
+    设$f\in C([a,b]),-\infty<a<b<\infty$，则$f$是某个多项式序列在$[a,b]$上的一致极限，即\[\forall \epsilon>0,\exists \text{多项式}P,\sup_{a\leq x\leq b}|f(x)-P(x)|<\epsilon\]
 \end{corollary}
 在处理分析问题时，类似分段光滑函数可由三角级数一致逼近，将连续函数用多项式一致逼近是一个很强大的工具。
 \begin{proof}
@@ -67,7 +67,7 @@ $\int_{-\infty}^{\infty}|g(y)|\,dy<\infty$的必要条件是$\int_{\delta/\lambd
     于是
     \[P(x)=\frac{1}{\lambda\sqrt{\pi}}\sum_{0}^{N}\int_{a-1}^{b+1}\frac{(-1)^n (x-y)^{2n}}{\lambda^{2n}n!}f(y)\,dy,\sup_{a\leq x\leq b}\left|f(x)-P(x)\right|<\epsilon\]
     我们还可以求出$P$的显式表达式：
-    \[P(x)=\sum_{n=0}^{N}\sum_{k=0}^{2n}c_{kn}x^k,c_{kn}=\frac{(-1)^{k-n}C_{2n}^{k}}{\lambda^{2n+1}n!\sqrt{\pi}}\int_{a-1}^{b+1}y^{2n-k}f(y)\,dy\]
+    \[P(x)=\sum_{n=0}^{N}\sum_{k=0}^{2n}c_{kn}x^k,c_{kn}=\frac{(-1)^{k-n}}{\lambda^{2n+1}n!\sqrt{\pi}}\binom{2n}{k}\int_{a-1}^{b+1}y^{2n-k}f(y)\,dy\]
     使用其他光滑函数列逼近$\delta$分布也可以得到不同的多项式逼近，不过，绝大多数情况下我们并不需要计算出这个表达式，而是直接用多项式的一致逼近来获取函数的性质。
 \end{proof}
 
