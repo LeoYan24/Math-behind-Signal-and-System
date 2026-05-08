@@ -175,6 +175,8 @@ $$h[n]=\left(\sum_{i=1}^s P_i(n) \lambda_i^n \right)u[n]+\sum_{i=0}^{M-N}B_i\del
     其中零输入响应$r_{zi}[n]$由零输入初始值唯一确定。
 \end{theorem}
 
+当$N>1$时，差分方程的解不仅依赖于$r_{zs}[0]$，还依赖于$r_{zs}[1-N]$，系统不具备马尔可夫性。
+
 沿着\ref{sub:fundamental_solution}的思路，我们尝试由单位阶跃响应来求解单位脉冲响应，从而简化计算。
 
 \begin{lemma}
