@@ -175,7 +175,7 @@ $$h[n]=\left(\sum_{i=1}^s P_i(n) \lambda_i^n \right)u[n]+\sum_{i=0}^{M-N}B_i\del
     其中零输入响应$r_{zi}[n]$由零输入初始值唯一确定。
 \end{theorem}
 
-当$N>1$时，差分方程的解不仅依赖于$r_{zs}[0]$，还依赖于$r_{zs}[1-N]$，系统不具备马尔可夫性。
+尽管$N>1$时，差分方程的解不仅依赖于$r_{zs}[0]$，还依赖于$r_{zs}[1-N]$，但我们还是认为系统有马尔可夫性，这与\ref{sub:discrete_system_overview}中提到的马尔可夫性并不矛盾——在\ref{sub:difference_equation}的最后我们指出，这些初始值相当于$n=0$时刻$r_{zs}$的$0$到$N-1$阶差分，并且给定这些初始值后，$n>0$时刻的响应的确不依赖于$n<0$时刻的激励。
 
 沿着\ref{sub:fundamental_solution}的思路，我们尝试由单位阶跃响应来求解单位脉冲响应，从而简化计算。
 
@@ -188,8 +188,7 @@ $$h[n]=\left(\sum_{i=1}^s P_i(n) \lambda_i^n \right)u[n]+\sum_{i=0}^{M-N}B_i\del
 \begin{proof}
     单位脉冲响应$h[n]$与单位阶跃响应$g[n]$分别满足以下方程：
     \begin{align*}
-        \sum_{k=0}^{N}a_k h[n-k] &= \delta[n]\\
-        \sum_{k=0}^{N}a_k g[n-k] &= u[n]
+        \sum_{k=0}^{N}a_k h[n-k] &= \delta[n],\sum_{k=0}^{N}a_k g[n-k]= u[n]
     \end{align*}
     将$g[n]$的方程两边同时后向差分，得到\begin{align*}
     \sum_{k=0}^{N}a_k \nabla g[n-k] &= \nabla u[n]=\delta[n]
