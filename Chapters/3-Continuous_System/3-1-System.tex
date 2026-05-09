@@ -49,16 +49,10 @@
 就说系统是\textbf{线性系统}(linear system)，且满足叠加法则 (principle of superposition)。
 \end{definition}
 
-由于系统原有的能量，即便激励为零，响应也可能不为零。对于线性系统，可以将$r(t)$分解为两部分：
-\begin{definition}[零输入响应与零状态响应]
-   \textbf{零输入响应}(zero input response,$r_{zi}(t)$)是指$e(t)=0$时，由于系统原有能量而产生的响应；\textbf{零状态响应}(zero state response,$r_{zs}(t)$)是指将系统初始能量置零时的响应。\textbf{全响应}$r(t)=r_{zi}(t)+r_{zs}(t)$。
-\end{definition}
-对于零输入响应不为0的线性系统，考虑以两个激励$e_1(t),e_2(t)$的线性组合作为输入，则按照先前对线性系统的定义，直接将对应的两个响应$r_1(t),r_2(t)$进行线性组合，则零输入响应被重复计算，这不是我们希望看到的，因此我们其实应该定义\textbf{零状态响应有线性性的系统为线性系统}。
-
 \begin{definition}[时不变性和移不变性]
     如果一个系统的输出不依赖于输入信号施加于系统的时间，输入信号发生时移，输出信号也发生相同的时移，即
     $$\forall b\in\mathbb{R},H[e(t-b)]=r(t-b),\text{即}H[\tau_b e(t)]=\tau_b r(t)$$
-    则称该系统是\textbf{时不变的}(time-invariant)。如果激励和响应的自变量是空间，我们同样可以定义系统的\textbf{移不变性}(shift-invariance)，这时$b$是空间中的向量。后文中一般不特意区分时域和空间域。
+    则称该系统是\textbf{时不变的}(time-invariant)。如果激励和响应的自变量是空间变量，$b$是空间中的向量，则称该系统是\textbf{移不变的}(shift-invariant)。后文中一般不特意区分时域和空间域。
 \end{definition}
 \begin{definition}[线性时不变系统]
     如果一个系统既是线性的又是时不变的，就说它是\textbf{线性时不变系统}(linear time-invariant system,LTI)。
@@ -75,6 +69,12 @@
 \begin{definition}[马尔可夫性]
     只要知道了$t=t_0$时刻的系统状态，未来的响应$r(t)(t>t_0)$就与过去的激励$e(t)(t<t_0)$无关，称这样的系统具有\textbf{马尔可夫性}或\textbf{无后效性}。
 \end{definition}
+
+对于同时具有线性性和马尔可夫性的系统，在某一时刻（通常取为$t=0$时刻）以前的激励归结为系统的初始条件，在$t>0$时，即便激励为零，响应也可能不为零。由系统的线性性，可以将$r(t)$分解为两部分：
+\begin{definition}[零输入响应与零状态响应]
+   \textbf{零输入响应}(zero input response,$r_{zi}(t)$)是指$e(t)=0$时，由于初始条件而产生的响应；\textbf{零状态响应}(zero state response,$r_{zs}(t)$)是指将系统初始能量置零时的响应。\textbf{全响应}$r(t)=r_{zi}(t)+r_{zs}(t)$。
+\end{definition}
+对于零输入响应不为0的线性系统，考虑以两个激励$e_1(t),e_2(t)$的线性组合作为输入，则按照先前对线性系统的定义，直接将对应的两个响应$r_1(t),r_2(t)$进行线性组合，则零输入响应被重复计算，这不是我们希望看到的。在这样的语境下，我们其实应该定义\textbf{零状态响应对激励线性、零输入响应对初始条件线性的系统为线性系统}。
 
 此外，系统还有一些其他的特性，例如稳定性、可逆性和即时性。系统的其他特性将在后文中陆续介绍。
 
@@ -246,14 +246,16 @@ $$g(t)=\int_{-\infty}^{t}h(y)\,dy$$
 最后，我们来说明系统的一个重要特性：\textbf{因果性}，并利用$r(t)=(h*e)(t)$给出线性时不变系统的因果性条件。
 
 \begin{definition}[因果性]
-一个系统在有激励时，才会出现响应，或者说$r(t_0)$仅依赖于$e(t)$在$t<t_0$时的值（这里不等号不取等是标准的定义方式，我们马上会看到它的作用），即
+如果系统的响应仅依赖于过去的激励而不依赖于未来的激励，即
 \begin{equation}
     \forall t_0,\left(e_1(t)=e_2(t)\ \mathrm{for}\ t<t_0\right)\implies \left(r_1(t)=r_2(t)\ \mathrm{for}\ t<t_0\right)\label{eq:4.1}
 \end{equation}
-这个条件称为\textbf{因果性条件}(casuality condition)。
+则该系统是\textbf{因果的}(casual)，上述条件称为\textbf{因果性条件}(casuality condition)。
 \end{definition}
 
-因果性表明，系统的响应不能先于激励出现，且仅仅依赖于先前的激励，从物理上讲，这样的系统才可能是可实现的。对于特殊的系统类型，因果性条件具有更加简洁的形式：
+从物理上讲，实时处理信号的可实现的系统必须具有因果性。不过，如果信号已经被记录下来以便离线处理（非实时），就有可能实现非因果的系统\cite{dsp}。
+
+对于特殊的系统类型，因果性条件具有更加简洁的形式：
 
 \begin{proposition}
 对于线性系统，因果性条件等价于
