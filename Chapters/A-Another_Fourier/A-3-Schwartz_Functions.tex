@@ -76,7 +76,7 @@
 \begin{theorem}
     时域信号、频域信号的方差之积满足不等式
     \[\sigma(f)\sigma(F)\geq \frac{1}{4\pi}\]
-    其中$f\in L^1(\mathbb{R} )\cap L^2(\mathbb{R} )$，$F(\xi)=\int_{-\infty}^{\infty}f(t)\mathrm{e}^{-2\pi \mathrm{i}\xi t}\,dt$，$\sigma(f),\sigma(F)$分别为$f,F$的方差。
+    其中$f\in L^1(\mathbb{R} )\cap L^2(\mathbb{R})$，$F(\xi)=\int_{-\infty}^{\infty}f(t)\mathrm{e}^{-2\pi \mathrm{i}\xi t}\,dt$，$\sigma(f),\sigma(F)$分别为$f,F$的方差。
 \end{theorem}
 物理规律中许多现象都可以归结为这一数学事实，例如著名的\textbf{海森堡不确定性原理} (Heisenberg's uncertainty principle)\footnote{尽管广义的不确定性原理应该归结为算符或矩阵的不对易，但由于动量空间波函数是位置空间波函数的傅里叶变换，以上结果的确能够证明$\sigma_x \sigma_p\geq\frac{\hbar}{2}$}。读者可以自行验证，以上不等式取等于高斯函数。
 \begin{proof}
@@ -87,19 +87,19 @@
 }
     要使它们都是概率密度函数，我们就需要把$|f|^2,|F|^2$归一化，在频率形式的傅里叶变换下，这是自动成立的，而如果使用角频率来做傅里叶变换，则需要引入额外的归一化系数，因此下面仅使用频率。
 
-    我们知道，如果随机变量$X$的概率密度函数为$f(x)$，并且其方差有定义（二阶中心矩存在），则方差为$\sigma^2=\int_{-\infty}^{\infty}(x-\mu)^2 f(x)\,dx$，其中$\mu=\int_{-\infty}^{\infty}x f(x)\,dx$为数学期望。
+    %我们知道，如果随机变量$X$的概率密度函数为$f(x)$，并且其方差有定义（二阶中心矩存在），则方差为$\sigma^2=\int_{-\infty}^{\infty}(x-\mu)^2 f(x)\,dx$，其中$\mu=\int_{-\infty}^{\infty}x f(x)\,dx$为数学期望。
     
-    我们假设$f$和$F$的数学期望为0，否则可以通过时移、频移定理将它调整为0，而不影响另一个域上信号的模值；又假设\[\int_{-\infty}^{\infty}t^2|f(t)|^2\,dt<\infty,\int_{-\infty}^{\infty}\xi^2|F(\xi)|^2\,d\xi<\infty\]
+    我们假设$|f|^2$和$|F|^2$的数学期望为0，否则可以通过时移、频移定理将它调整为0，而不影响另一个域上信号的模值；又假设\[\int_{-\infty}^{\infty}t^2|f(t)|^2\,dt<\infty,\int_{-\infty}^{\infty}\xi^2|F(\xi)|^2\,d\xi<\infty\]
     即方差存在，则\begin{align*}
     4\pi^2 \sigma^2(f)\sigma^2(F)&=4\pi^2 \int_{-\infty}^{\infty}t^2|f(t)|^2\,dt\int_{-\infty}^{\infty}\xi^2|F(\xi)|^2\,d\xi\\
     &=\int_{-\infty}^{\infty}t^2|f(t)|^2\,dt\int_{-\infty}^{\infty}|2\pi \mathrm{i}\xi F(\xi)|^2\,d\xi\\
     &=\int_{-\infty}^{\infty}t^2|f(t)|^2\,dt\int_{-\infty}^{\infty}\left| \mathcal{F} [f'(t)](\xi)\right|^2\,d\xi&\text{(时域微分性质)}\\
     &=\int_{-\infty}^{\infty}t^2|f(t)|^2\,dt\int_{-\infty}^{\infty}| f'(t)|^2\,dt&\text{(普朗歇尔定理)}\\
     &\geq \left(\int_{-\infty}^{\infty}|tf(t)||f'(t)|\,dt\right)^2&\text{(柯西-施瓦兹不等式)}\\
-    &=\frac{1}{4}\int_{-\infty}^{\infty}|f(t)|^2\,dt^2&\text{(分部积分)}\\
-    &=\frac{1}{4}&\text{(归一化)}
+    &=\frac{1}{4}\left(\evalat{t|f(t)|^2}{-\infty}{\infty}-\int_{-\infty}^{\infty}|f(t)|^2\,dt\right)^2&\text{(分部积分)}
+    %&=\frac{1}{4}&\text{(归一化)}
     \end{align*}
-    因此，$\sigma(f)\sigma(F)\geq \dfrac{1}{4\pi}$，得证。
+    上述过程中，我们通过普朗歇尔定理说明了$f'(t)\in L^2(\mathbb{R})$，因此$f(t)$几乎处处可导，$t|f(t)|^2$几乎处处连续，而期望$\int_{-\infty}^{\infty}t|f(t)|^2\,dt=0<\infty$，因此$\lim_{|t|\to\infty}t|f(t)|^2=0$；$\int_{-\infty}^{\infty}|f(t)|^2\,dt=1$，因此，$\sigma(f)\sigma(F)\geq \dfrac{1}{4\pi}$，得证。
 \end{proof}
 
 使用方差的定义可以轻松地得到一个有用的不等式，它给出了一种基于方差估计函数集中程度的方法，这就是\textbf{切比雪夫不等式} (Chebyshev's inequality)：
