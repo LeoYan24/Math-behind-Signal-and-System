@@ -138,28 +138,28 @@
         \node[signode, right=of pre_y, label=right:$y(t)$] (y) {};
         
         \draw[->] (x) -- (e);
-        \draw[->] (e) -- node {$H_1(s)$} (pre_y);
+        \draw[->] (e) -- node {$A(s)$} (pre_y);
         \draw[->] (pre_y) -- (y);
-        \draw[->] (pre_y) to[bend left=50] node {$H_2(s)$} (e);
+        \draw[->] (pre_y) to[bend left=50] node {$F(s)$} (e);
     \end{tikzpicture}
     \caption{闭环系统}
 \end{figure}
 
-上图展示了一个最简单的闭环系统的信号流图。我们将$H_1(s)$称为\textbf{开环增益}，表示不考虑反馈回路时系统的增益，与之相对，将考虑反馈回路后的增益称为\textbf{闭环增益}。
+上图展示了一个最简单的闭环系统的信号流图。我们将$A(s)$称为\textbf{开环增益}，表示不考虑反馈回路时系统的增益，与之相对，将考虑反馈回路后的增益称为\textbf{闭环增益}。
 
-计算该系统的闭环增益：
+设左侧节点的输出信号为$E(s)$，计算该系统的闭环增益$H(s)$：
 \begin{align*}
-    Y(s)&=H_1(s)E(s)\\
-    E(s)&=X(s)-H_2(s)Y(s)\\
-    \implies Y(s)&=H_1(s)\left[X(s)-H_2(s)Y(s)\right]\\
-    \implies Y(s)&=\frac{H_1(s)}{1+H_1(s)H_2(s)}X(s)\\
-    \implies H(s)&=\frac{Y(s)}{X(s)}=\frac{H_1(s)}{1+H_1(s)H_2(s)}
+    Y(s)&=A(s)E(s)\\
+    E(s)&=X(s)+F(s)Y(s)\\
+    \implies Y(s)&=A(s)\left[X(s)+F(s)Y(s)\right]\\
+    \implies Y(s)&=\frac{A(s)}{1-A(s)F(s)}X(s)\\
+    \implies H(s)&=\frac{Y(s)}{X(s)}=\frac{A(s)}{1-A(s)F(s)}
 \end{align*}
 
 \begin{definition}[反馈深度与反馈类型]
-将$1+H_1(s)H_2(s)$称为\textbf{反馈深度}，它是引入反馈回路导致的增益下降的倍率。
+将$1-A(s)F(s)$称为\textbf{反馈深度}，它是引入反馈回路导致的增益下降的倍率。
 
-如果反馈深度大于1，则系统的输出更加稳定，但增益下降，此时反馈为\textbf{负反馈}，特别地，如果反馈深度远大于1，称为\textbf{深度负反馈}，此时$1+H_1(s)H_2(s)\approx H_1(s)H_2(s)$，增益近似等于$1/H_2(s)$（即反馈回路系统的逆系统），与开环增益无关。
+如果反馈深度大于1，则系统的输出更加稳定，但增益下降，此时反馈为\textbf{负反馈}，特别地，如果反馈深度远大于1，称为\textbf{深度负反馈}，此时$1-A(s)F(s)\approx -A(s)F(s)$，增益近似等于$-1/F(s)$（即反馈回路系统的逆系统），与开环增益无关。
 
 如果反馈深度小于1，则系统的输出不稳定，但增益变高，称为\textbf{正反馈}，多用于振荡器；如果反馈深度近似为0，系统将进入\textbf{自激振荡状态}，通常电路无法正常工作，需要消除这种状态。
 \end{definition}

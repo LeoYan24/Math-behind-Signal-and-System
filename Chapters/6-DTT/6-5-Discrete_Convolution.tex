@@ -3,6 +3,19 @@
 \subsection{离散信号的卷积}\label{sub:discrete_conv}
 
 %卷积，周期卷积
+对于离散非周期信号，定义：
+\begin{definition}[卷积和]
+    设$x[n],y[n]$为离散信号，则它们的\textbf{卷积和}定义为
+    \[(x*y)[n]=\sum_{k=-\infty}^{\infty}x[k]y[n-k]\]
+\end{definition}
+
+对于两个具有相同周期的离散信号，定义：
+\begin{definition}[周期离散信号的卷积和]
+    设$x[n],y[n]$是周期为$N$的离散信号，则它们的卷积和定义为
+    \[(x*y)[n]=\sum_{m=0}^{N-1}x[m]y[n-m]\]
+\end{definition}
+
+为了区分这两种卷积，有时也将前者称为\textbf{线性卷积}，而将后者称为\textbf{循环卷积}。
 
 \subsection{离散信号的相关}\label{sub:discrete_corr}
 
