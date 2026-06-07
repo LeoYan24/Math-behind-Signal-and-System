@@ -349,39 +349,39 @@ $$\tau_g(\omega_c)=-\left.\dfrac{d\varphi(\omega)}{d\omega}\right|_{\omega=\omeg
 
 现代的通信方式有两种\cite{electronic_circuits}，\textbf{有线通信}(wired communication)和\textbf{无线通信}(wireless communication)。无线通信指用电磁波作为载体的\textbf{射频通信}(radio frequency communication)，有线通信则是通过导线传输电信号，例如电话线、光纤等。尽管无线通信的信息传输效率比有线通信低一些，但无线通信配置灵活、建设速度快、通信可靠、维护方便且易于跨越复杂地形，应用广泛。
 
-电磁波是通过天线发射和接受的。在电路分析的课程中，我们学过：当实际电路的几何尺寸远小于使用时最高工作频率所对应的波长时，可以忽略电磁场相互作用，由此抽象出的理想化原件模型被称为\textbf{集总参数元件}(lumped element)；当实际电路的几何尺寸与使用时最高工作频率所对应的波长相当时，必须考虑电磁场相互作用，由此抽象出的理想化原件模型被称为\textbf{分布参数元件}(distributed element)。无线通信中的天线就是一个典型的分布参数元件，它将受金属束缚的电磁场（电压、电流）转化为辐射的电磁场，这个转化过程要求天线的尺寸必须与波长相当。以四分之一波长导体线为例，要发射$1kHz$的电磁波，则需要$75km$长的天线，这是难以实现的，因此无线通信通常使用$MHz$甚至$GHz$频率的电磁波作为载体。
+电磁波是通过天线发射和接收的。在电路分析的课程中，我们学过：当实际电路的几何尺寸远小于使用时最高工作频率所对应的波长时，可以忽略电磁场相互作用，由此抽象出的理想化原件模型被称为\textbf{集总参数元件}(lumped element)；当实际电路的几何尺寸与使用时最高工作频率所对应的波长相当时，必须考虑电磁场相互作用，由此抽象出的理想化元件模型被称为\textbf{分布参数元件}(distributed element)。无线通信中的天线就是一个典型的分布参数元件，它将受金属束缚的电磁场（电压、电流）转化为辐射的电磁场，这个转化过程要求天线的尺寸必须与波长相当。以四分之一波长导体线为例，要发射1kHz的电磁波，则需要75km长的天线，这是难以实现的，因此无线通信通常使用MHz甚至GHz频率的电磁波作为载体。
 
 将低频基带信号装载到高频信号上的过程，称为\textbf{调制}(modulation)，此时高频信号被称为\textbf{载波}(carrier)，例如用正弦信号作为载波，可以将基带信号装载到载波的幅度、频率、相位上，对应的调制方式称为\textbf{调幅}(AM, amplitude modulation)、\textbf{调频}(FM, frequency modulation)和\textbf{调相}(PM, phase modulation)。相应地，在信号接收端，从高频的已调信号还原出低频的基带信号的过程，称为\textbf{解调}(demodulation)。
 \begin{definition}[调频、调幅、调相]
     设基带信号为$m(t)$，载波信号为\[c(t)=A_c \cos(\omega_c t+\varphi_c)\]
     其中$A_c,\omega_c,\varphi_c$分别为载波的幅值、角频率和初相位，则：
     \begin{itemize}
-        \item 调幅信号为\[v_{AM}(t)=[1+k_{AM} m(t)]A_c \cos(\omega_c t+\varphi_c)\]其中$k_{AM}$为调幅灵敏度；
-        \item 调频信号为\[v_{FM}(t)=A_c \cos\left(\omega_c t+k_{FM}\int_{0}^{t}m(\tau)\,d\tau+\varphi_c\right)\]其中$k_{FM}$为调频灵敏度；
-        \item 调相信号为\[v_{PM}(t)=A_c \cos\left(\omega_c t+k_{PM} m(t)+\varphi_c\right)\]其中$k_{PM}$为调相灵敏度。
+        \item 调幅信号为\[v_{\text{AM}}(t)=[1+k_{\text{AM}} m(t)]A_c \cos(\omega_c t+\varphi_c)\]其中$k_{\text{AM}}$为调幅灵敏度；
+        \item 调频信号为\[v_{\text{FM}}(t)=A_c \cos\left(\omega_c t+k_{\text{FM}}\int_{0}^{t}m(\tau)\,d\tau+\varphi_c\right)\]其中$k_{\text{FM}}$为调频灵敏度；
+        \item 调相信号为\[v_{\text{PM}}(t)=A_c \cos\left(\omega_c t+k_{\text{PM}} m(t)+\varphi_c\right)\]其中$k_{\text{PM}}$为调相灵敏度。
     \end{itemize}
 \end{definition}
-也可以在载波的幅度和相位上同时调制，例如\textbf{正交振幅调制}(QAM, quadrature amplitude modulation)。
+%也可以在载波的幅度和相位上同时调制，例如\textbf{正交振幅调制}(QAM, quadrature amplitude modulation)。
 
 下面来解释为什么这三种调制方式的数学表示形式如上。\\
-1.\textbf{幅度调制}：已调信号的幅度为\[1+k_{AM}m(t)\]
-我们曾用这种调制方式作为\ref{sub:distortion}中的例子来解释群时延的概念，事实上，当时所使用的是\textbf{双边带调幅}(DSB)，一般而言不能略去1倍的载波信号这一项，即
-\[v_{AM}(t)\neq k_{AM} m(t)A_c \cos(\omega_c t+\varphi_c)=v_{DSB}(t)\]
-这是因为调幅信号通常通过包络检测器直接恢复，虽然有部分功率用于传输载波，但这简化了解调过程。此外，一般被调信号$m(t)$会预先经过衰减器以确保$|k_{AM}m(t)|\leq 1$，这样，$1+km(t)\geq 0$，包络不出现反转，即不会出现过度调制问题，包络检测器才能正常解调。\\
-2.\textbf{频率调制}：$v_{FM}(t)$的傅里叶变换较为复杂，但其直观易于理解，这种调制方式下的\textbf{瞬时角频率}为：\begin{align*}
-    \frac{d}{dt}\left(\omega_c t+k_{FM}\int_{0}^{t}m(\tau)\,d\tau+\varphi_c\right)=\omega_c+k_{FM}m(t)
+1.\textbf{幅度调制}：已调信号的幅度为\[1+k_{\text{AM}}m(t)\]
+我们曾用这种调制方式作为\ref{sub:distortion}中的例子来解释群时延的概念，事实上，当时所使用的是\textbf{双边带调幅}(\text{DSB})，一般而言不能略去1倍的载波信号这一项，即
+\[v_{\text{AM}}(t)\neq k_{\text{AM}} m(t)A_c \cos(\omega_c t+\varphi_c)=v_{\text{DSB}}(t)\]
+这是因为调幅信号通常通过包络检测器直接恢复，虽然有部分功率用于传输载波，但这简化了解调过程。此外，一般被调信号$m(t)$会预先经过衰减器以确保$|k_{\text{AM}}m(t)|\leq 1$，这样，$1+km(t)\geq 0$，包络不出现反转，即不会出现过度调制问题，包络检测器才能正常解调。\\
+2.\textbf{频率调制}：$v_{\text{FM}}(t)$的傅里叶变换较为复杂，但其直观易于理解，这种调制方式下的\textbf{瞬时角频率}为：\begin{align*}
+    \frac{d}{dt}\left(\omega_c t+k_{\text{FM}}\int_{0}^{t}m(\tau)\,d\tau+\varphi_c\right)=\omega_c+k_{\text{FM}}m(t)
 \end{align*}
-3.\textbf{相位调制}：\textbf{瞬时相位}为\[\omega_c t+k_{PM} m(t)+\varphi_c\]
+3.\textbf{相位调制}：\textbf{瞬时相位}为\[\omega_c t+k_{\text{PM}} m(t)+\varphi_c\]
 
 我们以双边带调制为例给出一个简单的调制解调过程：
 \begin{example}
 设基带信号为$m(t)=\cos(\omega_m t)$，载波信号为$c(t)=\cos(\omega_c t)$，其中$\omega_c\gg \omega_m$。设计一个简单的解调器以还原出$m(t)$。\\
-解：双边带调幅信号为\[v_{DSB}(t)=m(t)c(t)=\cos(\omega_m t)\cos(\omega_c t)\]
+解：双边带调幅信号为\[v_{\text{DSB}}(t)=m(t)c(t)=\cos(\omega_m t)\cos(\omega_c t)\]
 我们已经在上一节对它做过频域分析，得到其频谱为
-\[V_{DSB}(\omega)=\frac{\pi}{2}\left[\delta_{\omega_c+\omega_m}+\delta_{-(\omega_c+\omega_m)}+\delta_{\omega_c-\omega_m}+\delta_{-(\omega_c-\omega_m)}\right]\]
-假设传输过程没有发生失真，接收端得到的信号仍为$v_{DSB}(t)$。为了还原出$m(t)$，我们可以将$v_{DSB}(t)$与载波$c(t)$相乘，得到
+\[V_{\text{DSB}}(\omega)=\frac{\pi}{2}\left[\delta_{\omega_c+\omega_m}+\delta_{-(\omega_c+\omega_m)}+\delta_{\omega_c-\omega_m}+\delta_{-(\omega_c-\omega_m)}\right]\]
+假设传输过程没有发生失真，接收端得到的信号仍为$v_{\text{DSB}}(t)$。为了还原出$m(t)$，我们可以将$v_{\text{DSB}}(t)$与载波$c(t)$相乘，得到
 \begin{align*}
-    y(t)&=v_{DSB}(t)c(t)\\
+    y(t)&=v_{\text{DSB}}(t)c(t)\\
     &=\cos(\omega_m t)\cos^2(\omega_c t)\\
     &=\frac{1}{2}\cos(\omega_m t)(1+\cos(2\omega_c t))\\
     &=\frac{1}{2}\cos(\omega_m t)+\frac{1}{2}\cos(\omega_m t)\cos(2\omega_c t)
@@ -394,19 +394,19 @@ $$\tau_g(\omega_c)=-\left.\dfrac{d\varphi(\omega)}{d\omega}\right|_{\omega=\omeg
 只要再通过一个截止频率在$(\omega_m,\ 2\omega_c-\omega_m)$之间的低通滤波器，就可以滤除高频成分，得到$\dfrac{1}{2}\cos(\omega_m t)$，从而还原出基带信号$m(t)$。
 \end{example}
 时域上，这个过程相当于\begin{align*}
-    y(t)&=v_{DSB}(t)c(t)\\
+    y(t)&=v_{\text{DSB}}(t)c(t)\\
     &=m(t)c^2(t)\\
     &=m(t)\frac{1+\cos(2\omega_c t)}{2}\\
     &=\frac{m(t)}{2}+\frac{m(t)}{2}\cos(2\omega_c t)
 \end{align*}
 而$\frac{m(t)}{2}\cos(2\omega_c t)$被低通滤波器滤除。
 
-事实上，对于带限信号（尤其是窄带信号），我们都可以采用这种调制解调的方法进行传输，这是由于三角函数具有\textbf{频谱搬移}(spectrum shifting)的性质：\begin{align*}
+我们将只含有低频成分（相对于载波频率而言）的模拟信号称为\textbf{模拟基带信号}，这种信号都可以采用上述方法进行传输，这是由于三角函数具有\textbf{频谱搬移}(spectrum shifting)的性质：\begin{align*}
     \mathcal{F} \left[\cos(\omega_c t)\right]&=\pi\left[\delta_{\omega_c}+\delta_{-\omega_c}\right]\\
     \mathcal{F}\left[x(t)\cos(\omega_c t)\right]&=\frac{1}{2\pi}X(\omega)*\mathcal{F}\left[\cos(\omega_c t)\right]\\
     &=\frac{1}{2}\left[X(\omega-\omega_c)+X(\omega+\omega_c)\right]
 \end{align*}
-经过两次与载波相乘，一半的信号回到原来的位置，另一半被搬移到$2\omega_c$处，可见只要信号的带宽小于$\omega_c$，就可以通过选择合适的低通滤波器还原出基带信号。
+经过两次与载波相乘，信号的一半频谱回到原来的位置，另一半频谱被搬移到$2\omega_c$处，可见只要信号的带宽小于$\omega_c$，就可以通过选择合适的低通滤波器还原出基带信号。
 
 利用这种频谱搬移特性，还可以实现信号的\textbf{频分复用}(FDM, frequency division multiplexing)：将多个基带信号分别调制到不同的载波频率上进行传输，在接收端先使用不同的带通滤波器分别解调，再与载波信号相乘，最后通过低通滤波器，即可还原出各个基带信号。
 
