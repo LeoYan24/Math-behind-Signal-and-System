@@ -610,21 +610,21 @@ $\mathcal{S} $是线性空间，因此可以定义其对偶空间，即\textbf{�
 
     再利用傅里叶变换的频移性质，得到：
     \begin{lralign}
-        \mathcal{F} [\mathrm{e}^{2\pi \mathrm{i} \mathbf{x}_0\cdot\mathbf{x}}](\boldsymbol{\xi})&=\delta_{\mathbf{x_0}}
+        \mathcal{F} [\mathrm{e}^{2\pi \mathrm{i} \boldsymbol{\xi}_0\cdot\mathbf{x}}](\boldsymbol{\xi})&=\delta_{\boldsymbol{\xi}_0}
 \switch
-        \mathcal{F} [\mathrm{e}^{\mathrm{i} \mathbf{x}_0\cdot\mathbf{x}}](\boldsymbol{\omega})&=(2\pi)^n \delta_{\mathbf{x_0}}
+        \mathcal{F} [\mathrm{e}^{\mathrm{i} \boldsymbol{\omega}_0\cdot\mathbf{x}}](\boldsymbol{\omega})&=(2\pi)^n \delta_{\boldsymbol{\omega}_0}
     \end{lralign}
     利用欧拉公式求得三角函数的傅里叶变换：
     \begin{lralign}
-        \mathcal{F} [\cos(2\pi \mathbf{x}_0\cdot\mathbf{x})](\boldsymbol{\xi})&=\frac{1}{2}[\delta_{\mathbf{x_0}}+\delta_{-\mathbf{x_0}}]
+        \mathcal{F} [\cos(2\pi \boldsymbol{\xi}_0\cdot\mathbf{x})](\boldsymbol{\xi})&=\frac{1}{2}[\delta_{\boldsymbol{\xi}_0}+\delta_{-\boldsymbol{\xi}_0}]
 \switch
-        \mathcal{F} [\cos(\mathbf{x}_0\cdot\mathbf{x})](\boldsymbol{\omega})&=\frac{(2\pi)^n}{2}[\delta_{\mathbf{x_0}}+\delta_{-\mathbf{x_0}}]
+        \mathcal{F} [\cos(\boldsymbol{\omega}_0\cdot\mathbf{x})](\boldsymbol{\omega})&=\frac{(2\pi)^n}{2}[\delta_{\boldsymbol{\omega}_0}+\delta_{-\boldsymbol{\omega}_0}]
     \end{lralign}
     以及
     \begin{lralign}
-        \mathcal{F} [\sin(2\pi \mathbf{x}_0\cdot\mathbf{x})](\boldsymbol{\xi})&=\frac{1}{2\mathrm{i}}[\delta_{\mathbf{x_0}}-\delta_{-\mathbf{x_0}}]
+        \mathcal{F} [\sin(2\pi \boldsymbol{\xi}_0\cdot\mathbf{x})](\boldsymbol{\xi})&=\frac{1}{2\mathrm{i}}[\delta_{\boldsymbol{\xi}_0}-\delta_{-\boldsymbol{\xi}_0}]
 \switch
-        \mathcal{F} [\sin(\mathbf{x}_0\cdot\mathbf{x})](\boldsymbol{\omega})&=\frac{(2\pi)^n}{2\mathrm{i}}[\delta_{\mathbf{x_0}}-\delta_{-\mathbf{x_0}}]
+        \mathcal{F} [\sin(\boldsymbol{\omega}_0\cdot\mathbf{x})](\boldsymbol{\omega})&=\frac{(2\pi)^n}{2\mathrm{i}}[\delta_{\boldsymbol{\omega}_0}-\delta_{-\boldsymbol{\omega}_0}]
     \end{lralign}
 \end{corollary}
 
