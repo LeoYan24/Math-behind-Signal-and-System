@@ -107,13 +107,13 @@
 为了直观地看出周期信号的各个频率分量的大小与相位，可以绘制\textbf{频谱} (spectrum)来表征函数的频域信息。频谱指函数频域图像，通常用其指数形式的傅里叶系数$c_k$来表征。由于难以画出复数，将频谱拆分为\textbf{幅度谱}$|\hat{f}(k\omega)|-\omega$和\textbf{相位谱}$\phi_k-\omega$，其中$\phi_k=\arg \hat{f}(k\omega)$。
 
 对于实信号，
-\[\hat{f}(k\omega)=\hat{f}(-k\omega)^*\implies |\hat{f}(k\omega)|=|\hat{f}(-k\omega)|,\phi_{-k}=-\phi_k\]
+\[\hat{f}(k\omega)=\overline{\hat{f}(-k\omega)}\implies |\hat{f}(k\omega)|=|\hat{f}(-k\omega)|,\phi_{-k}=-\phi_k\]
 即幅度谱为偶函数，相位谱为奇函数，所以实信号的频谱中有一半是冗余的。因此，有时也按照三角形式的傅里叶展开式
 \[\frac{c_0}{2}+\sum_{k = 1}^{\infty} c_k\cos(k\omega t+\varphi _k)\]
 绘制频谱$|c_k|-\omega$（注意此时$c_k$不是指数函数形式的傅里叶系数）和$\phi_k-\omega$，称之为\textbf{单边频谱}，而完整的频谱称为\textbf{双边频谱}，根据欧拉公式，
 \begin{align*}
     c_k\cos(k\omega t+\varphi _k)&=\frac{c_k}{2}\mathrm{e}^{\mathrm{i}(k\omega t+\varphi_k)}+\frac{c_k}{2}\mathrm{e}^{-\mathrm{i}(k\omega t+\varphi_k)}\\
-    &=\frac{c_k}{2}\mathrm{e}^{\mathrm{i}(k\omega t+\varphi_k)}+\frac{c_{-k}^*}{2}\mathrm{e}^{\mathrm{i}(-k\omega t+\varphi_{-k})}\\
+    &=\frac{c_k}{2}\mathrm{e}^{\mathrm{i}(k\omega t+\varphi_k)}+\frac{\overline{c_{-k}}}{2}\mathrm{e}^{\mathrm{i}(-k\omega t+\varphi_{-k})}\\
     \implies c_k&=2\hat{f}(k\omega),k>0
 \end{align*}
 因此\textbf{对于实函数，单边频谱相比双边频谱，在正频率处的幅值加倍，相位不变，展示频域信息的效果不变，但没有冗余}。
@@ -205,7 +205,7 @@
 
 如果函数在有限个点处不连续，我们的确无法将这一结论加强到逐点收敛，因为在不连续点处函数的取值不影响积分值，也就不影响傅里叶系数，当然也就得不到不连续点处的收敛性，但是如果将分段连续函数在不连续点处的取值定义为左右极限的平均值，这样就能够得到逐点收敛性了。
 
-最后一个条件实际上相当于要求f是有界变差函数，感兴趣的读者可以参考实变函数的教材（如\cite{simple_real_analysis}，\cite{real_analysis}）。在\ref{sub:uniform_converge}中我们将讨论另外的更易理解的条件：
+狄利克雷条件中的最后一条实际上相当于要求f是有界变差函数，感兴趣的读者可以参考实变函数的教材（如\cite{simple_real_analysis}，\cite{real_analysis}）。在\ref{sub:uniform_converge}中我们将讨论另外的更易理解的条件：
 \begin{definition}[分段光滑]
     在区间$[a,b]$上，函数$f$称为\textbf{分段光滑} (piecewise smooth)，如果存在区间的划分$a=x_0<x_1<\dots <x_n=b$，使得在每个子区间$(x_{i-1},x_i)$上f可微，且区间端点处$f$的左右导数存在，记作$f\in PS[a,b]$。
 \end{definition}
