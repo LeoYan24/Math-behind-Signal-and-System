@@ -78,9 +78,9 @@
 \end{example}
 
 \begin{example}[三角函数的希尔伯特变换，直接计算]
-    如果使用狄利克雷积分的结果：
+    利用\ref{sub:int_sin}中的狄利克雷积分：
     \[\int_{-\infty}^{\infty}\frac{\sin ax}{x}\,dx=\pi,a>0\]
-    也可以直接计算三角函数的希尔伯特变换，这次以正弦函数为例：
+    也可以直接计算三角函数的希尔伯特变换，这里以正弦函数为例：
     \begin{align*}
         \mathcal{H} \sin(\omega_0 t)&=\frac{1}{\pi}\text{p.v.}\int_{-\infty}^{\infty}\frac{\sin(\omega_0 y)}{t-y}\,dy\\
         &=\frac{1}{\pi}\lim_{\epsilon\to 0^+}\left(\int_{-\infty}^{t-\epsilon}\frac{\sin(\omega_0 y)}{t-y}\,dy+\int_{t+\epsilon}^{\infty}\frac{\sin(\omega_0 y)}{t-y}\,dy\right)\\
@@ -116,7 +116,7 @@
 
 希尔伯特变换还具有\textbf{正交性}：
 \begin{theorem}
-    设$f\in L^2(\mathbb{R})$，则有
+    设实函数$f\in L^2(\mathbb{R})$，则有
     \[(f,\mathcal{H} f)=0\]
 \end{theorem}
 由于这个原因，有时将$\mathcal{H} f$称为$f$的\textbf{正交伴随}(orthogonal complement)。
@@ -126,14 +126,15 @@
         (f,\mathcal{H} f)&=\int_{-\infty}^{\infty}f(t)\overline{\mathcal{H} f(t)}\,dt\\
         &=\int_{-\infty}^{\infty}\mathcal{F} f(\xi)\overline{\mathcal{F} [\mathcal{H} f](\xi)}\,d\xi\\
         &=\int_{-\infty}^{\infty}\mathcal{F} f(\xi)\overline{-\mathrm{i}\,\text{sgn}(\xi)\mathcal{F} f(\xi)}\,d\xi\\
-        &=-\mathrm{i}\int_{-\infty}^{\infty}\text{sgn}(\xi)|\mathcal{F} f(\xi)|^2\,d\xi\\
+        &=\mathrm{i}\int_{-\infty}^{\infty}\text{sgn}(\xi)|\mathcal{F} f(\xi)|^2\,d\xi\\
         &=0
     \end{align*}
+    最后一个等号是因为实函数的傅里叶变换具有共轭对称性，$|\mathcal{F} f(\xi)|$是偶函数，因此$\text{sgn}(\xi)|\mathcal{F} f(\xi)|^2$是奇函数。
 \end{proof}
 
 此外，希尔伯特变换具有奇偶对称性：
 \begin{theorem}
-    设$f\in L^2(\mathbb{R})$，则有
+    $f$与$\mathcal{H}f$的奇偶性相反，即：
     \begin{itemize}
         \item 如果$f$是偶函数，则$\mathcal{H} f$是奇函数；
         \item 如果$f$是奇函数，则$\mathcal{H} f$是偶函数。
@@ -148,7 +149,7 @@
     \end{align*}
     即$\mathcal{F} [\mathcal{H} f](\xi)$是奇函数，因此$\mathcal{H} f$是奇函数。
     
-    类似地，如果$f$是奇函数，则$\mathcal{F} f$也是奇函数，$\mathcal{F} [\mathcal{H} f](\xi)=-\mathrm{i}\,\text{sgn}(\xi)\mathcal{F} f(\xi)$是偶函数，因此$\mathcal{H} f$是偶函数。
+    类似地，如果$f$是奇函数，则$\mathcal{F} f$也是奇函数，$\mathcal{F} [\mathcal{H} f](\xi)=-\mathrm{i}\,\text{sgn}(\xi)\mathcal{F} f(\xi)$是偶函数，因此$\mathcal{H} f$是偶函数。直接使用希尔伯特变换的定义也可验证这一性质。
 \end{proof}
 
 \subsection{解析信号}\label{sub:analytic_signal}
@@ -199,7 +200,7 @@ $$\mathcal{F}[\text{Re}\ g(t)]=\frac{\mathcal{F}g(\xi)+\mathcal{F}\overline{g}(\
     &=\frac{1}{2}H(\omega)+\frac{1}{2\pi \mathrm{i}\omega}*H(\omega)
 \end{align*}
 
-考察上式的实部和虚部，记$H(\omega)=R(\omega)+iI(\omega)$，则有：
+考察上式的实部和虚部，记$H(\omega)=R(\omega)+\im I(\omega)$，则有：
 \begin{align*}
     R(\omega)&=\frac{1}{2}R(\omega)-\frac{1}{2\pi \omega}*I(\omega)\\
     I(\omega)&=\frac{1}{2}I(\omega)+\frac{1}{2\pi \omega}*R(\omega)
@@ -211,7 +212,7 @@ $$\mathcal{F}[\text{Re}\ g(t)]=\frac{\mathcal{F}g(\xi)+\mathcal{F}\overline{g}(\
 \end{align*}
 也就是以下定理：
 \begin{theorem}[希尔伯特变换关系]
-    设$h(t)$为因果线性时不变系统的单位冲激响应，$H(\omega)=R(\omega)+iI(\omega)$为系统的频率响应，则$R(\omega)$与$I(\omega)$构成希尔伯特变换对，即：
+    设$h(t)$为因果线性时不变系统的单位冲激响应，$H(\omega)=R(\omega)+\im I(\omega)$为系统的频率响应，则$R(\omega)$与$I(\omega)$构成希尔伯特变换对，即：
     \begin{align*}
     &R(\omega)=-\frac{1}{\pi \omega}*I(\omega)=\mathcal{H} ^{-1}I(\omega)\\
     &I(\omega)=\frac{1}{\pi \omega}*R(\omega)=\mathcal{H} R(\omega)

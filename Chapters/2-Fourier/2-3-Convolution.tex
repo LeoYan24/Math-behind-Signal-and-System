@@ -233,7 +233,7 @@ $\rho(f,g)=\pm 1$时两信号\textbf{线性相关}；$\rho(f,g)=0$时两信号\t
 \begin{proposition}
     设$f,g\in L^2(\mathbb{R})$，则
 \begin{enumerate}
-    \item $R_{fg}=f* \overline{g^-}=\overline{R_{gf}^-}$，如果$f,g$都是实信号，则$f\star g = (g\star f)^- =f^- *g=(f*g^-)^-$.
+    \item $R_{fg}=f* \overline{g^-}=\overline{R_{gf}^-}$，如果$f,g$都是实信号，则$R_{fg} =R_{gf}^- =f^- *g=(f*g^-)^-$.该性质表明相关与卷积有着密切的联系，并且互相关函数具有共轭对称性。
     \item (维纳-辛钦定理)设$f,g\in L^1(\mathbb{R})$，则$\mathcal{F} R_{fg} =\mathcal{F} f\overline{\mathcal{F} g}$
     \item $R_{\tau_b f,g}=\tau_{b}R_{fg}=R_{f,\tau_{-b}g}$
     \item $R_{fg}\leq\|f\|_2\|g\|_2$，特别地，$R_f(x)\leq R_f(0)=\|f\|_2^2$
@@ -260,7 +260,7 @@ $\rho(f,g)=\pm 1$时两信号\textbf{线性相关}；$\rho(f,g)=0$时两信号\t
     &=\overline{R_{gf}}(-x)
 \end{align*}
 
-由于不涉及频率、角频率的问题，我们仅给出一种符号下的证明：
+由于傅里叶变换时不涉及频率、角频率的问题，我们仅给出一种符号下的证明：
 
 2.
 \begin{align*}
