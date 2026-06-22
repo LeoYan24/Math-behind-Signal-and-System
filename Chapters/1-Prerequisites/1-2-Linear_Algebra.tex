@@ -137,10 +137,10 @@ $d(\cdot,\cdot):V\times V\rightarrow \mathbb{R}  $，满足\textbf{度量公理}
 \[\lim_{x\to x_0}f(x)=A\iff \forall \epsilon>0\exists \delta>0(\forall x\in V,d(x,x_0)<\delta\Rightarrow d(f(x),f(x_0))<\epsilon)\]
 这就是数学分析中的极限定义，只是将绝对值改成了度量。
 
-在数学分析中，一个实数列的收敛性等价于该序列是柯西列，这实际上是依赖于实数的完备性的。柯西列描述了一个“应当收敛”的序列所具有的性质，而不依赖于最终的极限是否在我们所讨论的空间中。
 \begin{definition}[柯西列]
     在度量空间$(V,d)$中，序列$\{x_n\}$称为柯西列，如果对于任意$\epsilon>0$，存在$N\in\mathbb{N}$使得对所有$m,n>N$都有$d(x_m,x_n)<\epsilon$。
 \end{definition}
+在数学分析中，一个实数列的收敛性等价于该序列是柯西列，这实际上是依赖于实数的完备性的。柯西列描述了一个“应当收敛”的序列所具有的性质，而不依赖于最终的极限是否在我们所讨论的空间中。更一般地，我们提出度量空间中完备性的定义：
 
 \begin{definition}[完备度量空间]
     如果度量空间中所有柯西列都有极限，那么这个空间称为\textbf{完备度量空间}。

@@ -6,23 +6,22 @@
 \[\int_{-\infty}^{\infty}| f(x)| ^2\,dx\to\infty,\lim_{T \to \infty}\frac{1}{T}\int_{-T/2}^{T/2}| f(x)|^2  \,dx<\infty\]
 \end{definition}
 
-在\ref{sub:Lp_space}中，我们约定了：能量为0的信号也属于能量信号，功率为0的信号（即能量信号）也属于功率信号。在这个约定下，能量信号即$L^2(\mathbb{R})$，而功率信号也成为线性空间。本节就来讨论功率信号的空间结构，以及如何通过傅里叶变换来进行能量与功率的谱分析。
+在\ref{sub:Lp_space}中，我们约定了：能量为0的信号也属于能量信号，功率为0的信号（即能量信号）也属于功率信号。在这个约定下，能量信号即$L^2(\mathbb{R})$，而功率信号也成为线性空间。本节就来讨论功率信号空间的结构，以及如何通过傅里叶变换来进行能量与功率的谱分析。
 
 \subsection{*功率信号及其数学背景}\label{sub:power_signal}
 
 如果认为功率为0的信号也是功率信号，则功率信号构成线性空间，我们暂时以$B^2$记这个空间，稍后我们会看到这样做的原因。一个自然的问题是：它是否构成线性赋范空间，甚至内积空间？
 
 为了使它成为线性赋范空间，首先要定义功率信号的范数，然而从它的定义中我们找不到与$L^p(\mathbb{R})$空间的关联。一种自然的想法是，定义
-$$\|f\|_{\mathrm{pwr}}=P_f=\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}|f(x)|^2\,dx$$
-
-$\|\cdot\|_{\mathrm{pwr}}$并不构成范数，它仅仅是\textbf{半范数}(seminorm)，满足：\begin{itemize}
+$$\|f\|_{\mathrm{pwr}}=\sqrt{P_f}=\left(\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}|f(x)|^2\,dx\right)$$
+其中$P_f$表示信号$f$的功率。$\|\cdot\|_{\mathrm{pwr}}$并不构成范数，它仅仅是\textbf{半范数}(seminorm)，满足：\begin{itemize}
     \item 非负性：$\|f\|_{\mathrm{pwr}}\geq 0$
     \item 齐次性：$\|\alpha f\|_{\mathrm{pwr}}=|\alpha|\|f\|_{\mathrm{pwr}}$
     \item 次可加性：$\|f+g\|_{\mathrm{pwr}}\leq\|f\|_{\mathrm{pwr}}+\|g\|_{\mathrm{pwr}}$
 \end{itemize}
 它不构成$B^2$上的范数，因为它不具有同一性：
 $$\|f\|_{\mathrm{pwr}}=0\centernot\implies f=0$$
-因为$L^2(\mathbb{R})\in B^2$，而能量信号的功率均为0。
+因为能量信号空间$L^2(\mathbb{R})\in B^2$，而能量信号的功率均为0。
 
 不过，我们其实已经处理过了一个半范数，这一次也可以使用同样的办法。对于$L^p(\mathbb{R})(1\leq p\leq\infty)$空间，
 $$f=0,\mathrm{a.e.}\iff\|f\|_p=0$$
@@ -32,7 +31,7 @@ $f\sim g$是一种等价关系，记$f$所在的等价类为$[f]_{\sim}$，在�
 $$\left\|[f]_{\sim}\right\|_{p}=0\iff f=0,\mathrm{a.e.}\iff f\sim 0$$
 也就是说，$L^p(\mathbb{R})$实际上是$p$次可积函数空间的\textbf{商空间}(factor space)，商空间中元素的范数定义为该元素的任意一个代表元的范数，在这个意义下，$L^p(\mathbb{R})$构成线性赋范空间，只是我们通常不特意区分函数$f$及其所在的等价类$[f]_{\sim}$，也不为商空间和代表元引入额外的记号。
 
-类似地，在功率信号空间中，我们不妨定义以下等价关系：
+类似地，在功率信号空间中，我们不妨在$B^2$中定义以下等价关系：
 $$f\sim g\iff \|f-g\|_{\mathrm{pwr}}=0\iff f-g\in L^2(\mathbb{R})$$
 
 这样，通过功率值定义的半范数也就成为了范数。$B^2$甚至还是一个内积空间，它的内积定义为：
@@ -41,7 +40,7 @@ $$f\sim g\iff \|f-g\|_{\mathrm{pwr}}=0\iff f-g\in L^2(\mathbb{R})$$
     $$(f,g)_{\mathrm{pwr}}=\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}f\cdot\overline{g}\,dm$$
 \end{definition}
 
-这个内积是良定义的，由柯西-施瓦兹不等式，有：
+这个内积是良定义的。已知$0\le P_f,P_g<\infty$，由积分的柯西-施瓦兹不等式，有：
 \begin{align*}
     (f,g)_{\mathrm{pwr}}&=\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}f\cdot\overline{g}\,dm\\
     &\leq \lim_{T\to\infty}\frac{1}{T}\left(\int_{-T/2}^{T/2}|f|^2\,dm\cdot\int_{-T/2}^{T/2}|g|^2\,dm\right)^{1/2}\\
@@ -49,7 +48,7 @@ $$f\sim g\iff \|f-g\|_{\mathrm{pwr}}=0\iff f-g\in L^2(\mathbb{R})$$
     &=\sqrt{P_f\cdot P_g}<\infty
 \end{align*}
 
-内积所需要满足的其余性质是容易证明的，这里不再一一列举。
+内积所需要满足的其余性质是容易证明的，这里不再一一列举。注意到$\sqrt{P_f\cdot P_g}=\|f\|_{\text{pwr}}\cdot\|g\|_{\text{pwr}}$，我们同时验证了该内积空间中的柯西-施瓦兹不等式。
 
 数学上，我们将内积空间$B^2$称为\textbf{贝希科维奇空间}(Besicovitch space)，它与我们修正定义后的功率信号空间是等价的概念。
 
@@ -69,28 +68,28 @@ $$f\sim g\iff \|f-g\|_{\mathrm{pwr}}=0\iff f-g\in L^2(\mathbb{R})$$
 
 简便起见，这两个小节中，我们将使用频率形式的傅里叶变换。
 
-对于能量信号$f\in L^2(\mathbb{R})$，如果它还是绝对可积的，则它的傅里叶变换$F(\xi)$存在，并且满足帕塞瓦尔定理（见\ref{sub:fourier_operation_properties}）：
+对于能量信号$f\in L^2(\mathbb{R})$，如果它还是绝对可积的，即$f\in L^1(\mathbb{R})$，则它的傅里叶变换$F(\xi)$存在，并且满足帕塞瓦尔定理（见\ref{sub:fourier_operation_properties}）：
 \begin{align*}
     \int_{-\infty}^{\infty}|f(t)|^2\,dt=\int_{-\infty}^{\infty}|F(\xi)|^2\,d\xi
 \end{align*}
 
-因此，$f\in L^1(\mathbb{R})\cap L^2(\mathbb{R})$的能量可以看作是分布在各个频率分量上的。类比概率密度函数，我们定义：
+因此，$f\in L^1(\mathbb{R})\cap L^2(\mathbb{R})$的\textbf{能量可以看作是分布在各个频率分量上的}。类比概率密度函数，我们定义：
 
 \begin{definition}[能量谱密度]
     $f$的\textbf{能量谱密度}(energy spectral density,ESD)为$|F(\xi)|^2$。
 \end{definition}
 图像$|F(\xi)|^2-\xi$与$\xi$轴围成的面积就是$f$的功率。
 
-对于功率信号$f\in B^2$，为了使用帕塞瓦尔定理，可以考虑功率信号的截短。本小节中，总是用记号$f_T$来表示功率信号$f$的截短：
+对于功率信号$f\in B^2$，为了使用帕塞瓦尔定理，可以考虑功率信号的截短。本小节中，总是用记号$f_T$来表示时域功率信号$f$的截短：
 $$f_T(t)=f(t)\chi_{[-T/2,T/2]}$$
-显然，$f_T(t)\in L^1(\mathbb{R})\cap L^2(\mathbb{R})$，因此可以定义它的傅里叶变换，记为$F_T(\xi)$，并且帕塞瓦尔定理也是对$f_T(t)$成立的，即：
+显然，$f_T(t)\in L^1(\mathbb{R})\cap L^2(\mathbb{R})$，因此可以定义它的傅里叶变换，记为$F_T(\xi)$。对$f_T(t)$使用帕塞瓦尔定理，有：
 $$E_{f_T}=\int_{\mathbb{R}}|f_T|^2\,dm=\int_{\mathbb{R}}|F_T|^2\,dm$$
 
 这样，在$T\to\infty$时，$E_{f_T}$的时间平均值就是$f$的功率：
 $$P_f=\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}|f(t)|^2\,dt=\lim_{T\to\infty}\frac{E_{f_T}}{T}=\lim_{T\to\infty}\frac{1}{T}\int_{\mathbb{R}}|F_T(\xi)|^2\,d\xi$$
 如果能交换极限与积分的顺序，则
 $$P_f=\int_{\mathbb{R}}\lim_{T\to\infty}\frac{|F_T(\xi)|^2}{T}\,d\xi$$
-由此我们定义：
+这样，\textbf{功率也可以看作是分布在各个频率分量上的}：
 
 \begin{definition}[功率谱密度]
     功率信号$f$的\textbf{功率谱密度}(power spectral density,PSD)为
@@ -109,8 +108,7 @@ $S_f(\xi)$的计算是非常麻烦的，并且它还常常含有冲击项$\delta
         &=\frac{1}{2\pi(\xi-1)}\sin\left(\pi T(\xi-1)\right)+\frac{1}{2\pi(\xi+1)}\sin\left(\pi T(\xi+1)\right)
     \end{align*}
     功率谱密度为\begin{align*}
-        S_f(\xi)&=\lim_{T\to\infty}\frac{|F_T(\xi)|^2}{T}\\
-        &=\lim_{T\to\infty}\frac{1}{T}\left[\frac{\sin^2\left(\pi T(\xi-1)\right)}{4\pi^2(\xi-1)^2}+\frac{\sin^2\left(\pi T(\xi+1)\right)}{4\pi^2(\xi+1)^2}\right]
+        S_f(\xi)&=\lim_{T\to\infty}\frac{|F_T(\xi)|^2}{T}=\lim_{T\to\infty}\frac{1}{T}\left[\frac{\sin^2\left(\pi T(\xi-1)\right)}{4\pi^2(\xi-1)^2}+\frac{\sin^2\left(\pi T(\xi+1)\right)}{4\pi^2(\xi+1)^2}\right]
     \end{align*}
     在$\xi\neq\pm 1$时，$S_f(\xi)=0$；在$\xi=\pm 1$时，利用极限$\lim_{x\to 0}\sin x/x=1$可以求得$S_f(\xi)$以$T/4$的速度趋于$\infty$（严谨的做法要涉及到\ref{sub:approach}中的理论），因此
     $$S_f(\xi)=\frac{1}{4}(\delta_1+\delta_{-1})$$
@@ -137,27 +135,27 @@ $$\left\langle S_f,\varphi\right\rangle=\left\langle \lim_{T\to\infty}\frac{|F_T
 设$f,g\in L^1(\mathbb{R})\cap L^2(\mathbb{R})$，根据\ref{sub:fourier_operation_properties}中的帕塞瓦尔定理，有
 $$(f,g)=(\mathcal{F} f,\mathcal{F} g)$$
 即
-$$E_{fg}=\int_{\mathbb{R}}\mathcal{F}f(\xi)\overline{\mathcal{F}g}(\xi)\,d\xi$$
+$$E_{fg}=\int_{\mathbb{R}}\mathcal{F}f(\xi)\overline{\mathcal{F}g(\xi)}\,d\xi$$
 因此，可以定义：
 
 \begin{definition}[互功率谱密度]
-    设能量信号$f,g\in L^1(\mathbb{R})\cap L^2(\mathbb{R})$，则它们的\textbf{互能量谱密度}(cross energy spectrum density,CESD)为$\mathcal{F}f(\xi)\overline{\mathcal{F}g}(\xi)$。
+    设能量信号$f,g\in L^1(\mathbb{R})\cap L^2(\mathbb{R})$，则它们的\textbf{互能量谱密度}(cross energy spectrum density,CESD)为$\mathcal{F}f(\xi)\overline{\mathcal{F}g(\xi)}$。
 \end{definition}
 它给出了互能量$E_{fg}$在各个频率成分上的分布情况。
 
 将这一定义类比到功率信号，可以定义\textbf{互功率谱密度}(cross power spectrum density,CPSD)。考虑截短信号
 $$f_T(t)=f(t)\chi_{[-T/2,T/2]},g_T(t)=g(t)\chi_{[-T/2,T/2]}$$
 它们的傅里叶变换分别记为$F_T(t)$和$G_T(t)$，由帕塞瓦尔定理，有
-$$\int_{-T/2}^{T/2}f(t)\overline{g(t)}\,dt=\int_{-\infty}^{\infty}f_T(t)\overline{g_T(t)}\,dt=\int_{-\infty}^{\infty}F_T(\xi)\overline{G_T}(\xi)\,d\xi$$
+$$\int_{-T/2}^{T/2}f(t)\overline{g(t)}\,dt=\int_{-\infty}^{\infty}f_T(t)\overline{g_T(t)}\,dt=\int_{-\infty}^{\infty}F_T(\xi)\overline{G_T(\xi)}\,d\xi$$
 因此
-$$P_{fg}=\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}f(t)\overline{g(t)}\,dt=\lim_{T\to\infty}\frac{1}{T}\int_{-\infty}^{\infty}F_T(\xi)\overline{G_T}(\xi)\,d\xi$$
+$$P_{fg}=\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}f(t)\overline{g(t)}\,dt=\lim_{T\to\infty}\frac{1}{T}\int_{-\infty}^{\infty}F_T(\xi)\overline{G_T(\xi)}\,d\xi$$
 在分布的意义下，可以交换积分与极限的顺序，得到
-$$P_{fg}=\int_{-\infty}^{\infty}\lim_{T\to\infty}\frac{1}{T}F_T(\xi)\overline{G_T}(\xi)\,d\xi$$
+$$P_{fg}=\int_{-\infty}^{\infty}\lim_{T\to\infty}\frac{1}{T}F_T(\xi)\overline{G_T(\xi)}\,d\xi$$
 因此：
 
 \begin{definition}[互功率谱密度]
     功率信号$f,g\in B^2$的互功率谱密度为
-    $$S_{fg}(\xi)=\lim_{T\to\infty}\frac{1}{T}F_T(\xi)\overline{G_T}(\xi)$$
+    $$S_{fg}(\xi)=\lim_{T\to\infty}\frac{1}{T}F_T(\xi)\overline{G_T(\xi)}$$
 \end{definition}
 
 \subsection{功率信号的相关}\label{sub:power_corelation}
@@ -192,7 +190,7 @@ $$\mathcal{F}R_{fg}=\mathcal{F}f\overline{\mathcal{F}g}$$
 我们自然希望功率信号也有类似的性质：
 \begin{theorem}[功率信号的维纳-辛钦定理]
     设$f,g\in B^2$，则
-    $$\mathcal{F}R_{fg}(\xi)=S_{fg}(\xi)=\lim_{T\to\infty}\frac{1}{T}F_T(\xi)\overline{G_T}(\xi)$$
+    $$\mathcal{F}R_{fg}(\xi)=S_{fg}(\xi)=\lim_{T\to\infty}\frac{1}{T}F_T(\xi)\overline{G_T(\xi)}$$
 \end{theorem}
 \begin{proof}
     定义截短所得能量信号$f_T$和$g_T$的互相关函数为
@@ -206,7 +204,7 @@ $$\mathcal{F}R_{fg}=\mathcal{F}f\overline{\mathcal{F}g}$$
     右式等于
     $$\lim_{T\to\infty}\left\langle \frac{F_T\overline{G_T}}{T},\varphi\right\rangle=\langle S_{fg},\varphi\rangle$$
     综上，我们证明了
-    $$\langle \mathcal{F}R_{fg},\varphi\rangle=\langle S_{fg},\varphi\rangle$$
+    $$\langle \mathcal{F}R_{fg},\varphi\rangle=\langle S_{fg},\varphi\rangle,\forall \varphi\in\mathcal{S} $$
 \end{proof}
 
 \begin{example}
@@ -258,11 +256,11 @@ $$S_f=\left(\frac{1}{2}\right)^2\delta_1+\left(\frac{1}{2}\right)^2\delta_{-1}=\
 由此可以猜想：
 
 \begin{theorem}
-    对于功率信号$f$，设其傅里叶变换为
+    对于几乎周期函数$f$，设其（作为分布的）傅里叶变换为
     $$\mathcal{F}f=\sum_{n}a_n\delta_{\xi_n}$$
     则其功率谱密度为
     $$S_f=\sum_n |a_n|^2\delta_{\xi_n}$$
-    进一步，设功率信号$g$的傅里叶变换为
+    进一步，设几乎周期函数$g$的傅里叶变换为
     $$\mathcal{F}g=\sum_n b_n\delta_{\xi_n}$$
     则$f$与$g$的互功率谱密度为
     $$S_{fg}=\sum_{n}a_n\overline{b_n}\delta_{\xi_n}$$
@@ -313,15 +311,15 @@ $$S_f=\left(\frac{1}{2}\right)^2\delta_1+\left(\frac{1}{2}\right)^2\delta_{-1}=\
     $$S_f=\frac{1}{4}(\delta_1-\delta_{-1}+\delta_{\sqrt{2}}-\delta_{\sqrt{2}})$$
 \end{example}
 
-回顾功率谱密度的定义：
-$$S_{fg}=\lim_{T\to\infty}\frac{1}{T}F_T(\xi)\overline{G_T}(\xi)$$
+我们对此进行一些直观上的说明。回顾功率谱密度的定义：
+$$S_{fg}=\lim_{T\to\infty}\frac{1}{T}F_T(\xi)\overline{G_T(\xi)}$$
 利用$\delta$分布的取样性质，不妨认为
 $$\delta(0)=\infty,\delta(x)=0,x\neq 0\implies\delta\cdot\delta=\infty\cdot\delta,\delta_a\cdot\delta_b=0,a\neq b$$
 那么，以上功率谱密度的计算方法可以不严谨地由以下事实推出：
 $$\lim_{T\to\infty}\frac{1}{T}\delta^2=\delta,\lim_{T\to\infty}F_T(\xi)=F(\xi),\lim_{T\to\infty}G_T(\xi)=G(\xi)$$
 即：
 \begin{align*}
-    S_{fg}&=\lim_{T\to\infty}\frac{1}{T}F_T(\xi)\overline{G_T}(\xi)\\
+    S_{fg}&=\lim_{T\to\infty}\frac{1}{T}F_T(\xi)\overline{G_T(\xi)}\\
     &=\lim_{T\to\infty}\frac{1}{T}\left(\sum_{n}a_n\delta_{\xi_n}\right)\left(\sum_{n}\overline{b_n}\delta_{\xi_n}\right)\\
     &=\sum_{n}a_n \overline{b_n}\lim_{T\to\infty}\frac{1}{T}\delta^2_{\xi_n}\\
     &=\sum_{n}a_n \overline{b_n}\delta_{\xi_n}
