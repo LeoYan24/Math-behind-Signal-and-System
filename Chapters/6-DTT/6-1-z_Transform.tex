@@ -42,7 +42,7 @@
     设离散时间信号$x[n]$的z变换为$X(z)=\sum_{n=-\infty}^{\infty}x[n]z^{-n}$，则其\textbf{收敛域}(region of convergence, ROC)定义为
     \[\text{ROC}=\left\{z\in\mathbb{C} \left|r<|z|<R\right.\right\}\]
     其中
-    \[r=\varlimsup_{n\to\infty}|x[-n]|^{\frac{1}{n}},R=\left(\varlimsup_{n\to\infty}|x[n]|^{\frac{1}{n}}\right)^{-1}\]
+    \[r=\varlimsup_{n\to\infty}|x[n]|^{\frac{1}{n}},R=\left(\varlimsup_{n\to\infty}|x[-n]|^{\frac{1}{n}}\right)^{-1}\]
 \end{definition}
 以上定义对于$r=0$或$R=\infty$或$r\geq R$的退化情况同样适用。特别地，我们指出：
 \begin{itemize}
@@ -112,7 +112,7 @@
     \begin{align*}
         \mathcal{Z}\left[x[nM]\right]=\sum_{n=-\infty}^{\infty}x[nM]z^{-n}=\sum_{m=nM}x[m]z^{-m/M}\quad(m=nM)
     \end{align*}
-    为了处理$m$只能取$n$的整数倍的情况，我们引入\textbf{选择函数}：
+    为了处理$m$只能取$n$的整数倍的情况，我们引入\textbf{离散选择函数}：
     \[\shah_M[m]=\frac{1}{M}\sum_{k=0}^{M-1}\mathrm{e}^{\mathrm{i}\frac{2\pi}{M}km}=\begin{cases}
         1 & \text{if }m=nM\\
         0 & \text{otherwise}

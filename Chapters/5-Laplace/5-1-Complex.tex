@@ -3,7 +3,7 @@
 本小节将串写拉普拉斯变换所需的复变函数论中的一些基本概念和重要结果\cite{Function_Theory}。实际上，只需要复变函数中一些最基础的概念即可建立起拉普拉斯变换理论的大部分内容。因此，即便是未学过复变函数的读者，也可通过本小节快速把握拉普拉斯变换中所需的复变函数的内容。
 
 \subsection{形式导数与全纯函数}\label{sub:derivative_and_holomorphic}
-我们总是用$z$表示复数$x+iy$。考虑复系数双变元多项式集$\mathbb{C}[x,y]$，通过做替换$$x=\frac{z+\overline{z}}{2},y=\frac{z-\overline{z}}{2\mathrm{i}}$$
+我们总是用$z$表示复数$x+\im y$。考虑复系数双变元多项式集$\mathbb{C}[x,y]$，通过做替换$$x=\frac{z+\overline{z}}{2},y=\frac{z-\overline{z}}{2\mathrm{i}}$$
 可以将$\mathbb{C}[x,y]$中的多项式$f(x,y)$表示为$g(z,\overline{z})$。在一些情况下，$g(z,\overline{z})$不显含$\overline{z}$，例如$f(x,y)=x+\mathrm{i}y$，$g(z,\overline{z})=z$。对于$f(x,y)$，我们可以用导数$\dfrac{\partial f}{\partial x},\dfrac{\partial f}{\partial y}$来描述它对$x,y$的依赖关系，同理，为了表述多项式对$z,\overline{z}$的依赖关系，我们定义:\begin{definition}[形式导数]
     设$f=u+iv\in C^1(\mathbb{C})$，$u,v$为复数域上的实值函数，则
     \begin{align*}
@@ -50,7 +50,7 @@
         \begin{cases}
         \frac{\partial u}{\partial x}=\frac{\partial v}{\partial y}\\
         \frac{\partial v}{\partial x}=-\frac{\partial u}{\partial y}
-        \end{cases},\mathrm{或}\frac{\partial f}{\partial y}= \mathrm{i}\frac{\partial f}{\partial x}
+        \end{cases},\text{或}\frac{\partial f}{\partial y}= \mathrm{i}\frac{\partial f}{\partial x}
     \end{align*}
 \end{definition}
 \begin{definition}[整函数]
@@ -123,7 +123,7 @@
 \end{remark}
 \begin{example}
 设$f(z)=1/z$，则$f$在$\mathbb{C}\backslash\{0\}$上全纯，但$\mathbb{C}\backslash\{0\}$不是单连通的，它在单位圆$\gamma(t)=\mathrm{e}^{\mathrm{i}t},t\in[0,2\pi]$上积分为\begin{align*}
-    \oint_{\gamma}f(z)\,dz=\int_0^{2\pi}f(\gamma(t))\gamma'(t)\,dt=\int_0^{2\pi}\frac{1}{\mathrm{e}^{\mathrm{i}t}}\mathrm{i}e^{it}\,dt=\int_0^{2\pi}\mathrm{i}\,dt=2\pi \mathrm{i}\neq 0
+    \oint_{\gamma}f(z)\,dz=\int_0^{2\pi}f(\gamma(t))\gamma'(t)\,dt=\int_0^{2\pi}\frac{1}{\mathrm{e}^{\mathrm{i}t}}\mathrm{i}e^{\im t}\,dt=\int_0^{2\pi}\mathrm{i}\,dt=2\pi \mathrm{i}\neq 0
 \end{align*}
 \end{example}
 
@@ -143,7 +143,7 @@
     \[\sum_{n=-\infty}^{\infty}c_n(z-a)^n\]
     的级数称为以$a$为中心的\textbf{洛朗级数}，其收敛域记为ROC。
 
-    将它的负幂次项部分视为$w=1/(z-a)$下的幂级数，则可用柯西-阿达马公式确定它的收敛域为圆环$\mathcal{A} _a(r,R)$，其中$r,R$分别称为洛朗级数的\textbf{外半径}(outer radius)和\textbf{内半径}(inner radius)，满足：
+    类似于无穷限积分，洛朗级数的收敛性是由它的正负幂次项部分和的二重极限给出的。将它的负幂次项部分视为$w=1/(z-a)$下的幂级数，则可用柯西-阿达马公式确定它的收敛域为圆环$\mathcal{A} _a(r,R)$，其中$r,R$分别称为洛朗级数的\textbf{外半径}(outer radius)和\textbf{内半径}(inner radius)，满足：
     \[r=\varlimsup_{n\to\infty}|c_{-n}|^{1/n},R=\left(\varlimsup_{n\to\infty}|c_n|^{1/n}\right)^{-1}\]
     在$\mathrm{ROC}=\mathcal{A} _a(r,R)$上，洛朗级数是绝对收敛且内闭一致收敛的。
 \end{definition}
@@ -270,7 +270,7 @@ $f(z)=\mathrm{e}^{1/z}$在0处有本性奇点，$f(z)=1/\sin(\pi z)$在$z=n,n\in
     \end{align*}
     代入$z=ix$可得
     \begin{align*}
-        \sinh (ix)=\mathrm{i}\sin x,\cosh (ix)=\cos x
+        \sinh (\im x)=\mathrm{i}\sin x,\cosh (\im x)=\cos x
     \end{align*}
     同理有\begin{align*}
         \sin z=-\mathrm{i}\sinh (\mathrm{i}z),\cos z=\cosh (\mathrm{i}z)

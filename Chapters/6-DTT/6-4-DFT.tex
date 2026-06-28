@@ -185,14 +185,14 @@ $$\mathcal{F} \mathcal{F} ^H=N\cdot I$$
         &=\frac{1}{N}\sum_{n=0}^{N-1}\sum_{m=0}^{N-1}x[n]y[m]W_N^{k m}\left(\sum_{l=0}^{N-1}W_N^{l(n-m)}\right)\\
         &=\sum_{n=0}^{N-1}x[n]y[n]W_N^{k n}
     \end{align*}
-    我们又一次遇到了选择函数：
-    \[\shah_N[m-n]=\sum_{l=0}^{N-1}W_N^{l(n-m)}=\begin{cases}
-    N & \mathrm{if } m-n\equiv 0 \mod N \\
+    最后一个等号用到了\ref{sub:z_operation}中引入的离散选择函数：
+    \[\shah_N[m-n]=\frac{1}{N}\sum_{l=0}^{N-1}W_N^{l(n-m)}=\begin{cases}
+    1 & \text{if } m-n\equiv 0 \mod N \\
     0 & \mathrm{otherwise}
     \end{cases}\]
 \end{proof}
 
-选择函数$\shah_N$的引入更多是为了方便与狄拉克梳状分布进行对比。如果不区分周期信号与有限长信号，则$\shah_N$就相当于周期离散信号中的单位冲激序列。用向量的语言来说，就是
+如果不区分周期信号与有限长信号，则$\shah_N$就相当于周期离散信号中的单位冲激序列。用向量的语言来说，就是
 \[\shah_N\sim\boldsymbol{\delta}=\begin{bmatrix}
 1  \\
 0  \\
@@ -200,7 +200,7 @@ $$\mathcal{F} \mathcal{F} ^H=N\cdot I$$
 0
 \end{bmatrix}\]
 
-习惯上，将这种向量记法的各元素的序号依次取为$0,1,\dots,N-1$，而不是$1,2,\dots,N$，这样序号与离散傅里叶变换中的求和指标一致。仿照狄拉克分布的平移，选择函数的平移记为$\boldsymbol{\delta}_k[n]=\boldsymbol{\delta}[n-k]$，特别地，$\boldsymbol{\delta}_0=\boldsymbol{\delta}$。
+习惯上，将这种向量记法的各元素的序号依次取为$0,1,\dots,N-1$，而不是$1,2,\dots,N$，这样序号与离散傅里叶变换中的求和指标一致。仿照狄拉克分布的平移，离散选择函数的平移记为$\boldsymbol{\delta}_k[n]=\boldsymbol{\delta}[n-k]$，特别地，$\boldsymbol{\delta}_0=\boldsymbol{\delta}$。
 
 类似狄拉克分布，容易验证单位脉冲序列具有取样性质和卷积性质：
 \begin{proposition}
@@ -242,16 +242,13 @@ x[1]
         \mathrm{DFT}(x^-)[k]&=\sum_{n=0}^{N-1}x^- [n]W_N^{kn}\\
         &=\sum_{n=0}^{N-1}x[-n]W_N^{kn}\\
         &=\sum_{m=0}^{N-1}x[m]W_N^{-km}&(m=-n)\\
-        &=N\cdot\mathrm{DFT}^{-1}(x)[k]
-    \end{align*}
-
-    \begin{align*}
+        &=N\cdot\mathrm{DFT}^{-1}(x)[k]\\
         \mathrm{DFT}\left(\mathrm{DFT}x\right)[n]&=\sum_{k=0}^{N-1}X[k]W_N^{kn}\\
         &=\sum_{k=0}^{N-1}\left(\sum_{m=0}^{N-1}x[m]W_N^{km}\right)W_N^{kn}\\
         &=\sum_{m=0}^{N-1}x[m]\left(\sum_{k=0}^{N-1}W_N^{k(m+n)}\right)\\
+        &=\sum_{m=0}^{N-1}x[m]\shah_N[m+n]\\
         &=N x^- [n]
     \end{align*}
-    我们又一次用到了选择函数。
 
     如果$x[n]$是实信号，则有
     \begin{align*}

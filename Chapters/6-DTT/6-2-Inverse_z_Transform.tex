@@ -97,14 +97,14 @@ $$\mathrm{Res}(f,\infty)=\dfrac{1}{2\pi \mathrm{i}}\oint_{C^-_R}f(z)\,dz$$
     \[x[n]=-\mathrm{Res}\left(X(z)z^{n-1},\infty\right)=\mathrm{Res}\left(\frac{X(1/z)}{z^{n+1}},0\right)\]
 \end{theorem}
 
-要使用$\mathrm{Res}\left(\dfrac{X(1/z)}{z^{n+1}}\right)$计算是非常繁琐的，我们一般会使用留数定理将问题转化为其他极点的留数计算。注意我们并不打算算出复线积分，留数定理是从一些极点到另一些极点的桥梁.
+要使用$\mathrm{Res}\left(\dfrac{X(1/z)}{z^{n+1}}\right)$计算逆z变换是非常繁琐的，通常使用留数定理将问题转化为其他极点的留数计算。注意我们并不打算算出复线积分，留数定理是从一些极点到另一些极点的桥梁.
 \begin{example}
     设右边信号$x[n]$的z变换为
     \[X(z)=\frac{z^2}{(z-1)^3},\mathrm{ROC}:|z|>1\]
     求$x[n]$。\\
     解：$X(z)$在$\infty$处有极点，因此可以使用留数定理：
     \begin{align*}
-        x[n]=-\mathrm{Res}\left(X(z)z^{n-1},\infty\right)=-\frac{1}{2\pi \mathrm{i}}\oint_{C^-_R}X(z)z^{n-1}\,dz
+        x[n]=-\mathrm{Res}\left(X(z)z^{n-1},\infty\right)=-\frac{1}{2\pi \mathrm{i}}\oint_{C^-_R}X(z)z^{n-1}\,dz,n\ge 0
     \end{align*}
     其中$C^-_R$为以原点为中心、半径$R$充分大的\textbf{顺时针}圆周，使得$X(z)$的所有极点都在$C^-_R$内。顺时针是为了使它绕$\infty$的环绕数$\mathrm{Ind}_{C^-_R}(\infty)=1$。由于$C^-_R$绕$z=1$的环绕数为$-1$，根据留数定理，有
     \begin{align*}
@@ -116,7 +116,8 @@ $$\mathrm{Res}(f,\infty)=\dfrac{1}{2\pi \mathrm{i}}\oint_{C^-_R}f(z)\,dz$$
         &=\lim_{z\to 1}\frac{1}{2}\frac{d^2}{dz^2}z^{n+1}\\
         &=\frac{(n+1)n}{2}
     \end{align*}
-    因此$$x[n]=-\mathrm{Res}\left(X(z)z^{n-1},1\right)=-\frac{(n+1)n}{2}u[n]$$    
+    又已知$x[n]$是右边信号，因此
+    $$x[n]=-\mathrm{Res}\left(X(z)z^{n-1},1\right)=-\frac{(n+1)n}{2}u[n]$$    
 \end{example}
 
 左边信号对应经典的泰勒级数情况，我们已经在前面说明，$x[n]=\mathrm{Res}\left(X(z)z^{n-1},0\right)$。不过实际计算时，使用留数定理将高阶极点的留数转化为其他低阶极点的留数会更加方便。注意考虑围道外的点时，需要将$\infty$处的留数也计算进去。
@@ -136,7 +137,7 @@ $$\mathrm{Res}(f,\infty)=\dfrac{1}{2\pi \mathrm{i}}\oint_{C^-_R}f(z)\,dz$$
     \begin{align*}
         x[n]=-\mathrm{Res}\left(X(z)z^{n-1},1\right)=-\frac{(n+1)n}{2}u[-n-1]
     \end{align*}
-    其实，由于$\mathrm{deg}\ z^{n+1}\leq \mathrm{deg}\ (z-1)^3(n\le 0)$，$X(z)z^{n-1}$在$\infty$处为可去奇点，这种情况下可以直接断定无穷远点的留数为0。
+    其实，$X(z)z^{n-1}$在$\infty$处为可去奇点，这是因为$\mathrm{deg}\ z^{n+1}\leq \mathrm{deg}\ (z-1)^3(n\le 0)$，这种情况下可以直接断定无穷远点的留数为0。
 \end{example}
 
 $n<-1$时，无穷远处的留数为0，这并不是偶然现象，因为当我们用它来处理$z=0$处的极点时，$z=\infty$处自然就是零点（可去奇点）而非极点。
@@ -157,7 +158,8 @@ $n<-1$时，无穷远处的留数为0，这并不是偶然现象，因为当我�
     求$x[n]$。\\
     解：考虑将$X(z)$拆成左边信号和右边信号的z变换之和：
     \begin{align*}
-        X(z)&=\frac{1}{(z-1)^3(z-2)}=\frac{A}{z-2}+\frac{B}{z-1}+\frac{C}{(z-1)^2}+\frac{D}{(z-1)^3}\\
+        X(z)&=\frac{1}{(z-1)^3(z-2)}\\
+        &=\frac{A}{z-2}+\frac{B}{z-1}+\frac{C}{(z-1)^2}+\frac{D}{(z-1)^3}\\
         &=\frac{A}{z-2}+\frac{B(z-1)^2+C(z-1)+D}{(z-1)^3}\\
         &=\frac{A}{z-2}+\frac{B'z^2+C'Z+D'}{(z-1)^3}
     \end{align*}
