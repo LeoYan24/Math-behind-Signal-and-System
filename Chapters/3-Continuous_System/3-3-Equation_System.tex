@@ -263,7 +263,7 @@ Picard定理适用范围很广，但我们仅仅关注线性微分方程组，�
 $$\frac{d\mathbf{y}}{dt}=\mathbf{f}(t,\mathbf{y})$$
 而不仅仅是线性的情况。
 
-考虑由齐次线性微分方程转化而来的齐次线性微分方程组，则我们实际上只需要向量值函数$\mathbf{y}_1(t),\mathbf{y}_2(t),\cdots,\mathbf{y}_n(t)$的第一个分量，而后续的分量是前一分量的导数。这启发我们对数量值函数定义：
+考虑由齐次线性微分方程转化而来的齐次线性微分方程组，则我们实际上只需要向量值函数$\mathbf{y}_1(t),\mathbf{y}_2(t),\cdots,\mathbf{y}_n(t)$的第一个分量，而后续的分量是前一分量的导数，第一个分量线性相关，则后续分量线性相关。这启发我们对数量值函数定义：
 \begin{definition}[数量值函数的线性相关性]
     函数$y_1(t),y_2(t),\cdots,y_n(t)$在区间$(a,b)$上是\textbf{线性相关}的，如果存在不全为零的常数$c_1,c_2,\cdots,c_n$，使得
     \[c_1y_1(t)+c_2y_2(t)+\cdots+c_ny_n(t)=0,\forall t\in(a,b)\]
@@ -409,6 +409,70 @@ $$\frac{d\mathbf{y}}{dt}=\mathbf{f}(t,\mathbf{y})$$
     \end{align*}
 \end{example}
 
+本小节的最后，我们来看以上理论对于由方程转化而来的方程组的应用。我们已经知道，$n$阶方程的解空间是$n$维的，因此只要给出$n$个线性无关的解$y_1(t),y_2(t),\cdots,y_n(t)$，就能得到通解；线性无关性可以通过Wronsky行列式来判断；给出$n$个无关的条件，就能唯一确定一个解，特别地，这个条件经常为初始条件，它包含函数及其前$n-1$阶导数在某一点处的值。
+
+现在，我们只关心$\mathbf{y}(t)$中第一个分量的值。根据前一定理可得：
+\begin{theorem}
+    设齐次方程的基本解组为$\{y_k(t)\}_{k=1}^n$，则非齐次方程\begin{align*}
+    y^{(n)}+a_{n-1}(x)y^{(n-1)}+\cdots+a_1(x)y'+a_0(x)y=f(t)
+    \end{align*}
+    的通解为\begin{align*}
+    y(t)=\sum_{k=1}^n c_k y_k(t)+\sum_{k=1}^n y_k(t)\int_{t_0}^t \frac{W_k(s)}{W(s)}f(s)\,ds
+    \end{align*}
+    其中$W(t)$是$\{y_k(t)\}_{k=1}^n$的Wronsky行列式，$W_k(t)$是$W(t)$的第$n$行第$k$列的元素的代数余子式。
+\end{theorem}
+\begin{proof}
+    已知\begin{align*}
+        \phi(t)=\begin{bmatrix}
+        y_1(t) & y_2(t) & \cdots & y_n(t)\\
+        y'_1(t) & y'_2(t) & \cdots & y'_n(t)\\
+        \vdots & \vdots & \ddots & \vdots\\
+        y_1^{(n-1)}(t) & y_2^{(n-1)}(t) & \cdots & y_n^{(n-1)}(t)
+        \end{bmatrix},\mathbf{f}(t)=\begin{bmatrix}
+        0\\
+        \vdots\\
+        0\\
+        f(t)
+        \end{bmatrix}
+    \end{align*}
+    而$\phi(t)$的逆矩阵可以表示为以下形式：\begin{align*}
+        \phi^{-1}(t)=\frac{1}{W(t)}\begin{bmatrix}
+        * & \cdots & * & W_1(t)\\
+        * &  \cdots & * & W_2(t)\\
+        \vdots & \vdots & \vdots & \vdots\\
+        * &  \cdots & * & W_n(t)
+        \end{bmatrix}
+    \end{align*}
+    其中“*”表示我们不关注的元素，出现这种元素是因为只需要计算$\mathbf{y}$的第一个分量。代入前一定理进行计算（提示：后两个等号都在对明确列出所有元素的矩阵与列向量之积进行运算）：\begin{align*}
+        &\phi(t)\int_{t_0}^t \phi^{-1}(s)\mathbf{f}(s)\,ds\\
+        =&\int_{t_0}^t \frac{\phi(t)}{W(s)}\begin{bmatrix}
+        * & \cdots & * & W_1(t)\\
+        * &  \cdots & * & W_2(t)\\
+        \vdots & \vdots & \vdots & \vdots\\
+        * &  \cdots & * & W_n(t)
+        \end{bmatrix}\begin{bmatrix}
+        0\\
+        \vdots\\
+        0\\
+        f(t)
+        \end{bmatrix}\,ds\\
+        =&\int_{t_0}^t \frac{f(s)}{W(s)}\begin{bmatrix}
+        y_1(t) & y_2(t) & \cdots & y_n(t)\\
+        * & * & \cdots & *\\
+        \vdots & \vdots & \ddots & \vdots\\
+        * & * & \cdots & *
+        \end{bmatrix}\begin{bmatrix}
+        W_1(s)\\
+        W_2(s)\\
+        \vdots\\
+        W_n(s)
+        \end{bmatrix}\,ds\\
+        =&\sum_{k=1}^n y_k(t)\int_{t_0}^t \frac{W_k(s)}{W(s)}f(s)\,ds
+    \end{align*}
+\end{proof}
+
+然而，寻找基本解组是困难的，这一结果更多用于理论推导。本书不单独讨论高阶线性方程的求解技术，对于更特殊的常系数线性方程，上一节中展示的方程求解办法就已经较为完善了，而进一步的求解方法需要用到拉普拉斯变换，见\ref{sec:Laplace_ODE}。%将方程对应到方程组的意义，从数学上讲，是为了得到对解空间的理解和好用的Wronsky行列式；从信号与系统的角度来讲，则是为了导出系统的状态变量分析这一主题。
+
 \subsection{常系数线性微分方程组}\label{sub:constant_coefficient_linear_equation_system}
 
 简洁起见，如无其他说明，下文中“方程”总指代常系数线性微分方程，“方程组”总指代常系数线性微分方程组。
@@ -469,71 +533,6 @@ $$\frac{d\mathbf{y}}{dt}=\mathbf{f}(t,\mathbf{y})$$
     \mathbf{y}(t)=\mathrm{e}^{A(t-t_0)}\mathbf{y}_0+\int_{t_0}^t \mathrm{e}^{A(t-s)}\mathbf{f}(s)\,ds
 \end{align*}
 中给出的是基本解矩阵$\mathrm{e}^{At}$与非齐次项$\mathbf{f}(t)$在有限区间上的“卷积积分”。称之为卷积，一方面是因为激励是在$t_0$时刻才开始施加于系统的，应当认为$\mathbf{f}(t)$在$t<t_0$时为零；另一方面，充当“基本解”这个角色的实际上是$\phi(t)u(t)$，这样，积分限就可以由$(-\infty,\infty)$改为$(t_0,t)$。
-
-本小节的最后，我们来看以上理论对于由方程转化而来的方程组的应用。我们已经知道，$n$阶方程的解空间是$n$维的，因此只要给出$n$个线性无关的解$y_1(t),y_2(t),\cdots,y_n(t)$，就能得到通解；线性无关性可以通过Wronsky行列式来判断；给出$n$个无关的条件，就能唯一确定一个解，特别地，这个条件经常为初始条件，它包含函数及其前$n-1$阶导数在某一点处的值。
-
-现在，我们只关心$\mathbf{y}(t)$中第一个分量的值。根据前一定理可得：
-\begin{theorem}
-    设齐次方程的基本解组为$\{y_k(t)\}_{k=1}^n$，则非齐次方程\begin{align*}
-    y^{(n)}+a_{n-1}y^{(n-1)}+\cdots+a_1y'+a_0y=f(t)
-    \end{align*}
-    的通解为\begin{align*}
-    y(t)=\sum_{k=1}^n c_k y_k(t)+\sum_{k=1}^n y_k(t)\int_{t_0}^t \frac{W_k(s)}{W(s)}f(s)\,ds
-    \end{align*}
-    其中$W(t)$是$\{y_k(t)\}_{k=1}^n$的Wronsky行列式，$W_k(t)$是$W(t)$的第$n$行第$k$列的元素的代数余子式。
-\end{theorem}
-\begin{proof}
-    已知\begin{align*}
-        \phi(t)=\begin{bmatrix}
-        y_1(t) & y_2(t) & \cdots & y_n(t)\\
-        y'_1(t) & y'_2(t) & \cdots & y'_n(t)\\
-        \vdots & \vdots & \ddots & \vdots\\
-        y_1^{(n-1)}(t) & y_2^{(n-1)}(t) & \cdots & y_n^{(n-1)}(t)
-        \end{bmatrix},\mathbf{f}(t)=\begin{bmatrix}
-        0\\
-        \vdots\\
-        0\\
-        f(t)
-        \end{bmatrix}
-    \end{align*}
-    而$\phi(t)$的逆矩阵可以表示为以下形式：\begin{align*}
-        \phi^{-1}(t)=\frac{1}{W(t)}\begin{bmatrix}
-        * & \cdots & * & W_1(t)\\
-        * &  \cdots & * & W_2(t)\\
-        \vdots & \vdots & \vdots & \vdots\\
-        * &  \cdots & * & W_n(t)
-        \end{bmatrix}
-    \end{align*}
-    其中“*”表示我们不关注的元素，出现这种元素是因为只需要计算$\mathbf{y}$的第一个分量。代入前一定理进行计算（提示：后两个等号都在对明确列出所有元素的矩阵与列向量之积进行运算）：\begin{align*}
-        &\phi(t)\int_{t_0}^t \phi^{-1}(s)\mathbf{f}(s)\,ds\\
-        =&\int_{t_0}^t \frac{\phi(t)}{W(s)}\begin{bmatrix}
-        * & \cdots & * & W_1(t)\\
-        * &  \cdots & * & W_2(t)\\
-        \vdots & \vdots & \vdots & \vdots\\
-        * &  \cdots & * & W_n(t)
-        \end{bmatrix}\begin{bmatrix}
-        0\\
-        \vdots\\
-        0\\
-        f(t)
-        \end{bmatrix}\,ds\\
-        =&\int_{t_0}^t \frac{f(s)}{W(s)}\begin{bmatrix}
-        y_1(t) & y_2(t) & \cdots & y_n(t)\\
-        * & * & \cdots & *\\
-        \vdots & \vdots & \ddots & \vdots\\
-        * & * & \cdots & *
-        \end{bmatrix}\begin{bmatrix}
-        W_1(s)\\
-        W_2(s)\\
-        \vdots\\
-        W_n(s)
-        \end{bmatrix}\,ds\\
-        =&\sum_{k=1}^n y_k(t)\int_{t_0}^t \frac{W_k(s)}{W(s)}f(s)\,ds
-    \end{align*}
-\end{proof}
-\begin{remark}
-    尽管从逻辑上可以获得这个结果，但我们通常不愿意计算大量的矩阵和行列式。应该说，上一节中展示的方程求解办法就已经较为完善了，而进一步的求解方法需要用到拉普拉斯变换，见\ref{sec:Laplace_ODE}。将方程对应到方程组的意义，从数学上讲，是为了得到对解空间的理解和好用的Wronsky行列式；从信号与系统的角度来讲，则是为了导出系统的状态变量分析这一主题。
-\end{remark}
 
 \subsection{*连续系统的状态变量分析}\label{sub:state_variable_analysis}
 
