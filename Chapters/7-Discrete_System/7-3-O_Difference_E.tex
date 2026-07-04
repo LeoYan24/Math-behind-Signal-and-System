@@ -175,9 +175,9 @@ $$h[n]=\left(\sum_{i=1}^s P_i(n) \lambda_i^n \right)u[n]+\sum_{i=0}^{M-N}B_i\del
     其中零输入响应$r_{zi}[n]$由零输入初始值唯一确定。
 \end{theorem}
 
-尽管$N>1$时，差分方程的解不仅依赖于$r_{zs}[0]$，还依赖于$r_{zs}[1-N]$，但我们还是认为系统有马尔可夫性，这与\ref{sub:discrete_system_overview}中提到的马尔可夫性并不矛盾——在\ref{sub:difference_equation}的最后我们指出，这些初始值相当于$n=0$时刻$r_{zs}$的$0$到$N-1$阶差分，并且给定这些初始值后，$n>0$时刻的响应的确不依赖于$n<0$时刻的激励。
+尽管$N>1$时，差分方程的解不仅依赖于$r_{zs}[0]$，还依赖于$r_{zs}[1-N]$，但我们还是认为系统有马尔可夫性，这与\refsub{discrete_system_overview}中提到的马尔可夫性并不矛盾——在\refsub{difference_equation}的最后我们指出，这些初始值相当于$n=0$时刻$r_{zs}$的$0$到$N-1$阶差分，并且给定这些初始值后，$n>0$时刻的响应的确不依赖于$n<0$时刻的激励。
 
-沿着\ref{sub:fundamental_solution}的思路，我们尝试由单位阶跃响应来求解单位脉冲响应，从而简化计算。
+沿着\refsub{fundamental_solution}的思路，我们尝试由单位阶跃响应来求解单位脉冲响应，从而简化计算。
 
 \begin{lemma}
     设$h[n]$为差分方程
@@ -251,7 +251,7 @@ $$g[n]=\left(\sum_{i=1}^s P_i(n) \lambda_i^n \right)u[n]+\sum_{i=0}^{M-N-1}B_i\d
 $$\left\{z\in\mathbb{C}\left||z|>r, r=\varlimsup_{n\to\infty}|x[n]|^{1/n}\right.\right\}$$
 当然，作为洛朗级数，我们还是可以通过奇点判断收敛域。
 
-单边z变换与双边z变换类似，可以参照\ref{sub:z_operation}给出单边z变换的线性性、移位性质、卷积定理等性质。本小节中，我们简要介绍与双边z变换不同的性质：
+单边z变换与双边z变换类似，可以参照\refsub{z_operation}给出单边z变换的线性性、移位性质、卷积定理等性质。本小节中，我们简要介绍与双边z变换不同的性质：
 \begin{proposition}[单边z变换的移位性质]
     设$x[n]$的单边z变换为$X(z)$，则\begin{align*}
     \mathcal{Z}\{x[n-k]u[n]\}&=z^{-k}X(z)+\sum_{i=0}^{k-1}x[i-k]z^{-i}=z^{-k}\left[X(z)+\sum_{i=1}^{k}x[-i]z^{i}\right]\\
@@ -321,11 +321,11 @@ $$\left\{z\in\mathbb{C}\left||z|>r, r=\varlimsup_{n\to\infty}|x[n]|^{1/n}\right.
 
 首先，通过将$X(z)$限制在单位圆上，可以由这个定理得到离散时间傅里叶变换的终值定理，因此可以用“\textbf{频域上的低频成分对应时域的稳态行为}”来解释这个定理。我们知道，对于连续系统，终值定理为$\lim_{t\to\infty}f(t)=\lim_{s\to 0}sF(s)$，与离散系统一样，它们的终值定理都是向变换域上的$0$频率点取极限。
 
-其次，终值定理的这种证明方法只适用于$H(z)$无本性奇点的情况，在\ref{sub:phase_response}中我们曾使用过类似的方法。当然，也可以仿照\ref{sub:initial_and_final_value}中的思路，将$X(z)$分解为$z=1$处的一阶分式与$|z|>r$上的全纯函数的和，这个方法在$H(z)$的奇点不全为极点时同样适用。
+其次，终值定理的这种证明方法只适用于$H(z)$无本性奇点的情况，在\refsub{phase_response}中我们曾使用过类似的方法。当然，也可以仿照\refsub{initial_and_final_value}中的思路，将$X(z)$分解为$z=1$处的一阶分式与$|z|>r$上的全纯函数的和，这个方法在$H(z)$的奇点不全为极点时同样适用。
 
 最后，在多数文献中，这个定理同样允许$z=1$不是奇点，但根据洛朗级数的收敛半径公式，当奇点全部位于单位圆内（不含边界）时，可以判断$X(z)$的收敛半径小于$1$，\textbf{从而$|x[n]|$的上极限为$0$}，终值定理仍然成立，但是我们仅需考虑非平凡情况。
 
-进一步，当单位圆外有奇点时，还可以判断$|x[n]|$的上极限为$\infty$，\textbf{$x[n]$无界但极限未必存在}，此时终值定理不成立。可见，类似于\ref{sub:converge_abscissa}，我们还是\textbf{能够根据$X(z)$在$z$平面上的奇点情况来判断原信号的时域特性}。
+进一步，当单位圆外有奇点时，还可以判断$|x[n]|$的上极限为$\infty$，\textbf{$x[n]$无界但极限未必存在}，此时终值定理不成立。可见，类似于\refsub{converge_abscissa}，我们还是\textbf{能够根据$X(z)$在$z$平面上的奇点情况来判断原信号的时域特性}。
 
 \subsection{常系数线性差分方程的单边z变换解法}\label{sub:z_difference_equation}
 

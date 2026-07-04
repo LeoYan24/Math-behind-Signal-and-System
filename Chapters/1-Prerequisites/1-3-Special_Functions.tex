@@ -8,7 +8,7 @@
     \textbf{伽马函数}定义在复平面$\mathbb{C}$的右半平面上：
     \[\Gamma (z)=\int_{0}^{\infty}x^{z-1}\mathrm{e}^{-x}\,dx,\mathrm{Re}(z)>0\]
 \end{definition}
-注意到$\mathrm{Re}(z)>0$时，$|x^{z-1}\mathrm{e}^{-x}|<t^{\mathrm{Re}(z)-1}$，而$t^{\mathrm{Re}(z)-1}$在$[0,\infty)$上可积，因此伽马函数的积分定义在右半平面$\mathrm{Re}(z)>0$上收敛。事实上它是$\mathrm{Re}(z)>0$上的全纯函数，全纯的概念，见\ref{sec:Complex}。
+注意到$\mathrm{Re}(z)>0$时，$|x^{z-1}\mathrm{e}^{-x}|<t^{\mathrm{Re}(z)-1}$，而$t^{\mathrm{Re}(z)-1}$在$[0,\infty)$上可积，因此伽马函数的积分定义在右半平面$\mathrm{Re}(z)>0$上收敛。事实上它是$\mathrm{Re}(z)>0$上的全纯函数，全纯的概念，见\refsec{Complex}。
 
 初次接触这个函数时，最好将$z$作为实数来理解。伽马函数是阶乘函数的推广，因为对于正整数$n$，有$\Gamma (n)=(n-1)!$，这是因为伽马函数满足以下递推关系：
 \begin{theorem}
@@ -160,7 +160,7 @@
     \includegraphics[width=0.5\textwidth]{intsin}
     \caption{正弦积分函数$\mathrm{Si}(x)$的图像}
 \end{figure}
-$\dfrac{\sin t}{t}$是\ref{sub:signal}中介绍的采样信号，在$t=0$处连续延拓为1。正弦积分函数在$x=0$处的值为0，并且是奇函数，因为它的导数是偶函数。
+$\dfrac{\sin t}{t}$是\refsub{signal}中介绍的采样信号，在$t=0$处连续延拓为1。正弦积分函数在$x=0$处的值为0，并且是奇函数，因为它的导数是偶函数。
 
 正弦积分函数是有界的。为估计$\lim_{x\to\infty}\mathrm{Si}(x)$，我们考虑区间$[n\pi,(n+1)\pi]$上的积分：
 \begin{align*}
@@ -179,7 +179,7 @@ $\dfrac{\sin t}{t}$是\ref{sub:signal}中介绍的采样信号，在$t=0$处连�
 \end{align*}
 是交错级数，其各项绝对值单调递减且趋于0，根据Leibniz判别法可知该级数收敛，即积分收敛。由于正弦积分函数是奇函数，$\mathrm{Si}(-\infty)$也是收敛的，综上我们说明了正弦积分函数的有界性。
 
-进一步，正弦积分函数在$\infty$处收敛于$\pi/2$，这个结果称为\textbf{狄利克雷积分}，它可以通过留数定理或傅里叶变换来证明，我们将在\ref{sub:fourier_of_signal}中给出基于傅里叶变换的证明。
+进一步，正弦积分函数在$\infty$处收敛于$\pi/2$，这个结果称为\textbf{狄利克雷积分}，它可以通过留数定理或傅里叶变换来证明，我们将在\refsub{fourier_of_signal}中给出基于傅里叶变换的证明。
 \begin{theorem}[狄利克雷积分]
     \[\int_{0}^{\infty}\frac{\sin t}{t}\,dt=\mathrm{Si}(\infty)=\frac{\pi}{2}\]
 \end{theorem}

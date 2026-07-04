@@ -2,7 +2,7 @@
 
 \subsection{周期函数的卷积}\label{sub:conv_of_period_func}
 
-不考虑收敛性的问题，当函数$f$有周期$T$时，$f$与另一个函数$g$的卷积$f*g$也具有周期$T$。这是因为，根据我们在\ref{sub:intuition_of_convolution}中给出的卷积的性质，
+不考虑收敛性的问题，当函数$f$有周期$T$时，$f$与另一个函数$g$的卷积$f*g$也具有周期$T$。这是因为，根据我们在\refsub{intuition_of_convolution}中给出的卷积的性质，
 \[\tau_T(f*g)=(\tau_T f)*g=f*g\]
 其中$\tau_T$为平移算子，$(\tau_T f)(x)=f(x-T)$。进一步，如果$f,g$均为以$T$为周期的周期函数，则卷积积分在每个长为$T$的区间上取值相同，这样不仅会导致冗余的计算，而且卷积积分或者为0，或者发散，因此需要对周期函数单独定义卷积运算。与之前一样，我们不讨论卷积积分收敛对$f,g$的要求。
 
@@ -20,7 +20,7 @@
         f*g&=g*f
     \end{align*}    
 \end{proposition}
-它的证明与\ref{sub:properties_of_convolution}节中的类似，不再赘述。
+它的证明与\cref{prop:conv_prop}类似，不再赘述。
 
 \begin{proposition}[信号反转]
     设$f,g$为以$T$为周期的周期函数，则有：
@@ -49,9 +49,9 @@
     \end{align*}
 \end{proof}
 
-不过，周期函数的卷积也与经典的卷积有一些差别。例如，在函数的平移和伸缩变换下，卷积不再具有类似\ref{sub:intuition_of_convolution}中的性质，因为这两个性质的证明都依赖于无穷的积分区间。
+不过，周期函数的卷积也与经典的卷积有一些差别。例如，在函数的平移和伸缩变换下，卷积不再具有类似\cref{prop:conv_signal_shift}中的性质，因为这两个性质的证明都依赖于无穷的积分区间。
 
-在\ref{sub:poisson_summation}中，我们指出，周期函数可以视作施瓦兹函数的周期延拓，并且周期函数的傅里叶级数的系数正比于紧支函数的傅里叶变换在离散点处的取值。因此，我们希望周期函数的卷积的傅里叶系数也具有类似卷积定理的性质。事实也确实如此：
+在\refsub{poisson_summation}中，我们指出，周期函数可以视作施瓦兹函数的周期延拓，并且周期函数的傅里叶级数的系数正比于紧支函数的傅里叶变换在离散点处的取值。因此，我们希望周期函数的卷积的傅里叶系数也具有类似卷积定理的性质。事实也确实如此：
 \begin{theorem}[周期函数的卷积定理]
     设$f,g\in L^2([0,T])$，且$f,g$为以$T$为周期的周期函数，记它们的傅里叶级数系数分别为$\{a_n\},\{b_n\}$，则它们的卷积$f*g\in L^2([0,T])$，并且傅里叶级数系数$c_n=a_n b_n$。
 \end{theorem}
@@ -159,7 +159,7 @@
         =&2\pi f(t)\|w\|_2^2=2\pi f(t)
 \end{lralign}
 
-以上过程对$f(t)w(t-\tau)$使用了傅里叶反演公式并忽略了在不连续点的取值问题。前面已经验证$f(t)w(t-\tau)\in L^1(\mathbb{R})$，但是\ref{sub:fourier_inversion}中傅里叶反演公式所需的其他条件需要对$f,w$做出更严格的假设，这里不再赘述。
+以上过程对$f(t)w(t-\tau)$使用了傅里叶反演公式并忽略了在不连续点的取值问题。前面已经验证$f(t)w(t-\tau)\in L^1(\mathbb{R})$，但是\refsub{fourier_inversion}中傅里叶反演公式所需的其他条件需要对$f,w$做出更严格的假设，这里不再赘述。
 \end{proof}
 
 即使不要求窗函数归一化，我们也能得到类似的公式，但会引入额外的系数，这解释了为什么我们以$L^2$范数归一化窗函数。
@@ -266,7 +266,7 @@
     \begin{align*}
     \hat{\psi}(0)&=\int_{-\infty}^{\infty}\psi(t)\,dt\neq 0
     \end{align*}
-    则由于$\hat{\psi}$连续（见\ref{sub:introduction_of_fourier}），在$\xi=0$的小邻域$(-\delta,\delta)$内，$|\hat{\psi}(\xi)|\geq \dfrac{|\hat{\psi}(0)|}{2}>0$，从而
+    则由于$\hat{\psi}$连续（见\refsub{introduction_of_fourier}），在$\xi=0$的小邻域$(-\delta,\delta)$内，$|\hat{\psi}(\xi)|\geq \dfrac{|\hat{\psi}(0)|}{2}>0$，从而
     \begin{align*}
         C_{\psi}&=\int_{-\infty}^{\infty}\frac{|\hat{\psi}(\xi)|^2}{|\xi|}\,d\xi\\
         &\geq \int_{-\delta}^{\delta}\frac{|\hat{\psi}(\xi)|^2}{|\xi|}\,d\xi&(\delta>0)\\
@@ -280,7 +280,7 @@
     \[(f,g)=\frac{1}{C_{\psi}}\int_{-\infty}^{\infty}a^{-2}\,da\int_{-\infty}^{\infty}\mathrm{WT} _{f,\psi}(a,b)\overline{\mathrm{WT} _{g,\psi}(a,b)}\,db\]
 \end{theorem}
 \begin{proof}
-    \ref{sub:fourier_operation_properties}中的普朗歇尔定理表明：
+    \refsub{fourier_operation_properties}中的普朗歇尔定理表明：
     \begin{align*}
         (f,g)=(\hat{f},\hat{g})=\int_{-\infty}^{\infty}\hat{f}(\xi)\overline{\hat{g}(\xi)}\,d\xi
     \end{align*}

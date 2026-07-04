@@ -5,7 +5,7 @@
 \subsection{傅里叶变换的引出}\label{sub:introduction_of_fourier}
 定义傅里叶变换的一种动机是从傅里叶级数出发。要从傅里叶级数研究的周期现象转向傅里叶变换研究的非周期现象，自然能够想到在傅里叶级数相关的理论中，令T趋于无穷；另一方面，复指数函数比三角函数更适合作为描述振荡（周期）行为的基本函数。
 
-我们做一个简单的尝试，令$f\in L^2(\mathbb{R})$（关于$L^2$空间的讨论，见\ref{sub:Lp_space}）,$T\to \infty$，则\[c_n=\frac{1}{T}\int_{T}f(t)\mathrm{e}^{-\mathrm{i}k\omega t}\,dt=\frac{1}{T}\int_{T}f(t)\mathrm{e}^{-2\pi \mathrm{i}k\xi t}\,dt\to 0\]这样做变换将丢失f的所有信息，不是我们希望看到的，但很明显，只要给以上公式乘上T，并认为$k\omega$或$k\xi$是自变量，问题就迎刃而解，得到一个很有意思的积分变换，它正是\textbf{傅里叶变换} (Fourier Tansform,FT)。傅里叶本人同样意识到了傅里叶级数向傅里叶变换的过渡，他用同样的方法从形式上得到了傅里叶变换的公式，但我们使用的指数函数其实是后来柯西、泊松等数学家开始使用的，它使得公式具有更加简洁的形式。
+我们做一个简单的尝试，令$f\in L^2(\mathbb{R})$（关于$L^2$空间的讨论，见\refsub{Lp_space}）,$T\to \infty$，则\[c_n=\frac{1}{T}\int_{T}f(t)\mathrm{e}^{-\mathrm{i}k\omega t}\,dt=\frac{1}{T}\int_{T}f(t)\mathrm{e}^{-2\pi \mathrm{i}k\xi t}\,dt\to 0\]这样做变换将丢失f的所有信息，不是我们希望看到的，但很明显，只要给以上公式乘上T，并认为$k\omega$或$k\xi$是自变量，问题就迎刃而解，得到一个很有意思的积分变换，它正是\textbf{傅里叶变换} (Fourier Tansform,FT)。傅里叶本人同样意识到了傅里叶级数向傅里叶变换的过渡，他用同样的方法从形式上得到了傅里叶变换的公式，但我们使用的指数函数其实是后来柯西、泊松等数学家开始使用的，它使得公式具有更加简洁的形式。
 \begin{definition}[傅里叶变换]
 设$f\in L^1(\mathbb{R})$，其傅里叶变换定义为
 \lr{
@@ -52,7 +52,7 @@ f(t)&=\sum_{n=-\infty}^{\infty}c_n \mathrm{e}^{\mathrm{i}\omega t}\\
     \[f=\mathcal{F} \mathcal{F} ^{-1}f=\mathcal{F} ^{-1}\mathcal{F} f\]
 \end{claim}
 \begin{remark}
-    一般的傅里叶反演公式将在\ref{sub:fourier_inversion}中给出，而不会导致循环论证。类似傅里叶级数，我们实际上也应该要求$f\in PC$，傅里叶逆变换收敛到左右极限的平均值，但更多时候我们不关心不连续点的值。
+    一般的傅里叶反演公式将在\refsub{fourier_inversion}中给出，而不会导致循环论证。类似傅里叶级数，我们实际上也应该要求$f\in PC$，傅里叶逆变换收敛到左右极限的平均值，但更多时候我们不关心不连续点的值。
 \end{remark}
 
 对于性质较好的函数$f(t)$，设其频域函数为$F$，则傅里叶反演公式告诉我们：
@@ -108,7 +108,7 @@ f(t)&=\sum_{n=-\infty}^{\infty}c_n \mathrm{e}^{\mathrm{i}\omega t}\\
         \lim_{|\omega|\to\infty}\mathcal{F} f(\omega)=0
     }
 \end{claim}
-它的证明比较复杂，将在\ref{sub:riemman_lebesgue_lemma}中给出。
+它的证明比较复杂，将在\refsub{riemman_lebesgue_lemma}中给出。
 
 \subsection{傅里叶变换的运算性质}\label{sub:fourier_operation_properties}
 \begin{theorem}[傅里叶变换的运算性质]
@@ -302,7 +302,7 @@ $\evalat{\mathrm{e}^{-2\pi \mathrm{i}\xi t}f(t)}{-\infty}{\infty},\evalat{\mathr
 \subsection{常用信号的傅里叶变换}\label{sub:fourier_of_signal}
 
 \begin{example}[矩形函数]
-在\ref{sub:tri_exp_series}中讨论了矩形函数$f(t)=E\chi_{[-T/2,T/2]}$的傅里叶级数，并发现它的频谱与采样函数非常相似。现在可以验证，它的傅里叶变换就是某个采样函数：
+在\refsub{tri_exp_series}中讨论了矩形函数$f(t)=E\chi_{[-T/2,T/2]}$的傅里叶级数，并发现它的频谱与采样函数非常相似。现在可以验证，它的傅里叶变换就是某个采样函数：
 \begin{lralign}
 \mathcal{F} f(\xi)&=\int_{-\infty}^{\infty}f(t)\mathrm{e}^{-2\pi \mathrm{i}\xi t}\,dt\\
 &=E\int_{-\infty}^{\infty}\chi_{[-T/2,T/2]}(t)\mathrm{e}^{-2\pi \mathrm{i}\xi t}\,dt\\
@@ -325,7 +325,7 @@ $\evalat{\mathrm{e}^{-2\pi \mathrm{i}\xi t}f(t)}{-\infty}{\infty},\evalat{\mathr
     \mathcal{F} \chi_{[-T/2,T/2]}(\omega)&=T\mathrm{Sa}\left(\frac{T\omega}{2}\right)
 \end{lralign}
 \end{example}
-将矩形函数周期化，傅里叶系数与矩形函数的傅里叶变换在一列等间距的点上取值成正比，这一关系的解释将在\ref{sub:poisson_summation}中给出。
+将矩形函数周期化，傅里叶系数与矩形函数的傅里叶变换在一列等间距的点上取值成正比，这一关系的解释将在\refsub{poisson_summation}中给出。
 
 由傅里叶反演公式得到：
 \begin{corollary}[采样函数的傅里叶变换]
@@ -336,7 +336,7 @@ $\evalat{\mathrm{e}^{-2\pi \mathrm{i}\xi t}f(t)}{-\infty}{\infty},\evalat{\mathr
     \end{lralign}
 \end{corollary}
 
-基于以上结果，可以证明\ref{sub:int_sin}中给出的狄利克雷积分公式：
+基于以上结果，可以证明\refsub{int_sin}中给出的狄利克雷积分公式：
 \begin{corollary}[狄利克雷积分]
     \[\int_{-\infty}^{\infty}\frac{\sin t}{t}\,dt=\pi\]
 \end{corollary}
@@ -355,7 +355,7 @@ $\evalat{\mathrm{e}^{-2\pi \mathrm{i}\xi t}f(t)}{-\infty}{\infty},\evalat{\mathr
     以上两个结果都与狄利克雷积分等价。
 \end{proof}
 \begin{example}[狄拉克函数]
-在\ref{sub:signal}中介绍了狄拉克$\delta$函数，实际上它应该作为一个分布来理解，见\ref{sub:general_distributions}，不过我们可以从形式上求出它的傅里叶变换。
+在\refsub{signal}中介绍了狄拉克$\delta$函数，实际上它应该作为一个分布来理解，见\refsub{general_distributions}，不过我们可以从形式上求出它的傅里叶变换。
 \lr{
 \mathcal{F} \delta(\xi)&=\int_{-\infty}^{\infty}\delta(t)\mathrm{e}^{-2\pi \mathrm{i}\xi t}\,dt\\
 &=\int_{-\infty}^{\infty}\delta(t)\,dt=1
@@ -364,7 +364,7 @@ $\evalat{\mathrm{e}^{-2\pi \mathrm{i}\xi t}f(t)}{-\infty}{\infty},\evalat{\mathr
 &=\int_{-\infty}^{\infty}\delta(t)\,dt=1
 }
 \end{example}
-根据傅里叶变换的对偶性，我们当然希望恒为1的函数的傅里叶变换是$\delta$或$2\pi\delta$（取决于是用频率做变换还是用角频率做变换），然而，1在无限区间上必定是不可积的，在常规意义下它不能够做傅里叶变换。这个问题将在\ref{sub:operation_of_distribution}中讨论，那时就可以对相当大范围内的函数做傅里叶变换，还将在\ref{sub:fourier_of_dirac_comb}中看到周期函数的傅里叶变换与傅里叶级数的深刻关系。现在我们暂且承认公式：
+根据傅里叶变换的对偶性，我们当然希望恒为1的函数的傅里叶变换是$\delta$或$2\pi\delta$（取决于是用频率做变换还是用角频率做变换），然而，1在无限区间上必定是不可积的，在常规意义下它不能够做傅里叶变换。这个问题将在\refsub{operation_of_distribution}中讨论，那时就可以对相当大范围内的函数做傅里叶变换，还将在\refsub{fourier_of_dirac_comb}中看到周期函数的傅里叶变换与傅里叶级数的深刻关系。现在我们暂且承认公式：
 \begin{claim}
     用$\mathds{1}$表示恒为1的函数。
 \lr{
@@ -463,7 +463,7 @@ $\evalat{\mathrm{e}^{-2\pi \mathrm{i}\xi t}f(t)}{-\infty}{\infty},\evalat{\mathr
 %\end{figure}
 
 \begin{example}[单边指数函数和双边指数函数]
-在\ref{sub:signal}中我们曾介绍单边指数函数$f(t)=\mathrm{e}^{-at}u(t)$和双边指数函数$g(t)=f(t)+f(-t)$.
+在\refsub{signal}中我们曾介绍单边指数函数$f(t)=\mathrm{e}^{-at}u(t)$和双边指数函数$g(t)=f(t)+f(-t)$.
 \begin{lralign}
 \mathcal{F} f(\xi)&=\int_{-\infty}^{\infty}f(t)\mathrm{e}^{-2\pi \mathrm{i}\xi t}\,dt\\
 &=\int_{0}^{\infty}\mathrm{e}^{-at}\mathrm{e}^{-2\pi \mathrm{i}\xi t}\,dt\\

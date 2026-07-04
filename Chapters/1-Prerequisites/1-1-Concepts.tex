@@ -35,7 +35,7 @@
 \[\int_{-\infty}^{\infty}| f(x)| ^2\,dx<\infty\]
 \end{definition}
 
-能量无限等价于功率非零。在\ref{sub:Lp_space}中我们将看到，能量信号是$L^2$空间中的元素，而功率信号则不属于$L^2$空间。我们还可以将这一定义推广到离散信号，其中离散的能量信号满足“平方可和”性质$\sum_{n=-\infty}^{\infty}|x[n]|^2<\infty$，对应$l^2$空间中的元素，并将能量无限而功率有限的离散信号称为功率信号。
+能量无限等价于功率非零。在\refsub{Lp_space}中我们将看到，能量信号是$L^2$空间中的元素，而功率信号则不属于$L^2$空间。我们还可以将这一定义推广到离散信号，其中离散的能量信号满足“平方可和”性质$\sum_{n=-\infty}^{\infty}|x[n]|^2<\infty$，对应$l^2$空间中的元素，并将能量无限而功率有限的离散信号称为功率信号。
 
 为了区分某段时间内和全时域上的能量和功率，定义：\begin{definition}
 \quad\newline
@@ -73,7 +73,7 @@
 \ding{173} 积分性质：$\int_{-\infty}^{\infty}\delta (x)\,dx=1$，从而$\int_{-\infty}^{\infty}f(x)\delta (x)\,dx=f(0)$。\\
 \ding{174} $\delta(x)$ 函数是偶函数：$\delta (-x)=\delta (x)$
 \end{definition}
-这个函数可视为一些性质较好的函数如高斯函数、采样函数集中到x=0附近时的极限情况，从而具备很多优美的性质，见\ref{sub:approach}。实际上，它应该作为一个分布（而不是函数）来理解，并且是无限阶可导的，我们将在\ref{sub:general_distributions}中详细讨论这一点。目前，我们仅能从形式和直观上定义这样一个函数。
+这个函数可视为一些性质较好的函数如高斯函数、采样函数集中到x=0附近时的极限情况，从而具备很多优美的性质，见\refsub{approach}。实际上，它应该作为一个分布（而不是函数）来理解，并且是无限阶可导的，我们将在\refsub{general_distributions}中详细讨论这一点。目前，我们仅能从形式和直观上定义这样一个函数。
 
 根据以上定义中列举的性质，可以得到$\delta$函数的伸缩变换性质：$\delta(ax)=\dfrac{1}{|a|}\delta(x)$，这是因为我们需要保证：
 \[\int_{-\infty}^{\infty}\delta(ax)\,d(ax)=a\int_{-\infty}^{\infty}\delta(y)\,dy=a\]
@@ -110,7 +110,7 @@
 
 我们将在实变函数的理论中用到它。例如，狄利克雷函数$D(x)$可表示为$\chi_{\mathbb{Q}}(x)$。概率论中会定义连续性随机变量的特征函数(characteristic function)，指随机变量的矩母函数的傅里叶变换，本书中不会用到它，但请读者注意它们的区别。
 
-单位阶跃函数的积分为单位斜变信号 (the unit ramp)，导数为狄拉克函数，从直观上这不难理解，在学习\ref{sub:general_distributions}之后，很容易自行验证它。
+单位阶跃函数的积分为单位斜变信号 (the unit ramp)，导数为狄拉克函数，从直观上这不难理解，在学习\refsub{general_distributions}之后，很容易自行验证它。
 
 \begin{definition}[单边指数函数和双边指数函数]
     \begin{align*}
@@ -184,4 +184,4 @@ $$x[n]\to x[\alpha n],\alpha\in\mathbb{R}$$
     称为\textbf{升采样/上采样}，对应\textbf{插值}。
 \end{definition}
 
-如果离散信号本身是由连续信号采样得到的，例如$x[n]=f(T_s n)$，那么插值就对应于还原连续信号的过程，因此离散信号的伸缩相当于处理连续信号时增加或减少样值点。降采样、升采样的名称就来源于此。对于降采样、升采样，我们将在\ref{sub:interpolation}中详细讨论。
+如果离散信号本身是由连续信号采样得到的，例如$x[n]=f(T_s n)$，那么插值就对应于还原连续信号的过程，因此离散信号的伸缩相当于处理连续信号时增加或减少样值点。降采样、升采样的名称就来源于此。对于降采样、升采样，我们将在\refsub{interpolation}中详细讨论。

@@ -10,7 +10,7 @@
 \begin{remark}
     严格来说，我们只能得到
     \[\frac{f(t-)+f(t+)}{2}=\frac{1}{2\pi \mathrm{i}}\lim_{r\to\infty}\int_{b-\mathrm{i}r}^{b +\mathrm{i}r}\mathcal{L} f(s)\mathrm{e}^{st}\,ds\]
-    不过，我们仍不关心不连续点处的值，，并且常常将其定义为左右极限的算术平均值，因此后文中将直接使用上面的结论。要求分段光滑是为了保证傅里叶反演公式成立，在\ref{sub:fourier_inversion}中，对应我们给出的第二个版本的傅里叶反演公式（定理A.2.6.）。读者也可参考其他版本的傅里叶反演公式来替换对$f$和$\mathcal{L} f$的要求，从而得到不同版本的拉普拉斯反演公式。
+    不过，我们仍不关心不连续点处的值，，并且常常将其定义为左右极限的算术平均值，因此后文中将直接使用上面的结论。要求分段光滑是为了保证傅里叶反演公式成立，在\refsub{fourier_inversion}中，对应我们给出的第二个版本的傅里叶反演公式（定理A.2.6.）。读者也可参考其他版本的傅里叶反演公式来替换对$f$和$\mathcal{L} f$的要求，从而得到不同版本的拉普拉斯反演公式。
 \end{remark}
 \begin{remark}
     这里的积分\[\lim_{r\to\infty}\int_{b-\mathrm{i}r}^{b +\mathrm{i}r}\mathcal{L} f(s)\mathrm{e}^{st}\,ds\]
@@ -74,7 +74,7 @@
         f(t)\mathrm{e}^{-b t}=\frac{1}{2\pi}\lim_{r\to\infty}\int_{-r}^{r}F(b+\mathrm{i}\omega)\mathrm{e}^{\mathrm{i}\omega t}\,d\omega
         =\mathcal{F}^{-1} [F(b+\mathrm{i}\omega)](t)
     \end{align*}
-    我们已经证明过$f$连续和$F(b+\mathrm{i}\omega)\in L^1(\mathbb{R})$，因此可以使用傅里叶反演公式（见\ref{sub:fourier_inversion}的定理A.2.5.），得到
+    我们已经证明过$f$连续和$F(b+\mathrm{i}\omega)\in L^1(\mathbb{R})$，因此可以使用傅里叶反演公式（见\refsub{fourier_inversion}的定理A.2.5.），得到
     \begin{align*}
         F(b+\mathrm{i}\omega)&=\mathcal{F} [f(t)\mathrm{e}^{-b t}](\omega)\\
         &=\int_{-\infty}^{\infty}f(t)\mathrm{e}^{-b t}\mathrm{e}^{-\mathrm{i}\omega t}\,dt\\
@@ -273,7 +273,7 @@
         \sinh(x)&=\sum_{n=0}^{\infty}\frac{x^{2n+1}}{(2n+1)!}\\
         &=x+\frac{x^3}{6}+\cdots,\forall x\in\mathbb{R}
     \end{align*}
-    根据\ref{sub:unique_exetension}中的唯一延拓定理，泰勒展开式在复数域上仍成立，因此
+    根据\refsub{unique_exetension}中的唯一延拓定理，泰勒展开式在复数域上仍成立，因此
     \begin{align*}
         F(s)&=\frac{\sinh(\pi s)-\pi s}{s^2 \sinh(\pi s)}\\
         &=\frac{[(\pi s)+(\pi^3s^3/3!)+\cdots]-\pi s}{s^2 \cdot(\pi s)}=\frac{\pi^2}{3},s\to 0

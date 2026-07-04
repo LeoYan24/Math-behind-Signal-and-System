@@ -41,7 +41,7 @@
     我们称这样的问题为\textbf{初值问题}。
 \end{definition}
 
-我们将看到，由常系数线性微分方程描述的系统是因果的线性时不变系统，这也是我们最为关注的系统类型。现在来给出线性、时不变性的定义，因果性的定义将在\ref{sub:cascade}中给出。
+我们将看到，由常系数线性微分方程描述的系统是因果的线性时不变系统，这也是我们最为关注的系统类型。现在来给出线性、时不变性的定义，因果性的定义将在\refsub{cascade}中给出。
 
 \begin{definition}[线性系统]
     如果算子H是线性的，即
@@ -64,7 +64,7 @@
     当$e(t)=\delta(t)$时，零状态响应$r_{zs}(t)$为\textbf{单位脉冲响应}；当$e(t)=u(t)$时，零状态响应$r_{zs}(t)$称为\textbf{单位阶跃响应}。习惯上，将单位脉冲响应记为$h(t)$，单位阶跃响应记为$g(t)$。
 \end{definition}
 
-常微分方程的解空间是有限维的，只要给定足够的初值数量，就可以唯一确定方程的解，因此常微分方程系统都具有\textbf{马尔可夫性}。在\ref{sub:compare_to_high_order}中，我们将对线性微分方程组的解空间维数进行说明。
+常微分方程的解空间是有限维的，只要给定足够的初值数量，就可以唯一确定方程的解，因此常微分方程系统都具有\textbf{马尔可夫性}。在\refsub{compare_to_high_order}中，我们将对线性微分方程组的解空间维数进行说明。
 
 \begin{definition}[马尔可夫性]
     只要知道了$t=t_0$时刻的系统状态，未来的响应$r(t)(t>t_0)$就与过去的激励$e(t)(t<t_0)$无关，称这样的系统具有\textbf{马尔可夫性}或\textbf{无后效性}。
@@ -82,7 +82,7 @@
 如果一个系统在激励信号有界时，响应也是有界的，则称之为\textbf{稳定系统}(bounded-input bounded-output,BIBO)，即
 \[e(t)\in L^\infty(\mathbb{R})\implies r(t)\in L^\infty(\mathbb{R})\]
 \end{definition}
-我们将在\ref{sub:stability_of_system}和\ref{sub:discrete_system_function}中，分别借助拉普拉斯变换和z变换的理论，给出连续的和离散的线性时不变系统具有稳定性的充分必要条件。
+我们将在\refsub{stability_of_system}和\refsub{discrete_system_function}中，分别借助拉普拉斯变换和z变换的理论，给出连续的和离散的线性时不变系统具有稳定性的充分必要条件。
 
 \begin{definition}[可逆性]
     如果H（作为映射）如果是单射，则也是双射（因为我们不关注其值域），于是H是可逆的。换句话说，一种响应仅可能对应唯一的激励。
@@ -225,15 +225,17 @@ $$k(x,y)=H_x[\delta(x-y)]$$
 \end{align*}
 而线性性是显然的。总之，我们有：
 \begin{proposition}[线性时不变系统的等价定义]
+    \label{prop:LTI_conv}
     “系统$H$是线性时不变系统”等价于“响应是激励与单位脉冲响应$h$的卷积”，即$r(t)=(h*e)(t)$。
 \end{proposition}
 
 线性时不变系统的单位阶跃响应是单位脉冲响应的积分，可以利用此关系式进行单位脉冲响应或单位阶跃响应的求解，下一小节中将给出一个利用此方法的例子。
 
 \begin{proposition}[单位阶跃响应]
-线性时不变系统的单位阶跃响应为
-$$g(t)=\int_{-\infty}^{t}h(y)\,dy$$
-其中$h(t)$为系统的单位脉冲响应。
+    \label{prop:step_response}
+    线性时不变系统的单位阶跃响应为
+    $$g(t)=\int_{-\infty}^{t}h(y)\,dy$$
+    其中$h(t)$为系统的单位脉冲响应。
 \end{proposition}
 \begin{proof}
 \begin{align*}
@@ -264,9 +266,9 @@ $$g(t)=\int_{-\infty}^{t}h(y)\,dy$$
 \end{equation}
 \end{proposition}
 \begin{proof}
-只要取$e_1(t)=e(t),e_2(t)=0$，就从条件\ref{eq:4.1}推出条件\ref{eq:4.2}；反过来，如果条件\ref{eq:4.2}成立，则任意$e_1,e_2$满足
+只要取$e_1(t)=e(t),e_2(t)=0$，就从\refeqn{4.1}推出\refeqn{4.2}；反之，如果\refeqn{4.2}成立，则任意$e_1,e_2$满足
 $$e_1(t)=e_2(t)\ \mathrm{for}\ t<t_0,\text{即}e_1(t)-e_2(t)=0\ \mathrm{for}\ t<t_0$$
-根据条件\ref{eq:4.2}，有
+根据\refeqn{4.2}，有
 $$r_1(t)-r_2(t)=0\ \mathrm{for}\ t<t_0,\text{即}r_1(t)=r_2(t)\ \mathrm{for}\ t<t_0$$
 \end{proof}
 
@@ -282,9 +284,9 @@ $$r_1(t)-r_2(t)=0\ \mathrm{for}\ t<t_0,\text{即}r_1(t)=r_2(t)\ \mathrm{for}\ t<
 其中h为单位脉冲响应。
 \end{proposition}
 \begin{proof}
-只要取$t_0=0$，就从条件\ref{eq:4.2}推出条件\ref{eq:4.3}；用时不变性，条件\ref{eq:4.3}可以推出条件\ref{eq:4.2}。
+只要取$t_0=0$，就从\refeqn{4.2}推出\refeqn{4.3}；用时不变性，\refeqn{4.3}可以推出\refeqn{4.2}。
 
 对于单位脉冲响应，
 $$\delta=0\ \mathrm{for}\ t<0\implies h(t)=0\ \mathrm{for}\ t<0$$
-反过来，如果$h(t)=0,e(t)=0\ \mathrm{for}\ t<0$,则根据\ref{sub:intuition_of_convolution}中介绍的卷积的“支集相加”性质，有$r(t)=(h*e)(t)=0\ \mathrm{for}\ t<0$.
+反过来，如果$h(t)=0,e(t)=0\ \mathrm{for}\ t<0$,则根据\cref{prop:conv_supp}，有$r(t)=(h*e)(t)=0\ \mathrm{for}\ t<0$.
 \end{proof}

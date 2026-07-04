@@ -1,7 +1,7 @@
 \section{z变换}\label{sec:z_Transform}
 
 \subsection{z变换的引出}\label{sub:inteoduction_of_z}
-中学数学中处理递推数列的一种经典方法是使用生成函数，将数列转化为形式幂级数，从而利用级数的性质来分析数列。z变换可以看作生成函数的推广，它将数列推广为离散时间信号,将形式幂级数推广为洛朗级数（我们将在\ref{sub:meromorphic_function}中详细讨论这个洛朗级数的收敛域），从而可以利用复变函数的理论来分析离散时间信号与离散系统。
+中学数学中处理递推数列的一种经典方法是使用生成函数，将数列转化为形式幂级数，从而利用级数的性质来分析数列。z变换可以看作生成函数的推广，它将数列推广为离散时间信号,将形式幂级数推广为洛朗级数（我们将在\refsub{meromorphic_function}中详细讨论这个洛朗级数的收敛域），从而可以利用复变函数的理论来分析离散时间信号与离散系统。
 \begin{definition}[z变换]
     将离散时间信号$x[n]$的z变换记为$X(z)$或$\mathcal{Z} x(z)$，它的定义为
     \[X(z)=\mathcal{Z} x[n]=\sum_{n=-\infty}^{\infty}x[n]z^{-n},z\in\mathbb{C}\]
@@ -37,7 +37,7 @@
     \end{align*}
 \end{example}
 
-根据\ref{sub:laurant_series}中介绍的洛朗级数理论，z变换的收敛域为一个环状区域：
+根据\refsub{laurant_series}中介绍的洛朗级数理论，z变换的收敛域为一个环状区域：
 \begin{definition}[z变换的收敛域]
     设离散时间信号$x[n]$的z变换为$X(z)=\sum_{n=-\infty}^{\infty}x[n]z^{-n}$，则其\textbf{收敛域}(region of convergence, ROC)定义为
     \[\text{ROC}=\left\{z\in\mathbb{C} \left|r<|z|<R\right.\right\}\]
@@ -46,7 +46,7 @@
 \end{definition}
 以上定义对于$r=0$或$R=\infty$或$r\geq R$的退化情况同样适用。特别地，我们指出：
 \begin{itemize}
-    \item 若 \( x[n] = 0,\ n < 0 \)，则 \( r = 0 \)，双边 z 变换退化为单边 z 变换（见\ref{sub:single_z}）；
+    \item 若 \( x[n] = 0,\ n < 0 \)，则 \( r = 0 \)，双边 z 变换退化为单边 z 变换（见\refsub{single_z}）；
     \item 若 \( x[n] = 0,\ n > 0 \)，则 \( R = \infty \)；
     \item 若 \( x[n] \) 是有限长序列，则 \( r = 0,\ R = \infty \)，z 变换在除 \( z = 0 \) 和 \( z = \infty \) 外的整个复平面解析；
     \item 若 \( |x[n]| \) 在 \( n \to \pm \infty \) 时分别以 \( |a|^n \) 的速率增长，则其双边 z 变换的收敛域可能为空。除了前面三种情况外，典型的z变换具有非空收敛域的例子如 \( x[n] = \alpha^{|n|} \)（\( |\alpha| < 1 \)），其收敛域为
@@ -90,7 +90,7 @@
 \end{example}
 可以看到，同一个复变函数在不同的域上展开，对应不同的表达式，并且在不同类型的收敛域上对应不同类型的信号，其共性是可以用奇点位置判断收敛域。
 
-上例实际上展示了一种求逆z变换的方法，即将$X(z)$做幂级数展开，然后根据幂级数的系数确定$x[n]$。更一般地，$X(z)$是一个真分式函数时，可以通过部分分式分解将$X(z)$表示为若干简单分式之和，然后对每个简单分式进行类似上例的幂级数展开，从而得到$x[n]$。这种方法在实际应用中非常常见，我们将在\ref{sub:z_inverse}中详细介绍。
+上例实际上展示了一种求逆z变换的方法，即将$X(z)$做幂级数展开，然后根据幂级数的系数确定$x[n]$。更一般地，$X(z)$是一个真分式函数时，可以通过部分分式分解将$X(z)$表示为若干简单分式之和，然后对每个简单分式进行类似上例的幂级数展开，从而得到$x[n]$。这种方法在实际应用中非常常见，我们将在\refsub{z_inverse}中详细介绍。
 
 \subsection{z变换的运算性质}\label{sub:z_operation}
 \begin{proposition}[z变换的运算性质]
@@ -172,3 +172,247 @@
     \end{align*}
     其z变换为$Y(z)=1$，收敛域为$\mathbb{C}$。
 \end{example}
+
+\subsection{亚纯函数}\label{sub:meromorphic_function}
+
+本小节介绍亚纯函数来为逆z变换做准备。逆z变换即由$X(z)$求$x[n]$，根据洛朗级数展开的唯一性，容易想到有两种常用的方法：
+\begin{itemize}
+    \item 将$X(z)$展开为洛朗级数，直接读取系数；
+    \item 利用留数的计算公式，$z^{n-1} X(z)=\sum_{m=-\infty}^{\infty} x[m] z^{n-m-1}$在$z=0$处的留数即为$x[n]$
+\end{itemize}
+
+在前面的例子6.1.6.中，我们已经展示了前一种方法，可以看出，在完成部分分式展开之后，这个方法是非常有效的。但是，在$X(z)$收敛域不同的情况下展开，我们得到了三种洛朗级数，这似乎与洛朗级数的唯一性矛盾；在$x[n]$为右边信号的情况下，展开式的负幂次项构成级数，$z=0$为本性奇点，这与原信号在$z=0$处全纯的结果矛盾。实际上，这是因为在收敛域不是$|z|<1/2$的情况下，我们将分式$1/(2z-1)$展开为负幂次项级数时，是在做$z=\infty$处的洛朗展开，这样展开得到的洛朗级数不能用来判定$z=0$处的奇点类型。
+
+为了说明这个问题，我们需要引入亚纯函数的概念\cite{Function_Theory}：
+\begin{definition}[亚纯函数]
+    设$U\subset\mathbb{C}$为开集，$S\subset U$没有极限点，函数$f:U\backslash S\to\mathbb{C}$称为\textbf{亚纯函数}，如果$f$在$U\backslash S$内全纯，且在$S$中没有本性奇点。
+\end{definition}
+
+初学者往往对$S$没有极限点这一要求感到困惑。实际上，这一条件使得我们对每个奇点都能指出一个小邻域，在这个邻域内能够定义洛朗级数、能够定义极点的留数。
+
+亚纯函数是全纯函数的推广，它允许孤立极点和可去奇点的存在。如果将开集$U\subset \mathbb{C}$上的全纯函数集视为环$\mathcal{O} (U)$，则亚纯函数集构成$\mathcal{O} (U)$的分式域$\mathrm{Frac}(\mathcal{O} (U))$，记为$\mathcal{M} (U)$。
+
+对扩展复平面$\hat{\mathbb{C}}=\mathbb{C}\cup\{\infty\}$，标准的做法是通过球极投影将扩展平面同胚映射至单位球，即黎曼球面，采用球面拓扑来定义扩展复平面的拓扑。本书不详细讲述这一点，感兴趣的读者请自行阅读复变函数的教材。简单来说，对于无穷远点，我们定义：
+\begin{definition}[无穷远点的邻域]
+    无穷远点$\infty$的邻域定义为
+    \[U(\infty)=\left\{\left.z\in\mathbb{C} \right||z|>R\right\}\cup\{\infty\},R>0\]
+    $\infty$是集合$S\cup\{\infty\}$的极限点当且仅当$S$中存在点列$\{z_n\}$，使得$\lim_{n\to\infty}|z_n|=\infty$。
+\end{definition}
+基于以上定义，我们可以给出扩展复平面上的亚纯函数定义：
+\begin{definition}[扩展复平面上的亚纯函数]
+    设$U\subset\hat{\mathbb{C}}$为开集，$U$的子集$S$没有极限点，函数$f:U\backslash S\to\hat{\mathbb{C}}$称为\textbf{亚纯函数}(meromorphic functions)，如果$f$在$U\backslash S$内全纯，且在$S$中没有本性奇点。
+\end{definition}
+\begin{example}
+    对于有理函数$f(z)=P(z)/Q(z)$，其中$P(z),Q(z)$为多项式，$f(z)$是$\hat{\mathbb{C}}$上的亚纯函数。进一步，如果$\mathrm{deg}P\leq\mathrm{deg}Q$，则$f(z)$在$\infty$处有可去奇点；如果$\mathrm{deg}P>\mathrm{deg}Q$，则$f(z)$在$\infty$处有$\mathrm{deg}P-\mathrm{deg}Q$阶极点。
+\end{example}
+我们不加证明地给出以下结论\cite{Function_Theory}：
+\begin{claim}
+    扩充复平面$\hat{\mathbb{C}}$上，亚纯函数一定是有理函数。
+\end{claim}
+因此，扩充复平面上的亚纯函数与有理函数是等价的概念。在$U\subset\mathbb{C}$上，全纯函数是亚纯函数的子集：$\mathcal{O}(U)\subset\mathcal{M}(U)$，而扩充复平面上亚纯函数仅仅包括有理函数，这说明很多整函数在$\infty$处有本性奇点，下面很快会给出一个例子。
+
+$f(z)$在$\infty$处的性质是通过$f(1/z)$在$z=0$处的性质来研究的：
+\begin{definition}[无穷远点的奇点类型]
+    定义$g(z)=f(1/z)$，则$f$在$\infty$处的奇点类型定义为$g$在$0$处的奇点类型，即：
+    \begin{itemize}
+        \item 若$f(1/z)$在$z=0$处有可去奇点，则称$f$在$\infty$处有可去奇点；
+        \item 若$f(1/z)$在$z=0$处有极点，则称$f$在$\infty$处有极点；
+        \item 若$f(1/z)$在$z=0$处有本性奇点，则称$f$在$\infty$处有本性奇点。
+    \end{itemize}
+\end{definition}
+
+\begin{example}
+    $f(z)=\mathrm{e}^{z}$在$\mathbb{C}$上全纯。考察$f(1/z)$在$0$处的性质：
+    \[f(1/z)=\mathrm{e}^{1/z}=\sum_{n=0}^{\infty}\frac{1}{n!}z^{-n}\]
+    该级数有无穷多个负幂次项，因此$\mathrm{e}^{z}$在$\infty$处有本性奇点，它不是扩充复平面上的亚纯函数。
+\end{example}
+
+我们称$g(z)=f(1/z)$在$0$处的洛朗展开为$f(z)$在$\infty$处的洛朗展开，奇点类型可通过洛朗展开判断：
+\begin{definition}[无穷远点的洛朗展开与奇点类型]
+    设$g(z)=f(1/z)$在$z=0$处的洛朗展开为
+    \[g(z)=\sum_{n=-\infty}^{\infty}c_n z^{n}\]
+    $g(z)$在$z=0$处的奇点类型定义与\refsub{laurant_series}中一致。代回$f(z)=g(1/z)$，则$f(z)$在$\infty$处的洛朗展开为
+    \[f(z)=\sum_{n=-\infty}^{\infty}c_n z^{-n}\]
+    因此，$f(z)$在$\infty$处的奇点类型为：
+    \begin{itemize}
+        \item 如果$c_n=0,\forall n<0$，，即级数无正幂次项，则$f(z)$在$\infty$处有可去奇点；
+        \item 如果$\exists m\in\mathbb{N}_+$，使得$c_{-1}=c_{-2}=\cdots =c_{-m}=0,c_{-(m+1)}\neq 0$，即级数正幂次项只有有限个，则$f(z)$在$\infty$处有极点；
+        \item 如果$c_n\neq 0$对无穷多个负整数$n$成立，即级数正幂次项有无穷多个，则$f(z)$在$\infty$处有本性奇点。
+    \end{itemize}
+\end{definition}
+
+需要注意，无穷远点的留数并不是$c_{-1}$。本质上，留数就是在环绕数为$1$的围道上进行复线积分的结果。取充分大的\textbf{顺时针}圆周$C^-_R:t\mapsto R\mathrm{e}^{-\mathrm{i}t},t\in[0,2\pi]$为围道，使得$C^-_R$外只有$\infty$一个极点（可行性由奇点孤立保证），则$\mathrm{Ind}_{C^-_R}(\infty)=1$\footnote{从围道内部看上去，围道的正向是顺时针时，从围道外部（包括无穷远点）看上去是逆时针的，因此环绕数为1。学过球极投影的读者可以更好地理解这一点：在黎曼球面上，如果两点位于位于围道两侧（例如这里的无穷远点与有限极点），计算环绕数时，曲线的正向是相反的。}，根据留数定理，有
+$$\mathrm{Res}(f,\infty)=\dfrac{1}{2\pi \mathrm{i}}\oint_{C^-_R}f(z)\,dz$$
+尽管现在要把$f$展开为$\infty$处的洛朗级数，但在做积分时我们仅仅切换了围道的定向，保留下来的是$f$在$\infty$处的展开式中$1/z$的系数的相反数，即$-c_{1}$。
+
+在以上积分中，做变量代换$$w=\frac{1}{z},dz=-\dfrac{1}{w^2}dw$$
+由于$R$充分大，围道变为逆时针的$C_{1/R}:t\mapsto \dfrac{1}{R}\mathrm{e}^{-\mathrm{i}t},t\in[0,2\pi]$，它的内部只有$z=0$一个极点（可行性仍由奇点孤立保证），于是
+\[\mathrm{Res}(f,\infty)=\frac{1}{2\pi \mathrm{i}}\oint_{C_{1/R}}f(1/w)\frac{-1}{w^2}dw=-\mathrm{Res}\left(\frac{f(1/w)}{w^2},0\right)\]
+因此我们得到：
+\begin{proposition}[无穷远点的留数]
+    设$f(z)$在$\infty$处有孤立奇点，则$f(z)$在$\infty$处的留数为$f$在$\infty$处的展开式中$1/z$的系数的相反数$-c_{1}$，它可以用以下公式计算：
+    \[\mathrm{Res}(f,\infty)=-\mathrm{Res}\left(\frac{f(1/z)}{z^2},0\right)\]
+\end{proposition}
+
+现在也就不难理解为什么上一节的例子6.1.6中，在不同收敛域上展开的洛朗级数会有不同的形式，并且在某些收敛域上无法判定$z=0$处的奇点类型了——在$|z|>1/2$的收敛域上，我们其实是将$1/(2z-1)$展开为$z=\infty$处的洛朗级数，这个级数只能说明$1/(2z-1)$在$\infty$处为可去奇点，而不能用于判断$z=0$处的奇点类型。
+
+\subsection{逆z变换}\label{sub:z_inverse}
+经验上，在做逆z变换时，我们更多地使用洛朗级数展开，直接对比系数的方法，这种方法还可以处理本性奇点的情况。
+\begin{example}
+    设$X(z)=\mathrm{e}^{1/z}$，求$x[n]$。\\
+    解：$X(z)$在$z=0$处有本性奇点，因此不能使用留数计算（注意我们获得留数计算公式的方法，是将洛朗级数乘以$z^{n-1}$，从而化为泰勒级数）。但它的展开式很容易获得：
+    \[X(z)=\sum_{k=0}^{\infty}\frac{1}{n!}z^{-n}\]
+    因此$x[n]=\frac{1}{n!}u[-n-1]$。可以验证其收敛域为$\hat{\mathbb{C}}\backslash\{0\}$，并且在$\infty$处展开与上式一致（在没有$0$以外的奇点时，这是必然的，因为同一收敛域上的洛朗级数展开唯一）。
+\end{example}
+
+如果$X(z)$是亚纯函数，计算留数仍然是一个有效的方法，因为要将有理函数展开为部分分式的计算量可能比较大（见\refsub{frac_laplace_inverse}）。在$X(z)z^{n-1}=\sum_{m=-\infty}^{\infty}x[m]z^{n-m-1}$中，对比$1/z$项系数，就得到使用该公式计算右边信号的逆z变换公式：
+\begin{theorem}
+    设右边离散信号$x[n]$的z变换为$X(z)$，则有
+    \[x[n]=-\mathrm{Res}\left(X(z)z^{n-1},\infty\right)=\mathrm{Res}\left(\frac{X(1/z)}{z^{n+1}},0\right)\]
+\end{theorem}
+
+要使用$\mathrm{Res}\left(\dfrac{X(1/z)}{z^{n+1}}\right)$计算逆z变换是非常繁琐的，通常使用留数定理将问题转化为其他极点的留数计算。注意我们并不打算算出复线积分，留数定理是从一些极点到另一些极点的桥梁.
+\begin{example}
+    设右边信号$x[n]$的z变换为
+    \[X(z)=\frac{z^2}{(z-1)^3},\mathrm{ROC}:|z|>1\]
+    求$x[n]$。\\
+    解：$X(z)$在$\infty$处有极点，因此可以使用留数定理：
+    \begin{align*}
+        x[n]=-\mathrm{Res}\left(X(z)z^{n-1},\infty\right)=-\frac{1}{2\pi \mathrm{i}}\oint_{C^-_R}X(z)z^{n-1}\,dz,n\ge 0
+    \end{align*}
+    其中$C^-_R$为以原点为中心、半径$R$充分大的\textbf{顺时针}圆周，使得$X(z)$的所有极点都在$C^-_R$内。顺时针是为了使它绕$\infty$的环绕数$\mathrm{Ind}_{C^-_R}(\infty)=1$。由于$C^-_R$绕$z=1$的环绕数为$-1$，根据留数定理，有
+    \begin{align*}
+        -\oint_{C^-_R}X(z)z^{n-1}\,dz=\oint_{C_R}X(z)z^{n-1}\,dz=2\pi \mathrm{i} \mathrm{Res}\left(X(z)z^{n-1},1\right)
+    \end{align*}
+    现在问题转化为一个三阶极点的留数求解：
+    \begin{align*}
+        \mathrm{Res}\left(X(z)z^{n-1},1\right)&=\lim_{z\to 1}\frac{1}{2!}\frac{d^2}{dz^2}\left[(z-1)^3\frac{z^{n+1}}{(z-1)^3}\right]\\
+        &=\lim_{z\to 1}\frac{1}{2}\frac{d^2}{dz^2}z^{n+1}\\
+        &=\frac{(n+1)n}{2}
+    \end{align*}
+    又已知$x[n]$是右边信号，因此
+    $$x[n]=-\mathrm{Res}\left(X(z)z^{n-1},1\right)=-\frac{(n+1)n}{2}u[n]$$    
+\end{example}
+
+左边信号对应经典的泰勒级数情况，我们已经在前面说明，$x[n]=\mathrm{Res}\left(X(z)z^{n-1},0\right)$。不过实际计算时，使用留数定理将高阶极点的留数转化为其他低阶极点的留数会更加方便。注意考虑围道外的点时，需要将$\infty$处的留数也计算进去。
+\begin{example}
+    设左边信号$x[n]$的z变换为
+    \[X(z)=\frac{z^2}{(z-1)^3},\mathrm{ROC}:|z|<1\]
+    求$x[n]$。\\
+    解：由留数定理：
+    \[x[n]=\mathrm{Res}\left(X(z)z^{n-1},0\right)=\frac{1}{2\pi \mathrm{i}}\oint_{C_r}X(z)z^{n-1}\,dz\]
+    其中$C_r$为以原点为中心、半径$r$充分小的逆时针圆周，使得$X(z)$的其他极点都在$C_r$外。在$n\geq -1$时，$X(z)z^{n-1}$在$z=0$处为可去奇点，留数为0；在$n<-1$时，$X(z)z^{n-1}$在$z=0$处有$-(n-1)$阶极点。为了避免计算高阶极点，我们将其转化为围道外的极点留数计算。由于$\mathrm{Ind}_{C_r}(1)=\mathrm{Ind}_{C_r}(\infty)=-1$，根据留数定理，有
+    \[\oint_{C_r}X(z)z^{n-1}\,dz=-2\pi \mathrm{i} \left[\mathrm{Res}\left(X(z)z^{n-1},1\right)+\mathrm{Res}\left(X(z)z^{n-1},\infty\right)\right]\]
+    现在问题转化为两个极点的留数求解。前者与上例相同，后者可以使用无穷远点的留数计算公式：
+    \begin{align*}
+        \mathrm{Res}\left(X(z)z^{n-1},\infty\right)&=-\mathrm{Res}\left(\frac{X(1/z)}{z^{n+1}},0\right)=-\mathrm{Res}\left(\frac{1}{(1-z)^3 z^{n-1}},0\right)
+    \end{align*}
+    在$n\le 0$时，$\dfrac{1}{(1-z)^3 z^{n-1}}$在$z=0$处全纯，留数为0，因此
+    \begin{align*}
+        x[n]=-\mathrm{Res}\left(X(z)z^{n-1},1\right)=-\frac{(n+1)n}{2}u[-n-1]
+    \end{align*}
+    其实，$X(z)z^{n-1}$在$\infty$处为可去奇点，这是因为$\mathrm{deg}\ z^{n+1}\leq \mathrm{deg}\ (z-1)^3(n\le 0)$，这种情况下可以直接断定无穷远点的留数为0。
+\end{example}
+
+$n<-1$时，\textbf{无穷远处的留数为0}，这并不是偶然现象，因为当我们用它来处理$z=0$处的极点时，$z=\infty$处自然就是零点（可去奇点）而非极点。
+
+总之，设离散信号$x[n]$的z变换为$X(z)$，则有：
+\begin{itemize}
+    \item 如果$x[n]$为左边信号，则
+    \[x[n]=\mathrm{Res}\left(X(z)z^{n-1},0\right)=\oint_{C_r}X(z)z^{n-1}\,dz\]
+    \item 如果$x[n]$为右边信号，则
+    \[x[n]=-\mathrm{Res}\left(X(z)z^{n-1},\infty\right)=-\oint_{C^-_R}X(z)z^{n-1}\,dz=\oint_{C_R}X(z)z^{n-1}\,dz\]
+\end{itemize}
+如果能够对双边信号，取收敛域内的围道$C$，并证明$x[n]=\oint_{C}X(z)z^{n-1}\,dz$，则逆z变换的形式统一，这是一个非常漂亮的结果。
+
+根据我们先前对双边信号的处理经验，可以想到，如果我们能够将$X(z)$拆成左边信号和右边信号的z变换之和，那么就可以分别计算它们的逆z变换，再将结果相加。对于我们最常遇到的有理函数，这总是可行的，因为理论上可以对部分分式展开式\textbf{分组通分}。
+\begin{example}
+    设双边信号的z变换为
+    \[X(z)=\frac{1}{(z-1)^3(z-2)},\mathrm{ROC}:1<|z|<2\]
+    求$x[n]$。\\
+    解：考虑将$X(z)$拆成左边信号和右边信号的z变换之和：
+    \begin{align*}
+        X(z)&=\frac{1}{(z-1)^3(z-2)}\\
+        &=\frac{A}{z-2}+\frac{B}{z-1}+\frac{C}{(z-1)^2}+\frac{D}{(z-1)^3}\\
+        &=\frac{A}{z-2}+\frac{B(z-1)^2+C(z-1)+D}{(z-1)^3}\\
+        &=\frac{A}{z-2}+\frac{B'z^2+C'Z+D'}{(z-1)^3}
+    \end{align*}
+    容易求得$A=1$，从$X(z)$中减去$1/(z-2)$，并约去公因式$(z-2)$，即得分解式的另一部分。因此，
+    \[X(z)=\frac{1}{z-2}-\frac{z^2-z+1}{(z-1)^3}\]
+    很明显，第一项对应左边信号，第二项对应右边信号。取圆形围道$C_r(0<r<2)$和$C_R(R>1)$，分别计算它们的逆z变换：
+    \begin{align*}
+        x_{\text{left}}[n]&=\mathrm{Res}\left(\frac{z^{n-1}}{z-2},0\right)\\
+        &=\frac{1}{2\pi \mathrm{i}}\oint_{C_r}\frac{z^{n-1}}{z-2}\,dz\\
+        &=-\mathrm{Res}\left(\frac{z^{n-1}}{z-2},2\right)\\
+        &=-2^{n-1}u[-n]\\
+        x_{\text{right}}[n]&=-\mathrm{Res}\left(-\frac{z^2-z+1}{(z-1)^3}z^{n-1},\infty\right)\\
+        &=-\frac{1}{2\pi \mathrm{i}}\oint_{C_R}\frac{z^2-z+1}{(z-1)^3}z^{n-1}\,dz\\
+        &=-\left[\mathrm{Res}\left(\frac{z^2-z+1}{(z-1)^3}z^{n-1},1\right)+\mathrm{Res}\left(\frac{z^2-z+1}{(z-1)^3}z^{n-1},0\right)\right]\\
+        &=-\lim_{z\to 1}\frac{1}{2}\frac{d^2}{dz^2}\left(z^{n+1}-z^{n}+z^{n-1}\right)-\delta[n]\\
+        &=-\frac{n^2-n+2}{2}u[n]-\delta[n]
+    \end{align*}
+    因此
+    \[x[n]=x_{\text{left}}[n]+x_{\text{right}}[n]=-2^{n-1}u[-n]-\frac{n^2-n+2}{2}u[n-1]\]
+\end{example}
+
+注意到上个例子中我们可以选取两条一样的围道，只要它处于收敛域内，即$1<r=R<2$。由此我们可以总结出逆z变换的一般方法：
+\begin{theorem}[逆z变换，留数定理方法]
+    设离散信号$x[n]$的z变换为$X(z)\in\mathcal{M} \left(\hat{\mathbb{C}}\right)$（即它是有理函数），其收敛域为$r<|z|<R$，任取围道$C\subset\mathcal{A} _0(r,R)$，则有
+    \[x[n]=\mathcal{Z} ^{-1}X[n]=\frac{1}{2\pi \mathrm{i}}\oint_{C}X(z)z^{n-1}\,dz\]
+\end{theorem}
+
+前面的几个例子已经说明了它的道理，但严格的证明写起来较为复杂，因此本书不再单独给出证明。围道的任意性是由柯西积分定理保证的，因为$X(z)$在$\mathcal{A} _0(r,R)$内全纯。请读者注意：$z^{n-1}(n<0)$可能会在$z=0$处产生高阶极点，此时就必须转化为计算围道外的留数，但无需考虑$\infty$处的留数。
+
+\subsection{z域卷积定理}\label{sub:z_convolution}
+
+使用逆z变换公式，我们还可以得到\textbf{z域卷积定理}:
+\begin{theorem}[z域卷积定理]
+    设离散信号$x[n],y[n]$的z变换分别为$X(z),Y(z)$，收敛域分别为$\mathcal{A} _0(r_1,R_1),\mathcal{A} _0(r_2,R_2)$，则在$\mathcal{A} _0(r_1 r_2,R_1 R_2)$内取围道$C$，有
+    \[x[n]y[n]\xleftrightarrow{\mathcal{Z}} \frac{1}{2\pi \mathrm{i}}\oint_{C}X(\nu)Y\left(\frac{z}{\nu}\right)\nu^{-1}\,d\nu\]
+\end{theorem}
+\begin{proof}
+    对于收敛域，可以用z变换的收敛域公式验证：
+    \[r=\varlimsup_{n\to\infty}|x[-n]y[-n]|^{\frac{1}{n}}=\varlimsup_{n\to\infty}|x[-n]|^{\frac{1}{n}}\cdot\varlimsup_{n\to\infty}|y[-n]|^{\frac{1}{n}}=r_1 r_2\]
+    \[R=\left(\varlimsup_{n\to\infty}|x[n]y[n]|^{\frac{1}{n}}\right)^{-1}=\left(\varlimsup_{n\to\infty}|x[n]|^{\frac{1}{n}}\right)^{-1}\cdot\left(\varlimsup_{n\to\infty}|y[n]|^{\frac{1}{n}}\right)^{-1}=R_1 R_2\]
+    在$\mathcal{A} _0(r_1 r_2,R_1 R_2)$内取围道$C$，则对于任意$\nu\in C$，都有$\nu\in\mathcal{A} _0(r_1,R_1)$，且$z/\nu\in\mathcal{A} _0(r_2,R_2)$，因此$X(\nu),Y(z/\nu)$均全纯。由逆z变换公式，有
+    \begin{align*}
+        \oint_{C}X(\nu)Y\left(\frac{z}{\nu}\right)\nu^{-1}\,d\nu&=\oint_{C}\left(\sum_{m=-\infty}^{\infty}x[m]\nu^{-m}\right)\left(\sum_{k=-\infty}^{\infty}y[k]\left(\frac{z}{\nu}\right)^{-k}\right)\nu^{-1}\,d\nu\\
+        &=\sum_{m=-\infty}^{\infty}\sum_{k=-\infty}^{\infty}x[m]y[k]z^{-k}\oint_{C}\nu^{-(m-k+1)}\,d\nu\\
+        &=2\pi \mathrm{i} \sum_{n=-\infty}^{\infty}x[n]y[n]z^{-n}
+    \end{align*}
+    积分与求和的交换是由收敛域内洛朗级数的内闭一致收敛性保证的。因此，
+    \[x[n]y[n]\xleftrightarrow{\mathcal{Z}} \frac{1}{2\pi \mathrm{i}}\oint_{C}X(\nu)Y\left(\frac{z}{\nu}\right)\nu^{-1}\,d\nu\]
+\end{proof}
+
+%\subsection{长除法}\label{sub:long_division}
+%本小节来介绍另一种求逆z变换的方法——\textbf{长除法}。中学中我们仅使用它来做因式分解。它适用于$X(z)$为有理函数，且只需要求有限项的情况，我们通过一个例子来说明它的使用方法：
+%\begin{example}
+%    设右边信号$x[n]$的z变换为
+%    \[X(z)=\frac{z}{z^2-2z+1},\mathrm{ROC}:|z|>1\]
+%    求$x[n]$的前五项$x[0],x[1], x[2], x[3], x[4]$。\\
+%    解：将$X(z)$写成长除法的形式：
+%    \[
+%    \renewcommand\arraystretch{1.2}
+%    \setlength{\arraycolsep}{1pt}
+%    \begin{array}{rc rrrrrrrrr}
+%    & & & & z^{-1} & +2z^{-2} & +3z^{-3} & +4z^{-4} & + \cdots \\
+%    \cline{3-10}
+%    z^2 - 2z + 1 & \big) & z & & & & & & & \\
+%    & & z & -2 & +z^{-1} & & & & & \\
+%    \cline{3-5}
+%    & & & 2 & -z^{-1} & & & & & \\
+%    & & & 2 & -4z^{-1} & +2z^{-2} & & & & \\
+%    \cline{4-6}
+%    & & & & 3z^{-1} & -2z^{-2} & & & & \\
+%    & & & & 3z^{-1} & -6z^{-2} & +3z^{-3} & & & \\
+%    \cline{5-7}
+%    & & & & & 4z^{-2} & -3z^{-3} & & & \\
+%    & & & & & 4z^{-2} & -8z^{-3} & +4z^{-4} & & \\
+%    \cline{6-8}
+%    & & & & & & 5z^{-3} & -4z^{-4}
+%    \end{array}
+%    \]
+%    对照z变换的定义$X(z)=\sum_{n=-\infty}^{\infty}x[n]z^{-n}$，可得
+%    \[x[0]=0,x[1]=1,x[2]=2,x[3]=3,x[4]=4,\cdots\]
+%    可以猜想，$x[n]=n u[n]$。
+%\end{example}

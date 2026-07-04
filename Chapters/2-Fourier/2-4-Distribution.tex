@@ -123,7 +123,7 @@ $\delta$的高阶导数可以依此类推，它们已经难以用类似$\delta(x
 \end{equation}
 然而，测试函数$\varphi\in\mathcal{C} $的傅里叶变换$\mathcal{F}\varphi$并不属于
 $\mathcal{C} $
-（关于这一点的说明，以及施瓦兹函数类的引出，见\ref{sub:fourier_close}），这说明测试函数集$\mathcal{C} $在傅里叶分析中的表现不够好，我们需要引入新的测试函数空间，以保证
+（关于这一点的说明，以及施瓦兹函数类的引出，见\refsub{fourier_close}），这说明测试函数集$\mathcal{C} $在傅里叶分析中的表现不够好，我们需要引入新的测试函数空间，以保证
 $\mathcal{F}\varphi$仍然是测试函数。这个测试函数空间正是\textbf{施瓦兹空间}(Schwartz space)$\mathcal{S} $\cite{brad_osgood_ee261}，它是$\mathbb{R}$上所有无限可微函数的集合，这些函数及其各阶导数都以比任何负幂更快的速度趋于0，即
 \begin{definition}[施瓦兹空间与施瓦兹函数]
     \[\mathcal{S} =\left\{\varphi\in C^{\infty}(\mathbb{R} )\left|\lim_{|x|\to\infty}|x|^m\varphi^{(n)}(x)=0,\forall m,n\in\mathbb{N} \right.\right\}\]
@@ -336,7 +336,7 @@ $$\mathcal{F}(T^-)= (\mathcal{F}T)^-$$
 }
 取$g=f$即证。
 \end{proof}
-相比\ref{sub:fourier_operation_properties}中的帕塞瓦尔定理，这个证明适用于$f$是正则分布而$g$是施瓦兹函数的情况，它的证明要简单得多。
+相比\refsub{fourier_operation_properties}中的帕塞瓦尔定理，这个证明适用于$f$是正则分布而$g$是施瓦兹函数的情况，它的证明要简单得多。
 
 \begin{example}[$\delta$是偶分布]
     \begin{align*}
@@ -450,7 +450,7 @@ $\overline{T}=-T$，则称T为\textbf{纯虚分布}。
 \end{equation*}
 \end{definition}
 
-分布的伸缩与函数的伸缩有一点不同，即多了一个$\dfrac{1}{|a|}$的因子，这意味着，作为形式上的函数定义的分布$T(x)$，其伸缩$\sigma_a T(x)$并不一定等于$T(ax)$。在\ref{sub:signal}中定义过
+分布的伸缩与函数的伸缩有一点不同，即多了一个$\dfrac{1}{|a|}$的因子，这意味着，作为形式上的函数定义的分布$T(x)$，其伸缩$\sigma_a T(x)$并不一定等于$T(ax)$。在\refsub{signal}中定义过
 $$\delta(ax)=\dfrac{1}{|a|}\delta(x)$$
 它与分布的伸缩定义相符：
 $$\sigma_a\delta=\delta(ax)=\frac{1}{|a|}\delta(x)$$
@@ -497,7 +497,7 @@ $$\sigma_a\delta=\delta(ax)=\frac{1}{|a|}\delta(x)$$
     \caption{伸缩的定义范围示意图}
 \end{figure}
 
-上图中，像$\delta$这样的从形式上定义的函数，应该归类于奇异分布。在\ref{sub:ordinary_signal}中给出$\delta(ax)$的定义时，我们实际上考察的是它作为分布的伸缩性质，这也是为什么$\delta$的两种伸缩定义看起来是一致的。
+上图中，像$\delta$这样的从形式上定义的函数，应该归类于奇异分布。在\refsub{ordinary_signal}中给出$\delta(ax)$的定义时，我们实际上考察的是它作为分布的伸缩性质，这也是为什么$\delta$的两种伸缩定义看起来是一致的。
 
 有了分布的平移和伸缩的定义，就可以建立分布的傅里叶变换的平移和尺度变换定理：
 \begin{theorem}[分布的傅里叶变换的平移和尺度变换]
@@ -740,7 +740,7 @@ $$\sigma_a\delta=\delta(ax)=\frac{1}{|a|}\delta(x)$$
 \end{align*}
 因此\[f*\delta_a=\tau_a f\]
 \end{example}
-在\ref{sub:fourier_of_signal}中，我们已经从形式上得到了$\mathrm{sgn},u,1/t$，的傅里叶变换，现在有了分布的工具，就可以借助分布的傅里叶变换的对偶性说明之前的结论是严谨的。
+在\refsub{fourier_of_signal}中，我们已经从形式上得到了$\mathrm{sgn},u,1/t$，的傅里叶变换，现在有了分布的工具，就可以借助分布的傅里叶变换的对偶性说明之前的结论是严谨的。
 
 \subsection{分布的傅里叶变换的连续性}\label{sub:continuity_of_distribution}
 
@@ -755,6 +755,6 @@ $$\sigma_a\delta=\delta(ax)=\frac{1}{|a|}\delta(x)$$
 \end{align*}
 \end{proof}
 
-分布的傅里叶变换的连续性是在弱收敛的意义下定义的，也就是说，作为一个分布，我们总是能够交换极限或求和与傅里叶变换的顺序（我们将会多次使用到这一结论），但是对于正则分布列$f_n\to f$，尽管$T_{f_n}\to T_f$，也不能认为$\mathcal{F}f_n$作为一个函数列收敛于$\mathcal{F}f$。在\ref{sec:Sampling_Interpolation}中我们将看到，通过分布的傅里叶变换的连续性，$\shah$分布能表示成傅里叶级数的形式，然而这个展开式是几乎处处不收敛的函数项级数。
+分布的傅里叶变换的连续性是在弱收敛的意义下定义的，也就是说，作为一个分布，我们总是能够交换极限或求和与傅里叶变换的顺序（我们将会多次使用到这一结论），但是对于正则分布列$f_n\to f$，尽管$T_{f_n}\to T_f$，也不能认为$\mathcal{F}f_n$作为一个函数列收敛于$\mathcal{F}f$。在\refsec{Sampling_Interpolation}中我们将看到，通过分布的傅里叶变换的连续性，$\shah$分布能表示成傅里叶级数的形式，然而这个展开式是几乎处处不收敛的函数项级数。
 
-事实上，施瓦兹函数的傅里叶变换也是具有连续性的。然而，证明它要困难得多，我们将证明放在\ref{sub:fourier_continuous}中。
+事实上，施瓦兹函数的傅里叶变换也是具有连续性的。然而，证明它要困难得多，我们将证明放在\refsub{fourier_continuous}中。

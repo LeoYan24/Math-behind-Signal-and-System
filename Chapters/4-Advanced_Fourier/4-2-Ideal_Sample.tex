@@ -12,7 +12,7 @@
 \[\mathcal{F} f=\chi_{[-\nu_m,\nu_m]}\mathcal{F} f\]
 取傅里叶逆变换可得
 \begin{theorem}[采样函数的“卷积幺元”作用]
-    设带限函数$f(t)$满足$$\mathrm{supp}\ \mathcal{F} f\subset [-\nu_m,\nu_m]$$
+    设带限函数$f(t)$满足$$\mathrm{supp}(\mathcal{F} f)\subset [-\nu_m,\nu_m]$$
     则采样信号能够起到类似$\delta$的卷积幺元的作用：\begin{align*}
         f(t)=2\nu_m\mathrm{sinc}(2\nu_m t)*f(t)
     \end{align*}
@@ -41,7 +41,7 @@
     其中$f_s=1/T\geq 2\nu_m$为采样频率，$T$为采样间隔，临界的采样频率$f_N=2\nu_m$被称为\textbf{奈奎斯特频率}(Nyquist frequency)。
 \end{theorem}
 
-采样频率、采样间隔的名称及关系，来自于\ref{sub:fourier_of_dirac_comb}中提出的关键观点：\textbf{在时域以$f_s=1/T$进行采样，在频域上表现为以$1/T$为周期进行周期化}。这一事实实质上就是将频谱先周期化再截取低频成分。
+采样频率、采样间隔的名称及关系，来自于\refsub{fourier_of_dirac_comb}中提出的关键观点：\textbf{在时域以$f_s=1/T$进行采样，在频域上表现为以$1/T$为周期进行周期化}。这一事实实质上就是将频谱先周期化再截取低频成分。
 
 对其做傅里叶反变换，有\begin{align*}
     f(t)&=\mathcal{F} ^{-1} [\chi_{[-\nu_m,\nu_m]}(\mathcal{F} f*\shah_{1/T})](t)\\
@@ -122,7 +122,7 @@
     &=\frac{1}{T f_s}\frac{\sin\left((2N+1)\pi t/T\right)}{\sin\left(\pi t/T\right)}\\
     &=\frac{2N+1}{T f_s}\frac{\mathrm{sinc}\left((2N+1)t/T\right)}{\mathrm{sinc}\left(t/T\right)}
 \end{align*}
-第二行到第三行其实就是狄利克雷核的相关公式，见\ref{sub:dirichlet_kernel}，可以通过等比数列求和公式得到：\begin{align*}
+第二行到第三行其实就是狄利克雷核的相关公式，见\refsub{dirichlet_kernel}，可以通过等比数列求和公式得到：\begin{align*}
     \sum_{k=-N}^{N}\mathrm{e}^{2\pi \mathrm{i}kt/T}&=\mathrm{e}^{-2\pi \mathrm{i}Nt/T}\frac{1-\mathrm{e}^{2\pi \mathrm{i}(2N+1)t/T}}{1-\mathrm{e}^{2\pi \mathrm{i}t/T}}\\
     &=\frac{\mathrm{e}^{-\pi \mathrm{i}(2N+1)t/T}-\mathrm{e}^{\pi \mathrm{i}(2N+1)t/T}}{\mathrm{e}^{-\pi \mathrm{i}t/T}-\mathrm{e}^{\pi \mathrm{i}t/T}}\\
     &=\frac{\sin\left((2N+1)\pi t/T\right)}{\sin\left(\pi t/T\right)}

@@ -1,12 +1,12 @@
 \section{分布的逼近，傅里叶反演公式}\label{sec:Approach}
 
 \subsection{分布的逼近}\label{sub:approach}
-在\ref{sub:shannon}中，我们对带限函数提出了公式：如果$\mathrm{supp}\ \mathcal{F} f\subset[-\frac{T}{2},\frac{T}{2}]$，则有
+在\refsub{shannon}中，我们对带限函数提出了公式：如果$\mathrm{supp}\ \mathcal{F} f\subset[-\frac{T}{2},\frac{T}{2}]$，则有
 \begin{equation*}
     f(t)=T\mathrm{sinc}(Tt)*f(t)
 \end{equation*}
 
-如果希望对更一般的函数$f(x)$，找到一个函数$g(x)$，使得$f(x)=g*f(x)$，自然会想到狄拉克$\delta$分布，然而它是一个奇异分布，我们只能从形式上定义一个$\delta$函数。事实上，不存在$g,f*g=f,\forall f$，但很容易构造一个函数列$g_n$，使得$f*g_n\to f$\cite{folland}。回忆我们在\ref{sub:intuition_of_convolution}中提到的“平均化”卷积，设$g_a(x)=\frac{1}{2a}\chi_{[-a,a]}$，则$g_a*f$是$f$在区间$[x-a,x+a]$上的平均值，即$\frac{1}{2a}f*g_a(t)=\int_{x-a}^{x+a}f(x)\,dx$，若$f\in C(\mathbb{R})$，则$g_a*f\to f,a\to 0$。
+如果希望对更一般的函数$f(x)$，找到一个函数$g(x)$，使得$f(x)=g*f(x)$，自然会想到狄拉克$\delta$分布，然而它是一个奇异分布，我们只能从形式上定义一个$\delta$函数。事实上，不存在$g,f*g=f,\forall f$，但很容易构造一个函数列$g_n$，使得$f*g_n\to f$\cite{folland}。回忆我们在\refsub{intuition_of_convolution}中提到的“平均化”卷积，设$g_a(x)=\frac{1}{2a}\chi_{[-a,a]}$，则$g_a*f$是$f$在区间$[x-a,x+a]$上的平均值，即$\frac{1}{2a}f*g_a(t)=\int_{x-a}^{x+a}f(x)\,dx$，若$f\in C(\mathbb{R})$，则$g_a*f\to f,a\to 0$。
 
 一般地，我们考虑函数的缩放，设$g\in L^1(\mathbb{R})$，我们记
 \[g_\lambda(x)=\frac{1}{\lambda}g\left(\frac{x}{\lambda}\right)\]
@@ -72,7 +72,7 @@ $\int_{-\infty}^{\infty}|g(y)|\,dy<\infty$的必要条件是$\int_{\delta/\lambd
 \end{proof}
 
 \subsection{黎曼-勒贝格引理}\label{sub:riemman_lebesgue_lemma}
-本小节来补充\ref{sub:introduction_of_fourier}中提到的\textbf{黎曼-勒贝格引理}的证明。
+本小节来补充\refsub{introduction_of_fourier}中提到的\textbf{黎曼-勒贝格引理}的证明。
 \begin{theorem}[黎曼-勒贝格引理]
     设$f\in L^1(\mathbb{R})$，则其傅里叶变换$\mathcal{F} f(x)\to 0,x\to\infty$。
 \end{theorem}
@@ -122,12 +122,12 @@ $\int_{-\infty}^{\infty}|g(y)|\,dy<\infty$的必要条件是$\int_{\delta/\lambd
 }{
     \int_{-\infty}^{\infty}\mathrm{e}^{\mathrm{i}\omega (x-y)}\,d\omega
 }
-两个积分是发散的，无法进行积分换序。我们可以使用“收敛因子”来处理这个问题，从信号处理的角度，这就是\textbf{加窗}(windowing)的手法，见\ref{sub:window}。这里我们用高斯窗，仍记$G_\lambda(\xi)=\frac{1}{\lambda\sqrt{\pi}}\mathrm{e}^{-\xi^2/\lambda^2}$，有\lr{
+两个积分是发散的，无法进行积分换序。我们可以使用“收敛因子”来处理这个问题，从信号处理的角度，这就是\textbf{加窗}(windowing)的手法，见\refsub{window}。这里我们用高斯窗，仍记$G_\lambda(\xi)=\frac{1}{\lambda\sqrt{\pi}}\mathrm{e}^{-\xi^2/\lambda^2}$，有\lr{
     \mathcal{F} G_\lambda(\xi)=\mathrm{e}^{-\pi^2 \lambda^2 \xi^2}
 }{
     \mathcal{F} G_\lambda(\omega)=\mathrm{e}^{-\lambda^2 \omega^2/4}
 }
-下面的证明中将用到高斯函数的傅里叶逆变换，但我们可以不依赖于傅里叶反演公式而预先求出它，具体的做法可以参考\ref{sub:fourier_of_signal}中求傅里叶正变换的过程。
+下面的证明中将用到高斯函数的傅里叶逆变换，但我们可以不依赖于傅里叶反演公式而预先求出它，具体的做法可以参考\refsub{fourier_of_signal}中求傅里叶正变换的过程。
 \begin{proof}
     考虑
 \lr{

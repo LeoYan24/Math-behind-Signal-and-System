@@ -54,7 +54,7 @@
         &=\evalat{f(t)\mathrm{e}^{-st}}{0-}{\infty}+\int_{0-}^{\infty}f(t)se^{-st}\,dt\\
         &=s\mathcal{L} f(s)-f(0-)
     \end{align*}
-    对于初值定理，只要在\ref{sub:initial_and_final_value}给出的证明中使用这个时域微分性质即可。
+    对于初值定理，只要在\refsub{initial_and_final_value}给出的证明中使用这个时域微分性质即可。
 \end{proof}
 
 形式上，$u(0-)=\delta(0-)=0$，自然得到
@@ -70,7 +70,7 @@ $\delta$的各阶导数同理。这样，分布理论处理的问题仅仅在于
 \subsection{常系数线性微分方程}\label{sub:laplace_ODE}
 拉普拉斯变换是处理常系数线性微分方程的有力工具。根据拉普拉斯变换的时域微分性质：
 \[\mathcal{L}\left[f^{(n)}(t)\right](s)=s^n\mathcal{L} f(s)-s^{n-1}f(0-)-s^{n-2}f'(0-)-\cdots -f^{(n-1)}(0-)\]
-可以将常系数线性微分方程转化为代数方程，还能够一并处理起始状态\footnote{数学上，我们使用经典的拉普拉斯变换以处理带初始状态的初值问题。初始状态、初值问题的定义，见\ref{sub:concepts_of_system}，起始条件、初始条件的定义，见\ref{sub:term_in_ODE}}。我们先提出一个一般的解法，再通过一个具体的例子来展示拉普拉斯变换的威力。
+可以将常系数线性微分方程转化为代数方程，还能够一并处理起始状态\footnote{数学上，我们使用经典的拉普拉斯变换以处理带初始状态的初值问题。初始状态、初值问题的定义，见\refsub{concepts_of_system}，起始条件、初始条件的定义，见\refsub{term_in_ODE}}。我们先提出一个一般的解法，再通过一个具体的例子来展示拉普拉斯变换的威力。
 
 考虑常系数线性微分方程
 \[a_n r^{(n)}(t)+a_{n-1}r^{(n-1)}(t)+\cdots +a_1 r'(t)+a_0 r(t)=e(t)\]
@@ -92,7 +92,7 @@ Q(s)&=a_n\left(s^{n-1}c_0 +s^{n-2}c_1 +\cdots +c_{n-1}\right)+a_{n-1}\left(s^{n-
 \[R(s)=\frac{E(s)}{P(s)}+\frac{Q(s)}{P(s)}=R_{zs}(s)+R_{zi}(s)\]
 现在，微分方程问题就转化为求$R(s)$的拉普拉斯逆变换的问题，并且可以求出系统函数
 \[H(s)=\frac{R_{zs}(s)}{E(s)}=\frac{1}{P(s)}\]
-与\ref{sub:fundamental_solution}类似，常系数线性微分方程所描述的系统作为一个线性时不变系统，其零状态响应的求解也可以归结为单位脉冲响应，即基本解的求解。现在，我们找到了一种新的、更为方便的求解方法，即先由拉普拉斯变换求得系统函数在做拉普拉斯逆变换。
+与\refsub{fundamental_solution}类似，常系数线性微分方程所描述的系统作为一个线性时不变系统，其零状态响应的求解也可以归结为单位脉冲响应，即基本解的求解。现在，我们找到了一种新的、更为方便的求解方法，即先由拉普拉斯变换求得系统函数在做拉普拉斯逆变换。
 
 \begin{example}[常系数线性微分方程]
     设系统由如下微分方程描述：
@@ -134,7 +134,7 @@ Q(s)&=a_n\left(s^{n-1}c_0 +s^{n-2}c_1 +\cdots +c_{n-1}\right)+a_{n-1}\left(s^{n-
 
 \subsection{动态电路的复频域分析}\label{sub:laplace_circuit}
 
-本小节介绍动态电路的复频域分析方法。与\ref{sub:freq_response}节类似，对描述线性元件的微分方程做拉普拉斯变换，即可得到它们的复频域模型：
+本小节介绍动态电路的复频域分析方法。与\refsub{freq_response}节类似，对描述线性元件的微分方程做拉普拉斯变换，即可得到它们的复频域模型：
 \begin{example}
     描述电容的方程为：
     \[\mathrm{i}(t)=C\frac{dv(t)}{dt}\]

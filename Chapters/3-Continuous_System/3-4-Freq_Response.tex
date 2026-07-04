@@ -90,7 +90,7 @@
 可见相量法可以省去列写微分方程和求傅里叶变换的过程，直接得到频率响应，这也是前文中强调定义式$H(\omega)=Y(\omega)/X(\omega)$的原因。
 
 \subsection{滤波器}\label{sub:filter}
-我们曾在\ref{sub:convolution}中提到，滤波就是把信号中的某些成分剔除或大幅减少，相当于在频域乘以一个函数，在时域上的表现则是与这个函数的傅里叶逆变换进行卷积。从频率响应的视角来看，滤波器就是一个系统，理想滤波器的幅频特性在某些频率处接近于0，而在另一些频率处接近于1。
+我们曾在\refsub{convolution}中提到，滤波就是把信号中的某些成分剔除或大幅减少，相当于在频域乘以一个函数，在时域上的表现则是与这个函数的傅里叶逆变换进行卷积。从频率响应的视角来看，滤波器就是一个系统，理想滤波器的幅频特性在某些频率处接近于0，而在另一些频率处接近于1。
 
 \begin{definition}[滤波器的分类]
     \textbf{低通滤波器}是指幅频特性$|H(\omega)|$近似等于$$\chi_{[-\omega_c,\omega_c]}$$的滤波器，$\omega_c$为截止频率；\textbf{高通滤波器}则相反，幅频特性近似$$1-\chi_{[-\omega_c,\omega_c]}$$
@@ -216,53 +216,54 @@ $$\tau_p(\omega_0)=-\frac{\varphi(\omega_0)}{\omega_0}$$
 \end{figure}
 
 \begin{example}[群时延]
-设输入信号为调幅信号（关于调幅信号，见\ref{sub:modulation}）：
-\[e(t)=\cos(\omega_m t)\cos(\omega_c t)\]
-其中$\omega_c$为载波角频率，$\omega_m$为被调制信号的角频率，且$\omega_c\gg \omega_m$.系统H的单位脉冲响应$h(t)$为实信号，频率响应为$H(\omega)$。求$e(t)$进入系统所得的输出信号$r(t)$。\\
-解：
-可以看到该信号是一个被低频信号$\pm\cos(\omega_m t)$包络的高频载波信号$\cos(\omega_c t)$:
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{AM.jpeg}
-    \caption{调幅信号示意图}
-\end{figure}
-将输入信号用积化和差公式展开：
-\begin{align*}
-    e(t)&=\frac{1}{2}[\cos((\omega_c+\omega_m)t)+\cos((\omega_c-\omega_m)t)]
-\end{align*}
-输入信号的傅里叶变换为
-\begin{align*}
-    E(\omega)&=\frac{\pi}{2}\left[\delta_{\omega_c+\omega_m}+\delta_{-(\omega_c+\omega_m)}+\delta_{\omega_c-\omega_m}+\delta_{-(\omega_c-\omega_m)}\right]
-\end{align*}
-因此输出信号的傅里叶变换为
-\begin{align*}
-    R(\omega)=&H(\omega)E(\omega)\\
-    =&\frac{\pi}{2} \left[H(\omega_c+\omega_m)\delta_{\omega_c+\omega_m}+H(-(\omega_c+\omega_m))\delta_{-(\omega_c+\omega_m)}\right.\\
-    &+\left. H(\omega_c-\omega_m)\delta_{\omega_c-\omega_m}+H(-(\omega_c-\omega_m))\delta_{-(\omega_c-\omega_m)}\right]\\
-    =&\frac{\pi}{2} \left[H(\omega_c+\omega_m)\delta_{\omega_c+\omega_m}+\overline{H(\omega_c+\omega_m)}\delta_{-(\omega_c+\omega_m)}\right.\\
-    &+\left.H(\omega_c-\omega_m)\delta_{\omega_c-\omega_m}+\overline{H(\omega_c-\omega_m)}\delta_{-(\omega_c-\omega_m)}\right]
-\end{align*}
-反变换得到输出信号为
-\begin{align*}
-    r(t)=&\frac{1}{4}\left[H(\omega_c+\omega_m)\mathrm{e}^{\mathrm{i}(\omega_c+\omega_m)t}+\overline{H(\omega_c+\omega_m)}\mathrm{e}^{-\mathrm{i}(\omega_c+\omega_m)t}\right.\\
-    &+\left. H(\omega_c-\omega_m)\mathrm{e}^{\mathrm{i}(\omega_c-\omega_m)t}+\overline{H(\omega_c-\omega_m)}\mathrm{e}^{-\mathrm{i}(\omega_c-\omega_m)t}\right]\\
-    =&\frac{1}{2}\text{Re}\ \left[H(\omega_c+\omega_m)\mathrm{e}^{\mathrm{i}(\omega_c+\omega_m)t}+H(\omega_c-\omega_m)\mathrm{e}^{\mathrm{i}(\omega_c-\omega_m)t}\right]\\
-    =&\frac{1}{2}|H(\omega_c+\omega_m)|\cos((\omega_c+\omega_m)t+\varphi(\omega_c+\omega_m))\\
-    &+\frac{1}{2}\left|H(\omega_c-\omega_m)\right|\cos\left((\omega_c-\omega_m)t+\varphi(\omega_c-\omega_m)\right)
-\end{align*}
-由于$\omega_c\gg \omega_m$，可以将$|H(\omega)|$近似为$|H(\omega_c)|$，将$\varphi(\omega)$在$\omega_c$处做泰勒展开：
-\begin{align*}
-    \varphi(\omega_c+ \omega)\approx \varphi(\omega_c)+\left.\frac{d\varphi(\omega)}{d\omega}\right|_{\omega=\omega_c}\omega
-\end{align*}
-将其带入$r(t)$中，得到
-\begin{align*}
-    r(t)\approx&\frac{1}{2}|H(\omega_c)|\left[\cos\left((\omega_c+\omega_m)t+\varphi(\omega_c)+\left.\frac{d\varphi(\omega)}{d\omega}\right|_{\omega=\omega_c}\omega_m\right)\right.\\
-    &\qquad\qquad\left.+\cos\left((\omega_c-\omega_m)t+\varphi(\omega_c)-\left.\frac{d\varphi(\omega)}{d\omega}\right|_{\omega=\omega_c}\omega_m\right)\right]\\
-    =&|H(\omega_c)|\cos(\omega_c t+\varphi(\omega_c))\cos\left(\omega_m\left[t+\left.\frac{d\varphi(\omega)}{d\omega}\right|_{\omega=\omega_c}\right]\right)
-\end{align*}
-相比输入信号$e(t)=\cos(\omega_m t)\cos(\omega_c t)$，输出信号的幅度大约变为$|H(\omega_c)|$倍，载波信号的相位延迟了$\varphi(\omega_c)$，调制信号的相位延迟了$\omega_m\left.\dfrac{d\varphi(\omega)}{d\omega}\right|_{\omega=\omega_c}$，折合到时间上，就是群时延
-$$\tau_g(\omega_c)=-\left.\dfrac{d\varphi(\omega)}{d\omega}\right|_{\omega=\omega_c}$$
-因此，群时延描述了系统对调制信号的包络造成的延时。从信号的图像上来看，高频的载波信号的延时是不会造成很明显的变化的，而低频的调制信号的时延则会明显地反映在图像上，就像一个“信号群”在传播过程中整体产生了一段时延，群时延的名称就由此而来。
+    \label{exmp:group_delay}
+    设输入信号为调幅信号（关于调幅信号，见\refsub{modulation}）：
+    \[e(t)=\cos(\omega_m t)\cos(\omega_c t)\]
+    其中$\omega_c$为载波角频率，$\omega_m$为被调制信号的角频率，且$\omega_c\gg \omega_m$.系统H的单位脉冲响应$h(t)$为实信号，频率响应为$H(\omega)$。求$e(t)$进入系统所得的输出信号$r(t)$。\\
+    解：
+    可以看到该信号是一个被低频信号$\pm\cos(\omega_m t)$包络的高频载波信号$\cos(\omega_c t)$:
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.5\textwidth]{AM.jpeg}
+        \caption{调幅信号示意图}
+    \end{figure}
+    将输入信号用积化和差公式展开：
+    \begin{align*}
+        e(t)&=\frac{1}{2}[\cos((\omega_c+\omega_m)t)+\cos((\omega_c-\omega_m)t)]
+    \end{align*}
+    输入信号的傅里叶变换为
+    \begin{align*}
+        E(\omega)&=\frac{\pi}{2}\left[\delta_{\omega_c+\omega_m}+\delta_{-(\omega_c+\omega_m)}+\delta_{\omega_c-\omega_m}+\delta_{-(\omega_c-\omega_m)}\right]
+    \end{align*}
+    因此输出信号的傅里叶变换为
+    \begin{align*}
+        R(\omega)=&H(\omega)E(\omega)\\
+        =&\frac{\pi}{2} \left[H(\omega_c+\omega_m)\delta_{\omega_c+\omega_m}+H(-(\omega_c+\omega_m))\delta_{-(\omega_c+\omega_m)}\right.\\
+        &+\left. H(\omega_c-\omega_m)\delta_{\omega_c-\omega_m}+H(-(\omega_c-\omega_m))\delta_{-(\omega_c-\omega_m)}\right]\\
+        =&\frac{\pi}{2} \left[H(\omega_c+\omega_m)\delta_{\omega_c+\omega_m}+\overline{H(\omega_c+\omega_m)}\delta_{-(\omega_c+\omega_m)}\right.\\
+        &+\left.H(\omega_c-\omega_m)\delta_{\omega_c-\omega_m}+\overline{H(\omega_c-\omega_m)}\delta_{-(\omega_c-\omega_m)}\right]
+    \end{align*}
+    反变换得到输出信号为
+    \begin{align*}
+        r(t)=&\frac{1}{4}\left[H(\omega_c+\omega_m)\mathrm{e}^{\mathrm{i}(\omega_c+\omega_m)t}+\overline{H(\omega_c+\omega_m)}\mathrm{e}^{-\mathrm{i}(\omega_c+\omega_m)t}\right.\\
+        &+\left. H(\omega_c-\omega_m)\mathrm{e}^{\mathrm{i}(\omega_c-\omega_m)t}+\overline{H(\omega_c-\omega_m)}\mathrm{e}^{-\mathrm{i}(\omega_c-\omega_m)t}\right]\\
+        =&\frac{1}{2}\text{Re}\ \left[H(\omega_c+\omega_m)\mathrm{e}^{\mathrm{i}(\omega_c+\omega_m)t}+H(\omega_c-\omega_m)\mathrm{e}^{\mathrm{i}(\omega_c-\omega_m)t}\right]\\
+        =&\frac{1}{2}|H(\omega_c+\omega_m)|\cos((\omega_c+\omega_m)t+\varphi(\omega_c+\omega_m))\\
+        &+\frac{1}{2}\left|H(\omega_c-\omega_m)\right|\cos\left((\omega_c-\omega_m)t+\varphi(\omega_c-\omega_m)\right)
+    \end{align*}
+    由于$\omega_c\gg \omega_m$，可以将$|H(\omega)|$近似为$|H(\omega_c)|$，将$\varphi(\omega)$在$\omega_c$处做泰勒展开：
+    \begin{align*}
+        \varphi(\omega_c+ \omega)\approx \varphi(\omega_c)+\left.\frac{d\varphi(\omega)}{d\omega}\right|_{\omega=\omega_c}\omega
+    \end{align*}
+    将其带入$r(t)$中，得到
+    \begin{align*}
+        r(t)\approx&\frac{1}{2}|H(\omega_c)|\left[\cos\left((\omega_c+\omega_m)t+\varphi(\omega_c)+\left.\frac{d\varphi(\omega)}{d\omega}\right|_{\omega=\omega_c}\omega_m\right)\right.\\
+        &\qquad\qquad\left.+\cos\left((\omega_c-\omega_m)t+\varphi(\omega_c)-\left.\frac{d\varphi(\omega)}{d\omega}\right|_{\omega=\omega_c}\omega_m\right)\right]\\
+        =&|H(\omega_c)|\cos(\omega_c t+\varphi(\omega_c))\cos\left(\omega_m\left[t+\left.\frac{d\varphi(\omega)}{d\omega}\right|_{\omega=\omega_c}\right]\right)
+    \end{align*}
+    相比输入信号$e(t)=\cos(\omega_m t)\cos(\omega_c t)$，输出信号的幅度大约变为$|H(\omega_c)|$倍，载波信号的相位延迟了$\varphi(\omega_c)$，调制信号的相位延迟了$\omega_m\left.\dfrac{d\varphi(\omega)}{d\omega}\right|_{\omega=\omega_c}$，折合到时间上，就是群时延
+    $$\tau_g(\omega_c)=-\left.\dfrac{d\varphi(\omega)}{d\omega}\right|_{\omega=\omega_c}$$
+    因此，群时延描述了系统对调制信号的包络造成的延时。从信号的图像上来看，高频的载波信号的延时是不会造成很明显的变化的，而低频的调制信号的时延则会明显地反映在图像上，就像一个“信号群”在传播过程中整体产生了一段时延，群时延的名称就由此而来。
 \end{example}
 
 \subsection{*色散}\label{sub:dispersion}
@@ -289,7 +290,7 @@ $$\tau_g(\omega_c)=-\left.\dfrac{d\varphi(\omega)}{d\omega}\right|_{\omega=\omeg
 引入\textbf{波数}$k=\frac{2\pi}{\lambda}$，则简谐波可以表示为
 \[y(x,t)=A\cos(\omega t - k x)\]
 
-这里波数并不是指波的数目，而是一个将空间距离折算为相位延迟的比例系数，也可以将它理解为波的空间角频率：对简谐波$y(x,t)=A\cos(\omega t-kx)$的空间变量做傅里叶变换，将得到空间角频率仅有$\pm k$的成分，对三维空间中的平面波也有类似的结论，见\ref{sub:multi_schwartz}。我们将宗量$\omega t-kx$称为波的\textbf{相位}(phase)，考察相位的传播速度，即令$\omega t-kx=\text{const}$（例如，振幅最大值处恒有$\omega t-kx=0$），得到
+这里波数并不是指波的数目，而是一个将空间距离折算为相位延迟的比例系数，也可以将它理解为波的空间角频率：对简谐波$y(x,t)=A\cos(\omega t-kx)$的空间变量做傅里叶变换，将得到空间角频率仅有$\pm k$的成分，对三维空间中的平面波也有类似的结论，见\refsub{multi_schwartz}。我们将宗量$\omega t-kx$称为波的\textbf{相位}(phase)，考察相位的传播速度，即令$\omega t-kx=\text{const}$（例如，振幅最大值处恒有$\omega t-kx=0$），得到
 \begin{align*}
     \frac{dx}{dt}=\frac{\omega}{k}=u\tag{$*$}
 \end{align*}
@@ -365,7 +366,7 @@ $$\tau_g(\omega_c)=-\left.\dfrac{d\varphi(\omega)}{d\omega}\right|_{\omega=\omeg
 
 下面来解释为什么这三种调制方式的数学表示形式如上。\\
 1.\textbf{幅度调制}：已调信号的幅度为\[1+k_{\text{AM}}m(t)\]
-我们曾用这种调制方式作为\ref{sub:distortion}中的例子来解释群时延的概念，事实上，当时所使用的是\textbf{双边带调幅}(\text{DSB})，一般而言不能略去1倍的载波信号这一项，即
+我们曾在\cref{exmp:group_delay}中使用这种调制方式来解释群时延的概念，事实上，当时所使用的是\textbf{双边带调幅}(\text{DSB})，一般而言不能略去1倍的载波信号这一项，即
 \[v_{\text{AM}}(t)\neq k_{\text{AM}} m(t)A_c \cos(\omega_c t+\varphi_c)=v_{\text{DSB}}(t)\]
 这是因为调幅信号通常通过包络检测器直接恢复，虽然有部分功率用于传输载波，但这简化了解调过程。此外，一般被调信号$m(t)$会预先经过衰减器以确保$|k_{\text{AM}}m(t)|\leq 1$，这样，$1+km(t)\geq 0$，包络不出现反转，即不会出现过度调制问题，包络检测器才能正常解调。\\
 2.\textbf{频率调制}：$v_{\text{FM}}(t)$的傅里叶变换较为复杂，但其直观易于理解，这种调制方式下的\textbf{瞬时角频率}为：\begin{align*}

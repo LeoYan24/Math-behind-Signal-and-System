@@ -2,7 +2,7 @@
 
 \subsection{离散傅里叶变换的引入：离散傅里叶级数}\label{sub:intro_DFT}
 
-沿着\ref{sub:dtft}的思路，我们仿照傅里叶级数来进行周期离散信号的频谱分析。设$x[n]$是周期为$N$的离散信号，即$x[n+N]=x[n],\forall n\in\mathbb{Z}$，考虑将其表示为一组复指数信号的线性组合，则每个复指数信号也应该以$N$为周期，即
+沿着\refsub{dtft}的思路，我们仿照傅里叶级数来进行周期离散信号的频谱分析。设$x[n]$是周期为$N$的离散信号，即$x[n+N]=x[n],\forall n\in\mathbb{Z}$，考虑将其表示为一组复指数信号的线性组合，则每个复指数信号也应该以$N$为周期，即
 \[E_{\Omega}[n]=\mathrm{e}^{\mathrm{i}\Omega n},E_{\Omega}[n+N]=E_{\Omega}[n],\forall n\in\mathbb{Z}\]
 因此复指数信号的数字角频率必须取值于有限的集合：
 \[\left\{\left.\Omega_k=\frac{2\pi k}{N}\right|k=0,1,\dots,N-1\right\}\]
@@ -158,7 +158,7 @@ $$\mathcal{F} \mathcal{F} ^H=N\cdot I$$
 
 以上性质全都可以直接带入定义验证，这里不再赘述。
 
-我们曾定义过离散信号的卷积和。类似\ref{sub:conv_of_period_func}，对于周期离散信号，卷积和的定义也必须修改，只是此时一般不会添加$1/N$的系数：
+我们曾定义过离散信号的卷积和。类似\refsub{conv_of_period_func}，对于周期离散信号，卷积和的定义也必须修改，只是此时一般不会添加$1/N$的系数：
 \begin{definition}[周期离散信号的卷积和]
     设$x[n],y[n]$是周期为$N$的离散信号，则它们的卷积和定义为
     \[(x*y)[n]=\sum_{m=0}^{N-1}x[m]y[n-m]\]
@@ -178,14 +178,14 @@ $$\mathcal{F} \mathcal{F} ^H=N\cdot I$$
         &=\mathrm{DFT}(x*y)[k]
     \end{align*}
 
-    可以仿照\ref{sub:convolution}，使用时域卷积定理给出频域卷积定理的证明；也可以直接带入定义验证：
+    可以仿照\refsub{convolution}，使用时域卷积定理给出频域卷积定理的证明；也可以直接带入定义验证：
     \begin{align*}
         \frac{1}{N}(X * Y)[k]&=\frac{1}{N}\sum_{l=0}^{N-1}X[l]Y[k-l]\\
         &=\frac{1}{N}\sum_{l=0}^{N-1}\left(\sum_{n=0}^{N-1}x[n]W_N^{ln}\right)\left(\sum_{m=0}^{N-1}y[m]W_N^{k m}W_N^{-lm}\right)\\
         &=\frac{1}{N}\sum_{n=0}^{N-1}\sum_{m=0}^{N-1}x[n]y[m]W_N^{k m}\left(\sum_{l=0}^{N-1}W_N^{l(n-m)}\right)\\
         &=\sum_{n=0}^{N-1}x[n]y[n]W_N^{k n}
     \end{align*}
-    最后一个等号用到了\ref{sub:z_operation}中引入的离散选择函数：
+    最后一个等号用到了\refsub{z_operation}中引入的离散选择函数：
     \[\shah_N[m-n]=\frac{1}{N}\sum_{l=0}^{N-1}W_N^{l(n-m)}=\begin{cases}
     1 & \text{if } m-n\equiv 0 \mod N \\
     0 & \mathrm{otherwise}
@@ -351,7 +351,7 @@ $$Y[2k]=X[k],\forall k\in \{0,1,\dots,N-1\}$$
 
 \subsubsection{离散傅里叶变换是连续傅里叶变换的逼近}
 
-假设$f(t)$是在时域、频域上同时紧支的连续信号（在\ref{sub:time_freq_limit}中我们会看到，这样的信号是不存在的，但近似满足这种关系的信号却很多），对$f(t)$进行理想采样时，将得到一个有限长离散信号$x[n]$，在采样间隔趋向于0时，$x[n]$就能很好地还原$f(t)$的特征。下面说明，对$x[n]$的离散傅里叶变换$X[k]$在频域上也能很好地还原$f(t)$的特征。
+假设$f(t)$是在时域、频域上同时紧支的连续信号（在\refsub{time_freq_limit}中我们会看到，这样的信号是不存在的，但近似满足这种关系的信号却很多），对$f(t)$进行理想采样时，将得到一个有限长离散信号$x[n]$，在采样间隔趋向于0时，$x[n]$就能很好地还原$f(t)$的特征。下面说明，对$x[n]$的离散傅里叶变换$X[k]$在频域上也能很好地还原$f(t)$的特征。
 
 简洁起见，假设$\mathrm{supp}(f)\subset[0,L]$，$\mathrm{supp}(\mathcal{F} f)\subset[-\omega_m,\omega_m]$，取$N$个等间隔点作为采样点，即
 \[x[n]=f\left(\frac{nL}{N}\right),n=0,1,\dots,N-1\]

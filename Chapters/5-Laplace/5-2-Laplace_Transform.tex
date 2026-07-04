@@ -7,7 +7,7 @@
 鉴于拉普拉斯变换的应用场景中使用角频率明显多于使用频率，我们在本书中采用角频率$\omega$作为拉普拉斯变换的变量；另外，本章默认$u(0)=1$。
 
 \subsection{拉普拉斯变换的引出}\label{sub:introduction_of_laplace}
-在\ref{sub:introduction_of_fourier}中，我们介绍了傅里叶变换：\begin{align*}
+在\refsub{introduction_of_fourier}中，我们介绍了傅里叶变换：\begin{align*}
     \mathcal{F} f(\omega)=\int_{-\infty}^{\infty}f(t)\mathrm{e}^{-\mathrm{i}\omega t}\,dt
 \end{align*}
 
@@ -28,7 +28,7 @@
     如果$f(t)$是时域信号，$\mathcal{L} f(s)$称为\textbf{复频域信号}。
     我们仍记$\mathcal{L} f(s)$为$F(s)$或$\hat{f}(s)$（在涉及傅里叶变换时，我们会避免使用它们或加以说明），并记$f\overset{\mathcal{L} }{\longleftrightarrow} F(s)$。
 \end{definition}
-在$\mathcal{E} $的定义中我们对$f$的定义域做了要求，但实际上只要$f$是因果信号（见\ref{sub:term_in_ODE}，$f(t)=f(t)u(t)$），就可以认为$f\in\mathcal{E}$，后文中不会特意区分$f$的定义域。
+在$\mathcal{E} $的定义中我们对$f$的定义域做了要求，但实际上只要$f$是因果信号（见\refsub{term_in_ODE}，$f(t)=f(t)u(t)$），就可以认为$f\in\mathcal{E}$，后文中不会特意区分$f$的定义域。
 
 在$\mathcal{E} $上定义拉普拉斯变换，是因为对于$f\in\mathcal{E} $，当$\sigma>a$时，给出拉普拉斯变换的积分是绝对收敛的：
 \begin{align*}

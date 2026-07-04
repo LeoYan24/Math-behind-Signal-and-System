@@ -6,7 +6,7 @@
 \[\int_{-\infty}^{\infty}| f(x)| ^2\,dx\to\infty,\lim_{T \to \infty}\frac{1}{T}\int_{-T/2}^{T/2}| f(x)|^2  \,dx<\infty\]
 \end{definition}
 
-在\ref{sub:Lp_space}中，我们约定了：能量为0的信号也属于能量信号，功率为0的信号（即能量信号）也属于功率信号。在这个约定下，能量信号即$L^2(\mathbb{R})$，而功率信号也成为线性空间。本节就来讨论功率信号空间的结构，以及如何通过傅里叶变换来进行能量与功率的谱分析。
+在\refsub{Lp_space}中，我们约定了：能量为0的信号也属于能量信号，功率为0的信号（即能量信号）也属于功率信号。在这个约定下，能量信号即$L^2(\mathbb{R})$，而功率信号也成为线性空间。本节就来讨论功率信号空间的结构，以及如何通过傅里叶变换来进行能量与功率的谱分析。
 
 \subsection{*功率信号及其数学背景}\label{sub:power_signal}
 
@@ -25,7 +25,7 @@ $$\|f\|_{\mathrm{pwr}}=0\centernot\implies f=0$$
 
 不过，我们其实已经处理过了一个半范数，这一次也可以使用同样的办法。对于$L^p(\mathbb{R})(1\leq p\leq\infty)$空间，
 $$f=0,\mathrm{a.e.}\iff\|f\|_p=0$$
-也就是说，$\|\cdot\|_p$也应该是半范数才对，但在\ref{sub:Lp_space}中，我们认为
+也就是说，$\|\cdot\|_p$也应该是半范数才对，但在\refsub{Lp_space}中，我们认为
 $$f=g,\mathrm{a.e.}\iff f\sim g$$
 $f\sim g$是一种等价关系，记$f$所在的等价类为$[f]_{\sim}$，在这个等价关系下，有
 $$\left\|[f]_{\sim}\right\|_{p}=0\iff f=0,\mathrm{a.e.}\iff f\sim 0$$
@@ -68,7 +68,7 @@ $$f\sim g\iff \|f-g\|_{\mathrm{pwr}}=0\iff f-g\in L^2(\mathbb{R})$$
 
 简便起见，这两个小节中，我们将使用频率形式的傅里叶变换。
 
-对于能量信号$f\in L^2(\mathbb{R})$，如果它还是绝对可积的，即$f\in L^1(\mathbb{R})$，则它的傅里叶变换$F(\xi)$存在，并且满足帕塞瓦尔定理（见\ref{sub:fourier_operation_properties}）：
+对于能量信号$f\in L^2(\mathbb{R})$，如果它还是绝对可积的，即$f\in L^1(\mathbb{R})$，则它的傅里叶变换$F(\xi)$存在，并且满足帕塞瓦尔定理（见\refsub{fourier_operation_properties}）：
 \begin{align*}
     \int_{-\infty}^{\infty}|f(t)|^2\,dt=\int_{-\infty}^{\infty}|F(\xi)|^2\,d\xi
 \end{align*}
@@ -110,7 +110,7 @@ $S_f(\xi)$的计算是非常麻烦的，并且它还常常含有冲击项$\delta
     功率谱密度为\begin{align*}
         S_f(\xi)&=\lim_{T\to\infty}\frac{|F_T(\xi)|^2}{T}=\lim_{T\to\infty}\frac{1}{T}\left[\frac{\sin^2\left(\pi T(\xi-1)\right)}{4\pi^2(\xi-1)^2}+\frac{\sin^2\left(\pi T(\xi+1)\right)}{4\pi^2(\xi+1)^2}\right]
     \end{align*}
-    在$\xi\neq\pm 1$时，$S_f(\xi)=0$；在$\xi=\pm 1$时，利用极限$\lim_{x\to 0}\sin x/x=1$可以求得$S_f(\xi)$以$T/4$的速度趋于$\infty$（严谨的做法要涉及到\ref{sub:approach}中的理论），因此
+    在$\xi\neq\pm 1$时，$S_f(\xi)=0$；在$\xi=\pm 1$时，利用极限$\lim_{x\to 0}\sin x/x=1$可以求得$S_f(\xi)$以$T/4$的速度趋于$\infty$（严谨的做法要涉及到\refsub{approach}中的理论），因此
     $$S_f(\xi)=\frac{1}{4}(\delta_1+\delta_{-1})$$
 
     直接计算功率：\begin{align*}
@@ -132,7 +132,7 @@ $$\left\langle S_f,\varphi\right\rangle=\left\langle \lim_{T\to\infty}\frac{|F_T
     $$P_{fg}=(f,g)_{\mathrm{pwr}}=\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}f\cdot\overline{g}\,dm$$
 \end{definition}
 
-设$f,g\in L^1(\mathbb{R})\cap L^2(\mathbb{R})$，根据\ref{sub:fourier_operation_properties}中的帕塞瓦尔定理，有
+设$f,g\in L^1(\mathbb{R})\cap L^2(\mathbb{R})$，根据\refsub{fourier_operation_properties}中的帕塞瓦尔定理，有
 $$(f,g)=(\mathcal{F} f,\mathcal{F} g)$$
 即
 $$E_{fg}=\int_{\mathbb{R}}\mathcal{F}f(\xi)\overline{\mathcal{F}g(\xi)}\,d\xi$$
@@ -183,7 +183,7 @@ P_f&=\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}|f(y)|^2\,dy,P_g=\lim_{T\to\in
 
 $R_f(0)=P_f,R_{fg}(0)=P_{fg}$，因此，相关是能量（功率）的推广，互相关是互能量（互功率）的推广。
 
-根据\ref{sub:correlation}中的维纳-辛钦定理，对于$f,g\in L^1(\mathbb{R})\cap L^2(\mathbb{R})$，有
+根据\refsub{correlation}中的维纳-辛钦定理，对于$f,g\in L^1(\mathbb{R})\cap L^2(\mathbb{R})$，有
 $$\mathcal{F}R_{fg}=\mathcal{F}f\overline{\mathcal{F}g}$$
 也就是说，\textbf{能量信号的互能量谱密度存在时，恰为互相关函数的傅里叶变换}。
 
@@ -270,7 +270,7 @@ $$S_f=\left(\frac{1}{2}\right)^2\delta_1+\left(\frac{1}{2}\right)^2\delta_{-1}=\
 \begin{proof}
     由分布的傅里叶变换的连续性，可以求得
     $$f(t)=\sum_n a_n\mathrm{e}^{2\pi \mathrm{i}\xi_n t},g(t)=\sum_n b_n\mathrm{e}^{2\pi\mathrm{i}\xi_n t}$$
-    它不应看作常规意义下的傅里叶级数，因为等号右边的级数可能是几乎处处不收敛的，等号仅仅在分布的意义下成立。\ref{sub:fourier_of_dirac_comb}中的狄拉克梳状分布就是这样一个例子。
+    它不应看作常规意义下的傅里叶级数，因为等号右边的级数可能是几乎处处不收敛的，等号仅仅在分布的意义下成立。\refsub{fourier_of_dirac_comb}中的狄拉克梳状分布就是这样一个例子。
 
     代入互相关的定义：\begin{align*}
         R_{fg}(x)=&\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}\left(\sum_n a_n\mathrm{e}^{2\pi \mathrm{i}\xi_n y}\right)\left(\sum_m \overline{b_m}\mathrm{e}^{-2\pi\mathrm{i}\xi_m (x+y)}\right)\,dy\\

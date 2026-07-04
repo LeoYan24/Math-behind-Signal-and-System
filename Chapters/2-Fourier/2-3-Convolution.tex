@@ -68,6 +68,7 @@ f*g&=\mathcal{F} ^{-1}\left(\mathcal{F} f\mathcal{F} g\right)
 
 作为一种新的函数空间上的运算，我们自然要讨论它是否满足线性性、结合律、交换律。事实上，它们都是成立的：
 \begin{proposition}[卷积的线性性、结合律、交换律]
+    \label{prop:conv_prop}
     \begin{align*}
     f*(ag_1+bg_2) & =af*g_1+bf*g_2 \\
     (f*g)*h       & =f*(g*h)       \\
@@ -78,13 +79,13 @@ f*g&=\mathcal{F} ^{-1}\left(\mathcal{F} f\mathcal{F} g\right)
 \begin{proof}
 \begin{align*}
     (f*g)*h(x) & =\int_{-\infty}^{\infty}(f*g)(x-y)h(y)\,dy=\int_{-\infty}^{\infty}h(y)\,dy\int_{-\infty}^{\infty}f(z)g(x-y-z)\,dz \\
-               & =\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}f(z)g(x-y-z)h(y)\,dy\,dz=\int_{-\infty}^{\infty}f(z)(g*h)(x-z)\,dz
+    & =\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}f(z)g(x-y-z)h(y)\,dy\,dz=\int_{-\infty}^{\infty}f(z)(g*h)(x-z)\,dz
 \end{align*}
 \end{proof}
 
 也可以通过取傅里叶变换的方式证明它们，但这样会缩减证明有效的范围，因为卷积存在只要求积分$(f*g)(x)=\int_{-\infty}^{\infty}f(y)g(x-y)\,dy$存在（它有许多种充分条件，不再一一讨论），而取傅里叶变换则要求$f,g,f*g$的傅里叶变换存在。
 
-卷积是否具有“幺元”呢？我们希望找到一个函数，使得它与任一函数$f$卷积，总得到$f$本身。事实上，只有$\delta$可以起到这个作用（尽管它应该作为一个分布来理解，见\ref{sub:general_distributions}和\ref{sub:approach}）。
+卷积是否具有“幺元”呢？我们希望找到一个函数，使得它与任一函数$f$卷积，总得到$f$本身。事实上，只有$\delta$可以起到这个作用（尽管它应该作为一个分布来理解，见\refsub{general_distributions}和\refsub{approach}）。
 \begin{proposition}[卷积幺元]
     设$f\in L^1(\mathbb{R})$，则$\delta$是“卷积幺元”，即
     \lr{
@@ -119,8 +120,8 @@ f*g&=\mathcal{F} ^{-1}\left(\mathcal{F} f\mathcal{F} g\right)
 
 %我们首先引入\textbf{支集}(support)的概念，读者只需理解其直观，真正理解它需要一些拓扑学的基础。
 \begin{definition}[支集]
-    设$f:\mathbb{R}\to \mathbb{R}$，f的\textbf{支集}
-$\mathrm{supp}\ f=\overline{\left\{x\in\mathbb{R}\left|f(x)\neq 0\right.\right\}}$
+    设$f:\mathbb{R}\to \mathbb{R}$，f的\textbf{支集}为
+$\mathrm{supp}(f)=\overline{\left\{x\in\mathbb{R}\left|f(x)\neq 0\right.\right\}}$
 \end{definition}
 
 这里上划线不是取共轭，而是对集合取闭包，闭包包括集合本身的和它的极限点，$\mathbb{R}$中集合的闭包是闭集，例如，$(a,b)$的闭包是$[a,b]$.
@@ -131,8 +132,9 @@ $\mathrm{supp}\ f=\overline{\left\{x\in\mathbb{R}\left|f(x)\neq 0\right.\right\}
 \end{definition}
 
 \begin{proposition}
+    \label{prop:conv_supp}
     卷积能够将两个函数的支集“相加”，即：\begin{align*}
-    \mathrm{supp}\ f\in [a,b],\mathrm{supp}\ g\in [c,d]\implies&\mathrm{supp}\ (f*g)\in [a+c,b+d]
+    \mathrm{supp}(f)\in [a,b],\mathrm{supp}(g)\in [c,d]\implies&\mathrm{supp}(f*g)\in [a+c,b+d]
     \end{align*}
 \end{proposition}
 
@@ -160,9 +162,10 @@ $\mathrm{supp}\ f=\overline{\left\{x\in\mathbb{R}\left|f(x)\neq 0\right.\right\}
 
 如果只有一个信号反转，则结果不再是卷积，而是f与g的互相关（在f,g都是实信号时），下面很快将讨论它。
 
-在建立卷积在信号时延或伸缩下的性质前，我们先来明确所使用的符号。我们将用$\tau$表示时延$\tau_b f(t)=f(t-b)$，用$\sigma$表示伸缩$\sigma_a f(t)=f(at)$，并避免使用$\tau,\sigma$作为变量的符号。这样的做法在研究分布的性质时是必要的，因为严格来讲不能给出分布的“自变量”，但例如$\delta$函数这样的分布又具有明显的尺度变换的性质，见\ref{sub:operation_of_distribution}.
+在建立卷积在信号时延或伸缩下的性质前，我们先来明确所使用的符号。我们将用$\tau$表示时延$\tau_b f(t)=f(t-b)$，用$\sigma$表示伸缩$\sigma_a f(t)=f(at)$，并避免使用$\tau,\sigma$作为变量的符号。这样的做法在研究分布的性质时是必要的，因为严格来讲不能给出分布的“自变量”，但例如$\delta$函数这样的分布又具有明显的尺度变换的性质，见\refsub{operation_of_distribution}.
 
 \begin{proposition}[信号时延、伸缩时的卷积]
+    \label{prop:conv_signal_shift}
     \begin{align*}
     (\tau_b f)*g=\tau_b (f*g)=f*(\tau_b g) \\
     (\sigma_a f)*(\sigma_a g)=\frac{1}{|a|}\sigma_a(f*g)
@@ -300,7 +303,7 @@ $$R_{fg}(x)=\int_{-\infty}^{\infty}f(y)\overline{g(x+y)}\,dy$$
     R_{fg}=R_{fg}(x)=\lim_{T\to\infty}\frac{1}{2T}\int_{-T}^{T}f(x+y)\overline{g(y)}\,dy
 \end{equation*}
 \end{definition}
-我们将在\ref{sub:power_corelation}中讨论它。
+我们将在\refsub{power_corelation}中讨论它。
 
 最后我们给出一个互相关的应用\cite{brad_osgood_ee261}。
 \begin{example}[雷达测距]

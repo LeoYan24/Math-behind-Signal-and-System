@@ -1,7 +1,7 @@
 \section{施瓦兹函数类，时限与带限}\label{sec:Schwartz_Functions}
 
 \subsection{施瓦兹函数在傅里叶变换下的封闭性}\label{sub:fourier_close}
-在\ref{sub:schwartz}中，我们介绍了施瓦兹函数类及其对偶空间分布，并直接假定了施瓦兹函数类在傅里叶变换下的封闭性。这一小节将填补这个逻辑漏洞，并介绍施瓦兹函数类的一些其他好处。由于不涉及具体的计算，简洁起见，我们将在本节使用角频率$\omega$。
+在\refsub{schwartz}中，我们介绍了施瓦兹函数类及其对偶空间分布，并直接假定了施瓦兹函数类在傅里叶变换下的封闭性。这一小节将填补这个逻辑漏洞，并介绍施瓦兹函数类的一些其他好处。由于不涉及具体的计算，简洁起见，我们将在本节使用角频率$\omega$。
 
 首先，可以根据施瓦兹函数类的定义\[\mathcal{S} =\left\{\varphi\in C^{\infty}(\mathbb{R} )\left|\lim_{|x|\to\infty}|x|^m\varphi^{(n)}(x)=0,\forall m,n\in\mathbb{N} \right.\right\}\]给出它们在$|x|\to\infty$时的估计，从而施瓦兹函数$\varphi$必满足$\int_{-\infty}^{\infty}|\varphi^{(n)}(x)|\,dx<\infty,n\in\mathbb{N}$，即施瓦兹函数类是$L^1(\mathbb{R} )$的子集，于是\begin{align*}
     \int_{-\infty}^{\infty}\varphi(t)\mathrm{e}^{-\mathrm{i}\omega t}\,dt&\leq \int_{-\infty}^{\infty}|\varphi(t)||\mathrm{e}^{-\mathrm{i}\omega t}|\,dt\\
@@ -14,12 +14,12 @@
     设$\varphi\in\mathcal{S}$，则$\mathcal{F} \varphi,\mathcal{F} ^{-1} \varphi\in\mathcal{S}$。
 \end{theorem}
 \begin{proof}
-    只需证明$\lim_{|\omega|\to\infty}|\omega|^m \mathcal{F} \varphi^{(n)}(\omega)=0,\forall m,n\in\mathbb{N}$。由傅里叶变换的微分性质（见\ref{sub:general_distributions}），
+    只需证明$\lim_{|\omega|\to\infty}|\omega|^m \mathcal{F} \varphi^{(n)}(\omega)=0,\forall m,n\in\mathbb{N}$。由傅里叶变换的微分性质（见\refsub{general_distributions}），
     \begin{align*}
     \mathcal{F} [\varphi'](\omega)&=\mathrm{i}\omega \mathcal{F} \varphi(\omega)\\
     \mathcal{F} [\varphi^{(n)}](\omega)&=(\mathrm{i}\omega)^n \mathcal{F} \varphi(\omega)
 \end{align*}
-根据黎曼-勒贝格引理（见\ref{sub:riemman_lebesgue_lemma}），\[\varphi^{(n)}\in L^1(\mathbb{R})\implies\lim_{|\omega|\to\infty}\mathcal{F}\left[ \varphi^{(n)}(\omega)\right]=0\]
+根据黎曼-勒贝格引理（见\refsub{riemman_lebesgue_lemma}），\[\varphi^{(n)}\in L^1(\mathbb{R})\implies\lim_{|\omega|\to\infty}\mathcal{F}\left[ \varphi^{(n)}(\omega)\right]=0\]
 即\[\lim_{|\omega|\to\infty}(\mathrm{i}\omega)^n \mathcal{F} \varphi(\omega)\to 0\]
 故$\mathcal{F} \varphi(\omega)\in\mathcal{S} $，同理可证明$\mathcal{F}^{-1} \varphi(\omega)\in\mathcal{S} $。
 \end{proof}
@@ -56,7 +56,7 @@
     \mathcal{F} f(\omega)&=\int_{-\infty}^{\infty}f(t)\mathrm{e}^{-\mathrm{i}\omega t}\,dt\\
     &=\int_{-T/2}^{T/2}f(t)\mathrm{e}^{-\mathrm{i}\omega t}\,dt
 \end{align*}
-这是一个可导的实变函数，可以将其做全纯延拓。我们在\ref{sub:introduction_of_laplace}中已经介绍过拉普拉斯变换，不过那时使用的是单边拉普拉斯变换，这里为了涵盖$\mathrm{supp}\ f\in[-T/2,T/2]$的情形，我们使用双边拉普拉斯变换：
+这是一个可导的实变函数，可以将其做全纯延拓。我们在\refsub{introduction_of_laplace}中已经介绍过拉普拉斯变换，不过那时使用的是单边拉普拉斯变换，这里为了涵盖$\mathrm{supp}\ f\in[-T/2,T/2]$的情形，我们使用双边拉普拉斯变换：
 \begin{align*}
     F(s)=\int_{-\infty}^{\infty}f(t)\mathrm{e}^{-st}\,dt=\int_{-T/2}^{T/2}f(t)\mathrm{e}^{-st}\,dt,F(\mathrm{i}\omega)=\mathcal{F} f(\omega)
 \end{align*}
@@ -65,7 +65,7 @@
 \end{proof}
 
 %时域频域“带宽”积，海森堡不确定性原理
-必须指出，实际应用中我们总是考虑时域、频域都近似紧支的函数，指出时限、带限不共存，只是理论需要。事实上，时域上的“宽度”与频域上的“宽度”之积存在一个下界，这一点从\ref{sub:fourier_operation_properties}中提出的伸缩定理就可以看出：
+必须指出，实际应用中我们总是考虑时域、频域都近似紧支的函数，指出时限、带限不共存，只是理论需要。事实上，时域上的“宽度”与频域上的“宽度”之积存在一个下界，这一点从\refsub{fourier_operation_properties}中提出的伸缩定理就可以看出：
 \lr{
     \mathcal{F} [f(at)](\xi)=\frac{1}{|a|}\mathcal{F} f\left(\frac{\xi}{a}\right)
 }{
@@ -80,7 +80,7 @@
 \end{theorem}
 物理规律中许多现象都可以归结为这一数学事实，例如著名的\textbf{海森堡不确定性原理} (Heisenberg's uncertainty principle)\footnote{尽管广义的不确定性原理应该归结为算符或矩阵的不对易，但由于动量空间波函数是位置空间波函数的傅里叶变换，以上结果的确能够证明$\sigma_x \sigma_p\geq\frac{\hbar}{2}$}。读者可以自行验证，以上不等式取等于高斯函数。
 \begin{proof}
-    我们首先验证，$|f|^2$与$|F|^2$作为某个随机变量的概率密度函数是良定义的，从而其方差是良定义的。根据普朗歇尔定理（见\ref{sub:fourier_operation_properties}），\lr{
+    我们首先验证，$|f|^2$与$|F|^2$作为某个随机变量的概率密度函数是良定义的，从而其方差是良定义的。根据普朗歇尔定理（见\refsub{fourier_operation_properties}），\lr{
     \int_{-\infty}^{\infty}|f(t)|^2\,dt=\int_{-\infty}^{\infty}|\mathcal{F} f(\xi)|^2\,d\xi
 }{
     \int_{-\infty}^{\infty}|f(t)|^2\,dt=\frac{1}{2\pi}\int_{-\infty}^{\infty}|\mathcal{F} f(\omega)|^2\,d\omega
@@ -153,7 +153,7 @@
     设$\varphi_k\to \varphi$，则$\mathcal{F} \varphi_k\to \mathcal{F} \varphi$。
 \end{theorem}
 \begin{proof}
-    不妨设$\varphi=\mathcal{F} \varphi=0$。由傅里叶变换的微分性质（见\ref{sub:general_distributions}），
+    不妨设$\varphi=\mathcal{F} \varphi=0$。由傅里叶变换的微分性质（见\refsub{general_distributions}），
     \begin{align*}
     \mathcal{F}\left[\left((-\mathrm{i}t)^n\varphi_k\right)^{(m)}\right](\omega)&=(\mathrm{i}\omega)^m \mathcal{F}\left[(-\mathrm{i}t)^n \varphi_k\right](\omega)\\
     &=(\mathrm{i}\omega)^m (\mathcal{F} \varphi_k)^{(n)}(\omega)\\
@@ -190,7 +190,7 @@
 根据夹逼定理，$\|\mathcal{F} \varphi_k\|_{m,n}\to 0$，得证。傅里叶逆变换同理。
 \end{proof}
 
-其实，如果我们考虑$L^1(\mathbb{R})\cap L^2(\mathbb{R})$中傅里叶变换的连续性，可以得到类似的结论，但证明要简单得多，因为$L^1(\mathbb{R})\cap L^2(\mathbb{R})$中有普朗歇尔定理（见\ref{sub:fourier_operation_properties}）。
+其实，如果我们考虑$L^1(\mathbb{R})\cap L^2(\mathbb{R})$中傅里叶变换的连续性，可以得到类似的结论，但证明要简单得多，因为$L^1(\mathbb{R})\cap L^2(\mathbb{R})$中有普朗歇尔定理（见\refsub{fourier_operation_properties}）。
 \begin{theorem}[$L^1(\mathbb{R})\cap L^2(\mathbb{R})$上傅里叶变换的连续性]
     设
     $$\lim_{k\to\infty}\|f_k-f\|_2=0$$
@@ -214,6 +214,6 @@
     因此，$\left\|f_k-f\right\|_2\to 0\Rightarrow \left\|\mathcal{F} f_k-\mathcal{F} f\right\|_2\to 0$，得证。
 \end{proof}
 
-另外，在弱收敛的意义下，傅里叶变换同样是$\mathcal{T} =\mathcal{S} ' $上的线性拓扑自同构。在\ref{sub:operation_of_distribution}中，我们已经证明过分布的傅里叶变换的连续性：\begin{theorem}[$\mathcal{T}$上傅里叶变换的连续性]
+另外，在弱收敛的意义下，傅里叶变换同样是$\mathcal{T} =\mathcal{S} ' $上的线性拓扑自同构。在\refsub{operation_of_distribution}中，我们已经证明过分布的傅里叶变换的连续性：\begin{theorem}[$\mathcal{T}$上傅里叶变换的连续性]
     设$T_k\to T$，则$\mathcal{F} T_k\to \mathcal{F} T$。
 \end{theorem}

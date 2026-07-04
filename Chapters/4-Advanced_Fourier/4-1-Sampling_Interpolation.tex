@@ -61,7 +61,7 @@
 \end{proof}
 
 其三是周期化：$$\shah_T*f(t)=f_T(t)=\sum_{k=-\infty}^{\infty}f(t-kT)$$
-在\ref{sub:operation_of_distribution}中，我们曾建立了$\delta_a$的平移性质：$\delta_a*f=\tau_a f$，只要函数项级数$\sum_{k=-\infty}^{\infty}f(t-kT)$收敛，自然就可以把它写成卷积的形式。
+在\refsub{operation_of_distribution}中，我们曾建立了$\delta_a$的平移性质：$\delta_a*f=\tau_a f$，只要函数项级数$\sum_{k=-\infty}^{\infty}f(t-kT)$收敛，自然就可以把它写成卷积的形式。
 
 对于一个施瓦兹函数，以上的式子中均不会出现收敛性的问题。回顾施瓦兹函数类的定义：
 \[\mathcal{S} =\left\{\varphi\in C^{\infty}(\mathbb{R} )\left|\lim_{|x|\to\infty}|x|^m\varphi^{(n)}(x)=0,\forall m,n\in\mathbb{N} \right.\right\}\]
@@ -77,7 +77,7 @@
 \end{lralign}
 \end{theorem}
 \begin{proof}
-考虑函数$f\in\mathcal{S} $，记其周期化函数为$\Phi=\shah*\varphi$，并将$\Phi$的傅里叶系数记为$\hat{\Phi}(k)$，由$\Phi$的无限阶可导性可知其傅里叶级数绝对一致收敛于它本身（这里只需要逐点收敛性，至于更强的收敛性，见\ref{sub:uniform_converge}），即
+考虑函数$f\in\mathcal{S} $，记其周期化函数为$\Phi=\shah*\varphi$，并将$\Phi$的傅里叶系数记为$\hat{\Phi}(k)$，由$\Phi$的无限阶可导性可知其傅里叶级数绝对一致收敛于它本身（这里只需要逐点收敛性，至于更强的收敛性，见\refsub{uniform_converge}），即
 \[\Phi(t)=\sum_{k=-\infty}^{\infty}\hat{\Phi}(k)\mathrm{e}^{2\pi \mathrm{i}kt}\]
 其中
 \begin{align*}
@@ -136,7 +136,7 @@ $\shah$分布的傅里叶变换具有自对偶性，即{\color{blue}$\shah\overs
 
 可以看到，\textbf{将$f$以周期$T$进行周期化，相当于在频域上以$1/T$的采样间隔进行采样}（还需要乘以常数$1/T$，但它不改变这一观点的本质）；结合傅里叶反演公式，容易推知：\textbf{在频域以周期$T$进行周期化，在时域上的表现是以$1/T$为采样间隔进行采样}。它们是整个信号与系统课程最核心的观点，我们还将在后面反复使用。
 
-根据分布的傅里叶变换的连续性（见\ref{sub:continuity_of_distribution}），我们还可以直接对$\shah$分布的傅里叶变换做另一种推导：
+根据分布的傅里叶变换的连续性（见\refsub{continuity_of_distribution}），我们还可以直接对$\shah$分布的傅里叶变换做另一种推导：
 \begin{lralign}
      \mathcal{F} \shah&= \mathcal{F} \left(\lim_{N\to\infty}\sum_{k=-N}^{N}\delta_k\right)\\
     &=\lim_{N\to\infty}\sum_{k=-N}^{N}\mathcal{F} \delta_k\\
@@ -153,7 +153,7 @@ $\shah$分布的傅里叶变换具有自对偶性，即{\color{blue}$\shah\overs
 \begin{definition}[$\shah$的傅里叶级数形式]
     \[\shah(x)=\sum_{k=-\infty}^{\infty}\mathrm{e}^{-2\pi \mathrm{i}kx}\]
 \end{definition}
-右边正是\ref{sub:dirichlet_kernel}中提到的狄利克雷核在$N\to\infty$时的式子。需要注意，这个式子仅在分布的意义下成立，例如将这个分布作用在某一区间的特征函数$\chi_{[a,b]}\in\mathcal{S}$上，则可验证函数项级数$$\sum_{k=-\infty}^{\infty}\mathrm{e}^{-2\pi \mathrm{i}kx}$$在整数点处趋于正无穷，在任意不包含整数点的区间上积分值为0。然而，作为函数项级数，我们只能得到整数点处的广义极限存在，这是一个几乎处处不收敛的函数项级数，例如在$x=1/2$处，级数项为$(-1)^k$，其和函数在多数点没有定义，只能作为奇异分布来定义。
+右边正是\refsub{dirichlet_kernel}中提到的狄利克雷核在$N\to\infty$时的式子。需要注意，这个式子仅在分布的意义下成立，例如将这个分布作用在某一区间的特征函数$\chi_{[a,b]}\in\mathcal{S}$上，则可验证函数项级数$$\sum_{k=-\infty}^{\infty}\mathrm{e}^{-2\pi \mathrm{i}kx}$$在整数点处趋于正无穷，在任意不包含整数点的区间上积分值为0。然而，作为函数项级数，我们只能得到整数点处的广义极限存在，这是一个几乎处处不收敛的函数项级数，例如在$x=1/2$处，级数项为$(-1)^k$，其和函数在多数点没有定义，只能作为奇异分布来定义。
 
 根据角频率形式下的$\shah$分布的傅里叶变换，可以想到$\shah$的伸缩的傅里叶变换仍具有
 $\shah$的形式，下面就来找出具体的公式：
@@ -174,4 +174,4 @@ $\shah$的形式，下面就来找出具体的公式：
 
 可以看到，傅里叶变换前后$\delta$的位置具有倒数关系。事实上，在多维傅里叶变换的理论中，我们还将看到更为深刻的关系。直观上，我们曾提出对函数和分布的一维傅里叶变换的伸缩定理：
 \[f(at)\overset{\mathcal{F} }{\longleftrightarrow}\frac{1}{|a|}F\left(\frac{\xi}{a}\right),\sigma_a T\overset{\mathcal{F} }{\longleftrightarrow}\frac{1}{|a|}\sigma_{1/a}\mathcal{F} T\]
-它同样揭示了时域伸而频域缩，时域缩而频域伸的关系，而$\shah_T$为我们提供了一种新的视角。对多维的$\shah$分布的讨论，见\ref{sec:Multi_Fourier}。二维$\shah$分布在$\mathbb{R}^3$中的图像就像一个“钉床”，因此又可以将$\shah$分布称为\textbf{钉床函数}(bed of nails)。
+它同样揭示了时域伸而频域缩，时域缩而频域伸的关系，而$\shah_T$为我们提供了一种新的视角。对多维的$\shah$分布的讨论，见\refsec{Multi_Fourier}。二维$\shah$分布在$\mathbb{R}^3$中的图像就像一个“钉床”，因此又可以将$\shah$分布称为\textbf{钉床函数}(bed of nails)。

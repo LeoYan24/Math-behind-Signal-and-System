@@ -72,7 +72,7 @@ $\varlimsup_{N \to \infty}S_N^R(t)>1$并不意味着狄利克雷定理失效，�
     \caption{狄利克雷核$D_N(t)$的函数图像}
 \end{figure}
 
-傅里叶级数的部分和是狄利克雷核与被展开函数的卷积（周期函数的卷积，见\ref{sub:conv_of_period_func}）：
+傅里叶级数的部分和是狄利克雷核与被展开函数的卷积（周期函数的卷积，见\refsub{conv_of_period_func}）：
 \begin{proposition}
     \[S_N^f(t)=\frac{1}{T}\int_{T}f(\tau)D_N(t-\tau)\,d\tau=\frac{1}{T}f*D_N(t)\]
 \end{proposition}
@@ -131,11 +131,9 @@ $D_N(t)$是偶函数，得证。
 \end{proof}
 
 \subsection{分段光滑条件下的一致收敛性}\label{sub:uniform_converge}
-直接由狄利克雷条件证明逐点收敛性需要很专业的分析学工具，但我们可以适当地加强狄利克雷条件，以得到更直观、简单的结论\cite{folland}。回忆\ref{sub:fourier_series_convergency}中对于分段光滑的定义：
-\begin{definition}[分段光滑]
-在区间$[a,b]$上，函数$f$称为\textbf{分段光滑} (piecewise smooth)，如果存在区间的划分$a=x_0<x_1<\dots <x_n=b$，使得在每个子区间$(x_{i-1},x_i)$上f可微，且区间端点处$f$的左右导数存在，记作$f\in PS[a,b]$。
-\end{definition}
-我们研究的多数函数是满足这样的性质的，并且我们将看到满足此条件会带来一些额外的性质。此时就可以相对简单地证明逐点收敛性：
+直接由狄利克雷条件证明逐点收敛性需要很专业的分析学工具，但我们可以适当地加强狄利克雷条件，以得到更直观、简单的结论\cite{folland}。分段光滑的定义，见\cref{def:piecewice_smooth}。
+
+我们研究的多数函数是分段光滑的。分段光滑会带来一些额外的性质，例如，可以相对简单地证明逐点收敛性：
 \begin{theorem}[傅里叶级数的逐点收敛性]
     \[\lim_{N\to\infty}S_N^f(t_0)=\frac{f(t_0+)+f(t_0-)}{2}\]
 \end{theorem}
@@ -171,7 +169,7 @@ $t\to 0^-$时同理。故g分段连续，当然是平方可积的，由贝塞尔
 \end{align*}
 \end{proof}
 
-f的原函数F的傅里叶系数同理，并且只要\textbf{分段连续}（见\ref{sub:fourier_series_convergency}）即可保证f可积，但是我们必须保证F是周期函数，这要求f的直流分量为0：
+f的原函数F的傅里叶系数同理，并且只要\textbf{分段连续}（见\cref{def:piecewise_continuos}）即可保证f可积，但是我们必须保证F是周期函数，这要求f的直流分量为0：
 \[F(t+T)-F(t)=\int_{T}f(t)dt=Tc_0=0,c_0=0\]
 此时，用刚刚得到的公式（2.16）就可直接得到F的傅里叶系数：
 \begin{proposition}[原函数的傅里叶系数]
