@@ -123,7 +123,7 @@ $$h[n]=y_h[n]u[n]=\left(\sum_{i=1}^s P_i(n) \lambda_i^n \right)u[n]$$
     解：特征方程为$\lambda^2-2\lambda+1=0$，有一个重根$\lambda=1$，因此单位脉冲响应的形式为
     $$h[n]=(A n+B)u[n]$$
     代入$n=0,1$，得\begin{align*}
-    h[0]=B=1,h[1]=A+B=0
+    h[0]=B=1,\quad h[1]=A+B=0
     \end{align*}
     因此$A=-1,B=1$，单位脉冲响应为
     $$h[n]=(1-n)u[n]$$
@@ -371,6 +371,6 @@ $$\sum_{k=0}^{N}a_k y[n-k] = \sum_{l=0}^{M}b_l x[n-l]$$
     &=\mathrm{Res}\left(\frac{4z^n(z-1)}{(z-2)^2},2\right)\\
     &=\lim_{z\to 2}\frac{d}{dz}\left(4z^n(z-1)\right)\\
     &=4\lim_{z\to 2}\left(nz^{n-1}(z-1)+z^n\right)\\
-    &=4\cdot 2^{n-1}(n+2)=2^{n+1}(n+2),n\in\mathbb{N}
+    &=4\cdot 2^{n-1}(n+2)=2^{n+1}(n+2),\quad n\in\mathbb{N}
 \end{align*}
 \end{example}

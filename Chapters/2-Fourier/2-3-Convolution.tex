@@ -54,6 +54,7 @@ f*g&=\mathcal{F} ^{-1}\left(\mathcal{F} f\mathcal{F} g\right)
 \end{lralign}
 综上得到\textbf{卷积定理}(the convolution thoerem)：
 \begin{theorem}[卷积定理]
+    \label{thm:conv}
     \quad
 \lr{
     \mathcal{F} (f*g)(\xi)=\mathcal{F} f(\xi)\mathcal{F} g(\xi)\\
@@ -78,8 +79,10 @@ f*g&=\mathcal{F} ^{-1}\left(\mathcal{F} f\mathcal{F} g\right)
 线性性得自积分的线性性，交换律通过变量替换即可证明，下面仅证明结合律。
 \begin{proof}
 \begin{align*}
-    (f*g)*h(x) & =\int_{-\infty}^{\infty}(f*g)(x-y)h(y)\,dy=\int_{-\infty}^{\infty}h(y)\,dy\int_{-\infty}^{\infty}f(z)g(x-y-z)\,dz \\
-    & =\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}f(z)g(x-y-z)h(y)\,dy\,dz=\int_{-\infty}^{\infty}f(z)(g*h)(x-z)\,dz
+    (f*g)*h(x) & =\int_{-\infty}^{\infty}(f*g)(x-y)h(y)\,dy\\
+    &=\int_{-\infty}^{\infty}h(y)\,dy\int_{-\infty}^{\infty}f(z)g(x-y-z)\,dz \\
+    & =\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}f(z)g(x-y-z)h(y)\,dy\,dz\\
+    &=\int_{-\infty}^{\infty}f(z)(g*h)(x-z)\,dz
 \end{align*}
 \end{proof}
 
@@ -104,7 +107,7 @@ f*g&=\mathcal{F} ^{-1}\left(\mathcal{F} f\mathcal{F} g\right)
 \end{proof}
 
 \subsection{卷积的直观}\label{sub:intuition_of_convolution}
-初次接触卷积时，往往会对它的定义感到疑惑，因为在数学分析的课程中我们很少见到这种“翻转、平移、相乘、积分”的结构。需要指出，卷积并不只有“时域相乘，频域卷积；时域卷积，频域相乘”的物理意义，例如概率论中两独立的连续型随机变量X,Y之和作为一种新的随机变量Z，其概率密度函数$f_Z(z)$正是两个独立的随机变量的概率密度函数的卷积$f_X*f_Y(z)$.类似于用“求曲线下方的面积”或“已知速度求位移”引入积分，尽管我们用一种较为自然的方式引入了卷积，但不应该认为它只有单一的意义。不过，还是可以建立一些卷积的性质来辅助我们理解卷积。
+初次接触卷积时，往往会对它的定义感到疑惑，因为在数学分析的课程中我们很少见到这种“翻转、平移、相乘、积分”的结构。需要指出，卷积并不只有“时域相乘，频域卷积；时域卷积，频域相乘”的物理意义，例如概率论中两独立的连续型随机变量X,Y之和作为一种新的随机变量Z，其概率密度函数$f_Z(z)$正是两个独立的随机变量的概率密度函数的卷积$f_X*f_Y(z)$.类似于用“求曲线下方的面积”或“已知速度求位移”引入积分，尽管我们用一种较为自然的方式引入了卷积，但\textbf{不应该认为它只有单一的意义}。不过，还是可以建立一些卷积的性质来辅助我们理解卷积。
 
 \subsubsection{卷积是一种起“平均化”作用的运算}
 \begin{definition}[加权均值]
@@ -234,6 +237,7 @@ $\rho(f,g)=\pm 1$时两信号\textbf{线性相关}；$\rho(f,g)=0$时两信号\t
 
 互相关具有以下性质：
 \begin{proposition}
+    \label{prop:cross_correlation}
     设$f,g\in L^2(\mathbb{R})$，则
 \begin{enumerate}
     \item $R_{fg}=f* \overline{g^-}=\overline{R_{gf}^-}$，如果$f,g$都是实信号，则$R_{fg} =R_{gf}^- =f^- *g=(f*g^-)^-$.该性质表明相关与卷积有着密切的联系，并且互相关函数具有共轭对称性。

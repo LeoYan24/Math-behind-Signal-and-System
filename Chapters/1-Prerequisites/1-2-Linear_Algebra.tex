@@ -66,7 +66,7 @@
 
 \begin{definition}[线性映射]
     设有线性空间$V$和$W$，如果映射$T:V\to W$满足：
-    \[T(\alpha \mathbf{u}+\beta \mathbf{v})=\alpha T(\mathbf{u})+\beta T(\mathbf{v}),\forall \mathbf{u},\mathbf{v}\in V,\forall \alpha,\beta\in F\]
+    \[T(\alpha \mathbf{u}+\beta \mathbf{v})=\alpha T(\mathbf{u})+\beta T(\mathbf{v}),\quad\forall \mathbf{u},\mathbf{v}\in V,\forall \alpha,\beta\in F\]
     则称$T$为从$V$到$W$的\textbf{线性映射}(linear mapping)。特别地，如果$W=V$，则称$T$为$V$上的\textbf{线性变换}(linear transformation)。
 \end{definition}
 
@@ -209,7 +209,7 @@ $\|f\|_1 =\int_{a}^{b}|f(t)|\,\text dt$下，其中的柯西列\begin{align*}
 
 \begin{definition}[Lipschitz连续]
     设$X$是线性赋范空间，函数$f:X\to \mathbb{C} $是\textbf{Lipschitz连续的}，如果
-    $$\exists L>0,\forall x,y\in X,|f(x)-f(y)|\leq L\|x-y\|$$
+    $$\exists L>0,\forall x,y\in X,\quad |f(x)-f(y)|\leq L\|x-y\|$$
 \end{definition}
 
 容易验证，Lipschitz连续蕴含连续，但连续函数未必是Lipschitz连续的：
@@ -231,7 +231,7 @@ $\|f\|_1 =\int_{a}^{b}|f(t)|\,\text dt$下，其中的柯西列\begin{align*}
     一方面，$|\Phi(u)-\Phi(v)\|=|\Phi(u-v)|\leq\|\Phi\|_*\|u-v\|\implies$$\Phi$是Lipschitz连续的，从而是连续的。
 
     另一方面，假设$\Phi$无界，则存在$X$中的序列$\{u_n\}$，满足
-    $$\|u_n\|=1,\lim_{n\to \infty}\Phi(u_n)=\infty$$
+    $$\|u_n\|=1,\quad\lim_{n\to \infty}\Phi(u_n)=\infty$$
     $u_n/\Phi(u_n)\to 0$而$\Phi(u_n/\Phi(u_n))=1$，这与连续性矛盾。
 \end{proof}
 
@@ -271,7 +271,7 @@ $\langle \cdot,\cdot\rangle:V\times V\rightarrow \mathbb{C} $，满足\textbf{�
 \end{proof} 
 有了柯西-施瓦兹不等式，三角不等式就是显然的了，这里仅给出其表述，读者可以自行证明。
 \begin{proposition}[三角不等式]
-    \[\forall \mathbf{a,b}\in V,\|\mathbf{a+b}\|\leq\|\mathbf{a}\|+\|\mathbf{b}\|\]
+    \[\forall \mathbf{a,b}\in V,\quad\|\mathbf{a+b}\|\leq\|\mathbf{a}\|+\|\mathbf{b}\|\]
 \end{proposition}
 
 \subsection{特征向量与特征值}\label{sub:eigenvector}

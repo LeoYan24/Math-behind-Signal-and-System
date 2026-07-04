@@ -30,7 +30,7 @@ $$E_{\Omega}[n]=\mathrm{e}^{\mathrm{i}\Omega n}$$
 可以看到，用连续信号的角频率来理解离散信号的角频率，则模拟角频率与数字角频率的关系取决于采样间隔$T$。采样间隔越大，振荡模式相同的离散信号对应的连续信号振荡越缓慢，同样的数字角频率对应的模拟角频率就越小。
 
 然而，前面的讨论忽略了
-$$\mathrm{e}^{\mathrm{i}(\Omega+2k\pi)n}=\mathrm{e}^{\mathrm{i}\Omega n},\forall k\in\mathbb{Z},n\in\mathbb{Z}$$
+$$\mathrm{e}^{\mathrm{i}(\Omega+2k\pi)n}=\mathrm{e}^{\mathrm{i}\Omega n},\quad \forall k\in\mathbb{Z},n\in\mathbb{Z}$$
 
 不依赖于连续信号，无法确定离散信号背后对应着什么模拟角频率。我们在\refsub{alias}中曾遇到过类似的现象，在欠采样的情况下，不同的连续信号会对应同一个离散信号，这就是\textbf{混叠现象}。
 
@@ -38,7 +38,7 @@ $$\mathrm{e}^{\mathrm{i}(\Omega+2k\pi)n}=\mathrm{e}^{\mathrm{i}\Omega n},\forall
 
 \begin{proposition}
 以$T$为采样间隔，模拟角频率为$\omega$的连续信号，采样所得离散信号的数字角频率为
-\[\Omega=\omega T+2k\pi,k\in\mathbb{Z},\Omega\in(-\pi,\pi]\]
+\[\Omega=\omega T+2k\pi,\quad k\in\mathbb{Z},\Omega\in(-\pi,\pi]\]
 \end{proposition}
 
 混叠是由于对信号的高频成分处理不当而产生的，混叠所得信号一定为（相对）低频的信号，因为此时错误地使用了“恒等式”来进行信号的复原：
@@ -110,18 +110,17 @@ $$X(\mathrm{e}^{\mathrm{i}\Omega})=\mathcal{X} (\Omega)$$
 
 由此可以得到离散时间傅里叶变换的定义：
 
-\begin{definition}[离散时间傅里叶变换]
+\begin{definition}[离散时间傅里叶变换]\label{def:DTFT}
     离散信号$x[n]\in l^1$的离散时间傅里叶变换定义为
     \[X(\mathrm{e}^{\mathrm{i}\Omega})=\sum_{n=-\infty}^{\infty}x[n]\mathrm{e}^{-\mathrm{i}\Omega n}\]
-    记$x[n]\xleftrightarrow{\mathrm{DTFT}}X(\mathrm{e}^{\mathrm{i}\Omega})$。其中，$\Omega $为\textbf{数字角频率}，$l^1$为\refsub{Lp_space}中介绍的绝对可和的序列空间，即
-    \[l^1=\left\{x[n]\left|\sum_{n=-\infty}^{\infty}|x[n]|<\infty\right.\right\}\]
+    记$x[n]\xleftrightarrow{\mathrm{DTFT}}X(\mathrm{e}^{\mathrm{i}\Omega})$。其中，$\Omega $为\textbf{数字角频率}，$l^1$见\cref{def:lp}。
 \end{definition}
 
 离散时间傅里叶变换是良定义的，因为
 \[x[n]\in l^1\implies \sum_{n=-\infty}^{\infty}\left|x[n]\mathrm{e}^{-\mathrm{i}\Omega n}\right|\leq \sum_{n=-\infty}^{\infty}|x[n]|<\infty\]
 
 以上探究$x[n]$的分解与合成的过程，已经指出离散时间傅里叶变换的反演公式，它可以看作是逆z变换在单位圆上的特例。单位圆在收敛域内，是由$x[n]\in l^1$保证的。
-\begin{theorem}[离散时间傅里叶反演公式]
+\begin{theorem}[离散时间傅里叶反演公式]\label{thm:DTFT_inv}
     设$x[n]\in l^1$的离散时间傅里叶变换为$X(\mathrm{e}^{\mathrm{i}\Omega})$，则$X(\mathrm{e}^{\mathrm{i}\Omega})$的离散时间傅里叶逆变换即为$x[n]$，即：
     \[x[n]=\frac{1}{2\pi}\int_{-\pi}^{\pi}X(\mathrm{e}^{\mathrm{i}\Omega})\mathrm{e}^{\mathrm{i}\Omega n}\,d\Omega\]
 \end{theorem}
@@ -166,6 +165,7 @@ $$X(\mathrm{e}^{\mathrm{i}\Omega})|_{\Omega=0}=\sum_{n=-\infty}^{\infty}x[n],X(\
 
 离散时间傅里叶变换的运算性质列举如下：
 \begin{proposition}[离散时间傅里叶变换的运算性质]
+    \label{prop:DTFT_operation}
     设$x[n],y[n]\in l^1$，其离散时间傅里叶变换分别为$X(\mathrm{e}^{\mathrm{i}\Omega}),Y(\mathrm{e}^{\mathrm{i}\Omega})$，则有：\begin{itemize}
         \item  线性：$\forall a,b\in\mathbb{C}$，有$a x[n]+b y[n]\xleftrightarrow{\mathrm{DTFT}} a X(\mathrm{e}^{\mathrm{i}\Omega})+b Y(\mathrm{e}^{\mathrm{i}\Omega})$
         \item 时移性质：$x[n-n_0]\xleftrightarrow{\mathrm{DTFT}}\mathrm{e}^{-\mathrm{i}\Omega n_0}X(\mathrm{e}^{\mathrm{i}\Omega})$
@@ -196,12 +196,12 @@ $$X(\mathrm{e}^{\mathrm{i}\Omega})|_{\Omega=0}=\sum_{n=-\infty}^{\infty}x[n],X(\
 \end{corollary}
 
 频域卷积定理的名称可以这样理解：如果记
-$$\mathcal{X} (\Omega)=X(\mathrm{e}^{\mathrm{i}\Omega}),\mathcal{Y} (\Omega)=Y(\mathrm{e}^{\mathrm{i}\Omega})$$
+$$\mathcal{X} (\Omega)=X(\mathrm{e}^{\mathrm{i}\Omega}),\quad \mathcal{Y} (\Omega)=Y(\mathrm{e}^{\mathrm{i}\Omega})$$
 则右式是周期函数的卷积（见\refsub{conv_of_period_func}）：
 \[x[n]y[n]\xleftrightarrow{\mathrm{DTFT}}\frac{1}{2\pi}\mathcal{X} (\Omega)*\mathcal{Y} (\Omega)=\frac{1}{2\pi}\int_{-\pi}^{\pi}\mathcal{X} (\theta)\mathcal{Y} (\Omega-\theta)\,d\theta\]
 
 此外，我们给出离散时间傅里叶变换的\textbf{帕塞瓦尔定理}(Parseval's Theorem)，它表明表明时域能量与频域能量成正比：
-\begin{theorem}[离散时间傅里叶变换的帕塞瓦尔定理]
+\begin{theorem}[离散时间傅里叶变换的帕塞瓦尔定理]\label{thm:DTFT_plancherel}
     设$x[n],y[n]\in l^1\cap l^2$，其离散时间傅里叶变换分别为$X(\mathrm{e}^{\mathrm{i}\Omega}),Y(\mathrm{e}^{\mathrm{i}\Omega})$，则有
     \[\sum_{n=-\infty}^{\infty}x[n]\overline{y[n]}=\frac{1}{2\pi}\int_{-\pi}^{\pi}X(\mathrm{e}^{\mathrm{i}\Omega})\overline{Y(\mathrm{e}^{\mathrm{i}\Omega})}\,d\Omega\]
     特别地，当$x[n]=y[n]$时，有

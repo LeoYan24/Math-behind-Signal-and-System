@@ -82,7 +82,7 @@
 
 \begin{example}[三种响应划分方式的区别]
     由微分方程及初始条件
-    \[y'+2y=10+e^{-t},y(0)=1\]
+    \[y'+2y=10+e^{-t},\quad y(0)=1\]
     特征方程$\lambda+2=0$的解为$\lambda=-2$，从而有齐次解（自由响应）$y_h(t)=Ce^{-2t}$（$C$为常数）及特解（强迫响应）$y_p(t)=5+\e^{-t}$，完全解为
     $$y(t)=y_h(t)+y_p(t)=Ce^{-2t}+5+\e^{-t}$$
     带入$y(0)=0$得$C+6=1,C=-5$，因此齐次解为$y_h(t)=-5\e^{-2t}$，完全解为
@@ -162,10 +162,10 @@ $r(t)=f(t)u(t)$，求出其一阶、二阶导数：\begin{align*}
 \end{cases}
 \end{align*}
 因此问题转化为求解微分方程
-\[f''(t)+3f'(t)+2f(t)=0,f(0)=0,f'(0)=1\]
+\[f''(t)+3f'(t)+2f(t)=0,\quad f(0)=0,f'(0)=1\]
 这个方程正是一开始的微分方程的齐次方程,可以立即得到它的解：
 \begin{align*}
-    f(t)=\mathrm{e}^{-t}-\mathrm{e}^{-2t},h(t)=\left(\mathrm{e}^{-t}-\mathrm{e}^{-2t}\right)u(t)
+    f(t)=\mathrm{e}^{-t}-\mathrm{e}^{-2t},\quad h(t)=\left(\mathrm{e}^{-t}-\mathrm{e}^{-2t}\right)u(t)
 \end{align*}
 总之，只要将齐次解乘以$u(t)$，求出对应阶导数并带回原方程对比系数，即可得到单位脉冲响应；由于单位阶跃响应形如$h(t)=y_h(t)u(t)$，满足$h(t)=0,t<0$，微分方程描述的
 系统还具有因果性。
@@ -174,6 +174,7 @@ $r(t)=f(t)u(t)$，求出其一阶、二阶导数：\begin{align*}
 对于以上例子中多次的出现满足$h(t)=y_h(t)u(t)$的信号，我们有一个专门的术语来称呼它们：
 
 \begin{definition}
+    \label{def:casual_signal}
     如果信号满足$h(t)=y_h(t)u(t)$，或等价的，$h(t)=0,\forall t<0$，则称之为\textbf{因果信号}(causal signal)；
     
     如果信号满足$h(t)=y_h(t)u(-t)$，则称之为\textbf{反因果信号}(anti-causal signal)。

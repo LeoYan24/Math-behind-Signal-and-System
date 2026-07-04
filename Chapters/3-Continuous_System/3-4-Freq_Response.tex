@@ -26,15 +26,15 @@
 \end{definition}
 \begin{example}
     高斯滤波器的单位冲激响应和频率响应特性分别为
-    $$h(t)=\mathrm{e}^{-t^2},H(\omega)=\sqrt{\pi}\mathrm{e}^{-\omega^2/4}$$
+    $$h(t)=\mathrm{e}^{-t^2},\quad H(\omega)=\sqrt{\pi}\mathrm{e}^{-\omega^2/4}$$
     利用反常积分的比较判别法的极限形式，
-    \[\frac{|\ln|H(\omega)||}{1+\omega^2}=\frac{\left|\ln \sqrt{\pi}-\frac{\omega^2}{4}\right|}{1+\omega^2}\sim \frac{\omega^2/4}{\omega^2}=\frac{1}{4},|\omega|\to\infty\]
+    \[\frac{|\ln|H(\omega)||}{1+\omega^2}=\frac{\left|\ln \sqrt{\pi}-\frac{\omega^2}{4}\right|}{1+\omega^2}\sim \frac{\omega^2/4}{\omega^2}=\frac{1}{4},\quad |\omega|\to\infty\]
     于是
     \[\int_{-\infty}^{\infty}\frac{\left|\ln|H(\omega)|\right|}{1+\omega^2}\,d\omega=\infty\]
     高斯滤波器不满足佩利-维纳准则。它不是因果系统，不是物理可实现的。
 \end{example}
 
-佩利-维纳准则表明$|H(\omega)|$是能量有限的，并且衰减速度不能过快，特别地，$|H(\omega)|$不能紧支，于是下一小节中提到的理想滤波器都是不可能实现的。要求能量有限，是因为有限能量输入对应有限能量输出。激励$e(t)=\delta(t)$时，输入能量是有限的，$h(t)$的能量也是有限的，根据帕塞瓦尔定理，$H(\omega)$的能量也是有限的；另一方面，$H\in L^2(\mathbb{R})$是得到佩里维纳准则的第二条所必需的。
+佩利-维纳准则表明$|H(\omega)|$是能量有限的，并且衰减速度不能过快，特别地，$|H(\omega)|$不能紧支，于是下一小节中提到的理想滤波器（\cref{def:ideal_filter}）都是不可能实现的。要求能量有限，是因为有限能量输入对应有限能量输出。激励$e(t)=\delta(t)$时，输入能量是有限的，$h(t)$的能量也是有限的，根据帕塞瓦尔定理，$H(\omega)$的能量也是有限的；另一方面，$H\in L^2(\mathbb{R})$是得到佩里维纳准则的第二条所必需的。
 
 佩利-维纳准则是因果性能量有限系统的必要特性，它没有对系统引入额外的要求。但是，得到这一条件需要比较复杂的数学知识，本书不作讨论。
 
@@ -93,6 +93,7 @@
 我们曾在\refsub{convolution}中提到，滤波就是把信号中的某些成分剔除或大幅减少，相当于在频域乘以一个函数，在时域上的表现则是与这个函数的傅里叶逆变换进行卷积。从频率响应的视角来看，滤波器就是一个系统，理想滤波器的幅频特性在某些频率处接近于0，而在另一些频率处接近于1。
 
 \begin{definition}[滤波器的分类]
+    \label{def:ideal_filter}
     \textbf{低通滤波器}是指幅频特性$|H(\omega)|$近似等于$$\chi_{[-\omega_c,\omega_c]}$$的滤波器，$\omega_c$为截止频率；\textbf{高通滤波器}则相反，幅频特性近似$$1-\chi_{[-\omega_c,\omega_c]}$$
     \textbf{带通滤波器}的幅频特性近似等于$$\chi_{[\omega_L,\omega_H]}+\chi_{[-\omega_H,-\omega_L]}$$
     其中$\omega_L,\omega_H$分别称为下截频和上截频；\textbf{带阻滤波器}则相反，幅频特性近似为$$1-\left(\chi_{[\omega_L,\omega_H]}+\chi_{[-\omega_H,-\omega_L]}\right)$$
@@ -165,15 +166,16 @@
 
 对于一般的线性时不变系统，可以将时延$t_0=-\varphi(\omega)/\omega$由常数推广为$\omega$的函数$\tau_p(\omega)$。此外，$\varphi(\omega)/\omega$是$\varphi(\omega)-\omega$图像的割线斜率，而$d\varphi(\omega)/d\omega$是该图像在$\omega$处的切线斜率，仿照电路分析中对于动态电阻和静态电阻的处理，我们定义相时延和群时延\cite{signal_systems}：
 \begin{definition}[相时延和群时延]
-\[\tau_p(\omega)=-\frac{\varphi(\omega)}{\omega}\]
-描述了系统对不同频率成分造成时延的情况，称之为\textbf{相时延}(phase delay)；将
-\[\tau_g(\omega)=-\frac{d\varphi(\omega)}{d\omega}\]
-称为\textbf{群时延}(group delay)或\textbf{包络延时}(envelope delay)。
+    \label{def:delay}
+    \[\tau_p(\omega)=-\frac{\varphi(\omega)}{\omega}\]
+    描述了系统对不同频率成分造成时延的情况，称之为\textbf{相时延}(phase delay)；将
+    \[\tau_g(\omega)=-\frac{d\varphi(\omega)}{d\omega}\]
+    称为\textbf{群时延}(group delay)或\textbf{包络延时}(envelope delay)。
 \end{definition}
 
 对于无失真传输系统，$\tau_p(\omega)=\tau_g(\omega)=t_0$。根据电路分析的经验，看到$\tau_p(\omega)=-\varphi(\omega)/\omega$而定义$\tau_g(\omega)=-d\varphi(\omega)/d\omega$是自然的，在处理非线性电阻的伏安特性曲线时也曾类似地定义动态电阻和静态电阻，但其物理意义并不十分明显，我们通过两个例子来理解它们的意义。
 
-\begin{example}[相时延]
+\begin{example}[相时延]\label{exmp:phase_delay}
 设输入信号为单频复指数信号$\mathrm{e}^{\mathrm{i}\omega_0 t}$，求频率响应为$H(\omega)$
 的线性时不变系统的输出信号$r(t)$。\\
 解：我们已经在前面得到：\[r(t)=H\left[\mathrm{e}^{\mathrm{i}\omega_0 t}\right]=H(\omega_0)\mathrm{e}^{\mathrm{i}\omega_0 t}\]
@@ -280,8 +282,7 @@ $$\tau_p(\omega_0)=-\frac{\varphi(\omega_0)}{\omega_0}$$
 
 典型的色散现象如一束白光通过三棱镜时，不同频率的光波由于波速不同而发生空间分离，形成彩虹色带。在无线电通信中，电离层对不同频率的电磁波有不同的折射率，导致信号传播速度不同，从而引起信号失真。
 
-为了讨论方便，我们假设波动是一维的，$x$处的质点在时刻$t$的位置为$y(x,t)$，$y(x,t)$\\
-满足的动力学方程称为\textbf{波动方程}，具有如下统一形式：
+为了讨论方便，我们假设波动是一维的，$x$处的质点在时刻$t$的位置为$y(x,t)$，$y(x,t)$满足的动力学方程称为\textbf{波动方程}，具有如下统一形式：
 \[\frac{\partial^2 y}{\partial x^2}=\frac{1}{u^2}\frac{\partial^2 y}{\partial t^2}\]
 其中常数$u$具有波速的物理意义。波动方程的解具有形式$y(x,t)=f(x-ut)+g(x+ut)$，其中$f$和$g$分别表示向x轴正方向和负方向传播的波的波形，数学上，它们可以是任意的无限阶可导函数。
 
@@ -301,7 +302,7 @@ $$\tau_p(\omega_0)=-\frac{\varphi(\omega_0)}{\omega_0}$$
 下面，我们将长度为$L$的均匀介质看作一个系统，设波$y(x,t)$沿$x$轴正向传播，将$x=0$处的波形作为输入信号$e(t)=y(0,t)$，$x=L$处的波形作为输出信号$r(t)=y(L,t)$。对于无色散介质，当输入为角频率为$\omega$的正弦波$\cos(\omega t)$时，有
 \[r(t)=y(L,t)=e\left(t - \frac{L}{u}\right)=\cos\left(\omega \left(t-\frac{L}{u}\right)\right)\]
 因此可以对给定的$\omega$求出频率响应为
-\[H(\omega)=\mathrm{e}^{-\mathrm{i}\omega \frac{L}{u}}=\mathrm{e}^{-\mathrm{i}kL},k=\frac{\omega}{u}\]
+\[H(\omega)=\mathrm{e}^{-\mathrm{i}\omega \frac{L}{u}}=\mathrm{e}^{-\mathrm{i}kL},\quad k=\frac{\omega}{u}\]
 我们用到了波速$u$的定义式($*$)。可以看出，$k$实际上是关于$\omega$的函数$k(\omega)=\omega/u$，但在研究单频正弦波时看不出这一点。
 \begin{definition}[色散关系]
     介质中波数$k$与角频率$\omega$之间的函数关系$k(\omega)$称为\textbf{色散关系}(dispersion relation)。

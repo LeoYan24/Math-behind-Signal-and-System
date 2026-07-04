@@ -13,13 +13,15 @@
 
 在不涉及收敛性的问题时，可以将$\omega$推广为复数$s=\sigma+\mathrm{i}\omega$，根据含参变量积分的求导法则，这样的积分变换可以对$s$求导，从而是全纯函数。这个积分变换就是\textbf{双边拉普拉斯变换}：
 \begin{definition}[双边拉普拉斯变换]
-    设函数$f$局部可积，$\exists a,b\in\mathbb{R},a<b$（我们允许$a=-\infty$和$b=\infty$），使得$f(t)\mathrm{e}^{-at}$和$f(t)\mathrm{e}^{-bt}$均绝对可积，则对$\mathrm{Re}\ s\in[a,b]$，$f$的双边拉普拉斯变换定义为
+    \label{def:bi_laplace}
+    设函数$f$局部可积，$\exists a,b\in\mathbb{R},a<b$（我们允许$a=-\infty$和$b=\infty$），使得$f(t)\mathrm{e}^{-at}$和$f(t)\mathrm{e}^{-bt}$均绝对可积，则对$\mathrm{Re}(s)\in[a,b]$，$f$的双边拉普拉斯变换定义为
     \[\mathcal{L}f(s)=\int_{-\infty}^{\infty}f(t)\mathrm{e}^{-st}\,dt\]
 \end{definition}
 “局部可积”即$f$在任意有限区间上可积，这个条件是为了保证在添加适当的收敛因子$\mathrm{e}^{-st}$后，拉普拉斯积分收敛，从而拉普拉斯变换有定义。
 
 在$\sigma>0$时，这个收敛因子会使得$t\to -\infty$时$|\mathrm{e}^{-st}|=\mathrm{e}^{-\sigma t}$快速增长，从而对所变换的函数提出很高的要。实际上，更多时候我们仅使用\textbf{单边拉普拉斯变换}，定义如下\cite{folland}：
 \begin{definition}[单边拉普拉斯变换]
+    \label{def:single_laplace}
     记\[\mathcal{E}=\left\{f:[0,\infty)\to\mathbb{C}\left|f\in PC[0,\infty),\exists C>0,a\in\mathbb{R},|f(t)|<Ce^{at},\forall t\geq 0\right.\right\}\]
     其中$PC[0,\infty)$表示$[0,\infty)$上的分段连续函数。
     对$f\in\mathcal{E}$，其拉普拉斯变换定义为
@@ -28,7 +30,7 @@
     如果$f(t)$是时域信号，$\mathcal{L} f(s)$称为\textbf{复频域信号}。
     我们仍记$\mathcal{L} f(s)$为$F(s)$或$\hat{f}(s)$（在涉及傅里叶变换时，我们会避免使用它们或加以说明），并记$f\overset{\mathcal{L} }{\longleftrightarrow} F(s)$。
 \end{definition}
-在$\mathcal{E} $的定义中我们对$f$的定义域做了要求，但实际上只要$f$是因果信号（见\refsub{term_in_ODE}，$f(t)=f(t)u(t)$），就可以认为$f\in\mathcal{E}$，后文中不会特意区分$f$的定义域。
+在$\mathcal{E} $的定义中我们对$f$的定义域做了要求，但实际上只要$f$是因果信号（\cref{def:casual_signal}），就可以认为$f\in\mathcal{E}$，后文中不会特意区分$f$的定义域。
 
 在$\mathcal{E} $上定义拉普拉斯变换，是因为对于$f\in\mathcal{E} $，当$\sigma>a$时，给出拉普拉斯变换的积分是绝对收敛的：
 \begin{align*}
@@ -53,11 +55,11 @@
     \end{align*}
 尽管积分只在$\sigma>0$时收敛，但$\mathcal{L} f(s)$可以延拓为$\mathbb{C}\backslash\{0\}$上的全纯函数。
 \begin{remark}
-    其实，这个公式对实部大于$-1$的$\nu$都成立。尽管$-1<\mathrm{Re}\ \nu<0$时，$f(t)=t^\nu$\\
+    其实，这个公式对实部大于$-1$的$\nu$都成立。尽管$-1<\mathrm{Re}(\nu)<0$时，$f(t)=t^\nu$\\
     在$t=0$处无界，但由于
-\[\left|\int_{0}^{1}t^{\nu}\mathrm{e}^{-st}\,dt\right|\leq \int_0^1 t^\nu\,dt=\frac{1}{\nu+1},\sigma>0\]
-\[\left|\int_{1}^{\infty}t^{\nu}\mathrm{e}^{-st}\,dt\right|\leq \int_1^\infty \mathrm{e}^{-\sigma t}\,dt=\frac{\mathrm{e}^{-\sigma}}{\sigma},\sigma>0\]
-其拉普拉斯变换是存在的。因此，我们可以认为$t^\nu\in\mathcal{E},\mathrm{Re}\ \nu>-1$.
+\[\left|\int_{0}^{1}t^{\nu}\mathrm{e}^{-st}\,dt\right|\leq \int_0^1 t^\nu\,dt=\frac{1}{\nu+1},\quad \sigma>0\]
+\[\left|\int_{1}^{\infty}t^{\nu}\mathrm{e}^{-st}\,dt\right|\leq \int_1^\infty \mathrm{e}^{-\sigma t}\,dt=\frac{\mathrm{e}^{-\sigma}}{\sigma},\quad \sigma>0\]
+其拉普拉斯变换是存在的。因此，我们可以认为$t^\nu\in\mathcal{E},\mathrm{Re}(\nu)>-1$.
 \end{remark}
 \end{example}
 
@@ -65,8 +67,8 @@
 \begin{proposition}[$\mathcal{E} $中的卷积]
     设$f,g\in\mathcal{E} $，则它们的卷积为
     \[(f*g)(t)=\begin{cases}
-    0                   & \mathrm{if } t<0 \\
-    \int_0^t f(x)g(t-x)\,dx & \mathrm{if } t\geq 0
+    0                   & \text{if } t<0 \\
+    \int_0^t f(x)g(t-x)\,dx & \text{if } t\geq 0
     \end{cases}\]
 \end{proposition}
 这是因为$x\geq 0,t-x\geq 0$时，$f(x),g(t-x)$才不恒为0，这相当于积分区间为$[0,t]$。
@@ -169,7 +171,7 @@
 \subsection{常用函数的拉普拉斯变换}\label{sub:ordinary_laplace}
 
 \begin{example}[指数多项式]
-    设$f(t)=t^\nu \mathrm{e}^{a t}u(t),\mathrm{Re}\ \nu>-1$，利用拉普拉斯变换的频移性质，有
+    设$f(t)=t^\nu \mathrm{e}^{a t}u(t),\mathrm{Re}(\nu)>-1$，利用拉普拉斯变换的频移性质，有
     \begin{align*}
         \mathcal{L} f(s)&=\mathcal{L}\left[t^\nu \mathrm{e}^{a t}u(t)\right](s)\\
         &=\mathcal{L} \left[t^\nu u(t)\right](s-a)\\
@@ -179,20 +181,20 @@
 \end{example}
 
 \begin{example}[正弦、余弦函数]
-    首先，$\cos(\omega_0 t),\sin(\omega_0 t)\in\mathcal{E}$，因为$$\forall a>0,|\cos(\omega_0 t)|,|\sin(\omega_0 t)|<\mathrm{e}^{a t}$$
+    首先，$\cos(\omega_0 t),\sin(\omega_0 t)\in\mathcal{E}$，因为$$\forall a>0,\quad |\cos(\omega_0 t)|,|\sin(\omega_0 t)|<\mathrm{e}^{a t}$$
     下面给出两种求解方法。\\
     方法一：利用欧拉公式化归为指数函数：
     \begin{align*}
         \mathcal{L}[\cos(\omega_0 t)](s)&=\mathcal{L}[\cos(\omega_0 t)u(t)](s)\\
         &=\frac{1}{2}\mathcal{L} [\mathrm{e}^{\mathrm{i}\omega_0 t}u(t)](s)+\frac{1}{2}\mathcal{L} [\mathrm{e}^{-\mathrm{i}\omega_0 t}u(t)](s)\\
         &=\frac{1}{2}\left(\frac{1}{s-\mathrm{i}\omega_0}+\frac{1}{s+\mathrm{i}\omega_0}\right)\\
-        &=\frac{s}{s^2+\omega_0^2},\sigma>0
+        &=\frac{s}{s^2+\omega_0^2},\quad \sigma>0
     \end{align*}
     \begin{align*}
         \mathcal{L}[\sin(\omega_0 t)](s)&=\mathcal{L} [\sin(\omega_0 t)u(t)](s)\\
         &=\frac{1}{2\mathrm{i}}\mathcal{L} [\mathrm{e}^{\mathrm{i}\omega_0 t}u(t)](s)-\frac{1}{2\mathrm{i}}\mathcal{L} [\mathrm{e}^{-\mathrm{i}\omega_0 t}u(t)](s)\\
         &=\frac{1}{2\mathrm{i}}\left(\frac{1}{s-\mathrm{i}\omega_0}-\frac{1}{s+\mathrm{i}\omega_0}\right)\\
-        &=\frac{\omega_0}{s^2+\omega_0^2},\sigma>0
+        &=\frac{\omega_0}{s^2+\omega_0^2},\quad \sigma>0
     \end{align*}
     方法二：利用微分性质：
     \begin{align*}
@@ -206,17 +208,17 @@
 
 \begin{example}[双曲函数]
     因为
-    \[\sinh(\omega_0 t)=\frac{\mathrm{e}^{\omega_0 t}-\mathrm{e}^{-\omega_0 t}}{2},\cosh(\omega_0 t)=\frac{\mathrm{e}^{\omega_0 t}+\mathrm{e}^{-\omega_0 t}}{2}\]
+    \[\sinh(\omega_0 t)=\frac{\mathrm{e}^{\omega_0 t}-\mathrm{e}^{-\omega_0 t}}{2},\quad \cosh(\omega_0 t)=\frac{\mathrm{e}^{\omega_0 t}+\mathrm{e}^{-\omega_0 t}}{2}\]
     所以
     \begin{align*}
         \mathcal{L} \left[\sinh(\omega_0 t)\right](s)&=\frac{1}{2}\mathcal{L} \left[\mathrm{e}^{\omega_0 t}\right](s)-\frac{1}{2}\mathcal{L} \left[\mathrm{e}^{-\omega_0 t}\right](s)\\
         &=\frac{1}{2}\left(\frac{1}{s-\omega_0}-\frac{1}{s+\omega_0}\right)\\
-        &=\frac{\omega_0}{s^2-\omega_0^2},\sigma>|\omega_0|
+        &=\frac{\omega_0}{s^2-\omega_0^2},\quad \sigma>|\omega_0|
     \end{align*}
     \begin{align*}
         \mathcal{L} \left[\cosh(\omega_0 t)\right](s)&=\frac{1}{2}\mathcal{L} \left[\mathrm{e}^{\omega_0 t}\right](s)+\frac{1}{2}\mathcal{L} \left[\mathrm{e}^{-\omega_0 t}\right](s)\\
         &=\frac{1}{2}\left(\frac{1}{s-\omega_0}+\frac{1}{s+\omega_0}\right)\\
-        &=\frac{s}{s^2-\omega_0^2},\sigma>|\omega_0|
+        &=\frac{s}{s^2-\omega_0^2},\quad \sigma>|\omega_0|
     \end{align*}
 \end{example}
 
@@ -229,7 +231,7 @@
         &=\int_s^{\infty}\frac{\omega_0}{x^2+\omega_0^2}\,dx\\
         &=\evalat{\arctan\frac{x}{\omega_0}}{s}{\infty}\\
         &=\frac{\pi}{2}-\arctan\frac{s}{\omega_0}\\
-        &=\arctan\left(\frac{\omega_0}{s}\right),\sigma>0
+        &=\arctan\left(\frac{\omega_0}{s}\right),\quad \sigma>0
     \end{align*}
 \end{example}
 
@@ -240,7 +242,7 @@
         \mathcal{L} [\mathrm{Si}(\omega_0 t)](s)&=\mathcal{L} \left[\int_0^{\omega_0 t} \frac{\sin(x)}{x}\,dx\right](s)\\
         &=\mathcal{L} \left[\int_0^{t} \frac{\sin(\omega_0 x)}{x}\,dx\right](s)\\
         &=\frac{1}{s}\mathcal{L} \left[\frac{\sin(\omega_0 t)}{t}\right](s)\\
-        &=\frac{1}{s}\arctan\left(\frac{\omega_0}{s}\right),\sigma>0
+        &=\frac{1}{s}\arctan\left(\frac{\omega_0}{s}\right),\quad \sigma>0
     \end{align*}    
 \end{example}
 
@@ -254,10 +256,10 @@
 \end{lemma}
 \begin{proof}
     1.令$g(t)=f(t)\mathrm{e}^{-x t}$，则$|g(t)|\leq Ce^{-(x-a)t}$，因此$g\in L^1(\mathbb{R} )$，根据Riemann-Lebesgue引理，有
-    \[\mathcal{L} f(x+\mathrm{i}y)=\mathcal{F} g(y)\to 0,|y|\to\infty\]
-    2.利用海涅归并原理，任取实部趋于无穷的序列$\{z_n\}$，满足$\mathcal{L} f(z_n)$存在（这要求$\mathrm{Re}\ z>a$），我们要证明序列$\mathcal{L} f(z_n)\to 0$。由控制收敛定理，有
+    \[\mathcal{L} f(x+\mathrm{i}y)=\mathcal{F} g(y)\to 0,\quad |y|\to\infty\]
+    2.利用海涅归并原理，任取实部趋于无穷的序列$\{z_n\}$，满足$\mathcal{L} f(z_n)$存在（这要求$\mathrm{Re}(z)>a$），我们要证明序列$\mathcal{L} f(z_n)\to 0$。由控制收敛定理（\cref{thm:DCT}），有
     \begin{align*}
-        &\int_{0}^{\infty}|f(t)\mathrm{e}^{-z_n t}|\,dt\leq \int_0^{\infty}Ce^{at}\mathrm{e}^{-Re(z_n) t}\,dt=C\int_0^{\infty}\mathrm{e}^{-(Re(z_n)-a)t}\,dt=\frac{C}{\mathrm{Re}\ z_n-a}<\infty\\
+        &\int_{0}^{\infty}|f(t)\mathrm{e}^{-z_n t}|\,dt\leq \int_0^{\infty}Ce^{at}\mathrm{e}^{-Re(z_n) t}\,dt=C\int_0^{\infty}\mathrm{e}^{-(Re(z_n)-a)t}\,dt=\frac{C}{\mathrm{Re}(z_n)-a}<\infty\\
         &\lim_{n\to\infty}\mathcal{L} f(z_n)=\lim_{n\to\infty}\int_0^{\infty}f(t)\mathrm{e}^{-z_n t}\,dt=\int_0^{\infty}\lim_{n\to\infty}f(t)\mathrm{e}^{-z_n t}\,dt=0
     \end{align*}
 \end{proof}
@@ -276,8 +278,8 @@
     \begin{align*}
         &|a_n \Gamma(n+1)\omega_0^{-n}|\to 0, n\to\infty\\
         \implies &|a_n|\leq C\frac{\omega_0^{n}}{\Gamma(n+1)}\\
-        \implies &|f(t)|\leq \sum_{n=0}^{\infty}|a_n|t^n\leq C\sum_{n=0}^{\infty}\frac{(\omega_0 t)^{n}}{\Gamma(n+1)}=Ce^{\omega_0 t}\\
-        \implies &\forall s,\mathrm{Re}\ s=\omega_0+\phi>\omega_0,|f(t)\mathrm{e}^{-s t}|\leq Ce^{-\phi t}
+        \implies &|f(t)|\leq \sum_{n=0}^{\infty}|a_n|t^n\leq C\sum_{n=0}^{\infty}\frac{(\omega_0 t)^{n}}{\Gamma(n+1)}=C\e^{\omega_0 t}\\
+        \implies &\forall s,\mathrm{Re}(s)=\omega_0+\phi>\omega_0,|f(t)\mathrm{e}^{-s t}|\leq C\e^{-\phi t}
     \end{align*}
     控制收敛定理的条件成立，换序即证。
 \end{proof}

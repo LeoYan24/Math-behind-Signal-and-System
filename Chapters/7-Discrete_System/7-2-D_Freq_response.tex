@@ -27,7 +27,7 @@ $$H(\mathrm{e}^{\mathrm{i}\Omega})=H(z)|_{z=\mathrm{e}^{\mathrm{i}\Omega}}$$
         \caption{离散系统的矢量图}
     \end{figure}
     该系统的系统函数具有如下形式：
-    $$H(z)=\frac{z-a}{(z+b+\mathrm{i}c)(z+b-\mathrm{i}c)},a,b,c>0$$
+    $$H(z)=\frac{z-a}{(z+b+\mathrm{i}c)(z+b-\mathrm{i}c)},\quad a,b,c>0$$
     因此幅频特性就是复平面上的向量$z-a$与向量$z+b+\mathrm{i}c$、$z+b-\mathrm{i}c$的长度之比。
 
     随矢量终点由$\Omega=0$向$\Omega=\pi$移动，由零点出发的矢量长度（分子）逐渐增加，而由极点出发的矢量长度（分母）逐渐减小，因此系统的增益在$\Omega=0$处较小，在$\Omega=\pi$处较大，具有高通滤波特性。
@@ -52,7 +52,7 @@ $$H(\mathrm{e}^{\mathrm{i}\Omega})=H(z)|_{z=\mathrm{e}^{\mathrm{i}\Omega}}$$
     对于一个因果且稳定的线性时不变系统，设其系统函数为$H(z)$，激励为在$n=0$时刻施加于系统的单频离散信号
     $$e[n]=\mathrm{e}^{\mathrm{i}\Omega n}u[n]$$
     激励信号的z变换为：
-    $$E(z)=\sum_{n=0}^{\infty}\mathrm{e}^{\mathrm{i}\Omega n}z^{-n}=\frac{1}{1-\mathrm{e}^{\mathrm{i}\Omega}z^{-1}},|z|>1$$
+    $$E(z)=\sum_{n=0}^{\infty}\mathrm{e}^{\mathrm{i}\Omega n}z^{-n}=\frac{1}{1-\mathrm{e}^{\mathrm{i}\Omega}z^{-1}},\quad |z|>1$$
     因此响应的z变换为
     $$R(z)=H(z)E(z)=\frac{H(z)}{1-\mathrm{e}^{\mathrm{i}\Omega}z^{-1}}$$
     为了求出$R(z)$的逆z变换，我们考虑使用留数定理的方法。由于系统函数$H(z)$的收敛域包含$|z|\geq 1$，只要选取一个半径$R>1$的圆$C_R:t\mapsto R\mathrm{e}^{\mathrm{i}t},t\in[0,2\pi)$作为围道，就能够保证$R(z)$在$C_R$上解析，从而留数定理的方法适用。
@@ -97,7 +97,7 @@ $$H(\mathrm{e}^{\mathrm{i}\Omega})=H(z)|_{z=\mathrm{e}^{\mathrm{i}\Omega}}$$
     其中$\Omega_m$为调制频率，$\Omega_c$为载波频率，且满足$0<\Omega_m\ll\Omega_c<\pi$。利用积化和差公式以及单边余弦序列的z变换公式，可以求得激励信号的z变换为
     \begin{align*}
         E(z)&=\mathcal{Z}\left\{\frac{1}{2}\left(\cos(\Omega_c+\Omega_m)n+\cos(\Omega_c-\Omega_m)n\right)u[n]\right\}\\
-        &=\frac{1}{4}\left[\frac{z}{z-\mathrm{e}^{\mathrm{i}(\Omega_c+\Omega_m)}}+\frac{z}{z-\mathrm{e}^{-\mathrm{i}(\Omega_c+\Omega_m)}}+\frac{z}{z-\mathrm{e}^{\mathrm{i}(\Omega_c-\Omega_m)}}+\frac{z}{z-\mathrm{e}^{-\mathrm{i}(\Omega_c-\Omega_m)}}\right],|z|>1
+        &=\frac{1}{4}\left[\frac{z}{z-\mathrm{e}^{\mathrm{i}(\Omega_c+\Omega_m)}}+\frac{z}{z-\mathrm{e}^{-\mathrm{i}(\Omega_c+\Omega_m)}}+\frac{z}{z-\mathrm{e}^{\mathrm{i}(\Omega_c-\Omega_m)}}+\frac{z}{z-\mathrm{e}^{-\mathrm{i}(\Omega_c-\Omega_m)}}\right],\quad |z|>1
     \end{align*}
     因此响应的z变换为
     \begin{align*}

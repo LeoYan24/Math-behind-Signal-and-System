@@ -6,7 +6,7 @@
 
 \begin{definition}
     \textbf{伽马函数}定义在复平面$\mathbb{C}$的右半平面上：
-    \[\Gamma (z)=\int_{0}^{\infty}x^{z-1}\mathrm{e}^{-x}\,dx,\mathrm{Re}(z)>0\]
+    \[\Gamma (z)=\int_{0}^{\infty}x^{z-1}\mathrm{e}^{-x}\,dx,\quad\mathrm{Re}(z)>0\]
 \end{definition}
 注意到$\mathrm{Re}(z)>0$时，$|x^{z-1}\mathrm{e}^{-x}|<t^{\mathrm{Re}(z)-1}$，而$t^{\mathrm{Re}(z)-1}$在$[0,\infty)$上可积，因此伽马函数的积分定义在右半平面$\mathrm{Re}(z)>0$上收敛。事实上它是$\mathrm{Re}(z)>0$上的全纯函数，全纯的概念，见\refsec{Complex}。
 
@@ -39,7 +39,7 @@
 下面介绍一个与伽马函数有着紧密联系的特殊函数：\textbf{贝塔函数}。
 
 \begin{definition}[贝塔函数]
-    \[B(p,q)=\int_{0}^{1}x^{p-1}(1-x)^{q-1}\,dx,\mathrm{Re}(p)>0,\mathrm{Re}(q)>0\]
+    \[B(p,q)=\int_{0}^{1}x^{p-1}(1-x)^{q-1}\,dx,\quad\mathrm{Re}(p)>0,\mathrm{Re}(q)>0\]
 \end{definition}
 贝塔函数又称\textbf{B函数}，或\textbf{欧拉第一积分}。只要做变量替换$y=1-x$，就可以看出它是对称的，即$B(p,q)=B(q,p)$。贝塔函数与伽马函数之间有如下关系：
 \begin{theorem}
@@ -181,6 +181,7 @@ $\dfrac{\sin t}{t}$是\refsub{signal}中介绍的采样信号，在$t=0$处连�
 
 进一步，正弦积分函数在$\infty$处收敛于$\pi/2$，这个结果称为\textbf{狄利克雷积分}，它可以通过留数定理或傅里叶变换来证明，我们将在\refsub{fourier_of_signal}中给出基于傅里叶变换的证明。
 \begin{theorem}[狄利克雷积分]
+    \label{thm:dirichlet_int}
     \[\int_{0}^{\infty}\frac{\sin t}{t}\,dt=\mathrm{Si}(\infty)=\frac{\pi}{2}\]
 \end{theorem}
 
@@ -246,6 +247,7 @@ $$a_0=\frac{1}{2^\nu\Gamma(\nu+1)}$$
 其推导过程可以参考\cite{folland}。下面指出贝塞尔函数的一些性质：
 
 \begin{proposition}[递推公式]
+    \label{prop:bessel_recursion}
     任给$x,\nu$，有
     \begin{align*}
         &\frac{d}{dx}[x^{-\nu}J_{\nu}(x)]=-x^{-\nu}J_{\nu+1}(x)\\

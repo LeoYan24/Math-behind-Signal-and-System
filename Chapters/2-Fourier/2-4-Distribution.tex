@@ -105,9 +105,7 @@ $\delta$的高阶导数可以依此类推，它们已经难以用类似$\delta(x
     \item 设当$m\to\infty$时，$T_m\to T$，即$\forall\varphi\in\mathcal{C} ,\left\langle T_m,\varphi\right\rangle\to\left\langle T,\varphi\right\rangle$，
           则\[\left\langle T_m',\varphi\right\rangle=-\left\langle T_m,\varphi'\right\rangle\to-\left\langle T,\varphi'\right\rangle=\left\langle T',\varphi\right\rangle\]
 \end{enumerate}
-可以看到，分布理论中极限的概念是通过测试函数来定义的，如果分布序列$\{T_m\}_{m=1}^{\infty}$
-作用在任何测试函数上都是趋于某个分布T作用于这个测试函数的值，就说序列$\{T_m\}$
-\textbf{弱收敛}(converge weakly)于T，并记为$T_m\to T$\cite{folland}。
+可以看到，分布理论中极限的概念是通过测试函数来定义的，如果分布序列$\{T_m\}_{m=1}^{\infty}$作用在任何测试函数上都是趋于某个分布T作用于这个测试函数的值，就说序列$\{T_m\}$\textbf{弱收敛}(converge weakly)于T，并记为$T_m\to T$\cite{folland}。
 \end{proof}
 
 \subsection{施瓦兹空间的引入}\label{sub:schwartz}
@@ -127,27 +125,23 @@ $\mathcal{C} $
 $\mathcal{F}\varphi$仍然是测试函数。这个测试函数空间正是\textbf{施瓦兹空间}(Schwartz space)$\mathcal{S} $\cite{brad_osgood_ee261}，它是$\mathbb{R}$上所有无限可微函数的集合，这些函数及其各阶导数都以比任何负幂更快的速度趋于0，即
 \begin{definition}[施瓦兹空间与施瓦兹函数]
     \[\mathcal{S} =\left\{\varphi\in C^{\infty}(\mathbb{R} )\left|\lim_{|x|\to\infty}|x|^m\varphi^{(n)}(x)=0,\forall m,n\in\mathbb{N} \right.\right\}\]
-施瓦兹空间中的函数称为\textbf{施瓦兹函数}(Schwartz function)，它们是非常光滑且
-衰减很快的函数，因此又称为\textbf{速降函数}(rapidly decreasing function)
+    施瓦兹空间中的函数称为\textbf{施瓦兹函数}(Schwartz function)，它们是非常光滑且衰减很快的函数，因此又称为\textbf{速降函数}(rapidly decreasing function)
 \end{definition}
 \begin{example}
 高斯函数$\mathrm{e}^{-x^2}$及其各阶导数都属于施瓦兹空间。
 \end{example}
 \begin{definition}[施瓦兹分布]
-    施瓦兹空间的对偶空间$\mathcal{T} :=\mathcal{S}^*$中的元素称为\textbf{施瓦兹分布}(Schwartz distribution)
-或\textbf{缓增分布}(tempered distribution)。称之为“缓增分布”，是因为一些能够用函数描述的施瓦兹分布在自变量趋于无穷时增长速度较缓，以至于它们与施瓦兹函数的乘积可积。
+    施瓦兹空间的对偶空间$\mathcal{T}:=\mathcal{S}^*$中的元素称为\textbf{施瓦兹分布}(Schwartz distribution)或\textbf{缓增分布}(tempered distribution)。称之为“缓增分布”，是因为一些能够用函数描述的施瓦兹分布在自变量趋于无穷时增长速度较缓，以至于它们与施瓦兹函数的乘积可积。
 \end{definition}
 我们仍定义
 \begin{align}
     T(\varphi)                 & =\left\langle T,\varphi\right\rangle                                        \\
-    \left\langle T_f,\varphi\right\rangle & =\int_{-\infty}^{\infty}f(x)\varphi(x)\,dx,\varphi\in\mathcal{S}
+    \left\langle T_f,\varphi\right\rangle & =\int_{-\infty}^{\infty}f(x)\varphi(x)\,dx,\quad\varphi\in\mathcal{S}
 \end{align}
 易见$\mathcal{C} \subset \mathcal{S} ,\mathcal{T} \subset\mathcal{D}. $
 
-有了施瓦兹函数类$\mathcal{S} $和缓增分布$\mathcal{T} $，我们就可以定义分布的傅里
-叶变换，还可以定义有关分布的一系列算子。前文中曾定义分布与函数的乘法和分布的导数，
-现在认为正则分布是由施瓦兹函数导出的，则显然能够推广到缓增分布，即\begin{align}
-    \left\langle gT,\varphi\right\rangle=\left\langle T,g\varphi\right\rangle,\left\langle T',\varphi\right\rangle=\left\langle T,\varphi'\right\rangle,g\in\mathcal{S} ,T\in\mathcal{T}
+有了施瓦兹函数类$\mathcal{S} $和缓增分布$\mathcal{T} $，我们就可以定义分布的傅里叶变换，还可以定义有关分布的一系列算子。前文中曾定义分布与函数的乘法和分布的导数，现在认为正则分布是由施瓦兹函数导出的，则显然能够推广到缓增分布，即\begin{align}
+    \left\langle gT,\varphi\right\rangle=\left\langle T,g\varphi\right\rangle,\left\langle T',\varphi\right\rangle=\left\langle T,\varphi'\right\rangle,\quad g\in\mathcal{S} ,T\in\mathcal{T}
 \end{align}
 
 \subsection{分布的运算性质}\label{sub:operation_of_distribution}
@@ -164,19 +158,19 @@ $\mathcal{F}\varphi$仍然是测试函数。这个测试函数空间正是\textb
 \end{align*}
 因此我们定义\begin{definition}[分布的傅里叶变换]
     \begin{align*}
-        \left\langle \mathcal{F} T,\varphi\right\rangle & =\left\langle T,\mathcal{F} \varphi\right\rangle,T\in\mathcal{T} ,\varphi\in\mathcal{S}
+        \left\langle \mathcal{F} T,\varphi\right\rangle & =\left\langle T,\mathcal{F} \varphi\right\rangle,\quad T\in\mathcal{T} ,\varphi\in\mathcal{S}
     \end{align*}
 \end{definition}
 
 傅里叶逆变换同理:
 \begin{definition}[分布的傅里叶反变换]
     \begin{align*}
-        \left\langle \mathcal{F} ^{-1}T,\varphi\right\rangle & =\left\langle T,\mathcal{F} ^{-1}\varphi\right\rangle,T\in\mathcal{T} ,\varphi\in\mathcal{S}
+        \left\langle \mathcal{F} ^{-1}T,\varphi\right\rangle & =\left\langle T,\mathcal{F} ^{-1}\varphi\right\rangle,\quad T\in\mathcal{T} ,\varphi\in\mathcal{S}
     \end{align*}
 \end{definition}
 
 只要承认函数的傅里叶反演公式，分布的傅里叶反演公式就自然成立：\begin{theorem}[分布的傅里叶反演公式]
-    \[\mathcal{F} \mathcal{F} ^{-1}T=\mathcal{F} ^{-1}\mathcal{F} T=T,\forall T\in\mathcal{T}\]
+    \[\mathcal{F} \mathcal{F} ^{-1}T=\mathcal{F} ^{-1}\mathcal{F} T=T,\quad\forall T\in\mathcal{T}\]
 \end{theorem}
 \begin{proof}
     \begin{align*}
@@ -190,7 +184,7 @@ $\mathcal{F}\varphi$仍然是测试函数。这个测试函数空间正是\textb
 
 傅里叶变换的线性性依然成立：
 \begin{theorem}[分布的傅里叶变换的线性]
-    \[\mathcal{F} (aT+bS)=a\mathcal{F} T+b\mathcal{F} S,a,b\in\mathbb{C},S,T\in\mathcal{T}\]
+    \[\mathcal{F} (aT+bS)=a\mathcal{F} T+b\mathcal{F} S,\quad a,b\in\mathbb{C},S,T\in\mathcal{T}\]
 \end{theorem}
 \begin{proof}
     尽管没有明确指出，我们也会很自然的想到定义
@@ -317,26 +311,25 @@ $$\mathcal{F}(T^-)= (\mathcal{F}T)^-$$
 
 利用分布的傅里叶变换的定义及其对偶性，可以立即得到：
 \begin{theorem}[帕塞瓦尔恒等式/普朗歇尔定理]
-    \quad
+    设$f,g\in L^1(\mathbb{R})\cap L^2(\mathbb{R})$，则
     \lr{
-    \int_{-\infty}^{\infty}|f(t)|^2\,dt=\int_{-\infty}^{\infty}|\mathcal{F} f(\xi)|^2\,d\xi
-}{
-    \int_{-\infty}^{\infty}|f(t)|^2\,dt=\frac{1}{2\pi}\int_{-\infty}^{\infty}|\mathcal{F} f(\omega)|^2\,d\omega
-}
+        \int_{-\infty}^{\infty}f(t)\overline{g(t)}\,dt=\int_{-\infty}^{\infty}\mathcal{F} f(\xi)\overline{\mathcal{F}g(\xi)}\,d\xi
+    }{
+        \int_{-\infty}^{\infty}f(t)\overline{g(t)}\,dt=\frac{1}{2\pi}\int_{-\infty}^{\infty}\mathcal{F} f(\omega)\overline{\mathcal{F}g(\omega)}\,d\omega
+    }
 \end{theorem}
 \begin{proof}
-设$f,g\in\mathcal{S} $,\lr{
+\begin{lralign}
     \left\langle \mathcal{F} f,\overline{\mathcal{F} g}\right\rangle&=\left\langle \mathcal{F} f,\mathcal{F}^{-1}\overline{g}\right\rangle\\
     &=\left\langle f,\mathcal{F} \mathcal{F} ^{-1}\overline{g}\right\rangle\\
     &=\left\langle f,\overline{g}\right\rangle
-}{
+\switch
     \left\langle \mathcal{F} f,\overline{\mathcal{F} g}\right\rangle&=\left\langle f,2\pi\mathcal{F}^{-1}\overline{g}\right\rangle\\
     &=\left\langle f,2\pi\mathcal{F} \mathcal{F} ^{-1}\overline{g}\right\rangle\\
     &=2\pi\left\langle f,\overline{g}\right\rangle
-}
-取$g=f$即证。
+\end{lralign}
 \end{proof}
-相比\refsub{fourier_operation_properties}中的帕塞瓦尔定理，这个证明适用于$f$是正则分布而$g$是施瓦兹函数的情况，它的证明要简单得多。
+相比\cref{thm:plancherel}，这个证明适用于$f$是正则分布而$g$是施瓦兹函数的情况，它的证明要简单得多。
 
 \begin{example}[$\delta$是偶分布]
     \begin{align*}
@@ -366,8 +359,8 @@ $$\mathcal{F}(T^-)= (\mathcal{F}T)^-$$
 \end{example}
 
 \begin{example}[正弦、余弦函数的傅里叶变换]
-根据欧拉公式$\mathrm{e}^{ix}=\cos(x)+\mathrm{i}\sin(x)$，
-有\[\cos(x)=\frac{\mathrm{e}^{ix}+\mathrm{e}^{-ix}}{2},\sin(x)=\frac{\mathrm{e}^{ix}-\mathrm{e}^{-ix}}{2\mathrm{i}}\]因此
+根据欧拉公式$\mathrm{e}^{\im x}=\cos(x)+\mathrm{i}\sin(x)$，
+有\[\cos(x)=\frac{\mathrm{e}^{\im x}+\mathrm{e}^{-\im x}}{2},\quad\sin(x)=\frac{\mathrm{e}^{\im x}-\mathrm{e}^{-\im x}}{2\mathrm{i}}\]因此
 \lr{
     \mathcal{F} [\cos(2\pi ax)]&=\frac{1}{2}(\mathcal{F} [\mathrm{e}^{2\pi \mathrm{i}ax}]+\mathcal{F} [\mathrm{e}^{-2\pi \mathrm{i}ax}])\\
     &=\frac{1}{2}(\delta_{a}+\delta_{-a}) \\
@@ -389,16 +382,16 @@ $$\mathcal{F}(T^-)= (\mathcal{F}T)^-$$
 \end{align*}
 因此我们定义\begin{definition}[分布的共轭]
     \begin{equation*}
-    \left\langle \overline{T},\varphi\right\rangle=\overline{\left\langle T,\overline{\varphi}\right\rangle},T\in\mathcal{T} ,\varphi\in\mathcal{S}
+    \left\langle \overline{T},\varphi\right\rangle=\overline{\left\langle T,\overline{\varphi}\right\rangle},\quad T\in\mathcal{T} ,\varphi\in\mathcal{S}
 \end{equation*}
 \end{definition}
 
 有了共轭就可以仿照复数定义分布的实部、虚部以及实分布、纯虚分布：
 \begin{definition}[分布的实部、虚部]
     设$T\in\mathcal{T} $，则
-    \[\mathrm{Re}\ T=\frac{T+\overline{T}}{2}\]
+    \[\mathrm{Re}(T)=\frac{T+\overline{T}}{2}\]
     称为T的\textbf{实部}，
-    \[\mathrm{Im}\ T=\frac{T-\overline{T}}{2}\]
+    \[\mathrm{Im}(T)=\frac{T-\overline{T}}{2}\]
     称为T的\textbf{虚部}。
 \end{definition}
 \begin{definition}[实分布与纯虚分布]
@@ -434,7 +427,7 @@ $\overline{T}=-T$，则称T为\textbf{纯虚分布}。
 \end{align*}
 因此我们定义\begin{definition}[分布的平移]
     \begin{equation*}
-    \left\langle \tau_b T,\varphi\right\rangle=\left\langle T,\tau_{-b}\varphi\right\rangle,T\in\mathcal{T} ,\varphi\in\mathcal{S}
+    \left\langle \tau_b T,\varphi\right\rangle=\left\langle T,\tau_{-b}\varphi\right\rangle,\quad T\in\mathcal{T} ,\varphi\in\mathcal{S}
 \end{equation*}
 \end{definition}
 
@@ -446,13 +439,13 @@ $\overline{T}=-T$，则称T为\textbf{纯虚分布}。
 \end{align*}
 因此我们定义\begin{definition}[分布的伸缩]
     \begin{equation*}
-    \left\langle\sigma_a T,\varphi\right\rangle=\left\langle T,\frac{1}{|a|}\sigma_{1/a}\varphi\right\rangle,T\in\mathcal{T} ,\varphi\in\mathcal{S}
+    \left\langle\sigma_a T,\varphi\right\rangle=\left\langle T,\frac{1}{|a|}\sigma_{1/a}\varphi\right\rangle,\quad T\in\mathcal{T} ,\varphi\in\mathcal{S}
 \end{equation*}
 \end{definition}
 
-分布的伸缩与函数的伸缩有一点不同，即多了一个$\dfrac{1}{|a|}$的因子，这意味着，作为形式上的函数定义的分布$T(x)$，其伸缩$\sigma_a T(x)$并不一定等于$T(ax)$。在\refsub{signal}中定义过
+分布的伸缩与函数的伸缩有一点不同，即多了一个$\dfrac{1}{|a|}$的因子，这意味着，作为形式上的函数定义的分布$T(x)$，其伸缩$\sigma_a T(x)$并不一定等于$T(ax)$。我们在\refsub{signal}中声明：
 $$\delta(ax)=\dfrac{1}{|a|}\delta(x)$$
-它与分布的伸缩定义相符：
+实际上它是将$\delta$作为一个分布，套用分布的伸缩的定义：
 $$\sigma_a\delta=\delta(ax)=\frac{1}{|a|}\delta(x)$$
 
 但是，如果分布本身是由不属于$L^1(\mathbb{R})$的函数定义的正则分布，那么它的伸缩就不等于该函数的伸缩，因此\textbf{必须明确伸缩算子所处的语境}。排除$L^1(\mathbb{R})$中的函数，是因为我们不需要用分布理论来讨论其伸缩。
@@ -598,7 +591,7 @@ $$\sigma_a\delta=\delta(ax)=\frac{1}{|a|}\delta(x)$$
     & =\left\langle g*T,(f^-)*\varphi\right\rangle\\
     & =\left\langle f*(g*T),\varphi\right\rangle
 \end{align*}
-即\[(f*g)*T=f*(g*T),f,g\in\mathcal{S} ,T\in\mathcal{T}\]
+即\[(f*g)*T=f*(g*T),\quad f,g\in\mathcal{S} ,T\in\mathcal{T}\]
 而线性性则和前面傅里叶变换的线性性没有多少区别：\\
 \ding{172}对函数的线性性
 \begin{align*}
@@ -607,7 +600,7 @@ $$\sigma_a\delta=\delta(ax)=\frac{1}{|a|}\delta(x)$$
                                      & =a\left\langle f*T,\varphi\right\rangle+b\left\langle g*T,\varphi\right\rangle                            \\
                                      & =\left\langle af*T+bg*T,\varphi\right\rangle
 \end{align*}
-即\[(af+bg)*T=af*T+bg*T,a,b\in\mathbb{C},f,g\in\mathcal{S} ,T\in\mathcal{T} \]
+即\[(af+bg)*T=af*T+bg*T,\quad a,b\in\mathbb{C},f,g\in\mathcal{S} ,T\in\mathcal{T} \]
 {\parskip=0pt \ding{173} 对分布的线性性}
 \begin{align*}
     \left\langle f*(aS+bT),\varphi\right\rangle & =\left\langle aS+bT,(f^-)*\varphi\right\rangle                                                 \\
@@ -615,7 +608,7 @@ $$\sigma_a\delta=\delta(ax)=\frac{1}{|a|}\delta(x)$$
                                      & =a\left\langle f*S,\varphi\right\rangle+b\left\langle f*T,\varphi\right\rangle                            \\
                                      & =\left\langle af*S+bf*T,\varphi\right\rangle
 \end{align*}
-即\[f*(aS+bT)=af*S+bf*T,a,b\in\mathbb{C},f\in\mathcal{S} ,S,T\in\mathcal{T}\]
+即\[f*(aS+bT)=af*S+bf*T,\quad a,b\in\mathbb{C},f\in\mathcal{S} ,S,T\in\mathcal{T}\]
 
 下面研究卷积定理是否仍成立：\\\ding{172}时域卷积
 \lr{
@@ -679,7 +672,7 @@ $$\sigma_a\delta=\delta(ax)=\frac{1}{|a|}\delta(x)$$
 也的确是有意义的），那么我们可以定义\cite{brad_osgood_ee261}：
 \begin{definition}[分布与分布的卷积]
     \begin{equation*}
-    \left\langle S*T,\varphi\right\rangle=\left\langle S(y),\left\langle T(x),\varphi(x+y)\right\rangle\right\rangle,S,T\in\mathcal{T} ,\varphi\in\mathcal{S} ,\left\langle T(x),\varphi(x+y)\right\rangle\in\mathcal{S}
+    \left\langle S*T,\varphi\right\rangle=\left\langle S(y),\left\langle T(x),\varphi(x+y)\right\rangle\right\rangle,S,T\in\mathcal{T} ,\quad\varphi\in\mathcal{S} ,\left\langle T(x),\varphi(x+y)\right\rangle\in\mathcal{S}
 \end{equation*}
 \end{definition}
 
@@ -745,6 +738,7 @@ $$\sigma_a\delta=\delta(ax)=\frac{1}{|a|}\delta(x)$$
 \subsection{分布的傅里叶变换的连续性}\label{sub:continuity_of_distribution}
 
 \begin{theorem}[分布的傅里叶变换的连续性]
+    \label{thm:distribution_fourier_continuous}
     设$\{T_n\}\subset\mathcal{T} $，$T\in\mathcal{T} $，如果$T_n\to T$，则$\mathcal{F} T_n\to\mathcal{F} T$.
 \end{theorem}
 \begin{proof}

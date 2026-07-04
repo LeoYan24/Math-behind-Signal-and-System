@@ -3,7 +3,7 @@
 回顾功率信号的定义：
 \begin{definition}[功率信号]
 能量无限而功率非零有限的信号称为\textbf{功率信号}：
-\[\int_{-\infty}^{\infty}| f(x)| ^2\,dx\to\infty,\lim_{T \to \infty}\frac{1}{T}\int_{-T/2}^{T/2}| f(x)|^2  \,dx<\infty\]
+\[\int_{-\infty}^{\infty}| f(x)| ^2\,dx\to\infty,\quad\lim_{T \to \infty}\frac{1}{T}\int_{-T/2}^{T/2}| f(x)|^2  \,dx<\infty\]
 \end{definition}
 
 在\refsub{Lp_space}中，我们约定了：能量为0的信号也属于能量信号，功率为0的信号（即能量信号）也属于功率信号。在这个约定下，能量信号即$L^2(\mathbb{R})$，而功率信号也成为线性空间。本节就来讨论功率信号空间的结构，以及如何通过傅里叶变换来进行能量与功率的谱分析。
@@ -68,7 +68,7 @@ $$f\sim g\iff \|f-g\|_{\mathrm{pwr}}=0\iff f-g\in L^2(\mathbb{R})$$
 
 简便起见，这两个小节中，我们将使用频率形式的傅里叶变换。
 
-对于能量信号$f\in L^2(\mathbb{R})$，如果它还是绝对可积的，即$f\in L^1(\mathbb{R})$，则它的傅里叶变换$F(\xi)$存在，并且满足帕塞瓦尔定理（见\refsub{fourier_operation_properties}）：
+对于能量信号$f\in L^2(\mathbb{R})$，如果它还是绝对可积的，即$f\in L^1(\mathbb{R})$，则它的傅里叶变换$F(\xi)$存在，并且满足帕塞瓦尔定理（\cref{thm:plancherel}）：
 \begin{align*}
     \int_{-\infty}^{\infty}|f(t)|^2\,dt=\int_{-\infty}^{\infty}|F(\xi)|^2\,d\xi
 \end{align*}
@@ -178,12 +178,12 @@ $$P_{fg}=\int_{-\infty}^{\infty}\lim_{T\to\infty}\frac{1}{T}F_T(\xi)\overline{G_
 令$T\to\infty$，得到
 $$R_f(x)=\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}f(x+y)\overline{f(y)}\,dy\leq\sqrt{P_f P_g}$$
 其中$P_f,P_g$分别是f,g的功率：\begin{align*}
-P_f&=\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}|f(y)|^2\,dy,P_g=\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}|g(y)|^2\,dy
+P_f&=\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}|f(y)|^2\,dy,\quad P_g=\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}|g(y)|^2\,dy
 \end{align*}
 
 $R_f(0)=P_f,R_{fg}(0)=P_{fg}$，因此，相关是能量（功率）的推广，互相关是互能量（互功率）的推广。
 
-根据\refsub{correlation}中的维纳-辛钦定理，对于$f,g\in L^1(\mathbb{R})\cap L^2(\mathbb{R})$，有
+根据\cref{prop:cross_correlation}中的维纳-辛钦定理，对于$f,g\in L^1(\mathbb{R})\cap L^2(\mathbb{R})$，有
 $$\mathcal{F}R_{fg}=\mathcal{F}f\overline{\mathcal{F}g}$$
 也就是说，\textbf{能量信号的互能量谱密度存在时，恰为互相关函数的傅里叶变换}。
 
@@ -246,7 +246,7 @@ $$\mathcal{F}R_{fg}=\mathcal{F}f\overline{\mathcal{F}g}$$
 $$\lim_{T\to\infty}\frac{1}{T}\left[\frac{\sin^2\left(\pi T(\xi-1)\right)}{4\pi^2(\xi-1)^2}+\frac{\sin^2\left(\pi T(\xi+1)\right)}{4\pi^2(\xi+1)^2}\right]$$
 的处理，但计算起来还是比较麻烦。下面我们提出一种更简便的方法。
 
-我们知道，能量信号的互功率谱密度就是两个信号的傅里叶变换共轭相乘：
+根据\cref{prop:cross_correlation}中的维纳-辛钦定理，能量信号的互功率谱密度就是两个信号的傅里叶变换共轭相乘：
 $$f,g\in L^1(\mathbb{R})\cap L^2(\mathbb{R}),\mathcal{F}R_{fg}=\mathcal{F}f\overline{\mathcal{F}g}$$
 特别地，当$f=g$时，有$\mathcal{F}R_f=|\mathcal{F}f|^2$。观察我们处理过的功率信号$f(t)=\cos(2\pi t)$，它的傅里叶变换为
 $$\mathcal{F}f=\frac{1}{2}\delta_1+\frac{1}{2}\delta_{-1}$$
@@ -269,7 +269,7 @@ $$S_f=\left(\frac{1}{2}\right)^2\delta_1+\left(\frac{1}{2}\right)^2\delta_{-1}=\
 
 \begin{proof}
     由分布的傅里叶变换的连续性，可以求得
-    $$f(t)=\sum_n a_n\mathrm{e}^{2\pi \mathrm{i}\xi_n t},g(t)=\sum_n b_n\mathrm{e}^{2\pi\mathrm{i}\xi_n t}$$
+    $$f(t)=\sum_n a_n\mathrm{e}^{2\pi \mathrm{i}\xi_n t},\quad g(t)=\sum_n b_n\mathrm{e}^{2\pi\mathrm{i}\xi_n t}$$
     它不应看作常规意义下的傅里叶级数，因为等号右边的级数可能是几乎处处不收敛的，等号仅仅在分布的意义下成立。\refsub{fourier_of_dirac_comb}中的狄拉克梳状分布就是这样一个例子。
 
     代入互相关的定义：\begin{align*}
@@ -316,7 +316,7 @@ $$S_{fg}=\lim_{T\to\infty}\frac{1}{T}F_T(\xi)\overline{G_T(\xi)}$$
 利用$\delta$分布的取样性质，不妨认为
 $$\delta(0)=\infty,\delta(x)=0,x\neq 0\implies\delta\cdot\delta=\infty\cdot\delta,\delta_a\cdot\delta_b=0,a\neq b$$
 那么，以上功率谱密度的计算方法可以不严谨地由以下事实推出：
-$$\lim_{T\to\infty}\frac{1}{T}\delta^2=\delta,\lim_{T\to\infty}F_T(\xi)=F(\xi),\lim_{T\to\infty}G_T(\xi)=G(\xi)$$
+$$\lim_{T\to\infty}\frac{1}{T}\delta^2=\delta,\quad\lim_{T\to\infty}F_T(\xi)=F(\xi),\quad\lim_{T\to\infty}G_T(\xi)=G(\xi)$$
 即：
 \begin{align*}
     S_{fg}&=\lim_{T\to\infty}\frac{1}{T}F_T(\xi)\overline{G_T(\xi)}\\

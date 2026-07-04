@@ -31,11 +31,13 @@
 
 其中，我们特别关注能够用\textbf{常系数线性微分方程（组）}描述的系统，例如，第一个例子中的动态电路就可以用一阶常系数线性微分方程来描述。我们首先给出微分方程的概念：
 \begin{definition}[微分方程]
+    \label{def:ODE}
     称如下形式的方程为\textbf{常微分方程}(ordinary differential equation,ODE)\cite{ode}：
-    \[F(x,y,y',\cdots,y^{(n)})=0,n\geq 1\]
+    \[F(x,y,y',\cdots,y^{(n)})=0,\quad n\geq 1\]
     其中$F$为已知函数，自变量$x$在$\mathbb{R}$的某个区间上变化，未知函数$y\in\mathbb{R}$，正整数$n$称为方程的\textbf{阶}。如果$n\geq 2$，则方程称为\textbf{高阶微分方程}。
 \end{definition}
 \begin{definition}[初值问题]
+    \label{def:initial_value_prob}
     数学上，将微分方程中的函数在某一点的各阶导数值称为\textbf{初始条件}，以$t=0$时刻为例，又称为\textbf{0时刻状态}：
     \[y(0)=y_0,y'(0)=y'_0,\cdots,y^{(n-1)}(0)=y^{(n-1)}_0\]
     我们称这样的问题为\textbf{初值问题}。
@@ -44,34 +46,40 @@
 我们将看到，由常系数线性微分方程描述的系统是因果的线性时不变系统，这也是我们最为关注的系统类型。现在来给出线性、时不变性的定义，因果性的定义将在\refsub{cascade}中给出。
 
 \begin{definition}[线性系统]
+    \label{def:system_linear}
     如果算子H是线性的，即
-\[\forall a,b\in\mathbb{C},\forall e_1(t),e_2(t),H[ae_1(t)+be_2(t)]=aH[e_1(t)]+bH[e_2(t)]\]
+\[\forall a,b\in\mathbb{C},\forall e_1(t),e_2(t),\quad H[ae_1(t)+be_2(t)]=aH[e_1(t)]+bH[e_2(t)]\]
 就说系统是\textbf{线性系统}(linear system)，且满足叠加法则 (principle of superposition)。
 \end{definition}
 
 \begin{definition}[时不变性和移不变性]
+    \label{def:time_invariant}
     如果一个系统的输出不依赖于输入信号施加于系统的时间，输入信号发生时移，输出信号也发生相同的时移，即
-    $$\forall b\in\mathbb{R},H[e(t-b)]=r(t-b),\text{即}H[\tau_b e(t)]=\tau_b r(t)$$
+    $$\forall b\in\mathbb{R},\quad H[e(t-b)]=r(t-b),\text{即}H[\tau_b e(t)]=\tau_b r(t)$$
     则称该系统是\textbf{时不变的}(time-invariant)。如果激励和响应的自变量是空间变量，$b$是空间中的向量，则称该系统是\textbf{移不变的}(shift-invariant)。后文中一般不特意区分时域和空间域。
 \end{definition}
 \begin{definition}[线性时不变系统]
+    \label{def:LTI}
     如果一个系统既是线性的又是时不变的，就说它是\textbf{线性时不变系统}(linear time-invariant system,LTI)。
 \end{definition}
 
 对于线性时不变系统，定义：
 
 \begin{definition}[单位脉冲响应与单位阶跃响应]
+    \label{def:unit_immpulse_response}
     当$e(t)=\delta(t)$时，零状态响应$r_{zs}(t)$为\textbf{单位脉冲响应}；当$e(t)=u(t)$时，零状态响应$r_{zs}(t)$称为\textbf{单位阶跃响应}。习惯上，将单位脉冲响应记为$h(t)$，单位阶跃响应记为$g(t)$。
 \end{definition}
 
 常微分方程的解空间是有限维的，只要给定足够的初值数量，就可以唯一确定方程的解，因此常微分方程系统都具有\textbf{马尔可夫性}。在\refsub{compare_to_high_order}中，我们将对线性微分方程组的解空间维数进行说明。
 
 \begin{definition}[马尔可夫性]
+    \label{def:system_markov}
     只要知道了$t=t_0$时刻的系统状态，未来的响应$r(t)(t>t_0)$就与过去的激励$e(t)(t<t_0)$无关，称这样的系统具有\textbf{马尔可夫性}或\textbf{无后效性}。
 \end{definition}
 
 对于同时具有线性性和马尔可夫性的系统，在某一时刻（通常取为$t=0$时刻）以前的激励归结为系统的初始条件，在$t>0$时，即便激励为零，响应也可能不为零。由系统的线性性，可以将$r(t)$分解为两部分：
 \begin{definition}[零输入响应与零状态响应]
+    \label{def:zir_zsr}
    \textbf{零输入响应}(zero input response,$r_{zi}(t)$)是指$e(t)=0$时，由于初始条件而产生的响应；\textbf{零状态响应}(zero state response,$r_{zs}(t)$)是指将系统初始能量置零时的响应。\textbf{全响应}$r(t)=r_{zi}(t)+r_{zs}(t)$。
 \end{definition}
 对于零输入响应不为0的线性系统，考虑以两个激励$e_1(t),e_2(t)$的线性组合作为输入，则按照先前对线性系统的定义，直接将对应的两个响应$r_1(t),r_2(t)$进行线性组合，则零输入响应被重复计算，这不是我们希望看到的。在这样的语境下，我们其实应该定义\textbf{零状态响应对激励线性、零输入响应对初始条件线性的系统为线性系统}。
@@ -79,16 +87,19 @@
 此外，系统还有一些其他的特性，例如稳定性、可逆性和即时性。系统的其他特性将在后文中陆续介绍。
 
 \begin{definition}[稳定性]
-如果一个系统在激励信号有界时，响应也是有界的，则称之为\textbf{稳定系统}(bounded-input bounded-output,BIBO)，即
-\[e(t)\in L^\infty(\mathbb{R})\implies r(t)\in L^\infty(\mathbb{R})\]
+    \label{def:system_stability}
+    如果一个系统在激励信号有界时，响应也是有界的，则称之为\textbf{稳定系统}(bounded-input bounded-output,BIBO)，即
+    \[e(t)\in L^\infty(\mathbb{R})\implies r(t)\in L^\infty(\mathbb{R})\]
 \end{definition}
 我们将在\refsub{stability_of_system}和\refsub{discrete_system_function}中，分别借助拉普拉斯变换和z变换的理论，给出连续的和离散的线性时不变系统具有稳定性的充分必要条件。
 
 \begin{definition}[可逆性]
+    \label{def:system_inversion}
     如果H（作为映射）如果是单射，则也是双射（因为我们不关注其值域），于是H是可逆的。换句话说，一种响应仅可能对应唯一的激励。
 \end{definition}
 
 \begin{definition}[即时性与记忆性]
+    \label{def:system_memory}
 一个系统具有\textbf{即时性}（或无记忆性），如果该系统在任意时刻$t$的状态完全且唯一地取决于该时刻的系统状态与激励，而不显式地依赖于任何过去时刻$t'<t$的系统状态或历史激励。
 
 一个系统具有\textbf{记忆性}（或历史依赖性），如果系统的响应在任意时刻$t$的状态演化率显式地依赖于过去时刻$t'<t$的系统状态或历史激励，而不能被简化为仅依赖于当前时刻$t$的量。
@@ -97,7 +108,11 @@
 相比马尔可夫性，即时性对系统的约束要强得多：
 
 \begin{example}[积分方程]
-    设系统由积分方程$r(t)=\int_{-\infty}^{t}e(y)\,dy$描述，它的响应依赖于$t$以前所有时刻的激励，因此该系统是记忆系统；如果知道$r(t_0)$，则可以得到$r(t)=\int_{t_0}^{t}e(y)\,dy,t>t_0$，因此该系统具有马尔可夫性。
+    设系统由积分方程
+    $$r(t)=\int_{-\infty}^{t}e(y)\,dy$$
+    描述，它的响应依赖于$t$以前所有时刻的激励，因此该系统是记忆系统；如果知道$r(t_0)$，则可以得到
+    $$r(t)=\int_{t_0}^{t}e(y)\,dy,\quad t>t_0$$
+    因此该系统具有马尔可夫性。
 \end{example}
 
 事实上，线性时不变系统总是具有马尔可夫性的，但是它们多数没有即时性，即时性要求单位脉冲响应$h(t)=K\delta$，$K$为常数。加法器、乘法器都是典型的即时系统。
@@ -173,7 +188,7 @@ $r(t)=\mathcal{F} e(t)$.
 对核积分系统的级联也是对核积分系统，并且级联系统的核函数可以视作前级系统的核函数作为后级系统的激励信号输入后得到的响应函数：
 \begin{proposition}[对核积分系统的级联]
     设有两对核积分系统K，L：
-    \[K[e(t)](x)=\int_{a}^{b}k(x,y)e(y)\,dy,L[e(t)](x)=\int_{c}^{d}l(x,y)e(y)\,dy\]
+    \[K[e(t)](x)=\int_{a}^{b}k(x,y)e(y)\,dy,\quad L[e(t)](x)=\int_{c}^{d}l(x,y)e(y)\,dy\]
 则级联系统$H=LK$也是对核积分系统，并且核函数为\begin{equation*}
     h(x,z)=L_y[k(y,z)](x)=\int_{c}^{d}l(x,y)k(y,z)\,dy
 \end{equation*}
@@ -248,11 +263,12 @@ $$k(x,y)=H_x[\delta(x-y)]$$
 最后，我们来说明系统的一个重要特性：\textbf{因果性}，并利用$r(t)=(h*e)(t)$给出线性时不变系统的因果性条件。
 
 \begin{definition}[因果性]
-如果系统的响应仅依赖于过去的激励而不依赖于未来的激励，即
-\begin{equation}
-    \forall t_0,\left(e_1(t)=e_2(t)\ \mathrm{for}\ t<t_0\right)\implies \left(r_1(t)=r_2(t)\ \mathrm{for}\ t<t_0\right)\label{eq:4.1}
-\end{equation}
-则该系统是\textbf{因果的}(casual)，上述条件称为\textbf{因果性条件}(casuality condition)。
+    \label{def:causuality}
+    如果系统的响应仅依赖于过去的激励而不依赖于未来的激励，即
+    \begin{equation}
+        \forall t_0,\left(e_1(t)=e_2(t)\ \mathrm{for}\ t<t_0\right)\implies \left(r_1(t)=r_2(t)\ \mathrm{for}\ t<t_0\right)\label{eq:4.1}
+    \end{equation}
+    则该系统是\textbf{因果的}(casual)，上述条件称为\textbf{因果性条件}(casuality condition)。
 \end{definition}
 
 从物理上讲，实时处理信号的可实现的系统必须具有因果性。不过，如果信号已经被记录下来以便离线处理（非实时），就有可能实现非因果的系统\cite{dsp}。

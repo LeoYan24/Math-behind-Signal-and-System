@@ -108,7 +108,7 @@ $$m^*\left(\bigsqcup_{k=1}^{\infty}E_k\right)\neq\sum_{k=1}^{\infty}m^*(E_k)$$
 
 \begin{definition}[几乎处处收敛]
     函数列$\{f_n:E\to\mathbb{R}\}_{n=1}^{\infty}$在$E$上几乎处处收敛于函数$f:E\to\mathbb{R}$，如果存在一个零测度集$E_0$，使得
-    $$\forall x\in E\setminus E_0,\lim_{n\to\infty}f_n(x)=f(x)$$
+    $$\forall x\in E\setminus E_0,\quad\lim_{n\to\infty}f_n(x)=f(x)$$
     记为$f_n\to f,\mathrm{a.e.}$
 \end{definition}
 
@@ -136,9 +136,9 @@ Littlewood的第三个观点是，\textbf{几乎处处收敛的可测函数列�
 
 \begin{definition}[黎曼积分]
     设$f:[a,b]\to\mathbb{R}$有界，$P=\{x_0,x_1,\dots,x_n\}$是区间$[a,b]$的一个划分，$a=x_0<x_1<\cdots <x_n=b$，对于每个子区间$[x_{k-1},x_k]$，定义
-    \[m_k=\inf_{x\in [x_{k-1},x_k]}f(x),M_k=\sup_{x\in [x_{k-1},x_k]}f(x)\]
+    \[m_k=\inf_{x\in [x_{k-1},x_k]}f(x),\quad M_k=\sup_{x\in [x_{k-1},x_k]}f(x)\]
     由此定义$f$对$P$的上、下\textbf{达布和}(Darboux sum)分别为
-    \[U(f,P)=\sum_{k=1}^{n}M_k(x_k-x_{k-1}),L(f,P)=\sum_{k=1}^{n}m_k(x_k-x_{k-1})\]
+    \[U(f,P)=\sum_{k=1}^{n}M_k(x_k-x_{k-1}),\quad L(f,P)=\sum_{k=1}^{n}m_k(x_k-x_{k-1})\]
     如果
     \[\inf_{P}U(f,P)=\sup_{P}L(f,P)\]
     则称$f$在$[a,b]$上\textbf{黎曼可积}，并将上述公共值定义为$f$在$[a,b]$上的\textbf{黎曼积分}，为了区分于勒贝格积分，记为$(R)\int_{a}^{b}f(x)\,dx$。
@@ -161,7 +161,7 @@ Littlewood的第三个观点是，\textbf{几乎处处收敛的可测函数列�
     若存在函数$\varphi:E\to\mathbb{R}$的定义域$E$的一个可测集划分$\{E_k\}_{k=1}^{n}$，使得$\varphi$在每个可测子集$E_k$上为常数函数，则称$\varphi$是定义在$E$上的\textbf{简单函数}。
 
     简单函数有\textbf{典范表示}(canonical representation)，即
-    \[\varphi=\sum_{k=1}^{n}a_k\chi_{E_k},\text{其中}E_k=\varphi^{-1}(a_k)=\{x\in E|\varphi(x)=a_k\}\]
+    \[\varphi=\sum_{k=1}^{n}a_k\chi_{E_k},\quad\text{其中}E_k=\varphi^{-1}(a_k)=\{x\in E|\varphi(x)=a_k\}\]
 \end{definition}
 
 显然，简单函数是可测的，并且它的勒贝格积分应该定义为
@@ -276,7 +276,7 @@ $dm$表示勒贝格测度。
 本小节的最后，我们通过非负可测函数来定义任意可测函数的勒贝格积分。
 
 \begin{definition}[函数的正部与负部]
-    函数$f:E\to\mathbb{R}$的\textbf{正部}与\textbf{负部}分别定义为$$f^+(x)=\max\{f(x),0\},f^-(x)=-\min\{f(x),0\}$$
+    函数$f:E\to\mathbb{R}$的\textbf{正部}与\textbf{负部}分别定义为$$f^+(x)=\max\{f(x),0\},\quad f^-(x)=-\min\{f(x),0\}$$
     易见$f=f^+-f^-,|f|=f^++f^-$。
 \end{definition}
 后文中将定义函数的翻转为$f^-(x)=f(-x)$，请读者注意它们的区别，正部与负部这一概念仅在本节中使用。
@@ -303,6 +303,7 @@ $dm$表示勒贝格测度。
 
 下面的定理是本书中\textbf{用于极限与积分换序的主要定理}：
 \begin{theorem}[Lebesgue控制收敛定理]
+    \label{thm:DCT}
     设$\{f_n:E\to\mathbb{R}\}$是可测函数列，$f_n\to f,\mathrm{a.e.}$，如果存在一个可积函数$g:E\to[0,+\infty)$，使得对于所有$n$和$x\in E$，有$|f_n(x)|\leq g(x)$，则$f$可积，并且
     \[\int_{E}f\,dm=\lim_{n\to\infty}\int_{E}f_n\,dm\]
 \end{theorem}
@@ -360,24 +361,24 @@ $dm$表示勒贝格测度。
 
 本小节主要介绍两类常用的线性赋范空间：$L^p$空间和$l^p$空间$(1\leq p\leq \infty)$，前者是处理连续信号的，而后者是处理离散信号的。
 
-\begin{definition}[$L^p$空间]
+\begin{definition}[$L^p$空间]\label{def:Lp}
     设$E$是可测集，$L^p(E)(0<p<\infty)$空间表示在$E$上$p$次勒贝格可积的函数组成的函数空间，即
     \[L^p(E):=\left\{f:E\rightarrow \mathbb{C} \left| \int_{E}|f(t)|^p\,dm<\infty\right.\right\}\]
 \end{definition}
 
-\begin{definition}[$L^{\infty}$空间]
+\begin{definition}[$L^{\infty}$空间]\label{def:L_infty}
     设$E$是可测集，$L^{\infty}(E)$空间表示在$E$上\textbf{本性有界}(essentially bounded)的函数组成的函数空间，即
     \[L^{\infty}(E):=\left\{f:E\rightarrow \mathbb{C} \left|\exists M<\infty,|f|\leq M,\mathrm{a.e.}\right.\right\}\]
 \end{definition}
 
-\begin{definition}[$l^p$空间]
+\begin{definition}[$l^p$空间]\label{def:lp}
     设$E$是可数集，$l^p(E)(0<p<\infty)$空间表示在可数集$E$上$p$次可和的函数组成的函数空间，即
     \[l^p(E):=\left\{f:E\rightarrow \mathbb{C} \left| \sum_{t\in E}|f(t)|^p<\infty\right.\right\}\]
 \end{definition}
 
 一般而言，在考虑$l^p$空间时，可数集$E$取为$\mathbb{N}$，$\mathbb{N} ^*$（数列）或$\mathbb{Z}$（离散信号）。本小节的后续内容中，默认取$E=\mathbb{N}$。
 
-\begin{definition}[$l^{\infty}$空间]
+\begin{definition}[$l^{\infty}$空间]\label{def:l_infty}
     $l^{\infty}$表示有界数列空间，即
     \[l^{\infty}:=\left\{\{x_n\}_{n=0}^{\infty} \left|\exists M<\infty,|x_n|\leq M,\forall n\in \mathbb{N}\right.\right\}\]
 \end{definition}
@@ -391,7 +392,7 @@ $dm$表示勒贝格测度。
 \end{lemma}
 
 由此可以推出以上几种空间都是线性空间。此外，在$0<p<1$时，$L^p(E)$和$l^p$空间是度量空间，它们的度量分别为
-\[d(f,g)=\int_{E}|f-g|^p\,dm,d(\{x_n\},\{y_n\})=\sum_{n=0}^{\infty}|x_n-y_n|^p\]
+\[d(f,g)=\int_{E}|f-g|^p\,dm,\quad d(\{x_n\},\{y_n\})=\sum_{n=0}^{\infty}|x_n-y_n|^p\]
 
 不过，$0<p<1$的情况不是我们的主要目标，因为它们不构成范数空间。下面，我们给出以上几种空间在$1\leq p \leq \infty$时的范数定义，再通过Minkowski不等式证明这些范数满足三角不等式，从而证明它们是线性赋范空间。
 
@@ -416,7 +417,7 @@ $dm$表示勒贝格测度。
 
 \begin{definition}[凸函数]
     函数$\phi:(a,b)\to\mathbb{R}$是\textbf{凸}(convex)的，如果\begin{align*}
-        \forall x_1,x_2\in(a,b),\forall \lambda\in[0,1],\phi(\lambda x_1+(1-\lambda)x_2)\leq \lambda\phi(x_1)+(1-\lambda)\phi(x_2)
+        \forall x_1,x_2\in(a,b),\forall \lambda\in[0,1],\quad\phi(\lambda x_1+(1-\lambda)x_2)\leq \lambda\phi(x_1)+(1-\lambda)\phi(x_2)
     \end{align*}
     如果等号成立当且仅当$x_1=x_2$，则称$\phi$是\textbf{严格凸}(strictly convex)的。
 \end{definition}
@@ -512,7 +513,7 @@ Minkowski不等式表明，$L^p(E)$空间的范数满足三角不等式，因此
 这个不等式还能够推出有限测度集上$L^p$空间的包含关系：
 \begin{corollary}
     设$m(E)<\infty$，则$\forall 1\leq p_1<p_2\leq \infty$，有$L^{p_2}(E)\subset L^{p_1}(E)$，并且\begin{align*}
-        \exists c\geq 0,\forall f\in L^{p_2}(E),\|f\|_{p_1}\leq c\cdot \|f\|_{p_2}
+        \exists c\geq 0,\forall f\in L^{p_2}(E),\quad\|f\|_{p_1}\leq c\cdot \|f\|_{p_2}
     \end{align*}
 \end{corollary}
 \begin{proof}
@@ -584,7 +585,7 @@ $$(f,f)=\int_{E}|f|^2\,dm=E$$
 \begin{align*}
     \langle \mathbf{w},\mathbf{v}_j \rangle=\left\langle \sum_{i = 1}^{n}  c_i \mathbf{v}_i,\mathbf{v}_j \right\rangle =c_j\left\langle \mathbf{v}_j,\mathbf{v}_j \right\rangle \\
     c_j=\frac{\langle \mathbf{w},\mathbf{v}_j \rangle}{\langle \mathbf{v}_j,\mathbf{v}_j \rangle},
-    \mathbf{w}=\sum_{j = 1}^{n}  \frac{\langle \mathbf{w},\mathbf{v}_j \rangle}{\langle \mathbf{v}_j,\mathbf{v}_j \rangle} \mathbf{v}_j
+    \mathbf{w}=\sum_{j = 1}^{n}  \frac{\langle \mathbf{w},\quad\mathbf{v}_j \rangle}{\langle \mathbf{v}_j,\mathbf{v}_j \rangle} \mathbf{v}_j
 \end{align*}
 而标准正交基是$\langle \mathbf{v}_j,\mathbf{v}_j \rangle=1$的情况。
 

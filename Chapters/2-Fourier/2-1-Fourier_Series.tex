@@ -80,7 +80,7 @@
 \[\cos(k\omega t)=\frac{\mathrm{e}^{\mathrm{i}k\omega t}+\mathrm{e}^{-\mathrm{i}k\omega t}}{2},\sin(k\omega t)=\frac{\mathrm{e}^{\mathrm{i}k\omega t}-\mathrm{e}^{-\mathrm{i}k\omega t}}{2\mathrm{i}}\]
 故函数$f(t)$也可在指数函数系下展开：
 \begin{definition}[指数形式傅里叶展开]
-    \[f(t)=\sum_{k = 0}^{\infty}  c_k \mathrm{e}^{\mathrm{i}k\omega t} ,c_k=\frac{a_k-\mathrm{i}b_k}{2},c_{-k}=\frac{a_k+\mathrm{i}b_k}{2}=\overline{c_k},k\in \mathbb{N}\]
+    \[f(t)=\sum_{k = 0}^{\infty}  c_k \mathrm{e}^{\mathrm{i}k\omega t} ,\quad c_k=\frac{a_k-\mathrm{i}b_k}{2},c_{-k}=\frac{a_k+\mathrm{i}b_k}{2}=\overline{c_k},\quad k\in \mathbb{N}\]
 特别地，$c_0=\overline{c_0}\implies c_0\in\mathbb{R} $.
 \end{definition}
 容易验证$\{\mathrm{e}^{\mathrm{i}k\omega t}\}_{k=0}^{\infty}$是完备正交函数系：
@@ -119,7 +119,8 @@
 因此\textbf{对于实函数，单边频谱相比双边频谱，在正频率处的幅值加倍，相位不变，展示频域信息的效果不变，但没有冗余}。
 
 \begin{example}[周期矩形脉冲信号的傅里叶级数展开和频谱图]
-脉冲宽度为$\tau$，脉冲幅度为E，周期为$T (\tau<T)$的周期矩形脉冲信号$f(t)=E\chi_{[-\tau/2,\tau/2]}$，基波角频率$\omega=\dfrac{2\pi}{T}$，傅里叶级数展开为
+    \label{exmp:rect_FS}
+    脉冲宽度为$\tau$，脉冲幅度为E，周期为$T (\tau<T)$的周期矩形脉冲信号$f(t)=E\chi_{[-\tau/2,\tau/2]}$，基波角频率$\omega=\dfrac{2\pi}{T}$，傅里叶级数展开为
 \[f(t)=\sum_{k = 1}^{\infty}  \frac{E\tau}{T}\text{Sa}\left(\frac{k\omega \tau}{2}\right)\mathrm{e}^{\mathrm{i}k\omega t}\]
 \end{example}
 \begin{figure}[H]
@@ -201,7 +202,7 @@
 
 \begin{theorem}[狄利克雷定理]
     满足狄利克雷条件时，f的傅里叶级数展开在在任意点收敛到其左右极限的平均值：
-    \[\forall t\in \mathbb{R},\sum_{k=\infty}^{\infty}c_k \mathrm{e}^{\mathrm{i}2\pi kt}=\frac{f(t+)+f(t-)}{2}\]
+    \[\forall t\in \mathbb{R},\quad\sum_{k=\infty}^{\infty}c_k \mathrm{e}^{\mathrm{i}2\pi kt}=\frac{f(t+)+f(t-)}{2}\]
 \end{theorem}
 
 如果函数在有限个点处不连续，我们的确无法将这一结论加强到逐点收敛，因为在不连续点处函数的取值不影响积分值，也就不影响傅里叶系数，当然也就得不到不连续点处的收敛性，但是如果将分段连续函数在不连续点处的取值定义为左右极限的平均值，这样就能够得到逐点收敛性了。

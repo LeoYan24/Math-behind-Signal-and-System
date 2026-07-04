@@ -27,7 +27,7 @@
     \mathbf{y}[k] = A^k \mathbf{y}[0] + \sum_{i=0}^{k-1} A^{k-1-i} \mathbf{f}[i]
 \end{align*}
 
-利用解的存在性与唯一性，可以仿照\refsub{solution_of_linear_equation_system}中的方法进一步说明：
+利用解的存在性与唯一性，可以仿照\cref{thm:n_order_ODE}的方法进一步说明：
 \begin{theorem}
     $N$阶线性差分方程组的解空间$S$构成$N$维实线性空间。
 \end{theorem}
@@ -120,10 +120,10 @@ $$\mathbf{y}[k+1] = A \mathbf{y}[k] + \mathbf{f}[k]$$
 \end{definition}
 
 得到这个定义的思路有两种。一种思路是考虑将齐次差分方程中的列向量$\mathbf{y}[n]$替换为一个矩阵值函数，则$\phi[n]=A^n$恰好满足方程\begin{align*}
-    \phi[n+1] = A \phi[n],\phi[0] = I
+    \phi[n+1] = A \phi[n],\quad \phi[0] = I
 \end{align*}
 
-另一种思路是类比微分方程。常系数线性微分方程最典型的解的形式为$e^{\lambda t}$，而方程组的解矩阵为$\phi(t)=e^{At}$；对于差分方程，将$\lambda^n$中的$\lambda$替换为矩阵$A$，就得到解矩阵$\phi[n]=A^n$。
+另一种思路是类比微分方程。常系数线性微分方程最典型的解的形式为$e^{\lambda t}$，而方程组的解矩阵为$\phi(t)=\e^{At}$；对于差分方程，将$\lambda^n$中的$\lambda$替换为矩阵$A$，就得到解矩阵$\phi[n]=A^n$。
 
 解矩阵的一个重要特征是，\textbf{它的列向量是齐次差分方程的解}，因此方程的齐次解总能表示为$\phi[n]\mathbf{c}$的形式，其中$\mathbf{c}\in\mathbb{R}^N$是一个常向量。与微分方程不同的是，当$A$不可逆时，$\phi[n]$也是不可逆的，因此$\phi^{-1}[n]$并不总是存在的。
 
@@ -139,7 +139,7 @@ $$\mathbf{y}[k+1] = A \mathbf{y}[k] + \mathbf{f}[k]$$
 它满足$\phi[n+1] = A[n] \phi[n],\phi[0] = I$，因此其列向量确为方程组的解。但由于$A[n]$不为常数矩阵，我们通常是求不出$\phi[n]$的解析表达式的，这一点与\refsec{Equation_System}中的线性微分方程组有些类似。
 
 解矩阵在差分方程组理论中，仍然扮演着“基本解”的角色。以非齐次项$\mathbf{f}[n]$为激励，方程组\begin{align*}
-    \mathbf{y}[n+1] = A \mathbf{y}[n] + \mathbf{f}[n],\mathbf{y}_0 = \mathbf{y}[0]
+    \mathbf{y}[n+1] = A \mathbf{y}[n] + \mathbf{f}[n],\quad \mathbf{y}_0 = \mathbf{y}[0]
 \end{align*}
 的解$\mathbf{y}[n]$为响应，则方程描述了一个离散的因果线性时不变系统，类比\refsub{constant_coefficient_linear_equation_system}中的常系数线性微分方程组，可以猜想零状态响应可以表示为卷积和，然而，我们实际上应该使用$\phi[n-1]u[n-1]$做卷积才能得到正确的结论，我们将在下一小节中看到这样做的原因。\begin{align*}
     \mathbf{y}_{zs}[n] = (\phi[n-1]u[n-1]) * \mathbf{f}[n]=\sum_{i=0}^{n-1} \phi[n-1-i]\mathbf{f}[i]=\sum_{i=0}^{n-1} A^{n-1-i} \mathbf{f}[i]
@@ -147,7 +147,7 @@ $$\mathbf{y}[k+1] = A \mathbf{y}[k] + \mathbf{f}[k]$$
 求和范围的改变是因为我们认为激励$\mathbf{f}[n]$是在$n=0$时刻施加于系统的。这与上一小节中用迭代法得到的通解公式一致。
 
 零输入响应是方程的齐次解。由于解矩阵的列向量是差分方程的解，零输入响应可以表示为解矩阵的列向量的线性组合：\begin{align*}
-    \mathbf{y}_{zi}[n] = \phi[n]\mathbf{c},\mathbf{c}\in\mathbb{R}^N\tag{$*$}
+    \mathbf{y}_{zi}[n] = \phi[n]\mathbf{c},\quad \mathbf{c}\in\mathbb{R}^N\tag{$*$}
 \end{align*}
 
 代入初始值$\mathbf{y}[0]=\mathbf{y}_0$，可以求出$\mathbf{c}$的表达式:
@@ -158,10 +158,10 @@ $$\mathbf{y}[k+1] = A \mathbf{y}[k] + \mathbf{f}[k]$$
 \begin{align*}
     \mathbf{y}_{zi}[n] = \phi[n]\mathbf{c} = \phi[n]\mathbf{y}_0
 \end{align*}
-最终，我们得到了常系数线性差分方程组的通解公式，它与\refsub{constant_coefficient_linear_equation_system}中的常系数线性微分方程组的通解公式非常相似，并且与上一小节中通过迭代法得到的通解公式一致：
+最终，我们得到了常系数线性差分方程组的通解公式，它与\cref{cor:differential_equation_system}非常相似，并且与上一小节中通过迭代法得到的通解公式一致：
 \begin{theorem}
     设$\phi[n]$为带有初始值的方程组\begin{align*}
-        \mathbf{y}[n+1] = A \mathbf{y}[n]+\mathbf{f}[n],\mathbf{y}_0 = \mathbf{y}[0]
+        \mathbf{y}[n+1] = A \mathbf{y}[n]+\mathbf{f}[n],\quad \mathbf{y}_0 = \mathbf{y}[0]
     \end{align*}
     的解矩阵，则方程组的通解为\begin{align*}
         \mathbf{y}[n]& = \phi[n]\mathbf{y}_0 + \sum_{i=0}^{n} \phi[i]\mathbf{f}[n-i]\\
@@ -184,7 +184,7 @@ $$\mathbf{y}[k+1] = A \mathbf{y}[k] + \mathbf{f}[k]$$
 特别地，列向量可以视作只有一列的矩阵，因此向量值函数的单边z变换也是良定义的。
 
 考虑如下常系数线性差分方程组\begin{align*}
-    \mathbf{y}[n+1] = A \mathbf{y}[n] + \mathbf{f}[n],\mathbf{y}_0 = \mathbf{y}[0]
+    \mathbf{y}[n+1] = A \mathbf{y}[n] + \mathbf{f}[n],\quad \mathbf{y}_0 = \mathbf{y}[0]
 \end{align*}
 两边同时乘以$u[n]$并进行单边z变换，得到\begin{align*}
     z\mathbf{Y}(z) - z\mathbf{y}_0 = A \mathbf{Y}(z) + \mathbf{F}(z)
@@ -358,7 +358,7 @@ $$\mathbf{q}[n]=A^n\mathbf{q}[0]+\sum_{i=0}^{n-1}A^{n-1-i}B\mathbf{e}[i]$$
 \end{align*}
 
 特别地，如果$A$是可对角化的，则每个子系统都是一阶的，状态变量的方程为\begin{align*}
-    w_k[n+1]=\lambda_k w_k[n]+\mathbf{p}_k^T B\mathbf{e}[n],k=1,2,\cdots,N
+    w_k[n+1]=\lambda_k w_k[n]+\mathbf{p}_k^T B\mathbf{e}[n],\quad k=1,2,\cdots,N
 \end{align*}
 其中$\lambda_k$是$A$的第$k$个特征值，$\mathbf{p}_k^T$是$P^{-1}$的第$k$行，$\mathbf{p}_k^T B$是$\hat{B}$的第$k$行。每个子系统的状态变量$w_k[n]$的解为\begin{align*}
     w_k[n]=\lambda_k^n w_k(0)+\sum_{i=0}^{n-1} \lambda_k^{n-1-i}\mathbf{p}_k^TB\mathbf{e}[n]

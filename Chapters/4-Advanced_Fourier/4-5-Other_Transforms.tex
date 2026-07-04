@@ -18,11 +18,11 @@
 
 初看起来它与傅里叶变换没什么关系，但如果做变量替换$x=\mathrm{e}^{-t}$，则$dx=-\mathrm{e}^{-t}dt=-x dt$，积分限变为$t\in(-\infty,\infty)$，因此有：
 \[\mathcal{M} f(s)=\int_{-\infty}^{\infty}f(\mathrm{e}^{-t})\mathrm{e}^{-s t}\,dt\]
-这实际上是$f(\mathrm{e}^{-t})$的双边拉普拉斯变换，见\refsub{introduction_of_laplace}，但如果限制$s=\mathrm{i}\omega$，则是$f(\mathrm{e}^{-t})$的角频率形式的傅里叶变换：
+这实际上是$f(\mathrm{e}^{-t})$的双边拉普拉斯变换，见\cref{def:bi_laplace}，但如果限制$s=\mathrm{i}\omega$，则是$f(\mathrm{e}^{-t})$的角频率形式的傅里叶变换：
 \[\mathcal{M} f(\mathrm{i}\omega)=\int_{-\infty}^{\infty}f(\mathrm{e}^{-t})\mathrm{e}^{-\mathrm{i}\omega t}\,dt\]
 可以通过傅里叶变换的性质研究梅林变换的性质。显然，梅林变换是线性的。
 
-首先，利用傅里叶反演公式（见\refsub{introduction_of_fourier}或\refsub{fourier_inversion}），可以得到梅林变换的反变换：
+首先，利用傅里叶反演公式（见\cref{claim:fourier_inversion}或\cref{thm:fourier_inversion}），可以得到梅林变换的反变换：
 \begin{proposition}[梅林反变换]
     设$f\in L^1(\mathbb{R}^+)$，则有
     \[f(x)=\frac{1}{2\pi \mathrm{i}}\int_{-\infty}^{\infty}\mathcal{M} f(\mathrm{i}\omega)x^{-\mathrm{i}\omega}\,d\omega\]
@@ -310,10 +310,9 @@ $\rho-\hat{\mathbf{n}}\cdot\mathbf{b}<0$的情况，将在下一性质指出处�
         &=2\pi \int_0^{\infty}\chi_D(r)J_0(\rho r)r\,dr\\
         &=2\pi \int_0^{r}J_0(\rho r)r\,dr
     \end{align*}
-    其中$\rho=\|\boldsymbol{\omega}\|$。根据\refsub{bessel}节中的结论，有：
+    其中$\rho=\|\boldsymbol{\omega}\|$。根据\cref{prop:bessel_recursion}，有：
     \begin{align*}
-        F\chi_D(\boldsymbol{\omega})&=2\pi \left[\frac{r J_1(\rho r)}{\rho}\right]\\
-        &=\frac{2\pi r}{\rho}J_1(\rho r)
+        F\chi_D(\boldsymbol{\omega})&=2\pi \left[\frac{r J_1(\rho r)}{\rho}\right]=\frac{2\pi r}{\rho}J_1(\rho r)
     \end{align*}
 \end{example}
 

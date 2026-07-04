@@ -6,7 +6,7 @@
 \[\tau_T(f*g)=(\tau_T f)*g=f*g\]
 其中$\tau_T$为平移算子，$(\tau_T f)(x)=f(x-T)$。进一步，如果$f,g$均为以$T$为周期的周期函数，则卷积积分在每个长为$T$的区间上取值相同，这样不仅会导致冗余的计算，而且卷积积分或者为0，或者发散，因此需要对周期函数单独定义卷积运算。与之前一样，我们不讨论卷积积分收敛对$f,g$的要求。
 
-\begin{definition}[周期函数的卷积]
+\begin{definition}[周期函数的卷积]\label{def:period_conv}
     设$f,g$为以$T$为周期的周期函数，则它们的卷积定义为：
     \[(f*g)(x)=\frac{1}{T}\int_{0}^{T}f(y)g(x-y)\,dy\]
 \end{definition}

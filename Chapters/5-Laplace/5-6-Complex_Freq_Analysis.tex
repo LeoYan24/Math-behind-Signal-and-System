@@ -19,7 +19,7 @@
     \end{figure}
 \end{example}
 
-根据\refsub{stability_of_system}中提出的系统的稳定性条件，因果的线性时不变系统是稳定的，当且仅当其系统函数的收敛域包含虚轴，此时系统函数的所有极点均位于左半平面$\mathrm{Re}\ s<0$，\textbf{系统的频率响应特性即系统函数在虚轴上的限制}。
+根据\refsub{stability_of_system}中提出的系统的稳定性条件，因果的线性时不变系统是稳定的，当且仅当其系统函数的收敛域包含虚轴，此时系统函数的所有极点均位于左半平面$\mathrm{Re}(s)<0$，\textbf{系统的频率响应特性即系统函数在虚轴上的限制}。
 
 此时，如果零极点图较为简单，则可以由零极点图判断系统的滤波特性，即判断系统函数在虚轴上不同位置的幅值大小。
 
@@ -29,7 +29,7 @@
     设系统的零极点图如下图(a)所示：
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.7\textwidth]{zero_pole1}
+        \includegraphics[width=0.8\textwidth]{zero_pole1}
         \caption{零极点图与幅频特性曲线(1)}
     \end{figure}
     可以看到系统函数在原点处由一个一阶零点，这表明系统的频率响应特性在$\omega=0$有零点，也就意味着系统对低频信号有抑制作用；系统的极点均位于实轴上，这意味着系统函数的分母是有两个实根的实系数多项式
@@ -65,7 +65,7 @@
     设系统的零极点图如下图(a)所示：
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.7\textwidth]{zero_pole_vector}
+        \includegraphics[width=0.8\textwidth]{zero_pole_vector}
         \caption{零极点图与幅频特性曲线(3)}
     \end{figure}
 
@@ -305,7 +305,7 @@
 \end{theorem}
 
 根据行列式的图论展开的几何意义，梅森增益公式又可以写成如下形式：
-\begin{theorem}[梅森增益公式，图论形式]
+\begin{theorem}[梅森增益公式，图论形式]\label{thm:mason_gain}
     设系统有$n$个中间节点$M_1,M_2,\cdots,M_n$，激励$X$接入节点$M_1$，响应$Y$取自节点$M_n$，则
     \[H=\frac{Y}{X}=\frac{\sum_{k}g_k\Delta_k}{\Delta}\]
     其中$g_k$为从源点到阱点的第$k$条前向通路增益，$\Delta_k$为去掉与第$k$条前向通路接触的所有节点后的特征行列式。
@@ -324,7 +324,7 @@
 $$\sigma=(1\ 3\ 4)(2\ 5)$$
 对应中间节点组成的环路
 $$M_1\to M_3\to M_4\to M_1,M_2\to M_5\to M_2$$
-因此，行列式的每一项$\prod_{i=1}^{n}s_{i,\sigma(i)}$都可以看作是由若干个不接触环路增益的乘积。如果环路中出现不动点$\sigma(\mathrm{i})=\mathrm{i}$，则对应的$s_{ii}=1-a_{ii}$中的1，表示该节点不参与任何环路；如果考虑自环，则对应$-a_{ii}$。
+因此，行列式的每一项$\prod_{i=1}^{n}s_{i,\sigma(i)}$都可以看作是由若干个不接触环路增益的乘积。如果环路中出现不动点$\sigma(i)=i$，则对应的$s_{ii}=1-a_{ii}$中的1，表示该节点不参与任何环路；如果考虑自环，则对应$-a_{ii}$。
 
 其次，考虑正负号的问题。对于k-循环，它对$\mathrm{sgn}(\sigma)$的贡献为$(-1)^{k-1}$，而每个增益对应一个$-a_{ij}$，因此k-循环对行列式的贡献为$(-1)^{k-1}(-1)^k=-1$。因此，$l$个互不接触的环路增益之积的符号应为$(-1)^l$。
 \begin{example}
@@ -452,11 +452,11 @@ $$M_1\to M_3\to M_4\to M_1,M_2\to M_5\to M_2$$
     \[H=\frac{Y}{X}=\frac{H_{13}+H_{12}H_{23}}{\Delta}=\frac{H_{13}+H_{12}H_{23}}{1-G_{21}H_{12}-G_{31}H_{13}-G_{32}H_{23}-G_{21}G_{32}H_{13}-G_{31}H_{23}H_{12}}\]
 
     \ding{173}使用梅森增益公式的几何意义：图中共有五个环路，分别为\begin{align*}
-        L_1&:M_1\to M_2\to M_1,\text{增益}L_1=G_{21}H_{12}\\
-        L_2&:M_1\to M_3\to M_1,\text{增益}L_2=G_{31}H_{13}\\
-        L_3&:M_2\to M_3\to M_2,\text{增益}L_3=G_{32}H_{23}\\
-        L_4&:M_1\to M_2\to M_3\to M_1,\text{增益}L_4=G_{21}G_{32}H_{13}\\
-        L_5&:M_1\to M_3\to M_2\to M_1,\text{增益}L_5=G_{31}H_{23}H_{12}
+        L_1&:M_1\to M_2\to M_1,\quad \text{增益}L_1=G_{21}H_{12}\\
+        L_2&:M_1\to M_3\to M_1,\quad \text{增益}L_2=G_{31}H_{13}\\
+        L_3&:M_2\to M_3\to M_2,\quad \text{增益}L_3=G_{32}H_{23}\\
+        L_4&:M_1\to M_2\to M_3\to M_1,\quad \text{增益}L_4=G_{21}G_{32}H_{13}\\
+        L_5&:M_1\to M_3\to M_2\to M_1,\quad \text{增益}L_5=G_{31}H_{23}H_{12}
     \end{align*}
     这五个环路两两相交，因此特征行列式为
     \[\Delta=1-(L_1+L_2+L_3+L_4+L_5)=1-G_{21}H_{12}-G_{31}H_{13}-G_{32}H_{23}-G_{21}G_{32}H_{13}-G_{31}H_{23}H_{12}\]
@@ -527,7 +527,7 @@ $$M_1\to M_3\to M_4\to M_1,M_2\to M_5\to M_2$$
 为了说明为什么这样的系统具有最小的延时特性，我们首先考虑一个例子：
 \begin{example}
     设因果且稳定的连续线性时不变系统A，B的系统函数分别为
-    \[H_A(s)=\frac{s+1}{s+2},H_B(s)=\frac{s-1}{s+2}\]
+    \[H_A(s)=\frac{s+1}{s+2},\quad H_B(s)=\frac{s-1}{s+2}\]
     这两个系统具有相同的幅频特性：
     \[|H_A(\mathrm{i}\omega)|=|H_B(\mathrm{i}\omega)|=\frac{\sqrt{\omega^2+1}}{\sqrt{\omega^2+4}}\]
     其中系统A为最小相位系统，系统B不是最小相位系统。计算两个系统的相频特性：
@@ -536,7 +536,7 @@ $$M_1\to M_3\to M_4\to M_1,M_2\to M_5\to M_2$$
         \varphi_B(\omega)&=\arg(\mathrm{i}\omega-1)-\arg(\mathrm{i}\omega+2)=-\arctan(\omega)-\arctan\left(\frac{\omega}{2}\right)
     \end{align*}
 
-    在\refsub{distortion}中曾介绍，考察系统的延时特性，可以使用相时延$\tau_p$和群时延$\tau_g$。计算两个系统的相时延和群时延：
+    在\refsub{distortion}中曾介绍，考察系统的时延特性，可以使用相时延$\tau_p$和群时延$\tau_g$（见\cref{def:delay}）。计算两个系统的相时延和群时延：
     \begin{align*}
         \tau_{pA}(\omega)&=-\frac{\varphi_A(\omega)}{\omega}=\frac{-\arctan(\omega)+\arctan\left(\frac{\omega}{2}\right)}{\omega}\\
         \tau_{pB}(\omega)&=-\frac{\varphi_B(\omega)}{\omega}=\frac{\arctan(\omega)+\arctan\left(\frac{\omega}{2}\right)}{\omega}\\
@@ -572,7 +572,7 @@ $$M_1\to M_3\to M_4\to M_1,M_2\to M_5\to M_2$$
     
     两个系统级联，相频特性相加：
     \begin{align*}
-        \tilde{H}(s)=H(s)A(s),\arg \tilde{H}(s)=\arg H(s)+\arg A(\omega)
+        \tilde{H}(s)=H(s)A(s),\quad \arg \tilde{H}(s)=\arg H(s)+\arg A(\omega)
     \end{align*}
     因此相时延和群时延也相加。为了验证级联系统具有最小相位性，我们来计算全通系统造成的相时延和群时延。全通系统的相频特性为：
     \begin{align*}
@@ -608,9 +608,9 @@ $$M_1\to M_3\to M_4\to M_1,M_2\to M_5\to M_2$$
 
 \begin{example}
     设因果且稳定的连续线性时不变系统的系统函数及单位脉冲响应为
-    \[H(s)=\frac{s+1}{s+2},h(t)=\delta(t)-\mathrm{e}^{-2t}u(t)\]
+    \[H(s)=\frac{s+1}{s+2},\quad h(t)=\delta(t)-\mathrm{e}^{-2t}u(t)\]
     则其逆系统的系统函数及单位脉冲响应为
-    \[H^{-1}(s)=\frac{s+2}{s+1},h_{\mathrm{inv}}(t)=\delta(t)+\mathrm{e}^{-t}u(t)\]
+    \[H^{-1}(s)=\frac{s+2}{s+1},\quad h_{\mathrm{inv}}(t)=\delta(t)+\mathrm{e}^{-t}u(t)\]
     该逆系统也是因果且稳定的连续线性时不变系统。将两个系统级联，其单位脉冲响应为
 \begin{align*}
     h_{eq}(t)&=h(t)*h_{\mathrm{inv}}(t)\\
@@ -641,7 +641,7 @@ $$M_1\to M_3\to M_4\to M_1,M_2\to M_5\to M_2$$
 
 \begin{example}[负的群时延]
     考虑调幅信号通过具有负的群时延的系统。设
-    \[e(t)=\cos(\omega_m t)\cos(\omega_c t),H(s)=\frac{s+1}{s+2},h(t)=\delta-\mathrm{e}^{-2t}u(t)\]
+    \[e(t)=\cos(\omega_m t)\cos(\omega_c t),\quad H(s)=\frac{s+1}{s+2},\quad h(t)=\delta-\mathrm{e}^{-2t}u(t)\]
     则系统的群时延为
     \[\tau_g(\omega)=-\frac{d\varphi(\omega)}{d\omega}=-\frac{1}{1+\omega^2}+\frac{2}{4+\omega^2}\]
     在低频段，群时延为负值。设基波频率$\omega_m=1$，载波频率$\omega_c=5$（这个载波的频率不算很高，这是为了使响应与激励区分开），则
@@ -668,7 +668,7 @@ $$M_1\to M_3\to M_4\to M_1,M_2\to M_5\to M_2$$
 
 \begin{example}[暂态信号经过原系统]
     设
-    $$e(t)=\chi_{[0,1]}(t),H(s)=\frac{s+1}{s+2}$$
+    $$e(t)=\chi_{[0,1]}(t),\quad H(s)=\frac{s+1}{s+2}$$
     则系统的响应为
     \begin{align*}
         y(t)&=(h*\chi_{[0,1]})(t)\\

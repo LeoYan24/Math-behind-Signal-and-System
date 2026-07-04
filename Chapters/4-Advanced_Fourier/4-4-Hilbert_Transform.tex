@@ -78,7 +78,7 @@
 \end{example}
 
 \begin{example}[三角函数的希尔伯特变换，直接计算]
-    利用\refsub{int_sin}中的狄利克雷积分：
+    利用狄利克雷积分（\cref{thm:dirichlet_int}）：
     \[\int_{-\infty}^{\infty}\frac{\sin ax}{x}\,dx=\pi,a>0\]
     也可以直接计算三角函数的希尔伯特变换，这里以正弦函数为例：
     \begin{align*}
@@ -157,7 +157,7 @@
 希尔伯特变换可以用来构造解析信号。解析信号在通信领域有着重要的应用，例如调制解调、单边带调制等。
 \begin{definition}[解析信号]
     函数$f\in L^1(\mathbb{R})$称为\textbf{解析信号}(analytic signal)，如果它仅含正频率成分，即
-    \[\text{supp}\mathcal{F} f\subseteq[0,\infty)\]
+    \[\text{supp}(\mathcal{F} f)\subseteq[0,\infty)\]
 \end{definition}
 
 实信号的傅里叶变换满足共轭对称性：$\mathcal{F} f^-=\overline{\mathcal{F} f}$，即幅度谱为偶函数而相位谱为奇函数，因此实信号不可能是解析信号。但如果考虑$2u\cdot\mathcal{F} f$，其中$u$为单位阶跃函数，则该信号仅含正频率成分（我们马上将看到为什么是两倍的$u\mathcal{F} f$）。
@@ -182,9 +182,9 @@
 与解析信号相关的解析信号并不是它本身，而是它的两倍，这一点从频域上是容易看出来的。
 
 对于一个解析信号$g(t)$，它的实部为：
-$$\text{Re}\ g(t)=\frac{g(t)+\overline{g(t)}}{2}$$
+$$\text{Re}(g(t))=\frac{g(t)+\overline{g(t)}}{2}$$
 实部的傅里叶变换为：
-$$\mathcal{F}[\text{Re}\ g(t)]=\frac{\mathcal{F}g(\xi)+\mathcal{F}\overline{g}(\xi)}{2}=\frac{\mathcal{F}g(\xi)+\mathcal{F}g(-\xi)}{2}$$
+$$\mathcal{F}[\text{Re}(g(t))]=\frac{\mathcal{F}g(\xi)+\mathcal{F}\overline{g}(\xi)}{2}=\frac{\mathcal{F}g(\xi)+\mathcal{F}g(-\xi)}{2}$$
 可见取解析信号的实部相当于在频域上做偶延拓再将幅值减半，这正是由实信号构造与之相关的解析信号的逆过程。因此，\textbf{一个信号是解析信号，当且仅当它的虚部是实部的希尔伯特变换}。
 
 以上构造表明：若某线性时不变系统的响应恰好是激励的希尔伯特变换，就可借此构造与激励相关的解析信号。然而，希尔伯特变换的单位冲激响应为$1/\pi t$，其本身非因果，因此对应系统不可实现。

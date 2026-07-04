@@ -177,7 +177,7 @@ Picard定理适用范围很广，但我们仅仅关注线性微分方程组，�
 下面我们首先考虑齐次方程，再通过常数变易法来处理非齐次方程。
 
 利用前一命题，可以进一步说明：
-\begin{theorem}
+\begin{theorem}\label{thm:n_order_ODE}
     $n$阶齐次线性方程组的解集$S$构成$n$维实线性空间。
 \end{theorem}
 \begin{proof}
@@ -207,7 +207,7 @@ Picard定理适用范围很广，但我们仅仅关注线性微分方程组，�
 
 \begin{definition}[向量值函数的线性相关性]
     称向量值函数$\mathbf{y}_1(t),\mathbf{y}_2(t),\cdots,\mathbf{y}_n(t)$在区间$(a,b)$上是\textbf{线性相关}的，如果存在不全为零的常数$c_1,c_2,\cdots,c_n$，使得
-    \[c_1\mathbf{y}_1(t)+c_2\mathbf{y}_2(t)+\cdots+c_n\mathbf{y}_n(t)=0,\forall t\in(a,b)\]
+    \[c_1\mathbf{y}_1(t)+c_2\mathbf{y}_2(t)+\cdots+c_n\mathbf{y}_n(t)=0,\quad \forall t\in(a,b)\]
     否则称它们是\textbf{线性无关}的。
 \end{definition}
 
@@ -249,7 +249,7 @@ Picard定理适用范围很广，但我们仅仅关注线性微分方程组，�
 \begin{theorem}[Liouville公式]
     设$\mathbf{y}_1(t),\mathbf{y}_2(t),\cdots,\mathbf{y}_n(t)$为方程$\frac{d\mathbf{y}}{dt}=A(t)\mathbf{y}$的解，$W(t)$为它们的Wronsky行列式，则$\forall t_0\in (a,b)$，有
     \begin{align*}
-        W(t)=W(t_0)\mathrm{e}^{-\int_{t_0}^t \mathrm{tr}A(s)\,ds},\forall t\in(a,b)
+        W(t)=W(t_0)\mathrm{e}^{-\int_{t_0}^t \mathrm{tr}A(s)\,ds},\quad \forall t\in(a,b)
     \end{align*}
 \end{theorem}
 
@@ -267,7 +267,7 @@ $$\frac{d\mathbf{y}}{dt}=\mathbf{f}(t,\mathbf{y})$$
 考虑由齐次线性微分方程转化而来的齐次线性微分方程组，则我们实际上只需要向量值函数$\mathbf{y}_1(t),\mathbf{y}_2(t),\cdots,\mathbf{y}_n(t)$的第一个分量，而后续的分量是前一分量的导数，第一个分量线性相关，则后续分量线性相关。这启发我们对数量值函数定义：
 \begin{definition}[数量值函数的线性相关性]
     函数$y_1(t),y_2(t),\cdots,y_n(t)$在区间$(a,b)$上是\textbf{线性相关}的，如果存在不全为零的常数$c_1,c_2,\cdots,c_n$，使得
-    \[c_1y_1(t)+c_2y_2(t)+\cdots+c_ny_n(t)=0,\forall t\in(a,b)\]
+    \[c_1y_1(t)+c_2y_2(t)+\cdots+c_ny_n(t)=0,\quad \forall t\in(a,b)\]
     否则称它们是\textbf{线性无关}的。
 \end{definition}
 
@@ -512,7 +512,7 @@ $$\frac{d\mathbf{y}}{dt}=\mathbf{f}(t,\mathbf{y})$$
     \end{align*}
 \end{theorem}
 
-\begin{corollary}
+\begin{corollary}\label{cor:differential_equation_system}
     非齐次方程组满足初始条件$\mathbf{y}(t_0)=\mathbf{y}_0$的解为\begin{align*}
     \mathbf{y}(t)=\mathrm{e}^{A(t-t_0)}\mathbf{y}_0+\int_{t_0}^t \mathrm{e}^{A(t-s)}\mathbf{f}(s)\,ds
     \end{align*}
@@ -618,7 +618,7 @@ $$\frac{d\mathbf{y}}{dt}=\mathbf{f}(t,\mathbf{y})$$
 \end{align*}
 
 特别地，如果$A$是可对角化的，则每个子系统都是一阶的，状态变量的方程为\begin{align*}
-    \frac{dz_k}{dt}=\lambda_k z_k(t)+\mathbf{p}_k^T B\mathbf{e}(t),k=1,2,\cdots,n
+    \frac{dz_k}{dt}=\lambda_k z_k(t)+\mathbf{p}_k^T B\mathbf{e}(t),\quad k=1,2,\cdots,n
 \end{align*}
 其中$\lambda_k$是$A$的第$k$个特征值，$\mathbf{p}_k^T$是$P^{-1}$的第$k$行，$\mathbf{p}_k^T B$是$\hat{B}$的第$k$行。每个子系统的状态变量$z_k(t)$的解为\begin{align*}
     z_k(t)=\mathrm{e}^{\lambda_k t}z_k(0)+\int_0^t \mathrm{e}^{\lambda_k (t-s)}\mathbf{p}_k^TB\mathbf{e}(s)\,ds
@@ -685,14 +685,14 @@ $$\frac{d\mathbf{y}}{dt}=\mathbf{f}(t,\mathbf{y})$$
     z_{1f}=\mathrm{e}^{\lambda T}\int_0^T \mathrm{e}^{-\lambda s}z_2(s)\,ds
     \end{align*}
     这是一个关于$z_2(t)$的积分方程。考虑到$z_2(t)$满足\begin{align*}
-    z_2(0)=0,z_2(T)=z_{2f},\int_{0}^T \mathrm{e}^{-\lambda s}z_2(s)\,ds=z_{1f}\mathrm{e}^{-\lambda T}
+    z_2(0)=0,z_2(T)=z_{2f},\quad \int_{0}^T \mathrm{e}^{-\lambda s}z_2(s)\,ds=z_{1f}\mathrm{e}^{-\lambda T}
     \end{align*}
     这三个约束条件，我们不妨尝试给$z_2(t)$分配三个待定系数，并考虑最简单的情况，即$z_2(t)$为二阶多项式：\begin{align*}
     z_2(t)=a t^2+bt+c
     \end{align*}
 
     代入约束条件，得到\begin{align*}
-    c=0,2aT+b=z_{2f},
+    c=0,\quad 2aT+b=z_{2f},
     \end{align*}
     \begin{align*}
     z_{1f}\mathrm{e}^{-\lambda T}&=\int_0^T \mathrm{e}^{-\lambda s}(a s^2+bs)\,ds\\

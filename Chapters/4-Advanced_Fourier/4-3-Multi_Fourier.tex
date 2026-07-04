@@ -93,7 +93,6 @@
     \end{align*}
 \end{definition}
 $f(\mathbf{x})$的傅里叶变换为（以频率为例）：
-
 {\color{blue}
 \begin{align*}
 \mathcal{F} f(\boldsymbol{\xi})&=\int_{\mathbb{R}^n}f(\mathbf{x})\mathrm{e}^{-2\pi \mathrm{i} \mathbf{x}\cdot\boldsymbol{\xi}}\,d\mathbf{x}\\
@@ -188,7 +187,7 @@ $$\left\{\mathbf{x}\in\mathbb{R}^n \mid \mathbf{x}\cdot\boldsymbol{\xi}=k+\theta
     \end{lralign}
 \end{proposition}
 \begin{proof}
-    类似一维的情况（见\refsub{fourier_operation_properties}），带入定义可立即得到：
+    类似一维的情况（\cref{thm:FT_dual}），带入定义可立即得到：
     \begin{lralign}
         \mathcal{F} f^-=\mathcal{F} (f^-)=\mathcal{F} ^{-1} f
     \switch
@@ -426,7 +425,7 @@ $$\left\{\mathbf{x}\in\mathbb{R}^n \mid \mathbf{x}\cdot\boldsymbol{\xi}=k+\theta
     =&\mathcal{F} f(\boldsymbol{\omega})\cdot \mathcal{F} g(\boldsymbol{\omega})
     \end{lralign}
 \ding{173}频域卷积：\\
-仿照\refsub{properties_of_convolution}中的证明。根据时域卷积定理$\mathcal{F} (f*g)=\mathcal{F} f\mathcal{F} g$，
+仿照\cref{thm:conv}的证明。根据时域卷积定理$\mathcal{F} (f*g)=\mathcal{F} f\mathcal{F} g$，
 令$f=\mathcal{F} \mathfrak{f},g=\mathcal{F} \mathfrak{g}$，则
 \begin{lralign}
     \mathcal{F} \mathfrak{f}*\mathcal{F} \mathfrak{g}&=\mathcal{F} ^{-1}\left[\mathcal{F}\mathcal{F} \mathfrak{f}\cdot\mathcal{F} \mathcal{F} \mathfrak{g}\right]\\
@@ -439,8 +438,10 @@ $$\left\{\mathbf{x}\in\mathbb{R}^n \mid \mathbf{x}\cdot\boldsymbol{\xi}=k+\theta
 \end{lralign}
 \end{proof}
 
+与一维的情况下的\cref{thm:plancherel}类似，我们给出更一般的普朗歇尔定理，它实际上指出空间域与变换域上的内积的数量关系。
+
 \begin{theorem}[普朗歇尔定理]
-    设$f(\mathbf{x}),\in L^1(\mathbb{R}^n)\cap L^2(\mathbb{R}^n)$，则有：
+    设$f(\mathbf{x})\in L^1(\mathbb{R}^n)\cap L^2(\mathbb{R}^n)$，则有：
     \begin{lralign}
     \int_{\mathbb{R}^n}|f(\mathbf{x})|^2\,d\mathbf{x}&=\int_{\mathbb{R}^n}|\mathcal{F} f(\boldsymbol{\xi})|^2\,d\boldsymbol{\xi}
 \switch
@@ -448,7 +449,7 @@ $$\left\{\mathbf{x}\in\mathbb{R}^n \mid \mathbf{x}\cdot\boldsymbol{\xi}=k+\theta
     \end{lralign}
 \end{theorem}
 \begin{proof}
-    与一维的情况类似，我们给出更一般的结论，它实际上指出空间域与变换域上的内积的数量关系。设$f,g\in L^1(\mathbb{R}^n)\cap L^2(\mathbb{R}^n)$，则有：
+    设$f,g\in L^1(\mathbb{R}^n)\cap L^2(\mathbb{R}^n)$，则有：
     \begin{lralign}
     &\int_{\mathbb{R}^n}\mathcal{F} f(\boldsymbol{\xi})\overline{\mathcal{F} g(\boldsymbol{\xi})}\,d\mathbf{x}\\
     =&\int_{\mathbb{R}^n}\,d\boldsymbol{\xi}\int_{\mathbb{R}^n}f(\mathbf{x})\mathrm{e}^{-2\pi \mathrm{i} \mathbf{x}\cdot\boldsymbol{\xi}}\,d\mathbf{x}\int_{\mathbb{R}^n}\overline{g(\mathbf{y})}\mathrm{e}^{2\pi \mathrm{i} \mathbf{y}\cdot\boldsymbol{\xi}}\,d\mathbf{y}\\
@@ -485,7 +486,7 @@ $\mathcal{S} $是线性空间，因此可以定义其对偶空间，即\textbf{�
     将缓增分布组成的线性空间记作$\mathcal{T} (\mathbb{R}^n)$，在不引起歧义的前提下，也可直接记作$\mathcal{T} $。
 \end{definition}
 
-容易验证$\mathcal{S} $上的卷积总是有定义的；用类似于\refsub{fourier_close}中的方法，可以证明$\mathcal{S} $在傅里叶变换下是封闭的，我们仍然定义$\langle \mathcal{F} T,\varphi\rangle=\langle T,\mathcal{F} \varphi\rangle$从而$\mathcal{T} $在傅里叶变换下也是封闭的。典型的施瓦兹函数例如高斯函数$f(\mathbf{x})=\mathrm{e}^{-\pi |\mathbf{x}|^2}$。
+容易验证$\mathcal{S} $上的卷积总是有定义的；用类似于\cref{thm:schwartz_close}的证明方法，可以证明$\mathcal{S} $在傅里叶变换下是封闭的，我们仍然定义$\langle \mathcal{F} T,\varphi\rangle=\langle T,\mathcal{F} \varphi\rangle$，从而$\mathcal{T} $在傅里叶变换下也是封闭的。典型的施瓦兹函数例如高斯函数$f(\mathbf{x})=\mathrm{e}^{-\pi |\mathbf{x}|^2}$。
 
 我们不再一一讨论作用于分布的各算子，因为它们与一维的情况没有多少差异。对于分布而言，平移与伸缩需要用算子来表示，只是这时平移算子$\tau_{\mathbf{b}}$（其中$\mathbf{b}$为向量）定义为：
 \begin{align*}
@@ -505,7 +506,7 @@ $\mathcal{S} $是线性空间，因此可以定义其对偶空间，即\textbf{�
         =&\langle T_f,\tau_{-\mathbf{b}}\varphi\rangle
     \end{align*}
     因此我们定义：
-    \[\langle \tau_{\mathbf{b}} T,\varphi\rangle=\langle T,\tau_{-\mathbf{b}}\varphi\rangle,T\in\mathcal{T} ,\varphi\in\mathcal{S} \]
+    \[\langle \tau_{\mathbf{b}} T,\quad \varphi\rangle=\langle T,\tau_{-\mathbf{b}}\varphi\rangle,T\in\mathcal{T} ,\varphi\in\mathcal{S} \]
 \end{example}
 
 \begin{example}[伸缩算子]
@@ -516,11 +517,11 @@ $\mathcal{S} $是线性空间，因此可以定义其对偶空间，即\textbf{�
         =&\frac{1}{|\det A|}\langle T_f,\sigma_{A^{-1}}\varphi\rangle
     \end{align*}
     因此我们定义：
-    \[\langle \sigma_A T,\varphi\rangle=\frac{1}{|\det A|}\langle T,\sigma_{A^{-1}}\varphi\rangle,T\in\mathcal{T} ,\varphi\in\mathcal{S} \]
+    \[\langle \sigma_A T,\varphi\rangle=\frac{1}{|\det A|}\langle T,\sigma_{A^{-1}}\varphi\rangle,\quad T\in\mathcal{T} ,\varphi\in\mathcal{S} \]
 \end{example}
 在一维情况下，我们有：
 
-\[\langle \tau_a T,\varphi\rangle=\langle T,\tau_{-a}\varphi\rangle,\langle\sigma_{a} T,\varphi\rangle=\frac{1}{|a|}\langle T,\sigma_{1/a}\varphi\rangle,T\in\mathcal{T} ,\varphi\in\mathcal{S} \]
+\[\langle \tau_a T,\varphi\rangle=\langle T,\tau_{-a}\varphi\rangle,\langle\sigma_{a} T,\varphi\rangle=\frac{1}{|a|}\langle T,\sigma_{1/a}\varphi\rangle,\quad T\in\mathcal{T} ,\varphi\in\mathcal{S} \]
 可以看到，如果将标量$b$推广为向量$\mathbf{b}$，而将线性变换（的矩阵表示）由一维矩阵$a$推广为$n$维矩阵$A$，则一维情况下的平移和伸缩算子的定义就是多维空间中的特例。
 
 借助上一小节中对函数的傅里叶变换的讨论，读者可以自行构建出分布的傅里叶变换的各种性质。
@@ -535,7 +536,7 @@ $\mathcal{S} $是线性空间，因此可以定义其对偶空间，即\textbf{�
     \[\delta_{\mathbf{x}_0}(\mathbf{x})=\begin{cases}
     \infty,&\mathbf{x}=\mathbf{x}_0\\
     0,&\mathbf{x}\neq \mathbf{x}_0
-    \end{cases},\int_{\mathbb{R}^n}\delta(\mathbf{x})\,d\mathbf{x}=1\]
+    \end{cases},\quad \int_{\mathbb{R}^n}\delta(\mathbf{x})\,d\mathbf{x}=1\]
     即$\delta_{\mathbf{x}_0}(\mathbf{x})=\tau_{\mathbf{x}_0}\delta(\mathbf{x})$。
 \end{definition}
 \begin{proposition}[多维狄拉克分布的性质]
@@ -558,12 +559,12 @@ $\mathcal{S} $是线性空间，因此可以定义其对偶空间，即\textbf{�
 \end{proposition}
 \begin{proof}
     分布与函数的卷积定义为：
-    \[\langle f*T,\varphi\rangle=\langle T,(f^-)*\varphi\rangle,f,\varphi\in\mathcal{S} ,T\in\mathcal{T} \]
+    \[\langle f*T,\varphi\rangle=\langle T,(f^-)*\varphi\rangle,\quad f,\varphi\in\mathcal{S} ,T\in\mathcal{T} \]
     并且这种卷积总满足交换律，即$f*T=T*f$。因此有：
     \begin{align*}
         \langle f*\delta,\varphi\rangle=\langle \delta,(f^-)*\varphi\rangle=((f^-)*\varphi)(\mathbf{0})=\int_{\mathbb{R}^n}f(\mathbf{y})\varphi(\mathbf{y})\,d\mathbf{y}=\langle f,\varphi\rangle
     \end{align*}
-    这就证明了$f*\delta=\delta*f=f$。
+    这就证明了$f*\delta=\delta*f=f$.
 
     类似地，有：
     \begin{align*}
@@ -633,15 +634,15 @@ $\mathcal{S} $是线性空间，因此可以定义其对偶空间，即\textbf{�
 为了直观性，我们再这一小节中将仅考虑$\mathbb{R}^2$中的情况。我们首先给出\textbf{格}的定义，讨论它的一些性质，再介绍它在信号与系统中的应用。
 \begin{definition}[格]
     任取$\mathbb{R}^2$，的一组基$\{\mathbf{u}_1,\mathbf{u}_2\}$，称形如
-    \[\mathbf{p}=p_1\mathbf{u}_1+p_2\mathbf{u}_2,p_1,p_2\in\mathbb{Z}\]
+    \[\mathbf{p}=p_1\mathbf{u}_1+p_2\mathbf{u}_2,\quad p_1,p_2\in\mathbb{Z}\]
     的点为\textbf{格点}(lattice point)，所有格点组成的集合称为由基$\{\mathbf{u}_1,\mathbf{u}_2\}$生成的\textbf{格}(lattice)，记为$\mathcal{L}$，$\mathcal{L} $构成$\mathbb{Z}$模。
 
     以$\mathbf{u}_1,\mathbf{u}_2$为邻边的平行四边形称为该格的\textbf{基本单元}或\textbf{基本平行四边形}(fundamental parallelogram)，基本单元的面积为$|\det(\mathbf{u}_1,\mathbf{u}_2)|$，定义为该格的\textbf{面积}（体积），记为$\mathrm{Area}(\mathcal{L} )$。
 
     记$A=(\mathbf{u}_1,\mathbf{u}_2)$为由基向量组成的可逆矩阵，则
-    \[\mathbf{u}_1=A \mathbf{e}_1,\mathbf{u}_2=A \mathbf{e}_2\]
+    \[\mathbf{u}_1=A \mathbf{e}_1,\quad \mathbf{u}_2=A \mathbf{e}_2\]
     其中$\mathbf{e}_1,\mathbf{e}_2$为标准正交基。作为列向量，格点可以表示为
-    \[\mathbf{p}=A\mathbf{n},\mathbf{n}\in\mathbb{Z}^2\]
+    \[\mathbf{p}=A\mathbf{n},\quad \mathbf{n}\in\mathbb{Z}^2\]
     因此，我们也将格$\mathcal{L} $记为$\mathcal{L} =A(\mathbb{Z}^2)$，$\mathrm{Area}(\mathcal{L} )=|\det A|$。
 \end{definition}
 
@@ -674,7 +675,7 @@ $\mathcal{S} $是线性空间，因此可以定义其对偶空间，即\textbf{�
 首先，我们给出二维情况下的\textbf{傅里叶级数}以及\textbf{泊松求和公式}：
 \begin{definition}[二维傅里叶级数]
     设$f(x_1,x_2)$为$\mathbb{R}^2$中周期为$(T_1,T_2)$的周期函数，即
-    \[f(x_1,x_2)=f(x_1+T_1,x_2)=f(x_1,x_2+T_2),\forall (x_1,x_2)\in\mathbb{R}^2\]
+    \[f(x_1,x_2)=f(x_1+T_1,x_2)=f(x_1,x_2+T_2),\quad \forall (x_1,x_2)\in\mathbb{R}^2\]
     设$f\in L^2([0,T_1]\times[0,T_2])$，则$f$的\textbf{二维傅里叶级数}为
     \[f(x_1,x_2)=\sum_{k_1,k_2=-\infty}^{\infty}c_{k_1,k_2}\mathrm{e}^{2\pi \mathrm{i}\left(\frac{1}{T_1}k_1 x_1+\frac{1}{T_2}k_2 x_2\right)}\]
     其中
@@ -742,7 +743,7 @@ $\mathcal{S} $是线性空间，因此可以定义其对偶空间，即\textbf{�
     1,&\mathrm{i}=j\\
     0,&\mathrm{i}\neq j
     \end{cases}=\delta^i_{j}\]
-    $\delta^i_{j}$为克罗内克δ符号。我们将$\mathbf{u}^*_1,\mathbf{u}^*_2$称为$\mathbf{u}_1,\mathbf{u}_2$的\textbf{对偶基}。\textbf{对偶基生成了对偶格}。此外，与对偶基做内积，定义了内积空间上唯一一组满足正交归一化条件，即$f_i(\mathbf{u_j})=\delta^i_{j}$的线性泛函，这组线性泛函称为\textbf{对偶线性泛函}。
+    $\delta^i_{j}$为克罗内克δ符号。我们将$\mathbf{u}^*_1,\mathbf{u}^*_2$称为$\mathbf{u}_1,\mathbf{u}_2$的\textbf{对偶基}。\textbf{对偶基生成了对偶格}。此外，与对偶基做内积，定义了内积空间上唯一一组满足正交归一化条件，即$f_i(\mathbf{u}_j)=\delta^i_{j}$的线性泛函，这组线性泛函称为\textbf{对偶线性泛函}。
 \end{definition}
 
 $\shah_{\mathcal{L} }$的$\delta$分布位于格$\mathcal{L} $的格点上，而其傅里叶变换$\mathcal{F} \shah_{\mathcal{L} }$的$\delta$分布位于对偶格$\mathcal{L} ^*$的格点上。这为我们展示了一种理解空间域与频域关系的方式，并从更高的视角解释了我们在\refsub{fourier_of_dirac_comb}最后所发现的现象，即一维狄拉克梳状分布经过傅里叶变换，$\delta$的位置具有“倒数”关系。
@@ -750,7 +751,7 @@ $\shah_{\mathcal{L} }$的$\delta$分布位于格$\mathcal{L} $的格点上，而
 最后，我们来讨论二维信号的采样与重建问题。
 \begin{definition}[二维带限函数]
     设$f\in L^1(\mathbb{R}^2)$，如果存在矩形区域$$B=\{( \xi_1,\xi_2)\left| |\xi_1|\leq \xi_{m1},|\xi_2|\leq \xi_{m2}\right.\}$$
-    使得$\mathrm{supp} \mathcal{F}f \subset B$，就说$f$为二维\textbf{带限函数}(bandlimited function)，带宽为$(\xi_{m1},\xi_{m2})$。
+    使得$\mathrm{supp}(\mathcal{F}f)\subset B$，就说$f$为二维\textbf{带限函数}(bandlimited function)，带宽为$(\xi_{m1},\xi_{m2})$。
 \end{definition}
 特别地，我们考虑
 $$\mathrm{supp}\mathcal{F} f\subset\left\{( \xi_1,\xi_2)\left| |\xi_1|\leq \dfrac{1}{2},|\xi_2|\leq \dfrac{1}{2}\right.\right\}$$
@@ -764,30 +765,30 @@ $$\mathrm{supp}\mathcal{F} f\subset\left\{( \xi_1,\xi_2)\left| |\xi_1|\leq \dfra
 \end{align*}
 最后一行用到了卷积的结合律，见\refsub{properties_of_convolution}。综上得到以下引理：
 \begin{lemma}[方形采样公式]
-    设$$f\in L^1(\mathbb{R}^2),\mathrm{supp}\mathcal{F} f\subset\left\{( \xi_1,\xi_2)\left| |\xi_1|\leq \dfrac{1}{2},|\xi_2|\leq \dfrac{1}{2}\right.\right\}$$
+    设$$f\in L^1(\mathbb{R}^2),\mathrm{supp}(\mathcal{F} f)\subset\left\{( \xi_1,\xi_2)\left| |\xi_1|\leq \dfrac{1}{2},|\xi_2|\leq \dfrac{1}{2}\right.\right\}$$
     则有
     \[f(\mathbf{x})=\sum_{\mathbf{k}\in\mathbb{Z}^2}f(\mathbf{k})\mathrm{sinc}(x_1-k_1)\mathrm{sinc}(x_2-k_2)\]
 \end{lemma}
 
-更一般地，我们考虑$\mathrm{supp}\mathcal{F} f$属于格$\mathcal{L} =A(\mathbb{Z}^2),A=[\mathbf{u}_1,\mathbf{u}_2]$的某个基本平行四边形内。显而易见，带限等价于存在这样一个平行四边形，使得频域信号$\mathcal{F} f$支于它。由于我们通常考虑实信号，不妨设这个基本平行四边形是关于原点对称的。
+更一般地，我们考虑$\mathrm{supp}(\mathcal{F} f)$属于格$\mathcal{L} =A(\mathbb{Z}^2),A=[\mathbf{u}_1,\mathbf{u}_2]$的某个基本平行四边形内。显而易见，带限等价于存在这样一个平行四边形，使得频域信号$\mathcal{F} f$支于它。由于我们通常考虑实信号，不妨设这个基本平行四边形是关于原点对称的。
 
 我们希望利用已经得到的方形采样公式来推导格采样公式。为此，考虑将频域信号$\mathcal{F} f$进行伸缩变换，这对应时域上“对偶”的伸缩变换：
 \[\mathcal{F} f(A\boldsymbol{\xi})=\frac{1}{|\det A|}\mathcal{F}[f(A^{-T}\mathbf{x})](\boldsymbol{\xi})\]
 
-令$g(\mathbf{x})=f(A^{-T}\mathbf{x})$，则$\mathrm{supp}\mathcal{F} g\in[-1/2,1/2]^2$，因此可以应用方形采样公式：
+令$g(\mathbf{x})=f(A^{-T}\mathbf{x})$，则$\mathrm{supp}(\mathcal{F} g)\in[-1/2,1/2]^2$，因此可以应用方形采样公式：
 \[g(\mathbf{x})=\sum_{\mathbf{k}\in\mathbb{Z}^2}g(\mathbf{k})\mathrm{sinc}(x_1-k_1)\mathrm{sinc}(x_2-k_2)\]
 将$g$的定义代入上式，得到：
 \[f(A^{-T}\mathbf{x})=\sum_{\mathbf{k}\in\mathbb{Z}^2}f(A^{-T}\mathbf{k})\mathrm{sinc}(x_1-k_1)\mathrm{sinc}(x_2-k_2)\]
 
 以上结果可以改写为\textbf{格采样公式}：
 \begin{theorem}[格采样公式]
-    设$$f\in L^1(\mathbb{R}^2),\mathrm{supp}\mathcal{F} f\subset\left\{( \xi_1,\xi_2)\left| \mathbf{\xi}=A\boldsymbol{\eta},\boldsymbol{\eta}\in[-1/2,1/2]^2\right.\right\}$$
+    设$$f\in L^1(\mathbb{R}^2),\mathrm{supp}(\mathcal{F} f)\subset\left\{( \xi_1,\xi_2)\left| \mathbf{\xi}=A\boldsymbol{\eta},\boldsymbol{\eta}\in[-1/2,1/2]^2\right.\right\}$$
     则有
     \[f(\mathbf{y})=\sum_{k_1,k_2\in\mathbb{Z}}f(k_1\mathbf{u}^*_1+k_2\mathbf{u}^*_2)\mathrm{sinc}(\mathbf{u}_1\cdot \mathbf{y}-k_1)\mathrm{sinc}(\mathbf{u}_2\cdot \mathbf{y}-k_2)\]
 \end{theorem}
 \begin{proof}
     令$\mathbf{y}=A^{-T}\mathbf{x}$，则$\mathbf{x}=A^T\mathbf{y}$，于是
-    \[x_1=\mathbf{u}_1\cdot \mathbf{y},x_2=\mathbf{u}_2\cdot \mathbf{y}\]
+    \[x_1=\mathbf{u}_1\cdot \mathbf{y},\quad x_2=\mathbf{u}_2\cdot \mathbf{y}\]
     对$A^{-T}\mathbf{k}$，我们知道$A^{-T}$的行向量分别为$\mathbf{u}^*_1,\mathbf{u}^*_2$，因此$A^{-T}\mathbf{k}=k_1\mathbf{u}^*_1+k_2\mathbf{u}^*_2$。综上得到：
     \begin{align*}
         f(\mathbf{y})&=\sum_{\mathbf{k}\in\mathbb{Z}^2}f(A^{-T}\mathbf{k})\mathrm{sinc}(\mathbf{u}_1\cdot \mathbf{y}-k_1)\mathrm{sinc}(\mathbf{u}_2\cdot \mathbf{y}-k_2)\\

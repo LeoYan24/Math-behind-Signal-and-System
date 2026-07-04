@@ -5,20 +5,21 @@
 \subsection{傅里叶变换的引出}\label{sub:introduction_of_fourier}
 定义傅里叶变换的一种动机是从傅里叶级数出发。要从傅里叶级数研究的周期现象转向傅里叶变换研究的非周期现象，自然能够想到在傅里叶级数相关的理论中，令T趋于无穷；另一方面，复指数函数比三角函数更适合作为描述振荡（周期）行为的基本函数。
 
-我们做一个简单的尝试，令$f\in L^2(\mathbb{R})$（关于$L^2$空间的讨论，见\refsub{Lp_space}）,$T\to \infty$，则\[c_n=\frac{1}{T}\int_{T}f(t)\mathrm{e}^{-\mathrm{i}k\omega t}\,dt=\frac{1}{T}\int_{T}f(t)\mathrm{e}^{-2\pi \mathrm{i}k\xi t}\,dt\to 0\]这样做变换将丢失f的所有信息，不是我们希望看到的，但很明显，只要给以上公式乘上T，并认为$k\omega$或$k\xi$是自变量，问题就迎刃而解，得到一个很有意思的积分变换，它正是\textbf{傅里叶变换} (Fourier Tansform,FT)。傅里叶本人同样意识到了傅里叶级数向傅里叶变换的过渡，他用同样的方法从形式上得到了傅里叶变换的公式，但我们使用的指数函数其实是后来柯西、泊松等数学家开始使用的，它使得公式具有更加简洁的形式。
+我们做一个简单的尝试，令$f\in L^2(\mathbb{R})$（关于$L^2$空间的讨论，见\refsub{Lp_space}），$T\to \infty$，则\[c_n=\frac{1}{T}\int_{T}f(t)\mathrm{e}^{-\mathrm{i}k\omega t}\,dt=\frac{1}{T}\int_{T}f(t)\mathrm{e}^{-2\pi \mathrm{i}k\xi t}\,dt\to 0\]这样做变换将丢失f的所有信息，不是我们希望看到的，但很明显，只要给以上公式乘上T，并认为$k\omega$或$k\xi$是自变量，问题就迎刃而解，得到一个很有意思的积分变换，它正是\textbf{傅里叶变换} (Fourier Tansform,FT)。傅里叶本人同样意识到了傅里叶级数向傅里叶变换的过渡，他用同样的方法从形式上得到了傅里叶变换的公式，但我们使用的指数函数其实是后来柯西、泊松等数学家开始使用的，它使得公式具有更加简洁的形式。
+
 \begin{definition}[傅里叶变换]
-设$f\in L^1(\mathbb{R})$，其傅里叶变换定义为
-\lr{
-    \mathcal{F} f(\xi)=\int_{-\infty}^{\infty}f(t)\mathrm{e}^{-2\pi \mathrm{i}\xi t}\,dt
-}{
-    \mathcal{F} f(\omega)=\int_{-\infty}^{\infty}f(t)\mathrm{e}^{-\mathrm{i}\omega t}\,dt
-}
-有时也用$\hat{f}$或F表示f的傅里叶变换，记作
-\[f\overset{\mathcal{F} }{\longleftrightarrow}F\]
-并称之为\textbf{傅里叶变换对}。
+    设$f\in L^1(\mathbb{R})$，其傅里叶变换定义为
+    \lr{
+        \mathcal{F} f(\xi)=\int_{-\infty}^{\infty}f(t)\mathrm{e}^{-2\pi \mathrm{i}\xi t}\,dt
+    }{
+        \mathcal{F} f(\omega)=\int_{-\infty}^{\infty}f(t)\mathrm{e}^{-\mathrm{i}\omega t}\,dt
+    }
+    有时也用$\hat{f}$或F表示f的傅里叶变换，记作
+    \[f\overset{\mathcal{F} }{\longleftrightarrow}F\]
+    并称之为\textbf{傅里叶变换对}。
 \end{definition}
 
-下面解释“乘T，认为$k\omega$或$k\xi$为自变量”的本质。我们来看上一节中的例2.1.1，为了体现双边频谱与采样函数的相似性，我们取了一个较为特殊的周期矩形脉冲信号，它的基波角频率应为图中两相邻竖直线间的间隔，即\textbf{谱线间隔}，可见其频率极小、周期极大，与我们研究非周期现象所用到的极限情况$T\to\infty$是一致的，换言之，令$T\to\infty$自动地使“傅里叶系数”在频谱中的间隔变小，\textbf{周期信号趋向非周期信号的过程自动地使离散频谱趋向连续频谱}。这样，乘T就不难理解了，它的作用是“除以$\dfrac{1}{T}$”，$\dfrac{1}{T}$是所在频率成分处小矩形的宽（类似于黎曼积分），换言之，以频率$\xi$为横坐标，\textbf{谱系数}$c_n$是$\dfrac{n}{T}=n\xi$处的小矩形面积，$Tc_n$是f中对应频率成分的含量，可以理解为单位频段内的谱系数，即频谱密度；以角频率$\omega$为横坐标，$c_n$是$\dfrac{2\pi n}{T}=n\omega$处的小矩形面积，$Tc_n$是f中对应角频率成分的含量。因此，$F(\xi)$或$F(\omega)$也称为频谱密度函数。
+下面解释“乘T，认为$k\omega$或$k\xi$为自变量”的本质。回顾上一节中的\cref{exmp:rect_FS}，为了体现双边频谱与采样函数的相似性，我们取了一个较为特殊的周期矩形脉冲信号，它的基波角频率应为图中两相邻竖直线间的间隔，即\textbf{谱线间隔}，可见其频率极小、周期极大，与我们研究非周期现象所用到的极限情况$T\to\infty$是一致的，换言之，令$T\to\infty$自动地使“傅里叶系数”在频谱中的间隔变小，\textbf{周期信号趋向非周期信号的过程自动地使离散频谱趋向连续频谱}。这样，乘T就不难理解了，它的作用是“除以$\dfrac{1}{T}$”，$\dfrac{1}{T}$是所在频率成分处小矩形的宽（类似于黎曼积分），换言之，以频率$\xi$为横坐标，\textbf{谱系数}$c_n$是$\dfrac{n}{T}=n\xi$处的小矩形面积，$Tc_n$是f中对应频率成分的含量，可以理解为单位频段内的谱系数，即频谱密度；以角频率$\omega$为横坐标，$c_n$是$\dfrac{2\pi n}{T}=n\omega$处的小矩形面积，$Tc_n$是f中对应角频率成分的含量。因此，$F(\xi)$或$F(\omega)$也称为\textbf{频谱密度函数}。
 
 实际上，从这个角度出发，可以立即得到\textbf{傅里叶逆变换} (Inverse Fourier Tansform,IFT)的公式，因为我们已经将f展开为傅里叶级数，这对应着由f的傅里叶变换$\mathcal{F} f$还原出f。我们知道
 \begin{lralign}
@@ -49,6 +50,7 @@ f(t)&=\sum_{n=-\infty}^{\infty}c_n \mathrm{e}^{\mathrm{i}\omega t}\\
 \end{definition}
 并且从形式上得到了\textbf{傅里叶反演公式} (the Fourier Inversion Thoerem)：
 \begin{claim}[傅里叶反演公式]
+    \label{claim:fourier_inversion}
     \[f=\mathcal{F} \mathcal{F} ^{-1}f=\mathcal{F} ^{-1}\mathcal{F} f\]
 \end{claim}
 \begin{remark}
@@ -111,10 +113,12 @@ f(t)&=\sum_{n=-\infty}^{\infty}c_n \mathrm{e}^{\mathrm{i}\omega t}\\
 它的证明比较复杂，将在\refsub{riemman_lebesgue_lemma}中给出。
 
 \subsection{傅里叶变换的运算性质}\label{sub:fourier_operation_properties}
-\begin{theorem}[傅里叶变换的运算性质]
-    以下默认$f\in L^1(\mathbb{R})$。
-    \begin{itemize}   
-    \item 对偶性：记$f$的反转信号 (the reversed siganl)为$f^-$，即$f^-(t)=f(-t)$，则
+
+本小节默认$f\in L^1(\mathbb{R})$。
+
+\begin{theorem}[对偶性]
+    \label{thm:FT_dual}
+    记$f$的反转信号 (the reversed siganl)为$f^-$，即$f^-(t)=f(-t)$，则
           \lr{(\mathcal{F}f)^-=\mathcal{F} (f^-)=\mathcal{F} ^{-1}f
           }{
             (\mathcal{F}f)^-=\mathcal{F} (f^-)=2\pi\mathcal{F} ^{-1}f
@@ -129,35 +133,119 @@ f(t)&=\sum_{n=-\infty}^{\infty}c_n \mathrm{e}^{\mathrm{i}\omega t}\\
         }{
             \mathcal{F} f^-=\overline{\mathcal{F} f}
         }
-          \begin{remark}
-            时域反转，频域也反转，因此我们可以不区分$(\mathcal{F}f)^-=\mathcal{F} (f^-)$，将它们全部写作$\mathcal{F} f^-$。
-          \end{remark}
-    \item 对称性：$\mathcal{F} f$与f奇偶性相同；f是实函数时，如果f还是偶函数，则$\mathcal{F} f$也是实函数，
-          如果f还是奇函数，则$\mathcal{F} $是纯虚函数
-    \item 线性性：$\forall f,g\in L^1(\mathbb{R}),\mathcal{F} (af+bg)=a\mathcal{F} f+b\mathcal{F} g$，即$\mathcal{F} $是线性算子
-    \item 平移定理：\lr{
-          &\mathcal{F} [f(t-b)](\xi)=\mathrm{e}^{-2\pi \mathrm{i} \xi b}\mathcal{F} f(\xi)\\
-          &\mathcal{F} \left[f(t)\mathrm{e}^{2\pi \mathrm{i} \xi t}\right](\xi)=\mathcal{F} f(\xi-b)
-          }{
-          &\mathcal{F} [f(t-b)](\omega)=\mathrm{e}^{-\mathrm{i}\omega t}\mathcal{F} f(\omega)\\
-          &\mathcal{F} \left[f(t)\mathrm{e}^{\mathrm{i}bt}\right](\omega)=\mathcal{F} f(\omega-b)
-          }
-          \begin{remark}
-          可见信号时移不改变$|\mathcal{F} f|$，而仅改变$\mathcal{F} f$的相位。
-          \end{remark}
-    \item 伸缩定理：\lr{
-              &\mathcal{F} [f(at)](\xi)=\frac{1}{|a|}\mathcal{F} f\left(\frac{\xi}{a}\right)\\
-              &\mathcal{F} f(a\xi)=\frac{1}{|a|}\mathcal{F} \left[f\left(\frac{t}{a}\right)\right]
-          }{
-              &\mathcal{F} [f(at)](\omega)=\frac{1}{|a|}\mathcal{F} f\left(\frac{\omega}{a}\right)\\
-              &\mathcal{F} f(a\omega)=\frac{1}{|a|}\mathcal{F} \left[f\left(\frac{t}{a}\right)\right]
-          }
-          \begin{remark}
-            信号反转可看作a=-1的特例。可以认为两种频率下的傅里叶变换是通过伸缩得到的，即
-          \[2\pi\xi=\omega,\textcolor{blue}{\mathcal{F}}(2\pi\xi)=\textcolor{red}{\mathcal{F}}(\omega)\]
-          $a>1$，时域收缩，频域舒张、变矮；$0<a<1$，时域舒张，频域收缩、变高；$a<0$，时域和频域都额外做一次反转。
-          \end{remark}
-    \item 微分性质：若$f$可导，且$f'\in L^1(\mathbb{R})$，则有\lr{
+\end{theorem}
+时域反转，频域也反转，因此我们可以不区分$(\mathcal{F}f)^-=\mathcal{F} (f^-)$，将它们全部写作$\mathcal{F} f^-$。
+\begin{proof}
+    \begin{lralign}
+        (\mathcal{F} f)^-(\xi)&=\int_{-\infty}^{\infty}f(t)\mathrm{e}^{2\pi \mathrm{i} \xi t}\,dt\\
+        \mathcal{F} (f^-)(\xi)&=\int_{-\infty}^{\infty}f(-t)\mathrm{e}^{-2\pi \mathrm{i} \xi t}\,dt\\
+        &=\int_{-\infty}^{\infty}f(t)\mathrm{e}^{2\pi \mathrm{i} \xi t}\,dt\\
+        \mathcal{F} ^{-1}f(x)&=\int_{-\infty}^{\infty}f(t)\mathrm{e}^{2\pi \mathrm{i}xt}\,dt
+    \switch
+        (\mathcal{F} f)^-(\omega)&=\int_{-\infty}^{\infty}f(t)\mathrm{e}^{\mathrm{i} \omega t}\,dt\\
+        \mathcal{F} (f^-)(\omega)&=\int_{-\infty}^{\infty}f(-t)\mathrm{e}^{-\mathrm{i} \omega t}\,dt\\
+        &=\int_{-\infty}^{\infty}f(t)\mathrm{e}^{\mathrm{i} \omega t}\,dt\\
+        \mathcal{F} ^{-1}f(x)&=\frac{1}{2\pi}\int_{-\infty}^{\infty}f(t)\mathrm{e}^{\mathrm{i}\omega t}\,dt
+    \end{lralign}
+    因此\lr{(\mathcal{F}f)^-=\mathcal{F} (f^-)=\mathcal{F} ^{-1}f}{(\mathcal{F}f)^-=\mathcal{F} (f^-)=2\pi\mathcal{F} ^{-1}f}
+    同时取傅里叶变换，即得
+    \lr{
+        \mathcal{F} \mathcal{F} f=f^-
+    }{
+        \mathcal{F} \mathcal{F} f=2\pi f^-
+    }
+    如果$f$是实函数，则$f=\overline{f}$，因此
+    \lr{
+        &\mathcal{F} f^-(\xi)=\int_{-\infty}^{\infty}f(t)\mathrm{e}^{2\pi \mathrm{i} \xi t}\,dt\\
+        &\ =\overline{\int_{-\infty}^{\infty}f(t)\mathrm{e}^{-2\pi \mathrm{i} \xi t}\,dt}=\overline{\mathcal{F} f(\xi)}
+    }{
+        &\mathcal{F} f^-(\omega)=\int_{-\infty}^{\infty}f(t)\mathrm{e}^{\mathrm{i} \omega t}\,dt\\
+        &\ =\overline{\int_{-\infty}^{\infty}f(t)\mathrm{e}^{-\mathrm{i} \omega t}\,dt}=\overline{\mathcal{F} f(\omega)}
+    }
+\end{proof}
+
+根据对偶性可以立即得到：
+\begin{theorem}[对称性]
+    \label{thm:FT_symmetry}
+    $\mathcal{F} f$与$f$奇偶性相同；$f$是实函数时，如果$f$还是偶函数，则$\mathcal{F} f$也是实函数，如果$f$还是奇函数，则$\mathcal{F} $是纯虚函数。
+\end{theorem}
+
+根据积分的线性性，立即得到：
+\begin{theorem}[线性性]
+    \label{thm:FT_linear}
+    $\forall f,g\in L^1(\mathbb{R}),\mathcal{F} (af+bg)=a\mathcal{F} f+b\mathcal{F} g$，即$\mathcal{F} $是线性算子。
+\end{theorem}
+
+下面考察函数在平移与伸缩变换下，其傅里叶变换的性质：
+
+\begin{theorem}[平移定理]
+    \label{thm:FT_shift}
+    \quad
+    \lr{
+        &\mathcal{F} [f(t-b)](\xi)=\mathrm{e}^{-2\pi \mathrm{i} \xi b}\mathcal{F} f(\xi)\\
+        &\mathcal{F} \left[f(t)\mathrm{e}^{2\pi \mathrm{i} \xi t}\right](\xi)=\mathcal{F} f(\xi-b)
+    }{
+        &\mathcal{F} [f(t-b)](\omega)=\mathrm{e}^{-\mathrm{i}\omega t}\mathcal{F} f(\omega)\\
+        &\mathcal{F} \left[f(t)\mathrm{e}^{\mathrm{i}bt}\right](\omega)=\mathcal{F} f(\omega-b)
+    }
+\end{theorem}
+可见信号时移不改变$|\mathcal{F} f|$，而仅改变$\mathcal{F} f$的相位。
+\begin{proof}
+    \ding{172}时移性质
+    \begin{lralign}
+    \mathcal{F} [f(t-b)](\xi)&=\int_{-\infty}^{\infty}f(t-b)\mathrm{e}^{-2\pi \mathrm{i} \xi t}\,dt\\
+    &=\int_{-\infty}^{\infty}f(t)\mathrm{e}^{-2\pi \mathrm{i} \xi (t+b)}\,dt\\
+    &=\mathrm{e}^{-2\pi \mathrm{i} \xi b}\int_{-\infty}^{\infty}f(t)\mathrm{e}^{-2\pi \mathrm{i} \xi t}\,dt\\
+    &=\mathrm{e}^{-2\pi \mathrm{i} \xi b}\mathcal{F} f(\xi)
+    \switch
+    \mathcal{F} [f(t-b)](\omega)&=\int_{-\infty}^{\infty}f(t-b)\mathrm{e}^{-\mathrm{i} \omega t}\,dt\\
+    &=\int_{-\infty}^{\infty}f(t)\mathrm{e}^{-\mathrm{i} \omega (t+b)}\,dt\\
+    &=\mathrm{e}^{-\mathrm{i} \omega b}\int_{-\infty}^{\infty}f(t)\mathrm{e}^{-\mathrm{i} \omega t}\,dt\\
+    &=\mathrm{e}^{-\mathrm{i} \omega b}\mathcal{F} f(\omega)
+    \end{lralign}
+    \ding{173}频移性质
+    \begin{lralign}
+        \mathcal{F} f(\xi-b)&=\int_{-\infty}^{\infty}f(t)\mathrm{e}^{-2\pi \mathrm{i}(\xi-b)t}\,dt\\
+    &=\int_{-\infty}^{\infty}\left(f(t)\mathrm{e}^{2\pi ibt}\right)\mathrm{e}^{-2\pi \mathrm{i}\xi t}\,dt\\
+    &=\mathcal{F} \left[f(t)\mathrm{e}^{2\pi ibt}\right](\xi)
+    \switch
+    \mathcal{F} f(\omega-b)&=\int_{-\infty}^{\infty}f(t)\mathrm{e}^{-\mathrm{i}(\omega-b)t}\,dt\\
+    &=\int_{-\infty}^{\infty}\left(f(t)\mathrm{e}^{ibt}\right)\mathrm{e}^{-\mathrm{i}\omega t}\,dt\\
+    &=\mathcal{F} \left[f(t)\mathrm{e}^{ibt}\right](\omega)
+    \end{lralign}
+\end{proof}
+
+\begin{theorem}[伸缩定理]
+    \label{thm:FT_stretch}
+    \begin{lralign}
+        &\mathcal{F} [f(at)](\xi)=\frac{1}{|a|}\mathcal{F} f\left(\frac{\xi}{a}\right)\\
+        &\mathcal{F} f(a\xi)=\frac{1}{|a|}\mathcal{F} \left[f\left(\frac{t}{a}\right)\right]
+    \switch
+        &\mathcal{F} [f(at)](\omega)=\frac{1}{|a|}\mathcal{F} f\left(\frac{\omega}{a}\right)\\
+        &\mathcal{F} f(a\omega)=\frac{1}{|a|}\mathcal{F} \left[f\left(\frac{t}{a}\right)\right]
+    \end{lralign}
+\end{theorem}
+\begin{proof}
+    \begin{lralign}
+        \mathcal{F} [f(at)](\xi)&=\int_{-\infty}^{\infty}f(at)\mathrm{e}^{2\pi i \xi t}\,dt\\
+        &=\frac{1}{|a|}\int_{-\infty}^{\infty}f(t)\mathrm{e}^{\frac{2\pi i \xi t}{a}}\,dt\\
+        &=\frac{1}{|a|}\mathcal{F} f\left(\frac{\xi}{a}\right)
+    \switch
+        \mathcal{F} [f(at)](\omega)&=\int_{-\infty}^{\infty}f(at)\mathrm{e}^{i \omega t}\,dt\\
+        &=\frac{1}{|a|}\int_{-\infty}^{\infty}f(t)\mathrm{e}^{\frac{i \omega t}{a}}\,dt\\
+        &=\frac{1}{|a|}\mathcal{F} f\left(\frac{\omega}{a}\right)
+    \end{lralign}
+    注意变量代换时，如果$a<0$，积分上下限也会改变，这正是绝对值的来源，对此有疑惑的读者可以自行分情况验算。频域的伸缩定理仅仅是时域伸缩定理的直接推论。
+\end{proof}
+
+信号反转可看作a=-1的特例。可以认为两种频率下的傅里叶变换是通过伸缩得到的，即
+\[2\pi\xi=\omega,\textcolor{blue}{\mathcal{F}}(2\pi\xi)=\textcolor{red}{\mathcal{F}}(\omega)\]
+
+$a>1$，时域收缩，频域舒张、变矮；$0<a<1$，时域舒张，频域收缩、变高；$a<0$，时域和频域都额外做一次反转。
+
+\begin{theorem}[微分性质]
+    \label{thm:FT_derivative}
+    若$f$可导，且$f'\in L^1(\mathbb{R})$，则有\lr{
               \mathcal{F} (f')(\xi)=2\pi \mathrm{i}\xi\mathcal{F} f(\xi)
           }{
               \mathcal{F} (f')(\omega)=\mathrm{i}\omega\mathcal{F} f(\omega)
@@ -174,73 +262,8 @@ f(t)&=\sum_{n=-\infty}^{\infty}c_n \mathrm{e}^{\mathrm{i}\omega t}\\
             \mathcal{F}(tf)(\omega)=\mathrm{i}(\mathcal{F} f)'(\omega)
           }
           容易将此性质推广至任意阶导数。
-\end{itemize}
 \end{theorem}
 \begin{proof}
-1.对偶性
-\begin{lralign}
-    (\mathcal{F} f)^-(\xi)&=\int_{-\infty}^{\infty}f(t)\mathrm{e}^{2\pi \mathrm{i} \xi t}\,dt\\
-    \mathcal{F} (f^-)(\xi)&=\int_{-\infty}^{\infty}f(-t)\mathrm{e}^{-2\pi \mathrm{i} \xi t}\,dt\\
-    &=\int_{-\infty}^{\infty}f(t)\mathrm{e}^{2\pi \mathrm{i} \xi t}\,dt\\
-    \mathcal{F} ^{-1}f(x)&=\int_{-\infty}^{\infty}f(t)\mathrm{e}^{2\pi \mathrm{i}xt}\,dt
-\switch
-    (\mathcal{F} f)^-(\omega)&=\int_{-\infty}^{\infty}f(t)\mathrm{e}^{\mathrm{i} \omega t}\,dt\\
-    \mathcal{F} (f^-)(\omega)&=\int_{-\infty}^{\infty}f(-t)\mathrm{e}^{-\mathrm{i} \omega t}\,dt\\
-    &=\int_{-\infty}^{\infty}f(t)\mathrm{e}^{\mathrm{i} \omega t}\,dt\\
-    \mathcal{F} ^{-1}f(x)&=\frac{1}{2\pi}\int_{-\infty}^{\infty}f(t)\mathrm{e}^{\mathrm{i}\omega t}\,dt
-\end{lralign}
-因此\lr{(\mathcal{F}f)^-=\mathcal{F} (f^-)=\mathcal{F} ^{-1}f}{(\mathcal{F}f)^-=\mathcal{F} (f^-)=2\pi\mathcal{F} ^{-1}f}
-同时取傅里叶变换，即得
-\lr{
-    \mathcal{F} \mathcal{F} f=f^-
-}{
-    \mathcal{F} \mathcal{F} f=2\pi f^-
-}
-如果$f$是实函数，则$f=\overline{f}$，因此
-\lr{
-    &\mathcal{F} f^-(\xi)=\int_{-\infty}^{\infty}f(t)\mathrm{e}^{2\pi \mathrm{i} \xi t}\,dt\\
-    &\ =\overline{\int_{-\infty}^{\infty}f(t)\mathrm{e}^{-2\pi \mathrm{i} \xi t}\,dt}=\overline{\mathcal{F} f(\xi)}
-}{
-    &\mathcal{F} f^-(\omega)=\int_{-\infty}^{\infty}f(t)\mathrm{e}^{\mathrm{i} \omega t}\,dt\\
-    &\ =\overline{\int_{-\infty}^{\infty}f(t)\mathrm{e}^{-\mathrm{i} \omega t}\,dt}=\overline{\mathcal{F} f(\omega)}
-}
-\noindent 2.对称性：根据对偶性立即得到。\\
-3.线性性：得自积分的线性性。\\
-4.平移定理\\
-\ding{172}时移性质
-\begin{lralign}
-\mathcal{F} [f(t-b)](\xi)&=\int_{-\infty}^{\infty}f(t-b)\mathrm{e}^{-2\pi \mathrm{i} \xi t}\,dt\\
-&=\int_{-\infty}^{\infty}f(t)\mathrm{e}^{-2\pi \mathrm{i} \xi (t+b)}\,dt\\
-&=\mathrm{e}^{-2\pi \mathrm{i} \xi b}\int_{-\infty}^{\infty}f(t)\mathrm{e}^{-2\pi \mathrm{i} \xi t}\,dt\\
-&=\mathrm{e}^{-2\pi \mathrm{i} \xi b}\mathcal{F} f(\xi)
-\switch
-\mathcal{F} [f(t-b)](\omega)&=\int_{-\infty}^{\infty}f(t-b)\mathrm{e}^{-\mathrm{i} \omega t}\,dt\\
-&=\int_{-\infty}^{\infty}f(t)\mathrm{e}^{-\mathrm{i} \omega (t+b)}\,dt\\
-&=\mathrm{e}^{-\mathrm{i} \omega b}\int_{-\infty}^{\infty}f(t)\mathrm{e}^{-\mathrm{i} \omega t}\,dt\\
-&=\mathrm{e}^{-\mathrm{i} \omega b}\mathcal{F} f(\omega)
-\end{lralign}
-\ding{173}频移性质
-\begin{lralign}
-    \mathcal{F} f(\xi-b)&=\int_{-\infty}^{\infty}f(t)\mathrm{e}^{-2\pi \mathrm{i}(\xi-b)t}\,dt\\
-&=\int_{-\infty}^{\infty}\left(f(t)\mathrm{e}^{2\pi ibt}\right)\mathrm{e}^{-2\pi \mathrm{i}\xi t}\,dt\\
-&=\mathcal{F} \left[f(t)\mathrm{e}^{2\pi ibt}\right](\xi)
-\switch
-\mathcal{F} f(\omega-b)&=\int_{-\infty}^{\infty}f(t)\mathrm{e}^{-\mathrm{i}(\omega-b)t}\,dt\\
-&=\int_{-\infty}^{\infty}\left(f(t)\mathrm{e}^{ibt}\right)\mathrm{e}^{-\mathrm{i}\omega t}\,dt\\
-&=\mathcal{F} \left[f(t)\mathrm{e}^{ibt}\right](\omega)
-\end{lralign}
-\noindent 5.伸缩定理\lr{
-    \mathcal{F} [f(at)](\xi)&=\int_{-\infty}^{\infty}f(at)\mathrm{e}^{2\pi i \xi t}\,dt\\
-    &=\frac{1}{|a|}\int_{-\infty}^{\infty}f(t)\mathrm{e}^{\frac{2\pi i \xi t}{a}}\,dt&(at\to t)\\
-    &=\frac{1}{|a|}\mathcal{F} f\left(\frac{\xi}{a}\right)
-}{
-    \mathcal{F} [f(at)](\omega)&=\int_{-\infty}^{\infty}f(at)\mathrm{e}^{i \omega t}\,dt\\
-    &=\frac{1}{|a|}\int_{-\infty}^{\infty}f(t)\mathrm{e}^{\frac{i \omega t}{a}}\,dt&(at\to t)\\
-    &=\frac{1}{|a|}\mathcal{F} f\left(\frac{\omega}{a}\right)
-}
-注意变量代换时，如果$a<0$，积分上下限也会改变，这正是绝对值的来源，对此有疑惑的读者
-可以自行分情况验算。频域的伸缩定理仅仅是时域伸缩定理的直接推论。\\
-6.微分性质\\
 \ding{172}时域微分
 \begin{lralign}
     \mathcal{F} (f')(\xi)&=\int_{-\infty}^{\infty}f'(t)\mathrm{e}^{-2\pi \mathrm{i}\xi t}\,dt\\
@@ -256,48 +279,54 @@ f(t)&=\sum_{n=-\infty}^{\infty}c_n \mathrm{e}^{\mathrm{i}\omega t}\\
 \ding{173}频域微分
 \begin{lralign}
     (\mathcal{F} f)'(\xi)&=\frac{d}{d\xi}\int_{-\infty}^{\infty}f(t)\mathrm{e}^{-2\pi \mathrm{i}\xi t}\,dt\\
-&=\int_{-\infty}^{\infty}f(t)\frac{\partial \mathrm{e}^{-2\pi \mathrm{i}\xi t}}{\partial \xi}\,dt\\
-&=-\int_{-\infty}^{\infty}2\pi itf(t)\mathrm{e}^{-2\pi \mathrm{i}\xi t}\,dt\\
-&=-\mathcal{F} (2\pi itf)(\xi)
+    &=\int_{-\infty}^{\infty}f(t)\frac{\partial \mathrm{e}^{-2\pi \mathrm{i}\xi t}}{\partial \xi}\,dt\\
+    &=-\int_{-\infty}^{\infty}2\pi \im tf(t)\mathrm{e}^{-2\pi \mathrm{i}\xi t}\,dt\\
+    &=-\mathcal{F} (2\pi \im tf)(\xi)
 \switch
     (\mathcal{F} f)'(\omega)&=\frac{d}{d\omega}\int_{-\infty}^{\infty}f(t)\mathrm{e}^{-\mathrm{i}\omega t}\,dt\\
-&=\int_{-\infty}^{\infty}f(t)\frac{\partial \mathrm{e}^{-\mathrm{i}\omega t}}{\partial \omega}\,dt\\
-&=-\int_{-\infty}^{\infty}itf(t)\mathrm{e}^{-\mathrm{i}\omega t}\,dt\\
-&=-\mathcal{F} (itf)(\omega)
+    &=\int_{-\infty}^{\infty}f(t)\frac{\partial \mathrm{e}^{-\mathrm{i}\omega t}}{\partial \omega}\,dt\\
+    &=-\int_{-\infty}^{\infty}\im tf(t)\mathrm{e}^{-\mathrm{i}\omega t}\,dt\\
+    &=-\mathcal{F} (\im tf)(\omega)
 \end{lralign}
 也可以由第一个微分性质取傅里叶逆变换，再令$f'=\mathcal{F} g$证明。
 \end{proof}
-$\evalat{\mathrm{e}^{-2\pi \mathrm{i}\xi t}f(t)}{-\infty}{\infty},\evalat{\mathrm{e}^{-\mathrm{i}\omega t}f(t)}{-\infty}{\infty}=0$是因为$f\in L^1(\mathbb{R})$要求反常积分$\int_{\mathbb{R}}|f(t)|\,dt<\infty$，其必要条件为$f(t)\to 0,t\to\infty$，而复指数函数部分模值恒为1。
+$\evalat{\mathrm{e}^{-2\pi \mathrm{i}\xi t}f(t)}{-\infty}{\infty},\evalat{\mathrm{e}^{-\mathrm{i}\omega t}f(t)}{-\infty}{\infty}=0$是因为$f\in L^1(\mathbb{R})$要求$\int_{\mathbb{R}}|f(t)|\,dt<\infty$，其必要条件为$f(t)\to 0,t\to\infty$，而复指数函数部分模值恒为1。
 
 下面，我们给出\textbf{帕塞瓦尔恒等式}(Parseval's identity)/\textbf{普朗歇尔定理}(Plancherel theorem)。之前已经给出过它的复指数级数形式，如果将傅里叶变换视作傅里叶级数的推广，那么“能量守恒”也自然地推广到傅里叶变换。
 \begin{theorem}[帕塞瓦尔恒等式/普朗歇尔定理]
-    设$f\in L^1(\mathbb{R})\cap L^2(\mathbb{R})$，则
+    \label{thm:plancherel}
+    设$f,g\in L^1(\mathbb{R})\cap L^2(\mathbb{R})$，则
     \lr{
-    \int_{-\infty}^{\infty}|f(t)|^2\,dt=\int_{-\infty}^{\infty}|\mathcal{F} f(\xi)|^2\,d\xi
-}{
-    \int_{-\infty}^{\infty}|f(t)|^2\,dt=\frac{1}{2\pi}\int_{-\infty}^{\infty}|\mathcal{F} f(\omega)|^2\,d\omega
-}
+        \int_{-\infty}^{\infty}f(t)\overline{g(t)}\,dt=\int_{-\infty}^{\infty}\mathcal{F} f(\xi)\overline{\mathcal{F}g(\xi)}\,d\xi
+    }{
+        \int_{-\infty}^{\infty}f(t)\overline{g(t)}\,dt=\frac{1}{2\pi}\int_{-\infty}^{\infty}\mathcal{F} f(\omega)\overline{\mathcal{F}g(\omega)}\,d\omega
+    }
 \end{theorem}
 \begin{proof}
-设$f,g\in L^1(\mathbb{R})\cap L^2(\mathbb{R})$，则\begin{lralign}
-&\quad\int_{-\infty}^{\infty}\mathcal{F} f(\xi)\overline{\mathcal{F} g(\xi)}\,d\xi\\
-&=\int_{-\infty}^{\infty}\mathcal{F} f(\xi)\mathcal{F}^{-1} \overline{g}(\xi)\,d\xi\\
-&=\int_{-\infty}^{\infty}\left(\int_{-\infty}^{\infty}f(x)\mathrm{e}^{-2\pi \mathrm{i}\xi x}\,dx\right)\mathcal{F}^{-1} \overline{g}(\xi)\,d\xi\\
-&=\int_{-\infty}^{\infty}f(x)\,dx\int_{-\infty}^{\infty}\mathcal{F}^{-1} \overline{g}(\xi)\mathrm{e}^{-2\pi \mathrm{i}\xi x}\,d\xi\\
-&=\int_{-\infty}^{\infty}f(x)\mathcal{F} \mathcal{F} ^{-1}\overline{g}(x)\,dx\\
-&=\int_{-\infty}^{\infty}f(x)\overline{g(x)}\,dx
+\begin{lralign}
+    &\quad\int_{-\infty}^{\infty}\mathcal{F} f(\xi)\overline{\mathcal{F} g(\xi)}\,d\xi\\
+    &=\int_{-\infty}^{\infty}\mathcal{F} f(\xi)\mathcal{F}^{-1} \overline{g}(\xi)\,d\xi\\
+    &=\int_{-\infty}^{\infty}\left(\int_{-\infty}^{\infty}f(x)\mathrm{e}^{-2\pi \mathrm{i}\xi x}\,dx\right)\mathcal{F}^{-1} \overline{g}(\xi)\,d\xi\\
+    &=\int_{-\infty}^{\infty}f(x)\,dx\int_{-\infty}^{\infty}\mathcal{F}^{-1} \overline{g}(\xi)\mathrm{e}^{-2\pi \mathrm{i}\xi x}\,d\xi\\
+    &=\int_{-\infty}^{\infty}f(x)\mathcal{F} \mathcal{F} ^{-1}\overline{g}(x)\,dx\\
+    &=\int_{-\infty}^{\infty}f(x)\overline{g(x)}\,dx
 \switch
-&\quad\int_{-\infty}^{\infty}\mathcal{F} f(\omega)\overline{\mathcal{F} g(\omega)}\,d\omega\\
-&=2\pi\int_{-\infty}^{\infty}\mathcal{F} f(\omega)\mathcal{F}^{-1} \overline{g}(\omega)\,d\omega\\
-&=2\pi\int_{-\infty}^{\infty}\left(\int_{-\infty}^{\infty}f(x)\mathrm{e}^{-\mathrm{i}\omega x}\,dx\right)\mathcal{F}^{-1} \overline{g}(\omega)\,d\omega\\
-&=2\pi\int_{-\infty}^{\infty}f(x)\,dx\int_{-\infty}^{\infty}\mathcal{F}^{-1} \overline{g}(\omega)\mathrm{e}^{-\mathrm{i}\omega x}\,d\omega\\
-&=2\pi\int_{-\infty}^{\infty}f(x)\mathcal{F} \mathcal{F} ^{-1}\overline{g}(x)\,dx\\
-&=2\pi\int_{-\infty}^{\infty}f(x)\overline{g(x)}\,dx
+    &\quad\int_{-\infty}^{\infty}\mathcal{F} f(\omega)\overline{\mathcal{F} g(\omega)}\,d\omega\\
+    &=2\pi\int_{-\infty}^{\infty}\mathcal{F} f(\omega)\mathcal{F}^{-1} \overline{g}(\omega)\,d\omega\\
+    &=2\pi\int_{-\infty}^{\infty}\left(\int_{-\infty}^{\infty}f(x)\mathrm{e}^{-\mathrm{i}\omega x}\,dx\right)\mathcal{F}^{-1} \overline{g}(\omega)\,d\omega\\
+    &=2\pi\int_{-\infty}^{\infty}f(x)\,dx\int_{-\infty}^{\infty}\mathcal{F}^{-1} \overline{g}(\omega)\mathrm{e}^{-\mathrm{i}\omega x}\,d\omega\\
+    &=2\pi\int_{-\infty}^{\infty}f(x)\mathcal{F} \mathcal{F} ^{-1}\overline{g}(x)\,dx\\
+    &=2\pi\int_{-\infty}^{\infty}f(x)\overline{g(x)}\,dx
 \end{lralign}
-取$g=f$即证。注意我们并不要求$g$是实信号，$\overline{\mathcal{F} g}\neq\mathcal{F} ^{-1}g$.
+注意我们并不要求$g$是实信号，$\overline{\mathcal{F} g}$不一定等于$\mathcal{F} ^{-1}g$.
 \end{proof}
 
-这说明，傅里叶变换是$L^1(\mathbb{R})\cap L^2(\mathbb{R})$上\textbf{保持$L^2(\mathbb{R})$内积的变换}。
+该定理说明傅里叶变换是$L^1(\mathbb{R})\cap L^2(\mathbb{R})$上\textbf{保持$L^2(\mathbb{R})$内积的变换}：
+\begin{lralign}
+    (f,g)=(\mathcal{F} f,\mathcal{F} g)
+    \switch
+    (f,g)=\frac{1}{2\pi}(\mathcal{F} f,\mathcal{F} g)
+\end{lralign}
 
 \subsection{常用信号的傅里叶变换}\label{sub:fourier_of_signal}
 
@@ -309,14 +338,16 @@ $\evalat{\mathrm{e}^{-2\pi \mathrm{i}\xi t}f(t)}{-\infty}{\infty},\evalat{\mathr
 &=E\int_{-T/2}^{T/2}\mathrm{e}^{-2\pi \mathrm{i}\xi t}\,dt\\
 &=-\frac{E}{2\pi \mathrm{i}\xi}\evalat{\mathrm{e}^{-2\pi \mathrm{i}\xi t}}{-T/2}{T/2}\\
 &=\frac{\mathrm{e}^{\pi \mathrm{i}\xi T}-\mathrm{e}^{-\pi \mathrm{i}\xi T}}{2\mathrm{i}}\frac{E}{\pi\xi}\\
-&=\frac{E}{\pi\xi}\sin(\pi T\xi)=ET\mathrm{sinc}(T\xi)
+&=\frac{E}{\pi\xi}\sin(\pi T\xi)\\
+&=ET\mathrm{sinc}(T\xi)
 \switch
 \mathcal{F} f(\omega)&=\int_{-\infty}^{\infty}f(t)\mathrm{e}^{-\mathrm{i}\omega t}\,dt\\
 &=E\int_{-\infty}^{\infty}\chi_{[-T/2,T/2]}(t)\mathrm{e}^{-\mathrm{i}\omega t}\,dt\\
 &=E\int_{-T/2}^{T/2}\mathrm{e}^{-\mathrm{i}\omega t}\,dt\\
 &=-\frac{E}{\mathrm{i}\omega}\evalat{\mathrm{e}^{-\mathrm{i}\omega t}}{-T/2}{T/2}\\
 &=\frac{\mathrm{e}^{\mathrm{i}\omega T/2}-\mathrm{e}^{-\mathrm{i}\omega T/2}}{2\mathrm{i}}\frac{2E}{\pi\omega}\\
-&=\frac{2E}{\omega}\sin\left(\frac{T\omega}{2}\right)=ET\mathrm{Sa}\left(\frac{T\omega}{2}\right)
+&=\frac{2E}{\omega}\sin\left(\frac{T\omega}{2}\right)\\
+&=ET\mathrm{Sa}\left(\frac{T\omega}{2}\right)
 \end{lralign}
 即
 \begin{lralign}
@@ -336,7 +367,7 @@ $\evalat{\mathrm{e}^{-2\pi \mathrm{i}\xi t}f(t)}{-\infty}{\infty},\evalat{\mathr
     \end{lralign}
 \end{corollary}
 
-基于以上结果，可以证明\refsub{int_sin}中给出的狄利克雷积分公式：
+基于以上结果，可以证明\cref{thm:dirichlet_int}：
 \begin{corollary}[狄利克雷积分]
     \[\int_{-\infty}^{\infty}\frac{\sin t}{t}\,dt=\pi\]
 \end{corollary}
@@ -422,38 +453,38 @@ $\evalat{\mathrm{e}^{-2\pi \mathrm{i}\xi t}f(t)}{-\infty}{\infty},\evalat{\mathr
 \begin{corollary}
     \quad
 \lr{
-    \mathcal{F} \left[\frac{1}{t}\right](\xi)&=-\pi \mathrm{i} sgn(\xi)\\
+    \mathcal{F} \left[\frac{1}{t}\right](\xi)&=-\pi \mathrm{i} \sgn(\xi)\\
 }{
-    \mathcal{F} \left[\frac{1}{t}\right](\omega)&=-\pi \mathrm{i} sgn(\omega)\\
+    \mathcal{F} \left[\frac{1}{t}\right](\omega)&=-\pi \mathrm{i} \sgn(\omega)\\
 }
 \end{corollary}
 
 最后，我们来求高斯函数和指数函数的傅里叶变换，它们在信号处理应用广泛，且有许多优美的性质。
 
-\begin{example}[高斯函数]
+\begin{example}[高斯函数]\label{exmp:gauss_fourier}
 我们来求$G(t)=\mathrm{e}^{-\pi t^2}$的傅里叶变换，其他高斯函数的傅里叶变换可以用同样的方法求得，或者使用伸缩定理得到。
 \begin{lralign}
-\mathcal{F} G(\xi)&=\int_{-\infty}^{\infty}\mathrm{e}^{-\pi t^2}\mathrm{e}^{-2\pi \mathrm{i}\xi t}\,dt\\
-\frac{d}{d\xi}\mathcal{F} G(\xi)&=\int_{-\infty}^{\infty}\mathrm{e}^{-\pi t^2}(-2\pi it)\mathrm{e}^{-2\pi \mathrm{i}\xi t}\,dt\\
-&=\mathrm{i}\int_{-\infty}^{\infty}\mathrm{e}^{-2\pi \mathrm{i}\xi t}\,de^{-\pi t^2}\\
-&=-\mathrm{i}\int_{-\infty}^{\infty}\mathrm{e}^{-\pi t^2}(-2\pi \mathrm{i}\xi)\mathrm{e}^{-2\pi \mathrm{i}\xi t}\,dt\\
-&=-2\pi \xi\mathcal{F} G
+    \mathcal{F} G(\xi)&=\int_{-\infty}^{\infty}\mathrm{e}^{-\pi t^2}\mathrm{e}^{-2\pi \mathrm{i}\xi t}\,dt\\
+    \frac{d}{d\xi}\mathcal{F} G(\xi)&=\int_{-\infty}^{\infty}\mathrm{e}^{-\pi t^2}(-2\pi \im t)\mathrm{e}^{-2\pi \mathrm{i}\xi t}\,dt\\
+    &=\mathrm{i}\int_{-\infty}^{\infty}\mathrm{e}^{-2\pi \mathrm{i}\xi t}\,d\e^{-\pi t^2}\\
+    &=-\mathrm{i}\int_{-\infty}^{\infty}\mathrm{e}^{-\pi t^2}(-2\pi \mathrm{i}\xi)\mathrm{e}^{-2\pi \mathrm{i}\xi t}\,dt\\
+    &=-2\pi \xi\mathcal{F} G
 \switch
-\mathcal{F} G(\omega)&=\int_{-\infty}^{\infty}\mathrm{e}^{-\pi t^2}\mathrm{e}^{-\mathrm{i}\omega t}\,dt\\
-\frac{d}{d\omega}\mathcal{F} G(\omega)&=\int_{-\infty}^{\infty}\mathrm{e}^{-\pi t^2}(-it)\mathrm{e}^{-\mathrm{i}\omega t}\,dt\\
-&=\frac{\mathrm{i}}{2\pi}\int_{-\infty}^{\infty}\mathrm{e}^{-\mathrm{i}\omega t}\,de^{-\pi t^2}\\
-&=-\frac{\mathrm{i}}{2\pi}\int_{-\infty}^{\infty}\mathrm{e}^{-\pi t^2}(-\mathrm{i}\omega)\mathrm{e}^{-\mathrm{i}\omega t}\,dt\\
-&=-\frac{\omega}{2\pi}\mathcal{F} G
+    \mathcal{F} G(\omega)&=\int_{-\infty}^{\infty}\mathrm{e}^{-\pi t^2}\mathrm{e}^{-\mathrm{i}\omega t}\,dt\\
+    \frac{d}{d\omega}\mathcal{F} G(\omega)&=\int_{-\infty}^{\infty}\mathrm{e}^{-\pi t^2}(-\im t)\mathrm{e}^{-\mathrm{i}\omega t}\,dt\\
+    &=\frac{\mathrm{i}}{2\pi}\int_{-\infty}^{\infty}\mathrm{e}^{-\mathrm{i}\omega t}\,d\e^{-\pi t^2}\\
+    &=-\frac{\mathrm{i}}{2\pi}\int_{-\infty}^{\infty}\mathrm{e}^{-\pi t^2}(-\mathrm{i}\omega)\mathrm{e}^{-\mathrm{i}\omega t}\,dt\\
+    &=-\frac{\omega}{2\pi}\mathcal{F} G
 \end{lralign}
 这是一个可分离变量的微分方程，
 \lr{
-\mathcal{F} G(\xi)&=\mathcal{F} G(0)e^{-\pi\xi^2}\\
-\mathcal{F} G(0)&=\int_{-\infty}^{\infty}e^{-\pi t^2}\,dt=1\\
-\mathcal{F} G(\xi)&=e^{-\pi\xi^2}
+\mathcal{F} G(\xi)&=\mathcal{F} G(0)\e^{-\pi\xi^2}\\
+\mathcal{F} G(0)&=\int_{-\infty}^{\infty}\e^{-\pi t^2}\,dt=1\\
+\mathcal{F} G(\xi)&=\e^{-\pi\xi^2}
 }{
-\mathcal{F} G(\omega)&=\mathcal{F} G(0)e^{-\frac{\omega^2}{4\pi}}\\
-\mathcal{F} G(0)&=\int_{-\infty}^{\infty}e^{-\pi t^2}\,dt=1\\
-\mathcal{F} G(\omega)&=e^{-\frac{\omega^2}{4\pi}}
+\mathcal{F} G(\omega)&=\mathcal{F} G(0)\e^{-\frac{\omega^2}{4\pi}}\\
+\mathcal{F} G(0)&=\int_{-\infty}^{\infty}\e^{-\pi t^2}\,dt=1\\
+\mathcal{F} G(\omega)&=\e^{-\frac{\omega^2}{4\pi}}
 }
 \end{example}
 %\begin{figure}[htbp]
@@ -478,11 +509,11 @@ $\evalat{\mathrm{e}^{-2\pi \mathrm{i}\xi t}f(t)}{-\infty}{\infty},\evalat{\mathr
 运用对偶性，立即得到
 \lr{
 \mathcal{F} g(\xi)&=\mathcal{F} f(\xi)+\overline{\mathcal{F} f(\xi)}\\
-&=2\mathrm{Re}\ {\mathcal{F} f(\xi)}\\
+&=2\mathrm{Re}({\mathcal{F} f(\xi)})\\
 &=\frac{2a}{a^2 + 4\pi^2 \xi^2}
 }{
 \mathcal{F} g(\omega)&=\mathcal{F} f(\omega)+\overline{\mathcal{F} f(\omega)}\\
-&=2\mathrm{Re}\ {\mathcal{F} f(\omega)}\\
+&=2\mathrm{Re}({\mathcal{F} f(\omega)})\\
 &=\frac{2a}{a^2 +\omega^2}
 }
 \end{example} 

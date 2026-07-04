@@ -68,29 +68,29 @@ $$\mathcal{F} \mathcal{F} ^H=N\cdot I$$
 
 上述内容归结为以下的定义和定理：
 
-\begin{definition}[离散傅里叶变换]
+\begin{definition}[离散傅里叶变换]\label{def:DFT}
     设$x[n]$是长为$N$的离散信号，则$x[n]$的离散傅里叶变换定义为
-    \[X[k]=\sum_{n=0}^{N-1}x[n]W_N^{kn},k=0,1,\dots,N-1\]
+    \[X[k]=\sum_{n=0}^{N-1}x[n]W_N^{kn},\quad k=0,1,\dots,N-1\]
     记$x[n]\xleftrightarrow{\mathrm{DFT}}X[k],X[k]=\mathrm{DFT}(x[n])$。
 \end{definition}
 
-\begin{theorem}[离散傅里叶反演公式]
+\begin{theorem}[离散傅里叶反演公式]\label{thm:DFT_inv}
     设$x[n]$是长为$N$的离散信号，其离散傅里叶变换为$X[k]$，则$x[n]$可以由$X[k]$通过离散傅里叶逆变换还原：
-    \[x[n]=\mathrm{DFT}^{-1}(X[k])=\frac{1}{N}\sum_{k=0}^{N-1}X[k]W_N^{-kn},n=0,1,\dots,N-1\]
+    \[x[n]=\mathrm{DFT}^{-1}(X[k])=\frac{1}{N}\sum_{k=0}^{N-1}X[k]W_N^{-kn},\quad n=0,1,\dots,N-1\]
 \end{theorem}
 
 进一步，对于离散周期信号，其周期起点任意选取，都不会影响离散傅里叶变换及其逆变换的结果，在此意义下，离散周期信号的向量表示不唯一。
 \begin{definition}[$(\mathcal{P} ,\mathcal{Q} )$-DFT]
     设$x[n]$是以$N$为周期的离散信号，$\mathcal{P} ,\mathcal{Q} $为任意的$N$个连续整数构成的指标集，即
-    \[\mathcal{P} =\{p,p+1,\cdots,p+N-1\},\mathcal{Q} =\{q,q+1,\cdots,q+N-1\}\]
+    \[\mathcal{P} =\{p,p+1,\cdots,p+N-1\},\quad \mathcal{Q} =\{q,q+1,\cdots,q+N-1\}\]
     则$x[n]$的$(\mathcal{P} ,\mathcal{Q} )-DFT$定义为
     \begin{align*}
-    X_{\mathcal{P} ,\mathcal{Q} }[k]&=\sum_{n\in\mathcal{P} }x[n]W_N^{kn},k\in\mathcal{Q}
+    X_{\mathcal{P} ,\mathcal{Q} }[k]&=\sum_{n\in\mathcal{P} }x[n]W_N^{kn},\quad k\in\mathcal{Q}
     \end{align*}
 \end{definition}
 \begin{proposition}
     $(\mathcal{P} ,\mathcal{Q} )$-DFT的定义不依赖于$\mathcal{P} ,\mathcal{Q} $的选取，即
-    \[X_{\mathcal{P} ,\mathcal{Q} }[k]=X[k],\forall \mathcal{P} ,\mathcal{Q} \]
+    \[X_{\mathcal{P} ,\mathcal{Q} }[k]=X[k],\quad \forall \mathcal{P} ,\mathcal{Q} \]
 \end{proposition}
 \begin{proof}
     记$p=rN+s$，则$\forall k\in\mathbb{Z}$，有\begin{align*}
@@ -99,7 +99,8 @@ $$\mathcal{F} \mathcal{F} ^H=N\cdot I$$
     &=\sum_{m=0}^{N-1}x[m+s]W_N^{k(m+s)}\\
     &=\sum_{m=s}^{N-1}x[m]W_N^{km}+\sum_{m=N}^{N+s-1}x[m]W_N^{km}\\
     &=\sum_{m=s}^{N-1}x[m]W_N^{km}+\sum_{m=0}^{s-1}x[m]W_N^{km}\\
-    &=\sum_{m=0}^{N-1}x[m]W_N^{km}=X[k]
+    &=\sum_{m=0}^{N-1}x[m]W_N^{km}\\
+    &=X[k]
     \end{align*}
     限制$k\in\mathcal{Q} $即得$X_{\mathcal{P} ,\mathcal{Q} }[k]=X[k]$。
 \end{proof}
@@ -146,6 +147,7 @@ $$\mathcal{F} \mathcal{F} ^H=N\cdot I$$
 
 离散傅里叶变换的运算性质列举如下：
 \begin{proposition}[离散傅里叶变换的运算性质]
+    \label{prop:DFT_operation}
     设$x[n],y[n]$是周期为$N$的离散信号，其离散傅里叶变换分别为$X[k],Y[k]$，则有：\begin{itemize}
         \item 线性性：$\forall a,b\in\mathbb{C}$，有
     \[a x[n]+b y[n]\xleftrightarrow{\mathrm{DFT}} a X[k]+b Y[k]\]
@@ -158,14 +160,14 @@ $$\mathcal{F} \mathcal{F} ^H=N\cdot I$$
 
 以上性质全都可以直接带入定义验证，这里不再赘述。
 
-我们曾定义过离散信号的卷积和。类似\refsub{conv_of_period_func}，对于周期离散信号，卷积和的定义也必须修改，只是此时一般不会添加$1/N$的系数：
+我们曾定义过离散信号的卷积和。类似\cref{def:period_conv}，对于周期离散信号，卷积和的定义也必须修改，只是此时一般不会添加$1/N$的系数：
 \begin{definition}[周期离散信号的卷积和]
     设$x[n],y[n]$是周期为$N$的离散信号，则它们的卷积和定义为
     \[(x*y)[n]=\sum_{m=0}^{N-1}x[m]y[n-m]\]
 \end{definition}
 
 根据离散傅里叶变换的周期性，时域和频域都是周期的，下面就来表述和验证卷积和定理：
-\begin{theorem}[离散傅里叶变换的卷积和定理]
+\begin{theorem}[离散傅里叶变换的卷积和定理]\label{thm:DFT_conv}
     设$x[n],y[n]$是周期为$N$的离散信号，其离散傅里叶变换分别为$X[k],Y[k]$，则有
     \[(x*y)[n]\xleftrightarrow{\mathrm{DFT}}X[k]Y[k]\]
     \[x[n]y[n]\xleftrightarrow{\mathrm{DFT}}\frac{1}{N}(X * Y)[k]\]
@@ -225,7 +227,7 @@ x[1]
 \end{definition}
 
 类似于连续信号的傅里叶变换，离散傅里叶变换的原信号与变换域信号都是周期的，此时可以研究离散傅里叶变换的对偶性。可以观察到卷积和定理与角频率形式的傅里叶变换的卷积定理类似，因此可以仿照角频率形式的傅里叶变换的对偶性写出离散傅里叶变换的对偶性的表述：
-\begin{proposition}[离散傅里叶变换的对偶性]
+\begin{proposition}[离散傅里叶变换的对偶性]\label{prop:DFT_dual}
     设$x[n]$是周期为$N$的离散信号，其离散傅里叶变换为$X[k]$，则有
     \begin{align*}
         &\mathrm{DFT}(x^-)[k]=X^-[k]=N\cdot\mathrm{DFT}^{-1}(x)[k]\\
@@ -265,7 +267,7 @@ x[1]
 \end{align*}
 其中$H$为埃尔米特算子，表示取矩阵的共轭转置，$I_N$为$N$阶单位矩阵。正交变换保持向量的内积，即
 \begin{align*}
-    \forall \mathbf{x,y}\in\mathbb{C}^N,\mathbf{x}\cdot\mathbf{y}&=\frac{1}{N}\mathcal{F} _N \mathbf{x}\cdot\mathcal{F} _N \mathbf{y}
+    \forall \mathbf{x,y}\in\mathbb{C}^N,\quad \mathbf{x}\cdot\mathbf{y}&=\frac{1}{N}\mathcal{F} _N \mathbf{x}\cdot\mathcal{F} _N \mathbf{y}
 \end{align*}
 由此可得离散傅里叶变换的帕塞瓦尔定理：
 \begin{theorem}[离散傅里叶变换的帕塞瓦尔定理]
@@ -283,7 +285,7 @@ x[1]
 \[f(t)=\sum_{k=-\infty}^{\infty}c_k \mathrm{e}^{\mathrm{i}\frac{2\pi}{T}kt}\]
 
 特别地，在一个周期内取$N$个等间隔点作为采样点，所得离散信号为
-\[x[n]=f\left(\frac{nT}{N}\right),n=0,1,\dots,N-1\]
+\[x[n]=f\left(\frac{nT}{N}\right),\quad n=0,1,\dots,N-1\]
 
 对$f(t)$在采样点处的傅里叶级数进行分组求和，得到
 \begin{align*}
@@ -309,7 +311,7 @@ x[1]
     &=\sum_{m=-\infty}^{\infty}\sum_{n=0}^{N-1}x[n]\mathrm{e}^{-\mathrm{i}\Omega (n+mN)}\\
     &=\left(\sum_{m=-\infty}^{\infty}\mathrm{e}^{-\mathrm{i}\Omega mN}\right)\left(\sum_{n=0}^{N-1}x[n]\mathrm{e}^{-\mathrm{i}\Omega n}\right)
 \end{align*}
-左侧括号内是狄拉克梳状分布的傅里叶级数形式，通过（角频率形式的）傅里叶变换可以推导出它的等价形式。由分布的傅里叶变换的连续性，有：
+左侧括号内是狄拉克梳状分布的傅里叶级数形式，通过（角频率形式的）傅里叶变换可以推导出它的等价形式。由分布的傅里叶变换的连续性（\cref{thm:distribution_fourier_continuous}），有：
 \begin{align*}
     \mathcal{F}\left[\sum_{m=-\infty}^{\infty}\mathrm{e}^{-\mathrm{i}\Omega mN}\right]&=\sum_{m=-\infty}^{\infty}\mathcal{F}\left[\mathrm{e}^{-\mathrm{i}\Omega mN}\right]\\
     &=2\pi\sum_{m=-\infty}^{\infty}\delta_{-mN}\\
@@ -336,7 +338,7 @@ $$y[n]=\begin{cases}
     0, & N \le n \le 2N-1
 \end{cases}$$
 则$x[n]$与$y[n]$的离散时间傅里叶变换是相同的。作为周期信号来说，它们的离散傅里叶变换满足关系：
-$$Y[2k]=X[k],\forall k\in \{0,1,\dots,N-1\}$$
+$$Y[2k]=X[k],\quad \quad \forall k\in \{0,1,\dots,N-1\}$$
 
 也就是说，在频域上，$y[n]$的离散傅里叶变换$Y[k]$是$x[n]$的离散傅里叶变换$X[k]$的插值版本，$Y[k]$相当于以两倍于$X[k]$的采样频率，对离散时间傅里叶变换进行采样的结果：
 \begin{figure}[H]
@@ -354,10 +356,10 @@ $$Y[2k]=X[k],\forall k\in \{0,1,\dots,N-1\}$$
 假设$f(t)$是在时域、频域上同时紧支的连续信号（在\refsub{time_freq_limit}中我们会看到，这样的信号是不存在的，但近似满足这种关系的信号却很多），对$f(t)$进行理想采样时，将得到一个有限长离散信号$x[n]$，在采样间隔趋向于0时，$x[n]$就能很好地还原$f(t)$的特征。下面说明，对$x[n]$的离散傅里叶变换$X[k]$在频域上也能很好地还原$f(t)$的特征。
 
 简洁起见，假设$\mathrm{supp}(f)\subset[0,L]$，$\mathrm{supp}(\mathcal{F} f)\subset[-\omega_m,\omega_m]$，取$N$个等间隔点作为采样点，即
-\[x[n]=f\left(\frac{nL}{N}\right),n=0,1,\dots,N-1\]
+\[x[n]=f\left(\frac{nL}{N}\right),\quad n=0,1,\dots,N-1\]
 
 采样间隔充分小时，采样频率高于奈奎斯特频率，即频域上周期化时不会产生交叠。因此，离散时间傅里叶变换$X(\mathrm{e}^{\mathrm{i}\Omega})$在$(-\pi,\pi]$范围内就是原信号的傅里叶变换$\mathcal{F} f(\omega)$在$(-\pi/T,\pi/T]$范围内的伸缩，即
-$$X(\mathrm{e}^{\mathrm{i}\Omega})=\mathcal{F} f\left(\frac{\Omega}{T}\right),\Omega\in(-\pi,\pi]$$
+$$X(\mathrm{e}^{\mathrm{i}\Omega})=\mathcal{F} f\left(\frac{\Omega}{T}\right),\quad \Omega\in(-\pi,\pi]$$
 
 因此，离散时间傅里叶变换能够完全还原出原信号的频域特征。由于离散傅里叶变换是离散时间傅里叶变换在频域上采样的结果，通过零填充的方式，总能使得离散傅里叶变换的频域采样点足够密集，从而很好地还原出原信号的频域特征。
 

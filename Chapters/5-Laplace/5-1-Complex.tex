@@ -3,9 +3,9 @@
 本小节将串写拉普拉斯变换所需的复变函数论中的一些基本概念和重要结果\cite{Function_Theory}。实际上，只需要复变函数中一些最基础的概念即可建立起拉普拉斯变换理论的大部分内容。因此，即便是未学过复变函数的读者，也可通过本小节快速把握拉普拉斯变换中所需的复变函数的内容。
 
 \subsection{形式导数与全纯函数}\label{sub:derivative_and_holomorphic}
-我们总是用$z$表示复数$x+\im y$。考虑复系数双变元多项式集$\mathbb{C}[x,y]$，通过做替换$$x=\frac{z+\overline{z}}{2},y=\frac{z-\overline{z}}{2\mathrm{i}}$$
+我们总是用$z$表示复数$x+\im y$。考虑复系数双变元多项式集$\mathbb{C}[x,y]$，通过做替换$$x=\frac{z+\overline{z}}{2},\quad y=\frac{z-\overline{z}}{2\mathrm{i}}$$
 可以将$\mathbb{C}[x,y]$中的多项式$f(x,y)$表示为$g(z,\overline{z})$。在一些情况下，$g(z,\overline{z})$不显含$\overline{z}$，例如$f(x,y)=x+\mathrm{i}y$，$g(z,\overline{z})=z$。对于$f(x,y)$，我们可以用导数$\dfrac{\partial f}{\partial x},\dfrac{\partial f}{\partial y}$来描述它对$x,y$的依赖关系，同理，为了表述多项式对$z,\overline{z}$的依赖关系，我们定义:\begin{definition}[形式导数]
-    设$f=u+iv\in C^1(\mathbb{C})$，$u,v$为复数域上的实值函数，则
+    设$f=u+\im v\in C^1(\mathbb{C})$，$u,v$为复数域上的实值函数，则
     \begin{align*}
         \frac{\partial f}{\partial z}=\frac{1}{2}\left(\frac{\partial}{\partial x}-\mathrm{i}\frac{\partial}{\partial y}\right)f=\frac{1}{2}\left(\frac{\partial u}{\partial x}+\frac{\partial v}{\partial y}\right)+\frac{\mathrm{i}}{2}\left(\frac{\partial v}{\partial x}-\frac{\partial u}{\partial y}\right)\\
         \frac{\partial f}{\partial \overline{z}}=\frac{1}{2}\left(\frac{\partial}{\partial x}+\mathrm{i}\frac{\partial}{\partial y}\right)f=\frac{1}{2}\left(\frac{\partial u}{\partial x}-\frac{\partial v}{\partial y}\right)-\frac{\mathrm{i}}{2}\left(\frac{\partial v}{\partial x}+\frac{\partial u}{\partial y}\right)
@@ -13,7 +13,7 @@
 \end{definition}
 注意$f$未必是多项式，多项式只是为了给我们提供一个直观的动机和理解方式。
 
-这种定义可以视作复合函数求导的结果，即\[\frac{\partial f}{\partial z}=\frac{\partial f}{\partial x}\frac{\partial x}{\partial z}+\frac{\partial f}{\partial y}\frac{\partial y}{\partial z},\frac{\partial f}{\partial \overline{z}}=\frac{\partial f}{\partial x}\frac{\partial x}{\partial \overline{z}}+\frac{\partial f}{\partial y}\frac{\partial y}{\partial \overline{z}}\]
+这种定义可以视作复合函数求导的结果，即\[\frac{\partial f}{\partial z}=\frac{\partial f}{\partial x}\frac{\partial x}{\partial z}+\frac{\partial f}{\partial y}\frac{\partial y}{\partial z},\quad \frac{\partial f}{\partial \overline{z}}=\frac{\partial f}{\partial x}\frac{\partial x}{\partial \overline{z}}+\frac{\partial f}{\partial y}\frac{\partial y}{\partial \overline{z}}\]
 
 读者可以自行验证，在这样的定义下有：\begin{proposition}
     \begin{align*}
@@ -37,12 +37,12 @@
 以上结论的证明略去，它们只是多元微分学的小练习。
 \begin{remark}*
     对于了解微分形式的语言的读者，可以更好地理解$z,\overline{z}$作为坐标的意义以及形式导数的意义。定义1-形式\cite{shijihuai}
-    $$dz=dx+\mathrm{i}dy,d\overline{z}=dx-\mathrm{i}dy$$
+    $$dz=dx+\mathrm{i}dy,\quad d\overline{z}=dx-\mathrm{i}dy$$
     则$dz\wedge d\overline{z}=-2\mathrm{i} dx\wedge dy$。定义算子
-    $$\partial f=\frac{\partial f}{\partial z}dz,\overline{\partial} f=\frac{\partial f}{\partial \overline{z}}d\overline{z}$$
+    $$\partial f=\frac{\partial f}{\partial z}dz,\quad \overline{\partial} f=\frac{\partial f}{\partial \overline{z}}d\overline{z}$$
     作用于1-形式时，有
-    $$\partial(f(z,\overline(z))dz+g(z,\overline{z})d\overline{z})=\frac{\partial g}{\partial z}dz\wedge d\overline{z},\overline{\partial}(f(z,\overline{z})dz+g(z,\overline{z})d\overline{z})=\frac{\partial f}{\partial \overline{z}}d\overline{z}\wedge dz$$
-    可以验证：$$d=\partial+\overline{\partial},\partial^2=\overline{\partial}^2=0,\partial\overline{\partial}+\overline{\partial}\partial=0$$
+    $$\partial(f(z,\overline{z})dz+g(z,\overline{z})d\overline{z})=\frac{\partial g}{\partial z}dz\wedge d\overline{z},\quad \overline{\partial}(f(z,\overline{z})dz+g(z,\overline{z})d\overline{z})=\frac{\partial f}{\partial \overline{z}}d\overline{z}\wedge dz$$
+    可以验证：$$d=\partial+\overline{\partial},\quad \partial^2=\overline{\partial}^2=0,\quad \partial\overline{\partial}+\overline{\partial}\partial=0$$
 \end{remark}
 \begin{definition}[全纯函数]
     设开集$U\in\mathbb{C}$，如果复值函数$f=u+\mathrm{i}v\in C^1(U)$满足$\frac{\partial f}{\partial \overline{z}}=0,\forall z\in U$，则称$f$为$U$上的\textbf{全纯函数}(holomorphic function)。这等价于$u,v$在$U$上满足\textbf{柯西-黎曼方程组}(Cauchy-Riemann equations)：
@@ -50,7 +50,7 @@
         \begin{cases}
         \frac{\partial u}{\partial x}=\frac{\partial v}{\partial y}\\
         \frac{\partial v}{\partial x}=-\frac{\partial u}{\partial y}
-        \end{cases},\text{或}\frac{\partial f}{\partial y}= \mathrm{i}\frac{\partial f}{\partial x}
+        \end{cases},\quad \text{或}\frac{\partial f}{\partial y}= \mathrm{i}\frac{\partial f}{\partial x}
     \end{align*}
 \end{definition}
 \begin{definition}[整函数]
@@ -132,7 +132,13 @@
 \end{remark}
 
 \begin{remark}*
-    对于了解微分形式的语言的读者，可以从柯西-黎曼方程看出全纯函数$f=u+\mathrm{i}v$相当于闭形式$u(x,y)dx+v(x,y)dy$。在单连通开集上，则闭形式也是恰当形式，1-形式$udx+vdy$相当于无旋无源场，且$udx+vdy$是某实函数$\varphi$的外导数，即$d\varphi=\dfrac{\partial \varphi}{\partial x}dx+\dfrac{\partial \varphi}{\partial y}dy=udx+vdy$；另外，根据另一柯西-黎曼方程$-v(x,y)dx+u(x,y)dy$也是闭形式、恰当形式，是某实函数$\psi$的外导数，即$d\psi=-v\,dx+u\,dy$。由于$\varphi,\psi$满足柯西-黎曼方程，可以定义全纯函数$g=\varphi+\mathrm{i}\psi$，将$g$称为向量场$f$的\textbf{复势函数}(complex potential function)，$\dfrac{\partial g}{\partial z}=u-\mathrm{i}v$与$f$互为共轭复变函数。如果将$d\psi$取为$v\,dx-u\,dy$，$g=\varphi+\mathrm{i}\psi$，则$\dfrac{\partial g}{\partial z}=u+\mathrm{i}v=f$，即单连通开集上的全纯函数$f$总是某个全纯函数$g$的导数。
+    对于了解微分形式的语言的读者，可以从柯西-黎曼方程看出全纯函数$f=u+\mathrm{i}v$相当于闭形式
+    $$u(x,y)dx+v(x,y)dy$$
+    在单连通开集上，则闭形式也是恰当形式，1-形式$udx+vdy$相当于无旋无源场，且$udx+vdy$是某实函数$\varphi$的外导数，即
+    $$d\varphi=\dfrac{\partial \varphi}{\partial x}dx+\dfrac{\partial \varphi}{\partial y}dy=udx+vdy$$
+    另外，根据另一柯西-黎曼方程，$-v(x,y)dx+u(x,y)dy$也是闭形式、恰当形式，因此是某实函数$\psi$的外导数，即$d\psi=-v\,dx+u\,dy$。由于$\varphi,\psi$满足柯西-黎曼方程，可以定义全纯函数$g=\varphi+\mathrm{i}\psi$，$\dfrac{\partial g}{\partial z}=u-\mathrm{i}v$与$f$互为共轭复变函数，将$g$称为向量场$f$的\textbf{复势函数}(complex potential function)。如果取
+    $$d\psi=v\,dx-u\,dy,\quad g=\varphi+\mathrm{i}\psi$$
+    则$\dfrac{\partial g}{\partial z}=u+\mathrm{i}v=f$，即单连通开集上的全纯函数$f$总是某个全纯函数$g$的导数。
 \end{remark}
 
 \subsection{洛朗级数}\label{sub:laurant_series}
@@ -144,12 +150,14 @@
     的级数称为以$a$为中心的\textbf{洛朗级数}，其收敛域记为ROC。
 
     类似于无穷限积分，洛朗级数的收敛性是由它的正负幂次项部分和的二重极限给出的。将它的负幂次项部分视为$w=1/(z-a)$下的幂级数，则可用柯西-阿达马公式确定它的收敛域为圆环$\mathcal{A} _a(r,R)$，其中$r,R$分别称为洛朗级数的\textbf{外半径}(outer radius)和\textbf{内半径}(inner radius)，满足：
-    \[r=\varlimsup_{n\to\infty}|c_{-n}|^{1/n},R=\left(\varlimsup_{n\to\infty}|c_n|^{1/n}\right)^{-1}\]
+    \[r=\varlimsup_{n\to\infty}|c_{-n}|^{1/n},\quad R=\left(\varlimsup_{n\to\infty}|c_n|^{1/n}\right)^{-1}\]
     在$\mathrm{ROC}=\mathcal{A} _a(r,R)$上，洛朗级数是绝对收敛且内闭一致收敛的。
 \end{definition}
 事实上，对任意的全纯函数$f:U\to\mathbb{C}$，及孤立奇点$a\in U$，$f$在$a$处存在且有唯一的洛朗级数展开式。
 
-借助洛朗级数的一致收敛性，可以建立一个对柯西积分公式的直观认识：记$f_n(z)=1/z^n,n\in\mathbb{Z}$，则在逆时针绕0一周的闭曲线$\gamma$上，有
+借助洛朗级数的一致收敛性，可以建立一个对柯西积分公式的直观认识：记
+$$f_n(z)=1/z^n,n\in\mathbb{Z}$$
+则在逆时针绕0一周的闭曲线$\gamma$上，有
 \[\oint_{\gamma}f_n(z)\,dz=\begin{cases}0&n\neq 1\\2\pi \mathrm{i}&n=1\end{cases}\]
 我们已经在前面说明了路径无关性，下面设$\gamma(t)=\mathrm{e}^{\mathrm{i}t},t\in[0,2\pi]$，则
 \begin{align*}
@@ -163,7 +171,7 @@
 \end{align*}
 
 为了验证柯西积分公式
-\[f(z)=\frac{1}{2\pi \mathrm{i}}\oint_{\gamma}\frac{f(\zeta)}{\zeta-z}\,d\zeta,\gamma:t\mapsto z+re^{\mathrm{i}t},t\in[0,2\pi]\]将$f$展开为$z$处的洛朗级数$f(\zeta)=\sum_{n=0}^{\infty}c_n (\zeta-z)^n$，由于洛朗级数在闭曲线$\gamma$上一致收敛，可以交换求和与积分的次序，得到
+\[f(z)=\frac{1}{2\pi \mathrm{i}}\oint_{\gamma}\frac{f(\zeta)}{\zeta-z}\,d\zeta,\quad \gamma:t\mapsto z+re^{\mathrm{i}t},t\in[0,2\pi]\]将$f$展开为$z$处的洛朗级数$f(\zeta)=\sum_{n=0}^{\infty}c_n (\zeta-z)^n$，由于洛朗级数在闭曲线$\gamma$上一致收敛，可以交换求和与积分的次序，得到
 \begin{align*}
     \oint_{\gamma}\frac{f(\zeta)}{\zeta-z}\,dz&=\oint_{\gamma}\sum_{n=0}^{\infty}c_n (\zeta-z)^{n-1}\,d\zeta\\
     &=\sum_{n=0}^{\infty}c_n\oint_{\gamma}(\zeta-z)^{n-1}\,d\zeta\\
@@ -215,11 +223,11 @@ $f(z)=\mathrm{e}^{1/z}$在0处有本性奇点，$f(z)=1/\sin(\pi z)$在$z=n,n\in
 \begin{example}
     计算$f(t)=\dfrac{1}{a^2+t^2}$的傅里叶变换$\mathcal{F} f(\omega)$。\\
     解：根据定义，$$\mathcal{F} f(\omega)=\int_{-\infty}^{\infty}\dfrac{1}{a^2+t^2}\mathrm{e}^{-\mathrm{i}\omega t}\,dt$$
-    为了使用留数定理计算该积分，我们将其推广为复变量上的积分，注意在$\mathbb{R}$上$z=\mathrm{Re}\,z=t$：
+    为了使用留数定理计算该积分，我们将其推广为复变量上的积分，注意在$\mathbb{R}$上$z=\mathrm{Re}(z)=t$：
     \[\mathcal{F} f(\omega)=\int_{-\infty}^{\infty}\frac{1}{a^2+z^2}\mathrm{e}^{-\mathrm{i}\omega z}\,dz\]
     设$f(z)=\dfrac{\mathrm{e}^{-\mathrm{i}\omega z}}{a^2+z^2}$，围道为：\begin{align*}
-        &\gamma_1:t\mapsto t,t\in[-R,R]\\
-        &\gamma_2:t\mapsto Re^{-\mathrm{i}t},t\in[0,\pi]
+        &\gamma_1:t\mapsto t,\quad t\in[-R,R]\\
+        &\gamma_2:t\mapsto Re^{-\mathrm{i}t},\quad t\in[0,\pi]
     \end{align*}
     则$\int_{\gamma_1}f(z)\,dz=\int_{-R}^{R}\frac{1}{a^2+t^2}\mathrm{e}^{-\mathrm{i}\omega t}\,dt$，当$R\to\infty$时，$\int_{\gamma_1}f(z)\,dz\to \mathcal{F} f(\omega)$。经验上，另一条趋向无穷远处的围道上的积分将变成0，我们来验证这一点：\begin{align*}
         \left|\int_{\gamma_2}f(z)\,dz\right|&=\left|-\int_0^{\pi}\frac{1}{a^2+R^2\mathrm{e}^{-2it}}\mathrm{e}^{\mathrm{i}\omega Re^{\mathrm{i}t}}\mathrm{i}Re^{-\mathrm{i}t}\,dt\right|\\
@@ -242,7 +250,7 @@ $f(z)=\mathrm{e}^{1/z}$在0处有本性奇点，$f(z)=1/\sin(\pi z)$在$z=n,n\in
     设$f,g$为连通开集$U\in\mathbb{C}$上的全纯函数，$S\subset U$，且$S$包含$U$中的极限点，如果$f(z)=g(z),\forall z\in S$，则$f(z)=g(z),\forall z\in U$。
 \end{corollary}
 这表明连通开集上的全纯函数环是整环。
-\begin{corollary}[唯一延拓定理]
+\begin{corollary}[唯一延拓定理]\label{cor:unique_continuation}
     整函数可以由$\mathbb{R}$上的值唯一确定，即如果整函数$f,g$满足$f(x)=g(x),\forall x\in\mathbb{R}$，则$f(z)=g(z),\forall z\in\mathbb{C}$。
 \end{corollary}
 
@@ -270,10 +278,10 @@ $f(z)=\mathrm{e}^{1/z}$在0处有本性奇点，$f(z)=1/\sin(\pi z)$在$z=n,n\in
     \end{align*}
     代入$z=ix$可得
     \begin{align*}
-        \sinh (\im x)=\mathrm{i}\sin x,\cosh (\im x)=\cos x
+        \sinh (\im x)=\mathrm{i}\sin x,\quad \cosh (\im x)=\cos x
     \end{align*}
     同理有\begin{align*}
-        \sin z=-\mathrm{i}\sinh (\mathrm{i}z),\cos z=\cosh (\mathrm{i}z)
+        \sin z=-\mathrm{i}\sinh (\mathrm{i}z),\quad \cos z=\cosh (\mathrm{i}z)
     \end{align*}
     因此双曲函数和三角函数互为全纯延拓。由唯一延拓定理，双曲函数的性质可以由三角函数的性质推导而来，例如恒等式
     \begin{align*}
