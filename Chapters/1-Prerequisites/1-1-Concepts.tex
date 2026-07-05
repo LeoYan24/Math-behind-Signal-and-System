@@ -30,7 +30,7 @@
 从电学的经验来看，电压、电流信号的功率总为其幅值的平方乘以某个常数，于是对于一般的信号我们也采取此定义。真实的物理世界中的信号的能量总是有限的，但是，为了更好地研究它们，很多时候使用真实信号的一部分做适当延拓作为研究对象，因此我们将遇到一些不满足“平方可积”性质$\int_{-\infty}^{\infty}| f(x)| ^2\,dx<\infty$的信号，于是定义：
 \begin{definition}[功率信号与能量信号]
 能量无限而功率非零有限的信号称为\textbf{功率信号}：
-\[\int_{-\infty}^{\infty}|f(x)|^2\,dx\to\infty,\quad\lim_{T \to \infty}\frac{1}{T}\int_{-T/2}^{T/2}| f(x)|^2  \,dx<\infty\]
+\[\int_{-\infty}^{\infty}|f(x)|^2\,dx=\infty,\quad\lim_{T \to \infty}\frac{1}{T}\int_{-T/2}^{T/2}| f(x)|^2  \,dx<\infty\]
 而能量非零有限的信号称为\textbf{能量信号}：
 \[0<\int_{-\infty}^{\infty}|f(x)|^2\,dx<\infty\]
 \end{definition}
@@ -55,7 +55,7 @@
 \end{definition}
 
 \subsection{典型的连续与离散信号}\label{sub:ordinary_signal}
-\begin{definition}[采样信号]
+\begin{definition}[采样信号]\label{def:sinc}
     \[\mathrm{Sa}(t)=\frac{\sin(t)}{t}\]
 \end{definition}
 它在0处连续延拓为1，在$\pi$的整数倍处为0，是偶函数，在正半轴上的积分值为$\pi /2$（这个结果称为狄利克雷积分）。国外教材中采样信号一般为一个类似的信号

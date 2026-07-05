@@ -197,7 +197,7 @@ $\mathcal{F}\varphi$仍然是测试函数。这个测试函数空间正是\textb
                                                & =\left\langle a\mathcal{F} T+b\mathcal{F} S,\varphi\right\rangle
 \end{align*}
 因此
-\[\mathcal{F} (aT+bS)=a\mathcal{F} T+b\mathcal{F} S,a,b\in\mathbb{C},S,T\in\mathcal{T}\]
+\[\mathcal{F} (aT+bS)=a\mathcal{F} T+b\mathcal{F} S,\quad a,b\in\mathbb{C},S,T\in\mathcal{T}\]
 \end{proof}
 \begin{example}[$\delta$的傅里叶变换]
     现在可以严谨地求出$\delta$的傅里叶变换：
@@ -228,9 +228,7 @@ $\mathcal{F}\varphi$仍然是测试函数。这个测试函数空间正是\textb
 }{
     \mathcal{F}\delta_a =\mathrm{e}^{-\mathrm{i} a x}
 }
-根据阿贝尔-狄利克雷判别法（A-D判别法，见数学分析教材，如\cite{xinjiang}），$\langle \mathrm{e}^{-\mathrm{i} a x},\varphi\rangle$
-作为一个反常积分是有意义的。可以看出这与函数的傅里叶变换的平移定理很相似，我们将在后面
-给出分布的平移、伸缩，并由此得到一些分布的傅里叶变换的性质。
+根据阿贝尔-狄利克雷判别法（A-D判别法），$\langle \mathrm{e}^{-\mathrm{i} a x},\varphi\rangle$作为一个反常积分是有意义的。可以看出这与函数的傅里叶变换的平移定理很相似，我们将在后面给出分布的平移、伸缩，并由此得到一些分布的傅里叶变换的性质。
 \end{example}
 
 \begin{example}[分布$\mathds{1}$的傅里叶变换]
@@ -242,12 +240,14 @@ $\mathcal{F}\varphi$仍然是测试函数。这个测试函数空间正是\textb
     \left\langle \mathcal{F} \mathds{1},\varphi\right\rangle&=\left\langle \mathds{1},\mathcal{F} \varphi\right\rangle\\
     &=\int_{-\infty}^{\infty}\mathcal{F} \varphi(\xi)\,d\xi\\
     &=\mathcal{F} \mathcal{F} \varphi(0)\\
-    &=\varphi(0)=\left\langle \delta,\varphi\right\rangle
+    &=\varphi(0)\\
+    &=\left\langle \delta,\varphi\right\rangle
 }{
     \left\langle \mathcal{F} \mathds{1},\varphi\right\rangle&=\left\langle \mathds{1},\mathcal{F} \varphi\right\rangle\\
     &=\int_{-\infty}^{\infty}\mathcal{F} \varphi(\xi)\,d\xi\\
     &=\mathcal{F} \mathcal{F} \varphi(0)\\
-    &=2\pi\varphi(0)=2\pi\left\langle \delta,\varphi\right\rangle
+    &=2\pi\varphi(0)\\
+    &=2\pi\left\langle \delta,\varphi\right\rangle
 }
 因此\lr{
     \mathcal{F} \mathds{1}&=\delta
@@ -266,7 +266,7 @@ $\mathcal{F}\varphi$仍然是测试函数。这个测试函数空间正是\textb
 \end{align*}
 因此我们定义\begin{definition}[分布的反转]
     \begin{equation*}
-    \left\langle T^-,\varphi\right\rangle=\left\langle T,\varphi^-\right\rangle,T\in\mathcal{T} ,\varphi\in\mathcal{S}
+    \left\langle T^-,\varphi\right\rangle=\left\langle T,\varphi^-\right\rangle,\quad T\in\mathcal{T} ,\varphi\in\mathcal{S}
 \end{equation*}
 \end{definition}
 
@@ -297,7 +297,7 @@ $$\mathcal{F}(T^-)= (\mathcal{F}T)^-$$
     &=\left\langle T,\mathcal{F} ^{-1}\varphi\right\rangle\\
     &=\left\langle\mathcal{F}^{-1}T,\varphi\right\rangle
 }{
-    &\left\langle\mathcal{F}T^-,\varphi\right\rangle=\left\langle T,\mathcal{F}\varphi^-\right\rangle\\
+    \left\langle\mathcal{F}T^-,\varphi\right\rangle&=\left\langle T,\mathcal{F}\varphi^-\right\rangle\\
     &=\left\langle T,2\pi\mathcal{F} ^{-1}\varphi\right\rangle\\
     &=\left\langle2\pi\mathcal{F}^{-1}T,\varphi\right\rangle
 }
@@ -351,11 +351,11 @@ $$\mathcal{F}(T^-)= (\mathcal{F}T)^-$$
 但它可以视为一个缓增分布，前文中已经提到$\langle \mathrm{e}^{\mathrm{i}at},\varphi\rangle$是收敛
 的。下面应用对偶性求它的傅里叶变换：
 \lr{
-\mathcal{F} [e^{2\pi \mathrm{i}at}]=\mathcal{F}^{-1}[e^{2\pi \mathrm{i}at}]^-=\delta_{-a}^-=\delta_{a}
+\mathcal{F} [\e^{2\pi \mathrm{i}at}]=\mathcal{F}^{-1}[\e^{2\pi \mathrm{i}at}]^-=\delta_{-a}^-=\delta_{a}
 }{
-\mathcal{F} [e^{\mathrm{i}at}]=2\pi\mathcal{F}^{-1}[e^{\mathrm{i}at}]^- =2\pi\delta_{-a}^- =2\pi\delta_{a}
+\mathcal{F} [\e^{\mathrm{i}at}]=2\pi\mathcal{F}^{-1}[\e^{\mathrm{i}at}]^- =2\pi\delta_{-a}^- =2\pi\delta_{a}
 }
-（请读者自行验证$\delta_{-a}^-= \delta_{a}$）
+（请读者自行验证$\delta_{-a}^-= \delta_{a}$）。
 \end{example}
 
 \begin{example}[正弦、余弦函数的傅里叶变换]

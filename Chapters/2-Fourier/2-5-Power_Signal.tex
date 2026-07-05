@@ -3,7 +3,7 @@
 回顾功率信号的定义：
 \begin{definition}[功率信号]
 能量无限而功率非零有限的信号称为\textbf{功率信号}：
-\[\int_{-\infty}^{\infty}| f(x)| ^2\,dx\to\infty,\quad\lim_{T \to \infty}\frac{1}{T}\int_{-T/2}^{T/2}| f(x)|^2  \,dx<\infty\]
+\[\int_{-\infty}^{\infty}| f(x)| ^2\,dx=\infty,\quad\lim_{T \to \infty}\frac{1}{T}\int_{-T/2}^{T/2}| f(x)|^2  \,dx<\infty\]
 \end{definition}
 
 在\refsub{Lp_space}中，我们约定了：能量为0的信号也属于能量信号，功率为0的信号（即能量信号）也属于功率信号。在这个约定下，能量信号即$L^2(\mathbb{R})$，而功率信号也成为线性空间。本节就来讨论功率信号空间的结构，以及如何通过傅里叶变换来进行能量与功率的谱分析。
@@ -31,8 +31,8 @@ $f\sim g$是一种等价关系，记$f$所在的等价类为$[f]_{\sim}$，在�
 $$\left\|[f]_{\sim}\right\|_{p}=0\iff f=0,\mathrm{a.e.}\iff f\sim 0$$
 也就是说，$L^p(\mathbb{R})$实际上是$p$次可积函数空间的\textbf{商空间}(factor space)，商空间中元素的范数定义为该元素的任意一个代表元的范数，在这个意义下，$L^p(\mathbb{R})$构成线性赋范空间，只是我们通常不特意区分函数$f$及其所在的等价类$[f]_{\sim}$，也不为商空间和代表元引入额外的记号。
 
-类似地，在功率信号空间中，我们不妨在$B^2$中定义以下等价关系：
-$$f\sim g\iff \|f-g\|_{\mathrm{pwr}}=0\iff f-g\in L^2(\mathbb{R})$$
+类似地，在功率信号空间中，我们不妨在$B^2$中定义以下等价关系\footnote{功率为零并不意味着是能量信号，例如，$f(x)=0,x<1;f(x)=x^{-0.5},x\ge 1$，则$\frac{1}{T}\int_{-T/2}^{T/2}| f(x)|^2  \,dx$与$T^{-0.5}$同阶。}：
+$$f\sim g\iff \|f-g\|_{\mathrm{pwr}}=0$$
 
 这样，通过功率值定义的半范数也就成为了范数。$B^2$甚至还是一个内积空间，它的内积定义为：
 \begin{definition}[$B^2$的内积]
@@ -160,7 +160,7 @@ $$P_{fg}=\int_{-\infty}^{\infty}\lim_{T\to\infty}\frac{1}{T}F_T(\xi)\overline{G_
 
 \subsection{功率信号的相关}\label{sub:power_corelation}
 
-\begin{definition}[功率信号的相关]
+\begin{definition}[功率信号的相关]\label{def:power_correlation}
     功率信号$f\in B^2$的自相关函数为
     $$R_f(x)=\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}f(x+y)\overline{f(y)}\,dy$$
     功率信号$f,g\in B^2$的互相关函数为
@@ -189,6 +189,7 @@ $$\mathcal{F}R_{fg}=\mathcal{F}f\overline{\mathcal{F}g}$$
 
 我们自然希望功率信号也有类似的性质：
 \begin{theorem}[功率信号的维纳-辛钦定理]
+    \label{thm:power_winner_khinchin}
     设$f,g\in B^2$，则
     $$\mathcal{F}R_{fg}(\xi)=S_{fg}(\xi)=\lim_{T\to\infty}\frac{1}{T}F_T(\xi)\overline{G_T(\xi)}$$
 \end{theorem}
@@ -247,7 +248,7 @@ $$\lim_{T\to\infty}\frac{1}{T}\left[\frac{\sin^2\left(\pi T(\xi-1)\right)}{4\pi^
 的处理，但计算起来还是比较麻烦。下面我们提出一种更简便的方法。
 
 根据\cref{prop:cross_correlation}中的维纳-辛钦定理，能量信号的互功率谱密度就是两个信号的傅里叶变换共轭相乘：
-$$f,g\in L^1(\mathbb{R})\cap L^2(\mathbb{R}),\mathcal{F}R_{fg}=\mathcal{F}f\overline{\mathcal{F}g}$$
+$$f,g\in L^1(\mathbb{R})\cap L^2(\mathbb{R}),\quad\mathcal{F}R_{fg}=\mathcal{F}f\overline{\mathcal{F}g}$$
 特别地，当$f=g$时，有$\mathcal{F}R_f=|\mathcal{F}f|^2$。观察我们处理过的功率信号$f(t)=\cos(2\pi t)$，它的傅里叶变换为
 $$\mathcal{F}f=\frac{1}{2}\delta_1+\frac{1}{2}\delta_{-1}$$
 尽管$\delta^2$无定义，但如果仅仅将$\delta$的强度平方，则恰好得到功率谱密度：
@@ -255,7 +256,7 @@ $$S_f=\left(\frac{1}{2}\right)^2\delta_1+\left(\frac{1}{2}\right)^2\delta_{-1}=\
 
 由此可以猜想：
 
-\begin{theorem}
+\begin{theorem}\label{thm:PSD}
     对于几乎周期函数$f$，设其（作为分布的）傅里叶变换为
     $$\mathcal{F}f=\sum_{n}a_n\delta_{\xi_n}$$
     则其功率谱密度为
@@ -324,3 +325,25 @@ $$\lim_{T\to\infty}\frac{1}{T}\delta^2=\delta,\quad\lim_{T\to\infty}F_T(\xi)=F(\
     &=\sum_{n}a_n \overline{b_n}\lim_{T\to\infty}\frac{1}{T}\delta^2_{\xi_n}\\
     &=\sum_{n}a_n \overline{b_n}\delta_{\xi_n}
 \end{align*}
+
+最后，如果函数中既有几乎周期的成分，又有功率为0的成分，即
+$$f(t)=g(t)+h(t),\quad g(t)\in B^2,P_h=\lim_{T \to \infty}\frac{1}{T}\int_{-T/2}^{T/2}|h(x)|^2  \,dx=0$$
+我们说明：$f(t)$的功率谱密度与$g(t)$相同。
+
+根据傅里叶变换的线性性，$F_T(\xi)=G_T(\xi)+H_T(\xi)$，作为功率信号，其功率谱密度为：
+$$S_f(\xi)=\lim_{T\to\infty}\frac{|F_T(\xi)|^2}{T}=\lim_{T\to\infty}\frac{|G_T(\xi)|^2}{T}+\lim_{T\to\infty}\frac{G_T(\xi)\overline{H_T(\xi)}}{T}+\lim_{T\to\infty}\frac{|H_T(\xi)|^2}{T}$$
+其中，$\lim_{T\to\infty}\dfrac{|G_T(\xi)|^2}{T}$就是$g(t)$的功率谱密度，可以根据\cref{thm:PSD}进行计算；而剩余两项均为0：
+\begin{align*}
+    0\le\lim_{T\to\infty}\frac{|H_T(\xi)|^2}{T}&=\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}|h(t)|^2\,dt=0
+\end{align*}
+对于交叉项$\lim_{T\to\infty}\dfrac{G_T(\xi)\overline{H_T(\xi)}}{T}$，利用功率信号的维纳-辛钦定理（\cref{thm:power_winner_khinchin}），有
+$$\lim_{T\to\infty}\frac{G_T(\xi)\overline{H_T(\xi)}}{T}=\mathcal{F} R_{gh}(\xi)$$
+由柯西-施瓦兹不等式，有：
+\begin{align*}
+    |R_{gh}(x)|^2&=\left|\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}f(x+y)\overline{g(y)}\,dy\right|^2\\
+    &\le \lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}|f(x+y)|^2\,dy\cdot\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}|g(y)|^2\,dy
+\end{align*}
+前一极限收敛于有限值而后一极限收敛于$0$，因此
+$$R_{gh}(x)=0,\quad \lim_{T\to\infty}\frac{G_T(\xi)\overline{H_T(\xi)}}{T}=\mathcal{F} R_{gh}(\xi)=0$$
+
+可见，功率为$0$的信号，功率谱密度必然恒为$0$，并且与功率信号的互谱密度也恒为$0$。根据\cref{thm:PSD}，其傅里叶变换一定不含有冲击项$\delta$，因此我们说$F(\xi)$具有\textbf{线谱分量（离散谱分量）}和\textbf{连续谱分量}，而$f(t)=g(t)+h(t)$的功率谱密度仅仅取决于其线谱分量，可以用\cref{thm:PSD}直接计算。

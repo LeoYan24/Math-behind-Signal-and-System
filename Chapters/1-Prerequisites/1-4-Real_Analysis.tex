@@ -40,7 +40,7 @@ $$m^*\left(\bigsqcup_{k=1}^{\infty}E_k\right)\neq\sum_{k=1}^{\infty}m^*(E_k)$$
 
 \begin{definition}[可测集]
     集合$E$是\textbf{可测集}，如果
-    $$\forall A,m^*(A)=m^*(A\cap E)+m^*(A\cap E^c)$$
+    $$\forall A,\quad m^*(A)=m^*(A\cap E)+m^*(A\cap E^c)$$
     这个条件称为称\textbf{Carathéodory条件}或\textbf{卡氏条件}。定义可测集的\textbf{勒贝格测度}为它的勒贝格外测度，即
     $m(E)=m^*(E)$。
 \end{definition}
@@ -82,7 +82,7 @@ $$m^*\left(\bigsqcup_{k=1}^{\infty}E_k\right)\neq\sum_{k=1}^{\infty}m^*(E_k)$$
 
 \begin{definition}[可测函数]
     定义在可测集上的函数$f:E\to\mathbb{R}$是可测的，如果
-    $$\forall c\in\mathbb{R},E_c=\left\{x\in E\left| f(x)<c\right.\right\}\text{可测}$$
+    $$\forall c\in\mathbb{R},\quad E_c=\left\{x\in E\left| f(x)<c\right.\right\}\text{可测}$$
     可测函数构成线性空间。
 \end{definition}
 \begin{example}
@@ -292,7 +292,7 @@ $dm$表示勒贝格测度。
 \[\int_{E}f\,dm\leq \int_{E}|f|\,dm\]
 此即勒贝格积分的绝对值不等式。
 
-对于黎曼积分，绝对可积性强于可积性，并称可积却不绝对可积的函数是\textbf{条件可积}的，例如，\refsub{int_sin}中介绍的采样函数就是条件可积的。但是，从前一定义可以看出，对于勒贝格积分，\textbf{可积性与绝对可积性是等价的}。
+对于黎曼积分，绝对可积性强于可积性，并称可积却不绝对可积的函数是\textbf{条件可积}的，例如，\cref{def:sinc}给出的采样函数就是条件可积的。但是，从前一定义可以看出，对于勒贝格积分，\textbf{可积性与绝对可积性是等价的}。
 
 类似于非负可测函数，可测函数的勒贝格积分也具有线性性、单调性和区域可加性。
 
@@ -457,7 +457,7 @@ $dm$表示勒贝格测度。
 
 $1/p+1/q=1$的关系，我们还会多次见到。在实分析中，通常称$p,q$互为共轭，但由于容易与复数的共轭混淆，我们不做此定义。\textbf{在本小节的后续内容中，$p,q$总是指满足$1/p+1/q=1$的两个正实数，并且如无特殊说明，允许其中一者为1而另一者为$\infty$}。
 
-\begin{theorem}[Hölder不等式]
+\begin{theorem}[Hölder不等式]\label{thm:holder}
     设$f\in L^p(E),g\in L^q(E)$，有$f\cdot g\in L^1(E)$，并且
     \[\int_{E}|fg|\,dm\leq \|f\|_p\cdot \|g\|_q\]
     取等条件为存在$\lambda>0$使得$|f|^p=\lambda |g|^q,\mathrm{a.e.}$
@@ -490,7 +490,7 @@ $1/p+1/q=1$的关系，我们还会多次见到。在实分析中，通常称$p,
 
 在$p=1$时，$f$的对偶函数就是$\mathrm{sgn}(f)$。这个引理直接带入即可验证。
 
-\begin{theorem}[Minkowski不等式]
+\begin{theorem}[Minkowski不等式]\label{thm:minkowski}
     $\forall f,g\in L^p(E)$，有$f+g\in L^p(E)$，并且
     \[\|f+g\|_p\leq \|f\|_p+\|g\|_p\]
     取等条件为存在$\lambda>0$使得$|f|=\lambda |g|,\mathrm{a.e.}$
@@ -510,7 +510,15 @@ Minkowski不等式表明，$L^p(E)$空间的范数满足三角不等式，因此
 
 利用积分的连续性，只要令$\mathbb{R} $上的函数在区间$[n,n+1)(n\in\mathbb{Z} )$上取常值，即可得到上述不等式的离散形式，从而证明$l^p$空间也是线性赋范空间。
 
-这个不等式还能够推出有限测度集上$L^p$空间的包含关系：
+Minkowski不等式与以下不等式等价：
+\begin{claim}[积分形式的Minkowski不等式]\label{cliam:minkowski}
+    设$f$是$E\times [a,b]$上的非负可测函数，$1\le p\le \infty$，且对几乎处处的$y\in[a,b]$，$f(\cdot,y)\in L^p(E)$，则
+    $$\left\|\int_a^b f(x,y)\,dy\right\|_p\le\int_a^b\|f(\cdot,y)\|_p\,dy$$
+    也可以将此不等式写成以下形式：
+    $$\left(\int_E\left(\int_a^b f(x,y)\,dy\right)^p\,dm\right)^{1/p}\le\int_a^b\left(\int_E f^p(x,y)\,dm\right)^{1/p}\,dy$$
+\end{claim}
+
+另外，Hölder不等式还能够推出有限测度集上$L^p$空间的包含关系：
 \begin{corollary}
     设$m(E)<\infty$，则$\forall 1\leq p_1<p_2\leq \infty$，有$L^{p_2}(E)\subset L^{p_1}(E)$，并且\begin{align*}
         \exists c\geq 0,\forall f\in L^{p_2}(E),\quad\|f\|_{p_1}\leq c\cdot \|f\|_{p_2}

@@ -19,6 +19,8 @@
 
 \subsection{数字角频率}\label{sub:digital_freq}
 
+\subsubsection{数字角频率与模拟角频率的关系}
+
 在学习\refsec{Sampling_Interpolation}后，我们可以另一种视角看待离散信号，即离散信号是连续信号的理想采样的结果。已知连续时间信号$f(t)$及采样间隔$T$，则采样得到的离散信号为$x[n]=f(nT)$。特别地，考虑最典型的具有数字角频率$\Omega$的信号
 $$E_{\Omega}[n]=\mathrm{e}^{\mathrm{i}\Omega n}$$
 它对应的连续时间信号为
@@ -56,6 +58,27 @@ $$\mathrm{e}^{\mathrm{i}(\Omega+2k\pi)n}=\mathrm{e}^{\mathrm{i}\Omega n},\quad \
 
     还原出的信号是以$\Omega\cdot T=\pi$为模拟角频率的信号。然而，$\cos((2k+1)\pi t),k\in\mathbb{N}^*$以采样频率$T=1$采样后也会得到同样的离散信号，但由于它们的模拟角频率太高，如果不改变采样点，就无法通过采样信号还原出来。
 \end{example}
+
+\subsubsection{离散信号的周期性}
+
+\begin{definition}[离散信号的周期性]
+    离散信号$x[n]$具有周期性，当且仅当存在正整数$N$，使得
+    $$x[n+N]=x[n],\quad \forall n\in\mathbb{Z}$$
+\end{definition}
+
+带入这个定义，不难发现，尽管$E_{\Omega}[n]=\mathrm{e}^{\mathrm{i}\Omega n}$对应的连续信号$f(t)=\mathrm{e}^{\mathrm{i}\Omega t/T}$总是具有周期性，但$E_{\Omega}[n]$本身未必具有周期性：
+$$E_{\Omega}[n+N]=\e^{\im\Omega(n+N)}=E_{\Omega}[n]\cdot \e^{\im \Omega N}$$
+要使$\e^{\im \Omega N}=1$，必须保证$\Omega N=2k\pi,k\in\mathbb{Z}$，即
+$$\Omega=2\pi\frac{k}{N}$$
+这表明，离散信号$E_{\Omega}[n]$具有周期性的必要条件是$\Omega/\pi$是有理数；另一方面，当$\Omega/\pi$是有理数时，容易验证$E_{\Omega}[n]$是周期离散信号。综上我们得到：
+
+\begin{proposition}
+    离散信号$E_{\Omega}[n]$具有周期性的充要条件是$\Omega/\pi\in\mathbb{Q}$.
+\end{proposition}
+
+对于离散正弦信号$x[n]=A\sin(\Omega n+\varphi)$，它总能表示为复指数信号的线性组合，因此具有相同的周期性判则。
+
+另外，对于$\Omega=\pi\frac{p}{q},p,q\in\mathbb{Z}$，且$p/q$为既约分数，容易验证$E_{\Omega}[n]$的最小正周期为$2q$.
 
 \subsection{离散时间傅里叶变换}\label{sub:dtft}
 
