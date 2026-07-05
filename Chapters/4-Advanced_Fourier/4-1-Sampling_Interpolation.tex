@@ -151,6 +151,7 @@ $\shah$分布的傅里叶变换具有自对偶性，即{\color{blue}$\shah\overs
 
 结合$\shah$的频率形式傅里叶变换公式可以得到$\shah$分布作为形式上的函数的另一种定义。实际上，这就是$\shah$作为一个周期分布的傅里叶级数展开（分布的周期性是通过$\tau_1 \shah=\shah$体现的）：
 \begin{definition}[$\shah$的傅里叶级数形式]
+    \label{def:shah_fourier_series}
     \[\shah(x)=\sum_{k=-\infty}^{\infty}\mathrm{e}^{-2\pi \mathrm{i}kx}\]
 \end{definition}
 右边正是\refsub{dirichlet_kernel}中提到的狄利克雷核在$N\to\infty$时的式子。需要注意，这个式子仅在分布的意义下成立，例如将这个分布作用在某一区间的特征函数$\chi_{[a,b]}\in\mathcal{S}$上，则可验证函数项级数$$\sum_{k=-\infty}^{\infty}\mathrm{e}^{-2\pi \mathrm{i}kx}$$在整数点处趋于正无穷，在任意不包含整数点的区间上积分值为0。然而，作为函数项级数，我们只能得到整数点处的广义极限存在，这是一个几乎处处不收敛的函数项级数，例如在$x=1/2$处，级数项为$(-1)^k$，其和函数在多数点没有定义，只能作为奇异分布来定义。

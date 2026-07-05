@@ -26,9 +26,7 @@
     \mathcal{F} \left[\frac{1}{\pi x}\right](\omega)= -\mathrm{i}\,\text{sgn}(\omega)
 \end{lralign}
 
-借助这个结论，我们可以通过傅里叶变换来研究希尔伯特变换的性质。简洁起见，本小节主要使用频率形式的傅里叶变换。
-
-由分布与函数的卷积定理（见\refsub{operation_of_distribution}），我们可以得到希尔伯特变换的傅里叶变换表达式：
+借助这个结论，我们可以通过傅里叶变换来研究希尔伯特变换的性质。由分布与函数的卷积定理（\cref{thm:distribution_func_conv}），可以得到：
     \[\mathcal{F} [\mathcal{H} f](\xi)=-\mathrm{i}\,\text{sgn}(\xi)\mathcal{F} f(\xi)\]
 可以看到，希尔伯特变换在频域上对应乘以$-\mathrm{i}\,\text{sgn}(\xi)$，这表明希尔伯特变换是一个全通滤波器，它将正频率成分的相位延迟$\pi/2$，将负频率成分的相位超前$\pi/2$，而不改变任意频率成分的幅度。
 
@@ -50,7 +48,7 @@
         \switch
         \mathcal{F} [\cos(\omega_0 t)](\xi)&=\pi(\delta_{\omega_0}+\delta_{-\omega_0})
     \end{lralign}
-    因此余弦函数的希尔伯特变换的傅里叶变换为：
+    因此余弦函数的希尔伯特变换的傅里叶变换为（假设$2\pi f_0=\omega_0>0$）：
     \begin{lralign}
         &\mathcal{F} [\mathcal{H} \cos(2\pi f_0 t)](\xi)\\
         =&-\mathrm{i}\,\text{sgn}(\xi)\cdot \frac{1}{2}(\delta_{f_0}+\delta_{-f_0})\\
@@ -79,16 +77,16 @@
 
 \begin{example}[三角函数的希尔伯特变换，直接计算]
     利用狄利克雷积分（\cref{thm:dirichlet_int}）：
-    \[\int_{-\infty}^{\infty}\frac{\sin ax}{x}\,dx=\pi,a>0\]
+    \[\int_{-\infty}^{\infty}\frac{\sin ax}{x}\,dx=\pi,\quad a>0\]
     也可以直接计算三角函数的希尔伯特变换，这里以正弦函数为例：
     \begin{align*}
         \mathcal{H} \sin(\omega_0 t)&=\frac{1}{\pi}\text{p.v.}\int_{-\infty}^{\infty}\frac{\sin(\omega_0 y)}{t-y}\,dy\\
         &=\frac{1}{\pi}\lim_{\epsilon\to 0^+}\left(\int_{-\infty}^{t-\epsilon}\frac{\sin(\omega_0 y)}{t-y}\,dy+\int_{t+\epsilon}^{\infty}\frac{\sin(\omega_0 y)}{t-y}\,dy\right)\\
         &=\frac{1}{\pi}\lim_{\epsilon\to 0^+}\left(\int_{\epsilon}^{\infty}\frac{\sin(\omega_0 (t-u))}{u}\,du+\int_{-\infty}^{-\epsilon}\frac{\sin(\omega_0 (t-u))}{u}\,du\right)& (u=t-y)\\
         &=\frac{1}{\pi}\lim_{\epsilon\to 0^+}\left(\int_{\epsilon}^{\infty}\frac{\sin(\omega_0 t)\cos(\omega_0 u)-\cos(\omega_0 t)\sin(\omega_0 u)}{u}\,du\right.\\
-        &\quad \left.+\int_{-\infty}^{-\epsilon}\frac{\sin(\omega_0 t)\cos(\omega_0 u)-\cos(\omega_0 t)\sin(\omega_0 u)}{u}\,du\right)\\
+        &\qquad \left.+\int_{-\infty}^{-\epsilon}\frac{\sin(\omega_0 t)\cos(\omega_0 u)-\cos(\omega_0 t)\sin(\omega_0 u)}{u}\,du\right)\\
         &=\frac{1}{\pi}\lim_{\epsilon\to 0^+}\left(\sin(\omega_0 t)\int_{\epsilon}^{\infty}\frac{\cos(\omega_0 u)}{u}\,du+\sin(\omega_0 t)\int_{-\infty}^{-\epsilon}\frac{\cos(\omega_0 u)}{u}\,du\right.\\
-        &\quad \left.-\cos(\omega_0 t)\int_{\epsilon}^{\infty}\frac{\sin(\omega_0 u)}{u}\,du-\cos(\omega_0 t)\int_{-\infty}^{-\epsilon}\frac{\sin(\omega_0 u)}{u}\,du\right)\\
+        &\qquad \left.-\cos(\omega_0 t)\int_{\epsilon}^{\infty}\frac{\sin(\omega_0 u)}{u}\,du-\cos(\omega_0 t)\int_{-\infty}^{-\epsilon}\frac{\sin(\omega_0 u)}{u}\,du\right)\\
         &=\frac{1}{\pi}\lim_{\epsilon\to 0^+}\left(-\cos(\omega_0 t)\int_{\epsilon}^{\infty}\frac{\sin(\omega_0 u)}{u}\,du+\cos(\omega_0 t)\int_{\epsilon}^{\infty}\frac{\sin(\omega_0 u)}{u}\,du\right)\\
         &=-\cos(\omega_0 t)
     \end{align*}
@@ -97,7 +95,7 @@
 
 \subsection{希尔伯特变换的性质}\label{sub:prop_of_hilbert}
 
-如果$f\in L^2(\mathbb{R})$，即$f(t)$是一个能量有限信号，则$\mathcal{H} f\in L^2(\mathbb{R})$，并且$\|\mathcal{H} f\|_2=\|f\|_2$，进一步，$L^2(\mathbb{R})$上的\textbf{希尔伯特变换是保内积的}：
+简洁起见，本小节主要使用频率形式的傅里叶变换。如果$f\in L^2(\mathbb{R})$，即$f(t)$是一个能量有限信号，则$\mathcal{H} f\in L^2(\mathbb{R})$，并且$\|\mathcal{H} f\|_2=\|f\|_2$，进一步，$L^2(\mathbb{R})$上的\textbf{希尔伯特变换是保内积的}：
 \begin{theorem}
     设$f,g\in L^2(\mathbb{R})$，则有
     \[(\mathcal{H} f,\mathcal{H} g)=(f,g)\]

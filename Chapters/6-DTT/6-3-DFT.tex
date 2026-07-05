@@ -3,8 +3,8 @@
 \subsection{离散傅里叶变换的引入：离散傅里叶级数}\label{sub:intro_DFT}
 
 沿着\refsub{dtft}的思路，我们仿照傅里叶级数来进行周期离散信号的频谱分析。设$x[n]$是周期为$N$的离散信号，即$x[n+N]=x[n],\forall n\in\mathbb{Z}$，考虑将其表示为一组复指数信号的线性组合，则每个复指数信号也应该以$N$为周期，即
-\[E_{\Omega}[n]=\mathrm{e}^{\mathrm{i}\Omega n},E_{\Omega}[n+N]=E_{\Omega}[n],\forall n\in\mathbb{Z}\]
-因此复指数信号的数字角频率必须取值于有限的集合：
+\[E_{\Omega}[n]=\mathrm{e}^{\mathrm{i}\Omega n},\quad E_{\Omega}[n+N]=E_{\Omega}[n],\quad \forall n\in\mathbb{Z}\]
+\refsub{digital_freq}中已经指出，复指数信号的数字角频率必须取值于有限的集合：
 \[\left\{\left.\Omega_k=\frac{2\pi k}{N}\right|k=0,1,\dots,N-1\right\}\]
 这个集合恰有$N$个元素。简便起见，这里数字角频率的范围取为$[0,2\pi)$。换言之，我们希望找到一个与$x[n]$具有相同周期的离散信号$X[k]$，使得
 \[x[n]=\frac{1}{N}\sum_{k=0}^{N-1}X[k]E_{\Omega_k}[n]=\frac{1}{N}\sum_{k=0}^{N-1}X[k]\mathrm{e}^{\mathrm{i}\frac{2\pi}{N}kn}\]
@@ -57,56 +57,30 @@ $$\mathcal{F} \mathcal{F} ^H=N\cdot I$$
 
 这样，我们就得到了\textbf{离散傅里叶级数} (Discrete Fourier Series, DFS)的定义：
 \begin{definition}[离散傅里叶级数]
-    设$x[n]$是周期为$N$的离散信号，则$x[n]$的离散傅里叶级数定义为
+    设$x[n]$是周期为$N$的离散信号，则$x[n]$的DFS定义为
     \[x[n]=\frac{1}{N}\sum_{k=0}^{N-1}X[k]W_N^{-kn}\]
     其中$W_N=\mathrm{e}^{\mathrm{i}\frac{2\pi}{N}}$，$X[k]=\sum_{n=0}^{N-1}x[n]W_N^{-kn}$。
 \end{definition}
 
 尽管在分析离散信号时没有“高次谐波分量”，但从以上讨论可以看出，只要有这$N$个离散频率成分，就可以完全表征周期为$N$的离散信号的频谱特性。至此，我们完美地回答了“如何对离散信号进行分解与合成”的问题。
 
-本小节的主要目标——\textbf{离散傅里叶变换} (Discrete Fourier Transform, DFT)就是求解离散傅里叶级数的系数的这个变换，只是习惯上认为离散傅里叶变换是针对于\textbf{有限长离散信号}而言的\cite{dsp}，但很明显，我们\textbf{没有必要区分周期信号与有限长离散信号}，它们之间的互相转化是非常简单的。
+本小节的主要目标——\textbf{离散傅里叶变换} (Discrete Fourier Transform, DFT)就是求解DFS的系数的这个变换，只是习惯上认为离散傅里叶变换是针对于\textbf{有限长离散信号}（或者说仅在有线长度的区间上非零的离散信号）而言的\cite{dsp}。\textbf{本书不区分有限长离散信号与周期离散信号}，出于以下两个考虑：其一，它们之间的互相转化非常简单；其二，这样的写法更有利于展示离散傅里叶变换的一系列运算性质的本质。
 
 上述内容归结为以下的定义和定理：
 
 \begin{definition}[离散傅里叶变换]\label{def:DFT}
-    设$x[n]$是长为$N$的离散信号，则$x[n]$的离散傅里叶变换定义为
+    设$x[n]$是长为$N$的离散信号，则$x[n]$的DFT定义为
     \[X[k]=\sum_{n=0}^{N-1}x[n]W_N^{kn},\quad k=0,1,\dots,N-1\]
     记$x[n]\xleftrightarrow{\mathrm{DFT}}X[k],X[k]=\mathrm{DFT}(x[n])$。
 \end{definition}
 
 \begin{theorem}[离散傅里叶反演公式]\label{thm:DFT_inv}
-    设$x[n]$是长为$N$的离散信号，其离散傅里叶变换为$X[k]$，则$x[n]$可以由$X[k]$通过离散傅里叶逆变换还原：
+    设$x[n]$是长为$N$的离散信号，其离散傅里叶变换为$X[k]$，则$x[n]$可以由$X[k]$通过离散傅里叶逆变换(IDFT)还原：
     \[x[n]=\mathrm{DFT}^{-1}(X[k])=\frac{1}{N}\sum_{k=0}^{N-1}X[k]W_N^{-kn},\quad n=0,1,\dots,N-1\]
 \end{theorem}
 
-进一步，对于离散周期信号，其周期起点任意选取，都不会影响离散傅里叶变换及其逆变换的结果，在此意义下，离散周期信号的向量表示不唯一。
-\begin{definition}[$(\mathcal{P} ,\mathcal{Q} )$-DFT]
-    设$x[n]$是以$N$为周期的离散信号，$\mathcal{P} ,\mathcal{Q} $为任意的$N$个连续整数构成的指标集，即
-    \[\mathcal{P} =\{p,p+1,\cdots,p+N-1\},\quad \mathcal{Q} =\{q,q+1,\cdots,q+N-1\}\]
-    则$x[n]$的$(\mathcal{P} ,\mathcal{Q} )-DFT$定义为
-    \begin{align*}
-    X_{\mathcal{P} ,\mathcal{Q} }[k]&=\sum_{n\in\mathcal{P} }x[n]W_N^{kn},\quad k\in\mathcal{Q}
-    \end{align*}
-\end{definition}
-\begin{proposition}
-    $(\mathcal{P} ,\mathcal{Q} )$-DFT的定义不依赖于$\mathcal{P} ,\mathcal{Q} $的选取，即
-    \[X_{\mathcal{P} ,\mathcal{Q} }[k]=X[k],\quad \forall \mathcal{P} ,\mathcal{Q} \]
-\end{proposition}
-\begin{proof}
-    记$p=rN+s$，则$\forall k\in\mathbb{Z}$，有\begin{align*}
-    X_{\mathcal{P} ,\mathcal{Q} }[k]&=\sum_{n\in\mathcal{P} }x[n]W_N^{kn}\\
-    &=\sum_{m=p}^{p+N-1}x[m]W_N^{km}\\
-    &=\sum_{m=0}^{N-1}x[m+s]W_N^{k(m+s)}\\
-    &=\sum_{m=s}^{N-1}x[m]W_N^{km}+\sum_{m=N}^{N+s-1}x[m]W_N^{km}\\
-    &=\sum_{m=s}^{N-1}x[m]W_N^{km}+\sum_{m=0}^{s-1}x[m]W_N^{km}\\
-    &=\sum_{m=0}^{N-1}x[m]W_N^{km}\\
-    &=X[k]
-    \end{align*}
-    限制$k\in\mathcal{Q} $即得$X_{\mathcal{P} ,\mathcal{Q} }[k]=X[k]$。
-\end{proof}
-
 \begin{example}
-    设$\mathbf{x}=[1,2,3,4]^T$，求其离散傅里叶变换。\\
+    设$\mathbf{x}=[1,2,3,4]^T$，求其DFT。\\
     解：由定义，
     \begin{align*}
         \begin{bmatrix}
@@ -143,12 +117,39 @@ $$\mathcal{F} \mathcal{F} ^H=N\cdot I$$
     \end{align*}
 \end{example}
 
+对于离散周期信号，其周期起点任意选取，都不会影响DFT及IDFT的结果。
+\begin{definition}[$(\mathcal{P} ,\mathcal{Q} )$-DFT]
+    设$x[n]$是以$N$为周期的离散信号，$\mathcal{P} ,\mathcal{Q} $为任意的$N$个连续整数构成的指标集，即
+    \[\mathcal{P} =\{p,p+1,\cdots,p+N-1\},\quad \mathcal{Q} =\{q,q+1,\cdots,q+N-1\}\]
+    则$x[n]$的$(\mathcal{P} ,\mathcal{Q} )-DFT$定义为
+    \begin{align*}
+    X_{\mathcal{P} ,\mathcal{Q} }[k]&=\sum_{n\in\mathcal{P} }x[n]W_N^{kn},\quad k\in\mathcal{Q}
+    \end{align*}
+\end{definition}
+\begin{proposition}
+    $(\mathcal{P} ,\mathcal{Q} )$-DFT的定义不依赖于$\mathcal{P} ,\mathcal{Q} $的选取，即
+    \[X_{\mathcal{P} ,\mathcal{Q} }[k]=X[k],\quad \forall \mathcal{P} ,\mathcal{Q} \]
+\end{proposition}
+\begin{proof}
+    记$p=rN+s$，则$\forall k\in\mathbb{Z}$，有\begin{align*}
+    X_{\mathcal{P} ,\mathcal{Q} }[k]&=\sum_{n\in\mathcal{P} }x[n]W_N^{kn}\\
+    &=\sum_{m=p}^{p+N-1}x[m]W_N^{km}\\
+    &=\sum_{m=0}^{N-1}x[m+s]W_N^{k(m+s)}\\
+    &=\sum_{m=s}^{N-1}x[m]W_N^{km}+\sum_{m=N}^{N+s-1}x[m]W_N^{km}\\
+    &=\sum_{m=s}^{N-1}x[m]W_N^{km}+\sum_{m=0}^{s-1}x[m]W_N^{km}\\
+    &=\sum_{m=0}^{N-1}x[m]W_N^{km}\\
+    &=X[k]
+    \end{align*}
+    限制$k\in\mathcal{Q} $即得$X_{\mathcal{P} ,\mathcal{Q} }[k]=X[k]$。
+\end{proof}
+
+在此意义下，离散周期信号的向量表示不唯一，我们约定：离散周期信号对应的向量总是以$n=0$时刻的值作为第一个元素。
+
 \subsection{离散傅里叶变换的运算性质}\label{sub:property_of_DFT}
 
-离散傅里叶变换的运算性质列举如下：
 \begin{proposition}[离散傅里叶变换的运算性质]
     \label{prop:DFT_operation}
-    设$x[n],y[n]$是周期为$N$的离散信号，其离散傅里叶变换分别为$X[k],Y[k]$，则有：\begin{itemize}
+    设$x[n],y[n]$是周期为$N$的离散信号，其DFT分别为$X[k],Y[k]$，则有：\begin{itemize}
         \item 线性性：$\forall a,b\in\mathbb{C}$，有
     \[a x[n]+b y[n]\xleftrightarrow{\mathrm{DFT}} a X[k]+b Y[k]\]
         \item 周期性：$X[k+N]=X[k],Y[k+N]=Y[k]$为周期为$N$的离散信号
@@ -168,7 +169,7 @@ $$\mathcal{F} \mathcal{F} ^H=N\cdot I$$
 
 根据离散傅里叶变换的周期性，时域和频域都是周期的，下面就来表述和验证卷积和定理：
 \begin{theorem}[离散傅里叶变换的卷积和定理]\label{thm:DFT_conv}
-    设$x[n],y[n]$是周期为$N$的离散信号，其离散傅里叶变换分别为$X[k],Y[k]$，则有
+    设$x[n],y[n]$是周期为$N$的离散信号，其DFT分别为$X[k],Y[k]$，则有
     \[(x*y)[n]\xleftrightarrow{\mathrm{DFT}}X[k]Y[k]\]
     \[x[n]y[n]\xleftrightarrow{\mathrm{DFT}}\frac{1}{N}(X * Y)[k]\]
 \end{theorem}
@@ -208,13 +209,13 @@ $$\mathcal{F} \mathcal{F} ^H=N\cdot I$$
 \begin{proposition}
     设$x[n]$是周期为$N$的离散信号，则有
     \begin{align*}
-        x[n]\boldsymbol{\delta}_k[n]&=x[k]\boldsymbol{\delta}_k[n]\\
-        x[n]*\boldsymbol{\delta}_k[n]&=x[n-k]
+        &x[n]\boldsymbol{\delta}_k[n]=x[k]\boldsymbol{\delta}_k[n]\\
+        &x[n]*\boldsymbol{\delta}_k[n]=x[n-k]
     \end{align*}
 \end{proposition}
 
 \begin{definition}[离散信号的反转]
-    将离散信号$x[n]$的反转信号$x[-n]$记为$x^-[n]$。特别地，将离散周期信号的反转信号写成向量形式，有：
+    将离散信号$x[n]$的反转信号$x[-n]$记为$x^-[n]$。将离散周期信号的反转信号写成向量形式，有：
     \begin{align*}
     \textbf{x}^-&=\begin{bmatrix}
 x[0]  \\
@@ -226,12 +227,12 @@ x[1]
 \end{bmatrix}\end{align*}
 \end{definition}
 
-类似于连续信号的傅里叶变换，离散傅里叶变换的原信号与变换域信号都是周期的，此时可以研究离散傅里叶变换的对偶性。可以观察到卷积和定理与角频率形式的傅里叶变换的卷积定理类似，因此可以仿照角频率形式的傅里叶变换的对偶性写出离散傅里叶变换的对偶性的表述：
+类似于连续信号的傅里叶变换，DFT的原信号与变换域信号都是周期的，此时可以研究DFT的对偶性。可以观察到卷积和定理与角频率形式的傅里叶变换的卷积定理类似，因此可以仿照角频率形式的傅里叶变换的对偶性写出DFT的对偶性的表述：
 \begin{proposition}[离散傅里叶变换的对偶性]\label{prop:DFT_dual}
-    设$x[n]$是周期为$N$的离散信号，其离散傅里叶变换为$X[k]$，则有
+    设$x[n]$是周期为$N$的离散信号，其DFT为$X[k]$，则有
     \begin{align*}
         &\mathrm{DFT}(x^-)[k]=X^-[k]=N\cdot\mathrm{DFT}^{-1}(x)[k]\\
-        &\mathrm{DFT}\left(\mathrm{DFT}x\right)[n]=N x^- [n]
+        &\mathrm{DFT}\left(\mathrm{DFT}(x)\right)[n]=N x^- [n]
     \end{align*}
     如果$x[n]$是实信号，则有
     \begin{align*}
@@ -245,10 +246,10 @@ x[1]
         &=\sum_{n=0}^{N-1}x[-n]W_N^{kn}\\
         &=\sum_{m=0}^{N-1}x[m]W_N^{-km}&(m=-n)\\
         &=N\cdot\mathrm{DFT}^{-1}(x)[k]\\
-        \mathrm{DFT}\left(\mathrm{DFT}x\right)[n]&=\sum_{k=0}^{N-1}X[k]W_N^{kn}\\
+        \mathrm{DFT}\left(\mathrm{DFT}(x)\right)[n]&=\sum_{k=0}^{N-1}X[k]W_N^{kn}\\
         &=\sum_{k=0}^{N-1}\left(\sum_{m=0}^{N-1}x[m]W_N^{km}\right)W_N^{kn}\\
         &=\sum_{m=0}^{N-1}x[m]\left(\sum_{k=0}^{N-1}W_N^{k(m+n)}\right)\\
-        &=\sum_{m=0}^{N-1}x[m]\shah_N[m+n]\\
+        &=N\sum_{m=0}^{N-1}x[m]\shah_N[m+n]\\
         &=N x^- [n]
     \end{align*}
 
@@ -261,7 +262,7 @@ x[1]
     \end{align*}
 \end{proof}
 
-另外，离散傅里叶变换是一种\textbf{正交变换}。以$\mathcal{F} _N$表示周期为$N$的离散傅里叶变换对应的矩阵，则$\mathcal{F} _N$是正交矩阵，但不是单位正交矩阵：
+另外，DFT是一种\textbf{正交变换}。以$\mathcal{F} _N$表示周期为$N$的离散傅里叶变换对应的矩阵，则$\mathcal{F} _N$是正交矩阵，但不是单位正交矩阵：
 \begin{align*}
 \mathcal{F}_N \mathcal{F}_N^H = N\cdot I_N
 \end{align*}
@@ -269,9 +270,9 @@ x[1]
 \begin{align*}
     \forall \mathbf{x,y}\in\mathbb{C}^N,\quad \mathbf{x}\cdot\mathbf{y}&=\frac{1}{N}\mathcal{F} _N \mathbf{x}\cdot\mathcal{F} _N \mathbf{y}
 \end{align*}
-由此可得离散傅里叶变换的帕塞瓦尔定理：
+由此可得DFT的帕塞瓦尔定理：
 \begin{theorem}[离散傅里叶变换的帕塞瓦尔定理]
-    设$x[n],y[n]$是长为$N$的离散信号，其离散傅里叶变换分别为$X[k],Y[k]$，则有
+    设$x[n],y[n]$是长为$N$的离散信号，其DFT分别为$X[k],Y[k]$，则有
     \[\sum_{n=0}^{N-1}x[n]\overline{y[n]}=\frac{1}{N}\sum_{k=0}^{N-1}X[k]\overline{Y[k]}\]
     特别地，当$x[n]=y[n]$时，有
     \[\sum_{n=0}^{N-1}|x[n]|^2=\frac{1}{N}\sum_{k=0}^{N-1}|X[k]|^2\]
@@ -282,14 +283,14 @@ x[1]
 \subsubsection{离散傅里叶变换可以看作是傅里叶级数展开的离散版本}
 
 对于以$T$为周期的周期信号$f(t)\in L^2([0,T])$，记其傅里叶系数为$c_k$，如果$f(t)$连续，则有
-\[f(t)=\sum_{k=-\infty}^{\infty}c_k \mathrm{e}^{\mathrm{i}\frac{2\pi}{T}kt}\]
+\[f(t)=\sum_{k=-\infty}^{\infty}c_k \mathrm{e}^{\mathrm{i}k\omega t}=\sum_{k=-\infty}^{\infty}c_k \mathrm{e}^{\mathrm{i}k\frac{2\pi}{T}t}\]
 
 特别地，在一个周期内取$N$个等间隔点作为采样点，所得离散信号为
 \[x[n]=f\left(\frac{nT}{N}\right),\quad n=0,1,\dots,N-1\]
 
 对$f(t)$在采样点处的傅里叶级数进行分组求和，得到
 \begin{align*}
-    x[n]=f\left(\frac{nT}{N}\right)&=\sum_{k=-\infty}^{\infty}c_k \mathrm{e}^{\mathrm{i}\frac{2\pi}{T}kn\frac{T}{N}}\\
+    x[n]=f\left(\frac{nT}{N}\right)&=\sum_{k=-\infty}^{\infty}c_k \mathrm{e}^{\mathrm{i}k\frac{2\pi}{T}\frac{nT}{N}}\\
     &=\sum_{k=-\infty}^{\infty}c_k W_N^{-kn}\\
     &=\sum_{m=-\infty}^{\infty}\sum_{k=0}^{N-1}c_{k+mN} W_N^{-(k+mN)n}\\
     &=\sum_{k=0}^{N-1}\left(\sum_{m=-\infty}^{\infty}c_{k+mN}\right)W_N^{-kn}
@@ -302,16 +303,16 @@ x[1]
 
 \subsubsection{离散傅里叶变换可以看作离散时间傅里叶变换在时域上周期化、在频域上采样的结果}
 
-设$x[n]$仅在$0\leq n\leq N-1$的范围内非零，它的离散时间傅里叶变换为
+设$x[n]$仅在$0\leq n\leq N-1$的范围内非零，它的DTFT为
 \[X(\mathrm{e}^{\mathrm{i}\Omega})=\sum_{n=0}^{N-1}x[n]\mathrm{e}^{-\mathrm{i}\Omega n}\]
 
-将$x[n]$以$N$为周期进行周期化，得到周期为$N$的离散信号$\tilde{x}[n]$，则$\tilde{x}[n]$的离散时间傅里叶变换为
+将$x[n]$以$N$为周期进行周期化，得到周期为$N$的离散信号$\tilde{x}[n]$，则$\tilde{x}[n]$的DTFT为
 \begin{align*}
     \tilde{X}(\mathrm{e}^{\mathrm{i}\Omega})&=\sum_{n=-\infty}^{\infty}\tilde{x}[n]\mathrm{e}^{-\mathrm{i}\Omega n}\\
     &=\sum_{m=-\infty}^{\infty}\sum_{n=0}^{N-1}x[n]\mathrm{e}^{-\mathrm{i}\Omega (n+mN)}\\
     &=\left(\sum_{m=-\infty}^{\infty}\mathrm{e}^{-\mathrm{i}\Omega mN}\right)\left(\sum_{n=0}^{N-1}x[n]\mathrm{e}^{-\mathrm{i}\Omega n}\right)
 \end{align*}
-左侧括号内是狄拉克梳状分布的傅里叶级数形式，通过（角频率形式的）傅里叶变换可以推导出它的等价形式。由分布的傅里叶变换的连续性（\cref{thm:distribution_fourier_continuous}），有：
+左侧括号内是狄拉克梳状分布的傅里叶级数形式（类似\cref{def:shah_fourier_series}），通过（角频率形式的）傅里叶变换可以推导出它的等价形式。由分布的傅里叶变换的连续性（\cref{thm:distribution_fourier_continuous}），有：
 \begin{align*}
     \mathcal{F}\left[\sum_{m=-\infty}^{\infty}\mathrm{e}^{-\mathrm{i}\Omega mN}\right]&=\sum_{m=-\infty}^{\infty}\mathcal{F}\left[\mathrm{e}^{-\mathrm{i}\Omega mN}\right]\\
     &=2\pi\sum_{m=-\infty}^{\infty}\delta_{-mN}\\
@@ -326,42 +327,68 @@ x[1]
 
 将$X(\mathrm{e}^{\mathrm{i}\Omega})$与$\shah_{2\pi/N}$相乘，相当于在$\Omega$轴上以$2\pi/N$为间隔进行采样，在点$\Omega_k=2\pi k/N$处，得到的样值为
 $$\sum_{n=0}^{N-1}x[n]\mathrm{e}^{-\mathrm{i}\Omega_k n}=\sum_{n=0}^{N-1}x[n]W_N^{-kn}$$
-这正是周期离散信号$\tilde{x}[n]$的离散傅里叶变换的值$X[k]$。
+这正是周期离散信号$\tilde{x}[n]$的DFT的值$X[k]$。
 
-结合离散傅里叶反演公式可知：对于长为$N$的离散信号，只要给定了离散时间傅里叶变换在$N$个等间隔点处的取值（这相当于对离散时间傅里叶变换进行理想采样），就可以完全还原出原信号。
+结合离散傅里叶反演公式可知：对于长为$N$的离散信号，只要给定了DTFT在$N$个等间隔点处的取值（这相当于对DTFT进行理想采样），就可以完全还原出原信号。
 
-这正是“\textbf{时域周期化，频域采样}”的观点在离散时间傅里叶变换上的体现。
+这正是“\textbf{时域周期化，频域采样}”的观点在DTFT上的体现。
 
 如果由这个长为$N$的离散信号$x[n]$，定义一个长为$2N$的离散信号：
 $$y[n]=\begin{cases}
     x[n], & 0 \le n \le N-1 \\
     0, & N \le n \le 2N-1
 \end{cases}$$
-则$x[n]$与$y[n]$的离散时间傅里叶变换是相同的。作为周期信号来说，它们的离散傅里叶变换满足关系：
+则$x[n]$与$y[n]$的DTFT是相同的。带入DFT的定义，容易验证：
 $$Y[2k]=X[k],\quad \quad \forall k\in \{0,1,\dots,N-1\}$$
 
-也就是说，在频域上，$y[n]$的离散傅里叶变换$Y[k]$是$x[n]$的离散傅里叶变换$X[k]$的插值版本，$Y[k]$相当于以两倍于$X[k]$的采样频率，对离散时间傅里叶变换进行采样的结果：
+也就是说，在频域上，$Y[k]$相当于以两倍于$X[k]$的采样频率，对DTFT进行采样的结果，如下图所示：
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{discrete_sample}
     \caption{离散傅里叶变换与离散时间傅里叶变换的关系}
 \end{figure}
 
-上图中，$x[n]$的长度为8，$y[n]$的长度为16。随着采样点编号从小到大，所对应的数字角频率依次覆盖$0\to\pi\to2\pi$。因此，$|X(\mathrm{e}^{\mathrm{i}\Omega})|$在区间$[0,\pi]$上的曲线，对应于$|X[k]|$与$|Y[k]|$左半部分的灰色包络；而$|X(\mathrm{e}^{\mathrm{i}\Omega})|$在区间$[\pi,2\pi]$上的曲线，则对应于两者右半部分的灰色包络。
+上图中，$x[n]$的长度为8，$y[n]$的长度为16。随着采样点编号从小到大，所对应的数字角频率依次覆盖$0\to\pi\to2\pi$。因此，$|X(\mathrm{e}^{\mathrm{i}\Omega})|$在区间$[0,\pi]$上的曲线，对应于$|X[k]|$与$|Y[k]|$左半部分的灰色包络；而$|X(\mathrm{e}^{\mathrm{i}\Omega})|$在区间$[-\pi,0]$上的曲线，则对应于两者右半部分的灰色包络。
 
-更一般地，通过延长$x[n]$并在新坐标点处取0，可以对$x[n]$的离散时间傅里叶变换进行任意多采样点的等间隔采样，这就是\textbf{零填充} (Zero Padding)的思想。
+更一般地，通过延长$x[n]$并在新坐标点处取0，可以对$x[n]$的DTFT进行任意多采样点的等间隔采样，这就是\textbf{零填充} (Zero Padding)的思想。在需要区分DFT所针对的离散信号长度的情况下，我们使用\textbf{DFT点数}的概念，例如$X[k]$是$N$点DFT的结果，而$Y[k]$是$2N$点DFT的结果。
 
 \subsubsection{离散傅里叶变换是连续傅里叶变换的逼近}
 
-假设$f(t)$是在时域、频域上同时紧支的连续信号（在\refsub{time_freq_limit}中我们会看到，这样的信号是不存在的，但近似满足这种关系的信号却很多），对$f(t)$进行理想采样时，将得到一个有限长离散信号$x[n]$，在采样间隔趋向于0时，$x[n]$就能很好地还原$f(t)$的特征。下面说明，对$x[n]$的离散傅里叶变换$X[k]$在频域上也能很好地还原$f(t)$的特征。
+假设$f(t)$是在时域、频域上同时紧支的连续信号（\cref{thm:time_freq_limit}表明，这样的信号是不存在的，但近似满足这种关系的信号却很多），对$f(t)$进行理想采样时，将得到一个有限长离散信号$x[n]$\footnote{工程上，只有有限长的数字信号才能够存储和处理，但在信号与系统课程中，我们暂时不考虑量化带来的影响。}，在采样间隔趋向于0时，$x[n]$就能很好地还原$f(t)$的特征。下面说明，对$x[n]$的离散傅里叶变换$X[k]$在频域上也能很好地还原$f(t)$的特征。
 
 简洁起见，假设$\mathrm{supp}(f)\subset[0,L]$，$\mathrm{supp}(\mathcal{F} f)\subset[-\omega_m,\omega_m]$，取$N$个等间隔点作为采样点，即
 \[x[n]=f\left(\frac{nL}{N}\right),\quad n=0,1,\dots,N-1\]
 
-采样间隔充分小时，采样频率高于奈奎斯特频率，即频域上周期化时不会产生交叠。因此，离散时间傅里叶变换$X(\mathrm{e}^{\mathrm{i}\Omega})$在$(-\pi,\pi]$范围内就是原信号的傅里叶变换$\mathcal{F} f(\omega)$在$(-\pi/T,\pi/T]$范围内的伸缩，即
-$$X(\mathrm{e}^{\mathrm{i}\Omega})=\mathcal{F} f\left(\frac{\Omega}{T}\right),\quad \Omega\in(-\pi,\pi]$$
+采样间隔充分小时，采样频率高于奈奎斯特频率，即频域上周期化时不会产生交叠。因此，离散时间傅里叶变换$X(\mathrm{e}^{\mathrm{i}\Omega})$在$[-\pi,\pi]$范围内就是原信号的傅里叶变换$\mathcal{F} f(\omega)$在$[-\pi/T,\pi/T]$范围内的伸缩，即
+$$X(\mathrm{e}^{\mathrm{i}\Omega})=\mathcal{F} f\left(\frac{\Omega}{T}\right),\quad \Omega\in[-\pi,\pi]$$
 
-因此，离散时间傅里叶变换能够完全还原出原信号的频域特征。由于离散傅里叶变换是离散时间傅里叶变换在频域上采样的结果，通过零填充的方式，总能使得离散傅里叶变换的频域采样点足够密集，从而很好地还原出原信号的频域特征。
+因此，DTFT能够完全还原出原信号的频域特征。由于离散傅里叶变换是DTFT在频域上采样的结果，通过零填充的方式，总能使得离散傅里叶变换的频域采样点足够密集，从而很好地还原出原信号的频域特征。
+
+\subsubsection{频谱泄露}
+
+对于时域上无限长的带限信号，例如$f(t)=\cos(\omega_0 t)$，我们希望通过DFT对其进行频谱分析，此时应该观察到模拟角频域上$\omega=\pm\omega_0$处的两根谱线，在数字角频域作为模拟角频域的伸缩也应具有同样的形状，然而在使用DFT对其进行模拟时，效果可能很不好：
+
+\begin{example}
+    使用DFT对$f(t)=\cos(0.3\pi t)$进行频谱分析，则最高模拟角频率为$0.3\pi$，以$f_s=1$s进行采样不会发生混叠，所得离散信号为
+    $$x[n]=f\left(\frac{n}{f_s}\right)=\cos(0.3\pi n)$$
+    $x[n]$是以$20$为周期的离散信号，我们提高DFT的点数$N$至$200$以便观察，所得结果如下图：
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.6\textwidth]{spectral_leakage_1}
+        \caption{200点离散傅里叶变换}
+    \end{figure}
+    可以看到两条清晰的线谱。
+
+    下一小节中，我们将介绍DFT的快速算法FFT，它对$N$为2的幂次的情况表现最好也最简单。为此，我们尝试提高DFT的点数$N$至256，所得结果如下图：
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.6\textwidth]{spectral_leakage}
+        \caption{256点离散傅里叶变换}
+    \end{figure}
+    提高了DFT的点数，频谱反而出现了多余的谱线，这就是\textbf{频谱泄露}现象。尽管此时还能看到清晰的峰值，但当信号中有频率相近的成分时，频谱泄露就是不可接受的了。
+\end{example}
+
+细心的读者或许已经发现，当采用$256$点DFT时，$256$并不是$x[n]$的周期，这样进行DFT是不合理的，这就是发生频谱泄露的本质原因，工程上往往容易忽略这一点。
 
 \subsection{快速傅里叶变换}\label{sub:FFT}
 

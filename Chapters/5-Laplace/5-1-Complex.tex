@@ -171,7 +171,7 @@ $$f_n(z)=1/z^n,n\in\mathbb{Z}$$
 \end{align*}
 
 为了验证柯西积分公式
-\[f(z)=\frac{1}{2\pi \mathrm{i}}\oint_{\gamma}\frac{f(\zeta)}{\zeta-z}\,d\zeta,\quad \gamma:t\mapsto z+re^{\mathrm{i}t},t\in[0,2\pi]\]将$f$展开为$z$处的洛朗级数$f(\zeta)=\sum_{n=0}^{\infty}c_n (\zeta-z)^n$，由于洛朗级数在闭曲线$\gamma$上一致收敛，可以交换求和与积分的次序，得到
+\[f(z)=\frac{1}{2\pi \mathrm{i}}\oint_{\gamma}\frac{f(\zeta)}{\zeta-z}\,d\zeta,\quad \gamma:t\mapsto z+r\e^{\mathrm{i}t},t\in[0,2\pi]\]将$f$展开为$z$处的洛朗级数$f(\zeta)=\sum_{n=0}^{\infty}c_n (\zeta-z)^n$，由于洛朗级数在闭曲线$\gamma$上一致收敛，可以交换求和与积分的次序，得到
 \begin{align*}
     \oint_{\gamma}\frac{f(\zeta)}{\zeta-z}\,dz&=\oint_{\gamma}\sum_{n=0}^{\infty}c_n (\zeta-z)^{n-1}\,d\zeta\\
     &=\sum_{n=0}^{\infty}c_n\oint_{\gamma}(\zeta-z)^{n-1}\,d\zeta\\
@@ -179,12 +179,12 @@ $$f_n(z)=1/z^n,n\in\mathbb{Z}$$
 \end{align*}
 
 多数情况下，洛朗级数的负幂次项并不真正构成级数，即负幂次项仅仅由有限项构成，因此内半径必为0，即只要外半径$R>0$，洛朗级数就在展开点的去心邻域内收敛。例如$f(z)=1/z$在0处的展开式就是它本身，收敛域为$\mathcal{A}_0(0,\infty)=\mathbb{C}^*$。根据负幂次项是否存在、是否构成级数，我们可以将孤立奇点分为三类：
-\begin{definition}[孤立奇点的分类]
+\begin{definition}[孤立奇点的分类]\label{def:singular_point}
     设$f$在开集$U\in\mathbb{C}$上全纯，$a$为$f$的孤立奇点，$f$在$a$处的洛朗级数展开式为
     \[f(z)=\sum_{n=-\infty}^{\infty}c_n(z-a)^n\]
     \begin{enumerate}
         \item 如果$c_n=0,\forall n<0$，则称$a$为$f$的\textbf{可去奇点}(removable singularity)；
-        \item 如果$\exists m\in\mathbb{N}_+$使得$c_{-1}=c_{-2}=\cdots=c_{-m}=0,c_{-(m+1)}\neq 0$，则称$a$为$f$的\textbf{m阶极点}(pole of order m)，$m$阶极点意味着$f(z)$在$a$处趋于无穷的速度与$1/(z-a)^m$同阶。
+        \item 如果$\exists m\in\mathbb{N}_+$使得$c_{-m}\neq 0,c_{-n}=0,\forall n>m$，则称$a$为$f$的\textbf{m阶极点}(pole of order m)，$m$阶极点意味着$f(z)$在$a$处趋于无穷的速度与$1/(z-a)^m$同阶。
         其中$m=1$时，称$a$为$f$的\textbf{简单极点}(simple pole)；
         \item 如果$c_n\neq 0$对无穷多个负整数$n$成立，则称$a$为$f$的\textbf{本性奇点}(essential singularity)。
     \end{enumerate}

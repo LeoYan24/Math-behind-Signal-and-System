@@ -156,11 +156,13 @@ f(t)&=\sum_{n=-\infty}^{\infty}c_n \mathrm{e}^{\mathrm{i}\omega t}\\
     }
     如果$f$是实函数，则$f=\overline{f}$，因此
     \lr{
-        &\mathcal{F} f^-(\xi)=\int_{-\infty}^{\infty}f(t)\mathrm{e}^{2\pi \mathrm{i} \xi t}\,dt\\
-        &\ =\overline{\int_{-\infty}^{\infty}f(t)\mathrm{e}^{-2\pi \mathrm{i} \xi t}\,dt}=\overline{\mathcal{F} f(\xi)}
+        \mathcal{F} f^-(\xi)&=\int_{-\infty}^{\infty}f(t)\mathrm{e}^{2\pi \mathrm{i} \xi t}\,dt\\
+        &=\overline{\int_{-\infty}^{\infty}f(t)\mathrm{e}^{-2\pi \mathrm{i} \xi t}\,dt}\\
+        &=\overline{\mathcal{F} f(\xi)}
     }{
-        &\mathcal{F} f^-(\omega)=\int_{-\infty}^{\infty}f(t)\mathrm{e}^{\mathrm{i} \omega t}\,dt\\
-        &\ =\overline{\int_{-\infty}^{\infty}f(t)\mathrm{e}^{-\mathrm{i} \omega t}\,dt}=\overline{\mathcal{F} f(\omega)}
+        \mathcal{F} f^-(\omega)&=\int_{-\infty}^{\infty}f(t)\mathrm{e}^{\mathrm{i} \omega t}\,dt\\
+        &\ =\overline{\int_{-\infty}^{\infty}f(t)\mathrm{e}^{-\mathrm{i} \omega t}\,dt}\\
+        &=\overline{\mathcal{F} f(\omega)}
     }
 \end{proof}
 
@@ -206,12 +208,12 @@ f(t)&=\sum_{n=-\infty}^{\infty}c_n \mathrm{e}^{\mathrm{i}\omega t}\\
     \ding{173}频移性质
     \begin{lralign}
         \mathcal{F} f(\xi-b)&=\int_{-\infty}^{\infty}f(t)\mathrm{e}^{-2\pi \mathrm{i}(\xi-b)t}\,dt\\
-    &=\int_{-\infty}^{\infty}\left(f(t)\mathrm{e}^{2\pi ibt}\right)\mathrm{e}^{-2\pi \mathrm{i}\xi t}\,dt\\
-    &=\mathcal{F} \left[f(t)\mathrm{e}^{2\pi ibt}\right](\xi)
+    &=\int_{-\infty}^{\infty}\left(f(t)\mathrm{e}^{2\pi \im bt}\right)\mathrm{e}^{-2\pi \mathrm{i}\xi t}\,dt\\
+    &=\mathcal{F} \left[f(t)\mathrm{e}^{2\pi \im bt}\right](\xi)
     \switch
     \mathcal{F} f(\omega-b)&=\int_{-\infty}^{\infty}f(t)\mathrm{e}^{-\mathrm{i}(\omega-b)t}\,dt\\
-    &=\int_{-\infty}^{\infty}\left(f(t)\mathrm{e}^{ibt}\right)\mathrm{e}^{-\mathrm{i}\omega t}\,dt\\
-    &=\mathcal{F} \left[f(t)\mathrm{e}^{ibt}\right](\omega)
+    &=\int_{-\infty}^{\infty}\left(f(t)\mathrm{e}^{\im bt}\right)\mathrm{e}^{-\mathrm{i}\omega t}\,dt\\
+    &=\mathcal{F} \left[f(t)\mathrm{e}^{\im bt}\right](\omega)
     \end{lralign}
 \end{proof}
 
@@ -227,19 +229,19 @@ f(t)&=\sum_{n=-\infty}^{\infty}c_n \mathrm{e}^{\mathrm{i}\omega t}\\
 \end{theorem}
 \begin{proof}
     \begin{lralign}
-        \mathcal{F} [f(at)](\xi)&=\int_{-\infty}^{\infty}f(at)\mathrm{e}^{2\pi i \xi t}\,dt\\
-        &=\frac{1}{|a|}\int_{-\infty}^{\infty}f(t)\mathrm{e}^{\frac{2\pi i \xi t}{a}}\,dt\\
+        \mathcal{F} [f(at)](\xi)&=\int_{-\infty}^{\infty}f(at)\mathrm{e}^{2\pi \im  \xi t}\,dt\\
+        &=\frac{1}{|a|}\int_{-\infty}^{\infty}f(t)\mathrm{e}^{\frac{2\pi \im  \xi t}{a}}\,dt\\
         &=\frac{1}{|a|}\mathcal{F} f\left(\frac{\xi}{a}\right)
     \switch
-        \mathcal{F} [f(at)](\omega)&=\int_{-\infty}^{\infty}f(at)\mathrm{e}^{i \omega t}\,dt\\
-        &=\frac{1}{|a|}\int_{-\infty}^{\infty}f(t)\mathrm{e}^{\frac{i \omega t}{a}}\,dt\\
+        \mathcal{F} [f(at)](\omega)&=\int_{-\infty}^{\infty}f(at)\mathrm{e}^{\im \omega t}\,dt\\
+        &=\frac{1}{|a|}\int_{-\infty}^{\infty}f(t)\mathrm{e}^{\frac{\im  \omega t}{a}}\,dt\\
         &=\frac{1}{|a|}\mathcal{F} f\left(\frac{\omega}{a}\right)
     \end{lralign}
     注意变量代换时，如果$a<0$，积分上下限也会改变，这正是绝对值的来源，对此有疑惑的读者可以自行分情况验算。频域的伸缩定理仅仅是时域伸缩定理的直接推论。
 \end{proof}
 
 信号反转可看作a=-1的特例。可以认为两种频率下的傅里叶变换是通过伸缩得到的，即
-\[2\pi\xi=\omega,\textcolor{blue}{\mathcal{F}}(2\pi\xi)=\textcolor{red}{\mathcal{F}}(\omega)\]
+\[2\pi\xi=\omega,\quad\textcolor{blue}{\mathcal{F}}(2\pi\xi)=\textcolor{red}{\mathcal{F}}(\omega)\]
 
 $a>1$，时域收缩，频域舒张、变矮；$0<a<1$，时域舒张，频域收缩、变高；$a<0$，时域和频域都额外做一次反转。
 
@@ -331,7 +333,7 @@ $\evalat{\mathrm{e}^{-2\pi \mathrm{i}\xi t}f(t)}{-\infty}{\infty},\evalat{\mathr
 \subsection{常用信号的傅里叶变换}\label{sub:fourier_of_signal}
 
 \begin{example}[矩形函数]
-在\refsub{tri_exp_series}中讨论了矩形函数$f(t)=E\chi_{[-T/2,T/2]}$的傅里叶级数，并发现它的频谱与采样函数非常相似。现在可以验证，它的傅里叶变换就是某个采样函数：
+在\cref{exmp:rect_FS}中讨论了矩形函数$f(t)=E\chi_{[-T/2,T/2]}$的傅里叶级数，并发现它的频谱与采样函数非常相似。现在可以验证，它的傅里叶变换就是某个采样函数：
 \begin{lralign}
 \mathcal{F} f(\xi)&=\int_{-\infty}^{\infty}f(t)\mathrm{e}^{-2\pi \mathrm{i}\xi t}\,dt\\
 &=E\int_{-\infty}^{\infty}\chi_{[-T/2,T/2]}(t)\mathrm{e}^{-2\pi \mathrm{i}\xi t}\,dt\\
@@ -386,7 +388,7 @@ $\evalat{\mathrm{e}^{-2\pi \mathrm{i}\xi t}f(t)}{-\infty}{\infty},\evalat{\mathr
     以上两个结果都与狄利克雷积分等价。
 \end{proof}
 \begin{example}[狄拉克函数]
-在\refsub{signal}中介绍了狄拉克$\delta$函数，实际上它应该作为一个分布来理解，见\refsub{general_distributions}，不过我们可以从形式上求出它的傅里叶变换。
+狄拉克$\delta$函数（\cref{def:delta}）实际上应该作为一个分布来理解，见\refsub{general_distributions}，不过我们可以从形式上求出它的傅里叶变换。
 \lr{
 \mathcal{F} \delta(\xi)&=\int_{-\infty}^{\infty}\delta(t)\mathrm{e}^{-2\pi \mathrm{i}\xi t}\,dt\\
 &=\int_{-\infty}^{\infty}\delta(t)\,dt=1
@@ -418,29 +420,27 @@ $\evalat{\mathrm{e}^{-2\pi \mathrm{i}\xi t}f(t)}{-\infty}{\infty},\evalat{\mathr
 &\mathcal{F} \left[\mathrm{e}^{\mathrm{i}a t}\right]=2\pi\delta_a
 }
 根据傅里叶变换的微分性质得到：\lr{
-    \mathcal{F} [t^n](\xi)&=\left(\frac{\mathrm{i}}{2\pi}\right)^n \delta^{(n)}(\xi)\\
+    \mathcal{F} [t^n](\xi)&=\left(\frac{\mathrm{i}}{2\pi}\right)^n \delta^{(n)}(\xi)
 }{
-    \mathcal{F} [t^n](\omega)&=2\pi \mathrm{i}^n\delta^{(n)}(\omega)\\
+    \mathcal{F} [t^n](\omega)&=2\pi \mathrm{i}^n\delta^{(n)}(\omega)
 }\end{corollary}
 
 我们还希望从$u'(t)=\delta(t),\mathrm{sgn}'(t)=2\delta(t)$得到单位阶跃函数$u(t)$和符号函数$\mathrm{sgn}(t)$的傅里叶变换，但在考虑$\delta$的不定积分时，必须处理积分常数“C”，它将导致频域中出现$C\delta$或$2\pi C\delta$项。
 
 注意到$\mathrm{sgn}(t)$是奇函数，其傅里叶变换应为纯虚的奇函数，我们可以由此确定它和单位阶跃函数的傅里叶变换中C的值，从而得到正确的结果:
 \begin{corollary}
-    \quad
-    \lr{
-    \mathcal{F} \mathrm{sgn}(\xi)&=\frac{1}{\pi \mathrm{i}\xi}
-}{
-    \mathcal{F} \mathrm{sgn}(\omega)&=\frac{2}{\mathrm{i}\omega}
-}
 \begin{lralign}
+    \mathcal{F} \mathrm{sgn}(\xi)&=\frac{1}{\pi \mathrm{i}\xi}\\
     \mathcal{F} u(\xi)&=\mathcal{F} \left[\frac{1}{2}(\mathrm{sgn}(t)+1)\right]\\
-    &=\frac{1}{2}\left(\delta+\frac{1}{\pi \mathrm{i}\xi}\right)\\
+    &=\frac{1}{2}\left(\delta+\frac{1}{\pi \mathrm{i}\xi}\right)
 \switch
+    \mathcal{F} \mathrm{sgn}(\omega)&=\frac{2}{\mathrm{i}\omega}\\
     \mathcal{F} u(\omega)&=\mathcal{F} \left[\frac{1}{2}(\mathrm{sgn}(t)+1)\right]\\
-    &=\pi\delta+\frac{1}{\mathrm{i}\omega}\\
+    &=\pi\delta+\frac{1}{\mathrm{i}\omega}
 \end{lralign}
 \end{corollary}
+
+作为一个正则分布，可以认为$1/\pi\im\xi$在$\xi=0$处取值为0，这一方面是因为$\sgn(t)$是奇函数，没有直流分量，另一方面是因为傅里叶变换在收敛到分段连续函数时总是收敛到左右极限的平均值。
 
 由傅里叶反演公式可得：%\begin{lralign}
 %    \mathcal{F} \mathcal{F} \mathrm{sgn}&=2\pi \mathrm{sgn}^-=-2\pi \mathrm{sgn}\\
@@ -458,6 +458,8 @@ $\evalat{\mathrm{e}^{-2\pi \mathrm{i}\xi t}f(t)}{-\infty}{\infty},\evalat{\mathr
     \mathcal{F} \left[\frac{1}{t}\right](\omega)&=-\pi \mathrm{i} \sgn(\omega)\\
 }
 \end{corollary}
+
+同理，$-\pi\im\sgn$在$\xi=\omega=0$处的取值为0.
 
 最后，我们来求高斯函数和指数函数的傅里叶变换，它们在信号处理应用广泛，且有许多优美的性质。
 
@@ -494,7 +496,7 @@ $\evalat{\mathrm{e}^{-2\pi \mathrm{i}\xi t}f(t)}{-\infty}{\infty},\evalat{\mathr
 %\end{figure}
 
 \begin{example}[单边指数函数和双边指数函数]
-在\refsub{signal}中我们曾介绍单边指数函数$f(t)=\mathrm{e}^{-at}u(t)$和双边指数函数$g(t)=f(t)+f(-t)$.
+\cref{def:exp}定义了单边指数函数$f(t)=\mathrm{e}^{-at}u(t)$和双边指数函数$g(t)=f(t)+f(-t)$.
 \begin{lralign}
 \mathcal{F} f(\xi)&=\int_{-\infty}^{\infty}f(t)\mathrm{e}^{-2\pi \mathrm{i}\xi t}\,dt\\
 &=\int_{0}^{\infty}\mathrm{e}^{-at}\mathrm{e}^{-2\pi \mathrm{i}\xi t}\,dt\\

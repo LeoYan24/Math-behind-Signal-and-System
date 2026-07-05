@@ -65,7 +65,7 @@
     \[f(t)=E\e^{-\left(t/\tau\right)^2}\]
     $\tau$为衰减速率或时间常数，$\tau$越大，函数值衰减越慢。
 \end{definition}
-\begin{definition}[单位脉冲函数/狄拉克函数]
+\begin{definition}[单位脉冲函数/狄拉克函数]\label{def:delta}
     $$\delta (x)=\begin{cases}
         0      & x\neq 0 \\
         \infty & x=0
@@ -112,7 +112,7 @@
 
 单位阶跃函数的积分为单位斜变信号 (the unit ramp)，导数为狄拉克函数，从直观上这不难理解，在学习\refsub{general_distributions}之后，很容易自行验证它。
 
-\begin{definition}[单边指数函数和双边指数函数]
+\begin{definition}[单边指数函数和双边指数函数]\label{def:exp}
     \begin{align*}
     f(t)=\mathrm{e}^{-at}u(t)=\begin{cases}
         \mathrm{e}^{-at}, & \text{if }t>0 \\
@@ -171,7 +171,7 @@ $E_{\Omega}[n]$这个记号仅在本书中使用，但这样做是值得的—�
 \end{figure}
 
 下面介绍离散信号的伸缩变换：
-$$x[n]\to x[\alpha n],\alpha\in\mathbb{R}$$
+$$x[n]\to x[\alpha n],\quad \alpha\in\mathbb{R}$$
 如果$\alpha\in\mathbb{N}_+$，则伸缩后的信号仍为离散信号，只是遗漏了原信号的一些信息；如果$\alpha=\frac{1}{N},N\in\mathbb{N}_+$，则伸缩后的信号在$N$的倍数以外的点没有定义，我们必须人为规定它们的值，这就是\textbf{插值}。
 
 最简单的处理方式是将这些点全部赋值为0。我们定义：

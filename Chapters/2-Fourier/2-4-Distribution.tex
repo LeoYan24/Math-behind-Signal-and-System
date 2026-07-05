@@ -141,7 +141,7 @@ $\mathcal{F}\varphi$仍然是测试函数。这个测试函数空间正是\textb
 易见$\mathcal{C} \subset \mathcal{S} ,\mathcal{T} \subset\mathcal{D}. $
 
 有了施瓦兹函数类$\mathcal{S} $和缓增分布$\mathcal{T} $，我们就可以定义分布的傅里叶变换，还可以定义有关分布的一系列算子。前文中曾定义分布与函数的乘法和分布的导数，现在认为正则分布是由施瓦兹函数导出的，则显然能够推广到缓增分布，即\begin{align}
-    \left\langle gT,\varphi\right\rangle=\left\langle T,g\varphi\right\rangle,\left\langle T',\varphi\right\rangle=\left\langle T,\varphi'\right\rangle,\quad g\in\mathcal{S} ,T\in\mathcal{T}
+    \left\langle gT,\varphi\right\rangle=\left\langle T,\quad g\varphi\right\rangle,\left\langle T',\varphi\right\rangle=\left\langle T,\varphi'\right\rangle,\quad g\in\mathcal{S} ,T\in\mathcal{T}
 \end{align}
 
 \subsection{分布的运算性质}\label{sub:operation_of_distribution}
@@ -154,7 +154,8 @@ $\mathcal{F}\varphi$仍然是测试函数。这个测试函数空间正是\textb
     \left\langle\mathcal{F}T_f,\varphi\right\rangle&=\int_{-\infty}^{\infty}\mathcal{F}f(x)\varphi(x)\,dx\\
     &=\int_{-\infty}^{\infty}\varphi(x)\,dx\int_{-\infty}^{\infty}f(y)\mathrm{e}^{-2\pi\mathrm{i}xy}\,dy\\
     & =\int_{-\infty}^{\infty}f(y)\,dy\int_{-\infty}^{\infty}\varphi(x)\mathrm{e}^{-2\pi \mathrm{i}xy}\,dx\\
-    & =\int_{-\infty}^{\infty}f(y)\mathcal{F}\varphi(y)\,dy=\left\langle T_f,\mathcal{F}\varphi\right\rangle
+    & =\int_{-\infty}^{\infty}f(y)\mathcal{F}\varphi(y)\,dy\\
+    &=\left\langle T_f,\mathcal{F}\varphi\right\rangle
 \end{align*}
 因此我们定义\begin{definition}[分布的傅里叶变换]
     \begin{align*}
@@ -647,6 +648,7 @@ $$\sigma_a\delta=\delta(ax)=\frac{1}{|a|}\delta(x)$$
     \mathcal{F} (gT)=\frac{1}{2\pi}\mathcal{F} g*\mathcal{F} T
 }
 综上我们得到：\begin{theorem}[分布与函数的卷积定理]
+    \label{thm:distribution_func_conv}
     \quad
     \lr{
     &\mathcal{F} (g*T)=\mathcal{F} g\mathcal{F} T \\

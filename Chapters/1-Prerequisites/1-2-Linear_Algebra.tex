@@ -283,18 +283,18 @@ $\langle \cdot,\cdot\rangle:V\times V\rightarrow \mathbb{C} $，满足\textbf{�
 \begin{definition}[无限维线性空间和基]
     如果一个线性空间V的维数是无限的，就称之为\textbf{无限维线性空间}。\\
 对于V，我们称向量列
-$\lbrace\mathbf{v_i}\rbrace_{i=1}^{\infty}$是V的一组基，如果
+$\lbrace\mathbf{v}_i\rbrace_{i=1}^{\infty}$是V的一组基，如果
 \begin{itemize}
     \item 线性无关性：任取基中的有限个向量，它们是线性无关的
     \item 有限生成性：任取向量$\mathbf{w} \in V$，存在有限个向量
-          $V'=\lbrace\mathbf{v_1,v_2,\dots,v_r}\rbrace\subset V $，$\mathbf{w}$可以用$V'$线性表出
+          $V'=\lbrace\mathbf{v}_1,\mathbf{v}_2,\dots,\mathbf{v}_r\rbrace\subset V $，$\mathbf{w}$可以用$V'$线性表出
 \end{itemize}
 \end{definition}
 这里要求“有限”是为了避免敛散性的问题：例如收敛的级数构成线性空间，如果我们声称取定了一组基（当然是无限的），并考察其中无限个基张成的空间，那么对于构成级数的每一项，均需要考察其敛散性。然而，级数的敛散性自然可以对前有限项不做要求，它们求和很可能不会收敛；从另一个角度来讲，一些更加抽象的线性空间中，也说不清楚基的无限和是否收敛。
 
 \begin{example}
     数列空间$l^2$是所有平方可和数列构成的线性空间，即
-    \[l^2=\left\{x=(x_1,x_2,\ldots)\left|\sum_{i=1}^{\infty}|x_i|^2<\infty\right.\right\}\]
+    \[l^2=\left\{\mathbf{x}=(x_1,x_2,\ldots)\left|\sum_{i=1}^{\infty}|x_i|^2<\infty\right.\right\}\]
     $l^2$空间是行向量（或列向量）的一种推广，其中标准正交基推广为只有一个元素为$1$的数列之集合，但它不构成$l^2$空间的基，因为它不满足有限生成性。
 \end{example}
 \begin{example}
@@ -307,4 +307,4 @@ $\lbrace\mathbf{v_i}\rbrace_{i=1}^{\infty}$是V的一组基，如果
     只要承认选择公理（或左恩引理），无限维线性空间总存在基。
 \end{claim}
 
-在\refsec{Real_Analysis}中，我们将看到更多无穷维线性空间的例子，它们当中很多都是完备的线性赋范空间。寻找函数空间的基是困难的，但在某些情况下，我们可以找到一些特殊的正交函数系作为基函数系，从而将函数展开为这些基函数的线性组合，这就是傅里叶级数展开的基本思想，见\refsub{orthognal}。
+\refsec{Real_Analysis}将给出更多无穷维线性空间的例子，它们当中很多都是完备的线性赋范空间。我们并不总是能够找到函数空间的基，但使用正交函数系作为基函数系是简单且，从而将函数展开为这些基函数的线性组合，这就是傅里叶级数展开的基本思想，见\refsub{orthognal}。
