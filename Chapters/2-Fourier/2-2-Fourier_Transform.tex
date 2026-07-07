@@ -5,7 +5,9 @@
 \subsection{傅里叶变换的引出}\label{sub:introduction_of_fourier}
 定义傅里叶变换的一种动机是从傅里叶级数出发。要从傅里叶级数研究的周期现象转向傅里叶变换研究的非周期现象，自然能够想到在傅里叶级数相关的理论中，令T趋于无穷；另一方面，复指数函数比三角函数更适合作为描述振荡（周期）行为的基本函数。
 
-我们做一个简单的尝试，令$f\in L^2(\mathbb{R})$（关于$L^2$空间的讨论，见\refsub{Lp_space}），$T\to \infty$，则\[c_n=\frac{1}{T}\int_{T}f(t)\mathrm{e}^{-\mathrm{i}k\omega t}\,dt=\frac{1}{T}\int_{T}f(t)\mathrm{e}^{-2\pi \mathrm{i}k\xi t}\,dt\to 0\]这样做变换将丢失f的所有信息，不是我们希望看到的，但很明显，只要给以上公式乘上T，并认为$k\omega$或$k\xi$是自变量，问题就迎刃而解，得到一个很有意思的积分变换，它正是\textbf{傅里叶变换} (Fourier Tansform,FT)。傅里叶本人同样意识到了傅里叶级数向傅里叶变换的过渡，他用同样的方法从形式上得到了傅里叶变换的公式，但我们使用的指数函数其实是后来柯西、泊松等数学家开始使用的，它使得公式具有更加简洁的形式。
+我们做一个简单的尝试，令$f\in L^2(\mathbb{R})$，$T\to \infty$，则
+\[c_n=\frac{1}{T}\int_{T}f(t)\mathrm{e}^{-\mathrm{i}k\omega t}\,dt=\frac{1}{T}\int_{T}f(t)\mathrm{e}^{-2\pi \mathrm{i}k\xi t}\,dt\to 0\]
+这样做变换将丢失$f$的所有信息，不是我们希望看到的，但很明显，只要给以上公式乘上$T$，并认为$k\omega$或$k\xi$是自变量，问题就迎刃而解，得到一个很有意思的积分变换，它正是\textbf{傅里叶变换} (Fourier Tansform,FT)。傅里叶本人同样意识到了傅里叶级数向傅里叶变换的过渡，他用同样的方法从形式上得到了傅里叶变换的公式，但我们使用的指数函数其实是后来柯西、泊松等数学家开始使用的，它使得公式具有更加简洁的形式。
 
 \begin{definition}[傅里叶变换]
     设$f\in L^1(\mathbb{R})$，其傅里叶变换定义为
@@ -19,9 +21,9 @@
     并称之为\textbf{傅里叶变换对}。
 \end{definition}
 
-下面解释“乘T，认为$k\omega$或$k\xi$为自变量”的本质。回顾上一节中的\cref{exmp:rect_FS}，为了体现双边频谱与采样函数的相似性，我们取了一个较为特殊的周期矩形脉冲信号，它的基波角频率应为图中两相邻竖直线间的间隔，即\textbf{谱线间隔}，可见其频率极小、周期极大，与我们研究非周期现象所用到的极限情况$T\to\infty$是一致的，换言之，令$T\to\infty$自动地使“傅里叶系数”在频谱中的间隔变小，\textbf{周期信号趋向非周期信号的过程自动地使离散频谱趋向连续频谱}。这样，乘T就不难理解了，它的作用是“除以$\dfrac{1}{T}$”，$\dfrac{1}{T}$是所在频率成分处小矩形的宽（类似于黎曼积分），换言之，以频率$\xi$为横坐标，\textbf{谱系数}$c_n$是$\dfrac{n}{T}=n\xi$处的小矩形面积，$Tc_n$是f中对应频率成分的含量，可以理解为单位频段内的谱系数，即频谱密度；以角频率$\omega$为横坐标，$c_n$是$\dfrac{2\pi n}{T}=n\omega$处的小矩形面积，$Tc_n$是f中对应角频率成分的含量。因此，$F(\xi)$或$F(\omega)$也称为\textbf{频谱密度函数}。
+下面解释“乘$T$，认为$k\omega$或$k\xi$为自变量”的本质。回顾上一节中的\cref{exmp:rect_FS}，为了体现双边频谱与采样函数的相似性，我们取了一个较为特殊的周期矩形脉冲信号，它的基波角频率应为图中两相邻竖直线间的间隔，即\textbf{谱线间隔}，可见其频率极小、周期极大，与我们研究非周期现象所用到的极限情况$T\to\infty$是一致的，换言之，令$T\to\infty$自动地使“傅里叶系数”在频谱中的间隔变小，\textbf{周期信号趋向非周期信号的过程自动地使离散频谱趋向连续频谱}。这样，乘T就不难理解了，它的作用是“除以$1/T$”，$1/T$是所在频率成分处小矩形的宽（类似于黎曼积分），换言之，以频率$\xi$为横坐标，\textbf{谱系数}$c_n$是$\dfrac{n}{T}=n\xi$处的小矩形面积，$Tc_n$是f中对应频率成分的含量，可以理解为单位频段内的谱系数，即频谱密度；以角频率$\omega$为横坐标，$c_n$是$\dfrac{2\pi n}{T}=n\omega$处的小矩形面积，$Tc_n$是f中对应角频率成分的含量。因此，$F(\xi)$或$F(\omega)$也称为\textbf{频谱密度函数}。
 
-实际上，从这个角度出发，可以立即得到\textbf{傅里叶逆变换} (Inverse Fourier Tansform,IFT)的公式，因为我们已经将f展开为傅里叶级数，这对应着由f的傅里叶变换$\mathcal{F} f$还原出f。我们知道
+实际上，从这个角度出发，可以立即得到\textbf{傅里叶逆变换} (Inverse Fourier Tansform,IFT)的公式，因为我们已经将f展开为傅里叶级数，这对应着由f的傅里叶变换$\mathcal{F} f$还原出$f$。我们知道
 \begin{lralign}
     f(t)&=\sum_{n=-\infty}^{\infty}c_n \mathrm{e}^{2\pi \mathrm{i}\xi t}\\
 &=\frac{1}{T}\sum_{n=-\infty}^{\infty}\left(\int_{T}f(t)\mathrm{e}^{-2\pi \mathrm{i}\xi t}\,dt\right)\mathrm{e}^{2\pi \mathrm{i}\xi t}

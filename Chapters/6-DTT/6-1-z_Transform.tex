@@ -22,7 +22,7 @@
     设$x[n]=a^n u[n],a\in\mathbb{C}$，则
     \[X(z)=\sum_{n=0}^{\infty}a^n z^{-n}=\frac{1}{1-a z^{-1}}=\frac{z}{z-a},\quad |z|>|a|\]
 \end{example}
-\begin{example}[单边余弦序列的z变换]
+\begin{example}[单边余弦序列的z变换]\label{exmp:causual_cos_z}
     \begin{align*}
         \mathcal{Z} \left[\cos(\Omega n)u[n]\right]&=\frac{1}{2}\left(\mathcal{Z} \left[\mathrm{e}^{\mathrm{i}\Omega n}u[n]\right]+\mathcal{Z} \left[\mathrm{e}^{-\mathrm{i}\Omega n}u[n]\right]\right)\\
         &=\frac{1}{2}\left(\frac{z}{z-\mathrm{e}^{\mathrm{i}\Omega}}+\frac{z}{z-\mathrm{e}^{-\mathrm{i}\Omega}}\right)\\
@@ -38,7 +38,7 @@
 \end{example}
 
 根据\refsub{laurant_series}中介绍的洛朗级数理论，z变换的收敛域为一个环状区域：
-\begin{definition}[z变换的收敛域]
+\begin{definition}[z变换的收敛域]\label{def:ROC}
     设离散时间信号$x[n]$的z变换为$X(z)=\sum_{n=-\infty}^{\infty}x[n]z^{-n}$，则其\textbf{收敛域}(region of convergence, ROC)定义为
     \[\text{ROC}=\left\{z\in\mathbb{C} \left|r<|z|<R\right.\right\}\]
     其中

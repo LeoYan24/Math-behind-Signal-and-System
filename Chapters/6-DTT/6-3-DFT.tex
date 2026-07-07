@@ -166,6 +166,7 @@ $$\mathcal{F} \mathcal{F} ^H=N\cdot I$$
     设$x[n],y[n]$是周期为$N$的离散信号，则它们的卷积和定义为
     \[(x*y)[n]=\sum_{m=0}^{N-1}x[m]y[n-m]\]
 \end{definition}
+为了区分两种卷积和，我们将非周期离散信号的卷积和称为\textbf{线性卷积}，而将周期离散信号的卷积和称为\textbf{循环卷积}或\textbf{圆卷积}。线性卷积的命名是由于它对参与运算的两信号都是线性的，而循环卷积的线性性必须保证信号具有相同的周期。一些文献中，也将循环卷积记作$\circledast$，或者用$\circledast_N$表示周期为$N$的离散信号的的循环卷积。
 
 根据离散傅里叶变换的周期性，时域和频域都是周期的，下面就来表述和验证卷积和定理：
 \begin{theorem}[离散傅里叶变换的卷积和定理]\label{thm:DFT_conv}
@@ -385,7 +386,7 @@ $$X(\mathrm{e}^{\mathrm{i}\Omega})=\mathcal{F} f\left(\frac{\Omega}{T}\right),\q
         \includegraphics[width=0.6\textwidth]{spectral_leakage}
         \caption{256点离散傅里叶变换}
     \end{figure}
-    提高了DFT的点数，频谱反而出现了多余的谱线，这就是\textbf{频谱泄露}现象。尽管此时还能看到清晰的峰值，但当信号中有频率相近的成分时，频谱泄露就是不可接受的了。
+    提高了DFT的点数，频谱反而出现了多余的谱线，这就是\textbf{频谱泄露}(spectral leakage)现象。尽管此时还能看到清晰的峰值，但当信号中有频率相近的成分时，频谱泄露就是不可接受的了。
 \end{example}
 
 细心的读者或许已经发现，当采用$256$点DFT时，$256$并不是$x[n]$的周期，这样进行DFT是不合理的，这就是发生频谱泄露的本质原因，工程上往往容易忽略这一点。

@@ -6,7 +6,7 @@
     f(t)=T\mathrm{sinc}(Tt)*f(t)
 \end{equation*}
 
-如果希望对更一般的函数$f(x)$，找到一个函数$g(x)$，使得$f(x)=g*f(x)$，自然会想到狄拉克$\delta$分布，然而它是一个奇异分布，我们只能从形式上定义一个$\delta$函数。事实上，$$!\exists g,f*g=f,\forall f$$
+如果希望对更一般的函数$f(x)$，找到一个函数$g(x)$，使得$f(x)=g*f(x)$，自然会想到狄拉克$\delta$分布，然而它是一个奇异分布，我们只能从形式上定义一个$\delta$函数。事实上，$$!\exists g,\quad f*g=f,\quad\forall f$$
 但很容易构造一个函数列$g_n$，使得$f*g_n\to f$\cite{folland}。回忆我们在\refsub{intuition_of_convolution}中提到的“平均化”卷积，设$g_a(x)=\frac{1}{2a}\chi_{[-a,a]}$，则$g_a*f$是$f$在区间$[x-a,x+a]$上的平均值，即$\frac{1}{2a}f*g_a(t)=\int_{x-a}^{x+a}f(x)\,dx$，若$f\in C(\mathbb{R})$，则$g_a*f\to f,a\to 0$。
 
 一般地，我们考虑函数的缩放，设$g\in L^1(\mathbb{R})$，我们记
@@ -47,30 +47,81 @@ $\int_{-\infty}^{\infty}|g(y)|\,dy<\infty$的必要条件是$\int_{\delta/\lambd
 一种常用的函数列是高斯函数列，这里取一个积分值为1的特例：
 \[G(x)=\frac{1}{\sqrt{\pi}}\mathrm{e}^{-x^2},\quad G_\lambda(x)=\frac{1}{\lambda\sqrt{\pi}}\mathrm{e}^{-x^2/\lambda^2}\]
 尽管用很多其他函数都可以逼近$\delta$分布，但高斯函数列有一系列非常好的性质：\begin{itemize}
-    \item 高斯函数是偶函数，$\alpha=\beta=\frac{1}{2}$；
+    \item 高斯函数是偶函数，$\alpha=\beta=\dfrac{1}{2}$；
     \item 高斯函数是无限阶可导的。我们知道，卷积能够继承函数的可导性：$f*g'=f'*g=(f*g)'$，使用高斯函数做卷积，所得的函数光滑
     \item 高斯函数是施瓦兹函数，即$G_\lambda\in \mathcal{S}$
     \item 高斯函数的傅里叶变换仍是高斯函数，这使得傅里叶变换更容易计算
     \item 高斯函数$G_\lambda\in L^1(\mathbb{R})$并且是有界的，与任意$f\in PC(\mathbb{R})$卷积时，卷积积分良定义且趋向于$f$
 \end{itemize}
 
-作为以上定理的推论，可以得到一个非常好用的定理：\begin{corollary}[*魏尔斯特拉斯逼近定理]
-    设$f\in C([a,b]),-\infty<a<b<\infty$，则$f$是某个多项式序列在$[a,b]$上的一致极限，即
+作为以上定理的推论，可以得到多项式空间在连续函数空间中的稠密性：
+\begin{theorem}[*魏尔斯特拉斯第一逼近定理]\label{thm:weierstrass_1}
+    设$f\in C([a,b]),-\infty<a<b<\infty$，则$f$是某个多项式序列在$[a,b]$上的一致极限，即：
     \[\forall \epsilon>0,\exists \text{多项式}P,\quad \sup_{a\leq x\leq b}|f(x)-P(x)|<\epsilon\]
-\end{corollary}
-在处理分析问题时，类似分段光滑函数可由三角级数一致逼近，将连续函数用多项式一致逼近是一个很强大的工具。
+\end{theorem}
+%在处理分析问题时，类似分段光滑函数可由三角级数一致逼近，将连续函数用多项式一致逼近是一个很强大的工具。
 \begin{proof}
-    将$f$做连续延拓，使得$f\in C(\mathbb{R}),f(x)=0\ \text{for}\ x\in (-\infty,a-1]\cup[b+1,\infty)$，则$\lim_{\lambda\to 0}f*G_\lambda \rightrightarrows f,x\in[a,b]$，即$f*G_\lambda$在区间$[a,b]$上一致收敛到$f$。具体来说，
+    将$f$做连续延拓，使得
+    $$f\in C(\mathbb{R}),\quad f(x)=0,\quad\forall x\in (-\infty,a-1]\cup[b+1,\infty)$$
+    则$\lim_{\lambda\to 0}f*G_\lambda \rightrightarrows f,\forall x\in[a,b]$，即$f*G_\lambda$在区间$[a,b]$上一致收敛到$f$。具体来说，
     \[\forall \epsilon>0,\exists \lambda>0,\quad \sup_{a\leq x\leq b}\left|f(x)-\frac{1}{\lambda\sqrt{\pi}}\int_{a-1}^{b+1}\mathrm{e}^{-(x-y)^2/\lambda^2}f(y)\,dy\right|<\frac{\epsilon}{2}\]
-    考虑使用剩下的半个$\epsilon$，将右边的积分用多项式近似。我们知道，$\mathrm{e}^{-t^2}$可以展开为泰勒级数，并且在$\mathbb{C}$上内闭一致收敛，即
+    考虑将右边的积分用多项式近似。我们知道，$\mathrm{e}^{-t^2}$可以展开为泰勒级数，并且在$\mathbb{C}$上内闭一致收敛，即
     \[\sum_{n=0}^{N}\frac{t^n}{n!}\rightrightarrows \mathrm{e}^{-t^2},\quad N\to\infty\]
-    具体来说，取$|f(x)|$的上界$M$（紧支连续函数一致连续，必有上界，见数学分析教材），存在$N$，使得
+    具体来说，取$|f(x)|$的上界$M$（紧支连续函数是一致连续的，必有上界），存在$N$，使得
     \[\sup_{t\in[a-1,b+1]}\left|\mathrm{e}^{-t^2}-\sum_{n=0}^{N}\frac{(-1)^n t^{2n}}{n!}\right|<\frac{\epsilon\sqrt{\pi}}{2M(b-a+2)}\]
     于是
     \[P(x)=\frac{1}{\lambda\sqrt{\pi}}\sum_{0}^{N}\int_{a-1}^{b+1}\frac{(-1)^n (x-y)^{2n}}{\lambda^{2n}n!}f(y)\,dy,\quad \sup_{a\leq x\leq b}\left|f(x)-P(x)\right|<\epsilon\]
     我们还可以求出$P$的显式表达式：
     \[P(x)=\sum_{n=0}^{N}\sum_{k=0}^{2n}c_{kn}x^k,\quad c_{kn}=\frac{(-1)^{k-n}}{\lambda^{2n+1}n!\sqrt{\pi}}\binom{2n}{k}\int_{a-1}^{b+1}y^{2n-k}f(y)\,dy\]
     使用其他光滑函数列逼近$\delta$分布也可以得到不同的多项式逼近，不过，绝大多数情况下我们并不需要计算出这个表达式，而是直接用多项式的一致逼近来获取函数的性质。
+\end{proof}
+
+进一步，可以得到三角多项式（\cref{def:trinomial}）空间在连续的周期函数空间中的稠密性：
+\begin{corollary}[魏尔斯特拉斯第二逼近定理]\label{cor:weierstrass_2}
+    设$f\in C(\mathbb{R})$以$T$为周期，则$f$是某个同周期的三角多项式序列的一致极限，即：
+    \[\forall \epsilon>0,\exists \text{三角多项式}P,\quad \sup_{x}|f(x)-P(x)|<\epsilon\]
+\end{corollary}
+\begin{proof}
+    由于可以对自变量进行伸缩变换，我们不妨设$T=2\pi$，并重点考虑区间$[-\pi,\pi]$.
+
+    首先，三角多项式的奇分量和偶分量是显式地分离的，这启发我们考虑将$f(t)$也分解为奇分量和偶分量：
+    $$f_\e(t)=\frac{f(t)+f(-t)}{2},\quad f_\text{o}(t)=\frac{f(t)-f(-t)}{2}$$
+    一种直接的想法是，通过变量代换$x=\cos t$和$x=\sin t$，分别将逼近$f_e(\arccos x)$和$f_\text{o}(\arcsin x)$的多项式转化为三角多项式。然而，$\sin(k x),k\in\mathbb{N}$有共同的零点和对称轴：
+    $$\sin(-k\pi)=\sin 0=\sin(k\pi)=0,\quad \sin(k(\pi-x))=\sin(kx)=\sin(k(-\pi-x))$$
+    对于奇分量来说，我们只能保证
+    $$f_\text{o}(-\pi)=f_\text{o}(0)=f_\text{o}(\pi)=0$$
+    而不能保证$f_\text{o}(t)$关于$t=\pm \dfrac{\pi}{2}$轴对称，因此不能单独使用正弦多项式逼近奇分量。
+
+    考虑以下两个偶函数：
+    $$g(t)=f(t)+f(-t),\quad h(t)=\sin(t)(f(t)-f(-t))$$
+    做变量代换$x=\cos t$，利用\cref{thm:weierstrass_1}，有：
+    $$\forall \epsilon>0,\exists\text{多项式}P,Q,\quad \sup_{-1\le x\le 1}|g(\arccos x)-P(x)|<\epsilon,\sup_{-1\le x\le 1}|h(\arccos x)-Q(x)|<\epsilon$$
+    代回变量$t$，$P(\cos t)$和$Q(\cos t)$都是以$2\pi$为周期的偶函数，符合我们的要求。
+
+    我们希望能用三角多项式逼近$f(t)-f(-t)$，也就是说$Q(\cos t)/\sin t$仍为三角多项式，这实际上要求$Q(\cos t)$在$t=0$和$\pm \pi$处，即$x=\pm 1$处有零点。注意到$x=\pm 1$时，有：
+    $$h(\arccos x)=0,\quad |Q(x)-h(\arccos x)|=|Q(x)|<\epsilon$$
+    构造修正多项式
+    $$R(x)=Q(x)-Q(1)\frac{1+x}{2}-Q(-1)\frac{1-x}{2}$$
+    这样，$R(\pm 1)=0$，且
+    \begin{align*}
+        |R(x)-Q(x)|&=\left|Q(1)\frac{1+x}{2}+Q(-1)\frac{1-x}{2}\right|\\
+        &\le|Q(1)|\frac{|1+x|}{2}+|Q(-1)|\frac{|1-x|}{2}\\
+        &\le 2\epsilon,\quad \forall x\in[-1,1]
+    \end{align*}
+    因此
+    $$\sup_{-1\le x\le 1}|R(x)-h(\arccos x)|\le\sup_{-1\le x\le 1}|R(x)-Q(x)|+\sup_{-1\le x\le 1}|Q(x)-h(\arccos x)|\le 3\epsilon$$
+    由于$R(x)$有零点$\pm 1$，它一定有因式$(1-x)(1+x)=1-x^2$，记$R(x)=R_0(x)(1-x^2)$，则
+    $$R(\cos t)=R_0(\cos t)(1-\cos^2 t)=R_0(\cos t)\sin^2 t$$
+
+    最后，我们通过分段估计来说明三角多项式$R_0(\cos t)\sin t$能够一致逼近$F(t)=f(t)-f(-t)$.一方面，由于$F(t)$连续且$F(0)=F(\pi)=0$（根据周期性，$F(-\pi)$处的情况与$F(\pi)$处相同），有
+    $$\forall\eta>0,\exists\delta_1>0,|t|<\delta_1\text{或}|t-\pi|<\delta_1\implies |F(t)|<\frac{\eta}{2}$$
+    取$R_0(\cos t)$的上界$M$，根据$\sin t$的连续性，
+    $$\exists\delta_2>0,|t|<\delta_2\text{或}|t-\pi|<\delta_2\implies|\sin t|<\frac{\eta}{2M}$$
+    令$\delta=\min\{\delta_1,\delta_2\}$，则
+    $$|t|<\delta\text{或}|t-\pi|<\delta\implies |F(t)-R_0(\cos t)\sin t|\le|F(t)|+M|\sin t|\le\eta$$
+    另一方面，当$|t|>\delta$且$|t-\pi|>\delta$时，$|sin t|>\sin\delta>0$，因此
+    $$|F(t)\sin t-R_0(\cos t)\sin^2 t|<\epsilon\implies|F(t)-R_0(\cos t)\sin t|<\frac{\epsilon}{\sin\delta}$$
+    只要选取$\epsilon<\eta\sin\delta$，就能保证$\sup_t |F(t)-R_0(\cos t)\sin t|<\eta$.
 \end{proof}
 
 \subsection{黎曼-勒贝格引理}\label{sub:riemman_lebesgue_lemma}

@@ -194,9 +194,9 @@ $\dfrac{\sin t}{t}$是\refsub{signal}中介绍的采样信号，在$t=0$处连�
 \end{corollary}
 
 然而，狄利克雷积分不是绝对收敛的。考虑$[0,\infty)$的等长的子区间族
-$$I_n=\left[(n+\frac{1}{6})\pi,(n+\frac{5}{6})\pi\right],n=0,1,2,\cdots$$
+$$I_n=\left[\left(n+\frac{1}{6}\right)\pi,\left(n+\frac{5}{6}\right)\pi\right],\quad n=0,1,2,\cdots$$
 在每个区间上，有
-$$t\leq n+1,|\sin t|\geq \frac{1}{2},\int_{I_n}\left|\frac{\sin t}{t}\right|\,dt \geq \int_{I_n}\frac{1}{2t}\,dt\geq\frac{\pi}{3}\sum_{n=1}^{\infty}\frac{1}{n+1}$$
+$$t\leq n+1,\quad |\sin t|\geq \frac{1}{2},\quad \int_{I_n}\left|\frac{\sin t}{t}\right|\,dt \geq \int_{I_n}\frac{1}{2t}\,dt\geq\frac{\pi}{3}\sum_{n=1}^{\infty}\frac{1}{n+1}$$
 $\sum_{n=1}^{\infty}\frac{1}{n}$是发散的调和级数。综上，我们说明了狄利克雷积分条件收敛，但不绝对收敛：
 $$\int_{0}^{\infty}\left|\frac{\sin t}{t}\right|\,dt=\infty$$
 
@@ -223,6 +223,121 @@ $$\int_{0}^{\infty}\left|\frac{\sin t}{t}\right|\,dt=\infty$$
 %\end{align*}
 %误差函数、补误差函数
 
+\subsection{三角多项式与切比雪夫多项式}\label{sub:chebychev_polynomial}
+
+\subsubsection{三角多项式}
+
+\begin{definition}[三角多项式]\label{def:trinomial}
+    \textbf{三角多项式}(trinomial)是一类由正弦、余弦函数（或复指数函数）的有限线性组合构成的函数。次数不超过$n$的三角多项式形如：
+    $$P_n(t)=\frac{a_0}{2}+\sum_{k=1}^n(a_k\cos(k\omega t)+b_k\sin(k\omega t)),\quad a_k,b_k\in\mathbb{C} ,t\in\mathbb{R} $$
+    其中：\begin{itemize}
+        \item 如果$a_n,b_n$不同时为0，则称$P_n(t)$的\textbf{次数}(degree)为$n$；
+        \item 如果所有$b_k=0$，则称之为\textbf{余弦多项式}，如果所有$a_k=0$，则称之为\textbf{正弦多项式}。
+    \end{itemize}
+    常数项写作$a_0/2$是约定成俗的，在\refsub{tri_exp_series}中我们将给出解释。
+\end{definition}
+
+利用欧拉公式：
+$$\mathrm{e}^{\mathrm{i}k\omega t}=\cos(k\omega t)+\mathrm{i}\sin(k\omega t)$$
+可得：
+\[\cos(k\omega t)=\frac{\mathrm{e}^{\mathrm{i}k\omega t}+\mathrm{e}^{-\mathrm{i}k\omega t}}{2},\quad \sin(k\omega t)=\frac{\mathrm{e}^{\mathrm{i}k\omega t}-\mathrm{e}^{-\mathrm{i}k\omega t}}{2\mathrm{i}}\]
+
+将上式代入$P_n(t)=\frac{a_0}{2}+\sum_{k=1}^n(a_k\cos(k\omega t)+b_k\sin(k\omega t))$，得到：
+\begin{align*}
+    P_n(t)&=\frac{a_0}{2}+\sum_{k=1}^n(a_k\cos(k\omega t)+b_k\sin(k\omega t))\\
+    &=\frac{a_0}{2}+\sum_{k=1}^n\left(a_k\frac{\mathrm{e}^{\mathrm{i}k\omega t}+\mathrm{e}^{-\mathrm{i}k\omega t}}{2}+b_k\frac{\mathrm{e}^{\mathrm{i}k\omega t}-\mathrm{e}^{-\mathrm{i}k\omega t}}{2\mathrm{i}}\right)\\
+    &=\sum_{k=-n}^n c_k\e^{\im k\omega t}
+\end{align*}
+其中
+$$c_0=\frac{a_0}{2},\quad c_k=\frac{a_k-\im b_k}{2},c_{-k}=\frac{a_k+\im b_k}{2}=\overline{c_k},\quad k\in\{1,\cdots,n\}$$
+可见，$n$次的三角多项式总能表示为$2n+1$个复指数函数$\{\e^{\im k\omega t}\}_{k=-n}^n$的有限线性组合。
+
+\subsubsection{切比雪夫多项式}
+
+我们熟悉的代数多项式可以通过第一类切比雪夫多项式与三角多项式联系起来。
+
+\begin{definition}[第一类切比雪夫多项式]
+    \label{def:chebychev_polynomial}
+    \textbf{第一类切比雪夫多项式}(Chebychev Polynomial of the First Kind)是定义在$[-1,1]$上的多项式：
+    $$T_n(x)=\cos(n\arccos(x))$$
+\end{definition}
+
+代入$x=\cos\theta$，则$T_n(\cos\theta)=\cos(n\theta)$，我们熟知：
+$$\cos(2\theta)=2\cos^2\theta-1,\quad \cos(3\theta)=4\cos^3\theta-3\cos\theta$$
+因此
+$$T_0(x)=1,\quad T_1(x)=x,\quad T_2(x)=2x^2-1,\quad T_3(x)=4x^3-3x$$
+可见$T_n(x)$的确是$x$的多项式。根据三角函数的和差角公式：
+$$\cos(\alpha+\beta)=\cos\alpha\cos\beta-\sin\alpha\sin\beta$$
+我们可以得到：
+\begin{align*}
+    T_{n+1}(\cos\theta)&=\cos((n+1)\theta)\\
+    &=\cos(n\theta)\cos\theta-\sin(n\theta)\sin\theta\\
+    &=T_n(\cos\theta)\cos\theta-[\cos((n-1)\theta)-\cos(n\theta)\cos\theta]\\
+    &=2T_n(\cos\theta)\cos\theta-T_{n-1}(\cos\theta)
+\end{align*}
+由此我们得到：
+\begin{theorem}[第一类切比雪夫多项式的递推公式]
+    $$T_{n+1}(x)=2xT_n(x)-T_{n-1}(x)$$
+\end{theorem}
+
+根据递推公式及初始值$T_0(x)=1,T_1(x)=x$，可以得到：
+\begin{align*}
+    &T_2(x)=2x^2-1\\
+    &T_3(x)=4x^3-3x\\
+    &T_4(x)=8x^4-8x^2+1\\
+    &T_5(x)=16x^5-20x^3+5x\\
+    &\cdots
+\end{align*}
+可以看出，$n$为偶数时，$T_n(x)$为偶函数；$n$为奇数时，$T_n(x)$为奇函数。根据递推式可以验证这一点。
+
+尽管$\arccos$的定义域只有$[-1,1]$，但得到$T_n(x)$的多项式定义式后，自然可以将定义域延拓至整个实轴。下图给出了这四个多项式在区间$[-1.5,1.5]$范围内的图像：
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{chebychev}
+    \caption{第一类切比雪夫多项式$T_n(x),n=2,3,4,5$的图像}
+\end{figure}
+
+可以看到，第一类切比雪夫多项式在$|x|>1$时的增长是非常迅速的。我们可以使用最高次项来估计$T_n(x)$在$|x|$比较大时的增长速度，根据递推关系，不难得到：
+$$T_n(x)\sim 2^{n-1}x^n,\quad |x|\to\infty$$
+不过，在$|x|\le 1$时，$T_n(x)$只会在$[-1,1]$内等幅振荡，这是因为余弦函数的值域就是$[-1,1]$。随着$n$的增大，$x\in[-1,1]$时，$n\arccos(x)$的取值范围增大，$T_n(x)$的值在$x\in[-1,1]$内经过$\pm 1$的次数会越来越多，这意味着振荡越来越快。
+
+事实上，我们可以用双曲正弦函数表示$|x|>1$时的$T_n(x)$：
+\begin{align*}
+    T_n(x)=\begin{cases}
+        \cos(n\arccos(x)),&\text{if }|x|\le 1\\
+        \cosh(n\ \mathrm{arccosh}x),&\text{if }x> 1\\
+        (-1)^n\cosh(n\ \mathrm{arccosh}(-x)),&\text{if }x< -1
+    \end{cases}
+\end{align*}
+
+尽管表达式不同，但从多项式形式的表达式可以看出$T_n(x)$在三段定义域之间是平滑衔接的，即$T_n(x)$无限阶可导。
+
+第一类切比雪夫多项式揭示了余弦多项式与代数多项式之间的联系。考虑余弦多项式：
+$$C(x)=\frac{a_0}{2}+\sum_{k=1}^n a_k\cos(k\omega x)$$
+利用$T_n(\cos\theta)=\cos(n\theta)$，并令$\theta=\omega x$，可得：
+$$C(x)=\frac{a_0}{2}+\sum_{k=1}^n a_k T_k(\cos(\omega x))$$
+可以归纳证明，$T_n(x)$是$n$次多项式，因此以上关系式表明$n$次余弦多项式总能表示为$\cos(\omega x)$的$n$次多项式，因此用$n$作为余弦多项式的“次数”是合理的。
+
+更一般地，一个$n$次的三角多项式$P_n(x)$总能写成关于$\sin(\omega x)$和$\cos(\omega x)$的$n$次二元多项式。其中正弦函数的转化可以借助第二类切比雪夫多项式：
+\begin{definition}[第二类切比雪夫多项式]
+    \textbf{第二类切比雪夫多项式}(Chebychev Polynomial of the Second Kind)是定义在$(-1,1)$上的多项式：
+    $$U_n(x)=\frac{\sin((n+1)\arccos x)}{\sin(\arccos x)}$$
+    $U_n(x)$是关于$x$的$n$次多项式。
+\end{definition}
+
+它的初始值与第一类切比雪夫多项式不同：
+$$U_0(x)=1,\quad U_1(x)=2x$$
+切比雪夫多项式具有相同的递推式：
+\begin{theorem}[第二类切比雪夫多项式的递推公式]
+    $$U_{n+1}(x)=2xU_n(x)-U_{n-1}(x)$$
+\end{theorem}
+
+利用$\sin(k\theta)=\sin\theta \cdot U_k(\cos\theta),k\ge 1$，可得：
+\begin{align*}
+    P_n(x)&=\frac{a_0}{2}+\sum_{k=1}^n(a_k\cos(k\omega x)+b_k\sin(k\omega x))\\
+    &=\frac{a_0}{2}+\sum_{k=1}^n a_k T_k(\cos(\omega x))+\sin(\omega x)\sum_{k=1}^n b_k U_{k-1}(\cos(\omega x))
+\end{align*}
+
 \subsection{*贝塞尔函数}\label{sub:bessel}
 
 贝塞尔函数是研究物理和工程问题时时常遇到的一种特殊函数，尤其是在涉及圆柱对称问题时。贝塞尔函数是贝塞尔方程的解，贝塞尔方程定义为：
@@ -238,16 +353,16 @@ $$\int_{0}^{\infty}\left|\frac{\sin t}{t}\right|\,dt=\infty$$
 贝塞尔方程无法用初等积分法求解，但可以使用幂级数法求解，即假设解可以表示为幂级数的形式，带入方程中，比较各阶系数，从而确定幂级数的系数。取定常数项
 $$a_0=\frac{1}{2^\nu\Gamma(\nu+1)}$$
 则可唯一确定贝塞尔函数的幂级数展开式如下：
-\begin{claim}
+\begin{theorem}
     贝塞尔函数的幂级数展开式为
     \[J_{\nu}(x)=\sum_{k=0}^{\infty}\frac{(-1)^k}{k!\Gamma(\nu+k+1)}\left(\frac{x}{2}\right)^{\nu+2k}\]
     特别地，第一类$n$阶贝塞尔函数为
     \[J_{n}(x)=\sum_{k=0}^{\infty}\frac{(-1)^k}{k!(n+k)!}\left(\frac{x}{2}\right)^{n+2k}\]
-\end{claim}
+\end{theorem}
 其推导过程可以参考\cite{folland}。下面指出贝塞尔函数的一些性质：
 
-\begin{proposition}[递推公式]
-    \label{prop:bessel_recursion}
+\begin{claim}[递推公式]
+    \label{claim:bessel_recursion}
     任给$x,\nu$，有
     \begin{align*}
         &\frac{d}{dx}[x^{-\nu}J_{\nu}(x)]=-x^{-\nu}J_{\nu+1}(x)\\
@@ -257,7 +372,7 @@ $$a_0=\frac{1}{2^\nu\Gamma(\nu+1)}$$
         &xJ_{\nu-1}(x)+xJ_{\nu+1}(x)=2\nu J_{\nu}(x)\\
         &J'_{\nu-1}(x)-J'_{\nu+1}(x)=2J_{\nu}(x)
     \end{align*}
-\end{proposition}
+\end{claim}
 
 这些性质是通过对贝塞尔函数的幂级数展开式逐项求导得到的。利用递推公式，可以计算出一些特殊值，例如：
 \begin{align*}
@@ -274,7 +389,7 @@ $$a_0=\frac{1}{2^\nu\Gamma(\nu+1)}$$
 \end{proposition}
 \begin{proof}
     在$n<0$时，$n!$没有定义，但实际上，伽马函数可以延拓至$\mathbb{C}\setminus \mathbb{Z}_-$，而在负整数处趋于无穷，在这个意义下，我们说
-    \[\frac{1}{\Gamma(z)}=0,z\in \mathbb{Z}_-\]
+    \[\frac{1}{\Gamma(z)}=0,\quad z\in \mathbb{Z}_-\]
     因此，当$n$为正整数时，根据贝塞尔函数的级数形式的定义式，可以写出$J_{-n}(x)$的幂级数展开式：
     \[J_{-n}(x)=\sum_{k=0}^{\infty}\frac{(-1)^k}{k!\Gamma(-n+k+1)}\left(\frac{x}{2}\right)^{-n+2k}=\sum_{k=n}^{\infty}\frac{(-1)^k}{k!(k-n)!}\left(\frac{x}{2}\right)^{-n+2k}\]
     令$j=k-n$，则
@@ -308,8 +423,8 @@ $$a_0=\frac{1}{2^\nu\Gamma(\nu+1)}$$
     任给$x$及$n\in\mathbb{N}$，有
     \[J_n(x)=\frac{1}{2\pi}\int_{-\pi}^{\pi}\exp(\mathrm{i}x\sin\theta - \mathrm{i}n\theta)\,d\theta=\frac{1}{\pi}\int_{0}^{\pi}\cos(x\sin\theta - n\theta)\,d\theta\]
     进一步，有
-    \[J_n(x)=\frac{2}{\pi}\int_{0}^{\pi/2}\cos(x\sin\theta)\cos(n\theta)\,d\theta,\text{如果}n\text{为偶数}\]
-    \[J_n(x)=\frac{2}{\pi}\int_{0}^{\pi/2}\sin(x\sin\theta)\sin(n\theta)\,d\theta,\text{如果}n\text{为奇数}\]
+    \[J_n(x)=\frac{2}{\pi}\int_{0}^{\pi/2}\cos(x\sin\theta)\cos(n\theta)\,d\theta,\quad \text{如果}n\text{为偶数}\]
+    \[J_n(x)=\frac{2}{\pi}\int_{0}^{\pi/2}\sin(x\sin\theta)\sin(n\theta)\,d\theta,\quad\text{如果}n\text{为奇数}\]
 \end{proposition}
 这个结果的证明需要用到生成函数及傅里叶级数的知识，见\cite{folland}。本书仅验证几个公式的等价性。
 \begin{proof}

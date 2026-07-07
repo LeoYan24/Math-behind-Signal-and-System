@@ -165,8 +165,10 @@ DTFT是良定义的，因为
     求离散信号$x[n]=a^n u[n]$的DTFT，其中$|a|<1$。\\
     解：由等比数列求和公式，
     \begin{align*}
-        X(\mathrm{e}^{\mathrm{i}\Omega})&=\sum_{n=-\infty}^{\infty}x[n]\mathrm{e}^{-\mathrm{i}\Omega n}=\sum_{n=0}^{\infty}a^n \mathrm{e}^{-\mathrm{i}\Omega n}\\
-        &=\sum_{n=0}^{\infty}(a \mathrm{e}^{-\mathrm{i}\Omega})^n=\frac{1}{1-a \mathrm{e}^{-\mathrm{i}\Omega}}
+        X(\mathrm{e}^{\mathrm{i}\Omega})&=\sum_{n=-\infty}^{\infty}x[n]\mathrm{e}^{-\mathrm{i}\Omega n}\\
+        &=\sum_{n=0}^{\infty}a^n \mathrm{e}^{-\mathrm{i}\Omega n}\\
+        &=\sum_{n=0}^{\infty}(a \mathrm{e}^{-\mathrm{i}\Omega})^n\\
+        &=\frac{1}{1-a \mathrm{e}^{-\mathrm{i}\Omega}}
     \end{align*}
 
     特别地，当$a=1$时，$x[n]=u[n]\notin l^1$，但不妨写出其DTFT：

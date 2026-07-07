@@ -4,13 +4,9 @@
 
 \subsection{一般的分布理论}\label{sub:general_distributions}
 
-我们已经看到，分布（例如狄拉克$\delta$）难以用经典的“函数”来描述，这时我们可以
-考察它们与一系列\textbf{检验函数}(test function)$\varphi$的作用，具体来说：
+我们已经看到，分布（例如狄拉克$\delta$）难以用经典的“函数”来描述，这时我们可以考察它们与一系列\textbf{检验函数}(test function)$\varphi$的作用，具体来说：
 \begin{definition}[分布]
-记$\mathbb{R}$
-上的复值光滑紧支函数集为$\mathcal{C} $，如果将检验函数集取为$\mathcal{C}$,我们
-将其对偶空间$\mathcal{D} $中的元素称为分布，并规定函数$f\in \mathcal{C} $所产生的分布$T_f$
-为作用在$\mathcal{C}$上的以下\textbf{泛函}：
+    我们称无限阶可导的函数是\textbf{光滑}(smooth)的。记$\mathbb{R}$上的复值光滑紧支函数集为$\mathcal{C} $，如果将检验函数集取为$\mathcal{C}$，我们将其对偶空间$\mathcal{D} $中的元素称为分布，并规定函数$f\in \mathcal{C} $所产生的分布$T_f$为作用在$\mathcal{C}$上的以下\textbf{泛函}：
 \begin{equation*}
     \left\langle T_f,\varphi\right\rangle:=\int_{-\infty}^{\infty}f(x)\varphi(x)\,dx,\varphi\in\mathcal{C}
 \end{equation*}
@@ -21,29 +17,24 @@
 \end{remark}
 \begin{example}
     尽管我们从形式上给出了$\delta$函数的定义，但它实际上应该采用定义
-\[\langle \delta,\varphi\rangle:=\delta(\varphi):=\varphi(0)\]
-由于“狄拉克函数”严格来说并不能算作一种函数，$\delta$是一个奇异分布。容易验证这与我们一
-开始给出的$\delta$作为“函数”的性质是相符的：
+\[\langle \delta,\varphi\rangle:=\varphi(0)\]
+由于“狄拉克函数”严格来说并不能算作一种函数，$\delta$是一个奇异分布。容易验证这与我们一开始给出的$\delta$作为“函数”的性质是相符的：
 \[\langle \delta,\varphi\rangle=\int_{-\infty}^{\infty}\delta(x)\varphi(x)\,dx=\int_{-\infty}^{\infty}\delta(x)\varphi(0)\,dx=\varphi(0)\]
 \end{example}
 
-下面来定义分布与函数的乘法和分布的导数。这一部分中，我们的原则是：\textbf{奇异分布与正
-    则分布具有相同的性质}，换言之，只要能够对正则分布定义的算子，就能够对奇异分布
-做相同的定义。在讨论分布的傅里叶变换时，还将定义更多的算子，例如分布卷积、尺度变换等。
+下面来定义分布与函数的乘法和分布的导数。这一部分中，我们的原则是：\textbf{奇异分布与正则分布具有相同的性质}，换言之，只要能够对正则分布定义的算子，就能够对奇异分布做相同的定义。在讨论分布的傅里叶变换时，还将定义更多的算子，例如分布卷积、尺度变换等。
 
 设$f,g,\varphi\in\mathcal{C} $,有
 \begin{align*}
     \left\langle (f\cdot g),\varphi\right\rangle=\int_{-\infty}^{\infty}(f\cdot g)(x)\varphi(x)\,dx=\int_{-\infty}^{\infty}f(x)(g\cdot\varphi)(x)\,dx=\langle f,(g\cdot\varphi)\rangle
 \end{align*}
-因此对于任意的分布$T\in\mathcal{D} $，定义它与$g\in\mathcal{C} $的乘积$gT$
-由以下等式给出：
+因此对于任意的分布$T\in\mathcal{D} $，定义它与$g\in\mathcal{C} $的乘积$gT$由以下等式给出：
 \begin{definition}[分布与函数的乘法]
     \begin{equation*}
     \left\langle gT,\varphi\right\rangle=\langle T,g\varphi\rangle
 \end{equation*}
 \end{definition}
-$g\varphi$就是普通的函数乘法。现在就可以说，分布集$\mathcal{D} $构成函数环
-$\mathcal{C} $上的模(module)，并且可以验证$\delta$的采样性质：
+$g\varphi$就是普通的函数乘法。现在就可以说，分布集$\mathcal{D} $构成函数环$\mathcal{C} $上的模(module)，并且可以验证$\delta$的采样性质：
 \begin{align*}
      & \left\langle g\delta,\varphi\right\rangle=\langle \delta,g\varphi\rangle=g(0)\varphi(0)=g(0)\langle\delta,\varphi\rangle \Rightarrow  g\delta=g(0)\delta
 \end{align*}
@@ -65,8 +56,7 @@ $\mathcal{C} $上的模(module)，并且可以验证$\delta$的采样性质：
      & \left\langle \delta',\varphi\right\rangle=-\left\langle \delta,\varphi'\right\rangle=-\varphi'(0)
 \end{align*}
 \end{example}
-$\delta$的高阶导数可以依此类推，它们已经难以用类似$\delta(x)$的“函数”描述，但
-可以看到$\delta^{(n)}$作为一个泛函（分布）作用是取测试函数的$(-1)^n$倍的n阶导。
+$\delta$的高阶导数可以依此类推，它们已经难以用类似$\delta(x)$的“函数”描述，但可以看到$\delta^{(n)}$作为一个泛函（分布）作用是取测试函数的$(-1)^n$倍的n阶导。
 
 \begin{example}
 结合以上两定义，可以推导出$\delta^{(n)}$与函数相乘的公式，例如，
@@ -97,7 +87,7 @@ $\delta$的高阶导数可以依此类推，它们已经难以用类似$\delta(x
 \begin{enumerate}
     \item 得自$\mathcal{C} $中函数的无限可微性：$\left\langle T^{(m)},\varphi\right\rangle=(-1)^m\left\langle T,\varphi^{(m)}\right\rangle$.
     \item 显然。
-    \item 只需验证莱布尼兹法则。
+    \item 只需验证莱布尼兹法则，由此容易得到莱布尼兹公式。
           \begin{align*}
               \left\langle (gT)',\varphi\right\rangle & =-\left\langle gT,\varphi'\right\rangle=-\left\langle T,g\varphi'\right\rangle=-\left\langle T,(g\varphi)'-g'\varphi\right\rangle                                            \\
                                            & =\left\langle T',g\varphi\right\rangle+\left\langle T,g'\varphi\right\rangle=\left\langle gT',\varphi\right\rangle+\left\langle g'T,\varphi\right\rangle=\left\langle gT'+g'T,\varphi\right\rangle
@@ -119,11 +109,8 @@ $\delta$的高阶导数可以依此类推，它们已经难以用类似$\delta(x
 \begin{equation}
     \left\langle\mathcal{F}T,\varphi\right\rangle=\left\langle T,\mathcal{F}\varphi\right\rangle
 \end{equation}
-然而，测试函数$\varphi\in\mathcal{C} $的傅里叶变换$\mathcal{F}\varphi$并不属于
-$\mathcal{C} $
-（关于这一点的说明，以及施瓦兹函数类的引出，见\refsub{fourier_close}），这说明测试函数集$\mathcal{C} $在傅里叶分析中的表现不够好，我们需要引入新的测试函数空间，以保证
-$\mathcal{F}\varphi$仍然是测试函数。这个测试函数空间正是\textbf{施瓦兹空间}(Schwartz space)$\mathcal{S} $\cite{brad_osgood_ee261}，它是$\mathbb{R}$上所有无限可微函数的集合，这些函数及其各阶导数都以比任何负幂更快的速度趋于0，即
-\begin{definition}[施瓦兹空间与施瓦兹函数]
+然而，测试函数$\varphi\in\mathcal{C} $的傅里叶变换$\mathcal{F}\varphi$并不属于$\mathcal{C} $（关于这一点的说明，以及施瓦兹函数类的引出，见\refsub{fourier_close}），这说明测试函数集$\mathcal{C} $在傅里叶分析中的表现不够好，我们需要引入新的测试函数空间，以保证$\mathcal{F}\varphi$仍然是测试函数。这个测试函数空间正是\textbf{施瓦兹空间}(Schwartz space)$\mathcal{S} $\cite{brad_osgood_ee261}，它是$\mathbb{R}$上所有无限可微函数的集合，这些函数及其各阶导数都以比任何负幂更快的速度趋于0，即：
+\begin{definition}[施瓦兹空间与施瓦兹函数]\label{def:schwartz}
     \[\mathcal{S} =\left\{\varphi\in C^{\infty}(\mathbb{R} )\left|\lim_{|x|\to\infty}|x|^m\varphi^{(n)}(x)=0,\forall m,n\in\mathbb{N} \right.\right\}\]
     施瓦兹空间中的函数称为\textbf{施瓦兹函数}(Schwartz function)，它们是非常光滑且衰减很快的函数，因此又称为\textbf{速降函数}(rapidly decreasing function)
 \end{definition}

@@ -1,4 +1,4 @@
-\section{傅里叶级数的渐进特性，吉布斯现象}\label{sec:Asymptotic_Behaviour}
+\section{傅里叶级数的渐进特性}\label{sec:Asymptotic_Behaviour}
 
 \subsection{收敛速度的估计}\label{sub:converge_speed}
 在用计算机模拟函数的傅里叶级数展开时，只能取有限项，自然要问计算到多少项时误差足够小，为此，我们不加证明地给出以下定理\cite{brad_osgood_ee261}：
@@ -9,42 +9,6 @@
     \[\max\left|f(t)-S_N^f(t)\right|<\frac{1}{N^{p-\frac{1}{2}}}\]
 其中$C^p(\mathbb{R} )$表示p次连续可导的函数集。
 \end{claim}
-
-\subsection{吉布斯现象}\label{sub:gibbs_phenomenon}
-当$f(t)$不连续时，傅里叶级数的会在间断点处产生\textbf{吉布斯现象} (Gibbs' Phenomenon)：
-\begin{definition}[吉布斯现象]
-    部分和$S_N^f(t)$在间断点处总会\textbf{过冲}（在间断点两侧出现超过原函数的峰值），过冲幅度约为跳变幅度的9\%，并且$S_N^f(t)$会在间断点附近高频振荡
-\end{definition}
-\begin{example}
-    对于跳变幅度为2、周期为$2\pi$的周期矩形脉冲信号
-\[R(x) =
-    \begin{cases}
-        1  & \text{if } 0<x<\pi  \\
-        -1 & \text{if } -\pi<x<0
-    \end{cases}\]
-其傅里叶级数的跳变值为1，$\varlimsup_{N \to \infty}S_N^R(t)=1.089490 \dots$。这是因为光滑的基函数很难逼近这种剧烈的局部变化，不得不用高频分量来补偿，高频分量带来了剧烈震动。
-\end{example}
-$\varlimsup_{N \to \infty}S_N^R(t)>1$并不意味着狄利克雷定理失效，因为定理给出的是逐点收敛：
-\[\varlimsup_{N \to \infty}S_N^R(t)=\lim_{N \to \infty}\sup_{t\in \mathbb{R} }S_N^R(t)\neq \sup_{t\in\mathbb{R}}\lim_{N\to\infty}S_N^R(t)\]
-使极限号与取上界号交换的一个充分条件是一致收敛，吉布斯现象表明，傅里叶级数在包含间断点的区间上不可能一致收敛。
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{gibbs}
-    \caption{吉布斯现象示意图}
-\end{figure}
-
-为了直观地理解它，我们来看一个经典的例子：
-\begin{example}
-    \begin{align*}
-    f_n(x)=
-    \begin{cases}
-        nx   & \text{if } 0<x\leq 1/n        \\
-        2-nx & \text{if } 1/n<x<2/n \\
-        0    & \text{otherwise}
-    \end{cases}
-\end{align*}
-随n增大，$f(x)$逐点趋于0，因为对每一点$2/n$总能取到更小的值；但$f(x)$的最大值永远是1。
-\end{example}
 
 \subsection{狄利克雷核}\label{sub:dirichlet_kernel}
 本小节引入狄利克雷核并介绍它的一些性质，并在下一小节用它来辅助我们对傅里叶级数收敛性的讨论。直接由狄利克雷条件证明收敛性是很困难的，并且需要更加专业的分析学工具，我们将给出更强的条件下的证明，并从这个更强的条件获得一些额外的性质。
@@ -104,7 +68,7 @@ $\varlimsup_{N \to \infty}S_N^R(t)>1$并不意味着狄利克雷定理失效，�
 $D_N(t)$是偶函数，得证。
 \end{proof}
 
-\begin{lemma}[贝塞尔不等式]
+\begin{lemma}[贝塞尔不等式]\label{lemma:bessel_inequality}
 设$ f\in L^2([0,T]),c_n=\dfrac{1}{T}\int_{T}f(t)\mathrm{e}^{-\mathrm{i}k\omega t}\,dt$，则
 \begin{align*}
     \sum_{-\infty}^{\infty}|c_n|^2\leq \frac{1}{T}\int_{T}|f(t)|^2\,dt=\frac{1}{T}\|f\|_2^2
@@ -114,7 +78,7 @@ $D_N(t)$是偶函数，得证。
 \begin{proof}
     \begin{align*}
     \left|f(t)-\sum_{n=-N}^{N}c_n \mathrm{e}^{\mathrm{i}n\omega t}\right|^2 & =\left(f(t)-\sum_{n=-N}^{N}c_n \mathrm{e}^{\mathrm{i}n\omega t}\right)\overline{\left(f(t)-\sum_{n=-N}^{N}c_n \mathrm{e}^{\mathrm{i}n\omega t}\right)}\\
-    & =\left(f(t)-\sum_{n=-N}^{N}c_n \mathrm{e}^{\mathrm{i}n\omega t}\right)\left(\overline{f(t)}-\sum_{n=-N}^{N}c_n \mathrm{e}^{-\mathrm{i}n\omega t}\right)\\
+    & =\left(f(t)-\sum_{n=-N}^{N}c_n \mathrm{e}^{\mathrm{i}n\omega t}\right)\left(\overline{f(t)}-\sum_{n=-N}^{N}\overline{c_n} \mathrm{e}^{-\mathrm{i}n\omega t}\right)\\
     & =|f(t)|^2-\sum_{n=-N}^{N}\left(\overline{c_n}f(t)\mathrm{e}^{\mathrm{i}n\omega t}+c_n \overline{f(t)}\mathrm{e}^{-\mathrm{i}n\omega t}\right)+\sum_{m,n=-N}^{N}c_m \overline{c_n}\mathrm{e}^{\mathrm{i}(m-n)\omega t}
 \end{align*}
 将上式在一个周期上积分，我们知道
@@ -143,16 +107,16 @@ $D_N(t)$是偶函数，得证。
 \begin{align*}
     &S_N^f(t_0)-\frac{f(t_0^+)+f(t_0^-)}{2} \\
     =&\frac{1}{T}\left(\int_{T}f(t_0-\tau)D_N(\tau)\,d\tau-\int_{0}^{\frac{T}{2}}f(t_0^+)D_N(\tau)\,d\tau-\int_{-\frac{T}{2}}^{0}f(t_0^-)D_N(\tau)\,d\tau\right)\\
-    =&\frac{1}{T}\left(\int_{0}^{\frac{T}{2}}(f(t_0-\tau)-f(t_0^+))D_N(\tau)\,d\tau\int_{-\frac{T}{2}}^{0}(f(t_0-\tau)-f(t_0^-))D_N(\tau)\,d\tau\right)
+    =&\frac{1}{T}\left(\int_{0}^{\frac{T}{2}}(f(t_0-\tau)-f(t_0^+))D_N(\tau)\,d\tau+\int_{-\frac{T}{2}}^{0}(f(t_0-\tau)-f(t_0^-))D_N(\tau)\,d\tau\right)
 \end{align*}
-$$S_N^f(t_0)-\frac{f(t_0^+)+f(t_0^-)}{2}=\frac{1}{T}\int_{T}g(t)\left(\mathrm{e}^{\mathrm{i}(N+1)\omega t}-\mathrm{e}^{\mathrm{i}N\omega t}\right)\,dt$$
+$$S_N^f(t_0)-\frac{f(t_0^+)+f(t_0^-)}{2}=\frac{1}{T}\int_{T}g(t)\left(\mathrm{e}^{\mathrm{i}(N+1)\omega t}-\mathrm{e}^{-\mathrm{i}N\omega t}\right)\,dt$$
 其中\begin{align*}
 g(t):=\begin{cases}
 \dfrac{f(t_0+t)-f(t_0^-)}{\mathrm{e}^{\mathrm{i}\omega t}-1} & \text{if }-\frac{T}{2}<t_0<0 \\
 \dfrac{f(t_0+t)-f(t_0^+)}{\mathrm{e}^{\mathrm{i}\omega t}-1} & \text{if }0<t_0<\frac{T}{2}
 \end{cases}
 \end{align*}                        
-由洛必达法则，$t\to 0$时，\[\lim_{t\to 0^+}g(t)=\lim_{t\to 0^+}\frac{f(t_0+t)-f(t_0^+)}{\mathrm{e}^{\mathrm{i}\omega t}-1}=\lim_{t\to 0^+}\frac{f'(t_0+t)}{\mathrm{i}\omega \mathrm{e}^{\mathrm{i}\omega t}}=\lim_{t\to 0^+}\frac{f'(t_0^+)}{\mathrm{i}\omega}\]
+由洛必达法则，$t\to 0$时，\[\lim_{t\to 0^+}g(t)=\lim_{t\to 0^+}\frac{f(t_0+t)-f(t_0^+)}{\mathrm{e}^{\mathrm{i}\omega t}-1}=\lim_{t\to 0^+}\frac{f'(t_0+t)}{\mathrm{i}\omega \mathrm{e}^{\mathrm{i}\omega t}}=\frac{f'(t_0^+)}{\mathrm{i}\omega}\]
 $t\to 0^-$时同理。故g分段连续，当然是平方可积的，由贝塞尔不等式，$g(t)$的傅里叶系数平方和收敛，通项趋于0，$S_N^f(t_0)-\left(f(t_0^+)+f(t_0^-)\right)/2=C_{-(N+1)}-C_N\to 0$，得证。
 \end{proof}
 
@@ -166,11 +130,12 @@ $t\to 0^-$时同理。故g分段连续，当然是平方可积的，由贝塞尔
     以$c_n$为例：
 \begin{align*}
     c'_n & =\frac{1}{T}\int_{T}f'(t)\mathrm{e}^{-\mathrm{i}n\omega t}\,dt\\
-         & =\frac{1}{T}\evalat{f(t)\mathrm{e}^{-\mathrm{i}n\omega t}}{0}{T}+\mathrm{i}n\omega\int_{T}f(t)\mathrm{e}^{-\mathrm{i}n\omega t}\,dt=\mathrm{i}n\omega c_n
+    & =\frac{1}{T}\evalat{f(t)\mathrm{e}^{-\mathrm{i}n\omega t}}{0}{T}+\mathrm{i}n\omega\int_{T}f(t)\mathrm{e}^{-\mathrm{i}n\omega t}\,dt\\
+    &=\mathrm{i}n\omega c_n
 \end{align*}
 \end{proof}
 
-f的原函数F的傅里叶系数同理，并且只要\textbf{分段连续}（见\cref{def:piecewise_continuos}）即可保证f可积，但是我们必须保证F是周期函数，这要求f的直流分量为0：
+$f$的原函数$F$的傅里叶系数同理，并且只要\textbf{分段连续}（\cref{def:piecewise_continuos}）即可保证$f$可积，但是我们必须保证$F$是周期函数，这要求$f$的直流分量为0：
 \[F(t+T)-F(t)=\int_{T}f(t)dt=Tc_0=0,\quad c_0=0\]
 此时，用刚刚得到的公式（2.16）就可直接得到F的傅里叶系数：
 \begin{proposition}[原函数的傅里叶系数]
@@ -189,10 +154,11 @@ $f\in PS([0,T])\implies S_N^f(t)\rightrightarrows f(t)$
 %\end{theorem}
 \begin{proof}
     使用魏尔斯特拉斯M判别法，要证明一致收敛性，只需证明
-    $$\left|\sum_{n=-\infty}^{\infty}c_n \mathrm{e}^{\mathrm{i}n\omega t}\right|\leq \sum_{n=-\infty}^{\infty}|c_n|<\infty$$
+    $$\sum_{n=-\infty}^{\infty}\left|c_n \mathrm{e}^{\mathrm{i}n\omega t}\right|=\sum_{n=-\infty}^{\infty}|c_n|<\infty$$
     记$c'_n$为$f'$的傅里叶系数，$c'_n =\mathrm{i}n\omega c_n$，
     \begin{align*}
-    \sum_{n=-\infty}^{\infty}|c_n|=|c_0|+\sum_{n\neq 0}\left| \frac{c'_n}{n}\right|\leq & |c_0|+\left(\sum_{n\neq 0}\frac{1}{n^2}\right)^{1/2}\left(\sum_{n\neq 0}|c'_n|^2\right)^{1/2}<\infty
+        \sum_{n=-\infty}^{\infty}|c_n|=&|c_0|+\sum_{n\neq 0}\left| \frac{c'_n}{n\omega}\right|\\
+        \leq & |c_0|+\frac{1}{\omega}\left(\sum_{n\neq 0}\frac{1}{n^2}\right)^{1/2}\left(\sum_{n\neq 0}|c'_n|^2\right)^{1/2}<\infty
 \end{align*}
 最后一步使用了柯西-施瓦兹不等式。
 \end{proof}

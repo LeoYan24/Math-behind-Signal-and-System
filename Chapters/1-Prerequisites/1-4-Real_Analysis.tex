@@ -431,7 +431,7 @@ $dm$表示勒贝格测度。
 \end{theorem}
 \begin{proof}
     令$\alpha=\int_0^1 f(t)\,dt$，任取$m\in[\phi'(\alpha-),\phi'(\alpha+)]$，则$\phi$的图像在点$(\alpha,\phi(\alpha))$处有支撑线（即恒在$\phi$的图像下方的直线）$y=m(x-\alpha)+\phi(\alpha)$，满足\begin{align*}
-        \forall t\in\mathbb{R},\phi(t)\geq m(t-\alpha)+\phi(\alpha)
+        \forall t\in\mathbb{R},\quad \phi(t)\geq m(t-\alpha)+\phi(\alpha)
     \end{align*}
     因此\begin{align*}
         \phi(f(x))\geq m(f(x)-\alpha)+\phi(\alpha)
@@ -541,13 +541,13 @@ Minkowski不等式与以下不等式等价：
 对于无限测度集，$L^p$空间互不包含。例如，\refsub{int_sin}中指出采样函数在$\mathbb{R} $上条件可积而不绝对可积，因此$\sin t/t\notin L^1(\mathbb{R} )$，但容易验证，$\sin t/t\in L^2(\mathbb{R} )$。
 
 $L^p$空间的完备性证明较为复杂，我们仅仅给出结论：
-\begin{claim}[Riesz-Fischer定理]
+\begin{claim}[Riesz-Fischer定理]\label{claim:Lp_complete}
     设$E$可测，$1\leq p\leq \infty$，则$L^p(E)$空间是完备的。
 \end{claim}
 容易由$L^p(\mathbb{R} )$的完备性推知$l^p$空间的完备性。至此，我们证明了：\textbf{$L^p$空间和$l^p$空间都是完备的线性赋范空间，即Banach空间}。
 
 另外，在$p=2$时，容易给出$L^2(E)$空间的内积（$l^2$空间同理）：
-\begin{definition}[$L^2$空间的内积]
+\begin{definition}[$L^2$空间的内积]\label{def:L2_inner_product}
     设$E$可测，定义$L^2(E)$空间的内积为
     \[(f,g)=\int_{E}f\cdot \overline{g}\,dm\]
 \end{definition}
@@ -579,37 +579,54 @@ $$(f,f)=\int_{E}|f|^2\,dm=E$$
 
 %可以认为，$\mathcal{R} $是一个从$L^q(E)$到$[L^p(E)]^*$的映射。根据上述定理，$\mathcal{R} $是同构映射，\textbf{线性赋范空间$L^q(E)$与$[L^p(E)]^*$同构}。
 
-\subsection{正交函数系}\label{sub:orthognal}
+\subsection{正交函数系与三角多项式}\label{sub:orthognal}
 \begin{definition}[正交基]
-    如果有内积空间$V$的一组基$\{\mathbf{v}_1,\mathbf{v}_2,\dots ,\mathbf{v}_n\}$，满足$\langle \mathbf{v}_i,\mathbf{v}_j\rangle =0,i \neq j$，则称这组基是一组\textbf{正交基}(orthognal bases)。\\如果对$V$中任一向量$\mathbf{w}$，均有以下分解式：
+    如果有内积空间$V$的一组基$\{\mathbf{v}_1,\mathbf{v}_2,\dots ,\mathbf{v}_n\}$，满足$\langle \mathbf{v}_i,\mathbf{v}_j\rangle =0,i \neq j$，则称这组基是一组\textbf{正交基}(orthognal bases)。\\
+    如果对$V$中任一向量$\mathbf{w}$，均可以表示为这组基的线性组合：
     \[\mathbf{w}=\sum_{i = 1}^{n}  c_i \mathbf{v}_i\]
-则这组基是\textbf{完备正交基}(complete orthognal bases)。\\
-如果$\{\mathbf{v}_1,\mathbf{v}_2,\dots ,\mathbf{v}_n\}$还满足$\langle \mathbf{v}_i,\mathbf{v}_i\rangle =1,i\in \{1,2,\dots ,n\}$，称这组基是\textbf{标准完备正交基} (complete othornormal bases)，此时空间中任意向量均有分解式
-\begin{align*}
-    \mathbf{w}=\sum_{i=1}^{n}\langle \mathbf{w},\mathbf{v}_i\rangle \mathbf{v}_i
-\end{align*}
+    则这组基是\textbf{完备正交基}(complete orthognal bases)。\\
+    如果$\{\mathbf{v}_1,\mathbf{v}_2,\dots ,\mathbf{v}_n\}$还满足$\langle \mathbf{v}_i,\mathbf{v}_i\rangle =1,i\in \{1,2,\dots ,n\}$，称这组基是\textbf{标准完备正交基} (complete othornormal bases)。
 \end{definition}
-我们对向量在标准正交基下的分解式做一些解释。在$\{\mathbf{v}_1,\mathbf{v}_2,\dots ,\mathbf{v}_n\}$是完备正交基的情况下，就可以将$\mathbf{w}=\sum_{i = 1}^{n}  c_i \mathbf{v}_i$两边同时对$\mathbf{v}_j$做内积，得到
-\begin{align*}
-    \langle \mathbf{w},\mathbf{v}_j \rangle=\left\langle \sum_{i = 1}^{n}  c_i \mathbf{v}_i,\mathbf{v}_j \right\rangle =c_j\left\langle \mathbf{v}_j,\mathbf{v}_j \right\rangle \\
-    c_j=\frac{\langle \mathbf{w},\mathbf{v}_j \rangle}{\langle \mathbf{v}_j,\mathbf{v}_j \rangle},
-    \mathbf{w}=\sum_{j = 1}^{n}  \frac{\langle \mathbf{w},\quad\mathbf{v}_j \rangle}{\langle \mathbf{v}_j,\mathbf{v}_j \rangle} \mathbf{v}_j
-\end{align*}
-而标准正交基是$\langle \mathbf{v}_j,\mathbf{v}_j \rangle=1$的情况。
 
-给出了标准完备正交基后，就可以得到以下命题，它是勾股定理的高维推广。
-\begin{proposition}[勾股定理/毕达哥拉斯恒等式]
-    \[|\mathbf{w}|^2=\sum_{i=1}^{n}|\langle\mathbf{w,v}_i\rangle|^2|\mathbf{v}_i|^2=\sum_{i=1}^{n}|\langle\mathbf{w,v}_i\rangle|^2\]
-\end{proposition}
-直接将$\mathbf{w}$与自己做内积并将之前得到的分解式带入，很容易证明这个命题。
-\begin{proof}\begin{align*}
+\begin{theorem}\label{thm:vector_decomposition}
+    设内积空间$V$有完备正交基$\{\mathbf{v}_1,\mathbf{v}_2,\dots ,\mathbf{v}_n\}$，则此空间中任意向量均有分解式
+    \begin{align*}
+        \mathbf{w}=\sum_{i=1}^{n}\frac{\langle \mathbf{w},\mathbf{v}_j \rangle}{\langle \mathbf{v}_j,\mathbf{v}_j \rangle}\mathbf{v}_i
+    \end{align*}
+    特别地，如果$\{\mathbf{v}_1,\mathbf{v}_2,\dots ,\mathbf{v}_n\}$是标准完备正交基，则
+    \begin{align*}
+        \mathbf{w}=\sum_{i=1}^{n}\langle \mathbf{w},\mathbf{v}_j \rangle\mathbf{v}_i
+    \end{align*}
+\end{theorem}
+\begin{proof}
+    将$\mathbf{w}=\sum_{i = 1}^{n}  c_i \mathbf{v}_i$两边同时对$\mathbf{v}_j$做内积，得到：
+    \begin{align*}
+        \langle \mathbf{w},\mathbf{v}_j \rangle=\left\langle \sum_{i = 1}^{n}  c_i \mathbf{v}_i,\mathbf{v}_j \right\rangle =c_j\left\langle \mathbf{v}_j,\mathbf{v}_j \right\rangle 
+    \end{align*}
+    因此\begin{align*}
+            c_j=\frac{\langle \mathbf{w},\mathbf{v}_j \rangle}{\langle \mathbf{v}_j,\mathbf{v}_j \rangle},\quad\mathbf{w}=\sum_{j = 1}^{n}  \frac{\langle \mathbf{w},\mathbf{v}_j \rangle}{\langle \mathbf{v}_j,\mathbf{v}_j \rangle} \mathbf{v}_j
+        \end{align*}
+    对于标准正交基，有$\langle \mathbf{v}_j,\mathbf{v}_j \rangle=1$.
+\end{proof}
+
+以下定理是勾股定理的高维推广：
+\begin{theorem}[毕达哥拉斯定理]\label{thm:gougu}
+    设内积空间$V$有完备正交基$\{\mathbf{v}_1,\mathbf{v}_2,\dots ,\mathbf{v}_n\}$，则
+    \[|\mathbf{w}|^2=\sum_{i=1}^{n}|\langle\mathbf{w,v}_i\rangle|^2|\mathbf{v}_i|^2\]
+    特别地，如果$\{\mathbf{v}_1,\mathbf{v}_2,\dots ,\mathbf{v}_n\}$是标准完备正交基，则
+    $$|\mathbf{w}|^2=\sum_{i=1}^{n}|\langle\mathbf{w,v}_i\rangle|^2$$
+\end{theorem}
+\begin{proof}
+    直接将$\mathbf{w}$与自己做内积并带入\cref{thm:vector_decomposition}，得到
+    \begin{align*}
     |\mathbf{w}|^2 & =\left\langle \sum_{i=1}^{n}\langle \mathbf{w},\mathbf{v}_i\rangle \mathbf{v}_i,\sum_{i=1}^{n}\langle \mathbf{w},\mathbf{v}_i\rangle \mathbf{v}_i\right\rangle                                           \\
                    & =\sum_{i=1}^{n}|\langle\mathbf{w,v}_i\rangle|^2\langle\mathbf{v}_i,\mathbf{v}_i\rangle+\sum_{1\leq i<j\leq n}\langle \mathbf{w,v}_i\rangle\langle \mathbf{w,v}_j\rangle\langle \mathbf{v}_i,\mathbf{v}_j\rangle \\
-                   & =\sum_{i=1}^{n}|\langle\mathbf{w,v}_i\rangle|^2|\mathbf{v}_i|^2=\sum_{i=1}^{n}|\langle\mathbf{w,v}_i\rangle|^2
-\end{align*}\end{proof}
+                   & =\sum_{i=1}^{n}|\langle\mathbf{w,v}_i\rangle|^2|\mathbf{v}_i|^2
+\end{align*}
+\end{proof}
 可见做正交基分解能够极大地简化对线性赋范空间的研究。
 
-我们知道，$L^2([0,T])$空间是完备的内积空间（见\refsub{Lp_space}），在这个空间上可以定义内积：
+我们知道，$L^2([0,T])$空间是完备的内积空间（\cref{claim:Lp_complete}），重述内积的定义\cref{def:L2_inner_product}如下：
 \begin{definition}[函数空间上的内积]
     在空间\[L^2([0,T]):=\left\{f:[0,T]\rightarrow \mathbb{C} \left| \int_{T}|f(t)|^2\,\text dt<\infty\right.\right\}\]
 上定义内积：
@@ -619,7 +636,7 @@ $$(f,f)=\int_{E}|f|^2\,dm=E$$
 有了内积，就可以定义正交性，从而有正交函数系的概念：
 \begin{definition}[正交函数系]
     在$L^2([0,T])$空间中，如果函数列$\{f_i(t)\}_{i=1}^{\infty}$满足
-\[(f_i,f_j)=\int_{T}f_i(t)f_j^*(t)\,dt=0,i\neq j\]
+\[(f_i,f_j)=\int_{T}f_i(t)f_j^*(t)\,dt=0,\quad i\neq j\]
 则称$\{f_i(t)\}_{i=1}^{\infty}$为$L^2([0,T])$空间中的一组\textbf{正交函数系}。
 \end{definition}
 
@@ -627,8 +644,11 @@ $$(f,f)=\int_{E}|f|^2\,dm=E$$
     对于一个正交函数系$\{f_i(t)\}_{i=1}^{\infty}$，如果不存在非零的函数$g(t)\notin\{f_i(t)\}_{i=1}^{\infty}$使得$g(t)$与$\{f_i(t)\}_{i=1}^{\infty}$中的所有函数正交，就称$\{f_i(t)\}_{i=1}^{\infty}$为\textbf{完备正交函数系}
 \end{definition}
 
-完备性意味着$L^2([0,T])$空间中的任一函数$f(t)$均可分解为这个函数系的级数$\sum_{i = 1}^{\infty}  a_i f_i(t)$，我们沿用前文中给出的公式计算这些系数：
+完备性意味着$L^2([0,T])$空间中的任一函数$f(t)$均可分解为这个函数系的级数$\sum_{i = 1}^{\infty}  a_i f_i(t)$，我们沿用\cref{thm:vector_decomposition}计算这些系数：
 \[a_i=\frac{(g,f_i)}{(f_i,f_i)}=\frac{\int_{T}g(t)f_i^*(t)\,dt}{\int_{T}|f_i(t)|^2\,dt}\]
 细心的读者可能已经发现，这里得到的公式用到了有限维线性空间中的结论，但要推广到无限维线性空间并不是显然的。我们将在\refsub{paseval}中给出帕塞瓦尔恒等式之后一并讨论这个问题。
 
-在适当的伸缩变换下，\refsub{bessel}中介绍的贝塞尔函数就是一个完备正交函数，傅里叶级数理论也是建立在完备正交函数系的基础之上的。此外，典型的标准完备正交函数系还有勒让德多项式 (Legendre polynomials)、小波变换基函数 (wavelet basis functions)等，下面仅讨论三角函数系和指数函数系。
+在下一章中我们将看到，三角函数系和指数函数系都是完备正交函数系，是傅里叶级数理论的基础。在添加适当权函数的前提下，\ref{sub:chebychev_polynomial}中介绍的切比雪夫多项式以及\refsub{bessel}中介绍的贝塞尔函数都是完备正交函数系；此外，典型的标准完备正交函数系还有勒让德多项式 (Legendre polynomials)、小波变换基函数 (wavelet basis functions)等。
+
+本书仅讨论三角函数系和指数函数系，它们的本质上都是\refsub{chebychev_polynomial}中介绍的\textbf{三角多项式}的延申。
+
