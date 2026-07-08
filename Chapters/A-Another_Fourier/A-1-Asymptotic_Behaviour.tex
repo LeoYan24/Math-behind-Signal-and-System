@@ -1,15 +1,5 @@
 \section{傅里叶级数的渐进特性}\label{sec:Asymptotic_Behaviour}
 
-\subsection{收敛速度的估计}\label{sub:converge_speed}
-在用计算机模拟函数的傅里叶级数展开时，只能取有限项，自然要问计算到多少项时误差足够小，为此，我们不加证明地给出以下定理\cite{brad_osgood_ee261}：
-\begin{claim}
-    设$f\in C^p(\mathbb{R} )(p\geq1)$是周期函数，其傅里叶系数为$c_k$，部分和
-    \[S_N^f(t)=\sum_{k=-N}^{N}c_k \mathrm{e}^{\mathrm{i}k\omega t}\]
-    在$\mathbb{R} $上逐点收敛、内闭一致收敛，且
-    \[\max\left|f(t)-S_N^f(t)\right|<\frac{1}{N^{p-\frac{1}{2}}}\]
-其中$C^p(\mathbb{R} )$表示p次连续可导的函数集。
-\end{claim}
-
 \subsection{狄利克雷核}\label{sub:dirichlet_kernel}
 本小节引入狄利克雷核并介绍它的一些性质，并在下一小节用它来辅助我们对傅里叶级数收敛性的讨论。直接由狄利克雷条件证明收敛性是很困难的，并且需要更加专业的分析学工具，我们将给出更强的条件下的证明，并从这个更强的条件获得一些额外的性质。
 
@@ -71,7 +61,7 @@ $D_N(t)$是偶函数，得证。
 \begin{lemma}[贝塞尔不等式]\label{lemma:bessel_inequality}
 设$ f\in L^2([0,T]),c_n=\dfrac{1}{T}\int_{T}f(t)\mathrm{e}^{-\mathrm{i}k\omega t}\,dt$，则
 \begin{align*}
-    \sum_{-\infty}^{\infty}|c_n|^2\leq \frac{1}{T}\int_{T}|f(t)|^2\,dt=\frac{1}{T}\|f\|_2^2
+    \sum_{n=-\infty}^{\infty}|c_n|^2\leq \frac{1}{T}\int_{T}|f(t)|^2\,dt=\frac{1}{T}\|f\|_2^2
 \end{align*}
 \end{lemma}
 它给出了傅里叶系数平方和的上界的估计。由此可以看出$c_n\to 0,n\to\infty$.
@@ -101,6 +91,7 @@ $D_N(t)$是偶函数，得证。
 
 我们研究的多数函数是分段光滑的。分段光滑会带来一些额外的性质，例如，可以相对简单地证明逐点收敛性：
 \begin{theorem}[傅里叶级数的逐点收敛性]
+    设$f\in PS(\mathbb{R})$是周期函数，其傅里叶级数的部分和为$S_N^f(t)$，则
     \[\lim_{N\to\infty}S_N^f(t_0)=\frac{f(t_0+)+f(t_0-)}{2}\]
 \end{theorem}
 \begin{proof}
@@ -122,6 +113,8 @@ $t\to 0^-$时同理。故g分段连续，当然是平方可积的，由贝塞尔
 
 在分段光滑的条件下，容易得到$f'(t)$的傅里叶系数，注意微积分基本定理可以分区间使用：
 \begin{proposition}[导函数的傅里叶系数]
+    \label{prop:derivative_fourier_series}
+    设周期函数$f(t)\in PS(\mathbb{R} )$的基波角频率为$\omega$，三角形式的傅里叶系数为$\{a_n\}_{n=0}^\infty$和$\{b_n\}_{n=1}^\infty$复指数形式的傅里叶系数为$\{c_n\}_{n\in\mathbb{Z} }$，则其导函数$f'(t)$的对应的傅里叶系数为：
     \begin{equation*}
     a'_n=n\omega b_n,\quad b'_n=-n\omega a_n,\quad c'_n=\mathrm{i}n\omega c_n
 \end{equation*}
@@ -137,15 +130,18 @@ $t\to 0^-$时同理。故g分段连续，当然是平方可积的，由贝塞尔
 
 $f$的原函数$F$的傅里叶系数同理，并且只要\textbf{分段连续}（\cref{def:piecewise_continuos}）即可保证$f$可积，但是我们必须保证$F$是周期函数，这要求$f$的直流分量为0：
 \[F(t+T)-F(t)=\int_{T}f(t)dt=Tc_0=0,\quad c_0=0\]
-此时，用刚刚得到的公式（2.16）就可直接得到F的傅里叶系数：
+此时，用刚刚得到的\cref{prop:derivative_fourier_series}就可直接得到$F$的傅里叶系数：
 \begin{proposition}[原函数的傅里叶系数]
+    \label{prop:integral_fourier_series}
+    设周期函数$f(t)\in PS(\mathbb{R} )$的基波角频率为$\omega$，三角形式的傅里叶系数为$\{a_n\}_{n=0}^\infty$和$\{b_n\}_{n=1}^\infty$复指数形式的傅里叶系数为$\{c_n\}_{n\in\mathbb{Z} }$，且直流分量$a_0/2=c_0=0$，则其原函数$F$的对应的傅里叶系数为：
     \begin{equation*}
-    A_n=\frac{a_n}{n\omega},\quad B_n=\frac{b_n}{n\omega},\quad C_n=\frac{c_n}{\mathrm{i}n\omega}
-\end{equation*}
+        A_n=\frac{a_n}{n\omega},\quad B_n=\frac{b_n}{n\omega},\quad C_n=\frac{c_n}{\mathrm{i}n\omega}
+    \end{equation*}
+    直流分量$A_0/2=C_0$仅依赖于不定积分的常数$C$.
 \end{proposition}
 
 分段光滑还能推出傅里叶级数的\textbf{一致收敛性}：
-\begin{theorem}
+\begin{theorem}\label{thm:uniform_convergency}
 $f\in PS([0,T])\implies S_N^f(t)\rightrightarrows f(t)$
 \end{theorem}
 
@@ -164,3 +160,40 @@ $f\in PS([0,T])\implies S_N^f(t)\rightrightarrows f(t)$
 \end{proof}
 
 请读者思考：我们探究了指数形式傅里叶级数收敛的条件，对于三角函数形式的傅里叶级数应该怎么办？
+
+\subsection{收敛速度的估计}\label{sub:converge_speed}
+
+\begin{theorem}\label{thm:converge_speed}
+    设$f\in C^p(\mathbb{R} )(p\geq1)$是周期函数，其傅里叶系数为$c_k$，部分和
+    \[S_N^f(t)=\sum_{k=-N}^{N}c_k \mathrm{e}^{\mathrm{i}k\omega t}\]
+    在$\mathbb{R} $上逐点收敛、内闭一致收敛，且
+    \[\max\left|f(t)-S_N^f(t)\right|<\frac{C}{N^{p-0.5}}\]
+    其中$C$为常数。
+\end{theorem}
+\begin{proof}
+    内闭一致收敛性是\cref{thm:uniform_convergency}的推论。根据\cref{prop:derivative_fourier_series}，$f^{(p)}(t)$的复指数形式的傅里叶系数为
+    $$c^{(p)}_k=(\im k\omega)^p c_k$$
+    因此
+    \begin{align*}
+        \max\left|f(t)-S_N^f(t)\right|&= \max\left|\sum_{k=N+1}^\infty c_k\e^{\im k\omega t}+\sum_{k=-\infty}^{-(N+1)}c_k\e^{\im k\omega t}\right|\le\sum_{|k|>N}|c_k|=\sum_{|k|>N}\frac{|c_k^{(p)}|}{(k\omega)^p}
+    \end{align*}
+    由柯西不等式可得：
+    \begin{align*}
+        \sum_{|k|>N}\frac{|c_k^{(p)}|}{(k\omega)^p}&\le\left(\sum_{|k|>N}\frac{1}{(k\omega)^{2p}}\right)^{1/2}\left(\sum_{|k|>N}|c^{(p)}_k|^2\right)^{1/2}\\
+        &<\frac{1}{\omega^{p}}\left(\sum_{|k|>N}\frac{1}{k^{2p}}\right)^{1/2}\left(\sum_{k\in\mathbb{Z}}|c^{(p)}_k|^2\right)^{1/2}
+    \end{align*}
+    $f\in C^p(\mathbb{R} )$表明$f^{(p)}(t)$是连续函数，因此$f^{(p)}(t)\in L^2([0,T])$，由\cref{lemma:bessel_inequality}可得：
+    $$\sum_{k\in\mathbb{Z}}\left|c^{(p)}_k\right|^2\le\frac{1}{T}\left\|f^{(p)}\right\|_2^2<\infty$$
+    因此
+    \begin{align*}
+        \sum_{|k|>N}\frac{|c_k^{(p)}|}{(k\omega)^p}&<\frac{\|f^{(p)}\|_2}{\sqrt{T}\omega^{p}}\left(\sum_{|k|>N}\frac{1}{k^{2p}}\right)^{1/2}
+    \end{align*}
+    利用
+    $$\int_{k}^{k+1}\frac{dx}{x^{2p}}<\frac{1}{k^{2p}}<\int_{k-1}^k\frac{dx}{x^{2p}}$$
+    对$k$求和，得到
+    \begin{align*}
+        \sum_{k=N+1}^\infty\frac{1}{k^{2p}}&<\int_{N}^\infty\frac{dx}{x^{2p}}=\evalat{-\frac{1}{(2p-1)x^{2p-1}}}{N}{\infty}=\frac{1}{(2p-1)N^{2p-1}}
+    \end{align*}
+    因此
+    $$\max\left|f(t)-S_N^f(t)\right|<\frac{2\|f^{(p)}\|_2}{\sqrt{(2p-1)T}\omega^{p}}\cdot\frac{1}{N^{p-0.5}}$$
+\end{proof}

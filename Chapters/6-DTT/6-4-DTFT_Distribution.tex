@@ -1,0 +1,280 @@
+\section{分布与离散信号分析}\label{sec:Discrete_Distribution}
+
+如何分析$l^1$以外的离散信号，例如$x[n]=\cos(\Omega_0 n)$的频率成分？
+
+一种直接的想法是利用z变换。然而，\refsub{dtft}中指出，离散信号频谱在z变换的收敛域包含单位元的情况下就是z变换在单位圆上的取值，当单位圆不在z变换的收敛域中时，这一方法就失效了——对于$l^1$以外的信号，z变换仅仅是一种变换域分析的手段，无法展示信号的频率成分。例如，对于$x[n]=\cos(\Omega_0 n)$，根据\cref{def:ROC}，$r=R=1$，$x[n]$的z变换没有收敛域。
+
+可见，目前为止，我们还没有一种合适的工具来分析此类信号，包括最基本的离散复指数信号和离散正余弦信号。直观上，我们需要引入冲击项$\delta$来描述这些信号的频谱，需要做的工作与\refsec{Distributions}是类似的。
+
+\subsection{离散时间傅里叶变换的分布理论}\label{sub:DTFT_distribution}
+
+\begin{definition}[测试函数]
+    在DTFT中，测试函数空间$\mathcal{C}$为周期为$2\pi$的光滑函数（即无限阶可导的函数），其中的元素称为\textbf{测试函数}。
+\end{definition}
+
+\begin{definition}[速降离散信号]
+    如果离散信号$\phi[n]$的衰减速度比任意多项式更快：
+    $$\lim_{|n|\to\infty}|n|^k\phi[n]=0,\quad \forall k\in\mathbb{N}$$
+    则称$\phi[n]$是速降离散信号，将速降离散信号空间记为$\mathcal{S}$.
+\end{definition}
+
+\begin{proposition}
+    设$\Phi(\Omega)$是周期为$2\pi$的函数，其傅里叶系数记为$\phi[n]$，则：
+    $$\phi[n]\in\mathcal{S}\iff \Phi(\Omega)\in\mathcal{C}$$
+\end{proposition}
+证明此命题需要用到附录中的结论。
+\begin{proof}
+    一方面，当$\phi[n]\in\mathcal{S}$时，DTFT满足
+    \begin{align*}
+        \left|\Phi(\Omega)\right|=\left|\sum_{n=-\infty}^\infty \phi[n]\e^{\im\Omega n}\right|\le \sum_{n=-\infty}^\infty |\phi[n]|
+    \end{align*}
+    容易由$\phi[n]\in\mathcal{S}$的定义得到$\sum_{n=-\infty}^\infty |\phi[n]|<\infty$，根据魏尔斯特拉斯M判别法，$\sum_{n=-\infty}^\infty \phi[n]\e^{\im\Omega n}$是一致收敛的函数项级数，逐项求导所得的函数项级数为：
+    \begin{align*}
+        \sum_{n=-\infty}^\infty \phi[n]\left(\e^{\im\Omega n}\right)'=\im\sum_{n=-\infty}^\infty n\phi[n]\e^{\im\Omega n}
+    \end{align*}
+    类似可得：
+    $$\phi[n]\in\mathcal{S}\implies n\phi[n]\in\mathcal{S}\implies \im\sum_{n=-\infty}^\infty n\phi[n]\e^{\im\Omega n}\text{一致收敛}$$
+    因此$\Phi'(\Omega)$可导，并且
+    $$\Phi'(\Omega)=\im\sum_{n=-\infty}^\infty n\phi[n]\e^{\im\Omega n}$$
+    可以归纳地重复上述过程，最终得到$\Phi(\Omega)\in\mathcal{C}$.
+    
+    另一方面，根据\cref{thm:converge_speed}，$\Phi(\Omega)\in\mathcal{C}\implies\phi[n]\in\mathcal{S}$.
+\end{proof}
+
+\begin{definition}[缓增离散信号]
+    如果存在常数$C$和$k\in\mathbb{N}$，使得
+    $$|x[n]|\le C(1+|n|)^k,\quad\forall n\in\mathbb{Z}$$
+    则称$x[n]$是\textbf{缓增离散信号}，将缓增离散信号空间记为$\mathcal{T}$.
+\end{definition}
+
+使用该定义描述缓增离散信号是合理的：$(1+|n|)^k$中，1放宽了对信号在$|n|$较小时的要求，而$|n|^k$描述离散信号递增速度不超过$k$次的多项式。
+
+$\mathcal{C}$的对偶空间是分布空间$\mathcal{D}$，速降离散信号空间$\mathcal{S}$的对偶空间是缓增离散信号空间$\mathcal{T}$.
+
+下面定义时域和频域信号的配对。设$x[n],\phi[n]\in l^1\cap l^2$，$X(\e^{\im\Omega})$为$x[n]$的DTFT，$\phi[n]$为$\Phi(\Omega)$的傅里叶系数，则
+$$\IDTFT(\Phi(\Omega))[n]=\frac{1}{2\pi}\int_{-\pi}^\pi \Phi(\Omega)\e^{\im\Omega n}\,d\Omega=\phi[-n]$$
+在\cref{thm:DTFT_plancherel}中取$y[n]=\overline{\phi[n]}$，则$Y(\e^{\im\Omega})=\overline{\Phi(\Omega)}$，得到：
+$$\sum_{n=-\infty}^\infty x[n]\phi[n]=\frac{1}{2\pi}\int_{-\pi}^\pi X(\e^{\im\Omega})\Phi(\Omega)\,d\Omega$$
+
+对于分布做同样的定义：
+
+\begin{definition}[配对]
+    时域信号的\textbf{配对}(pairing)定义为：
+    $$\langle x,\phi\rangle=\sum_{n=-\infty}^\infty x[n]\phi[n],\quad x\in \mathcal{T},\phi\in\mathcal{S}$$
+    其中$x[n]$为缓增离散信号而$\phi[n]$为速降离散信号。
+
+    数字角频域信号的配对定义为：
+    $$\langle X,\Phi\rangle=\frac{1}{2\pi}\int_{-\pi}^\pi X(\e^{\im\Omega})\Phi(\Omega)\,d\Omega,\quad X\in\mathcal{D},\Phi\in\mathcal{C}$$
+\end{definition}
+
+\begin{definition}[缓增离散信号的离散时间傅里叶变换]
+    对于缓增离散信号$x[n]$，称分布$X$是$x[n]$的DTFT，如果：
+    $$\langle X,\Phi\rangle=\langle x,\phi\rangle,\quad \forall \phi\in\mathcal{S}$$
+\end{definition}
+
+\begin{example}[复指数信号的离散时间傅里叶变换]
+    求复指数信号$x[n]=\e^{\im\Omega_0 n}$的DTFT.
+
+    解：记$x[n]$的DTFT为$X$，由定义，
+    $$\langle X,\Phi\rangle=\langle x,\phi\rangle=\sum_{n=-\infty}^{\infty}\e^{\im\Omega_0 n}\phi[n],\quad \forall \phi\in\mathcal{S}$$
+    光滑函数的傅里叶级数一致收敛于自身（\cref{thm:uniform_convergency}），因此
+    $$\Phi(\Omega)=\sum_{n=-\infty}^\infty \phi[n]\e^{\im\Omega n}$$
+    可见
+    $$\langle X,\Phi\rangle=\sum_{n=-\infty}^{\infty}\e^{\im\Omega_0 n}\phi[n]=\Phi(\e^{\im\Omega_0})=\langle \delta_{\Omega_0},\Phi\rangle$$
+    数字角频域总是以$2\pi$为周期的，根据以往的经验，$x[n]$的DTFT应该是以下周期分布：
+    $$X=\sum_{k=-\infty}^{\infty}\delta_{\Omega_0+2\pi k}=\tau_{\Omega_0}\shah_{2\pi}$$
+    其中，平移算子$\tau$的定义可以参考\cref{def:distribution_delay}，$\shah_{2\pi}$是\cref{def:shah}给出的以$2\pi$为周期的狄拉克梳状分布。
+
+    但是，事实上，我们不需要采用像$\tau_{\Omega_0}\shah_{2\pi}$这么复杂的符号，这一方面是因为$\delta_{\Omega_0}$已经足以描述$X$的行为，并且其意义是不言自明的；另一方面，从本节中对于配对的定义可以看出，$\mathcal{C,D}$是否进行周期化并不影响分布的运算，换言之，$\delta_{\Omega_0}$和$\tau_{\Omega_0}\shah_{2\pi}$在$\mathcal{D}$中\textbf{完全是同一个分布}。因此，$X=\delta_{\Omega_0}$.
+\end{example}
+
+在开始讨论分布理论中的DTFT的性质之前，我们仿照\refsec{Distributions}给出以下定义。
+
+\begin{definition}[分布与函数的乘法]
+    设$X\in\mathcal{D},g,\Phi\in\mathcal{C}$，则$g$与$X$的乘积$gX$由下式定义：
+    $$\langle gX,\Phi\rangle=\langle X,g\Phi\rangle$$
+\end{definition}
+
+\begin{definition}[分布的微分]
+    设$X\in\mathcal{D},\Phi\in\mathcal{C}$，则$X$的微分$X'$由下式定义：
+    $$\langle X',\Phi\rangle=-\langle X,\Phi'\rangle$$
+\end{definition}
+
+\begin{definition}[分布的平移与伸缩]
+    设$X\in\mathcal{D},\Phi\in\mathcal{C}$，则$X$向右平移$\Omega_0$所得分布记为$\tau_{\Omega_0}X$，满足：
+    $$\langle \tau_{\Omega_0}X,\Phi \rangle=\langle X,\tau_{-\Omega_0}\Phi \rangle$$
+    $\sigma_a X$由下式定义：
+    $$\langle \sigma_a X,\Phi \rangle=\left\langle X,\frac{1}{|a|}\sigma_{1/a}\Phi \right\rangle$$
+    特别地，$a=-1$时，$\sigma_{a}X$就是$X$的翻转，记作$X^-$.$\langle X^-,\Phi \rangle=\left\langle X,\Phi^- \right\rangle$.
+\end{definition}
+
+\begin{definition}[分布的共轭]
+    设$X\in\mathcal{D},\Phi\in\mathcal{C}$，则$X$的共轭$\overline{X}$由下式定义：
+    $$\langle \overline{X},\Phi\rangle=\overline{\langle X,\overline{\Phi}\rangle}$$
+    由此可以定义分布的实部与虚部：
+    $$\mathrm{Re}(X)=\frac{X+\overline{X}}{2},\quad \mathrm{Im}(X)=\frac{X-\overline{X}}{2\im}$$
+\end{definition}
+
+\begin{definition}[分布的卷积]
+    设$X,Y\in\mathcal{D},\Phi\in\mathcal{C}$，则$X,Y$的周期卷积为
+    $$\langle X*Y,\Phi\rangle=\langle X(u),\langle Y(v),\Phi(u+v)\rangle\rangle$$
+\end{definition}
+与\cref{def:conv_distr_distr}不同，由于是有限区间上的积分，分布的卷积总是有定义的。%与\cref{exmp:associative_loss}的比较？
+
+请读者自行验证上述定义对于正则分布成立。周期函数的卷积见\ref{def:period_conv}。
+
+容易验证，对于时域的配对而言，同样有：
+$$\langle gx,\phi\rangle=\langle x,g\phi\rangle,\quad \langle \tau_{n_0}x,\phi \rangle=\langle x,\tau_{-n_0}\phi \rangle,\quad \langle \overline{x},\phi\rangle=\overline{\langle x,\overline{\phi}\rangle},\quad x,\phi,g\in\mathcal{S},n_0\in\mathbb{Z}$$
+
+此外，设$x\in\mathcal{T},\phi\in\mathcal{S}$，考虑将时域卷积写成配对的形式：
+$$\langle x*y,\phi\rangle=\langle x,(y^-)*\phi\rangle$$
+此时我们希望$$x*y\in\mathcal{T},\quad (y^-)*\phi\in\mathcal{S}$$
+与模拟信号的情况一样，可以有多种条件用来保证这一点，其中一种条件为$y\in\mathcal{S}$，这也是我们之后主要考虑的情况。
+
+\subsection{离散时间傅里叶变换的分布的运算性质}\label{sub:DTFT_distribution_operation}
+
+本小节中依次验证\refsub{property_of_dtft}中的DTFT的性质。不做特殊说明时默认:
+$$x[n],y[n]\in\mathcal{T},\quad \phi[n]\in\mathcal{S}$$
+并用符号$X,Y\in\mathcal{D}$表示$x,y$的DTFT，$\phi[n]$是$\Phi(\Omega)$的傅里叶系数，即用$\Phi(\Omega)\in\mathcal{C}$表示$\phi^-$的DTFT.
+
+\begin{proposition}[线性性]
+    $$\DTFT(ax[n]+by[n])=aX+bY,\quad\forall a,b\in\mathbb{C}$$
+\end{proposition}
+该命题直接得自配对$\langle\cdot,\cdot\rangle$对两个变元的线性性。
+
+\begin{proposition}[时移性质]
+    $$\DTFT(x[n-n_0])=\e^{-\im \Omega n_0}X$$
+\end{proposition}
+\begin{proof}
+    $$\phi[n+n_0]=\frac{1}{2\pi}\int_{-\pi}^\pi \Phi(\Omega)\e^{-\im\Omega (n+n_0)}\,d\Omega$$
+    因此$\phi[n+n_0]$是$\Phi(\Omega)\e^{-\im\Omega n_0}$的傅里叶系数。
+    \begin{align*}
+        \langle \tau_{n_0}x,\phi\rangle&=\langle x,\tau_{-n_0}\phi\rangle=\langle X,\e^{-\im\Omega n_0}\Phi\rangle=\langle\e^{-\im \Omega n_0}X,\Phi\rangle
+    \end{align*}
+    即$\DTFT(x[n-n_0])=\e^{-\im \Omega n_0}X$.
+\end{proof}
+
+\begin{proposition}[频移性质]
+    $$\DTFT(\e^{\im\Omega_0 n}x[n])=\tau_{\Omega_0}X$$
+\end{proposition}
+\begin{proof}
+    $$\e^{\im\Omega_0 n}\phi[n]=\frac{1}{2\pi}\int_{-\pi}^\pi \Phi(\Omega)\e^{-\im(\Omega-\Omega_0) n}\,d\Omega=\frac{1}{2\pi}\int_{-\pi}^\pi \Phi(\Omega+\Omega_0)\e^{-\im\Omega n}\,d\Omega$$
+    因此$\e^{\im\Omega_0 n}\phi[n]$是$\Phi(\Omega+\Omega_0)$的傅里叶系数。
+    \begin{align*}
+        \langle \e^{\im\Omega_0 n}x,\phi\rangle&=\langle x,\e^{\im\Omega_0 n}\phi\rangle=\langle X,\tau_{-\Omega_0}\Phi\rangle=\langle \tau_{\Omega_0}X,\Phi\rangle
+    \end{align*}
+    即$\DTFT(\e^{\im\Omega_0 n}x[n])=\tau_{\Omega_0}X$.
+\end{proof}
+
+\begin{proposition}[共轭性质]
+    $$\DTFT\left(\overline{x[n]}\right)=\overline{X^-}$$
+\end{proposition}
+\begin{proof}
+    $$\overline{\phi[n]}=\frac{1}{2\pi}\overline{\int_{-\pi}^\pi \Phi(\Omega)\e^{-\im\Omega n}\,d\Omega}=\frac{1}{2\pi}\int_{-\pi}^\pi \overline{\Phi(\Omega)}\e^{\im\Omega n}\,d\Omega=\frac{1}{2\pi}\int_{-\pi}^\pi \overline{\Phi(-\Omega)}\e^{-\im\Omega n}\,d\Omega$$
+    因此$\overline{\phi[n]}$是$\overline{\Phi(-\Omega)}$的傅里叶系数。
+    \begin{align*}
+        \langle \overline{x},\phi\rangle&=\overline{\langle x,\overline{\phi}\rangle}=\overline{\langle X,\overline{\Phi^-}\rangle}=\langle \overline{X^-},\Phi\rangle
+    \end{align*}
+    最后一个等号用到了$\overline{X}^-=\overline{X^-}$.
+\end{proof}
+\begin{corollary}
+    如果$x[n]$为实数序列，则$X$具有共轭对称性：$X=\overline{X^-}$.
+\end{corollary}
+
+\begin{proposition}[反转性质]
+    $$\DTFT(x^-[n])=X^-$$
+\end{proposition}
+\begin{proof}
+    $$\phi[-n]=\frac{1}{2\pi}\int_{-\pi}^\pi \Phi(\Omega)\e^{\im\Omega n}\,d\Omega=\frac{1}{2\pi}\int_{-\pi}^\pi \Phi(-\Omega)\e^{-\im\Omega n}\,d\Omega$$
+    因此$\phi[-n]$是$\Phi(-\Omega)$的傅里叶系数。
+    \begin{align*}
+        \langle x^-,\phi\rangle=\langle x,\phi^-\rangle=\langle X,\Phi^-\rangle=\langle X^-,\Phi\rangle
+    \end{align*}
+\end{proof}
+
+\begin{proposition}[频域微分性质]\label{prop:DTFT_derivative}
+    $$\DTFT(nx[n])=\im X'$$
+\end{proposition}
+\begin{proof}
+    $\im \Phi'$的傅里叶系数为
+    \begin{align*}
+        \frac{1}{2\pi}\int_{-\pi}^\pi \im \Phi'(\Omega)\e^{-\im \Omega n}\,d\Omega&=\frac{\im}{2\pi}\left(\evalat{\Phi(\Omega)\e^{-\im \Omega n}}{-\pi}{\pi}-\int_{-\pi}^\pi \Phi(\Omega)(\e^{-\im \Omega n})'\,d\Omega\right)\\
+        &=\frac{n}{2\pi}\int_{-\pi}^\pi \Phi(\Omega)\e^{-\im\Omega n}\,d\Omega\\
+        &=n\phi[n]
+    \end{align*}
+    因此
+    \begin{align*}
+        \langle nx,\phi\rangle=\langle x,n\phi\rangle=\langle X,\im\Phi'\rangle=\langle \im X',\Phi\rangle
+    \end{align*}
+\end{proof}
+
+\begin{theorem}[时域卷积定理]
+    设$x\in\mathcal{T},y,\phi\in\mathcal{S}$，则
+    $$\DTFT(x*y)=XY$$
+\end{theorem}
+\begin{proof}
+    \begin{align*}
+        \langle(x*y),\phi\rangle=\langle x,(y^-)*\phi\rangle
+    \end{align*}
+    令$\psi[n]=(y^-)*\phi[n]$，对应的频域函数为
+    \begin{align*}
+        \Psi(\Omega)&=\sum_{k=-\infty}^\infty \psi[n]\e^{\im\Omega k}\\
+        &=\sum_{k=-\infty}^\infty \left(\sum_{m=-\infty}^\infty y[m]\phi[k+m]\right)\e^{\im\Omega k}\\
+        &=\sum_{m=-\infty}^\infty y[m]\e^{-\im\Omega m}\sum_{n=-\infty}^\infty \phi[n]\e^{\im \Omega n}&(n=k+m)\\
+        &=Y(\e^{\im\Omega})\Phi(\Omega)
+    \end{align*}
+    因此\begin{align*}
+        \langle(x*y),\phi\rangle=\langle x,(y^-)*\phi\rangle=\langle X,Y\Phi\rangle=\langle XY,\Phi\rangle
+    \end{align*}
+\end{proof}
+
+\begin{theorem}[频域卷积定理]
+    $$\DTFT(x[n]y[n])=X*Y$$
+\end{theorem}
+\begin{proof}
+    \begin{align*}
+        \langle X*Y,\Phi\rangle&=\langle X(u),\langle Y(v),\Phi(u+v)\rangle\rangle
+    \end{align*}
+    令$\Psi(u)=\langle Y(v),\Phi(u+v)\rangle$，则其傅里叶系数为
+    \begin{align*}
+        \psi[n]&=\frac{1}{2\pi}\int_{-\pi}^\pi \Psi(u)\e^{-\im un}\,du\\
+        &=\left\langle Y(v),\frac{1}{2\pi}\int_{-\pi}^\pi \Phi(u+v)\e^{-\im un}\,du\right\rangle\\
+        &=\left\langle Y(v),\frac{1}{2\pi}\int_{-\pi}^\pi \Phi(\Omega)\e^{-\im (\Omega-v)n}\,d\Omega\right\rangle&(\Omega=u+v)\\
+        &=\left\langle Y(v),\phi[n]\e^{\im vn}\right\rangle\\
+        &=\frac{1}{2\pi}\phi[n]\int_{-\pi}^\pi Y(v)\e^{\im vn}\,dv\\
+        &=\phi[n]y[n]
+    \end{align*}
+    因此
+    \begin{align*}
+        \langle X*Y,\Phi\rangle&=\langle X(u),\langle Y(v),\Phi(u+v)\rangle\rangle\\
+        &=\langle X,\Psi\rangle\\
+        &=\langle x,\phi y\rangle\\
+        &=\langle xy,\phi\rangle
+    \end{align*}
+\end{proof}
+
+由于$x[n],y[n]\in\mathcal{T}$时，$x[n]y[n]\in\mathcal{T}$，$X*Y$总是存在的，且\textbf{满足交换律和结合律}。
+
+\begin{example}[离散正弦、余弦函数的离散时间傅里叶变换]
+    根据欧拉公式及DTFT的线性性可得：
+    $$\DTFT(\cos(\Omega_0 n))=\frac{\delta_{\Omega_0}+\delta_{-\Omega_0}}{2},\quad \DTFT(\sin(\Omega_0 n))=\frac{\delta_{\Omega_0}-\delta_{-\Omega_0}}{2\im}$$
+\end{example}
+\begin{example}[单位阶跃序列的离散时间傅里叶变换]
+    \begin{align*}
+        &u[n]-u[n-1]=\delta[n]\\
+        \implies&\langle (1-\tau_1)u,\phi\rangle=\langle\delta,\phi\rangle\\
+        \implies&\langle(1-\e^{\im\Omega})U,\Phi\rangle=\langle 1,\Phi\rangle\\
+        \implies& U=\frac{1}{1-\e^{\im\Omega}}
+    \end{align*}
+\end{example}
+\begin{example}
+    本例探究$\delta'$的性质。
+    $$\langle \delta',\Phi\rangle=-\langle\delta,\Phi'\rangle=-\Phi'(0)$$
+    这与\cref{exmp:delta'}中的结论是类似的。根据\cref{prop:DTFT_derivative}，有：
+    $$\DTFT(n)=\im\delta'$$
+    这表明$\delta'$是$x[n]=-\im n$的DTFT.
+\end{example}
+
+\subsection{离散信号的相关}\label{sub:discrete_corr}
+
+\subsection{离散信号的谱密度}\label{sub:discrete_density}

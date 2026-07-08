@@ -6,11 +6,13 @@
 
 我们已经看到，分布（例如狄拉克$\delta$）难以用经典的“函数”来描述，这时我们可以考察它们与一系列\textbf{检验函数}(test function)$\varphi$的作用，具体来说：
 \begin{definition}[分布]
-    我们称无限阶可导的函数是\textbf{光滑}(smooth)的。记$\mathbb{R}$上的复值光滑紧支函数集为$\mathcal{C} $，如果将检验函数集取为$\mathcal{C}$，我们将其对偶空间$\mathcal{D} $中的元素称为分布，并规定函数$f\in \mathcal{C} $所产生的分布$T_f$为作用在$\mathcal{C}$上的以下\textbf{泛函}：
-\begin{equation*}
-    \left\langle T_f,\varphi\right\rangle:=\int_{-\infty}^{\infty}f(x)\varphi(x)\,dx,\varphi\in\mathcal{C}
-\end{equation*}
-将这样的分布称为\textbf{正则分布}，而将无法用紧支函数描述的分布称为\textbf{奇异分布}。
+    我们称无限阶可导的函数是\textbf{光滑}(smooth)的。记定义于$\mathbb{R}$上的复值光滑紧支函数集为$\mathcal{C} $。如果将检验函数集取为$\mathcal{C}$，我们将其对偶空间$\mathcal{D} $中的元素称为分布，并规定函数$f\in \mathcal{C} $所产生的分布为作用在$\mathcal{C}$上的泛函：
+    $$T_f:\varphi\mapsto T_f(\varphi)=\int_{-\infty}^{\infty}f(x)\varphi(x)\,dx$$
+    后文中，我们更多地使用\textbf{配对}(pairing)的记号：
+    \begin{equation*}
+        \left\langle T_f,\varphi\right\rangle=\int_{-\infty}^{\infty}f(x)\varphi(x)\,dx,\varphi\in\mathcal{C}
+    \end{equation*}
+    将$T_f$这样的分布称为\textbf{正则分布}，而将无法用紧支函数描述的分布称为\textbf{奇异分布}。注意，与内积不同，我们有意地不将$\varphi$取共轭，这使得配对具有双线性性。
 \end{definition}
 \begin{remark}
    实际上这里不需要要求$f\in\mathcal{C} $，只需要f在$\mathbb{R}$上局部可积（在任意闭区间上可积）即可，但为了简化讨论，我们仅考虑光滑紧支函数。 
@@ -50,7 +52,7 @@ $g\varphi$就是普通的函数乘法。现在就可以说，分布集$\mathcal{
 \end{equation*}
 \end{definition}
 注意$\varphi\in\mathcal{C} $是无限阶可导的，我们可以由此定义分布的任意阶导数。
-\begin{example}[$\delta$的导数]
+\begin{example}[$\delta$的导数]\label{exmp:delta'}
 \begin{align*}
      & \left\langle u',\varphi\right\rangle=-\left\langle u,\varphi'\right\rangle=-\int_{0}^{\infty}\varphi'(x)\,dx=\varphi(0)=\left\langle\delta,\varphi\right\rangle \\
      & \left\langle \delta',\varphi\right\rangle=-\left\langle \delta,\varphi'\right\rangle=-\varphi'(0)
@@ -128,7 +130,7 @@ $\delta$的高阶导数可以依此类推，它们已经难以用类似$\delta(x
 易见$\mathcal{C} \subset \mathcal{S} ,\mathcal{T} \subset\mathcal{D}. $
 
 有了施瓦兹函数类$\mathcal{S} $和缓增分布$\mathcal{T} $，我们就可以定义分布的傅里叶变换，还可以定义有关分布的一系列算子。前文中曾定义分布与函数的乘法和分布的导数，现在认为正则分布是由施瓦兹函数导出的，则显然能够推广到缓增分布，即\begin{align}
-    \left\langle gT,\varphi\right\rangle=\left\langle T,\quad g\varphi\right\rangle,\left\langle T',\varphi\right\rangle=\left\langle T,\varphi'\right\rangle,\quad g\in\mathcal{S} ,T\in\mathcal{T}
+    \left\langle gT,\varphi\right\rangle=\left\langle T,g\varphi\right\rangle,\quad\left\langle T',\varphi\right\rangle=\left\langle T,\varphi'\right\rangle,\quad g\in\mathcal{S} ,T\in\mathcal{T}
 \end{align}
 
 \subsection{分布的运算性质}\label{sub:operation_of_distribution}
@@ -379,7 +381,7 @@ $$\mathcal{F}(T^-)= (\mathcal{F}T)^-$$
     设$T\in\mathcal{T} $，则
     \[\mathrm{Re}(T)=\frac{T+\overline{T}}{2}\]
     称为T的\textbf{实部}，
-    \[\mathrm{Im}(T)=\frac{T-\overline{T}}{2}\]
+    \[\mathrm{Im}(T)=\frac{T-\overline{T}}{2\im}\]
     称为T的\textbf{虚部}。
 \end{definition}
 \begin{definition}[实分布与纯虚分布]
@@ -413,7 +415,7 @@ $\overline{T}=-T$，则称T为\textbf{纯虚分布}。
                                       & =\int_{-\infty}^{\infty}f(y)\varphi(y+b)\,dy \\
                                       & =\left\langle T_f,\tau_{-b}\varphi\right\rangle
 \end{align*}
-因此我们定义\begin{definition}[分布的平移]
+因此我们定义\begin{definition}[分布的平移]\label{def:distribution_delay}
     \begin{equation*}
     \left\langle \tau_b T,\varphi\right\rangle=\left\langle T,\tau_{-b}\varphi\right\rangle,\quad T\in\mathcal{T} ,\varphi\in\mathcal{S}
 \end{equation*}
@@ -481,23 +483,59 @@ $$\sigma_a\delta=\delta(ax)=\frac{1}{|a|}\delta(x)$$
 上图中，像$\delta$这样的从形式上定义的函数，应该归类于奇异分布。在\refsub{ordinary_signal}中给出$\delta(ax)$的定义时，我们实际上考察的是它作为分布的伸缩性质，这也是为什么$\delta$的两种伸缩定义看起来是一致的。
 
 有了分布的平移和伸缩的定义，就可以建立分布的傅里叶变换的平移和尺度变换定理：
-\begin{theorem}[分布的傅里叶变换的平移和尺度变换]
-\begin{align*}
-    &\mathcal{F}(\tau_b T)=\mathcal{F}(\mathrm{e}^{2\pi \mathrm{i}bx})T\\
-    &\mathcal{F}(\sigma_a T)=\frac{1}{|a|}\mathcal{F}(\sigma_a T)
-\end{align*}
+\begin{theorem}[分布的傅里叶变换的平移]
+\begin{lralign}
+    &\mathcal{F}(\tau_b T)=\mathrm{e}^{-2\pi\mathrm{i}bx}\mathcal{F}T\\
+    &\mathcal{F}(\e^{2\pi\im b t}T)=\tau_b\mathcal{F}T
+    \switch
+    &\mathcal{F}(\tau_b T)=\mathrm{e}^{-\mathrm{i}bx}\mathcal{F}T\\
+    &\mathcal{F}(\e^{\im b t}T)=\tau_b\mathcal{F}T
+\end{lralign}
 \end{theorem}
 \begin{proof}
-    对于前者，
-        \begin{align*}
-    \left\langle\mathcal{F}(\tau_b T),\varphi\right\rangle =\left\langle \tau_b T,\mathcal{F}\varphi\right\rangle=\left\langle T,\tau_{-b}\mathcal{F}\varphi\right\rangle=\left\langle T,\mathrm{e}^{2\pi \mathrm{i}bx}\mathcal{F}\varphi\right\rangle=\left\langle \mathcal{F}(\mathrm{e}^{2\pi\mathrm{i}bx}T),\varphi\right\rangle
+    \ding{172}时移性质
+    \begin{lralign}
+        \left\langle\mathcal{F}(\tau_b T),\varphi\right\rangle &=\left\langle \tau_b T,\mathcal{F}\varphi\right\rangle\\
+        &=\left\langle T,\tau_{-b}\mathcal{F}\varphi\right\rangle\\
+        &=\left\langle T,\mathcal{F}[\mathrm{e}^{-2\pi \mathrm{i}bx}\varphi]\right\rangle\\
+        &=\left\langle \mathrm{e}^{-2\pi\mathrm{i}bx}\mathcal{F}T,\varphi\right\rangle
+    \switch
+        \left\langle\mathcal{F}(\tau_b T),\varphi\right\rangle &=\left\langle \tau_b T,\mathcal{F}\varphi\right\rangle\\
+        &=\left\langle T,\tau_{-b}\mathcal{F}\varphi\right\rangle\\
+        &=\left\langle T,\mathcal{F}[\mathrm{e}^{-\mathrm{i}bx}\varphi]\right\rangle\\
+        &=\left\langle \mathrm{e}^{-\mathrm{i}bx}\mathcal{F}T,\varphi\right\rangle
+    \end{lralign}
+即
+    \begin{lralign}
+        \mathcal{F}(\tau_b T)=\mathrm{e}^{-2\pi\mathrm{i}bx}\mathcal{F}T
+    \switch
+        \mathcal{F}(\tau_b T)=\mathrm{e}^{-\mathrm{i}bx}\mathcal{F}T
+    \end{lralign}
+    \ding{173}频移性质
+    \begin{lralign}
+        \langle \mathcal{F}(\e^{2\pi\im b t}T),\varphi\rangle&=\langle T,\e^{2\pi\im b t}\mathcal{F}\varphi\rangle\\
+        &=\langle T,\mathcal{F}(\tau_{-b}\varphi)\rangle\\
+        &=\langle \tau_b\mathcal{F}T,\varphi\rangle
+    \switch
+        \langle \mathcal{F}(\e^{\im b t}T),\varphi\rangle&=\langle T,\e^{\im b t}\mathcal{F}\varphi\rangle\\
+        &=\langle T,\mathcal{F}(\tau_{-b}\varphi)\rangle\\
+        &=\langle \tau_b\mathcal{F}T,\varphi\rangle
+    \end{lralign}
+    即\begin{lralign}
+        \mathcal{F}(\e^{2\pi\im b t}T)=\tau_b\mathcal{F}T
+    \switch
+        \mathcal{F}(\e^{\im b t}T)=\tau_b\mathcal{F}T
+    \end{lralign}
+\end{proof}
+
+\begin{theorem}[分布的傅里叶变换的尺度变换]
+    $$\mathcal{F}(\sigma_a T)=\frac{1}{|a|}\sigma_{1/a}\mathcal{F}T$$
+\end{theorem}
+\begin{proof}
+    \begin{align*}
+    \left\langle\mathcal{F}(\sigma_a T),\varphi\right\rangle =\left\langle \sigma_a T,\mathcal{F}\varphi\right\rangle=\left\langle T,\frac{1}{|a|}\sigma_{\frac{1}{a}}\mathcal{F}\varphi\right\rangle=\left\langle T,\mathcal{F}[\sigma_a \varphi]\right\rangle=\left\langle \mathcal{F}T,\sigma_a\varphi\right\rangle=\left\langle \frac{1}{|a|}\sigma_{1/a}\mathcal{F}T,\varphi\right\rangle
 \end{align*}
-即\[\mathcal{F}(\tau_b T)=\mathcal{F}(\mathrm{e}^{2\pi\mathrm{i}bx}T)\]
-对于后者，
-\begin{align*}
-    \left\langle\mathcal{F}(\sigma_a T),\varphi\right\rangle =\left\langle \sigma_a T,\mathcal{F}\varphi\right\rangle=\left\langle T,\frac{1}{|a|}\sigma_{\frac{1}{a}}\mathcal{F}\varphi\right\rangle=\left\langle T,\frac{1}{|a|}\mathcal{F}\sigma_a \varphi\right\rangle=\left\langle \frac{1}{|a|}\mathcal{F}(\sigma_a T),\varphi\right\rangle
-\end{align*}
-即\[\mathcal{F}(\sigma_a T)=\frac{1}{|a|}\mathcal{F}(\sigma_a T)\]
+即\[\mathcal{F}(\sigma_a T)=\frac{1}{|a|}\sigma_{1/a}\mathcal{F}T\]
 \end{proof}
 
 \subsubsection{分布的傅里叶变换的微分性质}
@@ -659,7 +697,7 @@ $$\sigma_a\delta=\delta(ax)=\frac{1}{|a|}\delta(x)$$
 \end{align*}
 如果允许给分布标上自变量（对于能用函数表示的分布，即便不属于$\mathcal{S} $，这样做
 也的确是有意义的），那么我们可以定义\cite{brad_osgood_ee261}：
-\begin{definition}[分布与分布的卷积]
+\begin{definition}[分布与分布的卷积]\label{def:conv_distr_distr}
     \begin{equation*}
     \left\langle S*T,\varphi\right\rangle=\left\langle S(y),\left\langle T(x),\varphi(x+y)\right\rangle\right\rangle,S,T\in\mathcal{T} ,\quad\varphi\in\mathcal{S} ,\left\langle T(x),\varphi(x+y)\right\rangle\in\mathcal{S}
 \end{equation*}
@@ -673,7 +711,7 @@ $$\sigma_a\delta=\delta(ax)=\frac{1}{|a|}\delta(x)$$
     \left\langle R*(S*T),\varphi\right\rangle=\left\langle T(x),\left\langle S(y),\left\langle R(z),\varphi(x+y+z)\right\rangle\right\rangle\right\rangle=\left\langle (R*S)*T,\varphi\right\rangle
 \end{equation*}
 然而当证明过程中任何一步遇到卷积无定义的情况，这个证明就会失效。
-\begin{example}[结合律的失效]
+\begin{example}[结合律的失效]\label{exmp:associative_loss}
 \begin{align*}
     \left\langle\mathds{1}*\delta',\varphi\right\rangle& =\left\langle \mathds{1}(y),\left\langle \delta'(x),\varphi(x+y)\right\rangle\right\rangle\\
     &=\left\langle \mathds{1},-\varphi'\right\rangle\\

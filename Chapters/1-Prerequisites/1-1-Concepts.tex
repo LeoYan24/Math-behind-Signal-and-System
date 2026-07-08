@@ -54,7 +54,8 @@
 \textbf{全时域功率}：$$P=\lim_{N \to \infty}  \dfrac{1}{2N+1}\sum_{n = -N}^{N}  |x[n]| ^2$$
 \end{definition}
 
-\subsection{典型的连续与离散信号}\label{sub:ordinary_signal}
+\subsection{典型的信号}\label{sub:ordinary_signal}
+\subsubsection{连续信号}
 \begin{definition}[采样信号]\label{def:sinc}
     \[\mathrm{Sa}(t)=\frac{\sin(t)}{t}\]
 \end{definition}
@@ -128,7 +129,7 @@
 称为双边指数函数
 \end{definition}
 
-下面介绍离散信号。
+\subsubsection{离散信号}
 \begin{definition}[单位脉冲序列/克罗内克$\delta$函数]
     \[\delta[n]=\begin{cases}
         1, & \text{if }n=0     \\

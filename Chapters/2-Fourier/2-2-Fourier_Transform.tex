@@ -187,7 +187,7 @@ f(t)&=\sum_{n=-\infty}^{\infty}c_n \mathrm{e}^{\mathrm{i}\omega t}\\
     \quad
     \lr{
         &\mathcal{F} [f(t-b)](\xi)=\mathrm{e}^{-2\pi \mathrm{i} \xi b}\mathcal{F} f(\xi)\\
-        &\mathcal{F} \left[f(t)\mathrm{e}^{2\pi \mathrm{i} \xi t}\right](\xi)=\mathcal{F} f(\xi-b)
+        &\mathcal{F} \left[f(t)\mathrm{e}^{2\pi \mathrm{i} b t}\right](\xi)=\mathcal{F} f(\xi-b)
     }{
         &\mathcal{F} [f(t-b)](\omega)=\mathrm{e}^{-\mathrm{i}\omega t}\mathcal{F} f(\omega)\\
         &\mathcal{F} \left[f(t)\mathrm{e}^{\mathrm{i}bt}\right](\omega)=\mathcal{F} f(\omega-b)
@@ -222,11 +222,9 @@ f(t)&=\sum_{n=-\infty}^{\infty}c_n \mathrm{e}^{\mathrm{i}\omega t}\\
 \begin{theorem}[伸缩定理]
     \label{thm:FT_stretch}
     \begin{lralign}
-        &\mathcal{F} [f(at)](\xi)=\frac{1}{|a|}\mathcal{F} f\left(\frac{\xi}{a}\right)\\
-        &\mathcal{F} f(a\xi)=\frac{1}{|a|}\mathcal{F} \left[f\left(\frac{t}{a}\right)\right]
+        &\mathcal{F} [f(at)](\xi)=\frac{1}{|a|}\mathcal{F} f\left(\frac{\xi}{a}\right)
     \switch
-        &\mathcal{F} [f(at)](\omega)=\frac{1}{|a|}\mathcal{F} f\left(\frac{\omega}{a}\right)\\
-        &\mathcal{F} f(a\omega)=\frac{1}{|a|}\mathcal{F} \left[f\left(\frac{t}{a}\right)\right]
+        &\mathcal{F} [f(at)](\omega)=\frac{1}{|a|}\mathcal{F} f\left(\frac{\omega}{a}\right)
     \end{lralign}
 \end{theorem}
 \begin{proof}

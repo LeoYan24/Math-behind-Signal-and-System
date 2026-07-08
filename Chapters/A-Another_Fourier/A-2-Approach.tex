@@ -16,7 +16,7 @@
 更一般地，我们给出接下来要频繁使用的引理：\begin{lemma}
 \[\int_{a}^{b}g_\lambda(x)\,dx=\int_{a/\lambda}^{b/\lambda}g(y)\,dy\]
 \end{lemma}
-下面我们给出一个表述和证明有些类似于傅里叶级数收敛性的定理：
+
 \begin{theorem}
     设$g\in L^1(\mathbb{R}),\int_{-\infty}^{\infty}g(x)\,dx=1$，并记$\alpha=\int_{-\infty}^{0}g(x)\,dx,\beta=\int_{0}^{\infty}g(x)\,dx$。假设$f\in PC(\mathbb{R})$，则当$g(x)$时限或$f(x)$有界时，$f*g(x)$良定义，并且
     \[\lim_{\lambda\to 0}f*g_\lambda(x)=\alpha f(x+)+\beta f(x-)\]
@@ -136,11 +136,15 @@ $\int_{-\infty}^{\infty}|g(y)|\,dy<\infty$的必要条件是$\int_{\delta/\lambd
     }{
         \mathcal{F} \chi_{[a,b]}(\omega)=\int_{a}^{b}\mathrm{e}^{-\mathrm{i}\omega t}\,dt=\frac{\mathrm{e}^{-\mathrm{i}\omega a}-\mathrm{e}^{-\mathrm{i}\omega b}}{\mathrm{i}\omega}
     }
-    分子是两个模值为1的数相减，分母趋于无穷，故$\mathcal{F} \chi_{[a,b]}(x)\to 0,x\to\infty$。由线性性，$\mathcal{F} f(x)\to 0,x\to\infty$。\\
+    分子是两个模值为1的复数相减，分母趋于无穷，故
+    $$\mathcal{F} \chi_{[a,b]}(x)\to 0,\quad x\to\infty$$
+    由线性性，得到：
+    $$\mathcal{F} f(x)=\sum_{k=1}^n c_k\mathcal{F}\chi_{[a_k,b_k]}\to 0,\quad x\to\infty$$
+
     设$f\in L^1(\mathbb{R})$，则根据实变函数的理论，存在阶梯函数列$f_n$，使得$\|f-f_n\|_1\to 0,n\to\infty$。我们知道，
-    \[|\mathcal{F} g(x)|\leq \int_{-\infty}^{\infty}|g(t)|\,dt=\|g\|_1<\infty,g\in L^1(\mathbb{R})\]
+    \[|\mathcal{F} g(x)|\leq \int_{-\infty}^{\infty}|g(t)|\,dt=\|g\|_1<\infty,\quad g\in L^1(\mathbb{R})\]
     因此，
-    \[\sup_{x\in\mathbb{R}}|\mathcal{F} f(x)-\mathcal{F} f_n(x)|\leq \|f-f_n\|_1\to 0,n\to\infty\]
+    \[\sup_{x\in\mathbb{R}}|\mathcal{F} f(x)-\mathcal{F} f_n(x)|\leq \|f-f_n\|_1\to 0,\quad n\to\infty\]
     即$\mathcal{F} f_n\rightrightarrows\mathcal{F} f,\forall x\in\mathbb{R}$，于是$\mathcal{F} f(x)\to 0,x\to\infty$，得证。
 \end{proof}
 
