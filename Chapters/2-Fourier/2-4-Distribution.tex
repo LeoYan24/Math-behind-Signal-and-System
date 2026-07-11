@@ -766,14 +766,13 @@ $$\sigma_a\delta=\delta(ax)=\frac{1}{|a|}\delta(x)$$
 
 \begin{theorem}[分布的傅里叶变换的连续性]
     \label{thm:distribution_fourier_continuous}
-    设$\{T_n\}\subset\mathcal{T} $，$T\in\mathcal{T} $，如果$T_n\to T$，则$\mathcal{F} T_n\to\mathcal{F} T$.
+    设$\{T_n\}_{n=1}^\infty\subset\mathcal{T} $，$T\in\mathcal{T} $，如果$T_n\to T$，则$\mathcal{F} T_n\to\mathcal{F} T$.
 \end{theorem}
 \begin{proof}
     设$\varphi\in\mathcal{S} $，则
     \begin{align*}
-    \left\langle\mathcal{F} T_n-\mathcal{F} T,\varphi\right\rangle & =\left\langle T_n-T,\mathcal{F} \varphi\right\rangle \\
-    \lim_{n\to\infty}\left\langle\mathcal{F} T_n-\mathcal{F} T,\varphi\right\rangle & =\lim_{n\to\infty}\left\langle T_n-T,\mathcal{F} \varphi\right\rangle=0
-\end{align*}
+        \lim_{n\to\infty}\left\langle\mathcal{F} T_n,\varphi\right\rangle & =\lim_{n\to\infty}\left\langle T_n,\mathcal{F} \varphi\right\rangle=\langle T,\mathcal{F}\varphi\rangle=\langle \mathcal{F}T,\varphi\rangle
+    \end{align*}
 \end{proof}
 
 分布的傅里叶变换的连续性是在弱收敛的意义下定义的，也就是说，作为一个分布，我们总是能够交换极限或求和与傅里叶变换的顺序（我们将会多次使用到这一结论），但是对于正则分布列$f_n\to f$，尽管$T_{f_n}\to T_f$，也不能认为$\mathcal{F}f_n$作为一个函数列收敛于$\mathcal{F}f$。在\refsec{Sampling_Interpolation}中我们将看到，通过分布的傅里叶变换的连续性，$\shah$分布能表示成傅里叶级数的形式，然而这个展开式是几乎处处不收敛的函数项级数。

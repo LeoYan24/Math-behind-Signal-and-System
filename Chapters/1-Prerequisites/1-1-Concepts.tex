@@ -171,6 +171,14 @@ $E_{\Omega}[n]$这个记号仅在本书中使用，但这样做是值得的—�
     \caption{正弦序列}
 \end{figure}
 
+\begin{definition}[符号序列]
+    $$x[n]=\sgn[n]=\begin{cases}
+        -1,&\text{if }n<0\\
+        0,&\text{if }n=0\\
+        1,&\text{if }n>0
+    \end{cases}$$
+\end{definition}
+
 下面介绍离散信号的伸缩变换：
 $$x[n]\to x[\alpha n],\quad \alpha\in\mathbb{R}$$
 如果$\alpha\in\mathbb{N}_+$，则伸缩后的信号仍为离散信号，只是遗漏了原信号的一些信息；如果$\alpha=\frac{1}{N},N\in\mathbb{N}_+$，则伸缩后的信号在$N$的倍数以外的点没有定义，我们必须人为规定它们的值，这就是\textbf{插值}。

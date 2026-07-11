@@ -232,7 +232,7 @@ $\rho(f,g)=\pm 1$时两信号\textbf{线性相关}；$\rho(f,g)=0$时两信号\t
 \begin{equation*}
     R_{fg}(x)=\int_{-\infty}^{\infty}f(x+y)\overline{g(y)}\,dy
 \end{equation*}
-同样可以定义f的\textbf{自相关}(auto-correlation)$R_f(x)$
+当$f=g$时，称之为$f$的\textbf{自相关}(auto-correlation)并记为$R_f(x)$.
 \end{definition}
 
 互相关具有以下性质：
@@ -240,17 +240,14 @@ $\rho(f,g)=\pm 1$时两信号\textbf{线性相关}；$\rho(f,g)=0$时两信号\t
     \label{prop:cross_correlation}
     设$f,g\in L^2(\mathbb{R})$，则
 \begin{enumerate}
-    \item $R_{fg}=f* \overline{g^-}=\overline{R_{gf}^-}$，如果$f,g$都是实信号，则$R_{fg} =R_{gf}^- =f^- *g=(f*g^-)^-$.该性质表明相关与卷积有着密切的联系，并且互相关函数具有共轭对称性。
-    \item (维纳-辛钦定理)设$f,g\in L^1(\mathbb{R})$，则$\mathcal{F} R_{fg} =\mathcal{F} f\overline{\mathcal{F} g}$
+    \item $R_{fg}=f* \overline{g^-}=\overline{R_{gf}^-}$，特别地，如果$f,g$都是实信号，则
+    $$R_{fg} =R_{gf}^- =f *(g^-)=((f^-)*g)^-$$
+    该性质表明相关与卷积有着密切的联系，并且互相关函数具有共轭对称性。
     \item $R_{\tau_b f,g}=\tau_{b}R_{fg}=R_{f,\tau_{-b}g}$
     \item $R_{fg}\leq\|f\|_2\|g\|_2$，特别地，$R_f(x)\leq R_f(0)=\|f\|_2^2$
 \end{enumerate}
 \end{proposition}
-\begin{remark}
-    一般来说，\textbf{维纳-辛钦定理}(Wiener-Khinchin Theorem)是指第二条性质的特殊情况，即令$f=g$，得到
-    $$\mathcal{F}(R_f)=|\mathcal{F} f|^2$$
-    但是，用这个名称来指代更一般的定理$\mathcal{F}R_{fg}=\mathcal{F}f\overline{\mathcal{F}g}$是方便的，因此本书总是这样做。
-\end{remark}
+
 
 \begin{proof}
     1.
@@ -267,20 +264,9 @@ $\rho(f,g)=\pm 1$时两信号\textbf{线性相关}；$\rho(f,g)=0$时两信号\t
     &=\overline{R_{gf}}(-x)
 \end{align*}
 
-由于傅里叶变换时不涉及频率、角频率的问题，我们仅给出一种符号下的证明：
 
-2.
-\begin{align*}
-    \mathcal{F} R_{fg}(\xi) & =\int_{-\infty}^{\infty}R_{fg}(x)\mathrm{e}^{-2\pi \mathrm{i}\xi x}\,dx\\
-    & =\int_{-\infty}^{\infty}\mathrm{e}^{-2\pi \mathrm{i}\xi x}\,dx\int_{-\infty}^{\infty}f(x+y)\overline{g(y)}\,dy\\
-    & =\int_{-\infty}^{\infty}\overline{g(y)}\,dy\int_{-\infty}^{\infty}f(x+y)\mathrm{e}^{-2\pi \mathrm{i}\xi x}\,dx\\
-    & =\int_{-\infty}^{\infty}\overline{g(y)}\mathrm{e}^{2\pi \mathrm{i}\xi y}\,dy\int_{-\infty}^{\infty}f(u)\mathrm{e}^{-2\pi \mathrm{i}\xi u}\,du & (u=x+y) \\
-    &=\overline{\int_{-\infty}^{\infty}g(y)\mathrm{e}^{-2\pi \mathrm{i}\xi y}\,dy}\int_{-\infty}^{\infty}f(u)\mathrm{e}^{-2\pi \mathrm{i}\xi u}\,du\\
-    & =\mathcal{F} f(\xi)\overline{\mathcal{F} g(\xi)}
-\end{align*}
 
-3.
-\begin{align*}
+2.\begin{align*}
     R_{\tau_b f,g}(x)&=\int_{-\infty}^{\infty}\tau_b f(x+y)\overline{g(y)}\,dy\\
     & =\int_{-\infty}^{\infty}f(x+y-b)\overline{g(y)}\,dy\\
     & =R_{fg}(x-b)=\tau_{b} R_{fg}(x)\\
@@ -288,12 +274,34 @@ $\rho(f,g)=\pm 1$时两信号\textbf{线性相关}；$\rho(f,g)=0$时两信号\t
     &=R_{f,\tau_{-b}g}
 \end{align*}
 
-4.\begin{align*}
+3.\begin{align*}
     R_{fg}(x)& =\int_{-\infty}^{\infty}f(x+y)\overline{g(y)}\,dy\\
     & \leq \sqrt{\int_{-\infty}^{\infty}|f(x+y)|^2\,dy\int_{-\infty}^{\infty}\left|\overline{g(y)}\right|^2\,dy  }\\
     &=\sqrt{\|f\|_2^2\|g\|_2^2}\\
     &=\|f\|_2\cdot\|g\|_2  
 \end{align*}
+\end{proof}
+
+从相关的第一条性质可见，相关也可以看作卷积，利用卷积定理可得：
+
+\begin{theorem}[维纳-辛钦定理]\label{thm:winner-khinchin}
+    设$f,g\in L^1(\mathbb{R})\cap L^2(\mathbb{R})$，则$\mathcal{F} R_{fg} =\mathcal{F} f\overline{\mathcal{F} g}$
+\end{theorem}
+\begin{remark}
+    一般来说，\textbf{维纳-辛钦定理}(Wiener-Khinchin Theorem)是令$f=g$得到的
+    $$\mathcal{F}(R_f)=|\mathcal{F} f|^2$$
+    但是，用这个名称来指代更一般的定理$\mathcal{F}R_{fg}=\mathcal{F}f\overline{\mathcal{F}g}$是方便的，因此本书总是这样做。
+\end{remark}
+\begin{proof}
+    $R_{fg}(x)=f*\overline{g^-}$，以频率形式为例，计算$\overline{g^-}$的傅立叶变换：
+    \begin{align*}
+        \mathcal{F}\left(\overline{g^-}\right)=&\int_{-\infty}^\infty \overline{g^-(t)}\e^{2\pi\im\xi t}\,dt\\
+        =&\overline{\int_{-\infty}^\infty g(-t)\e^{-2\pi\im\xi t}\,dt}\\
+        =&\overline{\int_{-\infty}^\infty g(t)\e^{2\pi\im\xi t}\,dt}\\
+        =&\overline{\mathcal{F}g}
+    \end{align*}
+    由卷积定理可得：
+    $$\mathcal{F}R_{fg}=\mathcal{F}(f*g^-)=\mathcal{F}(f)\overline{\mathcal{F}g}$$
 \end{proof}
 
 一些文献（例如\cite{brad_osgood_ee261}）将互相关函数定义为
