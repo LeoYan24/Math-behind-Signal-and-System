@@ -120,7 +120,7 @@
 
 线性性是显然的，任给激励$e_1,e_2$及对应零状态响应$r_1,r_2$，显然$ar_1+br_2$是激励为$ae_1+be_2$时的零状态响应。
 \end{proof}
-至于零输入响应，它不会由于激励的改变而改变，不仅会破坏系统的时不变性，还会破坏系统的线性性，因为在初始状态非0时，直接将两个完全解相加，则所得信号的初始条件变为给定初始条件的两倍，但由于零输入相应是易于研究的，并且只要指出了零输入响应，就可以认为系统的初始状态为n维零向量来进行研究，最后将所得的零状态响应与零输入响应叠加，因此我们约定：
+至于零输入响应，它不会由于激励的改变而改变，不仅会破坏系统的时不变性，还会破坏系统的线性性，因为在初始状态非0时，直接将两个完全解相加，则所得信号的初始条件变为给定初始条件的两倍，但由于零输入响应是易于研究的，并且只要指出了零输入响应，就可以认为系统的初始状态为n维零向量来进行研究，最后将所得的零状态响应与零输入响应叠加，因此我们约定：
 \begin{definition}
     由常系数线性微分方程描述的系统总是因果线性时不变系统，不论初始状态是否为0。
 \end{definition}
@@ -162,7 +162,7 @@ $r(t)=f(t)u(t)$，求出其一阶、二阶导数：\begin{align*}
 \end{cases}
 \end{align*}
 因此问题转化为求解微分方程
-\[f''(t)+3f'(t)+2f(t)=0,\quad f(0)=0,f'(0)=1\]
+\[f''(t)+3f'(t)+2f(t)=0,\quad f(0)=0,\quad f'(0)=1\]
 这个方程正是一开始的微分方程的齐次方程,可以立即得到它的解：
 \begin{align*}
     f(t)=\mathrm{e}^{-t}-\mathrm{e}^{-2t},\quad h(t)=\left(\mathrm{e}^{-t}-\mathrm{e}^{-2t}\right)u(t)
@@ -202,9 +202,9 @@ $$y_h(t)u(t)+\sum_{k=0}^{m-n}c_k \delta^{(k)}$$
     设系统由微分方程\[r''(t)+3r'(t)+2r(t)=e''(t)+e(t)\]描述，求其单位脉冲响应。\\
     解：齐次方程的特征方程为$\lambda^2+3\lambda+2=0$，因此$\lambda_1=-1,\lambda_2=-2$，齐次解为$$r_h(t)=C_1 \mathrm{e}^{-t}+C_2 \mathrm{e}^{-2t}$$
     首先，我们按照已有的方法直接求解单位脉冲响应。将$\delta$带入右式得到$\delta''+\delta$，为了使左式也出现$\delta''$，设单位脉冲响应为$$h(t)=r_h(t)u(t)+C\delta$$
-    则$$h'(t)=r_h'(t)u(t)+r_h(0)\delta+C\delta',h''(t)=r_h''(t)u(t)+r_h'(0)\delta+r_h(0)\delta'+C\delta''$$
+    则$$h'(t)=r_h'(t)u(t)+r_h(0)\delta+C\delta',\quad h''(t)=r_h''(t)u(t)+r_h'(0)\delta+r_h(0)\delta'+C\delta''$$
     带入原方程左侧得到：\begin{align*}
-        LHS=&\left(r_h''(t)u(t)+r_h'(0)\delta+r_h(0)\delta'+C\delta''\right)\\
+        \text{LHS}=&\left(r_h''(t)u(t)+r_h'(0)\delta+r_h(0)\delta'+C\delta''\right)\\
         &\quad+3\left(r_h'(t)u(t)+r_h(0)\delta+C\delta'\right)\\
         &\quad+2\left(r_h(t)u(t)+C\delta\right)\\
         =&\left(r''_h(t)+3r'_h(t)+2r_h(t)\right)u(t)+\left(r'_h(0)+3r_h(0)+2C\right)\delta+\left(r_h(0)+3C\right)\delta'+C\delta''
@@ -216,7 +216,7 @@ $$y_h(t)u(t)+\sum_{k=0}^{m-n}c_k \delta^{(k)}$$
             C=1
         \end{cases}
     \end{align*}
-    所以$$C=1,r_h(0)=-3,r'_h(0)=8$$
+    所以$$C=1,\quad r_h(0)=-3,\quad r'_h(0)=8$$
     注意$u(t)$的系数自然为0，这是由齐次解的性质保证的。满足上述条件的$C_1=2,C_2=-5$，因此单位脉冲响应为
     $$h(t)=\left(2\mathrm{e}^{-t}-5\mathrm{e}^{-2t}\right)u(t)+\delta$$
 
@@ -225,7 +225,7 @@ $$y_h(t)u(t)+\sum_{k=0}^{m-n}c_k \delta^{(k)}$$
     则
     $$h_1'(t)=r_h'(t)u(t)+r_h(0)\delta,h_1''(t)=r_h''(t)u(t)+r_h'(0)\delta+r_h(0)\delta'$$
     带入原方程左侧得到：\begin{align*}
-        LHS=&\left(r_h''(t)u(t)+r_h'(0)\delta+r_h(0)\delta'\right)\\
+        \text{LHS}=&\left(r_h''(t)u(t)+r_h'(0)\delta+r_h(0)\delta'\right)\\
         &+3\left(r_h'(t)u(t)+r_h(0)\delta\right)\\
         &+2r_h(t)u(t)\\
         =&\left(r''_h(t)+3r'_h(t)+2r_h(t)\right)u(t)+\left(r'_h(0)+3r_h(0)\right)\delta+r_h(0)\delta'
@@ -236,7 +236,7 @@ $$y_h(t)u(t)+\sum_{k=0}^{m-n}c_k \delta^{(k)}$$
             r_h(0)=1\\
         \end{cases}
     \end{align*}
-    所以$$r_h(0)=1,r'_h(0)=-3$$
+    所以$$r_h(0)=1,\quad r'_h(0)=-3$$
     满足上述条件的$C_1=-1,C_2=2$，因此单位阶跃响应为
     $$g(t)=(-\mathrm{e}^{-t}+2\mathrm{e}^{-2t})u(t)$$
     单位脉冲响应为

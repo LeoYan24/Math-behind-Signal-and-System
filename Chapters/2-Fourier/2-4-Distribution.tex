@@ -300,7 +300,7 @@ $$\mathcal{F}(T^-)= (\mathcal{F}T)^-$$
 这与前文中函数的傅里叶变换对偶性完全一样。
 
 利用分布的傅里叶变换的定义及其对偶性，可以立即得到：
-\begin{theorem}[帕塞瓦尔恒等式/普朗歇尔定理]
+\begin{theorem}[帕塞瓦尔恒等式/普朗歇尔定理]\label{thm:distribution_plancherel}
     设$f,g\in L^1(\mathbb{R})\cap L^2(\mathbb{R})$，则
     \lr{
         \int_{-\infty}^{\infty}f(t)\overline{g(t)}\,dt=\int_{-\infty}^{\infty}\mathcal{F} f(\xi)\overline{\mathcal{F}g(\xi)}\,d\xi
@@ -683,7 +683,8 @@ $$\sigma_a\delta=\delta(ax)=\frac{1}{|a|}\delta(x)$$
     &\mathcal{F} (gT)=\frac{1}{2\pi}\mathcal{F} g*\mathcal{F} T
 }
 \end{theorem}
-这与函数之间卷积的情况是完全一样的。
+
+这与函数之间卷积的情况是完全一样的。对于$T\in\mathcal{T}$，保证$g*T$存在的一种典型条件是$g\in\mathcal{S}$.
 
 实际上，我们同样可以定义分布与分布的卷积，只是这时事情会麻烦的多。首先还是研究正则
 分布的卷积，如果想将前文中定义分布与函数卷积时的g也换成分布，则需要另一种方式来处理

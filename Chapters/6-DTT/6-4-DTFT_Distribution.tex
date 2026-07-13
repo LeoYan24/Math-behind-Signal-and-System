@@ -72,8 +72,8 @@ $$\sum_{n=-\infty}^\infty x[n]\phi[n]=\frac{1}{2\pi}\int_{-\pi}^\pi X(\e^{\im\Om
     $$\langle X,\Phi\rangle=\langle x,\phi\rangle,\quad \forall \phi\in\mathcal{S}$$
 \end{definition}
 
-\begin{example}[复指数信号的离散时间傅里叶变换]
-    求复指数信号$x[n]=\e^{\im\Omega_0 n}$的DTFT.
+\begin{example}[复指数信号的离散时间傅里叶变换]\label{exmp:exp_DTFT}
+    求复指数信号$x[n]=\e^{\im\Omega_0 n}(-\pi<\Omega_0\le\pi)$的DTFT.
 
     解：记$x[n]$的DTFT为$X$，由定义，
     $$\langle X,\Phi\rangle=\langle x,\phi\rangle=\sum_{n=-\infty}^{\infty}\e^{\im\Omega_0 n}\phi[n],\quad \forall \phi\in\mathcal{S}$$
@@ -257,10 +257,10 @@ $$x[n],y[n]\in\mathcal{T},\quad \phi[n]\in\mathcal{S}$$
 
 由于$x[n],y[n]\in\mathcal{T}$时，$x[n]y[n]\in\mathcal{T}$，$X*Y$总是存在的，且\textbf{满足交换律和结合律}。
 
-\begin{example}[离散正弦、余弦函数的离散时间傅里叶变换]
+\begin{example}[离散正弦、余弦函数的离散时间傅里叶变换]\label{exmp:cos_DTFT}
     根据欧拉公式及DTFT的线性性可得：
     $$\DTFT(\cos(\Omega_0 n))=\pi(\delta_{\Omega_0}+\delta_{-\Omega_0}),\quad \DTFT(\sin(\Omega_0 n))=-\pi\im(\delta_{\Omega_0}-\delta_{-\Omega_0})$$
-    根据\cref{prop:discrete_period}，当$\Omega_0/\pi$是无理数时，$\cos(\Omega_0 n)$和$\sin(\Omega_0 n)$不具有周期性，但是总存在有理数与$\Omega_0/\pi$充分靠近，并且频谱为线谱，因此可以说这种信号是\textbf{几乎周期}(almost periodic)的。我们在\cref{def:almost_periodic}引入过类似的概念。
+    根据\cref{prop:discrete_period}，当$\Omega_0/\pi$是无理数时，$\cos(\Omega_0 n)$和$\sin(\Omega_0 n)$不具有周期性，但是总存在有理数与$\Omega_0/\pi$充分靠近，并且频谱为线谱，因此可以说这种信号是\textbf{几乎周期}(almost periodic)的。我们在\refsub{power_signal}中讨论过类似的概念。
 \end{example}
 
 在上例中，令$\Omega_0=\pi$，则
@@ -276,7 +276,9 @@ $$\DTFT(\cos(\pi n))=\DTFT((-1)^n)=\pi(\delta_\pi+\delta_{-\pi})=2\pi\delta_\pi$
     $$\frac{1}{1-\e^{\im\Omega}}\sim\frac{\im}{\Omega},\quad \Omega\to 0$$
     $1/(1-\e^{\im\Omega})$在$[-\pi,\pi]$上不可积，也就无法与$1\in\mathcal{C}$配对。我们需要更加仔细地考察$U$的性质。
 
-    $(1-\e^{\im\Omega})U=1$确定了$U$在$\Omega\neq 0$处的值，为了使它能与1配对，我们只能认为$\langle U,\Phi\rangle$的意义是在主值意义下的积分，由于$\Phi\in\mathcal{C}$光滑，$1/(1-\e^{\im\Omega})$在$\Omega=0$附近的表现类似于奇函数$\im/\Omega$，该主值意义下的积分总是收敛的。
+    $(1-\e^{\im\Omega})U=1$确定了$U$在$\Omega\neq 0$处的值，为了使它能与1配对，我们只能认为$\langle U,\Phi\rangle$的意义是在主值意义下的积分，这样，$U$仍满足它的分布方程：
+    $$(1-\e^{\im\Omega})U=(1-\e^{\im\Omega})\pv\frac{1}{(1-\e^{\im\Omega})}=1$$
+    由于$\Phi\in\mathcal{C}$光滑，$1/(1-\e^{\im\Omega})$在$\Omega=0$附近的表现类似于奇函数$\im/\Omega$，该主值意义下的积分总是收敛的。
 
     主值积分不能描述$\Omega=0$处的$U$的行为，由于它是$1/(1-\e^{\im\Omega})$的极点，直观上可以使用$\delta$分布来处理这个问题。我们引入另一个分布方程：
     $$u[n]+u[-n]=\begin{cases}
@@ -493,6 +495,7 @@ $$P_x=\lim_{M\to\infty}\frac{1}{2M+1}\sum_{n=-M}^M |x[n]|^2=\lim_{M\to\infty}\fr
 
 仿照\cref{thm:power_winner_khinchin}，我们有：
 \begin{theorem}[离散功率信号的维纳-辛钦定理]
+    \label{thm:deiscrete_winner_khinchin}
     设$x[n],y[n]\in b^2$，则
     $$\DTFT(r_{xy})(\Omega)=\lim_{M\to\infty}\frac{1}{2M+1}X_M(\e^{\im\Omega})\overline{Y_M(\e^{\im\Omega})}$$
 \end{theorem}
@@ -594,17 +597,62 @@ S_x(\Omega)=\frac{1}{2\pi}\lim_{M\to\infty}\frac{|X_M(\e^{\im\Omega})|^2}{2M+1}=
 基于此，可以看出幅值为1的余弦序列功率为$1/2$，并且可以猜想：对于离散信号也有类似\cref{thm:PSD}的结论。
 
 \begin{theorem}\label{thm:discrete_PSD}
-    对于几乎周期序列$x[n]$，设其（作为分布的）傅里叶变换为
-    $$X=\sum_{k}a_k\delta_{\Omega_k}$$
+    对于几乎周期的功率序列$x[n]$，设其（作为分布的）傅里叶变换为
+    $$X=\sum_{p}a_p\delta_{\Omega_p}$$
     其中$0\le\Omega_k\le \pi$，则其功率谱密度为
-    $$S_x=\sum_k |a_k|^2\delta_{\Omega_k}$$
-    进一步，设几乎周期序列$y[n]$的傅里叶变换为
-    $$Y=\sum_k b_k\delta_{\Omega_k}$$
+    $$S_x=\sum_p |a_p|^2\delta_{\Omega_p}$$
+    进一步，设几乎周期的功率序列$y[n]$的傅里叶变换为
+    $$Y=\sum_q b_q\delta_{\Omega_q}$$
     则$x[n]$与$y[n]$的互功率谱密度为
     $$S_{xy}=\sum_{k}a_k\overline{b_k}\delta_{\Omega_k}$$
-    其中，求和指标$k$可以是有限的，也可以是可数的，因为分布级数由部分和分布的极限定义；$\Omega_k$为两个信号的公共频率，这是因为不同频率处的交叉项在互功率谱密度中的强度为0.
+    其中，求和指标$p,q$和$k$可以是有限的，也可以是可数的，因为分布级数由部分和分布的极限定义；$\Omega_k$为两个信号的公共频率，这是因为不同频率处的交叉项在互功率谱密度中的强度为0.
 \end{theorem}
 \begin{proof}
     由\cref{thm:DTFT_continuous_1}，可以求得：
-    $$x[n]=\sum_k a_n\e^{\im\Omega_k n},\quad y[n]=\sum_k b_n\e^{\im\Omega_k n}$$
+    $$x[n]=\sum_p a_p\e^{\im\Omega_p n},\quad y[n]=\sum_q b_q\e^{\im\Omega_q n}$$
+    代入互相关的定义：
+    \begin{align*}
+        r_{xy}[l]&=\lim_{M\to\infty}\frac{1}{2M+1}\sum_{n=-M}^M \left(\sum_p a_p\e^{\im\Omega_p (n+l)}\right)\left(\sum_q \overline{b_q}\e^{-\im\Omega_q n}\right)\\
+        &=\sum_{p,q}\left(a_p \overline{b_q}\e^{\im\Omega_p l}\cdot\lim_{M\to\infty}\frac{1}{2M+1}\sum_{n=-M}^M \e^{\im(\Omega_p-\Omega_q)n}\right)
+    \end{align*}
+    其中\begin{align*}
+        \sum_{n=-M}^M \e^{\im(\Omega_p-\Omega_q)n}&=\e^{-\im(\Omega_p-\Omega_q)M}\frac{1-\e^{\im(\Omega_p-\Omega_q)(2M+1)}}{1-\e^{\im(\Omega_p-\Omega_q)}}\\
+        &=\frac{\e^{-\im(\Omega_p-\Omega_q)(2M+1)/2}-\e^{\im(\Omega_p-\Omega_q)(2M+1)/2}}{\e^{-\im(\Omega_p-\Omega_q)/2}-\e^{\im(\Omega_p-\Omega_q)/2}}\\
+        &=\frac{\sin\left((2M+1)(\Omega_p-\Omega_q)/2\right)}{\sin((\Omega_p-\Omega_q)/2)}
+    \end{align*}
+    因此\begin{align*}
+        r_{xy}[l]&=\sum_{p,q}\left(a_p\overline{b_q}\e^{\im\Omega_p l}\cdot\lim_{M\to\infty}\frac{\sin\left((2M+1)(\Omega_p-\Omega_q)/2\right)}{(2M+1)\sin((\Omega_p-\Omega_q)/2)}\right)
+    \end{align*}
+    其中
+    $$\lim_{M\to\infty}\frac{\sin\left((2M+1)(\Omega_p-\Omega_q)/2\right)}{(2M+1)\sin((\Omega_p-\Omega_q)/2)}=\begin{cases}
+        1,&\text{if }p=q\\
+        0,&\text{if }p\neq q
+    \end{cases}$$
+    因此
+    \begin{align*}
+        r_{xy}[l]=\sum_{k}a_k\overline{b_k}\e^{\im\Omega_k l}\tag{$*$}
+    \end{align*}
+    其中$\Omega_k$为两个信号的公共频率。为了使用\cref{thm:DTFT_continuous_2}得到最终的结论，我们不妨设指标$k$的范围是$\mathbb{N}$，说明部分和序列
+    $$\sum_{k=0}^K a_k\overline{b_k}\e^{\im\Omega_k l}$$
+    是一致缓增的。利用$(*)$，令$y=x$可得：
+    \begin{align*}
+        &r_x[l]=\sum_{p} |a_p|^2\e^{\im\Omega_p l}
+    \end{align*}
+    进而得到：
+    \begin{align*}
+        P_x&=\lim_{M\to\infty}\frac{1}{2M+1}\sum_{n=-\infty}^\infty |x[n]|^2=r_x[0]=\sum_{p} |a_p|^2
+    \end{align*}
+    由于$x[n],y[n]$是功率序列，有：
+    $$P_x=\sum_{p} |a_p|^2<\infty,\quad P_y=\sum_{q} |b_q|^2<\infty$$
+    由柯西-施瓦兹不等式可得：
+    \begin{align*}
+        \sum_{k=0}^K a_k\overline{b_k}\e^{\im\Omega_k l}&\le\sum_{k=0}^\infty |a_k b_k|\\
+        &\le \left(\sum_{k=0}^\infty |a_k|^2\right)^{1/2}\left(\sum_{k=0}^\infty |b_k|^2\right)^{1/2}\\
+        &\le \left(\sum_{p} |a_p|^2\right)^{1/2}\left(\sum_{q} |b_q|^2\right)^{1/2}\\
+        &=\sqrt{P_x P_y}<\infty
+    \end{align*}
+    可见$\sum_{k=0}^K a_k\overline{b_k}\e^{\im\Omega_k l}$对$K$有一致上界$\sqrt{P_x P_y}$.
+
+    由\cref{thm:DTFT_continuous_2}及\cref{thm:deiscrete_winner_khinchin}，我们得到：
+    $$S_{xy}=\DTFT\left(r_{xy}[l]\right)=\sum_{k}a_k\overline{b_k}\delta_{\Omega_k}$$
 \end{proof}

@@ -59,6 +59,10 @@
 \end{theorem}
 当$T$表示采样周期时，$1/T=f_s$为采样频率，于是这一定理表明：\textbf{对于采样率足够的理想采样，可以由采样函数恢复出原函数}。这种插值方式与上一节中讨论的拉格朗日插值有一定的相似之处。采样函数$\mathrm{sinc}$在非零整数点处的值为0，在0处的值为1，于是可以直接利用每个数据点处的值限定所还原出信号在这一点的值，换言之，在以下这种公式所代表的插值方式下，数据点处的值是不会产生偏移的，$\mathrm{Sa}$函数同理。不同的是，拉格朗日插值法在数据点以外的位置往往会有误差，而以上插值方法在没有产生混叠现象时是精确的。
 
+必须指出，工程上很少使用香农采样定理还原信号，它仅仅指出采样不丢失模拟信号信息的最低要求。在\refsub{finite_sampling}的\cref{exmp:finite_sum}中，我们将看到物理可实现的有限项模拟信号求和
+$$\sum_{k=-N}^{N}f\left(kT\right)\mathrm{sinc}\left(f_s(t-kT)\right)$$
+可能会出现吉布斯现象。此外函数在时刻$t$的值要依赖于后续的采样点$f(kT),kT>t$，本质上这是在频域上通过理想滤波器$\chi_{[-\nu_m,\nu_m]}$非因果导致的，这使得我们无法进行实时的信号恢复。工程上，通常采用的插值方式例如零阶采样保持、线性插值等，都要求\textbf{采样率远高于奈奎斯特频率}，这样才能使得模拟信号失真不明显。
+
 \subsection{混叠现象}\label{sub:alias}
 我们已经说明了采样率不低于奈奎斯特频率时的信号还原方法，下面来说明为什么奈奎斯特频率时极限情况。直观上，采样频率越高，所需要的成本就越高，提供的信息就越多，而如果采样频率低于$f_N$，将发生\textbf{混叠}(alias)现象，还原所得的信号将产生失真。下图展示了正弦波的混叠：
 \begin{figure}[H]
@@ -98,15 +102,6 @@
         \mathrm{sinc}\left(f_s t\right)*\shah_T=\frac{\mathrm{sinc}\left(f_s t\right)}{\mathrm{sinc}\left(t/T\right)}
     \end{align*}
 \end{lemma}
-\begin{remark}
-    取$f_s=T=1,N=0$，可得$\mathrm{sinc}(t)*\shah=1$。这里给出前$N$项和的图像：
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.75\textwidth]{sinc_shah.jpeg}
-        \caption{$\mathrm{sinc}(t)*\shah$的前N项和}
-    \end{figure}
-    它与方波很接近，并且出现了吉布斯现象。将部分和$S_N(t)=\sum_{k=-N}^{N}\mathrm{sinc}(t-k)$视为采样率为1的情况下，对时宽为$2N$的方波进行还原的结果，则随着$N$的增大，采样点增多，结果越来越接近$\mathds{1}$。方波不是带限信号，吉布斯现象可以视为混叠的结果，但由于频带能量集中于低频，所以在大部分区域上，这种还原结果仍然较好地逼近了方波。
-\end{remark}
 \begin{proof}
     取傅里叶变换：
 \begin{align*}
@@ -128,6 +123,15 @@
     &=\frac{\sin\left((2N+1)\pi t/T\right)}{\sin\left(\pi t/T\right)}
 \end{align*}
 \end{proof}
+\begin{example}\label{exmp:finite_sum}
+    取$f_s=T=1,N=0$，可得$\mathrm{sinc}(t)*\shah=1$。这里给出前$N$项和的图像：
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.75\textwidth]{sinc_shah.jpeg}
+        \caption{$\mathrm{sinc}(t)*\shah$的前N项和}
+    \end{figure}
+    它与方波很接近，并且出现了吉布斯现象。将部分和$S_N(t)=\sum_{k=-N}^{N}\mathrm{sinc}(t-k)$视为采样率为1的情况下，对时宽为$2N$的方波进行还原的结果，则随着$N$的增大，采样点增多，结果越来越接近$\mathds{1}$。方波不是带限信号，吉布斯现象可以视为混叠的结果，但由于频带能量集中于低频，所以在大部分区域上，这种还原结果仍然较好地逼近了方波。
+\end{example}
 \begin{proposition}[有限采样公式]
     设$f(t)$周期为$T$，且带限于$[-\nu_m,\nu_m]$，取$f_s$满足
     $$f_s=1/T_s=\frac{2N+1}{T}\geq 2\nu_m$$

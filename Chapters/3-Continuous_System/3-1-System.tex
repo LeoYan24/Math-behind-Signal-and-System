@@ -204,7 +204,7 @@ $r(t)=\mathcal{F} e(t)$.
 \end{proof}
 
 函数与$\delta$的卷积还是它本身，这就好比信号在进入任何一个系统前，先经过了一个与$\delta$卷积的线性时不变系统，利用这一观点即可得到\textbf{叠加定理}(superposition thoerem)\cite{brad_osgood_ee261}，由于它是泛函分析中对应定理的特殊形式，有时也将它称为\textbf{施瓦兹核定理}(Schwartz kernel thoerem)。
-\begin{theorem}[叠加定理/施瓦兹核定理]
+\begin{theorem}[叠加定理/施瓦兹核定理]\label{thm:superposition}
     \begin{equation*}
         r(x)=\int_{-\infty}^{\infty}k(x,y)e(y)\,dy
     \end{equation*}
@@ -266,7 +266,7 @@ $$k(x,y)=H_x[\delta(x-y)]$$
     \label{def:causuality}
     如果系统的响应仅依赖于过去的激励而不依赖于未来的激励，即
     \begin{equation}
-        \forall t_0,\left(e_1(t)=e_2(t)\ \mathrm{for}\ t<t_0\right)\implies \left(r_1(t)=r_2(t)\ \mathrm{for}\ t<t_0\right)\label{eq:4.1}
+        \forall t_0,\quad \left(e_1(t)=e_2(t)\ \mathrm{for}\ t<t_0\right)\implies \left(r_1(t)=r_2(t)\ \mathrm{for}\ t<t_0\right)\label{eq:4.1}
     \end{equation}
     则该系统是\textbf{因果的}(casual)，上述条件称为\textbf{因果性条件}(casuality condition)。
 \end{definition}
@@ -278,7 +278,7 @@ $$k(x,y)=H_x[\delta(x-y)]$$
 \begin{proposition}
 对于线性系统，因果性条件等价于
 \begin{equation}
-    \forall t_0,\left(e(t)=0\ \mathrm{for}\ t<t_0\right)\implies \left(r(t)=0\ \mathrm{for}\ t<t_0\right)\label{eq:4.2}
+    \forall t_0,\quad \left(e(t)=0\ \mathrm{for}\ t<t_0\right)\implies \left(r(t)=0\ \mathrm{for}\ t<t_0\right)\label{eq:4.2}
 \end{equation}
 \end{proposition}
 \begin{proof}

@@ -13,7 +13,7 @@
 如果认为功率为0的信号也是功率信号，则功率信号构成线性空间，我们暂时以$B^2$记这个空间，稍后我们会看到这样做的原因。一个自然的问题是：它是否构成线性赋范空间，甚至内积空间？
 
 为了使它成为线性赋范空间，首先要定义功率信号的范数，然而从它的定义中我们找不到与$L^p(\mathbb{R})$空间的关联。一种自然的想法是，定义
-$$\|f\|_{\mathrm{pwr}}=\sqrt{P_f}=\left(\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}|f(x)|^2\,dx\right)$$
+$$\|f\|_{\mathrm{pwr}}=\sqrt{P_f}=\left(\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}|f(x)|^2\,dx\right)^{1/2}$$
 其中$P_f$表示信号$f$的功率。$\|\cdot\|_{\mathrm{pwr}}$并不构成范数，它仅仅是\textbf{半范数}(seminorm)，满足：\begin{itemize}
     \item 非负性：$\|f\|_{\mathrm{pwr}}\geq 0$
     \item 齐次性：$\|\alpha f\|_{\mathrm{pwr}}=|\alpha|\|f\|_{\mathrm{pwr}}$
@@ -62,7 +62,7 @@ $$f\sim g\iff \|f-g\|_{\mathrm{pwr}}=0$$
 
 我们总是可以取适当的周期信号使得它与这种信号充分靠近，例如$\sin (2\pi t)+\sin(2\sqrt{2}\pi t)$与周期信号$\sin(2\pi t)+\sin(2\pi\cdot 1.414t)$非常相似，后者以$707$为周期。这种近似的可行性是由$\mathbb{Q}$在$\mathbb{R}$中的稠密性保证的。
 
-几乎周期函数理论由丹麦数学家波尔(Harald Bohr)开创。1930年，维纳在其论文《Generalized Harmonic Analysis》中开创了用时间平均研究功率谱的先河，为两年后贝希科维奇的著作《Almost Periodic Functions》奠定了基础。在这一著作中，贝希科维奇扩展了波尔的几乎周期函数理论，定义了各类几乎周期函数$B^p$，前面通过商空间构造内积空间$B^2$的过程就是在这本著作中首次提出的。\textbf{贝希科维奇空间实际上是几乎周期函数空间的完备化扩张}，不过工程上处理的通常只是其中的几乎周期函数。
+几乎周期函数理论由丹麦数学家波尔(Harald Bohr)开创。1930年，维纳在其论文《Generalized Harmonic Analysis》中开创了用时间平均研究功率谱的先河，为两年后贝希科维奇的著作《Almost Periodic Functions》奠定了基础。在这一著作中，贝希科维奇扩展了波尔的几乎周期函数理论，定义了各类几乎周期函数$B^p$，前面通过商空间构造内积空间$B^2$的过程就是在这本著作中首次提出的。\textbf{贝希科维奇空间实际上是几乎周期函数空间的完备化扩张}，不过工程上处理的通常只是其中的几乎周期函数，此类函数的频谱仅有冲击项$\delta$及其平移。
 
 \subsection{能量谱与功率谱}\label{sub:power_spectrum}
 
@@ -263,20 +263,20 @@ $$S_f=\left(\frac{1}{2}\right)^2\delta_1+\left(\frac{1}{2}\right)^2\delta_{-1}=\
 由此可以猜想：
 
 \begin{theorem}\label{thm:PSD}
-    对于几乎周期函数$f$，设其（作为分布的）傅里叶变换为
+    对于几乎周期的功率信号$f$，设其（作为分布的）傅里叶变换为
     $$\mathcal{F}f=\sum_{n}a_n\delta_{\xi_n}$$
     则其功率谱密度为
     $$S_f=\sum_n |a_n|^2\delta_{\xi_n}$$
-    进一步，设几乎周期函数$g$的傅里叶变换为
-    $$\mathcal{F}g=\sum_n b_n\delta_{\xi_n}$$
+    进一步，设几乎周期的功率信号$g$的傅里叶变换为
+    $$\mathcal{F}g=\sum_m b_m\delta_{\xi_m}$$
     则$f$与$g$的互功率谱密度为
-    $$S_{fg}=\sum_{n}a_n\overline{b_n}\delta_{\xi_n}$$
-    其中，求和指标$n$可以是有限的，也可以是可数的，因为分布级数由部分和分布的极限定义；$\xi_n$为两个信号的公共频率，这是因为不同频率处的交叉项在互功率谱密度中的强度为0.
+    $$S_{fg}=\sum_{k}a_k\overline{b_k}\delta_{\xi_k}$$
+    其中，求和指标$n,m$和$k$可以是有限的，也可以是可数的，因为分布级数由部分和分布的极限定义；$\xi_k$为两个信号的公共频率，这是因为不同频率处的交叉项在互功率谱密度中的强度为0.
 \end{theorem}
 
 \begin{proof}
     由分布的傅里叶变换的连续性，可以求得
-    $$f(t)=\sum_n a_n\mathrm{e}^{2\pi \mathrm{i}\xi_n t},\quad g(t)=\sum_n b_n\mathrm{e}^{2\pi\mathrm{i}\xi_n t}$$
+    $$f(t)=\sum_n a_n\mathrm{e}^{2\pi \mathrm{i}\xi_n t},\quad g(t)=\sum_m b_m\mathrm{e}^{2\pi\mathrm{i}\xi_m t}$$
     它不应看作常规意义下的傅里叶级数，因为等号右边的级数可能是几乎处处不收敛的，等号仅仅在分布的意义下成立。\refsub{fourier_of_dirac_comb}中的狄拉克梳状分布就是这样一个例子。
 
     代入互相关的定义：\begin{align*}
@@ -299,9 +299,9 @@ $$S_f=\left(\frac{1}{2}\right)^2\delta_1+\left(\frac{1}{2}\right)^2\delta_{-1}=\
     \end{cases}$$
     因此
     \begin{align*}
-        R_{fg}(x)=\sum_n a_n\overline{b_n}\mathrm{e}^{2\pi \mathrm{i}\xi_n x}
+        R_{fg}(x)=\sum_k a_k\overline{b_k}\mathrm{e}^{2\pi \mathrm{i}\xi_k x}
     \end{align*}
-    利用功率信号的维纳-辛钦定理以及分布的傅里叶变换的连续性，得到
+    其中$\xi_k$为两个信号的公共频率。利用功率信号的维纳-辛钦定理以及分布的傅里叶变换的连续性，得到
     \begin{align*}
         S_{fg}&=\mathcal{F}R_{fg}\\
         &=\sum_n a_n\overline{b_n}\mathcal{F}\left[\mathrm{e}^{2\pi \mathrm{i}\xi_n x}\right]\\

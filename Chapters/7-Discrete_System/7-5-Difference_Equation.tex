@@ -92,7 +92,7 @@ $$\mathbf{y}[k+1] = A \mathbf{y}[k] + \mathbf{f}[k]$$
 对于非齐次方程，由于需要计算$\sum_{i=0}^{k-1} A^{k-1-i} \mathbf{f}[i]$，如果每个$A^{k-1-i}$都通过多项式快速幂算法来计算，那么每求一个$\mathbf{y}[k]$的复杂度为$O(k N^2 \log k)$，此时复杂度比直接迭代还要大。
 
 将上述三种算法在齐次/非齐次方程下的复杂度汇总如下：
-\begin{table}[h]
+\begin{table}[H]
     \centering
     \begin{tabular}{|c|c|c|}
         \hline

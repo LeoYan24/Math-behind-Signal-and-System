@@ -1,52 +1,70 @@
-\section{离散系统的频率响应特性}\label{sec:discrete_system_freq_response}
+\section{相频特性与时延}\label{sec:discrete_system_delay}
 
-\subsection{频率响应特性与零极点图}\label{sub:discrete_system_freq_response}
+\subsection{相时延与群时延}\label{sub:phase_group_delay}
 
-离散系统的系统函数$H(z)$是单位脉冲响应$h[n]$的z变换。在系统稳定的情况下，$h[n]\in l^1$，此时可以对单位脉冲响应做离散时间傅里叶变换，得到系统的\textbf{频率响应特性}，记为$H(\mathrm{e}^{\mathrm{i}\Omega})$，它是系统函数在单位圆上的限制，即
-$$H(\mathrm{e}^{\mathrm{i}\Omega})=H(z)|_{z=\mathrm{e}^{\mathrm{i}\Omega}}$$
-
-类似于连续系统，我们仍然将$|H(\mathrm{e}^{\mathrm{i}\Omega})|$称为系统的\textbf{幅频特性}，将$\arg H(\mathrm{e}^{\mathrm{i}\Omega})$称为系统的\textbf{相频特性}，我们仍将相频特性记为$\varphi(\Omega)$。我们同样可以对离散系统的相频特性做解卷绕处理，见\refsub{distortion}，但简洁起见，本章中不讨论$\varphi(\Omega)$跳变的情况。
-
-作为系统函数在单位圆上的限制，有$Y(\mathrm{e}^{\mathrm{i}\Omega})=H(\mathrm{e}^{\mathrm{i}\Omega})X(\mathrm{e}^{\mathrm{i}\Omega})$，因此，可以通过频率响应特性看出系统的滤波特性。对于非周期离散信号，高频信号指数字角频率接近$\pm\pi$的信号，一个离散系统如果对信号的低频成分有较大的增益，对高频成分有较小的增益，则称其为\textbf{低通滤波器}，其它类型的滤波器同理。
-
-与连续系统的情况一致，我们考虑的系统函数通常是有理函数，在下一小节中将看到，此类系统可以用常系数线性差分方程描述。对于离散系统，系统函数的零极点图绘制规则与连续系统一致。仿照\refsub{zero_pole_characteristics}，可以根据系统函数的零极点图定性分析系统的频率响应特性。
-
-\begin{example}
-    设系统的零极点图如下图(a)所示：
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.7\textwidth]{discrete_zero}
-        \caption{离散系统的零极点图(1)}
-    \end{figure}
-    由于在$z=1$附近有零点，而在$z=-1$附近有一对共轭极点，可以定性分析出系统的频率响应特性如上图(b)所示，这表明系统具有高通滤波特性。
-
-    也可以通过矢量图来分析系统的频率响应特性，如下图所示：
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.35\textwidth]{discrete_vector}
-        \caption{离散系统的矢量图}
-    \end{figure}
-    该系统的系统函数具有如下形式：
-    $$H(z)=\frac{z-a}{(z+b+\mathrm{i}c)(z+b-\mathrm{i}c)},\quad a,b,c>0$$
-    因此幅频特性就是复平面上的向量$z-a$与向量$z+b+\mathrm{i}c$、$z+b-\mathrm{i}c$的长度之比。
-
-    随矢量终点由$\Omega=0$向$\Omega=\pi$移动，由零点出发的矢量长度（分子）逐渐增加，而由极点出发的矢量长度（分母）逐渐减小，因此系统的增益在$\Omega=0$处较小，在$\Omega=\pi$处较大，具有高通滤波特性。
-\end{example}
-
-\subsection{相频特性与时延}\label{sub:phase_response}
-
-对于连续系统，我们通过相时延和群时延的概念，建立了系统的相频特性与系统对激励信号造成的相时延和群时延之间的关系，自然要问：对于离散系统，相频特性是否也有类似的物理意义？答案是肯定的，本小节就来讨论这个问题，并给出离散情况下的最小相位系统的概念。
-
-对于离散系统，相时延与群时延的定义是类似的，只是对于离散信号，$\Omega$的范围是$(-\pi,\pi]$，因此相时延与群时延的定义域也相应地限制在$(-\pi,\pi]$上。
+对于连续系统，我们通过相时延和群时延的概念（\cref{def:delay}），建立了系统的相频特性与系统对激励信号造成的相时延和群时延之间的关系，自然要问：对于离散系统，相频特性是否也有类似的物理意义？答案是肯定的，本节就来讨论这个问题，并给出离散情况下的最小相位系统的概念。
 
 \begin{definition}[相时延与群时延]
     对于一个因果、稳定的线性时不变系统，设其相频特性为$\varphi(\Omega)$，则系统的\textbf{相时延}定义为
     $$\tau_p(\Omega)=-\frac{\varphi(\Omega)}{\Omega}$$
     系统的\textbf{群时延}或\textbf{包络时延}定义为
     $$\tau_g(\Omega)=-\frac{d\varphi(\Omega)}{d\Omega}$$
+    由于数字角频率$\Omega\in(-\pi,\pi]$，相时延和群时延都是周期为$2\pi$的周期函数。
 \end{definition}
 
-有了对连续系统的相时延与群时延的处理经验，就可以猜想离散系统的相时延与群时延的具有类似的物理意义，即相时延$\tau_p(\Omega)$表示系统对频率为$\Omega$的频率成分的延时，群时延$\tau_g(\Omega)$表示系统对频率为$\Omega$的包络信号的延时。然而，离散系统的情况会更加复杂一些：
+有了对连续系统的相时延与群时延的处理经验，就可以猜想离散系统的相时延与群时延的具有类似的物理意义，即相时延$\tau_p(\Omega)$表示系统对频率为$\Omega$的频率成分的延时，群时延$\tau_g(\Omega)$表示系统对频率为$\Omega$的包络信号的延时。我们仍通过两个例子来说明这一点。
+
+\begin{example}[相时延]
+    设输入信号为单频复指数序列$e[n]=\e^{\im\Omega_0 n}(-\pi<\Omega_0\le\pi)$，求频率响应为$H(\e^{\im\Omega})$，的线性时不变系统的输出序列$r[n]$.
+
+    解：利用\cref{exmp:exp_DTFT}的结果，$e[n]$的DTFT为$E(\e^{\im\Omega})=\delta_{\Omega_0}$，因此输出序列的DTFT为
+    $$R(\e^{\im\Omega})=H(\e^{\im\Omega})E(\e^{\im\Omega})=H(\e^{\im\Omega_0})\delta_{\Omega_0}$$
+    因此
+    $$r[n]=H(\e^{\im\Omega_0})\e^{\im\Omega_0 n}=\left|H(\e^{\im\Omega_0})\right|\e^{\im(\Omega_0 n+\varphi(\Omega_0))}$$
+    可见输出序列仍为单频复指数序列，其幅值被放大了$\left|H(\e^{\im\Omega_0})\right|$倍，相位延迟了$\varphi(\Omega_0)$，折合到时间变量$n$上，就得到相时延：
+    $$r[n]=\left|H(\e^{\im\Omega_0})\right|\e^{\im\Omega_0 (n+\varphi(\Omega_0)/\Omega_0)},\quad \tau_p(\Omega_0)=-\frac{\varphi(\Omega_0)}{\Omega_0}$$
+\end{example}
+
+特别地，如果系统的相频特性$\varphi(\Omega)$是$\Omega$的线性函数，即$\varphi(\Omega)=-k\Omega$，则系统的相时延为常数$k$，即系统对所有频率的离散信号的相时延都是$k$，因此称其为\textbf{线性相位系统}。
+
+类似\cref{def:eigenfunction}，$\e^{\im\Omega_0 n}(-\pi<\Omega_0\le\pi)$为离散系统$H$的\textbf{特征函数}。
+
+\begin{example}[群时延]
+    设输入序列为调幅序列
+    $$e[n]=\cos(\Omega_m)\cos(\Omega_c)$$
+    其中$\Omega_m$为载波数字角频率，$\Omega_m$为调制序列数字角频率，且$0<\Omega_m\ll\Omega_c\le\pi$，单位脉冲响应$h[n]$为实序列，频率响应为$H(\e^{\im\Omega})$，求响应序列$r[n]$.
+
+    解：将输入序列用积化和差公式展开：
+    $$e[n]=\frac{1}{2}[\cos((\Omega_c+\Omega_m)n)+\cos((\Omega_c-\Omega_m)n)]$$
+    利用\cref{lemma:digital_cos_filter}，有：
+    \begin{align*}
+        r[n]=&\frac{1}{2}\left|H(\e^{\im(\Omega_c+\Omega_m)})\right|\cos((\Omega_c+\Omega_m)n+\varphi(\Omega_c+\Omega_m))\\
+        &\quad+\frac{1}{2}\left|H(\e^{\im(\Omega_c-\Omega_m)})\right|\cos((\Omega_c-\Omega_m)n+\varphi(\Omega_c-\Omega_m))
+    \end{align*}
+    由于$\Omega_c\gg\Omega_m$，可以将$\left|H(\e^{\im(\Omega_c+\Omega_m)})\right|$近似为$\left|H(\e^{\im\Omega_c})\right|$，将$\varphi(\Omega)$在$\Omega_c$处做泰勒展开：
+    $$\varphi(\Omega_c+\Omega)\approx\varphi(\Omega_c)+\evalat{\frac{d\varphi(\Omega)}{d\Omega}}{\Omega=\Omega_c}{}\Omega$$
+    代入得
+    \begin{align*}
+        r[n]=&\frac{1}{2}\left|H(\e^{\im\Omega_c})\right|\left[\cos\left((\Omega_c+\Omega_m)n+\varphi(\Omega_c)+\evalat{\frac{d\varphi(\Omega)}{d\Omega}}{\Omega=\Omega_c}{}\Omega_m\right)\right.\\
+        &\qquad\qquad+\cos\left((\Omega_c-\Omega_m)n+\varphi(\Omega_c)-\evalat{\frac{d\varphi(\Omega)}{d\Omega}}{\Omega=\Omega_c}{}\Omega_m\right)\\
+        &=\left|H(\e^{\im\Omega_c})\right|\cos(\Omega_c n+\varphi(\Omega_c))\cos\left(\Omega_m\left[n+\evalat{\frac{d\varphi(\Omega)}{d\Omega}}{\Omega=\Omega_c}{}\right]\right)
+    \end{align*}
+    相比输入序列$e[n]=\cos(\Omega_m)\cos(\Omega_c)$，输出序列的幅度大约变为$\left|H(\e^{\im\Omega_c})\right|$倍，载波序列的相位延迟了$\varphi(\Omega_c)$，调制序列的相位延迟了$\evalat{\dfrac{d\varphi(\Omega)}{d\Omega}}{\Omega=\Omega_c}{}$，将离散信号视为连续信号理想采样的结果，就可以把调制信号的相位偏移折算为连续信号的包络波形的时间延迟，从而得到系统对频率为$\Omega_c$的离散信号的群时延
+    $$\tau_g(\Omega_c)=-\frac{d\varphi(\Omega_c)}{d\Omega_c}$$
+    可见，类似于连续系统，群时延描述了低频包络序列的时延，因此又称为包络时延。
+\end{example}
+
+\begin{definition}[离散线性相位系统]
+    如果系统对各个频率成分有相同时延，即相时延$\tau_p(\Omega)$是常数，则称之为\textbf{线性相位系统}(linear phase system)；
+
+    如果系统如果系统对各个中心频率的信号群有相同时延，即群时延$\tau_p(\Omega)$是常数，则称之为\textbf{准线性相位系统}(quasilinear phase system).
+
+    线性相位性质蕴含准线性相位性质。
+\end{definition}
+
+\subsection{因果序列的稳态时延}\label{sub:causual_static_delay}
+
+借助z变换，可以得到相时延与群时延的另一种物理意义。上一小节中，我们讨论的都是稳态信号，即信号从$n=-\infty$持续到$\infty$，这是不可实现的。本小节中，我们考虑信号从某一时刻开始加到系统上（不妨设信号是因果的），进而考虑系统的时延。
 
 \begin{example}
     对于一个因果且稳定的线性时不变系统，设其系统函数为$H(z)$，激励为在$n=0$时刻施加于系统的单频离散信号
@@ -87,10 +105,6 @@ $$H(\mathrm{e}^{\mathrm{i}\Omega})=H(z)|_{z=\mathrm{e}^{\mathrm{i}\Omega}}$$
     上图展示了单频的离散正弦信号经过系统后的表现。可以看到，稳态响应本身并不是激励信号延时所得的，但作为连续正弦信号的采样结果，它们的包络呈现出相时延$\tau_p(\Omega)$的效果。
 \end{example}
 
-为了处理系统函数$H(z)$的极点，我们不得不忽略一些暂态项，在这种意义下，相时延的物理意义与猜想大致相符，稳态响应的确呈现出我们希望看到的相时延的时延量。特别地，如果系统的相频特性$\varphi(\Omega)$是$\Omega$的线性函数，即$\varphi(\Omega)=-k\Omega$，则系统的相时延为常数$k$，即系统对所有频率的离散信号的相时延都是$k$，因此称其为\textbf{线性相位系统}。
-
-可以猜想，群时延也具有类似于连续情况的定义与物理直观。下面的双边带调幅信号的例子，与\refsub{distortion}中的思路完全一致：
-
 \begin{example}
     对于一个因果且稳定的线性时不变系统，设其系统函数为$H(z)$，激励为离散调幅信号
     $$e[n]=\cos(\Omega_m n)\cos(\Omega_c n)u[n]$$
@@ -105,7 +119,7 @@ $$H(\mathrm{e}^{\mathrm{i}\Omega})=H(z)|_{z=\mathrm{e}^{\mathrm{i}\Omega}}$$
         &=\frac{1}{4}\left[\frac{zH(z)}{z-\mathrm{e}^{\mathrm{i}(\Omega_c+\Omega_m)}}+\frac{zH(z)}{z-\mathrm{e}^{-\mathrm{i}(\Omega_c+\Omega_m)}}+\frac{zH(z)}{z-\mathrm{e}^{\mathrm{i}(\Omega_c-\Omega_m)}}+\frac{zH(z)}{z-\mathrm{e}^{-\mathrm{i}(\Omega_c-\Omega_m)}}\right]
     \end{align*}
 
-    根据前一例子中的结果，在$n$充分大时，响应近似为
+    根据前一例子中的结果，在$n$充分大时，稳态响应近似为
     \begin{align*}
         r[n]&=\frac{1}{4}\left[H(\mathrm{e}^{\mathrm{i}(\Omega_c+\Omega_m)})\mathrm{e}^{\mathrm{i}(\Omega_c+\Omega_m)n}+H(\mathrm{e}^{-\mathrm{i}(\Omega_c+\Omega_m)})\mathrm{e}^{-\mathrm{i}(\Omega_c+\Omega_m)n}\right.\\
         &\qquad +\left.H(\mathrm{e}^{\mathrm{i}(\Omega_c-\Omega_m)})\mathrm{e}^{\mathrm{i}(\Omega_c-\Omega_m)n}+H(\mathrm{e}^{-\mathrm{i}(\Omega_c-\Omega_m)})\mathrm{e}^{-\mathrm{i}(\Omega_c-\Omega_m)n}\right]\\
@@ -122,7 +136,7 @@ $$H(\mathrm{e}^{\mathrm{i}\Omega})=H(z)|_{z=\mathrm{e}^{\mathrm{i}\Omega}}$$
         &\qquad\left.+\cos\left((\Omega_c-\Omega_m)n+\varphi(\Omega_c)-\left.\frac{d\varphi(\Omega)}{d\Omega}\right|_{\Omega=\Omega_c}\Omega_m\right)\right]\\
         &=|H(\mathrm{e}^{\mathrm{i}\Omega_c})|\cos\left(\Omega_c n+\varphi(\Omega_c)\right)\cos\left(\Omega_m n+\left.\frac{d\varphi(\Omega)}{d\Omega}\right|_{\Omega=\Omega_c}\Omega_m\right)
     \end{align*}
-    响应相对激励，幅度大约变为$|H(\mathrm{e}^{\mathrm{i}\Omega_c})|$倍，载波信号的相位延迟为$\varphi(\Omega_c)$，调制信号的相位偏移为$\left.\dfrac{d\varphi(\Omega)}{d\Omega}\right|_{\Omega=\Omega_c}\Omega_m$。将离散信号视为连续信号理想采样的结果，就可以把调制信号的相位偏移折算为连续信号的包络波形的时间延迟，从而得到系统对频率为$\Omega_c$的离散信号的群时延
+    同样地，将稳态响应的相位偏移折算为系统对中心频率为$\Omega_c$的离散序列的群时延：
     $$\tau_g(\Omega_c)=-\left.\frac{d\varphi(\Omega)}{d\Omega}\right|_{\Omega=\Omega_c}$$
 \end{example}
 
@@ -133,7 +147,7 @@ $$H(\mathrm{e}^{\mathrm{i}\Omega})=H(z)|_{z=\mathrm{e}^{\mathrm{i}\Omega}}$$
     设因果且稳定的离散线性时不变系统给的系统函数为$H(z)$，记$H(z)$的零点集为$\{z_k\}$，如果$\forall k,|z_k|<1$，则称该系统为\textbf{离散最小相位系统}。
 \end{definition} 
 
-对于离散系统，\textbf{单位圆对应连续系统的虚轴；单位圆外侧对应虚轴右侧}。二者都可视为稳定性和最小相位性的分界线，因果信号在变换域中的收敛域均位于分界线的一侧。对于连续系统，在$s$平面沿虚轴自$s=0$走到无穷远点时，频率由低到高，稳定系统的极点位于走向左侧，最小相位系统的极点和零点均位于左侧；对于离散系统，在$z$平面沿单位圆从$z=1$逆时针走到$z=-1$时，结论同样成立。
+对于离散系统，\textbf{单位圆对应连续系统的虚轴；单位圆外侧对应虚轴右侧}。二者都可视为稳定性和最小相位性的分界线，因果信号在变换域中的收敛域均位于分界线的一侧。对于连续系统，在$s$平面沿虚轴自$s=0$走到无穷远点时，频率由低到高，稳定系统的极点位于走向左侧，最小相位系统的极点和零点均位于左侧；对于离散系统，在$z$平面沿单位圆从$z=1$逆时针走到$z=-1$时，结论同样成立\footnote{以上全部描述本质上都是复平面的共形变换$s=\frac{1-z^{-1}}{1+z^{-1}}$的性质}。
 
 为了说明这种系统具有最小相位性，我们仿照\refsub{min_phase}，借助全通系统，给出系统函数为有理函数，且不考虑单位圆上有零点时的证明。
 
@@ -143,7 +157,7 @@ $$H(\mathrm{e}^{\mathrm{i}\Omega})=H(z)|_{z=\mathrm{e}^{\mathrm{i}\Omega}}$$
     其中$|z_k|<1$，则该系统是全通系统。
 \end{lemma}
 \begin{proof}
-    $H(z)$的零点、极点分别为$\{\overline{1/z_k}\}$和$\{z_k\}$，由于$|z_k|<1$，$\overline{1/z_k}$位于单位圆外，而$z_k$位于单位圆内，因此系统是稳定的。
+    $H(z)$的零点、极点分别为$\left\{\overline{1/z_k}\right\}$和$\{z_k\}$，由于$|z_k|<1$，$\overline{1/z_k}$位于单位圆外，而$z_k$位于单位圆内，因此系统是稳定的。
 
     我们来验证，以上乘积式中的每一项都是全通系统，从而它们的级联也是全通系统。记
     $$H_k(z)=\frac{1-\overline{z_k}z}{z-z_k}$$
@@ -174,7 +188,7 @@ $$H(\mathrm{e}^{\mathrm{i}\Omega})=H(z)|_{z=\mathrm{e}^{\mathrm{i}\Omega}}$$
     \tilde{H}(z)=H(z)A(z)=K(z)\frac{\prod_{k=1}^{M}(1-\overline{z_k} z)}{\prod_{l=1}^{N}(z-p_l)}
     \end{align*}
 
-    因此，级联系统是最小相位系统。为了验证级联系统具有最小相位性，我们来计算全通系统造成的群时延和相时延。设$z_k=r_k \mathrm{e}^{\mathrm{i}\theta_k}(r_k>1)$，全通系统的相频特性为：
+    因此，级联系统是最小相位系统。为了验证级联系统具有最小相位性，我们来计算全通系统造成的相时延和群时延。设$z_k=r_k \mathrm{e}^{\mathrm{i}\theta_k}(r_k>1)$，全通系统的相频特性为：
     \begin{align*}
         \varphi_A(\Omega)=\arg A(\mathrm{e}^{\mathrm{i}\Omega})=\sum_{k=1}^{M}\left[\arg(1-\overline{z_k}\mathrm{e}^{\mathrm{i}\Omega})-\arg(\mathrm{e}^{\mathrm{i}\Omega}-z_k)\right]
     \end{align*}
@@ -197,4 +211,4 @@ $$H(\mathrm{e}^{\mathrm{i}\Omega})=H(z)|_{z=\mathrm{e}^{\mathrm{i}\Omega}}$$
     由于$r_k>1$，$\tau_{g,A}(\Omega)<0$，因此全通系统的群时延为负值。级联系统的群时延为$\tau_g(\Omega)+\tau_{g,A}(\Omega)$，因此级联系统的群时延小于原系统的群时延。
 \end{proof}
 
-可见，尽管连续系统的$s$平面与离散系统的$z$平面具有深刻而优美的对应关系，但并不能将连续系统的结论直接套用到离散系统中，例如，连续系统的相时延和群时延直接反应了响应相对激励的时延特性，而离散系统的相时延和群时延则需要在忽略暂态项的意义下，才能反应出响应相对激励的时延特性；连续系统的最小相位系统同时具有最小的相时延和群时延，而离散系统的最小相位系统仅具有最小的群时延，却未必具有最小的相时延。
+可见，尽管连续系统的$s$平面与离散系统的$z$平面具有深刻而优美的对应关系，但并不能将连续系统的结论直接套用到离散系统中，例如，连续系统的最小相位系统同时具有最小的相时延和群时延，而离散系统的最小相位系统仅具有最小的群时延，却未必具有最小的相时延。
