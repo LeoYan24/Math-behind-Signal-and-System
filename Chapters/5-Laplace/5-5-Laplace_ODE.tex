@@ -33,8 +33,8 @@
 
 看上去，$\delta(0)=\infty,\mathcal{L} \delta'=\mathcal{L} \delta-\infty$，而$\delta_a$在$a<0$时非因果，但$\delta$应作为一个分布来理解，因此以上结果与我们之前所定义的拉普拉斯变换并不矛盾。
 
-不过，我们可以通过另一种方式，几乎完全避开分布的问题。在本节中，我们将（单边）拉普拉斯变换的定义修改为：
-\begin{definition}[拉普拉斯变换，改进版]
+不过，我们可以通过另一种方式，几乎完全避开分布的问题。在本节中，我们将单边拉普拉斯变换的定义修改为：
+\begin{definition}[单边拉普拉斯变换，改进版]
     设函数$f$局部可积，且$\exists a\in\mathbb{R}$，使得$f(t)\mathrm{e}^{-at}$绝对可积，则对$\mathrm{Re}(s)\in[a,\infty)$，$f$的拉普拉斯变换定义为
     \[\mathcal{L} f(s)=\int_{0-}^{\infty}f(t)\mathrm{e}^{-st}\,dt\]
 \end{definition}
@@ -75,13 +75,14 @@ $\delta$的各阶导数同理。这样，分布理论处理的问题仅仅在于
 
 考虑常系数线性微分方程
 \[a_n r^{(n)}(t)+a_{n-1}r^{(n-1)}(t)+\cdots +a_1 r'(t)+a_0 r(t)=e(t)\]
-其中$f,r\in\mathcal{E} $，并且给定初始状态：
+其中$e,r\in\mathcal{E} $，并且给定初始状态：
 \[r(0-)=c_0,r'(0-)=c_1,\cdots,r^{(n-1)}(0-)=c_{n-1}\]
 记$\mathcal{L} r(s)=R(s),\mathcal{L} e(s)=E(s)$，则对方程两边进行拉普拉斯变换，有
 \begin{align*}
     &a_n\left(s^n R(s)-s^{n-1}c_0 -s^{n-2}c_1 -\cdots -c_{n-1}\right)\\
     &+a_{n-1}\left(s^{n-1} R(s)-s^{n-2}c_0 -s^{n-3}c_1 -\cdots -c_{n-2}\right)\\
-    &+\cdots +a_1\left(s R(s)-c_0\right)+a_0 R(s)=E(s)
+    &+\cdots \\
+    &+a_1\left(s R(s)-c_0\right)+a_0 R(s)=E(s)
 \end{align*}
 整理得
 \[P(s)R(s)=E(s)+Q(s)\]
@@ -99,7 +100,7 @@ Q(s)&=a_n\left(s^{n-1}c_0 +s^{n-2}c_1 +\cdots +c_{n-1}\right)+a_{n-1}\left(s^{n-
     设系统由如下微分方程描述：
     \[r''(t)+3r'(t)+2r(t)=e'(t)+3e(t)\]
     初始状态为$r(0-)=1,r'(0-)=2$。求系统函数$H(s)$及单位阶跃响应$g(t)$。\\
-    解：对方程两边进行拉普拉斯变换，有（注意$e(0-)=u(0-)=0$）
+    解：对方程两边求单边拉普拉斯变换，由于$e(0-)=u(0-)=0$，有
     \begin{align*}
         \left(s^2 R(s)-s-2\right)+3\left(s R(s)-1\right)+2 R(s)=sE(s)+3E(s)
     \end{align*}
@@ -135,7 +136,7 @@ Q(s)&=a_n\left(s^{n-1}c_0 +s^{n-2}c_1 +\cdots +c_{n-1}\right)+a_{n-1}\left(s^{n-
 
 \subsection{动态电路的复频域分析}\label{sub:laplace_circuit}
 
-本小节介绍动态电路的复频域分析方法。与\refsub{freq_response}节类似，对描述线性元件的微分方程做拉普拉斯变换，即可得到它们的复频域模型：
+本小节介绍动态电路的复频域分析方法。与\refsub{freq_response}类似，对描述线性元件的微分方程做拉普拉斯变换，即可得到它们的复频域模型：
 \begin{example}
     描述电容的方程为：
     \[i(t)=C\frac{dv(t)}{dt}\]
@@ -169,30 +170,30 @@ Q(s)&=a_n\left(s^{n-1}c_0 +s^{n-2}c_1 +\cdots +c_{n-1}\right)+a_{n-1}\left(s^{n-
 
 作为一个例子，我们使用复频域分析的方法来处理一个二阶动态电路：
 \begin{example}[二阶动态电路]
-    设电路如下图(a)所示，起始状态为0，$t=0$时刻开关闭合，求电流$i(t)$。
+    设电路如下图(a)所示，起始状态为0，$t=0$时刻开关闭合，求电流$i(t)$.
     \begin{center}
-    \begin{tabular}{cc}
-        % 左侧电路图 (时域)
-        \begin{circuitikz}[american]
-            \draw (0,0) to[V=$E$] (0,3)
-            to[closing switch] (2.5,3)
-            to[L=$L$, i=$i(t)$] (5,3)
-            to[C=$C$] (5,0)
-            to[R=$R$] (0,0);
-        \end{circuitikz}
-        &
-        % 右侧电路图 (s域)
-        \begin{circuitikz}[american]
-            \draw (0,0) to[V=$E/s$] (0,3)
-            to[short] (2.5,3)
-            to[L=$sL$, i=$I(s)$] (5,3)
-            to[C=$1/sC$] (5,0)
-            to[R=$R$] (0,0);
-        \end{circuitikz}
-        \\
-        \text{(a) 时域电路} & \text{(b) s域等效电路}
-    \end{tabular}
-\end{center}
+        \begin{tabular}{cc}
+            % 左侧电路图 (时域)
+            \begin{circuitikz}[american]
+                \draw (0,0) to[V=$E$] (0,3)
+                to[closing switch] (2.5,3)
+                to[L=$L$, i=$i(t)$] (5,3)
+                to[C=$C$] (5,0)
+                to[R=$R$] (0,0);
+            \end{circuitikz}
+            &
+            % 右侧电路图 (s域)
+            \begin{circuitikz}[american]
+                \draw (0,0) to[V=$E/s$] (0,3)
+                to[short] (2.5,3)
+                to[L=$sL$, i=$I(s)$] (5,3)
+                to[C=$1/sC$] (5,0)
+                to[R=$R$] (0,0);
+            \end{circuitikz}
+            \\
+            \text{(a) 时域电路} & \text{(b) s域等效电路}
+        \end{tabular}
+    \end{center}
     解：采用复频域模型，如上图(b)所示。由基尔霍夫电压定律，有
     \[\frac{E}{s}=I(s)\left(R+sL+\frac{1}{sC}\right)\]
     因此
@@ -280,7 +281,7 @@ $$\mathcal{L}^{-1} \left[(sI-A)^{-1}\right](t)=\phi(t)u(t)=\mathrm{e}^{At}u(t)$$
         \end{bmatrix}+\begin{bmatrix}
             0\\
             t
-        \end{bmatrix},\begin{bmatrix}
+        \end{bmatrix},\quad\begin{bmatrix}
             q_1(0-)\\
             q_2(0-)
         \end{bmatrix}=\begin{bmatrix}

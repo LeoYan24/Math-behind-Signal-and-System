@@ -43,16 +43,16 @@ $$\lim_{t\to\infty}\frac{\ln|f(t)|}{t}=\lim_{t\to\infty}\sin t$$
 下面来看思路二。设$\mathcal{L} f(s)$在$\mathrm{Re}(s)>a$上良定义且等于$F(s)$，我们讨论$F(s)$在更大的区域，即$\mathrm{Re}(s)>a'(a'<a)$上是否也是$f$的拉普拉斯变换。我们在上一节的\cref{thm:laplace_inversion_1}中处理过类似的情况，因此我们先来看$F(s)$满足这一定理的条件时的情形。
 
 \begin{theorem}
-    设$F(s)$是某个函数$f\in\mathcal{E} $的拉普拉斯变换，且
-    $$|F(s)|\leq C|s|^{-\alpha},\quad \alpha>1,\forall \mathrm{Re}(s)>a'$$
+    设$F(s)$是某个函数$f\in\mathcal{E} $的拉普拉斯变换，且对于$\alpha>1$，有：
+    $$|F(s)|\leq C|s|^{-\alpha},\quad \forall \mathrm{Re}(s)>a'$$
     令
-    \[\sigma_s=\sup\left\{\mathrm{Re}(s)_j\in\mathbb{C}\left|s_j\text{为}F(s)\text{的奇点}\right.\right\}\]
+    \[\sigma_s=\sup\left\{\mathrm{Re}(s_j)\in\mathbb{C}\left|s_j\text{为}F(s)\text{的奇点}\right.\right\}\]
     则有$\sigma_c=\sigma_s$。
 \end{theorem}
 \begin{proof}
     一方面，$\sigma_c\geq\sigma_s$。$\mathcal{L} f(s)$在$\mathrm{Re}(s)<\sigma_s$上当然是发散的，因为$F(s)$在$\mathrm{Re}(s)=\sigma_s$上有奇点。
 
-    另一方面，$\sigma_c\leq\sigma_s$。用反证法。假设$\sigma_c>\sigma_s$，则在带状区域$\sigma_s<\mathrm{Re}(s)\leq\sigma_c$上，$F(s)$满足定理5.3.2.的条件，它可以做拉普拉斯逆变换，得到唯一的时域函数，由于拉普拉斯逆变换
+    另一方面，$\sigma_c\leq\sigma_s$。用反证法。假设$\sigma_c>\sigma_s$，则在带状区域$\sigma_s<\mathrm{Re}(s)\leq\sigma_c$上，$F(s)$满足\cref{thm:laplace_inversion_1}的条件，可以做拉普拉斯逆变换，得到唯一的时域函数，由于拉普拉斯逆变换
     $$\frac{1}{2\pi \mathrm{i}}\lim_{r\to\infty}\int_{b-\mathrm{i}r}^{b+\mathrm{i}r}F(s)\mathrm{e}^{st}\,ds$$
     不依赖于$b$的选取，该时域函数必然就是$f(t)$，从而$\mathcal{L} f(s)=F(s)$在$\mathrm{Re}(s)>\sigma_s$上成立，矛盾。
 \end{proof}
@@ -123,7 +123,7 @@ $$f(t)=\mathrm{e}^{at},\quad a\in\mathbb{R}^*,\quad F(s)=\dfrac{1}{s-a}$$
 \end{example}
 
 总之，对于相当大范围的函数，我们可以\textbf{通过分析其拉普拉斯变换的奇点来确定收敛横坐标}$\sigma_c$，从而确定拉普拉斯变换的最大收敛域。在前面我们已经证明：$$f\in\mathcal{E}\implies \sigma_c=\varlimsup_{t\to\infty}\frac{\ln|f(t)|}{t}$$
-因此我们可以\textbf{通过分析拉普拉斯变换的奇点来确定$f(t)$的增长速率}（的上确界），也可以\textbf{通过分析$f(t)$的增长速率来确定拉普拉斯变换的奇点位置}。
+因此我们既可以\textbf{通过分析拉普拉斯变换的奇点来确定$f(t)$的增长速率}（的上确界），也可以\textbf{通过分析$f(t)$的增长速率来确定拉普拉斯变换的奇点位置}。
 
 \subsection{系统的稳定性}\label{sub:stability_of_system}
 基于以上结论，我们可以使用拉普拉斯变换分析系统的\textbf{稳定性}（\cref{def:system_stability}）。对于线性时不变系统，稳定性有充要条件：
@@ -152,12 +152,12 @@ $$f(t)=\mathrm{e}^{at},\quad a\in\mathbb{R}^*,\quad F(s)=\dfrac{1}{s-a}$$
 \begin{definition}[系统函数]
     设$h\in\mathcal{E} $是线性时不变系统的冲激响应，则系统函数定义为
     $$H(s)=\frac{R(s)}{E(s)}=\mathcal{L} h(s)$$
-    如果虚轴$\mathrm{Re}(s)=0$在$H(s)$的收敛域内，则$H(\mathrm{i}\omega)$与第四章中定义的频率响应一致。
+    如果虚轴$\mathrm{Re}(s)=0$在$H(s)$的收敛域内，则$H(\mathrm{i}\omega)$与第四章中定义的频率响应$H(\omega)$一致。
 \end{definition}
 对$r(t)=h(t)*e(t)$两边同时进行拉普拉斯变换，有
 \[\mathcal{L} r(s)=\mathcal{L} h(s)\mathcal{L} e(s),\quad \text{即}R(s)=H(s)E(s)\]
 
-\begin{proposition}[稳定性的复频域判则]
+\begin{proposition}[稳定性的复频域判则]\label{prop:statibility_s}
     设因果线性时不变系统的冲激响应为$h(t)\in\mathcal{E}$，系统函数为$H(s)=\mathcal{L} h(s)$，则稳定性的充分必要条件是$H(s)$的所有奇点均位于复平面的左半平面$\mathrm{Re}(s)<0$上。
 \end{proposition}
 \begin{proof}

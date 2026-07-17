@@ -19,7 +19,7 @@
     \end{figure}
 \end{example}
 
-根据\refsub{stability_of_system}中提出的系统的稳定性条件，因果的线性时不变系统是稳定的，当且仅当其系统函数的收敛域包含虚轴，此时系统函数的所有极点均位于左半平面$\mathrm{Re}(s)<0$，\textbf{系统的频率响应特性即系统函数在虚轴上的限制}。
+根据\cref{prop:statibility_s}，因果的线性时不变系统是稳定的，当且仅当其系统函数的收敛域包含虚轴，此时系统函数的所有极点均位于左半平面$\mathrm{Re}(s)<0$，\textbf{系统的频率响应特性即系统函数在虚轴上的限制}。
 
 此时，如果零极点图较为简单，则可以由零极点图判断系统的滤波特性，即判断系统函数在虚轴上不同位置的幅值大小。
 
@@ -53,7 +53,7 @@
     系统函数的分母在虚轴左侧有一对共轭复根，这意味着系统函数形如
     \[H(s)=\frac{K}{(s-p)(s-\bar{p})}=\frac{K}{s^2-2\mathrm{Re}(p)s+|p|^2}\]
     考虑它在虚轴上的限制的幅值：
-    \[|H(\mathrm{i}\omega)|=\frac{K}{\sqrt{(\omega^2-2\mathrm{Re}(p)\omega+|p|^2)}}\]
+    \[|H(\mathrm{i}\omega)|=\frac{K}{\sqrt{\omega^2-2\mathrm{Re}(p)\omega+|p|^2}}\]
     由于$\mathrm{Re}(p)<0$，因此容易求得幅频特性在$\omega=\pm \mathrm{Im}(p)$处取得极大值，这表明系统对该频率附近的信号有增强作用。因此，该系统具有带通滤波特性。
     
     可以定性地画出其幅频特性曲线，如上图(b)所示。
@@ -250,7 +250,7 @@
     $$\mathbf{M}=\begin{bmatrix}
         M_1 \\
         M_2
-    \end{bmatrix},\mathbf{X}=\begin{bmatrix}
+    \end{bmatrix},\quad\mathbf{X}=\begin{bmatrix}
         H_1 X_1 + H_2 X_2 \\
         0
     \end{bmatrix}$$
@@ -290,7 +290,7 @@
     M_2 \\
     \vdots \\
     M_n
-\end{bmatrix},\mathbf{X}=\begin{bmatrix}
+\end{bmatrix},\quad\mathbf{X}=\begin{bmatrix}
     X \\
     0 \\
     \vdots \\
@@ -374,7 +374,7 @@ $$M_1\to M_3\to M_4\to M_1,\quad M_2\to M_5\to M_2$$
         \end{tikzpicture}
     \end{figure}
     仍设激励接入的节点为$M_1$，输出取自节点$M_n$，则前向通路有两条：
-    \[M_1\to M_2\to M_3\to M_4,M_1\to M_2\to M_4\]
+    \[M_1\to M_2\to M_3\to M_4,\quad M_1\to M_2\to M_4\]
     我们来考察前向通路与系统矩阵的对应关系。增益矩阵为
     \[A=\begin{bmatrix}
         0 & a_{12} & 0 & 0 \\
@@ -624,7 +624,7 @@ $$M_1\to M_3\to M_4\to M_1,\quad M_2\to M_5\to M_2$$
 \end{align*}
 \end{example}
 
-考虑原系统与逆系统级联时的群时延和相时延，由于两个系统的级联为恒等系统，他们的群时延和相时延之和必定为0，因此两个系统中必有其中之一具有负的时延。然而，响应并不会先于激励出现，不会违反因果性。
+考虑原系统与逆系统级联时的相时延与群时延，由于两个系统的级联为恒等系统，它们的相时延之和与群时延之和必定为0，因此两个系统中必有其中之一具有负的时延。然而，\textbf{响应并不会先于激励出现，负的时延与因果性不冲突}。
 
 为了明白这一点，我们首先考察上例中的情况。这个例子中，已经算出原系统的单位脉冲响应，它们都是因果信号，因此系统也是因果的。考虑它们的相频特性：
 \begin{align*}

@@ -19,10 +19,10 @@
 \end{definition}
 “局部可积”即$f$在任意有限区间上可积，这个条件是为了保证在添加适当的收敛因子$\mathrm{e}^{-st}$后，拉普拉斯积分收敛，从而拉普拉斯变换有定义。
 
-在$\sigma>0$时，这个收敛因子会使得$t\to -\infty$时$|\mathrm{e}^{-st}|=\mathrm{e}^{-\sigma t}$快速增长，从而对所变换的函数提出很高的要。实际上，更多时候我们仅使用\textbf{单边拉普拉斯变换}，定义如下\cite{folland}：
+在$\sigma>0$时，这个收敛因子会使得$t\to -\infty$时$\left|\mathrm{e}^{-st}\right|=\mathrm{e}^{-\sigma t}$快速增长，从而对所变换的函数提出很高的要求。实际上，更多时候我们仅使用\textbf{单边拉普拉斯变换}，定义如下\cite{folland}：
 \begin{definition}[单边拉普拉斯变换]
     \label{def:single_laplace}
-    记\[\mathcal{E}=\left\{f:[0,\infty)\to\mathbb{C}\left|f\in PC[0,\infty),\exists C>0,a\in\mathbb{R},|f(t)|<Ce^{at},\forall t\geq 0\right.\right\}\]
+    记\[\mathcal{E}=\left\{f:[0,\infty)\to\mathbb{C}\left|f\in PC[0,\infty),\exists C>0,a\in\mathbb{R},|f(t)|<C\e^{at},\forall t\geq 0\right.\right\}\]
     其中$PC[0,\infty)$表示$[0,\infty)$上的分段连续函数。
     对$f\in\mathcal{E}$，其拉普拉斯变换定义为
     \[\mathcal{L} f(s)=\int_{0}^{\infty}f(t)\mathrm{e}^{-st}\,dt,\quad s=\sigma+\mathrm{i}\omega\]
@@ -30,11 +30,11 @@
     如果$f(t)$是时域信号，$\mathcal{L} f(s)$称为\textbf{复频域信号}。
     我们仍记$\mathcal{L} f(s)$为$F(s)$或$\hat{f}(s)$（在涉及傅里叶变换时，我们会避免使用它们或加以说明），并记$f\overset{\mathcal{L} }{\longleftrightarrow} F(s)$。
 \end{definition}
-在$\mathcal{E} $的定义中我们对$f$的定义域做了要求，但实际上只要$f$是因果信号（\cref{def:casual_signal}），就可以认为$f\in\mathcal{E}$，后文中不会特意区分$f$的定义域。
+在$\mathcal{E} $的定义中我们对$f$的定义域做了要求，但实际上只要$f$是因果信号（\cref{def:casual_signal}），就可以认为$f\in\mathcal{E}$，因此后文中不会特意区分$f$的定义域。
 
 在$\mathcal{E} $上定义拉普拉斯变换，是因为对于$f\in\mathcal{E} $，当$\sigma>a$时，给出拉普拉斯变换的积分是绝对收敛的：
 \begin{align*}
-    \int_0^{\infty}|f(t)\mathrm{e}^{-st}|\,dt\leq \int_0^{\infty}Ce^{at}\mathrm{e}^{-\sigma t}\,dt=\frac{C}{\sigma-a}<\infty
+    \int_0^{\infty}|f(t)\mathrm{e}^{-st}|\,dt\leq \int_0^{\infty}C\e^{at}\mathrm{e}^{-\sigma t}\,dt=\frac{C}{\sigma-a}<\infty
 \end{align*}
 因此在导数存在的情况下可以交换积分与求导的次序，从而$\mathcal{L} f(s)$是$\sigma>a$上的全纯函数：
 \begin{align*}
@@ -67,8 +67,8 @@
 \begin{proposition}[$\mathcal{E} $中的卷积]
     设$f,g\in\mathcal{E} $，则它们的卷积为
     \[(f*g)(t)=\begin{cases}
-    0                   & \text{if } t<0 \\
-    \int_0^t f(x)g(t-x)\,dx & \text{if } t\geq 0
+    \displaystyle 0                   & \text{if } t<0 \\
+    \displaystyle\int_0^t f(x)g(t-x)\,dx & \text{if } t\geq 0
     \end{cases}\]
 \end{proposition}
 这是因为$x\geq 0,t-x\geq 0$时，$f(x),g(t-x)$才不恒为0，这相当于积分区间为$[0,t]$。
@@ -109,7 +109,7 @@
     \end{align*}
     4.伸缩：\begin{align*}
         \mathcal{L} [f(at)](s)&=\int_0^{\infty}f(at)\mathrm{e}^{-st}\,dt\\
-        &=\int_0^{\infty}f(x)\mathrm{e}^{-\frac{s}{a}x}\frac{1}{a}\,dx&(x=at)\\
+        &=\int_0^{\infty}f(x)\mathrm{e}^{-sx/a}\,\frac{dx}{a}&(x=at)\\
         &=\frac{1}{a}\mathcal{L} f\left(\frac{s}{a}\right)
     \end{align*}
     5.时域微分：\begin{align*}
@@ -146,14 +146,14 @@
 \end{proof}
 
 以上所有性质的证明都与傅里叶变换类似，实际上我们不需要做这种重复性的证明工作。给定$s=\sigma+\mathrm{i}\omega$，令$\tilde{f}(t)=f(t)\mathrm{e}^{-\sigma t}$，则$\mathcal{L} f(s)=\mathcal{F} \tilde{f}(\omega)$，只要$\tilde{f}\in L^1(\mathbb{R} )$，就可以将傅里叶变换的性质直接应用到拉普拉斯变换上。由于我们在$\mathcal{E} $中要求了$f(t)$的分段连续性，在收敛域$\sigma>a$内，$\tilde{f}(t)$总是属于$L^1(\mathbb{R})$的。下面给出一个例子：
-%\begin{example}[时移性质]
-%    设$f\in\mathcal{E} ,t_0>0$，令$\tilde{f}(t)=f(t)\mathrm{e}^{-\sigma t}$，则
-%    \begin{align*}
-%        \mathcal{L}[f(t-t_0)u(t-t_0)](s)&=\mathcal{F} \left[\tilde{f}(t-t_0)u(t-t_0)\right](\omega)\\
-%        &=\mathrm{e}^{-\mathrm{i}\omega t_0}\mathcal{F} \tilde{f}(\omega)\\
-%        &=\mathrm{e}^{-s t_0}\mathcal{L} f(s)
-%    \end{align*}
-%\end{example}
+\begin{example}[时移性质]
+    设$f\in\mathcal{E} ,t_0>0$，令$\tilde{f}(t)=f(t)\mathrm{e}^{-\sigma t}$，则
+    \begin{align*}
+        \mathcal{L}[f(t-t_0)u(t-t_0)](s)&=\mathcal{F} \left[\tilde{f}(t-t_0)u(t-t_0)\right](\omega)\\
+        &=\mathrm{e}^{-\mathrm{i}\omega t_0}\mathcal{F} \tilde{f}(\omega)\\
+        &=\mathrm{e}^{-s t_0}\mathcal{L} f(s)
+    \end{align*}
+\end{example}
 \begin{example}[卷积定理]
 设$f,g\in\mathcal{E} $，令$\tilde{f}(t)=f(t)\mathrm{e}^{-\sigma t}, \tilde{g}(t)=g(t)\mathrm{e}^{-\sigma t}$，注意到\begin{align*}
     (\tilde{f}*\tilde{g})(t)&=\int_{-\infty}^{\infty}\tilde{f}(x)\tilde{g}(t-x)\,dx\\
@@ -175,7 +175,7 @@
     \begin{align*}
         \mathcal{L} f(s)&=\mathcal{L}\left[t^\nu \mathrm{e}^{a t}u(t)\right](s)\\
         &=\mathcal{L} \left[t^\nu u(t)\right](s-a)\\
-        &=\frac{\Gamma(\nu+1)}{(s-a)^{\nu+1}},\sigma>a
+        &=\frac{\Gamma(\nu+1)}{(s-a)^{\nu+1}},\quad\sigma>a
     \end{align*}
     根据有理函数的理论，任意真分式函数都可以表示为若干个此类函数的线性组合，因此可以说$f$是指数多项式等价于$\mathcal{L} f$是真分式函数
 \end{example}
@@ -236,7 +236,7 @@
 \end{example}
 
 \begin{example}[正弦积分函数]
-    $$\frac{\sin(\omega_0 t)}{t}\leq Ce^{a t},a>0\implies \mathrm{Si}(\omega_0 t)\leq \frac{C}{a}\mathrm{e}^{a t}\implies \mathrm{Si}(\omega_0 t)\in\mathcal{E}$$
+    $$\frac{\sin(\omega_0 t)}{t}\leq C\e^{a t},a>0\implies \mathrm{Si}(\omega_0 t)\leq \frac{C}{\omega_0 a}\mathrm{e}^{a t}\implies \mathrm{Si}(\omega_0 t)\in\mathcal{E}$$
     利用正弦函数的拉普拉斯变换和拉普拉斯变换的时域积分性质，有
     \begin{align*}
         \mathcal{L} [\mathrm{Si}(\omega_0 t)](s)&=\mathcal{L} \left[\int_0^{\omega_0 t} \frac{\sin(x)}{x}\,dx\right](s)\\
@@ -249,18 +249,19 @@
 \subsection{*拉普拉斯变换的级数求法}\label{sub:laplace_by_series}
 我们知道，多项式的拉普拉斯变换都可以通过$$\mathcal{L} [t^n](s)=\dfrac{\Gamma(n+1)}{s^{n+1}}$$来计算，那么对于一些可以展开为幂级数的函数，不难想到逐项求拉普拉斯变换，下面讨论这种操作的适用范围。在此之前，我们先介绍一个引理：
 \begin{lemma}
-    设$f\in\mathcal{E} ,|f(t)|\leq Ce^{at}$，则\begin{itemize}
+    设$f\in\mathcal{E} ,|f(t)|\leq C\e^{at}$，则\begin{enumerate}
         \item $\forall x>a,\mathcal{L} f(x+\mathrm{i}y)\to 0,|y|\to\infty$
         \item $\forall y,\mathcal{L} f(x+\mathrm{i}y)\to 0,x\to\infty$
-    \end{itemize}
+    \end{enumerate}
 \end{lemma}
 \begin{proof}
-    1.令$g(t)=f(t)\mathrm{e}^{-x t}$，则$|g(t)|\leq Ce^{-(x-a)t}$，因此$g\in L^1(\mathbb{R} )$，根据Riemann-Lebesgue引理，有
+    1.令$g(t)=f(t)\mathrm{e}^{-x t}$，则$|g(t)|\leq C\e^{-(x-a)t}$，因此$g\in L^1(\mathbb{R} )$，根据Riemann-Lebesgue引理，有
     \[\mathcal{L} f(x+\mathrm{i}y)=\mathcal{F} g(y)\to 0,\quad |y|\to\infty\]
-    2.利用海涅归并原理，任取实部趋于无穷的序列$\{z_n\}$，满足$\mathcal{L} f(z_n)$存在（这要求$\mathrm{Re}(z)>a$），我们要证明序列$\mathcal{L} f(z_n)\to 0$。由控制收敛定理（\cref{thm:DCT}），有
+    2.利用海涅归并原理，任取实部趋于无穷的序列$\{z_n\}_{n=1}^\infty$，满足$\mathcal{L} f(z_n)$存在（这要求$\mathrm{Re}(z)>a$），我们要证明序列$\mathcal{L} f(z_n)\to 0$.
+    $$\int_{0}^{\infty}\left|f(t)\mathrm{e}^{-z_n t}\right|\,dt\leq \int_0^{\infty}C\e^{at}\mathrm{e}^{-\mathrm{Re}(z_n) t}\,dt=C\int_0^{\infty}\mathrm{e}^{-(\mathrm{Re}(z_n)-a)t}\,dt=\frac{C}{\mathrm{Re}(z_n)-a}<\infty$$
+    由控制收敛定理（\cref{thm:DCT}），取$\left|f(t)\mathrm{e}^{-z_1 t}\right|$作为控制函数，得到
     \begin{align*}
-        &\int_{0}^{\infty}|f(t)\mathrm{e}^{-z_n t}|\,dt\leq \int_0^{\infty}Ce^{at}\mathrm{e}^{-Re(z_n) t}\,dt=C\int_0^{\infty}\mathrm{e}^{-(Re(z_n)-a)t}\,dt=\frac{C}{\mathrm{Re}(z_n)-a}<\infty\\
-        &\lim_{n\to\infty}\mathcal{L} f(z_n)=\lim_{n\to\infty}\int_0^{\infty}f(t)\mathrm{e}^{-z_n t}\,dt=\int_0^{\infty}\lim_{n\to\infty}f(t)\mathrm{e}^{-z_n t}\,dt=0
+        \lim_{n\to\infty}\mathcal{L} f(z_n)=\lim_{n\to\infty}\int_0^{\infty}f(t)\mathrm{e}^{-z_n t}\,dt=\int_0^{\infty}\lim_{n\to\infty}f(t)\mathrm{e}^{-z_n t}\,dt=0
     \end{align*}
 \end{proof}
 
@@ -274,7 +275,7 @@
     收敛且等于$\mathcal{L} f(s)$，即$f$的拉普拉斯变换可以通过对其幂级数求拉普拉斯变换得到。
 \end{theorem}
 \begin{proof}
-    由条件知级数$\sum_{n=0}^{\infty}a_n \frac{\Gamma(n+1)}{s^{n+1}}$在$\sigma>\omega_0$时绝对收敛、内闭一致收敛，因此只需证明其和函数等于$\mathcal{L} f(s)$。拉普拉斯变换是一种积分变换，我们需要将求和与积分交换，可以考虑使用控制收敛定理。由于
+    由条件知级数$\sum_{n=0}^{\infty}a_n \dfrac{\Gamma(n+1)}{s^{n+1}}$在$\sigma>\omega_0$时绝对收敛、内闭一致收敛，因此只需证明其和函数等于$\mathcal{L} f(s)$。拉普拉斯变换是一种积分变换，我们需要将求和与积分交换，可以考虑使用控制收敛定理。由于
     \begin{align*}
         &|a_n \Gamma(n+1)\omega_0^{-n}|\to 0, n\to\infty\\
         \implies &|a_n|\leq C\frac{\omega_0^{n}}{\Gamma(n+1)}\\
