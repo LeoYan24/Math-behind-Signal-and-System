@@ -203,9 +203,7 @@
 \begin{definition}[扩展复平面上的亚纯函数]
     设$U\subset\hat{\mathbb{C}}$为开集，$U$的子集$S$没有极限点，函数$f:U\backslash S\to\hat{\mathbb{C}}$称为\textbf{亚纯函数}(meromorphic functions)，如果$f$在$U\backslash S$内全纯，且在$S$中没有本性奇点。
 \end{definition}
-\begin{example}
-    对于有理函数$f(z)=P(z)/Q(z)$，其中$P(z),Q(z)$为多项式，$f(z)$是$\hat{\mathbb{C}}$上的亚纯函数。进一步，如果$\mathrm{deg}P\leq\mathrm{deg}Q$，则$f(z)$在$\infty$处有可去奇点；如果$\mathrm{deg}P>\mathrm{deg}Q$，则$f(z)$在$\infty$处有$\mathrm{deg}P-\mathrm{deg}Q$阶极点。
-\end{example}
+
 我们不加证明地给出以下结论\cite{Function_Theory}：
 \begin{claim}
     扩充复平面$\hat{\mathbb{C}}$上，亚纯函数一定是有理函数。
@@ -227,9 +225,12 @@ $f(z)$在$\infty$处的性质是通过$f(1/z)$在$z=0$处的性质来研究的�
     \[f(1/z)=\mathrm{e}^{1/z}=\sum_{n=0}^{\infty}\frac{1}{n!}z^{-n}\]
     该级数有无穷多个负幂次项，因此$\mathrm{e}^{z}$在$\infty$处有本性奇点，它不是扩充复平面上的亚纯函数。
 \end{example}
+\begin{example}
+    对于有理函数$f(z)=P(z)/Q(z)$，其中$P(z),Q(z)$为多项式，$f(z)$是$\hat{\mathbb{C}}$上的亚纯函数。进一步，如果$\mathrm{deg}P\leq\mathrm{deg}Q$，则$f(z)$在$\infty$处有可去奇点；如果$\mathrm{deg}P>\mathrm{deg}Q$，则$f(z)$在$\infty$处有$\mathrm{deg}P-\mathrm{deg}Q$阶极点。
+\end{example}
 
 我们称$g(z)=f(1/z)$在$0$处的洛朗展开为$f(z)$在$\infty$处的洛朗展开，奇点类型可通过洛朗展开判断：
-\begin{definition}[无穷远点的洛朗展开与奇点类型]
+\begin{definition}[无穷远点的洛朗展开与奇点类型]\label{def:singular_point_infty}
     设$g(z)=f(1/z)$在$z=0$处的洛朗展开为
     \[g(z)=\sum_{n=-\infty}^{\infty}c_n z^{n}\]
     $g(z)$在$z=0$处的奇点类型定义与\cref{def:singular_point}一致。代回$f(z)=g(1/z)$，则$f(z)$在$\infty$处的洛朗展开为
@@ -257,7 +258,7 @@ $f(z)$在$\infty$处的性质是通过$f(1/z)$在$z=0$处的性质来研究的�
     \[\mathrm{Res}(f,\infty)=-\mathrm{Res}\left(\frac{f(1/z)}{z^2},0\right)\]
 \end{proposition}
 
-现在也就不难理解为什么上一节的例子6.1.6中，在不同收敛域上展开的洛朗级数会有不同的形式，并且在某些收敛域上无法判定$z=0$处的奇点类型了——在$|z|>1/2$的收敛域上，我们其实是将$1/(2z-1)$展开为$z=\infty$处的洛朗级数，这个级数只能说明$1/(2z-1)$在$\infty$处为可去奇点，而不能用于判断$z=0$处的奇点类型。
+现在也就不难理解为什么\cref{exmp:ROC}中，在不同收敛域上展开的洛朗级数会有不同的形式，并且在某些收敛域上无法判定$z=0$处的奇点类型了——在$|z|>1/2$的收敛域上，我们其实是将$1/(2z-1)$展开为$z=\infty$处的洛朗级数，这个级数只能说明$1/(2z-1)$在$\infty$处为可去奇点，而不能用于判断$z=0$处的奇点类型。
 
 \subsection{逆z变换}\label{sub:z_inverse}
 经验上，在做逆z变换时，我们更多地使用洛朗级数展开，直接对比系数的方法，这种方法还可以处理本性奇点的情况。
@@ -265,7 +266,7 @@ $f(z)$在$\infty$处的性质是通过$f(1/z)$在$z=0$处的性质来研究的�
     设$X(z)=\mathrm{e}^{1/z}$，求$x[n]$。\\
     解：$X(z)$在$z=0$处有本性奇点，因此不能使用留数计算（注意我们获得留数计算公式的方法，是将洛朗级数乘以$z^{n-1}$，从而化为泰勒级数）。但它的展开式很容易获得：
     \[X(z)=\sum_{k=0}^{\infty}\frac{1}{n!}z^{-n}\]
-    因此$x[n]=\frac{1}{n!}u[-n-1]$。可以验证其收敛域为$\hat{\mathbb{C}}\backslash\{0\}$，并且在$\infty$处展开与上式一致（在没有$0$以外的奇点时，这是必然的，因为同一收敛域上的洛朗级数展开唯一）。
+    因此$x[n]=\dfrac{1}{n!}u[-n-1]$。可以验证其收敛域为$\hat{\mathbb{C}}\backslash\{0\}$，并且在$\infty$处展开与上式一致（在没有$0$以外的奇点时，这是必然的，因为同一收敛域上的洛朗级数展开唯一）。
 \end{example}
 
 如果$X(z)$是亚纯函数，计算留数仍然是一个有效的方法，因为要将有理函数展开为部分分式的计算量可能比较大（如\cref{exmp:partial_fraction}）。在$X(z)z^{n-1}=\sum_{m=-\infty}^{\infty}x[m]z^{n-m-1}$中，对比$1/z$项系数，就得到使用该公式计算右边信号的逆z变换公式：

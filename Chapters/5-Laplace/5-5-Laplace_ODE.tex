@@ -2,27 +2,30 @@
 
 \subsection{拉普拉斯变换的改进}\label{sub:improvement_of_laplace}
 
-由于$f\in\mathcal{E}$对函数增长速度的要求是相当低的（作为反例，$\mathrm{e}^{t^2}\notin\mathcal{E}$），我们只需要单独处理$\delta$分布，而不需要重新构建一整套分布的理论\footnote{希望深入了解分布及其拉普拉斯变换的读者，可以参考\cite{Laplace_Distribution}。\cite{distribution}讨论这个话题时，采用了与本书类似的处理方法，这实际上不是拉普拉斯变换的分布理论。}。仍考虑将拉普拉斯变换化归为傅里叶变换，即
+由于$f\in\mathcal{E}$对函数增长速度的要求是相当低的（作为反例，$\mathrm{e}^{t^2}u(t)\notin\mathcal{E}$），我们只需要单独处理$\delta$分布，而不需要重新构建一整套分布的理论\footnote{希望深入了解分布及其拉普拉斯变换的读者，可以参考\cite{Laplace_Distribution}。\cite{distribution}讨论这个话题时，采用了与本书类似的处理方法，这实际上不是拉普拉斯变换的分布理论。}。考虑将拉普拉斯变换化归为傅里叶变换，即
 \[\mathcal{L} f(s)=\mathcal{F} [f(t)\mathrm{e}^{-\sigma t}](\omega),\quad s=\sigma+\mathrm{i}\omega\]
-这里$\mathcal{F} [f(t)\mathrm{e}^{-\sigma t}](\omega)$实际上依赖于两个变量$\sigma,\omega$，但我们只写出$\omega$，并将$\sigma$视为一个参数\cite{distribution}。这样一来，我们就可以将拉普拉斯变换推广到$\delta$分布上（为了避免变量符号的问题，我们将变量统一地用$x$表示）：
+这里$\mathcal{F} [f(t)\mathrm{e}^{-\sigma t}](\omega)$实际上依赖于两个变量$\sigma,\omega$，但我们只写出$\omega$，并将$\sigma$视为一个参数\cite{distribution}。这样一来，我们就可以将拉普拉斯变换推广到$\delta$分布上：
 \begin{align*}
-    \left\langle \mathcal{L}\delta,\phi\right\rangle=\left\langle \mathrm{e}^{-\sigma x}\delta,\mathcal{F} \varphi\right\rangle=\left\langle \delta,\mathrm{e}^{-\sigma x}\mathcal{F} \varphi\right\rangle=\mathcal{F}\varphi(0)=\int_{-\infty}^{\infty}\varphi(t)\,dt=\left\langle \mathds{1},\varphi\right\rangle
+    \left\langle \mathcal{L}\delta,\varphi\right\rangle=\left\langle \mathcal{F} [\mathrm{e}^{-\sigma t}\delta],\varphi\right\rangle=\left\langle \delta,\mathcal{F} \varphi\right\rangle=\mathcal{F}\varphi(0)=\int_{-\infty}^{\infty}\varphi(t)\,dt=\left\langle \mathds{1},\varphi\right\rangle
 \end{align*}
 其中$\mathds{1}$表示恒为1的函数。我们知道，多项式的拉普拉斯变换是真分式函数，而如果将$\delta$分布也纳入考虑，则可以得到任意有理函数。
 
 用同样的方法，我们还可以得到$\delta$的平移和导数的拉普拉斯变换：
 \begin{align*}
-    \left\langle \mathcal{L}\delta_a,\varphi\right\rangle&=\left\langle \mathrm{e}^{-\sigma x}\delta_a,\mathcal{F} \varphi\right\rangle\\
+    \left\langle \mathcal{L}\delta_a,\varphi\right\rangle&=\left\langle \mathcal{F} [\mathrm{e}^{-\sigma t}\delta_a],\varphi\right\rangle\\
+    &=\left\langle \delta_a,\mathcal{F} [\mathrm{e}^{-\sigma t}\varphi]\right\rangle\\
     &=\mathrm{e}^{-\sigma a}\mathcal{F}\varphi(a)\\
     &=\int_{-\infty}^{\infty}\varphi(t)\mathrm{e}^{-s a}\,dt\\
     &=\left\langle \mathrm{e}^{-s a},\varphi\right\rangle
 \end{align*}
 \begin{align*}
-    \left\langle \mathcal{L}\left[\delta'\right],\varphi\right\rangle&=\left\langle \mathrm{e}^{-\sigma x}\delta',\mathcal{F} \varphi\right\rangle\\
-    &=-\left\langle \delta,\left(\mathrm{e}^{-\sigma x}\mathcal{F} \varphi\right)'\right\rangle\\
-    &=-\left\langle \delta,-\sigma \mathrm{e}^{-\sigma x}\mathcal{F} \varphi + \mathrm{e}^{-\sigma x}(\mathcal{F} \varphi)'\right\rangle\\
-    &=\left\langle \delta,\sigma \mathrm{e}^{-\sigma x}\mathcal{F} \varphi + \mathrm{i}\omega \mathrm{e}^{-\sigma x}\mathcal{F} \varphi\right\rangle\\
+    \left\langle \mathcal{L}\left[\delta'\right],\varphi\right\rangle&=\left\langle \mathcal{F} [\mathrm{e}^{-\sigma t}\delta'],\varphi\right\rangle\\
+    &=\left\langle \delta',\mathcal{F} [\mathrm{e}^{-\sigma t}\varphi]\right\rangle\\
+    &=-\left\langle \delta,\left(\mathrm{e}^{-\sigma t}\mathcal{F} \varphi\right)'\right\rangle\\
+    &=-\left\langle \delta,-\sigma \mathrm{e}^{-\sigma t}\mathcal{F} \varphi + \mathrm{e}^{-\sigma t}(\mathcal{F} \varphi)'\right\rangle\\
+    &=\left\langle \delta,\sigma \mathrm{e}^{-\sigma t}\mathcal{F} \varphi + \mathrm{i}\omega \mathrm{e}^{-\sigma t}\mathcal{F} \varphi\right\rangle\\
     &=(\sigma + \mathrm{i}\omega)\mathcal{F} \varphi(0)\\
+    &=\int_{-\infty}^{\infty}\varphi(t)s\,dt\\
     &=\left\langle s,\varphi\right\rangle
 \end{align*}
 因此我们得到：
@@ -35,7 +38,7 @@
 
 不过，我们可以通过另一种方式，几乎完全避开分布的问题。在本节中，我们将单边拉普拉斯变换的定义修改为：
 \begin{definition}[单边拉普拉斯变换，改进版]
-    设函数$f$局部可积，且$\exists a\in\mathbb{R}$，使得$f(t)\mathrm{e}^{-at}$绝对可积，则对$\mathrm{Re}(s)\in[a,\infty)$，$f$的拉普拉斯变换定义为
+    设$f$局部可积，且$\exists a\in\mathbb{R}$，使得$f(t)\mathrm{e}^{-at}$绝对可积，则对$\mathrm{Re}(s)\in[a,\infty)$，$f$的拉普拉斯变换定义为
     \[\mathcal{L} f(s)=\int_{0-}^{\infty}f(t)\mathrm{e}^{-st}\,dt\]
 \end{definition}
 这里，积分限中的“0-”的含义是：
