@@ -247,7 +247,7 @@ Picard定理适用范围很广，但我们仅仅关注线性微分方程组，�
 \end{definition}
 
 \begin{theorem}[Liouville公式]
-    设$\mathbf{y}_1(t),\mathbf{y}_2(t),\cdots,\mathbf{y}_n(t)$为方程$\frac{d\mathbf{y}}{dt}=A(t)\mathbf{y}$的解，$W(t)$为它们的Wronsky行列式，则$\forall t_0\in (a,b)$，有
+    设$\mathbf{y}_1(t),\mathbf{y}_2(t),\cdots,\mathbf{y}_n(t)$为方程$\dfrac{d\mathbf{y}}{dt}=A(t)\mathbf{y}$的解，$W(t)$为它们的Wronsky行列式，则$\forall t_0\in (a,b)$，有
     \begin{align*}
         W(t)=W(t_0)\mathrm{e}^{-\int_{t_0}^t \mathrm{tr}A(s)\,ds},\quad \forall t\in(a,b)
     \end{align*}
@@ -288,7 +288,7 @@ $$\frac{d\mathbf{y}}{dt}=\mathbf{f}(t,\mathbf{y})$$
 \end{definition}
 
 我们知道，这种方程组的矩阵具有特殊的形式，它的迹恰为原方程的$-a_1(t)$，代入Liouville公式得到\begin{align*}
-    W(t)=W(t_0)\mathrm{e}^{-\int_{t_0}^t a_1(s)\,ds},\forall t\in(a,b)
+    W(t)=W(t_0)\mathrm{e}^{-\int_{t_0}^t a_1(s)\,ds},\quad\forall t\in(a,b)
 \end{align*}
 
 可见，对于齐次线性微分方程，与方程组类似，\begin{align*}
@@ -429,7 +429,7 @@ $$\frac{d\mathbf{y}}{dt}=\mathbf{f}(t,\mathbf{y})$$
         y'_1(t) & y'_2(t) & \cdots & y'_n(t)\\
         \vdots & \vdots & \ddots & \vdots\\
         y_1^{(n-1)}(t) & y_2^{(n-1)}(t) & \cdots & y_n^{(n-1)}(t)
-        \end{bmatrix},\mathbf{f}(t)=\begin{bmatrix}
+        \end{bmatrix},\quad\mathbf{f}(t)=\begin{bmatrix}
         0\\
         \vdots\\
         0\\

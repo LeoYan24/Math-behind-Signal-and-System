@@ -32,6 +32,10 @@ def draw_contour():
     # plt.plot([b, b], [r, -r], 'ko', markersize=3)
     plt.text(b , r+0.2, r'$b+\mathrm{i}r$', fontsize=18)
     plt.text(b , -r-0.5, r'$b-\mathrm{i}r$', fontsize=18)
+
+    # 标记围道边
+    plt.text(b + 0.15, 0.0, r'$\gamma_1$', fontsize=18)
+    plt.text(R * np.cos(0.85) + 0.15, R * np.sin(0.85) + 0.15, r'$\gamma_2$', fontsize=18)
     
     # 绘制虚线连接原点和圆弧上一点
     mid_angle = theta_top / 2

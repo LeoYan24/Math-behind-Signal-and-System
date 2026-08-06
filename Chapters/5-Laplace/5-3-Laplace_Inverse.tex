@@ -1,12 +1,23 @@
 \section{拉普拉斯逆变换}\label{sec:Laplace_Inverse}
 
 \subsection{两种单边拉普拉斯反演公式}\label{sub:laplace_inversion}
-我们仍然令$\tilde{f}(t)=f(t)\mathrm{e}^{-\sigma t}$，从而将傅里叶反演公式推广到单边拉普拉斯反演公式：
+
+\begin{definition}[收敛横坐标]
+    \textbf{收敛横坐标}(abscissa of convergence)为使得拉普拉斯积分
+    $$\mathcal{L} f(s)=\int_{0}^{\infty}f(t)\mathrm{e}^{-st}\,dt$$
+    最大收敛域的收敛轴实部（横坐标）$\sigma_c$，使得$\mathcal{L} f(s)$恰好在$\mathrm{Re}(s)>\sigma_c$上收敛，而在$\mathrm{Re}(s)<\sigma_c$上发散，即
+    \[\sigma_c=\inf\left\{a\in\mathbb{R}\left|\int_0^\infty f(t)\mathrm{e}^{-st}\,dt\text{在}\mathrm{Re}(s)>a\text{上收敛}\right.\right\}\]
+    将$\mathrm{Re}(s)>\sigma_c$称为拉普拉斯变换的\textbf{收敛域}(Region of Convergence, ROC)，直线$\mathrm{Re}(s)=\sigma_c$称为\textbf{收敛轴}。
+\end{definition}
+
+我们将在下一节给出收敛横坐标的求法与直观。
+
+单边拉普拉斯变换的收敛域为右半平面，因此总能找到一条直线$\mathrm{Re}(s)=b$位于$\mathcal{L} f(s)$的收敛域内，$\mathcal{L} f(s)$在这条直线上的限制就是傅里叶变换。令$\tilde{f}(t)=f(t)\mathrm{e}^{-\sigma t}$，从而将傅里叶反演公式推广到单边拉普拉斯反演公式：
 \begin{theorem}[单边拉普拉斯反演公式]
     \label{thm:laplace_inversion}
     设$f\in\mathcal{E}\cap PS[0,\infty) $，则
     \[f(t)=\frac{1}{2\pi \mathrm{i}}\lim_{r\to\infty}\int_{b-\mathrm{i}r}^{b +\mathrm{i}r}\mathcal{L} f(s)\mathrm{e}^{st}\,ds\]
-    其中$b>a$，$a$为$f$的拉普拉斯变换的收敛域下界。
+    其中$b\in\mathbb{R}$使得直线$\mathrm{Re}(s)=b$位于$\mathcal{L} f(s)$的收敛域内。
 \end{theorem}
 \begin{proof}
     令$\tilde{f}(t)=f(t)\mathrm{e}^{-b t}$，有：
@@ -36,7 +47,7 @@
     \[|F(s)|\leq C|s|^{-\alpha},\quad \alpha>1,\forall \mathrm{Re}(s)>a\]
     则$\forall b>a$，函数
     \[f(t)=\frac{1}{2\pi \mathrm{i}}\lim_{r\to\infty}\int_{b-\mathrm{i}r}^{b +\mathrm{i}r}F(s)\mathrm{e}^{st}\,ds\]
-    属于$\mathcal{E} $，且$F(s)=\mathcal{L} f(s),\forall \mathrm{Re}(s)>a$。
+    属于$\mathcal{E} $，且$F(s)=\mathcal{L} f(s),\forall \mathrm{Re}(s)>a$.
 \end{theorem}
 \begin{remark}
     这里的条件$\alpha>1$保证了$F(b+\mathrm{i}\omega)\in L^1(\mathbb{R})$（作为$\omega$的函数），尽管$b=0$时，
@@ -106,6 +117,8 @@
 其中$\deg P<\deg Q$，$r_i(i=1,2,\cdots,k)$为$Q(s)$的实根，$s^2+a_1 s+b_1,\cdots,s^2+a_l s+b_l$为$Q(s)$的不可约二次因式，$\{m_i\}_{i=1}^k,\{n_j\}_{j=1}^l$为常数，则$F(s)$可以展开为部分分式的和：
 \begin{align*}
     F(s)=&\frac{A_{11}}{s-r_1}+\frac{A_{12}}{(s-r_1)^2}+\cdots +\frac{A_{1m_1}}{(s-r_1)^{m_1}}\\
+    &+\cdots \\
+    &+\frac{A_{k1}}{s-r_k}+\frac{A_{k2}}{(s-r_k)^2}+\cdots +\frac{A_{km_k}}{(s-r_k)^{m_k}}\\
     &+\frac{B_{11}s+C_{11}}{s^2+a_1 s+b_1}+\frac{B_{12}s+C_{12}}{(s^2+a_1 s+b_1)^2}+\cdots +\frac{B_{1n_1}s+C_{1n_1}}{(s^2+a_1 s+b_1)^{n_1}}\\
     &+\cdots \\
     &+\frac{B_{l1}s+C_{l1}}{s^2+a_l s+b_l}+\frac{B_{l2}s+C_{l2}}{(s^2+a_l s+b_l)^2}+\cdots +\frac{B_{ln_l}s+C_{ln_l}}{(s^2+a_l s+b_l)^{n_l}}
@@ -225,7 +238,7 @@
         f(t)&=\frac{u(t)}{2\pi \mathrm{i}}\lim_{r\to\infty}\oint_{\Gamma_r}F(s)\mathrm{e}^{st}\,ds\\
         &=u(t)\sum_{k=1}^{N}\mathrm{Res}[F(s)\mathrm{e}^{st},s_k]
     \end{align*}
-    其中$\Gamma_r$为\reffig{laplace_inv}(a)中的矩形围道，$b>0$使得$F(s)$的所有极点都在$\Gamma_r$内部。
+    其中$\Gamma_r$为\reffig{laplace_inv}(a)中的矩形围道，$b>0$使得直线$\mathrm{Re}(s)=b$位于$F(s)$的收敛域内。
 \end{theorem}
 
 这一定理的证明方法已经在上面的例子中展示了。
@@ -252,8 +265,8 @@
     =& \frac{1}{2} \lim_{s\to -1} \frac{d^2}{ds^2}\!\left(\frac{\e^{st}}{s+2}\right) \\
     =& \frac{1}{2} \lim_{s\to -1} \frac{d}{ds}\!\left( \frac{t \e^{st}(s+2) - \e^{st}}{(s+2)^2} \right) \\
     =& \frac{1}{2} \lim_{s\to -1} \frac{ \bigl(t^2 \e^{st}(s+2) - t \e^{st}\bigr)(s+2)^2 - 2(s+2)\bigl(t \e^{st}(s+2) - \e^{st}\bigr) }{(s+2)^4} \\
-    =& \frac{1}{2} \e^{-t} \bigl( t^2 - t - 2t + 2 \bigr) 
-    = \frac{1}{2} \e^{-t} (t^2 - 3t + 2)
+    =& \frac{1}{2} \e^{-t} \bigl( t^2 - t - 2t + 2 \bigr) \\
+    =& \frac{1}{2} \e^{-t} (t^2 - 3t + 2)
     \end{align*}
     因此
     \[
@@ -273,7 +286,8 @@
     根据\refsub{unique_exetension}中的唯一延拓定理，泰勒展开式在复数域上仍成立，因此
     \begin{align*}
         F(s)&=\frac{\sinh(\pi s)-\pi s}{s^2 \sinh(\pi s)}\\
-        &=\frac{[(\pi s)+(\pi^3s^3/3!)+\cdots]-\pi s}{s^2 \cdot(\pi s)}=\frac{\pi^2}{3},\quad s\to 0
+        &=\frac{[(\pi s)+(\pi^3s^3/3!)+\cdots]-\pi s}{s^2 \cdot(\pi s)}\\
+        &=\frac{\pi^2}{6},\quad s\to 0
     \end{align*}
 
     我们使用与\reffig{laplace_inv}(a)类似的围道$\Gamma_r$（$b>0$）来计算单边拉普拉斯逆变换，但这里需要选取$r=N+0.5,N\in\mathbb{N} $以保证所有围道上被积函数的全纯性。
@@ -291,13 +305,98 @@
         =&\lim_{s\to \mathrm{i}n}\frac{\mathrm{e}^{\mathrm{i}nt}}{\mathrm{i}n}\cdot\frac{-1}{\cosh(\pi \mathrm{i}n)}\\
         =&\frac{(-1)^{n+1}\mathrm{e}^{\mathrm{i}nt}}{\mathrm{i}n}
     \end{align*}
-    其中$\cosh(\pi \mathrm{i}n)=\cos(n\pi)=(-1)^n$.由留数定理，有
+    其中$\cosh(\pi \mathrm{i}n)=\cos(n\pi)=(-1)^n$.综上，
     \begin{align*}
-        f(t)&=\mathcal{L}^{-1} F(s)\\
-        &=\frac{u(t)}{2\pi \mathrm{i}}\lim_{N\to\infty}\oint_{\Gamma_{N+0.5}}F(s)\mathrm{e}^{st}\,ds\\
+        f(t)&=\mathcal{L}^{-1} F(s)=\frac{u(t)}{2\pi \mathrm{i}}\lim_{N\to\infty}\oint_{\Gamma_{N+0.5}}F(s)\mathrm{e}^{st}\,ds
+    \end{align*}
+    由留数定理，
+    \begin{align*}
+        f(t)&=\frac{u(t)}{2\pi \mathrm{i}}\lim_{N\to\infty}\oint_{\Gamma_{N+0.5}}F(s)\mathrm{e}^{st}\,ds\\
         &=u(t)\sum_{n\in\mathbb{Z}\backslash\{0\}}\mathrm{Res}[F(s)\mathrm{e}^{st},\mathrm{i}n]\\
         &=u(t)\sum_{n\in\mathbb{Z}\backslash\{0\}}\frac{(-1)^{n+1}\mathrm{e}^{\mathrm{i}nt}}{\mathrm{i}n}\\
         &=2u(t)\sum_{n=1}^{\infty}\frac{(-1)^{n+1}}{n}\sin(nt)
     \end{align*}
-    它是锯齿波信号$f(t)=-t,t\in(-\pi,\pi)$的周期化延拓的傅里叶级数展开。
+    它是锯齿波信号$g(t)=-t,t\in(-\pi,\pi)$的周期化延拓的傅里叶级数展开与$2u(t)$的乘积。
 \end{example}
+
+\subsection{双边拉普拉斯逆变换}\label{sub:bi_laplace_inv}
+
+在\cref{def:bi_laplace}中已经看到，双边拉普拉斯变换的收敛域应为带状区域\footnote{其严格定义见\cref{def:bi_convergence_abscissa}}，因此可以使用与\cref{thm:laplace_inversion}相同的处理方法：只要直线$\mathrm{Re}(s)=b$位于$\mathcal{L} f(s)$的收敛域内，双边拉普拉斯逆变换就可化归为傅里叶逆变换：
+\begin{theorem}[双边拉普拉斯逆变换]\label{thm:bi_laplace_inv}
+    设$f\in PS(\mathbb{R})$，则
+    \[f(t)=\frac{1}{2\pi \mathrm{i}}\lim_{r\to\infty}\int_{b-\mathrm{i}r}^{b +\mathrm{i}r}\mathcal{L} f(s)\mathrm{e}^{st}\,ds\]
+    其中$b\in\mathbb{R}$使得直线$\mathrm{Re}(s)=b$位于$\mathcal{L} f(s)$的收敛域内。
+\end{theorem}
+
+收敛域的两侧均可能存在$\mathcal{L} f(s)$的极点，相同的复频域函数，在不同的收敛域下，对应不同的时域函数，因此给出双边拉普拉斯变换时必须指出收敛域。
+
+\begin{example}
+    设
+    \[
+    F(s) = \frac{1}{(s+1)^2(s-2)},\quad \ROC:-1<\mathrm{Re}(s)<2
+    \]
+    则
+    \[
+    f(t) = \frac{1}{2\pi \im} \lim_{r \to \infty} \int_{b - \im r}^{b + \im r} F(s) \e^{st} ds
+    \]
+    其中 $-1 < b < 2$，不妨取 $b=0$，并记围线$\eta_r$为从 $- \im r$ 到 $+ \im r$ 的直线段。
+
+    当 $t>0$ 时，取以$r$为半径的半圆形围线 $\gamma_{r1}:t\mapsto r \e^{-\im\theta}, \theta \in [0, \pi]$，则在左半平面上有：
+    $$\left|\e^{st}\right| = \e^{\mathrm{Re}(s)t} \le 1$$
+    因此
+    \begin{align*}
+        \left|\int_{\gamma_r} F(s) \e^{st} ds\right| &\leq \int_{0}^{\pi} \left| F(r \e^{\im\theta}) \im r \e^{i\theta} \right|d\theta  \\
+        &\leq \sup_{0 \leq \theta \leq \pi} |F(r \e^{\im\theta})|\cdot \int_{0}^{\pi} r d\theta \\
+        &= \pi r \sup_{0 \leq \theta \leq \pi} |F(r \e^{\im\theta})|
+    \end{align*}
+    而$F(r\e^{i\theta})=O(r^{-3})$，因此
+    \[
+    \left|\int_{\gamma_{r_1}} F(s) \e^{st} ds\right| \to 0, \quad r \to \infty
+    \]
+    $\eta_r+\gamma_{r1}$绕极点$s=-1$的环绕数为$1$，由留数定理，有：
+    \begin{align*}
+        f(t)&=\frac{1}{2\pi\im}\oint_{\eta_r+\gamma_{r1}}F(s)\e^{st}\,ds\\
+        &=\operatorname{Res}\left[\frac{\e^{st}}{(s+1)^2(s-2)}, -1\right] \\
+        &= \lim_{s \to -1} \frac{d}{ds} \left( \frac{\e^{st}}{s-2} \right)\\
+        &= \lim_{s \to -1} \frac{t \e^{st}(s-2) - \e^{st}}{(s-2)^2}\\
+        &= \frac{-3t \e^{-t} - \e^{-t}}{9}\\
+        &= -\frac{3t + 1}{9}\e^{-t},\quad t>0
+    \end{align*}
+
+    当 $t<0$ 时，取以$r$为半径的半圆形围线 $\gamma_{r2}:t\mapsto r \e^{\im\theta}, \theta \in [0, \pi]$，同理可得
+    $$\left|\int_{\gamma_{r_2}} F(s) \e^{st} ds\right| \to 0, \quad r \to \infty$$
+    注意$\eta_r+\gamma_{r2}$绕极点$s=2$的环绕数为$-1$，由留数定理，有：
+    \begin{align*}
+        f(t)&=\frac{1}{2\pi\im}\oint_{\eta_r+\gamma_{r2}}F(s)\e^{st}\,ds\\
+        &=-\operatorname{Res}\left[\frac{\e^{st}}{(s+1)^2(s-2)}, 2\right] \\
+        &= -\lim_{s \to 2} \frac{\e^{st}}{(s+1)^2} \\
+        &= -\frac{1}{9} \e^{2t},\quad t<0
+    \end{align*}
+    综上，
+    $$f(t)=-\frac{1}{9}\e^{2t}u(-t)-\frac{3t + 1}{9}\e^{-t}u(t)$$
+\end{example}
+
+对于真分式函数，以上补充围线的方法总是可行的，我们将这种对真分式函数做双边拉普拉斯逆变换的方法总结为以下定理：
+\begin{theorem}[真分式函数的双边拉普拉斯逆变换，留数定理方法]
+    设$F(s)$是真分式函数，位于收敛域左侧的极点集为$\{u_k\}_{k=1}^{N}$，位于收敛域右侧的极点集为$\{v_l\}_{l=1}^{M}$，则其双边拉普拉斯逆变换为$F(s)\mathrm{e}^{st}$在复平面上所有极点的留数之和：
+    \begin{align*}
+        f(t)&=u(t)\sum_{k=1}^{N}\mathrm{Res}[F(s)\mathrm{e}^{st},u_k]-u(-t)\sum_{l=1}^{M}\mathrm{Res}[F(s)\mathrm{e}^{st},v_l]
+    \end{align*}
+    其中$b\in\mathbb{R}$使得直线$\mathrm{Re}(s)=b$位于$F(s)$的收敛域内。
+\end{theorem}
+
+\begin{example}
+    在上例中，如果收敛域为$\ROC: \mathrm{Re}(s)>2$，则
+    \begin{align*}
+        f(t)=&u(t)\left(\Res[F(s)\mathrm{e}^{st},-1]+\Res[F(s)\mathrm{e}^{st},2]\right)\\
+        =&\left(\frac{1}{9}\e^{2t}-\frac{3t + 1}{9}\e^{-t}\right)u(t)
+    \end{align*}
+    如果收敛域为$\ROC: \mathrm{Re}(s)<-1$，则
+    \begin{align*}
+        f(t)&=-u(-t)\left(\Res[F(s)\mathrm{e}^{st},-1]+\Res[F(s)\mathrm{e}^{st},2]\right)\\
+        &=\left(\frac{3t + 1}{9}\e^{-t}-\frac{1}{9}\e^{2t}\right)u(-t)
+    \end{align*}
+    可见不同的收敛域对应不同的时域函数。
+\end{example}
+
+对于跳变点不位于$t=t_0$的情况，通常可以通过时移性质将其化归为在$t=0$处跳变的情况，此时$F(s)$具有指数因子$\mathrm{e}^{-st_0}$，因此辨别跳变点是容易的，我们不再单独给出例子说明这一点。

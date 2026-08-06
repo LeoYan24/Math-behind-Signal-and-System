@@ -1,17 +1,10 @@
 \section{拉普拉斯变换的收敛域}\label{Convergence}
 
 \subsection{收敛横坐标和收敛域}\label{sub:converge_abscissa}
-我们在定义拉普拉斯变换时，曾要求$|f(t)|\leq C \mathrm{e}^{at}$，这样拉普拉斯积分$\mathcal{L} f(s)=\int_{0}^{\infty}f(t)\mathrm{e}^{-st}\,dt$\\
+我们在定义单边拉普拉斯变换时，曾要求$|f(t)|\leq C \mathrm{e}^{at}$，这样拉普拉斯积分$\mathcal{L} f(s)=\int_{0}^{\infty}f(t)\mathrm{e}^{-st}\,dt$\\
 在$\mathrm{Re}(s)>a$上收敛，但是我们不知道这一要求是否是最精确的。本节就来讨论拉普拉斯变换的收敛横坐标和收敛域的问题，并由此给出一些由拉普拉斯变换分析时域性质的方法。
 
-\begin{definition}[收敛横坐标]
-    \textbf{收敛横坐标}为使得拉普拉斯积分$$\mathcal{L} f(s)=\int_{0}^{\infty}f(t)\mathrm{e}^{-st}\,dt$$最大收敛域的收敛轴实部（横坐标）$\sigma_c$，使得$\mathcal{L} f(s)$恰好在$\mathrm{Re}(s)>\sigma_c$上收敛，而在$\mathrm{Re}(s)<\sigma_c$上发散，即
-    \[\sigma_c=\inf\left\{a\in\mathbb{R}\left|\int_0^\infty f(t)\mathrm{e}^{-st}\,dt\text{在}\mathrm{Re}(s)>a\text{上收敛}\right.\right\}\]
-    将$\mathrm{Re}(s)>\sigma_c$称为拉普拉斯变换的\textbf{收敛域}，直线$\mathrm{Re}(s)=\sigma_c$称为\textbf{收敛轴}。
-\end{definition}
-
 为了寻找收敛横坐标，我们有两种思路：
-
 
 \subsubsection{思路一：从时域出发，分析$|f(t)|$的增长速率}
 由于$f\in\mathcal{E} $，在有限区间上的表现不会影响拉普拉斯积分的收敛性，因此我们只需考虑$t\to\infty$时$f$的增长速率。我们用$|f(t)|\sim C \mathrm{e}^{a t}$表示$|f(t)|$与$C \mathrm{e}^{a t}$在$t\to\infty$时具有相同增长速率，即
@@ -126,53 +119,6 @@ $$f(t)=\mathrm{e}^{at},\quad a\in\mathbb{R}^*,\quad F(s)=\dfrac{1}{s-a}$$
 总之，对于相当大范围的函数，我们可以\textbf{通过分析其拉普拉斯变换的奇点来确定收敛横坐标}$\sigma_c$，从而确定拉普拉斯变换的最大收敛域。在前面我们已经证明：$$f\in\mathcal{E}\implies \sigma_c=\varlimsup_{t\to\infty}\frac{\ln|f(t)|}{t}$$
 因此我们既可以\textbf{通过分析拉普拉斯变换的奇点来确定$f(t)$的增长速率}（的上确界），也可以\textbf{通过分析$f(t)$的增长速率来确定拉普拉斯变换的奇点位置}。
 
-\subsection{系统的稳定性}\label{sub:stability_of_system}
-基于以上结论，我们可以使用拉普拉斯变换分析系统的\textbf{稳定性}（\cref{def:system_stability}）。对于线性时不变系统，稳定性有充要条件：
-\begin{proposition}[稳定性的时域判则]
-    设线性时不变系统的冲激响应为$h(t)$，则系统稳定的充分必要条件是$\int_{-\infty}^{\infty}|h(t)|\,dt<\infty$。
-\end{proposition}
-\begin{proof}
-    一方面，对于有界输入$|e(t)|<M$，有
-    \begin{align*}
-        |r(t)|&=\left|\int_{-\infty}^{\infty}h(\tau)e(t-\tau)\,d\tau\right|\\
-        &\leq \int_{-\infty}^{\infty}|h(\tau)||e(t-\tau)|\,d\tau\\
-        &<M\int_{-\infty}^{\infty}|h(\tau)|\,d\tau<\infty
-    \end{align*}
-    因此输出有界。
-
-    另一方面，设$h(t)$不绝对可积，取有界激励信号$e(t)=\mathrm{sgn}(h(-t))$，则
-    \begin{align*}
-        |r(0)|&=\left|\int_{-\infty}^{\infty}h(\tau)e(-\tau)\,d\tau\right|\\
-        &=\left|\int_{-\infty}^{\infty}h(\tau)\mathrm{sgn}(h(\tau))\,d\tau\right|\\
-        &=\int_{-\infty}^{\infty}|h(\tau)|\,d\tau=\infty
-    \end{align*}
-    输出无界。
-\end{proof}
-
-下面使用拉普拉斯变换来分析系统的稳定性。对因果的线性时不变系统，我们定义
-\begin{definition}[系统函数]
-    设$h\in\mathcal{E} $是线性时不变系统的冲激响应，则系统函数定义为
-    $$H(s)=\frac{R(s)}{E(s)}=\mathcal{L} h(s)$$
-    如果虚轴$\mathrm{Re}(s)=0$在$H(s)$的收敛域内，则$H(\mathrm{i}\omega)$与第四章中定义的频率响应$H(\omega)$一致。
-\end{definition}
-对$r(t)=h(t)*e(t)$两边同时进行拉普拉斯变换，有
-\[\mathcal{L} r(s)=\mathcal{L} h(s)\mathcal{L} e(s),\quad \text{即}R(s)=H(s)E(s)\]
-
-\begin{proposition}[稳定性的复频域判则]\label{prop:statibility_s}
-    设因果线性时不变系统的冲激响应为$h(t)\in\mathcal{E}$，系统函数为$H(s)=\mathcal{L} h(s)$，则稳定性的充分必要条件是$H(s)$的所有奇点均位于复平面的左半平面$\mathrm{Re}(s)<0$上。
-\end{proposition}
-\begin{proof}
-    奇点在左半平面意味着单位冲激响应的增长速度至多相当于$\mathrm{e}^{-\alpha t}( \alpha>0)$，从而单位冲激响应绝对可积，系统稳定；反之，奇点在右半平面或虚轴上意味着单位冲激响应增长速度至少相当于$\mathrm{e}^{\alpha t}(\alpha\geq0)$，从而单位冲激响应不绝对可积，系统不稳定。
-\end{proof}
-\begin{definition}
-    根据单位冲激响应的拉普拉斯变换的奇点位置，将因果线性时不变系统分为三类：
-    \begin{itemize}
-        \item \textbf{稳定系统}：所有奇点均位于左半平面上；
-        \item \textbf{临界稳定系统}：至少有一个奇点位于虚轴上，且其余奇点均位于左半平面上；
-        \item \textbf{不稳定系统}：至少有一个奇点位于右半平面上。
-    \end{itemize}
-\end{definition}
-
 \subsection{初值定理与终值定理}\label{sub:initial_and_final_value}
 本小节介绍\textbf{初值定理}和\textbf{终值定理}，它们可以通过单边拉普拉斯变换直接得到函数在$t=0$和$t\to\infty$时的极限值，而不需要求出函数的显式表达式。
 \begin{theorem}[初值定理]
@@ -183,7 +129,7 @@ $$f(t)=\mathrm{e}^{at},\quad a\in\mathbb{R}^*,\quad F(s)=\dfrac{1}{s-a}$$
 \begin{remark}
     多数文献中，初值定理为
     \[f(0)=\lim_{s\to\infty}sF(s)\]
-    对于$F(s)$是真分式函数的情况，两者是等价的，因为$sF(s)$在$\infty$处有可去奇点（无穷远点的奇点类型见\cref{def:singular_point_infty}），但在其他情况下，$\lim_{s\to\infty}sF(s)$可能不存在，同时$\lim_{\mathrm{Re}(s)\to\infty}sF(s)$仍然存在。
+    对于$F(s)$是真分式函数的情况，两者是等价的，因为$sF(s)$在$\infty$处有可去奇点（无穷远点的奇点类型见\cref{def:singular_point_infty}），沿各个方向趋于无穷所得的极限是相同的，但在其他情况下，$\lim_{s\to\infty}sF(s)$可能不存在，同时$\lim_{\mathrm{Re}(s)\to\infty}sF(s)$仍然存在。
 \end{remark}
 \begin{proof}
     由拉普拉斯变换的时域微分性质，有
@@ -202,7 +148,7 @@ $$f(t)=\mathrm{e}^{at},\quad a\in\mathbb{R}^*,\quad F(s)=\dfrac{1}{s-a}$$
 \end{theorem}
 通过将$s$限制在虚轴上，这个定理可以解释为：\textbf{频域上的低频成分对应时域的稳态行为}。
 \begin{remark}
-多数文献中，这个定理的允许$s=0$不是奇点，但由于$\sigma_s<0$时，多数情况下有$\sigma_c<0$，从而$f(t)\to 0$，因此这里我们只考虑非平凡情形。此外高阶极点对应的$\lim_{t\to\infty}f(t)=\infty$同样可以用以下方法证明。
+多数文献中，这个定理不仅仅包括$s=0$是简单极点的情况。不过，如果$s=0$不是奇点，则$\sigma_s<0$，多数情况下有$\sigma_c<0$，从而$f(t)\to 0$，因此这里我们只考虑非平凡情形；如果$s=0$是高阶极点，同样可以用以下方法证明$\lim_{t\to\infty}f(t)=\infty$.
 \end{remark}
 \begin{proof}
     考虑$F(s)$在$s=0$处的洛朗级数展开：
@@ -213,14 +159,14 @@ $$f(t)=\mathrm{e}^{at},\quad a\in\mathbb{R}^*,\quad F(s)=\dfrac{1}{s-a}$$
     时域上，\begin{align*}
         f(t)&=\mathcal{L}^{-1} F(s)=\mathcal{L}^{-1}\left(\frac{a_{-1}}{s}\right)+\mathcal{L}^{-1} G(s)=a_{-1}u(t)+g(t)\to a_{-1},\quad t\to\infty
     \end{align*}
-    于是$\lim_{t\to\infty}f(t)=a_{-1}=\lim_{s\to 0}sF(s)$。
+    于是$\lim_{t\to\infty}f(t)=a_{-1}=\lim_{s\to 0}sF(s)$.
 \end{proof}
 
 \subsection{在双边拉普拉斯变换中的应用}\label{sub:bilateral_laplace}
 
 在\cref{def:bi_laplace}中，为了确定$a,b$的取值范围，我们可以拆分双边拉普拉斯积分，并仿照单边拉普拉斯变换的收敛域分析方法，分别讨论$t\to\infty$和$t\to-\infty$时$f(t)$的增长速率：
 \[\mathcal{L}f(s)=\int_{-\infty}^{0}f(t)\mathrm{e}^{-st}\,dt+\int_{0}^{\infty}f(t)\mathrm{e}^{-st}\,dt\]
-\begin{definition}[收敛横坐标]
+\begin{definition}[收敛横坐标]\label{def:bi_convergence_abscissa}
     \textbf{收敛横坐标}$\sigma_{c}^-,\sigma_{c}^+$使得拉普拉斯积分$$\mathcal{L}f(s)=\int_{-\infty}^{\infty}f(t)\mathrm{e}^{-st}\,dt$$恰好在$\mathrm{Re}(s)\in(\sigma_{c}^-,\sigma_{c}^+)$上收敛，而在$\mathrm{Re}(s)<\sigma_{c}^-$和$\mathrm{Re}(s)>\sigma_{c}^+$上发散，即
     \[\sigma_{c}^-=\sup\{a\in\mathbb{R}|\exists\epsilon>0,\mathcal{L} _b f(s)\text{在}\mathrm{Re}(s)\in(a,a+\epsilon)\text{上收敛}\}\]
     \[\sigma_c^+=\inf\{b\in\mathbb{R}|\exists\epsilon>0,\mathcal{L} _b f(s)\text{在}\mathrm{Re}(s)\in(b-\epsilon,b)\text{上收敛}\}\]
@@ -245,6 +191,6 @@ $$\mathrm{Re}(s)=b-\epsilon,\quad\int_{-\infty}^{0}f(t)\mathrm{e}^{-st}\,dt\leq\
 特别地，我们指出：\begin{itemize}
     \item 如果$f(t)=0,t<0$，则$\sigma_{c}^+=-\infty$，双边拉普拉斯变换退化为单边拉普拉斯变换；
     \item 如果$f(t)=0,t>0$，则$\sigma_{c}^-=\infty$；
-    \item 如果$f$紧支，则$\sigma_{c}^-=-\infty,\sigma_c^+=\infty$，双边拉普拉斯变换为整函数。
+    \item 如果$f$紧支，则$\sigma_{c}^-=-\infty,\sigma_c^+=\infty$，双边拉普拉斯变换为整函数；
     \item 如果$f(t)$在$t\to\pm\infty$时均与$\mathrm{e}^{a t}$表现类似，其双边拉普拉斯变换的收敛域为空集。除了前面三条中讨论的情况，典型的具有非空收敛域的例子如$f(t)=\mathrm{e}^{-|t|}$，其双边拉普拉斯变换的收敛域为$\mathrm{Re}(s)\in(-1,1)$.
 \end{itemize}
