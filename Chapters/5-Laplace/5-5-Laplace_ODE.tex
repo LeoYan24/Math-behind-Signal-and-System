@@ -34,9 +34,9 @@
     $\mathcal{L} \left[\delta'\right]=s$，进一步可得$\mathcal{L} \left[\delta^{(n)}\right]=s^n$。
 \end{proposition}
 
-看上去，$\delta(0)=\infty,\mathcal{L} \delta'=\mathcal{L} \delta-\infty$，而$\delta_a$在$a<0$时非因果，但$\delta$应作为一个分布来理解，因此以上结果与我们之前所定义的拉普拉斯变换并不矛盾。
+看上去，$\delta(0)=\infty,\mathcal{L} \delta'=\mathcal{L} \delta-\infty$，而$\delta_a$在$a<0$时非因果，但$\delta$应作为一个分布来理解，它不符合时域微分性质的使用条件，因此以上结果与我们之前所定义的拉普拉斯变换并不矛盾。
 
-不过，我们可以通过另一种方式，几乎完全避开分布的问题。在本节中，我们将单边拉普拉斯变换的定义修改为：
+不过，我们可以通过另一种方式，使得分布也在形式上满足单边拉普拉斯变换的各个性质。在本节中，我们将单边拉普拉斯变换的定义修改为：
 \begin{definition}[单边拉普拉斯变换，改进版]
     设$f$局部可积，且$\exists a\in\mathbb{R}$，使得$f(t)\mathrm{e}^{-at}$绝对可积，则对$\mathrm{Re}(s)\in[a,\infty)$，$f$的拉普拉斯变换定义为
     \[\mathcal{L} f(s)=\int_{0-}^{\infty}f(t)\mathrm{e}^{-st}\,dt\]
@@ -69,7 +69,7 @@
 
 $\delta$的各阶导数同理，可见这样的定义方式帮助我们避开了$u(t)$在$t=0$处的跳变问题和$\delta(0)=\infty$的问题。另外，我们将在下一小节中看到，这有助于我们讨论微分方程描述的系统的起始状态。
 
-\subsection{常系数线性微分方程}\label{sub:laplace_ODE}
+\subsection{拉普拉斯变换求解常系数线性微分方程}\label{sub:laplace_ODE}
 拉普拉斯变换是处理常系数线性微分方程的有力工具。根据拉普拉斯变换的时域微分性质：
 \[\mathcal{L}\left[f^{(n)}(t)\right](s)=s^n\mathcal{L} f(s)-s^{n-1}f(0-)-s^{n-2}f'(0-)-\cdots -f^{(n-1)}(0-)\]
 可以将常系数线性微分方程转化为代数方程，还能够一并处理起始状态（\cref{def:initial_state}）\footnote{数学上，我们使用经典的单边拉普拉斯变换以处理带初始条件的初值问题（\cref{def:initial_value_prob}）。}。我们先提出一个一般的解法，再通过一个具体的例子来展示拉普拉斯变换的威力。
@@ -363,11 +363,13 @@ $$\mathcal{L}^{-1} \left[(sI-A)^{-1}\right](t)=\phi(t)u(t)=\mathrm{e}^{At}u(t)$$
 \end{align*}
 由前一方程，
 \begin{align*}
-    \mathbf{Q}(s)=(sI-A)^{-1}\mathbf{q}(0-)+(sI-A)^{-1}B\mathbf{E}(s)=\Phi(s)\mathbf{q}(0-)+\Phi(s)B\mathbf{E}(s)
+    \mathbf{Q}(s)&=(sI-A)^{-1}\mathbf{q}(0-)+(sI-A)^{-1}B\mathbf{E}(s)\\
+    &=\Phi(s)\mathbf{q}(0-)+\Phi(s)B\mathbf{E}(s)
 \end{align*}
 代入后一方程，得到
 \begin{align*}
-    \mathbf{R}(s)=&C\left[\Phi(s)\mathbf{q}(0-)+\Phi(s)B\mathbf{E}(s)\right]+D\mathbf{E}(s)=C\Phi(s)\mathbf{q}(0-)+\left[C\Phi(s)B+D\right]\mathbf{E}(s)
+    \mathbf{R}(s)=&C\left[\Phi(s)\mathbf{q}(0-)+\Phi(s)B\mathbf{E}(s)\right]+D\mathbf{E}(s)\\
+    =&C\Phi(s)\mathbf{q}(0-)+\left[C\Phi(s)B+D\right]\mathbf{E}(s)
 \end{align*}
 因此系统函数为
 \begin{align*}

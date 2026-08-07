@@ -51,17 +51,18 @@ $$\lim_{t\to\infty}\frac{\ln|f(t)|}{t}=\lim_{t\to\infty}\sin t$$
     不依赖于$b$的选取，该时域函数必然就是$f(t)$，从而$\mathcal{L} f(s)=F(s)$在$\mathrm{Re}(s)>\sigma_s$上成立，矛盾。
 \end{proof}
 
-然而，很多函数不满足以上定理的条件，例如
+然而，很多函数不满足以上定理的条件，例如（尽管对这类函数我们可以直接验证$\sigma_c=\sigma_s=a$）
 $$f(t)=\mathrm{e}^{at},\quad a\in\mathbb{R}^*,\quad F(s)=\dfrac{1}{s-a}$$
-（尽管对这类函数我们可以直接验证$\sigma_c=\sigma_s=a$）。下面给出一个类似的定理\cite{Laplace_Transform}，以说明我们的目标结论$\sigma_c=\sigma_s$的适用范围是相当大的，这样，我们就\textbf{有很大的把握来通过$F(s)$的奇点直接分析$f(t)$的收敛横坐标}。
+下面给出一个类似的定理\cite{Laplace_Transform}，以说明我们的\textbf{目标结论$\sigma_c=\sigma_s$的适用范围是相当大的}。
 \begin{theorem}
-    设$F(s)$是某个函数$f\in\mathcal{E} $的拉普拉斯变换，且$f(t)$非负，仍然定义\[\sigma_s=\sup\left\{\mathrm{Re}(s)_j\in\mathbb{C}\left|s_j\text{为}F(s)\text{的奇点}\right.\right\}\]
-    则有$\sigma_c=\sigma_s$。
+    设$F(s)$是某个函数$f\in\mathcal{E} $的拉普拉斯变换，且$f(t)$非负，仍然定义
+    \[\sigma_s=\sup\left\{\mathrm{Re}(s_j)\in\mathbb{C}\left|s_j\text{为}F(s)\text{的奇点}\right.\right\}\]
+    则有$\sigma_c=\sigma_s$.
 \end{theorem}
 \begin{proof}
-    一方面，我们已经说明$\sigma_c\geq\sigma_s$。
+    一方面，我们已经说明$\sigma_c\geq\sigma_s$.
 
-    另一方面，$\sigma_c\leq\sigma_s$。用反证法，假设$\sigma_c>\sigma_s$，任取$b>\sigma_c$，由于$F(s)$在$\mathrm{Re}(s)>\sigma_s$上全纯，可以将它展开为$b$处的泰勒级数：
+    另一方面，$\sigma_c\leq\sigma_s$.用反证法，假设$\sigma_c>\sigma_s$，任取$b>\sigma_c$，由于$F(s)$在$\mathrm{Re}(s)>\sigma_s$上全纯，可以将它展开为$b$处的泰勒级数：
     \[F(s)=\sum_{n=0}^{\infty}\frac{F^{(n)}(b)}{n!}(s-b)^n,\quad \mathrm{Re}(s)>\sigma_s\]
     并且该级数的收敛半径至少为$b-\sigma_s$，因此在以下区域中，
     $$D(b,b-\sigma_s)=\{s\in\mathbb{C}||s-b|<b-\sigma_s\}$$
@@ -152,7 +153,7 @@ $$f(t)=\mathrm{e}^{at},\quad a\in\mathbb{R}^*,\quad F(s)=\dfrac{1}{s-a}$$
 \end{remark}
 \begin{proof}
     考虑$F(s)$在$s=0$处的洛朗级数展开：
-    \[F(s)=\sum_{n=-1}^{\infty}a_n s^n=\frac{a_{-1}}{s}+G(s),\quad a_{-m}\neq 0\]
+    \[F(s)=\sum_{n=-1}^{\infty}a_n s^n=\frac{a_{-1}}{s}+G(s),\quad a_{-1}\neq 0\]
     其中$G(s)$在$s=0$的邻域内全纯，因此也在包含虚轴的某个右半平面$\mathrm{Re}(s)>-\epsilon$上全纯，其拉普拉斯逆变换$g(t)$满足$g(t)\to 0,t\to\infty$，因此有\begin{align*}
         \lim_{s\to 0}sF(s)&=\lim_{s\to 0}\left(a_{-1}+sG(s)\right)=a_{-1}
     \end{align*}

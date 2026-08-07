@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib.patches import FancyArrowPatch
 
 def draw_contour():
     b = 1.5
@@ -36,6 +37,18 @@ def draw_contour():
     # 标记围道边
     plt.text(b + 0.15, 0.0, r'$\gamma_1$', fontsize=18)
     plt.text(R * np.cos(0.85) + 0.15, R * np.sin(0.85) + 0.15, r'$\gamma_2$', fontsize=18)
+
+    # 添加方向箭头（顺时针），仅箭头头部
+    ax = plt.gca()
+    line_arrow = FancyArrowPatch((b, r-0.8), (b, r-0.55), arrowstyle='-|>', mutation_scale=15,
+                                 linewidth=1.5, color='k', shrinkA=0, shrinkB=0)
+    ax.add_patch(line_arrow)
+
+    arc_arrow_start = (R * np.cos(-0.55), R * np.sin(-0.55))
+    arc_arrow_end = (R * np.cos(-0.65), R * np.sin(-0.65))
+    arc_arrow = FancyArrowPatch(arc_arrow_start, arc_arrow_end, arrowstyle='-|>', mutation_scale=15,
+                                linewidth=1.5, color='k', shrinkA=0, shrinkB=0)
+    ax.add_patch(arc_arrow)
     
     # 绘制虚线连接原点和圆弧上一点
     mid_angle = theta_top / 2

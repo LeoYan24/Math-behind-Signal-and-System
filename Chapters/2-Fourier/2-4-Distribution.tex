@@ -301,7 +301,7 @@ $$\mathcal{F}(T^-)= (\mathcal{F}T)^-$$
 
 利用分布的傅里叶变换的定义及其对偶性，可以立即得到：
 \begin{theorem}[帕塞瓦尔恒等式/普朗歇尔定理]\label{thm:distribution_plancherel}
-    设$f,g\in L^1(\mathbb{R})\cap L^2(\mathbb{R})$，则
+    设$f\in\mathcal{T} ,g\in\mathcal{S} $，则
     \lr{
         \int_{-\infty}^{\infty}f(t)\overline{g(t)}\,dt=\int_{-\infty}^{\infty}\mathcal{F} f(\xi)\overline{\mathcal{F}g(\xi)}\,d\xi
     }{
@@ -319,7 +319,6 @@ $$\mathcal{F}(T^-)= (\mathcal{F}T)^-$$
     &=2\pi\left\langle f,\overline{g}\right\rangle
 \end{lralign}
 \end{proof}
-相比\cref{thm:plancherel}，这个证明适用于$f$是正则分布而$g$是施瓦兹函数的情况，它的证明要简单得多。
 
 \begin{example}[$\delta$是偶分布]
     \begin{align*}
@@ -761,7 +760,125 @@ $$\sigma_a\delta=\delta(ax)=\frac{1}{|a|}\delta(x)$$
 \end{align*}
 因此\[f*\delta_a=\tau_a f\]
 \end{example}
-在\refsub{fourier_of_signal}中，我们已经从形式上得到了$\mathrm{sgn},u,1/t$，的傅里叶变换，现在有了分布的工具，就可以借助分布的傅里叶变换的对偶性说明之前的结论是严谨的。
+
+\subsection{再看正则分布}\label{sub:normal_distribution}
+
+在\refsub{fourier_of_signal}中，我们已经从形式上得到了$\mathrm{sgn},u,1/t$等$L^1(\mathbb{R})$以外的函数的傅里叶变换，本小节借助分布理论验证这些结果。
+
+\subsubsection{采样函数}
+
+在\refsub{int_sin}中已经说明：采样函数$\sinc\notin L^1(\mathbb{R})$，因此它的傅里叶变换是在分布的意义下求得的，利用分布的傅里叶变换的对偶性可以说明这一点。
+
+\subsubsection{符号函数和单位阶跃函数}
+
+利用分布的傅里叶变换的微分性质，有：
+\begin{lralign}
+    \mathcal{F}(\sgn')&=2\pi\im\xi\mathcal{F} \sgn=2
+    \switch
+    \mathcal{F}(\sgn')&=\im\omega\mathcal{F} \sgn=2
+\end{lralign}
+
+这是一个分布方程，它确定了$\mathcal{F}\sgn$在原点以外的值，但不应当认为
+\begin{lralign}
+    \mathcal{F} \sgn&=\frac{1}{\pi\im\xi}
+    \switch
+    \mathcal{F} \sgn&=\frac{2}{\im\omega}
+\end{lralign}
+因为反比例函数不能完整地描述分布$\mathcal{F}\sgn$的行为，它在原点附近不可积，通常无法与施瓦兹函数配对。为了处理这个问题，我们认为反比例函数作为一个正则分布的作用是做主值意义下的积分，由于施瓦兹函数光滑，这个主值积分总是收敛的。为了体现这一点，我们将它写成
+\begin{lralign}
+    \pv\frac{1}{\pi\im\xi}
+    \switch
+    \pv\frac{2}{\im\omega}
+\end{lralign}
+这样，在原点以外，它仍然满足分布方程：
+\begin{lralign}
+    \pi\im\xi\pv\frac{1}{\pi\im\xi}&=1
+    \switch
+    \im\omega\pv\frac{2}{\im\omega}&=2
+\end{lralign}
+
+为了描述反比例函数在原点处趋于无穷的行为，需要借助$\delta$分布。设
+\begin{lralign}
+    \mathcal{F} \sgn&=\pv\frac{1}{\pi\im\xi}+c\delta
+    \switch
+    \mathcal{F} \sgn&=\pv\frac{2}{\im\omega}+c\delta
+\end{lralign}
+
+为了确定$c$，我们尝试引入另一个分布方程。由于
+$$\sgn(t)+\sgn(-t)=0$$
+利用傅里叶变换的反转性质，得到：
+\begin{lralign}
+    \mathcal{F} \sgn+\mathcal{F} \sgn(-t)&=0\\
+    \pv\frac{1}{\pi\im\xi}+c\delta-\pv\frac{1}{\pi\im\xi}+c\delta&=0\\
+    2c\delta&=0
+    \switch
+    \mathcal{F} \sgn+\mathcal{F} \sgn(-t)&=0\\
+    \pv\frac{2}{\im\omega}+c\delta-\pv\frac{2}{\im\omega}+c\delta&=0\\
+    2c\delta&=0
+\end{lralign}
+可见$c=0$，因此：
+\begin{lralign}
+    \mathcal{F} \sgn&=\pv\frac{1}{\pi\im\xi}
+    \switch
+    \mathcal{F} \sgn&=\pv\frac{2}{\im\omega}
+\end{lralign}
+
+利用
+$$u(t)=\frac{1}{2}(\sgn(t)+1)$$
+可得
+\begin{lralign}
+    \mathcal{F} u&=\frac{1}{2}\left(\pv\frac{1}{\pi\im\xi}+\delta\right)
+    \switch
+    \mathcal{F} u&=\pv\frac{1}{\im\omega}+\pi\delta
+\end{lralign}
+
+这与我们在\cref{cor:sgn}中得到的结果大致相同\footnote{在考试时请不要把$\pv$写在卷子上。}。
+
+\subsubsection{反比例函数}
+
+和前面的$\mathcal{F}\sgn$一样，$1/t$在原点附近不可积，因而应理解为主值分布$\pv\dfrac{1}{t}$.利用分布的傅里叶变换的对偶性，对任意$\varphi\in\mathcal{S}$有：
+\begin{lralign}
+    \left\langle\mathcal{F}\left(\pv\frac{1}{t}\right),\varphi\right\rangle
+    &=\left\langle\pv\frac{1}{t},\mathcal{F}\varphi\right\rangle\\
+    &=\pi\im\left\langle\mathcal{F}\sgn,\mathcal{F}\varphi\right\rangle\\
+    &=\pi\im\left\langle\sgn,\mathcal{F}\mathcal{F} \varphi\right\rangle\\
+    &=-\pi\im\left\langle\sgn,\varphi\right\rangle
+    \switch
+    \left\langle\mathcal{F}\left(\pv\frac{1}{t}\right),\varphi\right\rangle
+    &=\left\langle\pv\frac{1}{t},\mathcal{F}\varphi\right\rangle\\
+    &=\frac{\im}{2}\left\langle\mathcal{F}\sgn,\mathcal{F}\varphi\right\rangle\\
+    &=\frac{\im}{2}\left\langle\sgn,\mathcal{F}\mathcal{F} \varphi\right\rangle\\
+    &=-\pi\im\left\langle\sgn,\varphi\right\rangle
+\end{lralign}
+因此
+\begin{lralign}
+    \mathcal{F}\left(\pv\frac{1}{t}\right)&=-\pi\im\sgn(\xi)
+    \switch
+    \mathcal{F}\left(\pv\frac{1}{t}\right)&=-\pi\im\sgn(\omega)
+\end{lralign}
+这便严格给出了\cref{cor:1/t}中反比例函数的傅里叶变换；其中$1/t$始终应理解为主值分布。
+
+\subsubsection{多项式}
+
+利用分布的傅里叶变换的微分性质，可依次求出各阶单项式的傅里叶变换：
+\begin{lralign}
+    \mathcal{F}(t^n)&=\left(\frac{\im}{2\pi}\right)^n\delta^{(n)},\quad n=0,1,2,\ldots
+    \switch
+    \mathcal{F}(t^n)&=2\pi\im^n\delta^{(n)},\quad n=0,1,2,\ldots
+\end{lralign}
+事实上，若结论对$n$成立，则
+\begin{lralign}
+    \mathcal{F}(t^{n+1})&=\frac{\im}{2\pi}\left[\mathcal{F}(t^n)\right]'=\left(\frac{\im}{2\pi}\right)^{n+1}\delta^{(n+1)}
+    \switch
+    \mathcal{F}(t^{n+1})&=\im\left[\mathcal{F}(t^n)\right]'=2\pi\im^{n+1}\delta^{(n+1)}
+\end{lralign}
+因此，若$P(t)=\sum_{k=0}^{n}a_k t^k$为多项式，则
+\begin{lralign}
+    \mathcal{F}P&=\sum_{k=0}^{n}a_k\left(\frac{\im}{2\pi}\right)^k\delta^{(k)}
+    \switch
+    \mathcal{F}P&=2\pi\sum_{k=0}^{n}a_k\im^k\delta^{(k)}
+\end{lralign}
+可见，多项式的频谱集中在零频率处；次数越高，所对应的$\delta$分布的导数阶数也越高。
 
 \subsection{分布的傅里叶变换的连续性}\label{sub:continuity_of_distribution}
 
