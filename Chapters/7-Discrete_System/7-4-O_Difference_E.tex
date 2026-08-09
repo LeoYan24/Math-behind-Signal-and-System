@@ -87,19 +87,19 @@ $$y[1-N],y[2-N],\cdots,y[0]$$
 
 \subsection{基本解}\label{sub:h_solution}
 
-如果将方程的非齐次项视作系统的激励$e[n]$，将方程的解视作系统的响应$r[n]$，则齐次解对应系统的的零输入响应$y_{zi}[n]$，特解对应系统的零状态响应$y_{zs}[n]$。容易验证，零输入响应对激励具有线性性和时不变性，因此这种系统是一个线性时不变系统，并且我们很快会看到它还是因果的。
+如果将方程的非齐次项视作系统的激励$e[n]$，将方程的解视作系统的响应$r[n]$，则齐次解对应系统的的零输入响应$y_{\zi}[n]$，特解对应系统的零状态响应$y_{\zs}[n]$。容易验证，零输入响应对激励具有线性性和时不变性，因此这种系统是一个线性时不变系统，并且我们很快会看到它还是因果的。
 
 对于离散系统，通常认为激励是在$n=0$时刻施加的，此时这个激励就可能影响到上述初始值。连续系统中，我们用起始状态来描述系统的初始储能，从而避开了初值条件依赖于激励的问题。类似地，对于离散系统，定义：
 \begin{definition}[离散系统的初始值与零输入初始值]
     设离散系统的激励为$e[n]$，响应为$r[n]$，则系统的\textbf{初始值}为
     $$r[1-N],r[2-N],\cdots,r[0]$$
     系统的\textbf{零输入初始值}为
-    $$r_{zi}[1-N],r_{zi}[2-N],\cdots,r_{zi}[0]$$
+    $$r_{\zi}[1-N],r_{\zi}[2-N],\cdots,r_{\zi}[0]$$
 \end{definition}
 
 初始值可以分解为零输入初始值与零状态初始值（以$n=0$时刻为例）：
 \begin{align*}
-    r[0]=r_{zi}[0]+r_{zs}[0]
+    r[0]=r_{\zi}[0]+r_{\zs}[0]
 \end{align*}
 
 上一小节中，我们介绍了差分方程的经典解法，为了确定带初始值的差分方程的解，可以先求出含参数的通解，再代入初始值求解这些参数。
@@ -141,41 +141,41 @@ $$h[n]=\left(\sum_{i=1}^s P_i(n) \lambda_i^n \right)u[n]+\sum_{i=0}^{M-N}B_i\del
 
 在得到单位脉冲响应后，差分方程的解就可以通过卷积和来得到：
 \begin{align*}
-    r_{zs}[n]=(h*e)[n]=\sum_{m=-\infty}^{\infty}h[n-m]e[m]
+    r_{\zs}[n]=(h*e)[n]=\sum_{m=-\infty}^{\infty}h[n-m]e[m]
 \end{align*}
 我们又一次将非齐次方程的求解化为卷积的计算。因为这个原因，可以将$h[n]$称为差分方程的\textbf{基本解}。
 
 我们认为激励$e[n]$是在$n=0$时刻施加于系统的，因此$e[n]$和$h[n]$都是因果信号，上式简化为：
 \begin{align*}
-    r_{zs}[n]=\sum_{m=0}^{n}h[n-m]e[m]
+    r_{\zs}[n]=\sum_{m=0}^{n}h[n-m]e[m]
 \end{align*}
 
 假设给定了零输入初始值：
 \begin{align*}
-    r_{zi}[1-N],r_{zi}[2-N],\cdots,r_{zi}[0]
+    r_{\zi}[1-N],r_{\zi}[2-N],\cdots,r_{\zi}[0]
 \end{align*}
-则零输入响应$r_{zi}[n]$满足齐次方程：
+则零输入响应$r_{\zi}[n]$满足齐次方程：
 \begin{align*}
-    \sum_{k=0}^{N}a_k r_{zi}[n-k] = 0
+    \sum_{k=0}^{N}a_k r_{\zi}[n-k] = 0
 \end{align*}
 上一小节中已经得到齐次方程的通解：
 \begin{align*}
-    r_{zi}[n]=\sum_{i=1}^{s}P_i(n) \lambda_i^n=\sum_{i=1}^{s}\sum_{j=0}^{k_i-1}A_{ij} n^j \lambda_i^n
+    r_{\zi}[n]=\sum_{i=1}^{s}P_i(n) \lambda_i^n=\sum_{i=1}^{s}\sum_{j=0}^{k_i-1}A_{ij} n^j \lambda_i^n
 \end{align*}
-利用零输入初始值，可以得到关于零输入响应$r_{zi}[n]$的$N$个方程，从而解出$r_{zi}[n]$，最终与零状态响应$r_{zs}[n]$相加得到差分方程的解。
+利用零输入初始值，可以得到关于零输入响应$r_{\zi}[n]$的$N$个方程，从而解出$r_{\zi}[n]$，最终与零状态响应$r_{\zs}[n]$相加得到差分方程的解。
 
 综上，通过线性时不变系统的视角，我们得到了与微分方程类似的结果：
 \begin{theorem}
     设$h[n]$为差分方程
     $$\sum_{k=0}^{N}a_k y[n-k] = \sum_{l=0}^{M}b_l x[n-l]$$
-    的单位脉冲响应，并且有零状态初始值$r_{zs}[1-N],r_{zs}[2-N],\cdots,r_{zs}[0]$，则该差分方程的解为
+    的单位脉冲响应，并且有零状态初始值$r_{\zs}[1-N],r_{\zs}[2-N],\cdots,r_{\zs}[0]$，则该差分方程的解为
     \begin{align*}
-        y[n]=r_{zi}[n]+r_{zs}[n]=r_{zi}[n]+\sum_{m=0}^{n}h[n-m]x[m]
+        y[n]=r_{\zi}[n]+r_{\zs}[n]=r_{\zi}[n]+\sum_{m=0}^{n}h[n-m]x[m]
     \end{align*}
-    其中零输入响应$r_{zi}[n]$由零输入初始值唯一确定。
+    其中零输入响应$r_{\zi}[n]$由零输入初始值唯一确定。
 \end{theorem}
 
-尽管$N>1$时，差分方程的解不仅依赖于$r_{zs}[0]$，还依赖于$r_{zs}[1-N]$，但我们还是认为系统有马尔可夫性，这与\refsub{discrete_system_overview}中提到的马尔可夫性并不矛盾——在\refsub{difference_equation}的最后我们指出，这些初始值相当于$n=0$时刻$r_{zs}$的$0$到$N-1$阶差分，并且给定这些初始值后，$n>0$时刻的响应的确不依赖于$n<0$时刻的激励。
+尽管$N>1$时，差分方程的解不仅依赖于$r_{\zs}[0]$，还依赖于$r_{\zs}[1-N]$，但我们还是认为系统有马尔可夫性，这与\refsub{discrete_system_overview}中提到的马尔可夫性并不矛盾——在\refsub{difference_equation}的最后我们指出，这些初始值相当于$n=0$时刻$r_{\zs}$的$0$到$N-1$阶差分，并且给定这些初始值后，$n>0$时刻的响应的确不依赖于$n<0$时刻的激励。
 
 沿着\refsub{fundamental_solution}的思路，我们尝试由单位阶跃响应来求解单位脉冲响应，从而简化计算。
 
@@ -188,7 +188,7 @@ $$h[n]=\left(\sum_{i=1}^s P_i(n) \lambda_i^n \right)u[n]+\sum_{i=0}^{M-N}B_i\del
 \begin{proof}
     单位脉冲响应$h[n]$与单位阶跃响应$g[n]$分别满足以下方程：
     \begin{align*}
-        \sum_{k=0}^{N}a_k h[n-k] &= \delta[n],\sum_{k=0}^{N}a_k g[n-k]= u[n]
+        \sum_{k=0}^{N}a_k h[n-k] &= \delta[n],\quad\sum_{k=0}^{N}a_k g[n-k]= u[n]
     \end{align*}
     将$g[n]$的方程两边同时后向差分，得到\begin{align*}
     \sum_{k=0}^{N}a_k \nabla g[n-k] &= \nabla u[n]=\delta[n]
@@ -317,15 +317,24 @@ $$\left\{z\in\mathbb{C}\left||z|>r, r=\varlimsup_{n\to\infty}|x[n]|^{1/n}\right.
     \end{align*}
 \end{proof}
 
-我们对离散信号的终值定理做三点说明。
+下面对终值定理作三点说明。
 
-首先，通过将$X(z)$限制在单位圆上，可以由这个定理得到离散时间傅里叶变换的终值定理，因此可以用“\textbf{频域上的低频成分对应时域的稳态行为}”来解释这个定理。我们知道，对于连续系统，终值定理为$\lim_{t\to\infty}f(t)=\lim_{s\to 0}sF(s)$，与离散系统一样，它们的终值定理都是向变换域上的$0$频率点取极限。
+首先，令$z=\mathrm{e}^{\mathrm{i}\Omega}$，并使$z\to 1$，即$\Omega\to 0$，可见终值由变换域中的零频成分决定。这与连续时间终值定理$\lim_{t\to\infty}f(t)=\lim_{s\to 0}sF(s)$一致，都体现了“\textbf{低频成分对应时域的稳态行为}”。
 
-其次，终值定理的这种证明方法只适用于$H(z)$无本性奇点的情况，在\refsub{causual_static_delay}中我们曾使用过类似的方法。当然，也可以仿照\refsub{initial_and_final_value}中的思路，将$X(z)$分解为$z=1$处的一阶分式与$|z|>r$上的全纯函数的和，这个方法在$H(z)$的奇点不全为极点时同样适用。
+其次，上面的留数证明要求$X(z)$的奇点均为极点，类似的论证曾用于\refsub{causual_static_delay}。若存在其他类型的奇点，可仿照\refsub{initial_and_final_value}，将$X(z)$分解为$z=1$处的一阶分式与$|z|>r$上的全纯函数之和，从而得到相同结论。
 
-最后，在多数文献中，这个定理同样允许$z=1$不是奇点，但根据洛朗级数的收敛半径公式，当奇点全部位于单位圆内（不含边界）时，可以判断$X(z)$的收敛半径小于$1$，\textbf{从而$|x[n]|$的上极限为$0$}，终值定理仍然成立，但是我们仅需考虑非平凡情况。
+最后，多数文献也允许$z=1$不是奇点。若$X(z)$的奇点都严格位于单位圆内，则其收敛域的内边界半径$r<1$。由洛朗级数的收敛半径公式，
+\[\varlimsup_{n\to\infty}|x[n]|^{1/n}=r<1,\]
+故$x[n]\to 0$，终值定理仍成立，其终值为零。反之，若奇点都位于单位圆外，则$r>1$，信号必然无界，且极限未必存在。更一般地，在已知收敛域方向的前提下，奇点到原点的距离决定信号的指数包络，奇点的辐角决定振荡频率，奇点的阶数则决定多项式包络。因此，与\refsub{converge_abscissa}类似，可以由$X(z)$的奇点判断$x[n]$的时域特性；这一结论也可由\refsub{laurant_series}中的洛朗级数理论严格说明。
 
-进一步，当单位圆外有奇点时，还可以判断$|x[n]|$的上极限为$\infty$，\textbf{$x[n]$无界但极限未必存在}，此时终值定理不成立。可见，类似于\refsub{converge_abscissa}，我们还是\textbf{能够根据$X(z)$在$z$平面上的奇点情况来判断原信号的时域特性}。
+\begin{example}
+    考察单边z变换
+    \[X_m(z)=\frac{1}{(1-az^{-1})^m}=\frac{z^m}{(z-a)^m},\qquad |z|>|a|,\]
+    其中$a=\rho\mathrm{e}^{\mathrm{i}\Omega}\neq 0$。对$(1-az^{-1})^{-m}$做泰勒级数展开可得：
+    \[x_m[n]=\binom{n+m-1}{m-1}a^n u[n]
+    =\binom{n+m-1}{m-1}\rho^n\mathrm{e}^{\mathrm{i}\Omega n}u[n].\]
+    $X_m(z)$仅在$z=a$处有一个$m$重极点。极点的模$\rho$控制指数包络：$\rho<1$时信号衰减，$\rho=1$时没有指数衰减或增长，$\rho>1$时信号增长；极点的辐角$\Omega$给出振荡频率；极点的阶数$m$产生$n^{m-1}$量级的多项式包络。例如，$m=1,a=1/2$时$x[n]=(1/2)^n u[n]$指数衰减，而$m=2,a=1/2$时$x[n]=(n+1)(1/2)^n u[n]$带有一次多项式包络。对于实信号，共轭极点成对出现，并合成为相应的正弦或余弦振荡。
+\end{example}
 
 \subsection{常系数线性差分方程的单边z变换解法}\label{sub:z_difference_equation}
 

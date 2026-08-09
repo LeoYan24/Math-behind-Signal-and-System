@@ -4,26 +4,24 @@
 
 \begin{definition}[希尔伯特变换]
     函数$f:\mathbb{R}\to\mathbb{C}$的\textbf{希尔伯特变换}(Hilbert transform)定义为
-    \[\mathcal{H} f(x)=\frac{1}{\pi}\text{p.v.}\int_{-\infty}^{\infty}\frac{f(y)}{x-y}\,dy=\left(f*\frac{1}{\pi x}\right)(x)\]
-    其中p.v.表示柯西主值意义下的积分\cite{hilbert_transform}，即：
-    \[\text{p.v.}\int_{-\infty}^{\infty}\frac{f(y)}{x-y}\,dy=\lim_{\epsilon\to 0^+}\left(\int_{-\infty}^{x-\epsilon}\frac{f(y)}{x-y}\,dy+\int_{x+\epsilon}^{\infty}\frac{f(y)}{x-y}\,dy\right)\]
-    称$f$与$\mathcal{H} f$为\textbf{希尔伯特变换对}，记为$f\overset{\mathcal{H} }{\longleftrightarrow} \mathcal{H} f$。
+    \[\mathcal{H} f(x)=\frac{1}{\pi}\text{p.v.}\int_{-\infty}^{\infty}\frac{f(y)}{x-y}\,dy=\left(f*\pv\frac{1}{\pi x}\right)(x)\]
+    称$f$与$\mathcal{H} f$为\textbf{希尔伯特变换对}，记为$f\overset{\mathcal{H} }{\longleftrightarrow} \mathcal{H} f$.
 \end{definition}
 
-希尔伯特变换既可以看作积分变换，又可以看作滤波器，因为它是函数与$1/\pi t$的卷积。希尔伯特变换在信号处理领域有着重要的应用，例如构造解析信号，将在本小节最后介绍。
+希尔伯特变换既可以看作积分变换，又可以看作滤波器，因为它是函数与分布$\pv 1/\pi t$的卷积（多数文献中略去了$\pv$的符号，但定义是一致的）。希尔伯特变换在信号处理领域有着重要的应用，例如构造解析信号，将在本小节最后介绍。
 
 \begin{remark}
-    一些文献中\cite{brad_osgood_ee261}，希尔伯特变换为$-1/\pi t$与$f(t)$的卷积，我们很快将看到这就是本书中的希尔伯特逆变换，它们没有本质区别；一些文献中\cite{signal_systems}，直接将希尔伯特变换记为$\hat{f}$，这样做有一定的好处，例如书写简便，但它与傅里叶变换的记号冲突，因此本书中不采用这种记号。
+    一些文献中\cite{brad_osgood_ee261}，希尔伯特变换为$-\pv 1/\pi t$与$f(t)$的卷积，我们很快将看到这就是本书中的希尔伯特逆变换，它们没有本质区别；一些文献中\cite{signal_systems}，直接将希尔伯特变换记为$\hat{f}$，这样做有一定的好处，例如书写简便，但它与傅里叶变换的记号冲突，因此本书中不采用这种记号。
 \end{remark}
 \begin{remark}
     我们没有对$f$所属的函数空间做出限制。实际上，希尔伯特变换可以定义在多种函数空间上，经典的希尔伯特变换建立在$L^1(\mathbb{R})$上，并且要求函数$f$是赫德尔连续的（我们没有介绍这个概念），希尔伯特变换还可以定义在$L^p(\mathbb{R}),1<p<\infty$上，或者更广义的分布空间上。专著\cite{hilbert_transform}详细讨论了$f$的范围。
 \end{remark}
 
-将函数$\dfrac{1}{x}$作为缓增的正则分布，可以求出其傅里叶变换：
+$\pv\dfrac{1}{x}$作为缓增的正则分布，我们在\refsub{normal_distribution}中推导过其傅里叶变换：
 \begin{lralign}
-    \mathcal{F} \left[\frac{1}{\pi x}\right](\xi)= -\mathrm{i}\,\text{sgn}(\xi)
+    \mathcal{F} \left[\pv\frac{1}{\pi x}\right](\xi)= -\mathrm{i}\,\text{sgn}(\xi)
     \switch
-    \mathcal{F} \left[\frac{1}{\pi x}\right](\omega)= -\mathrm{i}\,\text{sgn}(\omega)
+    \mathcal{F} \left[\pv\frac{1}{\pi x}\right](\omega)= -\mathrm{i}\,\text{sgn}(\omega)
 \end{lralign}
 
 借助这个结论，我们可以通过傅里叶变换来研究希尔伯特变换的性质。由分布与函数的卷积定理（\cref{thm:distribution_func_conv}），可以得到：
@@ -34,8 +32,8 @@
 \[\mathcal{H} \mathcal{H} f=-f\]
 因此，希尔伯特变换的逆变换为：
 \begin{definition}[希尔伯特逆变换]
-    设$f\in L^1(\mathbb{R})$，则$f$的\textbf{希尔伯特逆变换}定义为
-    \[\mathcal{H} ^{-1} f(x)=-\mathcal{H} f(x)=-\frac{1}{\pi}\text{p.v.}\int_{-\infty}^{\infty}\frac{f(y)}{x-y}\,dy=-\left(f*\frac{1}{\pi x}\right)(x)\]
+    函数$f:\mathbb{R}\to\mathbb{C}$的\textbf{希尔伯特逆变换}定义为
+    \[\mathcal{H} ^{-1} f(x)=-\mathcal{H} f(x)=-\frac{1}{\pi}\text{p.v.}\int_{-\infty}^{\infty}\frac{f(y)}{x-y}\,dy=-\left(f*\pv\frac{1}{\pi x}\right)(x)\]
 \end{definition}
 至此可以看出，希尔伯特变换对是一一的，因此记号$f\overset{\mathcal{H} }{\longleftrightarrow} \mathcal{H} f$是合理的。
 
@@ -191,29 +189,24 @@ $$\mathcal{F}[\text{Re}(g(t))]=\frac{\mathcal{F}g(\xi)+\mathcal{F}\overline{g}(\
 
 解析信号在频域中仅含正频率成分，可视为“频域因果”信号；相应地，其时域实部与虚部构成希尔伯特变换对。由此可类比猜想：若线性时不变系统在时域因果，则其频率响应的实部与虚部也应满足同样的希尔伯特变换关系。下面给出证明。
 
-设$h(t)$是因果线性时不变系统的单位冲激响应。记其频率响应为$H(\omega)=\mathcal{F}h(\omega)$。由$h(t)=u(t)h(t)$，可得：
+设$h(t)$是因果线性时不变系统的单位冲激响应，频率响应为$H(\omega)$.由$h(t)=u(t)h(t)$，可得：
 \begin{align*}
     H(\omega)&=\mathcal{F} [h(t)u(t)](\omega)\\
-    &=\frac{1}{2\pi}H(\omega)*\left(\pi\delta(\omega)+\frac{1}{\mathrm{i}\omega}\right)\\
-    &=\frac{1}{2}H(\omega)+\frac{1}{2\pi \mathrm{i}\omega}*H(\omega)
+    &=\frac{1}{2\pi}H(\omega)*\left(\pi\delta(\omega)+\pv\frac{1}{\mathrm{i}\omega}\right)\\
+    &=\frac{1}{2}H(\omega)+\pv\frac{1}{2\pi \mathrm{i}\omega}*H(\omega)
 \end{align*}
 
 考察上式的实部和虚部，记$H(\omega)=R(\omega)+\im I(\omega)$，则有：
 \begin{align*}
-    R(\omega)&=\frac{1}{2}R(\omega)-\frac{1}{2\pi \omega}*I(\omega)\\
-    I(\omega)&=\frac{1}{2}I(\omega)+\frac{1}{2\pi \omega}*R(\omega)
+    R(\omega)&=\frac{1}{2}R(\omega)-\pv\frac{1}{2\pi \omega}*I(\omega)\\
+    I(\omega)&=\frac{1}{2}I(\omega)+\pv\frac{1}{2\pi \omega}*R(\omega)
 \end{align*}
-整理可得：
-\begin{align*}
-    &R(\omega)=-\frac{1}{\pi \omega}*I(\omega)=\mathcal{H} ^{-1}I(\omega)\\
-    &I(\omega)=\frac{1}{\pi \omega}*R(\omega)=\mathcal{H} R(\omega)
-\end{align*}
-也就是以下定理：
+整理以上两式即得：
 \begin{theorem}[希尔伯特变换关系]
     设$h(t)$为因果线性时不变系统的单位冲激响应，$H(\omega)=R(\omega)+\im I(\omega)$为系统的频率响应，则$R(\omega)$与$I(\omega)$构成希尔伯特变换对，即：
     \begin{align*}
-    &R(\omega)=-\frac{1}{\pi \omega}*I(\omega)=\mathcal{H} ^{-1}I(\omega)\\
-    &I(\omega)=\frac{1}{\pi \omega}*R(\omega)=\mathcal{H} R(\omega)
+    &R(\omega)=-\pv\frac{1}{\pi \omega}*I(\omega)=\mathcal{H} ^{-1}I(\omega)\\
+    &I(\omega)=\pv\frac{1}{\pi \omega}*R(\omega)=\mathcal{H} R(\omega)
 \end{align*}
 将这种关系称为\textbf{希尔伯特变换关系}(Hilbert transform relation)。
 \end{theorem}

@@ -2,8 +2,11 @@
 
 \subsection{频率响应特性}\label{sub:discrete_system_freq_response}
 
-离散系统的系统函数$H(z)$是单位脉冲响应$h[n]$的z变换。在系统稳定的情况下，$h[n]\in l^1$，此时可以对单位脉冲响应做离散时间傅里叶变换，得到系统的\textbf{频率响应特性}，记为$H(\mathrm{e}^{\mathrm{i}\Omega})$，它是系统函数在单位圆上的限制，即
-$$H(\mathrm{e}^{\mathrm{i}\Omega})=H(z)|_{z=\mathrm{e}^{\mathrm{i}\Omega}}$$
+离散系统的系统函数$H(z)$是单位脉冲响应$h[n]$的z变换。在系统稳定的情况下，$h[n]\in l^1$，此时可以对单位脉冲响应做离散时间傅里叶变换，得到系统的\textbf{频率响应特性}，记为$H(\mathrm{e}^{\mathrm{i}\Omega})$，它是系统函数在单位圆上的限制，也是$h[n]$的DTFT，即
+$$H(\mathrm{e}^{\mathrm{i}\Omega})=H(z)|_{z=\mathrm{e}^{\mathrm{i}\Omega}}=\DTFT(h[n])(\e^{\im\Omega})$$
+
+利用DTFT的时域卷积和定理，我们有：
+$$R(\e^{\im\Omega})=H(\e^{\im\Omega})E(\e^{\im\Omega})$$
 
 类似于连续系统，我们仍然将$|H(\mathrm{e}^{\mathrm{i}\Omega})|$称为系统的\textbf{幅频特性}，将$\arg H(\mathrm{e}^{\mathrm{i}\Omega})$称为系统的\textbf{相频特性}，我们仍将相频特性记为$\varphi(\Omega)$。我们同样可以对离散系统的相频特性做解卷绕处理，见\refsub{distortion}，但简洁起见，本章中不讨论$\varphi(\Omega)$跳变的情况。
 
