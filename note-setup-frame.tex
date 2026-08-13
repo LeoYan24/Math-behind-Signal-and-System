@@ -91,6 +91,20 @@
 \declaretheorem[style=solutionstyle, name=Solution, numbered=yes, numberwithin=section]{solution}
 \declaretheorem[style=solutionstyle, name=Solution, numbered=no]{solution*}
 
+% Hyperref destinations must remain unique when theorem counters reset in
+% every section.  Include the section destination in each theorem anchor.
+\renewcommand*{\theHtheorem}{\theHsection.\arabic{theorem}}
+\renewcommand*{\theHproposition}{\theHsection.\arabic{proposition}}
+\renewcommand*{\theHcorollary}{\theHsection.\arabic{corollary}}
+\renewcommand*{\theHlemma}{\theHsection.\arabic{lemma}}
+\renewcommand*{\theHclaim}{\theHsection.\arabic{claim}}
+\renewcommand*{\theHdefinition}{\theHsection.\arabic{definition}}
+\renewcommand*{\theHexample}{\theHsection.\arabic{example}}
+\renewcommand*{\theHproblem}{\theHsection.\arabic{problem}}
+\renewcommand*{\theHremark}{\theHsection.\arabic{remark}}
+\renewcommand*{\theHnote}{\theHsection.\arabic{note}}
+\renewcommand*{\theHsolution}{\theHsection.\arabic{solution}}
+
 \usepackage[most]{tcolorbox}
 
 \newcommand{\newtcbenvironment}[2]{
