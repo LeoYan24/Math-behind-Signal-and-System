@@ -249,7 +249,7 @@ $$m^*\left(\bigsqcup_{k=1}^{\infty}E_k\right)\neq\sum_{k=1}^{\infty}m^*(E_k)$$
 
 可见，在有界区间上，\textbf{勒贝格积分是黎曼积分的推广}。
 
-下面依次介绍三个用于交换极限与积分顺序的重要结果。前两个定理首先针对非负函数，控制收敛定理则适用于一般可积函数列。
+下面依次介绍三个用于交换极限与积分顺序的重要结果。前两个定理针对非负函数，控制收敛定理则适用于一般可积函数列。
 
 \begin{theorem}[Levi单调收敛定理]
     设$\{f_n:E\to[0,+\infty)\}$是递增的非负可测函数列，且$f_n\to f,\mathrm{a.e.}$，则
@@ -350,15 +350,30 @@ Fatou引理给出了积分与下极限之间的基本不等式，也是证明其
     \[l^{\infty}:=\left\{\{x_n\}_{n=0}^{\infty} \left|\exists M<\infty,|x_n|\leq M,\forall n\in \mathbb{N}\right.\right\}\]
 \end{definition}
 
-不难证明以下引理：
 \begin{lemma}
     $\forall a,b\in\mathbb{C}$，当$p\geq 1$时，有
-    \[|a+b|^p\leq 2^{p-1}\max\{|a|^p,|b|^p\}\leq 2^{p-1}(|a|^p+|b|^p)\]
+    \[|a+b|^p\leq 2^{p-1}(|a|^p+|b|^p)\leq 2^p\max\{|a|^p,|b|^p\}\]
     当$0<p<1$时，有
     \[|a+b|^p\leq |a|^p+|b|^p\]
 \end{lemma}
+\begin{proof}
+    由三角不等式，$|a+b|\leq |a|+|b|$。当$p\geq 1$时，函数$x\mapsto x^p$在$[0,\infty)$上是凸函数，因此
+    \[\left(\frac{|a|+|b|}{2}\right)^p\leq \frac{|a|^p+|b|^p}{2}.\]
+    从而
+    \[|a+b|^p\leq (|a|+|b|)^p\leq 2^{p-1}(|a|^p+|b|^p)\leq 2^p\max\{|a|^p,|b|^p\}.\]
 
-由此可以推出以上几种空间都是线性空间。此外，在$0<p<\infty$时，$L^p(E)$和$l^p$空间是度量空间，它们的度量分别为
+    当$0<p<1$时，若$|a|+|b|=0$，结论显然成立；否则令
+    \[\lambda=\frac{|a|}{|a|+|b|}\in[0,1].\]
+    由于$0<p<1$，有$\lambda^p\geq\lambda$及$(1-\lambda)^p\geq 1-\lambda$，故
+    \begin{align*}
+        |a|^p+|b|^p
+        &=(|a|+|b|)^p\bigl(\lambda^p+(1-\lambda)^p\bigr)\\
+        &\geq (|a|+|b|)^p
+        \geq |a+b|^p.
+    \end{align*}
+\end{proof}
+
+由此可以推出以上几种空间都是线性空间。此外，在$0<p<1$时，$L^p(E)$和$l^p$空间是度量空间，它们的度量分别为
 \[d(f,g)=\int_{E}|f-g|^p\,dm,\quad d(\{x_n\},\{y_n\})=\sum_{n=0}^{\infty}|x_n-y_n|^p\]
 
 不过，$0<p<1$的情况不是我们的主要目标，因为它们不构成范数空间。下面，我们给出以上几种空间在$1\leq p \leq \infty$时的范数定义；由Minkowski不等式可知，这些范数满足三角不等式，因而相应的空间是线性赋范空间。

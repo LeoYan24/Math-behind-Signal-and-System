@@ -4,14 +4,9 @@
 \usepackage{varwidth}
 \usepackage{dsfont}
 \usepackage{fix-cm}
-% Explicitly define all CJK main-font shapes used by theorem text.
-% SimSun has no native bold/italic faces, so use the standard Windows
-% companion fonts instead of letting LaTeX fall back with a font warning.
-\setCJKmainfont{SimSun}[
-    BoldFont=SimHei,
-    ItalicFont=KaiTi,
-    BoldItalicFont=SimHei
-]
+% ctex's Windows fontset maps SimSun bold text to SimHei, but does not
+% declare the combined bold-italic shape.  Make that fallback explicit.
+\DeclareFontShape{TU}{SimSun(0)}{b}{it}{<->ssub * SimSun(0)/b/n}{}
 \usepackage{array}
 \usepackage{booktabs}
 \usepackage{float}
@@ -24,7 +19,7 @@
 \usepackage{centernot}
 \usepackage{silence}
 \usepackage{biblatex}
-\usepackage{fontawesome5}
+\usepackage{ccicons}
 \addbibresource{reference.bib}
 \usetikzlibrary{calc}
 \allowdisplaybreaks
