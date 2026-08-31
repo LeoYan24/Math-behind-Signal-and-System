@@ -1,355 +1,402 @@
 \section{功率信号}\label{sec:Power_Signal}
 
-回顾功率信号的定义：
-\begin{definition}[功率信号]
-能量无限而功率非零有限的信号称为\textbf{功率信号}：
-\[\int_{-\infty}^{\infty}| f(x)| ^2\,dx=\infty,\quad 0<\lim_{T \to \infty}\frac{1}{T}\int_{-T/2}^{T/2}| f(x)|^2  \,dx<\infty\]
+功率信号是满足 $0<P_f<\infty$ 的信号，其中
+$$
+    P_f=\lim_{T\to\infty}\frac1T\int_{-T/2}^{T/2}|f(t)|^2\,dt
+$$
+
+为了便于线性运算，下面研究具体的信号空间时也包含零信号，但功率信号并不因此构成一个线性空间，因为两个功率信号之和的功率未必有定义。有限能量信号的平均功率为零；反过来，零平均功率并不保证能量有限。例如，$f(x)=0,x<1;f(x)=x^{-0.5},x\ge 1$，则$\frac{1}{T}\int_{-T/2}^{T/2}| f(x)|^2  \,dx$与$\frac{\ln T}{T}$同阶。。
+
+周期信号是功率信号的重要例子。若信号 $f$ 的周期为 $T_0$，且一个周期内的能量
+
+$$
+    E_{T_0}=\int_0^{T_0}|f(t)|^2\,dt
+$$
+
+满足 $0<E_{T_0}<\infty$，则
+
+$$
+    P_f=\frac{E_{T_0}}{T_0}.
+$$
+
+在周期信号的傅里叶分析中，复指数与正弦、余弦是基本成分。有限个这样的成分叠加，既包括有限谐波的周期信号，也包括频率成分之间没有公周期的信号，例如
+$$
+    \sin(2\pi t)+\sin(2\sqrt2\pi t).
+$$
+这使\textbf{有限频率叠加成为研究功率信号的一类有代表性的对象}。本节以有限个复指数信号的线性组合为主要研究对象，将其组成的空间记为 $\mathcal{P}$。我们从时间平均出发，建立它们的互功率、相关函数及功率谱，并说明有限时间截短所得的能量谱如何趋于功率谱。
+
+\subsection{\texorpdfstring{$\mathcal{P}$空间}{P空间}}\label{sub:power_signal}
+
+\begin{definition}
+    扩展\cref{def:trinomial}的定义，将任意频率的复指数信号的有限线性组合构成的集合记为
+    $$
+        \mathcal{P}=\left\{
+        f(t)=\sum_{k=1}^{N}a_k\mathrm e^{2\pi\mathrm i\xi_k t}:
+        N\in\mathbb N^*,\ a_k\in\mathbb C,\ \xi_k\in\mathbb R
+        \right\}.
+    $$
 \end{definition}
 
-在\refsub{Lp_space}中，我们约定了：能量为0的信号也属于能量信号，功率为0的信号（即能量信号）也属于功率信号。在这个约定下，能量信号即$L^2(\mathbb{R})$，而功率信号也成为线性空间。本节就来讨论功率信号空间的结构，以及如何通过傅里叶变换来进行能量与功率的谱分析。
+频率 $\xi_k$ 不要求为某个固定基频$\xi_0$的整数倍，否则$f$ 以 $1/\xi_0$ 为周期。
 
-\subsection{*功率信号及其数学背景}\label{sub:power_signal}
+\begin{proposition}[平均正交性]
+    对任意 $\xi,\eta\in\mathbb R$，有
+    $$
+        \lim_{T\to\infty}\frac1T\int_{-T/2}^{T/2}
+        \mathrm e^{2\pi\mathrm i\xi t}
+        \overline{\mathrm e^{2\pi\mathrm i\eta t}}\,dt
+        =\begin{cases}
+            1, & \xi=\eta,   \\
+            0, & \xi\ne\eta.
+        \end{cases}
+    $$
+\end{proposition}
+\begin{proof}
+    若 $\xi=\eta$，被积函数恒为1。若 $\xi\ne\eta$，直接积分得
+    $$
+        \frac1T\int_{-T/2}^{T/2}\mathrm e^{2\pi\mathrm i(\xi-\eta)t}\,dt
+        =\frac{\sin\bigl(\pi(\xi-\eta)T\bigr)}
+        {\pi(\xi-\eta)T}\longrightarrow0.
+    $$
+\end{proof}
 
-如果认为功率为0的信号也是功率信号，则功率信号构成线性空间，我们暂时以$B^2$记这个空间，稍后我们会看到这样做的原因。一个自然的问题是：它是否构成线性赋范空间，甚至内积空间？
-
-为了使它成为线性赋范空间，首先要定义功率信号的范数，然而从它的定义中我们找不到与$L^p(\mathbb{R})$空间的关联。一种自然的想法是，定义
-$$\|f\|_{\mathrm{pwr}}=\sqrt{P_f}=\left(\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}|f(x)|^2\,dx\right)^{1/2}$$
-其中$P_f$表示信号$f$的功率。$\|\cdot\|_{\mathrm{pwr}}$并不构成范数，它仅仅是\textbf{半范数}(seminorm)，满足：\begin{itemize}
-    \item 非负性：$\|f\|_{\mathrm{pwr}}\geq 0$
-    \item 齐次性：$\|\alpha f\|_{\mathrm{pwr}}=|\alpha|\|f\|_{\mathrm{pwr}}$
-    \item 次可加性：$\|f+g\|_{\mathrm{pwr}}\leq\|f\|_{\mathrm{pwr}}+\|g\|_{\mathrm{pwr}}$
-\end{itemize}
-它不构成$B^2$上的范数，因为它不具有同一性：
-$$\|f\|_{\mathrm{pwr}}=0\centernot\implies f=0$$
-因为能量信号空间$L^2(\mathbb{R})\in B^2$，而能量信号的功率均为0。
-
-不过，我们其实已经处理过了一个半范数，这一次也可以使用同样的办法。对于$L^p(\mathbb{R})(1\leq p\leq\infty)$空间，
-$$f=0,\mathrm{a.e.}\iff\|f\|_p=0$$
-也就是说，$\|\cdot\|_p$也应该是半范数才对，但在\refsub{Lp_space}中，我们认为
-$$f=g,\mathrm{a.e.}\iff f\sim g$$
-$f\sim g$是一种等价关系，记$f$所在的等价类为$[f]_{\sim}$，在这个等价关系下，有
-$$\left\|[f]_{\sim}\right\|_{p}=0\iff f=0,\mathrm{a.e.}\iff f\sim 0$$
-也就是说，$L^p(\mathbb{R})$实际上是$p$次可积函数空间的\textbf{商空间}(factor space)，商空间中元素的范数定义为该元素的任意一个代表元的范数，在这个意义下，$L^p(\mathbb{R})$构成线性赋范空间，只是我们通常不特意区分函数$f$及其所在的等价类$[f]_{\sim}$，也不为商空间和代表元引入额外的记号。
-
-类似地，在功率信号空间中，我们不妨在$B^2$中定义以下等价关系\footnote{功率为零并不意味着是能量信号，例如，$f(x)=0,x<1;f(x)=x^{-0.5},x\ge 1$，则$\frac{1}{T}\int_{-T/2}^{T/2}| f(x)|^2  \,dx$与$T^{-0.5}$同阶。}：
-$$f\sim g\iff \|f-g\|_{\mathrm{pwr}}=0$$
-
-这样，通过功率值定义的半范数也就成为了范数。$B^2$甚至还是一个内积空间，它的内积定义为：
-\begin{definition}[$B^2$的内积]
-    设$f,g\in B^2$，它们的内积定义为
-    $$(f,g)_{\mathrm{pwr}}=\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}f\cdot\overline{g}\,dm$$
-\end{definition}
-
-这个内积是良定义的。已知$0\le P_f,P_g<\infty$，由积分的柯西-施瓦兹不等式，有：
+下面验证$\mathcal{P}$是功率信号中的线性空间：$\forall f,g\in\mathcal{P}$，取两者的频率的并集$\Lambda$，则
 \begin{align*}
-    (f,g)_{\mathrm{pwr}}&=\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}f\cdot\overline{g}\,dm\\
-    &\leq \lim_{T\to\infty}\frac{1}{T}\left(\int_{-T/2}^{T/2}|f|^2\,dm\cdot\int_{-T/2}^{T/2}|g|^2\,dm\right)^{1/2}\\
-    &=\left(\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}|f|^2\,dm\right)^{1/2}\cdot\left(\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}|g|^2\,dm\right)^{1/2}\\
-    &=\sqrt{P_f\cdot P_g}<\infty
+    \lim_{T\to\infty}\frac1T\int_{-T/2}^{T/2}f(t)\overline{g(t)}\,dt
+     & =\sum_{\xi,\eta\in\Lambda}a_\xi\overline{b_\eta}
+    \lim_{T\to\infty}\frac1T\int_{-T/2}^{T/2}
+    \mathrm e^{2\pi\mathrm i(\xi-\eta)t}\,dt=\sum_{\xi\in\Lambda}a_\xi\overline{b_\xi}.
 \end{align*}
+特别地，
+$$
+    P_f=\sum_{\xi\in\Lambda}|a_\xi|^2.
+$$
 
-内积所需要满足的其余性质是容易证明的，这里不再一一列举。注意到$\sqrt{P_f\cdot P_g}=\|f\|_{\text{pwr}}\cdot\|g\|_{\text{pwr}}$，我们同时验证了该内积空间中的柯西-施瓦兹不等式。
-
-数学上，我们将内积空间$B^2$称为\textbf{贝希科维奇空间}(Besicovitch space)，它与我们修正定义后的功率信号空间是等价的概念。
-
-很容易从功率信号联想到周期信号：周期信号在时间上不断重复，如果将一个周期信号在一个周期内的功率定义为$E_T$，则它在全时域上的平均功率$P$就等于$E_T$。事实上，这也是定义“功率”这一概念的核心动机，因为\textbf{在足够大的时间尺度上，周期信号的能量正比于时间}，它们的比值也就应当具备物理意义。
-
-不过，功率信号未必是周期信号。通常来说，只要一个信号中含有周期性的成分，它就是功率信号，例如$\sin (2\pi t)+\sin(2\sqrt{2}\pi t)$，我们称这种信号是\textbf{几乎周期的}(almost periodic)：
-\begin{definition}[几乎周期函数]\label{def:almost_periodic}
-    称函数$f$是几乎周期函数，如果
-    $$\forall\epsilon>0,\exists T>0,\forall x\in\mathbb{R},|f(x+T)-f(x)|<\epsilon$$
-\end{definition}
-
-我们总是可以取适当的周期信号使得它与这种信号充分靠近，例如$\sin (2\pi t)+\sin(2\sqrt{2}\pi t)$与周期信号$\sin(2\pi t)+\sin(2\pi\cdot 1.414t)$非常相似，后者以$707$为周期。这种近似的可行性是由$\mathbb{Q}$在$\mathbb{R}$中的稠密性保证的。
-
-几乎周期函数理论由丹麦数学家波尔(Harald Bohr)开创。1930年，维纳在其论文《Generalized Harmonic Analysis》中开创了用时间平均研究功率谱的先河，为两年后贝希科维奇的著作《Almost Periodic Functions》奠定了基础。在这一著作中，贝希科维奇扩展了波尔的几乎周期函数理论，定义了各类几乎周期函数$B^p$，前面通过商空间构造内积空间$B^2$的过程就是在这本著作中首次提出的。\textbf{贝希科维奇空间实际上是几乎周期函数空间的完备化扩张}，不过工程上处理的通常只是其中的几乎周期函数，此类函数的频谱仅有冲击项$\delta$及其平移。
-
-\subsection{能量谱与功率谱}\label{sub:power_spectrum}
-
-简便起见，这两个小节中，我们将使用频率形式的傅里叶变换。
-
-对于能量信号$f\in L^2(\mathbb{R})$，如果它还是绝对可积的，即$f\in L^1(\mathbb{R})$，则它的傅里叶变换$F(\xi)$存在，并且满足帕塞瓦尔定理（\cref{thm:plancherel}）：
-\begin{align*}
-    \int_{-\infty}^{\infty}|f(t)|^2\,dt=\int_{-\infty}^{\infty}|F(\xi)|^2\,d\xi
-\end{align*}
-
-因此，$f\in L^1(\mathbb{R})\cap L^2(\mathbb{R})$的\textbf{能量可以看作是分布在各个频率上的}。类比概率密度函数，我们定义：
-
-\begin{definition}[能量谱密度]
-    $f\in L^1(\mathbb{R})\cap L^2(\mathbb{R})$的\textbf{能量谱密度}(energy spectral density,ESD)为$S_f(\xi)=|F(\xi)|^2$。
-\end{definition}
-图像$|F(\xi)|^2-\xi$与$\xi$轴围成的面积就是$f$的功率。
-
-对于功率信号$f\in B^2$，为了使用帕塞瓦尔定理，可以考虑功率信号的截短。本小节中，总是用记号$f_T$来表示时域功率信号$f$的截短：
-$$f_T(t)=f(t)\chi_{[-T/2,T/2]}$$
-显然，$f_T(t)\in L^1(\mathbb{R})\cap L^2(\mathbb{R})$，因此可以定义它的傅里叶变换，记为$F_T(\xi)$。对$f_T(t)$使用帕塞瓦尔定理，有：
-$$E_{f_T}=\int_{\mathbb{R}}|f_T|^2\,dm=\int_{\mathbb{R}}|F_T|^2\,dm$$
-
-这样，在$T\to\infty$时，$E_{f_T}$的时间平均值就是$f$的功率：
-$$P_f=\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}|f(t)|^2\,dt=\lim_{T\to\infty}\frac{E_{f_T}}{T}=\lim_{T\to\infty}\frac{1}{T}\int_{\mathbb{R}}|F_T(\xi)|^2\,d\xi$$
-如果能交换极限与积分的顺序，则
-$$P_f=\int_{\mathbb{R}}\lim_{T\to\infty}\frac{|F_T(\xi)|^2}{T}\,d\xi$$
-这样，\textbf{功率也可以看作是分布在各个频率上的}：
-
-\begin{definition}[功率谱密度]
-    功率信号$f$的\textbf{功率谱密度}(power spectral density,PSD)为
-    $$S_f(\xi)=\lim_{T\to\infty}\frac{|F_T(\xi)|^2}{T}$$
-\end{definition}
-
-$S_f(\xi)$的计算是非常麻烦的，并且它还常常含有冲击项$\delta$。下面的例子说明了这一点：
-
-\begin{example}
-    设功率信号$f(t)=\cos (2\pi t)$，则$f_T(t)=\chi_{[-T/2,T/2]}\cos (2\pi t)$，它的傅里叶变换为\begin{align*}
-        F_T(\xi)&=\int_{-T/2}^{T/2}\cos (2\pi t) \mathrm{e}^{-2\pi\mathrm{i}\xi t}\,dt\\
-        &=\int_{-T/2}^{T/2}\frac{\mathrm{e}^{2\pi\mathrm{i}t}+\mathrm{e}^{2\pi\mathrm{i}t}}{2}\mathrm{e}^{-2\pi\mathrm{i}\xi t}\,dt\\
-        &=\frac{1}{2}\int_{-T/2}^{T/2}\left(\mathrm{e}^{-2\pi\mathrm{i}t(\xi-1)}+\mathrm{e}^{-2\pi\mathrm{i}t(\xi+1)}\right)\,dt\\
-        &=-\frac{1}{2}\left(\frac{1}{2\pi\mathrm{i}(\xi-1)}\evalat{\mathrm{e}^{-2\pi\mathrm{i}t(\xi-1)}}{-T/2}{T/2}+\frac{1}{2\pi\mathrm{i}(\xi+1)}\evalat{\mathrm{e}^{-2\pi\mathrm{i}t(2\pi\xi+1)}}{-T/2}{T/2}\right)\\
-        &=\frac{1}{4\pi\mathrm{i}(\xi-1)}\left(\mathrm{e}^{\pi\mathrm{i}T(\xi-1)}-\mathrm{e}^{-\pi\mathrm{i}T(\xi-1)}\right)+\frac{1}{4\pi\mathrm{i}(\xi+1)}\left(\mathrm{e}^{\pi\mathrm{i}T(\xi+1)}-\mathrm{e}^{-\pi\mathrm{i}T(\xi+1)}\right)\\
-        &=\frac{1}{2\pi(\xi-1)}\sin\left(\pi T(\xi-1)\right)+\frac{1}{2\pi(\xi+1)}\sin\left(\pi T(\xi+1)\right)
-    \end{align*}
-    功率谱密度为\begin{align*}
-        S_f(\xi)&=\lim_{T\to\infty}\frac{|F_T(\xi)|^2}{T}=\lim_{T\to\infty}\frac{1}{T}\left[\frac{\sin^2\left(\pi T(\xi-1)\right)}{4\pi^2(\xi-1)^2}+\frac{\sin^2\left(\pi T(\xi+1)\right)}{4\pi^2(\xi+1)^2}\right]
-    \end{align*}
-    在$\xi\neq\pm 1$时，$S_f(\xi)=0$；在$\xi=\pm 1$时，利用极限$\lim_{x\to 0}\sin x/x=1$可以求得$S_f(\xi)$以$T/4$的速度趋于$\infty$（严谨的做法要涉及到\refsub{approach}中的理论），因此
-    $$S_f(\xi)=\frac{1}{4}(\delta_1+\delta_{-1})$$
-
-    直接计算功率：\begin{align*}
-        P_f&=\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}\cos^2(2\pi t)\,dt\\
-        &=\frac{1}{2}+\lim_{T\to\infty}\frac{1}{2T}\int_{-T/2}^{T/2}\cos(2\pi t)\,dt\\
-        &=\frac{1}{2}
-    \end{align*}
-    它恰好等于$S_f(\xi)$的积分值。
-\end{example}
-
-上一小节中提到，功率信号空间$B^2$中多数信号均为几乎周期信号，它们具有离散的频谱和功率谱，而如果使用分布理论来处理功率谱密度，则极限与积分的换序对于分布而言是无需证明的，因为\textbf{分布列的极限是由积分的极限定义的}。对于功率谱密度，$\forall\varphi\in\mathcal{S}$，$S_f$作为一个缓增分布是由以下极限定义的：
-$$\left\langle S_f,\varphi\right\rangle=\left\langle \lim_{T\to\infty}\frac{|F_T|^2}{T},\varphi\right\rangle:=\lim_{T\to\infty}\left\langle \frac{|F_T|^2}{T},\varphi\right\rangle=\lim_{T\to\infty}\frac{1}{T}\int_{\mathbb{R}}|F_T(\xi)|^2\varphi(\xi)\,d\xi$$
+因此，$\mathcal{P}$ 中的每个非零信号都有正而有限的平均功率，是功率信号。在合并同频率项后，不同频率成分的功率可以相加。
 
 将能量与功率的概念推广到两个信号之间：
 \begin{definition}[互能量与互功率]\label{def:cross_energy_power}
     如果$f,g\in L^2(\mathbb{R})$，则它们的\textbf{互能量}定义为：
     $$E_{fg}=(f,g)=\int_{\mathbb{R}}f\cdot \overline{g}\,dm$$
-    如果$f,g\in B^2$，则它们的\textbf{互功率}定义为：
+    如果$f,g\in \mathcal{P}$，则它们的\textbf{互功率}定义为：
     $$P_{fg}=(f,g)_{\mathrm{pwr}}=\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}f\cdot\overline{g}\,dm$$
 \end{definition}
 
-设$f,g\in L^1(\mathbb{R})\cap L^2(\mathbb{R})$，由帕塞瓦尔定理可得
-$$E_{fg}=\int_{\mathbb{R}}\mathcal{F}f(\xi)\overline{\mathcal{F}g(\xi)}\,d\xi$$
-因此，可以定义：
+互能量积分的存在性由 $L^2$ 中的柯西—施瓦茨不等式保证；互功率极限的存在性则已由平均正交性证明。
 
-\begin{definition}[互能量谱密度]\label{def:cross_energy_power_density}
-    设能量信号$f,g\in L^1(\mathbb{R})\cap L^2(\mathbb{R})$，则它们的\textbf{互能量谱密度}(cross energy spectrum density,CESD)为$\mathcal{F}f(\xi)\overline{\mathcal{F}g(\xi)}$。
-\end{definition}
-它给出了互能量$E_{fg}$在各个频率成分上的分布情况。
+在 $\mathcal{P}$ 上定义\textbf{内积}：
+$$
+    (f,g)_{\mathrm{pwr}}=P_{fg}
+    =\sum_{\xi\in\Lambda}a_\xi\overline{b_\xi}.
+$$
+这是系数向量的内积：它对第一变元线性、对第二变元共轭线性，满足共轭对称性，并且
+$$
+    (f,f)_{\mathrm{pwr}}=\sum_{\xi\in\Lambda}|a_\xi|^2\ge0,
+$$
+等号成立当且仅当 $f=0$。所以它是 $\mathcal{P}$ 上的内积，诱导范数
 
-将这一定义类比到功率信号，可以定义\textbf{互功率谱密度}(cross power spectrum density,CPSD)。考虑截短信号
-$$f_T(t)=f(t)\chi_{[-T/2,T/2]},g_T(t)=g(t)\chi_{[-T/2,T/2]}$$
-它们的傅里叶变换分别记为$F_T(t)$和$G_T(t)$，由帕塞瓦尔定理，有
-$$\int_{-T/2}^{T/2}f(t)\overline{g(t)}\,dt=\int_{-\infty}^{\infty}f_T(t)\overline{g_T(t)}\,dt=\int_{-\infty}^{\infty}F_T(\xi)\overline{G_T(\xi)}\,d\xi$$
-因此
-$$P_{fg}=\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}f(t)\overline{g(t)}\,dt=\lim_{T\to\infty}\frac{1}{T}\int_{-\infty}^{\infty}F_T(\xi)\overline{G_T(\xi)}\,d\xi$$
-在分布的意义下，可以交换积分与极限的顺序，得到
-$$P_{fg}=\int_{-\infty}^{\infty}\lim_{T\to\infty}\frac{1}{T}F_T(\xi)\overline{G_T(\xi)}\,d\xi$$
-因此：
+$$
+    \|f\|_{\mathrm{pwr}}=\sqrt{P_f}
+    =\left(\sum_{\xi\in\Lambda}|a_\xi|^2\right)^{1/2}.
+$$
 
-\begin{definition}[互功率谱密度]
-    功率信号$f,g\in B^2$的互功率谱密度为
-    $$S_{fg}(\xi)=\lim_{T\to\infty}\frac{1}{T}F_T(\xi)\overline{G_T(\xi)}$$
-\end{definition}
+柯西—施瓦茨不等式给出
+$$
+    |P_{fg}|\le\sqrt{P_fP_g}.
+$$
 
 \subsection{功率信号的相关}\label{sub:power_corelation}
 
 \begin{definition}[功率信号的相关]\label{def:power_correlation}
-    功率信号$f\in B^2$的自相关函数为
-    $$R_f(x)=\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}f(x+y)\overline{f(y)}\,dy$$
-    功率信号$f,g\in B^2$的互相关函数为
-\begin{equation*}
-    R_{fg}(x)=\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}f(x+y)\overline{g(y)}\,dy
-\end{equation*}
+    功率信号$f,g\in \mathcal{P}$的互相关函数为
+    \begin{equation*}
+        R_{fg}(x)=\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}f(x+y)\overline{g(y)}\,dy
+    \end{equation*}
+    当 $g=f$ 时，称为 $f$ 的自相关函数，记为 $R_f$。
 \end{definition}
 
-自相关与互相关函数是良定义的：
+下面验证这些极限存在。将两个信号在共同的有限频率集 $\Lambda$ 上写为
+
+$$
+    f(t)=\sum_{\xi\in\Lambda}a_\xi e^{2\pi i\xi t},
+    \qquad
+    g(t)=\sum_{\xi\in\Lambda}b_\xi e^{2\pi i\xi t},
+$$
+
+对每个固定的 $\tau$，平移后的信号仍属于 $\mathcal{P}$。应用上一小节的平均正交性，得到
+
+$$
+    R_{fg}(\tau)=\sum_{\xi\in\Lambda}
+    a_\xi\overline{b_\xi}e^{2\pi i\xi\tau},\quad
+    R_f(\tau)=\sum_{\xi\in\Lambda}|a_\xi|^2e^{2\pi i\xi\tau}
+$$
+由此不仅证明了极限存在，也给出了相关函数的计算方法。不同频率之间的乘积在时间平均后消失；共同频率的乘积则保留下来，并随时延改变相位。
+
+\begin{proposition}[功率信号的相关函数的性质]
+    \quad
+    \begin{enumerate}
+        \item $R_{fg}(0)=P_{fg},\quad R_f(0)=P_f$;
+        \item $R_{fg}(\tau)=\overline{R_{gf}(-\tau)}$，特别地，自相关满足 $R_f(-\tau)=\overline{R_f(\tau)}$；若 $f$ 为实信号，则 $R_f$ 也是实值的，因而为偶函数；
+        \item $$
+                  |R_{fg}(\tau)|
+                  \le\sum_{\xi\in\Lambda}|a_\xi b_\xi|
+                  \le
+                  \left(\sum_{\xi\in\Lambda}|a_\xi|^2\right)^{1/2}
+                  \left(\sum_{\xi\in\Lambda}|b_\xi|^2\right)^{1/2}
+                  =\sqrt{P_fP_g}.
+              $$
+              特别地，$|R_f(\tau)|\le R_f(0)=P_f$.
+    \end{enumerate}
+\end{proposition}
+
+\subsection{能量谱与功率谱}\label{sub:power_spectrum}
+
+简便起见，本小节中，我们将使用频率形式的傅里叶变换。
+
+对于能量信号$f\in L^2(\mathbb{R})$，如果它还是绝对可积的，即$f\in L^1(\mathbb{R})$，则它的傅里叶变换$F(\xi)$存在，并且满足帕塞瓦尔定理（\cref{thm:plancherel}）：
 \begin{align*}
-    \left|\frac{1}{T}\int_{-T/2}^{T/2}f(x+y)\overline{g(y)}\,dy\right|& \leq \frac{1}{T}\sqrt{\int_{-T/2}^{T/2}|f(x+y)|^2\,dy\int_{-T/2}^{T/2}\left|\overline{g(y)}\right|^2\,dy}\\
-    & =\sqrt{\frac{1}{T}\int_{-T/2}^{T/2}|f(x+y)|^2\,dy\cdot\frac{1}{T}\int_{-T/2}^{T/2}|g(y)|^2\,dy}\\
-    & =\sqrt{\frac{1}{T}\int_{-T/2}^{T/2}|f(y)|^2\,dy\cdot\frac{1}{T}\int_{-T/2}^{T/2}|g(y)|^2\,dy}
+    \int_{-\infty}^{\infty}|f(t)|^2\,dt=\int_{-\infty}^{\infty}|F(\xi)|^2\,d\xi
 \end{align*}
-令$T\to\infty$，得到
-$$R_f(x)=\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}f(x+y)\overline{f(y)}\,dy\leq\sqrt{P_f P_g}$$
-其中$P_f,P_g$分别是f,g的功率：\begin{align*}
-P_f&=\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}|f(y)|^2\,dy,\quad P_g=\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}|g(y)|^2\,dy
-\end{align*}
+$$
+    E_{fg}=\int_{\mathbb R}f(t)\overline{g(t)}\,dt
+    =\int_{\mathbb R}F(\xi)\overline{G(\xi)}\,d\xi.
+$$
 
-$R_f(0)=P_f,R_{fg}(0)=P_{fg}$，因此，相关是能量（功率）的推广，互相关是互能量（互功率）的推广。
+因此，$f\in L^1(\mathbb{R})\cap L^2(\mathbb{R})$的\textbf{能量可以看作是分布在各个频率上的}。类比概率密度函数，我们定义：
 
-根据维纳-辛钦定理（\cref{thm:winner-khinchin}），对于$f,g\in L^1(\mathbb{R})\cap L^2(\mathbb{R})$，有
-$$\mathcal{F}R_{fg}=\mathcal{F}f\overline{\mathcal{F}g}$$
-也就是说，\textbf{能量信号的互能量谱密度存在时，恰为互相关函数的傅里叶变换}。
+\begin{definition}[能量谱密度]
+    设能量信号$f,g\in L^1(\mathbb{R})\cap L^2(\mathbb{R})$，则$f$的\textbf{能量谱密度}(energy spectral density,ESD)为
+    $$S^{\text{en}}_f(\xi)=|F(\xi)|^2$$
+    $f$与$g$的\textbf{互能量谱密度}(cross energy spectrum density,CESD)为$$S^{\text{en}}_{fg}(\xi)=\mathcal{F}f(\xi)\overline{\mathcal{F}g(\xi)}$$
+\end{definition}
+前者表示能量在频率上的分布，其积分是总能量；后者的积分是互能量，通常为复数。
 
-我们自然希望功率信号也有类似的性质：
-\begin{theorem}[功率信号的维纳-辛钦定理]
-    \label{thm:power_winner_khinchin}
-    设$f,g\in B^2$，则
-    $$\mathcal{F}R_{fg}=S_{fg}=\lim_{T\to\infty}\frac{F_T\overline{G_T}}{T}$$
+对于$f\in \mathcal{P}$，为了使用帕塞瓦尔定理，可以考虑功率信号的截短。本小节中，总是用记号$f_T$来表示时域功率信号$f$的截短：
+$$f_T(t)=f(t)\chi_{[-T/2,T/2]}$$
+由于$f$有界，$f_T(t)\in L^1(\mathbb{R})\cap L^2(\mathbb{R})$，因此可以定义它的傅里叶变换，记为$F_T(\xi)$。对$f_T(t)$使用帕塞瓦尔定理，有：
+$$E_{f_T}=\int_{\mathbb{R}}|f_T(t)|^2\,dt=\int_{\mathbb{R}}|F_T(\xi)|^2\,d\xi$$
+
+这样，在$T\to\infty$的极限存在时，$E_{f_T}$的时间平均值就是$f$的功率：
+$$P_f=\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}|f(t)|^2\,dt=\lim_{T\to\infty}\frac{E_{f_T}}{T}=\lim_{T\to\infty}\frac{1}{T}\int_{\mathbb{R}}|F_T(\xi)|^2\,d\xi$$
+如果能交换极限与积分的顺序，则
+$$P_f=\int_{\mathbb{R}}\lim_{T\to\infty}\frac{|F_T(\xi)|^2}{T}\,d\xi$$
+
+然而，这样定义的功率谱密度不仅计算流程复杂，而且极限$\lim_{T\to\infty}\dfrac{1}{T}|F_T(\xi)|^2$未必存在，积分与极限的换序也未必合法。
+
+前面已经说明，$\mathcal{P}$中函数的相关仍属于$\mathcal{P}$，其傅里叶变换（在分布的意义下）是存在的，因此，我们不妨直接扩展帕塞瓦尔定理的适用范围，定义：
+
+\begin{definition}[功率谱密度]
+    设功率信号$f,g\in\mathcal{P}$，则$f$的\textbf{功率谱密度}(power spectral density,PSD)为
+    $$S_f=\mathcal{F}R_f$$
+    $f$与$g$的\textbf{互功率谱密度}(cross power spectrum density,CPSD)为
+    $$S_{fg}=\mathcal{F}R_{fg}$$
+\end{definition}
+
+由相关函数的有限频率表达式，可以直接得到功率谱的计算公式。
+
+\begin{theorem}[有限频率信号的功率谱]\label{thm:PSD}
+    设$f,g\in\mathcal{P}$，在共同的有限频率集$\Lambda$上写成
+    $$
+        f(t)=\sum_{\xi\in\Lambda}a_\xi\mathrm{e}^{2\pi\mathrm{i}\xi t},
+        \qquad
+        g(t)=\sum_{\xi\in\Lambda}b_\xi\mathrm{e}^{2\pi\mathrm{i}\xi t},
+    $$
+    其中，相同频率的项已经合并，未出现的频率对应的系数取零。则
+    $$
+        S_f=\sum_{\xi\in\Lambda}|a_\xi|^2\delta_\xi,
+        \qquad
+        S_{fg}=\sum_{\xi\in\Lambda}a_\xi\overline{b_\xi}\delta_\xi.
+    $$
 \end{theorem}
 \begin{proof}
-    定义截短所得能量信号$f_T$和$g_T$的互相关函数为
-    $$R_T(x)=R_{f_T,g_T}=\int_{-T/2}^{T/2}f(x+y)\overline{g(x)}\,dy$$
-    由维纳-辛钦定理，有
-    $$\mathcal{F}R_T(\xi)=F_T(\xi)\overline{G_T(\xi)}$$
-    等式两边同时除以$T$并与测试函数$\varphi\in\mathcal{S}$配对：
-    $$\left\langle \mathcal{F}\left[\frac{R_T}{T}\right],\varphi\right\rangle=\left\langle \frac{\mathcal{F}R_T}{T},\varphi\right\rangle=\left\langle \frac{F_T\overline{G_T}}{T},\varphi\right\rangle$$
-    令$T\to\infty$，由分布的傅里叶变换的连续性，左式等于：
-    $$\lim_{T\to\infty}\left\langle \mathcal{F}\left[\frac{R_T}{T}\right],\varphi\right\rangle=\left\langle \mathcal{F}\left[\lim_{T\to\infty}\frac{R_T}{T}\right],\varphi\right\rangle=\langle \mathcal{F}R_{fg},\varphi\rangle$$
-    右式等于：
-    $$\lim_{T\to\infty}\left\langle \frac{F_T\overline{G_T}}{T},\varphi\right\rangle=\langle S_{fg},\varphi\rangle$$
-    综上，我们证明了
-    $$\langle \mathcal{F}R_{fg},\varphi\rangle=\langle S_{fg},\varphi\rangle,\quad \forall \varphi\in\mathcal{S} $$
+    由上一小节，
+    $$
+        R_{fg}(\tau)=\sum_{\xi\in\Lambda}
+        a_\xi\overline{b_\xi}\mathrm{e}^{2\pi\mathrm{i}\xi\tau}.
+    $$
+    对这个有限和逐项作傅里叶变换，利用
+    $\mathcal{F}[\mathrm{e}^{2\pi\mathrm{i}\xi\tau}]=\delta_\xi$，便得
+    $$
+        S_{fg}=\mathcal{F}R_{fg}
+        =\sum_{\xi\in\Lambda}a_\xi\overline{b_\xi}\delta_\xi.
+    $$
+    令$g=f$，即得自功率谱公式。
 \end{proof}
 
-\begin{example}
-    设功率信号$f(t)=\cos (2\pi t)$，则$f_T(t)=\chi_{[-T/2,T/2]}\cos (2\pi t)$，它的自相关函数为\begin{align*}
-        R_{T}(x)&=\int_{-\infty}^{\infty}f_T(x+y)f_T(y)\,dy\\
-        &=\int_{-\infty}^{\infty}\cos(2\pi (x
-        +y))\chi_{[-T/2,T/2]}\cdot\cos(2\pi y)\chi_{[-x-T/2,-x+T/2]}\,dy
+因此，$\mathcal{P}$中信号的功率谱由有限条冲激谱线组成。频率$\xi$处谱线的强度$|a_\xi|^2$，就是该频率分量的平均功率；各条谱线的强度之和为
+$$
+    \sum_{\xi\in\Lambda}|a_\xi|^2=P_f.
+$$
+这说明功率谱确实描述了功率在不同频率之间的分配。类似地，互功率谱中各条谱线的系数之和为$P_{fg}$，但这些系数通常是复数。
+
+沿用前面冲激积分的记法，也可写成
+$$
+    \int_{\mathbb{R}}S_f(\xi)\,d\xi=P_f,
+    \qquad
+    \int_{\mathbb{R}}S_{fg}(\xi)\,d\xi=P_{fg}.
+$$
+这里的积分表示有限个冲激项的系数之和，并不是把$\delta$当作普通可积函数。若用测试函数严格表述，可取一个在全部谱线所在区间上恒为$1$、在区间外光滑过渡到$0$的紧支集函数$\rho$；上面的两个积分分别表示$\langle S_f,\rho\rangle$和$\langle S_{fg},\rho\rangle$，其值与这样的$\rho$的具体选取无关。
+
+注意，虽然$f$本身的傅里叶变换为
+$$
+    \mathcal{F}f=\sum_{\xi\in\Lambda}a_\xi\delta_\xi,
+$$
+但不能将功率谱理解为分布$\mathcal{F}f$的模平方。\textbf{将谱线系数取模平方的规则来自平均正交性和相关函数的计算}，不涉及没有定义的$\delta^2$。
+
+\subsubsection{截短功率谱的分布极限}
+
+下面证明，刚才定义的功率谱也是有限时间截短所得能量谱除以窗口长度后的分布极限，从而将相关函数的定义与实际的有限时间观察联系起来。
+
+\begin{theorem}[功率信号的维纳-辛钦定理]\label{thm:power_winner_khinchin}
+    设$f,g\in\mathcal{P}$，记
+    $$
+        I_T=[-T/2,T/2],\qquad
+        f_T=f\chi_{I_T},\quad g_T=g\chi_{I_T},
+    $$
+    以及$F_T=\mathcal{F}f_T$、$G_T=\mathcal{F}g_T$。则在缓增分布的意义下，
+    $$
+        \lim_{T\to\infty}\frac{F_T\overline{G_T}}{T}
+        =S_{fg}=\mathcal{F}R_{fg}.
+    $$
+    特别地，
+    $$
+        \lim_{T\to\infty}\frac{|F_T|^2}{T}=S_f.
+    $$
+\end{theorem}
+\begin{proof}
+    先考察截短信号的互相关函数除以窗口长度所得的函数
+    \begin{align*}
+        q_T(\tau)
+         & =\frac1T\int_{\mathbb{R}}
+        f_T(t+\tau)\overline{g_T(t)}\,dt    \\
+         & =\frac1T\int_{I_T\cap(I_T-\tau)}
+        f(t+\tau)\overline{g(t)}\,dt.
     \end{align*}
-    当$|x|>T$时，两个截短信号的支集错开，积分区间变为空集，$R_T(x)=0$，于是\begin{align*}
-        R_T(x)=\begin{cases}
-            \displaystyle\int_{-T/2}^{-x+T/2}\cos(2\pi(x+y))\cos(2\pi y)\,dy, & 0\le x\le T,\\[1.2ex]
-            \displaystyle\int_{-x-T/2}^{T/2}\cos(2\pi(x+y))\cos(2\pi y)\,dy, & -T\le x<0,\\[1.2ex]
-            0, & |x|>T
+    这里必须同时保留两个截短窗口。它与相关函数定义中出现的有限平均
+    $$
+        c_T(\tau)=\frac1T\int_{I_T}
+        f(t+\tau)\overline{g(t)}\,dt
+    $$
+    一般并不相等。
+
+    $f,g\in\mathcal{P}$有界。固定$\tau$，当$T>|\tau|$时，两者积分区间相差的长度为$|\tau|$，所以
+    $$
+        |q_T(\tau)-c_T(\tau)|
+        \le\frac{|\tau|}{T}\|f\|_\infty\|g\|_\infty
+        \longrightarrow0.
+    $$
+    前面已经证明$c_T(\tau)\to R_{fg}(\tau)$，因此对每个固定的$\tau$，都有$q_T(\tau)\to R_{fg}(\tau)$。
+
+    此外，对所有$T>0$和$\tau\in\mathbb{R}$，
+    $$
+        |q_T(\tau)|\le\|f\|_\infty\|g\|_\infty.
+    $$
+    任取$\psi\in\mathcal{S}$，函数
+    $\|f\|_\infty\|g\|_\infty|\psi|$可积。由控制收敛定理（\cref{thm:DCT}），
+    $$
+        \lim_{T\to\infty}\int_{\mathbb{R}}q_T(\tau)\psi(\tau)\,d\tau
+        =\int_{\mathbb{R}}R_{fg}(\tau)\psi(\tau)\,d\tau.
+    $$
+    这就证明了$q_T\to R_{fg}$在缓增分布的意义下成立。
+
+    另一方面，$f_T,g_T\in L^1(\mathbb{R})\cap L^2(\mathbb{R})$，由能量信号的维纳-辛钦定理（\cref{thm:winner-khinchin}），
+    $$
+        \mathcal{F}q_T=\frac{F_T\overline{G_T}}{T}.
+    $$
+    再由分布的傅里叶变换的连续性（\cref{thm:distribution_fourier_continuous}），得到
+    $$
+        \frac{F_T\overline{G_T}}{T}
+        =\mathcal{F}q_T
+        \longrightarrow\mathcal{F}R_{fg}=S_{fg}.
+    $$
+\end{proof}
+
+\subsubsection{功率谱的计算例子}
+
+\begin{example}[单个余弦信号]
+    设$f(t)=A\cos(2\pi\xi_0t+\theta)$，其中$A\in\mathbb{R}$、$\xi_0>0$。由
+    $$
+        f(t)=\frac{A}{2}\mathrm{e}^{\mathrm{i}\theta}
+        \mathrm{e}^{2\pi\mathrm{i}\xi_0t}
+        +\frac{A}{2}\mathrm{e}^{-\mathrm{i}\theta}
+        \mathrm{e}^{-2\pi\mathrm{i}\xi_0t},
+    $$
+    得到
+    $$
+        P_f=\frac{A^2}{2},\qquad
+        R_f(\tau)=\frac{A^2}{2}\cos(2\pi\xi_0\tau),
+    $$
+    $$
+        S_f=\frac{A^2}{4}
+        \bigl(\delta_{\xi_0}+\delta_{-\xi_0}\bigr).
+    $$
+    初相位不影响自功率谱；两个频率处的谱线强度之和为$A^2/2$，正好等于平均功率。
+\end{example}
+
+为了具体说明截短窗口的影响，仍取$f(t)=\cos(2\pi t)$，记截短信号的自相关为
+$$
+    R_T(\tau)=\int_{\mathbb{R}}f_T(t+\tau)f_T(t)\,dt.
+$$
+当$|\tau|>T$时，两个窗口不相交，故$R_T(\tau)=0$。当$|\tau|\le T$时，交集的长度为$T-|\tau|$；利用积化和差公式积分，得到
+$$
+    R_T(\tau)=
+    \frac{\sin\bigl(2\pi(T-|\tau|)\bigr)}{4\pi}
+    +\frac{T-|\tau|}{2}\cos(2\pi\tau).
+$$
+于是对每个固定的$\tau$，
+$$
+    \frac{R_T(\tau)}{T}\longrightarrow
+    \frac12\cos(2\pi\tau)=R_f(\tau),
+$$
+与上述定理的证明一致。
+
+\begin{example}
+    设$f(t)=\sin(2\pi t)+\sin(2\sqrt2\pi t)$。由于两个正频率之比为无理数，$f$不是周期信号，但仍属于$\mathcal{P}$。其傅里叶变换为
+    $$
+        \mathcal{F}f
+        =\frac{1}{2\mathrm{i}}(\delta_1-\delta_{-1})
+        +\frac{1}{2\mathrm{i}}(\delta_{\sqrt2}-\delta_{-\sqrt2}).
+    $$
+    因而
+    $$
+        S_f=\frac14
+        \bigl(\delta_1+\delta_{-1}
+        +\delta_{\sqrt2}+\delta_{-\sqrt2}\bigr),
+        \qquad P_f=1.
+    $$
+\end{example}
+
+\subsection{为什么不研究完整的功率信号空间}\label{sub:power_signal_scope}
+
+把全部功率信号作为统一的研究对象，则该空间缺少线性空间的结构，因为它对线性组合不封闭；此外，单个信号的平均功率存在，并不足以保证互功率、相关函数等运算也有定义。
+
+\begin{example}
+    令$A_n=2^{2^n}$（$n=0,1,\ldots$），取$f(t)=1$，并定义实值偶函数
+    $$
+        g(t)=
+        \begin{cases}
+            1,      & |t|<A_0,                              \\
+            (-1)^n, & A_n\le|t|<A_{n+1},\quad n=0,1,\ldots.
         \end{cases}
-    \end{align*}
-    利用积化和差
-    $$\cos(2\pi(x+y))\cos(2\pi y)=\frac{1}{2}[\cos(2\pi(x+2y))+\cos(2\pi x)]$$
-    当$0\leq x\le T$时，
-    \begin{align*}
-        &\frac{1}{2}\int_{-T/2}^{-x+T/2}[\cos(2\pi(x+2y))+\cos(2\pi x)]\,dy\\
-        =&\frac{1}{2}\left[\frac{1}{4\pi}\evalat{\sin(2\pi(x+2y))}{-T/2}{-x+T/2}+(T-x)\cos(2\pi x)\right]\\
-        =&\frac{1}{8\pi}[\sin(2\pi(-x+T))-\sin(2\pi(x-T))]+\frac{T-x}{2}\cos(2\pi x)\\
-        =&\frac{1}{4\pi}\sin(2\pi(T-x))+\frac{T-x}{2}\cos(2\pi x)
-    \end{align*}
-    当$-T\leq x<0$时，\begin{align*}
-        &\frac{1}{2}\int_{-x-T/2}^{T/2}[\cos(2\pi(x+2y))+\cos(2\pi x)]\,dy\\
-        =&\frac{1}{2}\left[\frac{1}{4\pi}\evalat{\cos(2\pi(x+2y))}{-x-T/2}{T/2}+(T+x)\cos(2\pi x)\right]\\
-        =&\frac{1}{8\pi}[\sin(2\pi(x+T))-\sin(2\pi(-x-T))]+\frac{T+x}{2}\cos(2\pi x)\\
-        =&\frac{1}{4\pi}\sin(2\pi(T+x))+\frac{T+x}{2}\cos(2\pi x)
-    \end{align*}
-    合并两式，得到$x\in[-T/2,T/2]$时的统一表达式：\begin{align*}
-        \frac{1}{4\pi}\sin(2\pi(T-|x|))+\frac{T-|x|}{2}\cos(2\pi x)
-    \end{align*}
-
-    因此，$f$的自相关函数为
-    \begin{align*}
-        R_f(x)=&\lim_{T\to\infty}\frac{1}{T}R_T(x)\\
-        =&\lim_{T\to\infty}\left[\frac{1}{4\pi T}\sin(2\pi(T-|x|))+\left(\frac{1}{2}-\frac{|x|}{2T}\right)\cos(2\pi x)\right]\\
-        =&\frac{1}{2}\cos(2\pi x)
-    \end{align*}
-    它的傅里叶变换为
-    $$S_f=\mathcal{F}R_f=\frac{1}{4}(\delta_1+\delta_{-1})$$
-    这与我们在上一节中算出的结果一致。
+    $$
+    由于$|f(t)|=|g(t)|=1$，两个信号在任意窗口上的平均功率都等于$1$。然而，$g$在越来越长的区间上交替取$1$和$-1$。取$T_n=2A_{n+1}$，令
+    $$
+        M_n=\frac1{T_n}\int_{-T_n/2}^{T_n/2}
+        f(t)\overline{g(t)}\,dt
+        =\frac1{A_{n+1}}\int_0^{A_{n+1}}g(t)\,dt.
+    $$
+    最后一段区间的符号为$(-1)^n$，前面所有区间的总长度只有$A_n$，故
+    $$
+        |M_n-(-1)^n|\le\frac{2A_n}{A_{n+1}}\to 0,\quad n\to\infty.
+    $$
+    因此互功率沿两条子列分别趋于$1$和$-1$，极限不存在。可见柯西—施瓦茨不等式只能说明这些平均值的模不超过$1$，不能保证它们收敛。
+    $$
+        \frac1T\int_{-T/2}^{T/2}|f(t)+g(t)|^2\,dt
+        =\frac{1}{T}\int_{-T/2}^{T/2}(f^2(t)+2f(t)g(t)+g^2(t))\,dt=2+\frac2T\int_{-T/2}^{T/2}g(t)\,dt,
+    $$
+    所以$f+g$的自功率平均也没有极限。
 \end{example}
 
-这种方法避免了原有方法中对$S_f$所涉及的广义极限
-$$\lim_{T\to\infty}\frac{1}{T}\left[\frac{\sin^2\left(\pi T(\xi-1)\right)}{4\pi^2(\xi-1)^2}+\frac{\sin^2\left(\pi T(\xi+1)\right)}{4\pi^2(\xi+1)^2}\right]$$
-的处理，但计算起来还是比较麻烦。下面我们提出一种更简便的方法。
+相比之下，$\mathcal{P}$中的有限求和与平均正交性足以保证本节各个极限存在，并且已经涵盖周期信号的有限谐波叠加和没有公周期的多频率叠加。对一个周期内平方可积的周期信号，其有限傅里叶和还能在平均平方意义下逼近原信号。这些对象足以呈现功率谱分析的基本方法。
 
-根据的维纳-辛钦定理，能量信号的互功率谱密度就是两个信号的傅里叶变换共轭相乘：
-$$f,g\in L^1(\mathbb{R})\cap L^2(\mathbb{R}),\quad\mathcal{F}R_{fg}=\mathcal{F}f\overline{\mathcal{F}g}$$
-特别地，当$f=g$时，有$\mathcal{F}R_f=|\mathcal{F}f|^2$。观察我们处理过的功率信号$f(t)=\cos(2\pi t)$，它的傅里叶变换为
-$$\mathcal{F}f=\frac{1}{2}\delta_1+\frac{1}{2}\delta_{-1}$$
-尽管$\delta^2$无定义，但如果仅仅将$\delta$的强度平方，则恰好得到功率谱密度：
-$$S_f=\left(\frac{1}{2}\right)^2\delta_1+\left(\frac{1}{2}\right)^2\delta_{-1}=\frac{1}{4}\delta_1+\frac{1}{4}\delta_{-1}$$
-
-由此可以猜想：
-
-\begin{theorem}\label{thm:PSD}
-    对于几乎周期的功率信号$f$，设其（作为分布的）傅里叶变换为
-    $$\mathcal{F}f=\sum_{n}a_n\delta_{\xi_n}$$
-    则其功率谱密度为
-    $$S_f=\sum_n |a_n|^2\delta_{\xi_n}$$
-    进一步，设几乎周期的功率信号$g$的傅里叶变换为
-    $$\mathcal{F}g=\sum_m b_m\delta_{\xi_m}$$
-    则$f$与$g$的互功率谱密度为
-    $$S_{fg}=\sum_{k}a_k\overline{b_k}\delta_{\xi_k}$$
-    其中，求和指标$n,m$和$k$可以是有限的，也可以是可数的，因为分布级数由部分和分布的极限定义；$\xi_k$为两个信号的公共频率，这是因为不同频率处的交叉项在互功率谱密度中的强度为0.
-\end{theorem}
-
-\begin{proof}
-    由分布的傅里叶变换的连续性，可以求得
-    $$f(t)=\sum_n a_n\mathrm{e}^{2\pi \mathrm{i}\xi_n t},\quad g(t)=\sum_m b_m\mathrm{e}^{2\pi\mathrm{i}\xi_m t}$$
-    它不应看作常规意义下的傅里叶级数，因为等号右边的级数可能是几乎处处不收敛的，等号仅仅在分布的意义下成立。\refsub{fourier_of_dirac_comb}中的狄拉克梳状分布就是这样一个例子。
-
-    代入互相关的定义：\begin{align*}
-        R_{fg}(x)=&\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}\left(\sum_n a_n\mathrm{e}^{2\pi \mathrm{i}\xi_n (x+y)}\right)\left(\sum_m \overline{b_m}\mathrm{e}^{-2\pi\mathrm{i}\xi_m y}\right)\,dy\\
-        =&\sum_{n,m}\left(a_n\overline{b_m}\mathrm{e}^{2\pi \mathrm{i}\xi_n x}\cdot\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}\mathrm{e}^{2\pi \mathrm{i}(\xi_n-\xi_m) y}\,dy\right)
-    \end{align*}
-    其中，\begin{align*}
-        &\int_{-T/2}^{T/2}\mathrm{e}^{2\pi \mathrm{i}(\xi_n-\xi_m) y}\,dy\\
-        =&\frac{1}{2\pi\mathrm{i}(\xi_m-\xi_m)}\evalat{\mathrm{e}^{2\pi \mathrm{i}(\xi_n-\xi_m) y}}{-T/2}{T/2}\\
-        =&\frac{1}{2\pi\mathrm{i}(\xi_m-\xi_m)}\left(\mathrm{e}^{\pi \mathrm{i}(\xi_n-\xi_m)T}-\mathrm{e}^{-\pi \mathrm{i}(\xi_n-\xi_m)T}\right)\\
-        =&T\mathrm{Sa}\left(\pi(\xi_n-\xi_m)T\right)
-    \end{align*}
-    因此\begin{align*}
-        R_{fg}(x)=\sum_{n,m}\left(a_n\overline{b_m}\mathrm{e}^{2\pi \mathrm{i}\xi_n x}\cdot\lim_{T\to\infty}\mathrm{Sa}\left(\pi(\xi_n-\xi_m)T\right)\right)
-    \end{align*}
-    其中
-    $$\lim_{T\to\infty}\mathrm{Sa}\left(\pi(\xi_n-\xi_m)T\right)=\begin{cases}
-        1,\text{if }n=m\\
-        0,\text{if }n\neq m
-    \end{cases}$$
-    因此
-    \begin{align*}
-        R_{fg}(x)=\sum_k a_k\overline{b_k}\mathrm{e}^{2\pi \mathrm{i}\xi_k x}
-    \end{align*}
-    其中$\xi_k$为两个信号的公共频率。利用功率信号的维纳-辛钦定理以及分布的傅里叶变换的连续性，得到
-    \begin{align*}
-        S_{fg}&=\mathcal{F}R_{fg}\\
-        &=\sum_n a_n\overline{b_n}\mathcal{F}\left[\mathrm{e}^{2\pi \mathrm{i}\xi_n x}\right]\\
-        &=\sum_{n}a_n\overline{b_n}\delta_{\xi_n}
-    \end{align*}
-\end{proof}
-
-这种方法对于$B^2$中占大多数的几乎周期函数都是成立的，因为几乎周期函数具有离散的频谱和功率谱。它极大地简化了（互）功率谱密度的计算。
-
-\begin{example}
-    设几乎周期函数$f(t)=\sin (2\pi t)+\sin (2\sqrt{2}\pi t)$，则
-    $$\mathcal{F}f=\frac{1}{2\mathrm{i}}(\delta_1-\delta_{-1})+\frac{1}{2\mathrm{i}}(\delta_{\sqrt{2}}-\delta_{\sqrt{2}})$$
-    它的功率谱密度为
-    $$S_f=\frac{1}{4}(\delta_1+\delta_{-1}+\delta_{\sqrt{2}}+\delta_{\sqrt{2}})$$
-\end{example}
-
-我们对此进行一些直观上的说明。回顾功率谱密度的定义：
-$$S_{fg}=\lim_{T\to\infty}\frac{1}{T}F_T(\xi)\overline{G_T(\xi)}$$
-利用$\delta$分布的取样性质，不妨认为
-$$\delta(0)=\infty,\delta(x)=0,x\neq 0\implies\delta\cdot\delta=\infty\cdot\delta,\delta_a\cdot\delta_b=0,a\neq b$$
-那么，以上功率谱密度的计算方法可以不严谨地由以下事实推出：
-$$\lim_{T\to\infty}\frac{1}{T}\delta^2=\delta,\quad\lim_{T\to\infty}F_T(\xi)=F(\xi),\quad\lim_{T\to\infty}G_T(\xi)=G(\xi)$$
-即：
-\begin{align*}
-    S_{fg}&=\lim_{T\to\infty}\frac{1}{T}F_T(\xi)\overline{G_T(\xi)}\\
-    &=\lim_{T\to\infty}\frac{1}{T}\left(\sum_{n}a_n\delta_{\xi_n}\right)\left(\sum_{n}\overline{b_n}\delta_{\xi_n}\right)\\
-    &=\sum_{n}a_n \overline{b_n}\lim_{T\to\infty}\frac{1}{T}\delta^2_{\xi_n}\\
-    &=\sum_{n}a_n \overline{b_n}\delta_{\xi_n}
-\end{align*}
-
-最后，如果函数中既有几乎周期的成分，又有功率为0的成分，即
-$$f(t)=g(t)+h(t),\quad g(t)\in B^2,P_h=\lim_{T \to \infty}\frac{1}{T}\int_{-T/2}^{T/2}|h(x)|^2  \,dx=0$$
-我们说明：$f(t)$的功率谱密度与$g(t)$相同。
-
-根据傅里叶变换的线性性，$F_T(\xi)=G_T(\xi)+H_T(\xi)$，作为功率信号，其功率谱密度为：
-$$S_f(\xi)=\lim_{T\to\infty}\frac{|F_T(\xi)|^2}{T}=\lim_{T\to\infty}\frac{|G_T(\xi)|^2}{T}+\lim_{T\to\infty}\frac{G_T(\xi)\overline{H_T(\xi)}}{T}+\lim_{T\to\infty}\frac{|H_T(\xi)|^2}{T}$$
-其中，$\lim_{T\to\infty}\dfrac{|G_T(\xi)|^2}{T}$就是$g(t)$的功率谱密度，可以根据\cref{thm:PSD}进行计算；而剩余两项均为0：
-\begin{align*}
-    0\le\lim_{T\to\infty}\frac{|H_T(\xi)|^2}{T}&=\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}|h(t)|^2\,dt=0
-\end{align*}
-对于交叉项$\lim_{T\to\infty}\dfrac{G_T(\xi)\overline{H_T(\xi)}}{T}$，利用功率信号的维纳-辛钦定理（\cref{thm:power_winner_khinchin}），有
-$$\lim_{T\to\infty}\frac{G_T(\xi)\overline{H_T(\xi)}}{T}=\mathcal{F} R_{gh}(\xi)$$
-由柯西-施瓦兹不等式，有：
-\begin{align*}
-    |R_{gh}(x)|^2&=\left|\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}f(x+y)\overline{g(y)}\,dy\right|^2\\
-    &\le \lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}|f(x+y)|^2\,dy\cdot\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}|g(y)|^2\,dy
-\end{align*}
-前一极限收敛于有限值而后一极限收敛于$0$，因此
-$$R_{gh}(x)=0,\quad \lim_{T\to\infty}\frac{G_T(\xi)\overline{H_T(\xi)}}{T}=\mathcal{F} R_{gh}(\xi)=0$$
-
-可见，功率为$0$的信号，功率谱密度必然恒为$0$，并且与功率信号的互谱密度也恒为$0$。根据\cref{thm:PSD}，其傅里叶变换一定不含有冲击项$\delta$，因此我们说$F(\xi)$具有\textbf{线谱分量（离散谱分量）}和\textbf{连续谱分量}，而$f(t)=g(t)+h(t)$的功率谱密度仅仅取决于其线谱分量，可以用\cref{thm:PSD}直接计算。
+若要进一步允许平均平方意义下的极限，可以按平均功率范数对$\mathcal{P}$作完备化，得到Besicovitch平方平均几乎周期空间，常记为$B^2$；为了定义其中的范数和内积，需要将平均平方距离为零的函数视为等价类。本节不继续展开这些空间的构造。

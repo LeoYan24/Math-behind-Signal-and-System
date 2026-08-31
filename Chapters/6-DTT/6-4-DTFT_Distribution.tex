@@ -37,7 +37,7 @@
     因此$\Phi(\Omega)$可导，并且
     $$\Phi'(\Omega)=\im\sum_{n=-\infty}^\infty n\phi[n]\e^{\im\Omega n}$$
     可以归纳地重复上述过程，最终得到$\Phi(\Omega)\in\mathcal{C}$.
-    
+
     另一方面，根据\cref{thm:converge_speed}，$\Phi(\Omega)\in\mathcal{C}\implies\phi[n]\in\mathcal{S}$.
 \end{proof}
 
@@ -106,8 +106,8 @@ $$\sum_{n=-\infty}^\infty x[n]\phi[n]=\frac{1}{2\pi}\int_{-\pi}^\pi X(\e^{\im\Om
 \begin{definition}[分布的平移与伸缩]
     设$X\in\mathcal{D},\Phi\in\mathcal{C}$，则$X$向右平移$\Omega_0$所得分布记为$\tau_{\Omega_0}X$，满足：
     $$\langle \tau_{\Omega_0}X,\Phi \rangle=\langle X,\tau_{-\Omega_0}\Phi \rangle$$
-   由于配对是有限区间上的积分，不能定义$\sigma_a X$，但可以定义$X$的翻转，记作$X^-$：
-   $$\langle X^-,\Phi \rangle=\left\langle X,\Phi^- \right\rangle$$
+    由于配对是有限区间上的积分，不能定义$\sigma_a X$，但可以定义$X$的翻转，记作$X^-$：
+    $$\langle X^-,\Phi \rangle=\left\langle X,\Phi^- \right\rangle$$
 \end{definition}
 
 \begin{definition}[分布的共轭]
@@ -151,7 +151,7 @@ $$x[n],y[n]\in\mathcal{T},\quad \phi[n]\in\mathcal{S}$$
     $$\phi[n+n_0]=\frac{1}{2\pi}\int_{-\pi}^\pi \Phi(\Omega)\e^{-\im\Omega (n+n_0)}\,d\Omega$$
     因此$\phi[n+n_0]$是$\Phi(\Omega)\e^{-\im\Omega n_0}$的傅里叶系数。
     \begin{align*}
-        \langle \tau_{n_0}x,\phi\rangle&=\langle x,\tau_{-n_0}\phi\rangle=\langle X,\e^{-\im\Omega n_0}\Phi\rangle=\langle\e^{-\im \Omega n_0}X,\Phi\rangle
+        \langle \tau_{n_0}x,\phi\rangle & =\langle x,\tau_{-n_0}\phi\rangle=\langle X,\e^{-\im\Omega n_0}\Phi\rangle=\langle\e^{-\im \Omega n_0}X,\Phi\rangle
     \end{align*}
     即$\DTFT(x[n-n_0])=\e^{-\im \Omega n_0}X$.
 \end{proof}
@@ -163,7 +163,7 @@ $$x[n],y[n]\in\mathcal{T},\quad \phi[n]\in\mathcal{S}$$
     $$\e^{\im\Omega_0 n}\phi[n]=\frac{1}{2\pi}\int_{-\pi}^\pi \Phi(\Omega)\e^{-\im(\Omega-\Omega_0) n}\,d\Omega=\frac{1}{2\pi}\int_{-\pi}^\pi \Phi(\Omega+\Omega_0)\e^{-\im\Omega n}\,d\Omega$$
     因此$\e^{\im\Omega_0 n}\phi[n]$是$\Phi(\Omega+\Omega_0)$的傅里叶系数。
     \begin{align*}
-        \langle \e^{\im\Omega_0 n}x,\phi\rangle&=\langle x,\e^{\im\Omega_0 n}\phi\rangle=\langle X,\tau_{-\Omega_0}\Phi\rangle=\langle \tau_{\Omega_0}X,\Phi\rangle
+        \langle \e^{\im\Omega_0 n}x,\phi\rangle & =\langle x,\e^{\im\Omega_0 n}\phi\rangle=\langle X,\tau_{-\Omega_0}\Phi\rangle=\langle \tau_{\Omega_0}X,\Phi\rangle
     \end{align*}
     即$\DTFT(\e^{\im\Omega_0 n}x[n])=\tau_{\Omega_0}X$.
 \end{proof}
@@ -175,7 +175,7 @@ $$x[n],y[n]\in\mathcal{T},\quad \phi[n]\in\mathcal{S}$$
     $$\overline{\phi[n]}=\frac{1}{2\pi}\overline{\int_{-\pi}^\pi \Phi(\Omega)\e^{-\im\Omega n}\,d\Omega}=\frac{1}{2\pi}\int_{-\pi}^\pi \overline{\Phi(\Omega)}\e^{\im\Omega n}\,d\Omega=\frac{1}{2\pi}\int_{-\pi}^\pi \overline{\Phi(-\Omega)}\e^{-\im\Omega n}\,d\Omega$$
     因此$\overline{\phi[n]}$是$\overline{\Phi(-\Omega)}$的傅里叶系数。
     \begin{align*}
-        \langle \overline{x},\phi\rangle&=\overline{\langle x,\overline{\phi}\rangle}=\overline{\langle X,\overline{\Phi^-}\rangle}=\langle \overline{X^-},\Phi\rangle
+        \langle \overline{x},\phi\rangle & =\overline{\langle x,\overline{\phi}\rangle}=\overline{\langle X,\overline{\Phi^-}\rangle}=\langle \overline{X^-},\Phi\rangle
     \end{align*}
     最后一个等号用到了$\overline{X}^-=\overline{X^-}$.
 \end{proof}
@@ -200,9 +200,9 @@ $$x[n],y[n]\in\mathcal{T},\quad \phi[n]\in\mathcal{S}$$
 \begin{proof}
     $\im \Phi'$的傅里叶系数为
     \begin{align*}
-        \frac{1}{2\pi}\int_{-\pi}^\pi \im \Phi'(\Omega)\e^{-\im \Omega n}\,d\Omega&=\frac{\im}{2\pi}\left(\evalat{\Phi(\Omega)\e^{-\im \Omega n}}{-\pi}{\pi}-\int_{-\pi}^\pi \Phi(\Omega)(\e^{-\im \Omega n})'\,d\Omega\right)\\
-        &=\frac{n}{2\pi}\int_{-\pi}^\pi \Phi(\Omega)\e^{-\im\Omega n}\,d\Omega\\
-        &=n\phi[n]
+        \frac{1}{2\pi}\int_{-\pi}^\pi \im \Phi'(\Omega)\e^{-\im \Omega n}\,d\Omega & =\frac{\im}{2\pi}\left(\evalat{\Phi(\Omega)\e^{-\im \Omega n}}{-\pi}{\pi}-\int_{-\pi}^\pi \Phi(\Omega)(\e^{-\im \Omega n})'\,d\Omega\right) \\
+                                                                                   & =\frac{n}{2\pi}\int_{-\pi}^\pi \Phi(\Omega)\e^{-\im\Omega n}\,d\Omega                                                                       \\
+                                                                                   & =n\phi[n]
     \end{align*}
     因此
     \begin{align*}
@@ -220,10 +220,10 @@ $$x[n],y[n]\in\mathcal{T},\quad \phi[n]\in\mathcal{S}$$
     \end{align*}
     令$\psi[n]=(y^-)*\phi[n]$，对应的频域函数为
     \begin{align*}
-        \Psi(\Omega)&=\sum_{k=-\infty}^\infty \psi[n]\e^{\im\Omega k}\\
-        &=\sum_{k=-\infty}^\infty \left(\sum_{m=-\infty}^\infty y[m]\phi[k+m]\right)\e^{\im\Omega k}\\
-        &=\sum_{m=-\infty}^\infty y[m]\e^{-\im\Omega m}\sum_{n=-\infty}^\infty \phi[n]\e^{\im \Omega n}&(n=k+m)\\
-        &=Y(\e^{\im\Omega})\Phi(\Omega)
+        \Psi(\Omega) & =\sum_{k=-\infty}^\infty \psi[n]\e^{\im\Omega k}                                                         \\
+                     & =\sum_{k=-\infty}^\infty \left(\sum_{m=-\infty}^\infty y[m]\phi[k+m]\right)\e^{\im\Omega k}              \\
+                     & =\sum_{m=-\infty}^\infty y[m]\e^{-\im\Omega m}\sum_{n=-\infty}^\infty \phi[n]\e^{\im \Omega n} & (n=k+m) \\
+                     & =Y(\e^{\im\Omega})\Phi(\Omega)
     \end{align*}
     因此\begin{align*}
         \langle(x*y),\phi\rangle=\langle x,(y^-)*\phi\rangle=\langle X,Y\Phi\rangle=\langle XY,\Phi\rangle
@@ -235,23 +235,23 @@ $$x[n],y[n]\in\mathcal{T},\quad \phi[n]\in\mathcal{S}$$
 \end{theorem}
 \begin{proof}
     \begin{align*}
-        \langle X*Y,\Phi\rangle&=\langle X(u),\langle Y(v),\Phi(u+v)\rangle\rangle
+        \langle X*Y,\Phi\rangle & =\langle X(u),\langle Y(v),\Phi(u+v)\rangle\rangle
     \end{align*}
     令$\Psi(u)=\langle Y(v),\Phi(u+v)\rangle$，则其傅里叶系数为
     \begin{align*}
-        \psi[n]&=\frac{1}{2\pi}\int_{-\pi}^\pi \Psi(u)\e^{-\im un}\,du\\
-        &=\left\langle Y(v),\frac{1}{2\pi}\int_{-\pi}^\pi \Phi(u+v)\e^{-\im un}\,du\right\rangle\\
-        &=\left\langle Y(v),\frac{1}{2\pi}\int_{-\pi}^\pi \Phi(\Omega)\e^{-\im (\Omega-v)n}\,d\Omega\right\rangle&(\Omega=u+v)\\
-        &=\left\langle Y(v),\phi[n]\e^{\im vn}\right\rangle\\
-        &=\frac{1}{2\pi}\phi[n]\int_{-\pi}^\pi Y(v)\e^{\im vn}\,dv\\
-        &=\phi[n]y[n]
+        \psi[n] & =\frac{1}{2\pi}\int_{-\pi}^\pi \Psi(u)\e^{-\im un}\,du                                                                  \\
+                & =\left\langle Y(v),\frac{1}{2\pi}\int_{-\pi}^\pi \Phi(u+v)\e^{-\im un}\,du\right\rangle                                 \\
+                & =\left\langle Y(v),\frac{1}{2\pi}\int_{-\pi}^\pi \Phi(\Omega)\e^{-\im (\Omega-v)n}\,d\Omega\right\rangle & (\Omega=u+v) \\
+                & =\left\langle Y(v),\phi[n]\e^{\im vn}\right\rangle                                                                      \\
+                & =\frac{1}{2\pi}\phi[n]\int_{-\pi}^\pi Y(v)\e^{\im vn}\,dv                                                               \\
+                & =\phi[n]y[n]
     \end{align*}
     因此
     \begin{align*}
-        \langle X*Y,\Phi\rangle&=\langle X(u),\langle Y(v),\Phi(u+v)\rangle\rangle\\
-        &=\langle X,\Psi\rangle\\
-        &=\langle x,\phi y\rangle\\
-        &=\langle xy,\phi\rangle
+        \langle X*Y,\Phi\rangle & =\langle X(u),\langle Y(v),\Phi(u+v)\rangle\rangle \\
+                                & =\langle X,\Psi\rangle                             \\
+                                & =\langle x,\phi y\rangle                           \\
+                                & =\langle xy,\phi\rangle
     \end{align*}
 \end{proof}
 
@@ -269,9 +269,9 @@ $$\DTFT(\cos(\pi n))=\DTFT((-1)^n)=\pi(\delta_\pi+\delta_{-\pi})=2\pi\delta_\pi$
 
 \begin{example}[单位阶跃序列的离散时间傅里叶变换]
     \begin{align*}
-        &u[n]-u[n-1]=\delta[n]\\
-        \implies&\langle (1-\tau_1)u,\phi\rangle=\langle\delta,\phi\rangle\\
-        \implies&\langle(1-\e^{\im\Omega})U,\Phi\rangle=\langle 1,\Phi\rangle
+                 & u[n]-u[n-1]=\delta[n]                                        \\
+        \implies & \langle (1-\tau_1)u,\phi\rangle=\langle\delta,\phi\rangle    \\
+        \implies & \langle(1-\e^{\im\Omega})U,\Phi\rangle=\langle 1,\Phi\rangle
     \end{align*}
     类似\refsub{normal_distribution}，作为一个分布方程，$(1-\e^{\im\Omega})U=1$并不能表明$U=1/(1-\e^{\im\Omega})$，由于
     $$\frac{1}{1-\e^{\im\Omega}}\sim\frac{\im}{\Omega},\quad \Omega\to 0$$
@@ -283,9 +283,9 @@ $$\DTFT(\cos(\pi n))=\DTFT((-1)^n)=\pi(\delta_\pi+\delta_{-\pi})=2\pi\delta_\pi$
 
     主值积分不能描述$\Omega=0$处的$U$的行为，由于它是$1/(1-\e^{\im\Omega})$的极点，直观上可以使用$\delta$分布来处理这个问题。我们引入另一个分布方程：
     $$u[n]+u[-n]=\begin{cases}
-        2,&\text{if }n=0\\
-        1,&\text{if }n\neq 0
-    \end{cases}=1+\delta[n]\implies U+U^-=2\pi\delta+1$$
+            2, & \text{if }n=0     \\
+            1, & \text{if }n\neq 0
+        \end{cases}=1+\delta[n]\implies U+U^-=2\pi\delta+1$$
     代入
     $$U=\pv\dfrac{1}{1-\e^{\im\Omega}}+a\delta$$
     得到$a=\pi$，因此：
@@ -306,12 +306,12 @@ $$\delta_a*\delta_b=\delta_{a+b},\quad \delta_a*X=\tau_a X$$
 
 \begin{example}[单边正弦、余弦序列的离散时间傅里叶变换]
     \begin{align*}
-        \DTFT(\cos(\Omega_0 n)u[n])&=\pi(\delta_{\Omega_0}+\delta_{-\Omega_0})*U\\
-        &=\pv\frac{1}{2}\left(\frac{1}{1-\e^{\im(\Omega-\Omega_0)}}+\frac{1}{1-\e^{\im(\Omega+\Omega_0)}}\right)+\frac{\pi}{2}(\delta_{\Omega_0}+\delta_{-\Omega_0})\\
-        &=\pv\frac{1-\e^{\im\Omega}\cos\Omega_0}{1-2\e^{\im\Omega}\cos\Omega_0+\e^{2\im\Omega}}+\frac{\pi}{2}(\delta_{\Omega_0}+\delta_{-\Omega_0})\\
-        \DTFT(\sin(\Omega_0 n)u[n])&=-\pi\im(\delta_{\Omega_0}-\delta_{-\Omega_0})*U\\
-        &=-\frac{\im}{2}\pv\left(\frac{1}{1-\e^{\im(\Omega-\Omega_0)}}-\frac{1}{1-\e^{\im(\Omega+\Omega_0)}}\right)-\frac{\pi\im}{2}(\delta_{\Omega_0}-\delta_{-\Omega_0})\\
-        &=-\pv\frac{\e^{\im\Omega}\sin\Omega_0}{1-2\e^{\im\Omega}\cos\Omega_0+\e^{2\im\Omega}}-\frac{\pi\im}{2}(\delta_{\Omega_0}-\delta_{-\Omega_0})
+        \DTFT(\cos(\Omega_0 n)u[n]) & =\pi(\delta_{\Omega_0}+\delta_{-\Omega_0})*U                                                                                                                      \\
+                                    & =\pv\frac{1}{2}\left(\frac{1}{1-\e^{\im(\Omega-\Omega_0)}}+\frac{1}{1-\e^{\im(\Omega+\Omega_0)}}\right)+\frac{\pi}{2}(\delta_{\Omega_0}+\delta_{-\Omega_0})       \\
+                                    & =\pv\frac{1-\e^{\im\Omega}\cos\Omega_0}{1-2\e^{\im\Omega}\cos\Omega_0+\e^{2\im\Omega}}+\frac{\pi}{2}(\delta_{\Omega_0}+\delta_{-\Omega_0})                        \\
+        \DTFT(\sin(\Omega_0 n)u[n]) & =-\pi\im(\delta_{\Omega_0}-\delta_{-\Omega_0})*U                                                                                                                  \\
+                                    & =-\frac{\im}{2}\pv\left(\frac{1}{1-\e^{\im(\Omega-\Omega_0)}}-\frac{1}{1-\e^{\im(\Omega+\Omega_0)}}\right)-\frac{\pi\im}{2}(\delta_{\Omega_0}-\delta_{-\Omega_0}) \\
+                                    & =-\pv\frac{\e^{\im\Omega}\sin\Omega_0}{1-2\e^{\im\Omega}\cos\Omega_0+\e^{2\im\Omega}}-\frac{\pi\im}{2}(\delta_{\Omega_0}-\delta_{-\Omega_0})
     \end{align*}
     与\cref{exmp:causual_cos_z}和\cref{exmp:casual_sin_z}对比，可以发现这两个序列的DTFT仍是z变换在单位圆上的取值，尽管单位圆并不它们的z变换的收敛域内。
 \end{example}
@@ -360,9 +360,9 @@ $$\delta_a*\delta_b=\delta_{a+b},\quad \delta_a*X=\tau_a X$$
 \begin{example}
     构造缓增序列
     $$x_k[n]=\begin{cases}
-        k!,&n=k\\
-        0,&n\neq k
-    \end{cases}$$
+            k!, & n=k     \\
+            0,  & n\neq k
+        \end{cases}$$
     固定$n$，当$k\to\infty$时，$x_k[n]\to 0$，因此$\{x_k[n]\}$逐点收敛到0序列$x[n]\equiv 0$.
 
     但是，取速降序列$\phi[n]=\dfrac{1}{n!}$，则
@@ -373,64 +373,106 @@ $$\delta_a*\delta_b=\delta_{a+b},\quad \delta_a*X=\tau_a X$$
 
 \subsection{离散信号的相关和谱密度}\label{sub:discrete_corr}
 
-仿照连续信号，容易提出离散信号的相关的定义：
-\begin{definition}[能量离散信号的相关]
-    \label{def:discrete_correlation_energy}
-    设$x[n],y[n]\in l^2$，它们的\textbf{互相关}(cross correlation)定义为：
-    $$r_{xy}[l]=\sum_{n=-\infty}^\infty x[n+l]\overline{y[n]}$$
-    当$x=y$时，称之为$x[n]$的\textbf{自相关}(auto-correlation)并记为$r_x[l]$.
+本小节仿照\refsec{Power_Signal}，先讨论能量信号的相关与能量谱，再对有限个复指数序列的叠加建立互功率、相关函数和功率谱。离散情形中，数字角频率以$2\pi$为周期，因此频率相差$2\pi$的整数倍时，必须视为同一频率。
+
+\subsubsection{能量信号的相关与能量谱}
+
+\begin{definition}[离散能量信号的相关]\label{def:discrete_correlation_energy}
+    设$x,y\in l^2$，它们的\textbf{互相关}定义为
+    $$
+        r_{xy}[l]=\sum_{n=-\infty}^{\infty}
+        x[n+l]\overline{y[n]},\qquad l\in\mathbb{Z}.
+    $$
+    当$x=y$时，称为$x$的\textbf{自相关}，记为$r_x[l]$。
 \end{definition}
 
-利用与\cref{prop:cross_correlation}和\cref{thm:winner-khinchin}同样的方法，可以证明：
+上述级数绝对收敛，因为
+$$
+    \sum_{n=-\infty}^{\infty}|x[n+l]\overline{y[n]}|
+    \le\left(\sum_{n=-\infty}^{\infty}|x[n+l]|^2\right)^{1/2}
+    \left(\sum_{n=-\infty}^{\infty}|y[n]|^2\right)^{1/2}
+    =\|x\|_2\|y\|_2.
+$$
+特别地，定义两个信号的互能量为
+$$
+    E_{xy}=\sum_{n=-\infty}^{\infty}x[n]\overline{y[n]},
+$$
+便有$r_{xy}[0]=E_{xy}$和$r_x[0]=E_x$。
 
-\begin{proposition}[能量信号的相关的性质]
-    设$x,y\in l^2$，则\begin{enumerate}
-        \item $r_{xy}=x*\overline{y}^-=\overline{r_{gf}^-}$，特别地，如果$x,y$都是实信号，则
-        $$r_{xy}=r^-_{yx}=x*y^-=((x^-)*y)^-$$
-        \item $r_{\tau_n x,y}=\tau_n r_{xy}=r_{x,\tau_{-n}y}$
-        \item $r_{xy}\le\|x\|_2\|y\|_2$，特别地，$r_x[l]\le r_x(0)=\|x\|_2^2$
+\begin{proposition}[离散能量信号的相关的性质]
+    设$x,y\in l^2$，则
+    \begin{enumerate}
+        \item $r_{xy}=x*\overline{y^-}$，并且
+              $r_{xy}[l]=\overline{r_{yx}[-l]}$。
+        \item 若$\tau_k x[n]=x[n-k]$，则
+              $r_{\tau_k x,y}[l]=r_{xy}[l-k]=r_{x,\tau_{-k}y}[l]$。
+        \item $|r_{xy}[l]|\le\|x\|_2\|y\|_2$，特别地，
+              $|r_x[l]|\le r_x[0]=E_x$。
     \end{enumerate}
+    若$x$为实序列，则$r_x$也是实序列，且为偶序列。
 \end{proposition}
+这些性质可由求和换元和上面的柯西—施瓦茨估计直接得到。
 
-\begin{theorem}[能量信号的维纳-辛钦定理]
-    设$x,y\in l^1\cap l^2$，则
-    $$\DTFT(R_{xy})(\mathrm{e}^{\mathrm{i}\Omega})=X(\e^{\im\Omega})\overline{Y(\e^{\im\Omega})}$$
+\begin{theorem}[离散能量信号的维纳-辛钦定理]\label{thm:discrete_energy_wiener_khinchin}
+    设$x,y\in l^1\cap l^2$，其DTFT分别为$X$和$Y$，则
+    $$
+        \DTFT(r_{xy})(\mathrm{e}^{\mathrm{i}\Omega})
+        =X(\mathrm{e}^{\mathrm{i}\Omega})
+        \overline{Y(\mathrm{e}^{\mathrm{i}\Omega})}.
+    $$
 \end{theorem}
-
-\begin{example}[指数序列的自相关]
-    设$x[n]=a^n u[n],0<a<1$.由于$x[n]$是实信号，$r_x[l]$是偶对称的，只需计算$l\ge 0$时的相关：
+\begin{proof}
+    由于
+    $$
+        \sum_{l=-\infty}^{\infty}\sum_{n=-\infty}^{\infty}
+        |x[n+l]\overline{y[n]}|=\|x\|_1\|y\|_1<\infty,
+    $$
+    可以交换求和次序。令$m=n+l$，得到
     \begin{align*}
-        r_x[l]&=\sum_{n=-\infty}^\infty x[n+l]x[n]\\
-        &=\sum_{n=0}^\infty a^{n+l}a^n\\
-        &=a^l\sum_{n=0}^\infty a^{2n}\\
-        &=\frac{a^l}{1-a^2}
+        \DTFT(r_{xy})(\mathrm{e}^{\mathrm{i}\Omega})
+         & =\sum_l\sum_n x[n+l]\overline{y[n]}\mathrm{e}^{-\mathrm{i}\Omega l} \\
+         & =\left(\sum_m x[m]\mathrm{e}^{-\mathrm{i}\Omega m}\right)
+        \left(\sum_n\overline{y[n]}\mathrm{e}^{\mathrm{i}\Omega n}\right)
+        =X\overline{Y}.
     \end{align*}
-    利用$r_x[-l]=r_x[l]$，得到$r_x[l]=\dfrac{a^{|l|}}{1-a^2}$.
-\end{example}
+\end{proof}
 
-由DTFT的帕塞瓦尔定理（\cref{thm:DTFT_plancherel}），有：
-$$E_x=\sum_{n=-\infty}^{\infty}|x[n]|^2=\frac{1}{2\pi}\int_{-\pi}^{\pi}|X(\mathrm{e}^{\mathrm{i}\Omega})|^2\,d\Omega$$
+由DTFT的帕塞瓦尔定理（\cref{thm:DTFT_plancherel}），
+$$
+    E_x=\frac1{2\pi}\int_{-\pi}^{\pi}|X(\mathrm{e}^{\mathrm{i}\Omega})|^2\,d\Omega,
+    \qquad
+    E_{xy}=\frac1{2\pi}\int_{-\pi}^{\pi}
+    X(\mathrm{e}^{\mathrm{i}\Omega})\overline{Y(\mathrm{e}^{\mathrm{i}\Omega})}\,d\Omega.
+$$
+这说明能量与互能量可以按数字角频率分配。
 
-这表明$x\in l^1\cap l^2$的\textbf{能量是分布在各个数字角频率上的}，由此定义：
-
-\begin{definition}[能量谱密度]
-    $x\in l^1\cap l^2$的\textbf{能量谱密度}(energy spectral density,ESD)定义为
-    $$S_x(\Omega)=\dfrac{1}{2\pi}|\DTFT(x)(\mathrm{e}^{\mathrm{i}\Omega})|^2$$
+\begin{definition}[离散信号的能量谱密度]
+    设$x,y\in l^1\cap l^2$，定义\textbf{能量谱密度}与\textbf{互能量谱密度}为
+    $$
+        S_x^{\mathrm{en}}(\Omega)=\frac1{2\pi}|X(\mathrm{e}^{\mathrm{i}\Omega})|^2,
+        \qquad
+        S_{xy}^{\mathrm{en}}(\Omega)=\frac1{2\pi}
+        X(\mathrm{e}^{\mathrm{i}\Omega})\overline{Y(\mathrm{e}^{\mathrm{i}\Omega})}.
+    $$
 \end{definition}
+这里保留系数$1/(2\pi)$，使谱密度在一个频率周期上的积分直接等于能量或互能量；上标$\mathrm{en}$用于与后面的功率谱区分。
 
-\begin{example}[指数序列的能量谱密度]
-    设$x[n]=a^n u[n],0<a<1$，则$r_x[l]=\dfrac{a^{|l|}}{1-a^2}$，对其做DTFT，得到：
-    \begin{align*}
-        |\DTFT(x)(\mathrm{e}^{\mathrm{i}\Omega})|^2&=\DTFT(r_x)(\mathrm{e}^{\mathrm{i}\Omega})\\
-        &=\sum_{l=-\infty}^\infty \dfrac{a^{|l|}}{1-a^2}\e^{-\im\Omega l}\\
-        &=\frac{1}{1-a^2}\left(\sum_{l=0}^\infty a^l(\e^{-\im\Omega l}+\e^{\im\Omega l})-1\right)\\
-        &=\frac{1}{1-a^2}\left(\frac{1}{1-a\e^{-\im\Omega}}+\frac{1}{1-a\e^{\im\Omega}}-1\right)\\
-        &=\frac{1}{1-a^2}\left(\frac{2(1-a\cos\Omega)}{1-2a\cos\Omega+a^2}-1\right)\\
-        &=\frac{1}{1-2a\cos\Omega+a^2}
-    \end{align*}
-    因此它的能量谱密度为
-    $$S_x(\Omega)=\frac{1}{2\pi}|\DTFT(x)(\mathrm{e}^{\mathrm{i}\Omega})|^2=\frac{1}{2\pi(1-2a\cos\Omega+a^2)}$$
-    它的能量谱密度如下图所示：
+\begin{example}[指数序列的相关与能量谱]
+    设$x[n]=a^n u[n]$，其中$0<a<1$。当$l\ge0$时，
+    $$
+        r_x[l]=\sum_{n=0}^{\infty}a^{n+l}a^n
+        =\frac{a^l}{1-a^2}.
+    $$
+    由实序列自相关的偶对称性，
+    $$
+        r_x[l]=\frac{a^{|l|}}{1-a^2}.
+    $$
+    又因为$X(\mathrm{e}^{\mathrm{i}\Omega})=1/(1-a\mathrm{e}^{-\mathrm{i}\Omega})$，所以
+    $$
+        S_x^{\mathrm{en}}(\Omega)
+        =\frac{1}{2\pi(1-2a\cos\Omega+a^2)}.
+    $$
+    它在一个频率周期上的积分为$E_x=1/(1-a^2)$，其图像如下。
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.6\textwidth]{exp_ESD}
@@ -438,232 +480,272 @@ $$E_x=\sum_{n=-\infty}^{\infty}|x[n]|^2=\frac{1}{2\pi}\int_{-\pi}^{\pi}|X(\mathr
     \end{figure}
 \end{example}
 
-仿照\refsub{power_signal}，可以定义\textbf{离散功率信号空间}并赋予内积：
+\subsubsection{有限频率序列空间与平均内积}
 
-\begin{definition}[离散功率信号空间]
-    能量无限而功率非零有限的信号称为\textbf{离散功率信号}：
-    $$\sum_{n=-\infty}^\infty |x[n]|^2=\infty,\quad 0<\lim_{M\to\infty}\frac{1}{2M+1}\sum_{n=-M}^M |x[n]|^2<\infty$$
-    我们约定：能量为0的信号也属于能量信号，从而能量信号空间就是$l^2$；功率为0的信号也是功率信号，从而功率信号空间构成线性空间，记为$b^2$.
+对于离散信号$x[n]$，若时间平均极限存在，则记
+$$
+    P_x=\lim_{M\to\infty}\frac1{2M+1}\sum_{n=-M}^{M}|x[n]|^2.
+$$
+满足$0<P_x<\infty$的信号称为\textbf{离散功率信号}。有限能量信号的平均功率为零，因为
+$$
+    0\le\frac1{2M+1}\sum_{n=-M}^{M}|x[n]|^2
+    \le\frac{E_x}{2M+1}\longrightarrow0.
+$$
+因此，平均功率正而有限的信号必有无穷能量。不过，将零平均功率信号也纳入考虑，并不能保证全部信号构成线性空间。和\refsub{power_signal}一样，下面先选择一个具体的线性空间。
+
+\begin{definition}[有限频率序列空间]
+    将有限个复指数序列的线性组合构成的空间记为
+    $$
+        \mathcal{P}_{\mathrm d}
+        =\left\{x[n]=\sum_{k=1}^{K}a_k\mathrm{e}^{\mathrm{i}\Omega_k n}:
+        K\in\mathbb{N}^*,\ a_k\in\mathbb{C},\
+        \Omega_k\in(-\pi,\pi]\right\}.
+    $$
 \end{definition}
 
-离散功率信号空间中的典型信号是周期的或者几乎周期的。
+零序列也包含在$\mathcal{P}_{\mathrm d}$中；两个这样的序列相加或数乘，仍具有上述形式。每个$x\in\mathcal{P}_{\mathrm d}$都满足$|x[n]|\le\sum_k|a_k|$，因而有界。
 
-\begin{definition}[离散功率信号空间的内积]
-    设$x[n],y[n]\in b^2$，它们的内积定义为
-    $$(x,y)_{\pwr}=\lim_{M\to\infty}\frac{1}{2M+1}\sum_{n=-\infty}^\infty x[n]\overline{y[n]}$$
-\end{definition}
+频率代表元取在$(-\pi,\pi]$内，是因为
+$$
+    \mathrm{e}^{\mathrm{i}(\Omega+2\pi k)n}
+    =\mathrm{e}^{\mathrm{i}\Omega n},\qquad k,n\in\mathbb{Z}.
+$$
+因此，讨论频率表示时，约定先将频率按模$2\pi$归并，再合并同频率项。区间的两个端点$-\pi$和$\pi$代表同一个频率，不能重复计算。
 
-由这个内积导出的范数$\|\cdot\|_{\pwr}$并不具有同一性，但可以通过引入等价关系来解决这一问题：
-\begin{align*}
-    x\sim y\iff \|x-y\|_{\pwr}=0
-\end{align*}
+由离散傅里叶反演公式（\cref{thm:DFT_inv}），任何周期为$N$的序列都能精确地表示为$N$个复指数序列之和，因而属于$\mathcal{P}_{\mathrm d}$。它的平均功率为
+$$
+    P_x=\frac1N\sum_{n=0}^{N-1}|x[n]|^2.
+$$
+此外，$\mathcal{P}_{\mathrm d}$也包含非周期序列；例如，当$\Omega_0/(2\pi)$为无理数时，$\mathrm{e}^{\mathrm{i}\Omega_0 n}$不是周期序列。
 
-\begin{definition}[功率离散信号的相关]
-    \label{def:discrete_correlation_power}
-    设$x[n],y[n]\in b^2$，它们的\textbf{互相关}(cross correlation)定义为：
-    $$r_{xy}[l]=\lim_{M\to\infty}\frac{1}{2M+1}\sum_{n=-M}^M x[n+l]\overline{y[n]}$$
-    当$x=y$时，称之为$x[n]$的\textbf{自相关}(auto-correlation)并记为$r_x[l]$.
-\end{definition}
-
-通过截短信号的的极限来定义功率信号的功率谱密度。我们用
-$$x_M[n]=\begin{cases}
-    x[n],&\text{if }-M\le n\le M\\
-    0,&\text{otherwise}
-\end{cases}$$
-来表示长为$2M+1$的离散信号的截短，并用$X_M(\mathrm{e}^{\mathrm{i}\Omega})$表示其DTFT。对$x_M[n]$用帕塞瓦尔定理，有：
-$$E_{x_M}=\sum_{n=-\infty}^\infty |x_M[n]|^2=\frac{1}{2\pi}\int_{-\pi}^\pi |X_M(\mathrm{e}^{\mathrm{i}\Omega})|^2\,d\Omega$$
-
-这样，在$M\to\infty$时，$E_{x_M}$的时间平均值就是$x[n]$的功率：
-$$P_x=\lim_{M\to\infty}\frac{1}{2M+1}\sum_{n=-M}^M |x[n]|^2=\lim_{M\to\infty}\frac{E_{x_M}}{2M+1}=\lim_{M\to\infty}\frac{1}{2\pi}\int_{-\pi}^\pi |X_M(\e^{\im\Omega})|^2\,d\Omega$$
-
-由于离散功率信号$x[n]$的DTFT是作为分布来定义的，在分布的意义下可以交换积分与求和的次序，因此可以将功率写为密度函数的积分的形式：
-\begin{definition}[离散功率信号的功率谱密度]
-    功率信号$x[n]$的\textbf{功率谱密度}(power spectral density)为
-    $$S_x(\Omega)=\frac{1}{2\pi}\lim_{M\to\infty}\frac{|X_M(\e^{\im\Omega})|^2}{2M+1}$$
-\end{definition}
-
-仿照\cref{def:cross_energy_power}和\cref{def:cross_energy_power_density}，还可以定义离散信号的\textbf{互能量}以及\textbf{互能量谱密度}，功率信号同理：
-\begin{definition}[互能量，互功率与谱密度]
-    如果$x[n],y[n]\in l^2$，则它们的\textbf{互能量}定义为
-    $$E_{xy}=(x,y)=\sum_{n=-\infty}^\infty x[n]\overline{y[n]}$$
-    其中$(\cdot,\cdot)$为希尔伯特空间$l^2$上的内积。如果$x[n],y[n]\in l^1\cap l^2$，则它们的\textbf{互能量谱密度}(cross energy spectral density,CESD)定义为
-    $$S_{xy}(\Omega)=\frac{1}{2\pi}X(\e^{\im\Omega})\overline{Y(\e^{\im\Omega})}$$
-
-    如果$x[n],y[n]\in b^2$，则它们的\textbf{互功率}定义为
-    $$P_{xy}=(x,y)_{\pwr}=\lim_{M\to\infty}\frac{1}{2M+1}\sum_{n=-M}^M x[n]\overline{y[n]}$$
-    它们的\textbf{互功率谱密度}(cross power spectral density,CPSD)定义为
-    $$S_{xy}(\Omega)=\frac{1}{2\pi}\lim_{M\to\infty}\frac{1}{2M+1}X_M(\e^{\im\Omega})\overline{Y_M(\e^{\im\Omega})}$$
-\end{definition}
-
-仿照\cref{thm:power_winner_khinchin}，我们有：
-\begin{theorem}[离散功率信号的维纳-辛钦定理]
-    \label{thm:deiscrete_winner_khinchin}
-    设$x[n],y[n]\in b^2$，则
-    $$\DTFT(r_{xy})(\e^{\im\Omega})=\lim_{M\to\infty}\frac{1}{2M+1}X_M(\e^{\im\Omega})\overline{Y_M(\e^{\im\Omega})}=2\pi S_{xy}(\Omega)$$
-\end{theorem}
+\begin{proposition}[离散复指数的平均正交性]
+    对任意$\Omega,\Omega'\in\mathbb{R}$，
+    $$
+        \lim_{M\to\infty}\frac1{2M+1}
+        \sum_{n=-M}^{M}\mathrm{e}^{\mathrm{i}(\Omega-\Omega')n}
+        =
+        \begin{cases}
+            1, & \Omega-\Omega'\in2\pi\mathbb{Z},    \\
+            0, & \Omega-\Omega'\notin2\pi\mathbb{Z}.
+        \end{cases}
+    $$
+\end{proposition}
 \begin{proof}
-    定义截短信号所得的能量信号$x_M[n]$和$y_M[n]$的互相关函数为
-    $$r_M[l]=r_{x_M,y_M}[l]=\sum_{n=-M}^M x[n+l]\overline{y[n]}$$
-    由维纳-辛钦定理，有：
-    $$\DTFT(r_M)(\e^{\im\Omega})=X_M(\e^{\im\Omega})\overline{Y_M(\e^{\im\Omega})}$$
-    等式两边同时除以$2M+1$并与测试函数$\Phi(\Omega)\in\mathcal{C}$配对：
-    $$\left\langle \frac{1}{2M+1}\DTFT\left(r_M\right),\Phi\right\rangle=\left\langle \frac{1}{2M+1}X_M\overline{Y_M},\Phi\right\rangle$$
-    由柯西不等式，有：
-    \begin{align*}
-        \left|\frac{r_M[l]}{2M+1}\right|&=\left|\frac{1}{2M+1}\sum_{n=-M}^M x[n+l]\overline{y[n]}\right|\\
-        &\le \frac{1}{2M+1}\sum_{n=-\infty}^\infty |x[n+l]||y[n]|\\
-        &\le \left(\frac{1}{2M+1}\sum_{n=-\infty}^\infty |x[n+l]|^2\right)^{1/2}\left(\frac{1}{2M+1}\sum_{n=-\infty}^\infty |y[n]|^2\right)^{1/2}\\
-        &=\|x\|_{\pwr}\|y\|_{\pwr}<\infty
-    \end{align*}
-    因此序列
-    $$\left\{\frac{r_M[l]}{2M+1}\right\}_{M=1}^\infty$$
-    有界，从而是一致缓增的。令$M\to\infty$，由分布的DTFT的连续性，左式等于：
-    $$\lim_{M\to\infty}\left\langle \frac{1}{2M+1}\DTFT\left(r_M\right),\Phi\right\rangle=\left\langle\DTFT\left(\lim_{M\to\infty}\frac{r_M}{2M+1}\right),\Phi\right\rangle=\langle\DTFT(r_{xy}),\Phi\rangle$$
-    右式等于：
-    $$\lim_{M\to\infty}\left\langle \frac{1}{2M+1}X_M\overline{Y_M},\Phi\right\rangle=2\pi\langle S_{xy},\Phi\rangle$$
+    若$\Omega-\Omega'\in2\pi\mathbb{Z}$，每个求和项都等于$1$。否则，令$d=\Omega-\Omega'$，由有限等比数列求和公式，
+    $$
+        \frac1{2M+1}\sum_{n=-M}^{M}\mathrm{e}^{\mathrm{i}dn}
+        =\frac{\sin((2M+1)d/2)}{(2M+1)\sin(d/2)}
+        \longrightarrow0.
+    $$
 \end{proof}
 
-这样，功率谱可以通过相关函数的DTFT来计算。
+设$x,y\in\mathcal{P}_{\mathrm d}$，在共同的有限频率集$\Lambda\subset(-\pi,\pi]$上写成
+$$
+    x[n]=\sum_{\Omega\in\Lambda}a_\Omega\mathrm{e}^{\mathrm{i}\Omega n},
+    \qquad
+    y[n]=\sum_{\Omega\in\Lambda}b_\Omega\mathrm{e}^{\mathrm{i}\Omega n}.
+$$
+未出现的频率对应的系数取零。由于求和有限，由平均正交性可得
+$$
+    \lim_{M\to\infty}\frac1{2M+1}\sum_{n=-M}^{M}x[n]\overline{y[n]}
+    =\sum_{\Omega\in\Lambda}a_\Omega\overline{b_\Omega}.
+$$
+将这个极限定义为\textbf{互功率}$P_{xy}$，并令
+$$
+    (x,y)_{\pwr}=P_{xy}
+    =\sum_{\Omega\in\Lambda}a_\Omega\overline{b_\Omega}.
+$$
+这是$\mathcal{P}_{\mathrm d}$上的内积：它对第一变元线性、对第二变元共轭线性，并且
+$$
+    P_x=(x,x)_{\pwr}=\sum_{\Omega\in\Lambda}|a_\Omega|^2,
+    \qquad
+    P_x=0\iff x=0.
+$$
+因此，$\mathcal{P}_{\mathrm d}$的非零元素都是功率信号，且
+$$
+    \|x\|_{\pwr}=\sqrt{P_x},\qquad |P_{xy}|\le\sqrt{P_xP_y}.
+$$
+这里先通过有限频率计算证明极限存在，再验证内积性质，不需要将全部功率信号视为一个空间。
 
-\begin{example}
-设离散功率信号 \(x[n]=\cos(\Omega_0 n)\)，其中 \(0<\Omega_0<\pi\) 且 \(\Omega_0\neq 0,\pi\)，截短信号为$x_M[n]$，则其自相关函数为
-\[
-r_M[l]=\sum_{n=-\infty}^{\infty} x_M[n+l]x_M[n].
-\]
-由于两个截短信号的支集分别为 \([-M,M]\) 和 \([-M-l,M-l]\)，其交集非空当且仅当 \(|l|\le 2M\)。于是
-\[
-r_M[l]=
-\begin{cases}
-\displaystyle \sum_{n=-M}^{M-l}\cos(\Omega_0(n+l))\cos(\Omega_0 n), & 0\le l\le 2M,\\[1.2ex]
-\displaystyle \sum_{n=-M-l}^{M}\cos(\Omega_0(n+l))\cos(\Omega_0 n), & -2M\le l<0,\\[1.2ex]
-0, & |l|>2M.
-\end{cases}
-\]
-利用积化和差
-\[
-\cos(\Omega_0(n+l))\cos(\Omega_0 n)
-=\frac12\left[\cos(\Omega_0(2n+l))+\cos(\Omega_0 l)\right].
-\]
-当 \(0\le l\le 2M\) 时，
-\[
-r_M[l]=\frac12\left[
-\sum_{n=-M}^{M-l}\cos(\Omega_0(2n+l))
-+(2M-l+1)\cos(\Omega_0 l)
-\right].
-\]
-而
-\begin{align*}
-    \sum_{n=-M}^{M-l}\cos(\Omega_0(2n+l))&=\frac{1}{\sin\Omega_0}\sum_{n=-M}^{M-l}\cos(\Omega_0(2n+l))\sin\Omega_0\\
-    &=\frac{1}{2\sin\Omega_0}\sum_{n=-M}^{M-l}\left[\sin(\Omega_0(2n+l+1))-\sin(\Omega_0(2n+l-1))\right]\\
-    &=\frac{\sin\bigl(\Omega_0(2M-l+1)\bigr)}{\sin\Omega_0}
-\end{align*}
-故
-\[
-r_M[l]=\frac12\left[
-\frac{\sin\bigl(\Omega_0(2M-l+1)\bigr)}{\sin\Omega_0}
-+(2M-l+1)\cos(\Omega_0 l)
-\right].
-\]
-同理，当 \(-2M\le l<0\) 时，令 \(|l|=-l\)，可得相同形式的表达式
-\[
-r_M[l]=\frac12\left[
-\frac{\sin\bigl(\Omega_0(2M-|l|+1)\bigr)}{\sin\Omega_0}
-+(2M-|l|+1)\cos(\Omega_0 l)
-\right].
-\]
-合并后，对 \(|l|\le 2M\) 有
-\[
-r_M[l]=\frac12\left[
-\frac{\sin\bigl(\Omega_0(2M-|l|+1)\bigr)}{\sin\Omega_0}
-+(2M-|l|+1)\cos(\Omega_0 l)
-\right].
-\]
+\subsubsection{功率信号的相关与功率谱}
 
-因此，\(x\) 的自相关函数为
-\[
-r_x[l]=\lim_{M\to\infty}\frac{1}{2M+1}r_M[l].
-\]
-代入上式得
-\[
-r_x[l]=\lim_{M\to\infty}\left[
-\frac{\sin\bigl(\Omega_0(2M-|l|+1)\bigr)}{(2M+1)2\sin\Omega_0}
-+\frac{2M-|l|+1}{2(2M+1)}\cos(\Omega_0 l)
-\right].
-\]
-第一项有界，除以 \(2M+1\) 后趋于 \(0\)；第二项趋于 \(\dfrac12\cos(\Omega_0 l)\)。于是
-\[
-r_x[l]=\frac12\cos(\Omega_0 l),\quad l\in\mathbb Z.
-\]
+功率信号的相关采用时间平均。在$\mathcal{P}_{\mathrm d}$中，相关序列的存在性可直接由刚才的平均内积公式保证。
 
-其DTFT为
-\[
-\DTFT(r_x)=\frac{\pi}{2}(\delta_{\Omega_0}+\delta_{-\Omega_0})
-\]
-因此
-\[
-S_x(\Omega)=\frac{1}{2\pi}\lim_{M\to\infty}\frac{|X_M(\e^{\im\Omega})|^2}{2M+1}=\frac{1}{2\pi}\DTFT(r_x)=\frac14(\delta_{\Omega_0}+\delta_{-\Omega_0})
-\]
+\begin{definition}[离散功率信号的相关]\label{def:discrete_correlation_power}
+    设$x,y\in\mathcal{P}_{\mathrm d}$，它们的互相关定义为
+    $$
+        r_{xy}[l]=\lim_{M\to\infty}\frac1{2M+1}
+        \sum_{n=-M}^{M}x[n+l]\overline{y[n]}.
+    $$
+    当$x=y$时，称为自相关，记为$r_x[l]$。
+\end{definition}
+
+对每个固定的$l$，平移后的序列仍属于$\mathcal{P}_{\mathrm d}$，其频率$\Omega$处的系数为$a_\Omega\mathrm{e}^{\mathrm{i}\Omega l}$。由平均内积公式，
+$$
+    r_{xy}[l]=\sum_{\Omega\in\Lambda}
+    a_\Omega\overline{b_\Omega}\mathrm{e}^{\mathrm{i}\Omega l},
+    \qquad
+    r_x[l]=\sum_{\Omega\in\Lambda}|a_\Omega|^2\mathrm{e}^{\mathrm{i}\Omega l}.
+$$
+这既证明了相关函数的存在性，也说明相关序列仍属于$\mathcal{P}_{\mathrm d}$。由此可得
+$$
+    r_{xy}[0]=P_{xy},\quad r_x[0]=P_x,\quad
+    r_{xy}[l]=\overline{r_{yx}[-l]},\quad
+    |r_{xy}[l]|\le\sqrt{P_xP_y}.
+$$
+特别地，$|r_x[l]|\le P_x$；实序列的自相关为实偶序列。
+
+为了将功率与频谱联系起来，将$x[n]$截短为长为$2M+1$的序列：
+$$
+    x_M[n]=
+    \begin{cases}
+        x[n], & -M\le n\le M, \\
+        0,    & \text{其他}.
+    \end{cases}
+$$
+类似地，$y_M[n]$在$-M\le n\le M$时等于$y[n]$，其余位置为零。记$I_M=\{-M,\ldots,M\}$，以及$X_M=\DTFT(x_M)$、$Y_M=\DTFT(y_M)$。
+截短序列只有有限个非零项，帕塞瓦尔定理给出
+$$
+    \frac1{2M+1}\sum_{n=-M}^{M}|x[n]|^2
+    =\int_{-\pi}^{\pi}
+    \frac{|X_M(\mathrm{e}^{\mathrm{i}\Omega})|^2}{2\pi(2M+1)}\,d\Omega.
+$$
+左端趋于$P_x$，但右端被积函数有分布极限需要单独证明。仿照\refsub{power_spectrum}，先利用已知存在的相关序列定义功率谱，再证明截短谱的极限表示。
+
+\begin{definition}[离散信号的功率谱密度]
+    设$x,y\in\mathcal{P}_{\mathrm d}$，定义\textbf{功率谱密度}与\textbf{互功率谱密度}为
+    $$
+        S_x=\frac1{2\pi}\DTFT(r_x),
+        \qquad
+        S_{xy}=\frac1{2\pi}\DTFT(r_{xy}).
+    $$
+    这里的DTFT在周期分布的意义下理解。
+\end{definition}
+
+\begin{theorem}[有限频率序列的功率谱]\label{thm:discrete_PSD}
+    设$x,y\in\mathcal{P}_{\mathrm d}$，其在共同频率集$\Lambda\subset(-\pi,\pi]$上的系数分别为$a_\Omega,b_\Omega$，则
+    $$
+        S_x=\sum_{\Omega\in\Lambda}|a_\Omega|^2\delta_\Omega,
+        \qquad
+        S_{xy}=\sum_{\Omega\in\Lambda}
+        a_\Omega\overline{b_\Omega}\delta_\Omega.
+    $$
+    式中的$\delta_\Omega$沿用\cref{exmp:exp_DTFT}的周期分布记法。
+\end{theorem}
+\begin{proof}
+    对相关序列的有限频率表达式逐项做DTFT，利用
+    $\DTFT(\mathrm{e}^{\mathrm{i}\Omega l})=2\pi\delta_\Omega$，得到
+    $$
+        \DTFT(r_{xy})=2\pi\sum_{\Omega\in\Lambda}
+        a_\Omega\overline{b_\Omega}\delta_\Omega.
+    $$
+    除以$2\pi$即得互功率谱，令$y=x$即得自功率谱。
+\end{proof}
+
+每个频率周期内，各条自功率谱线的强度之和为$P_x$，互功率谱线的强度之和为$P_{xy}$。
+
+注意，原序列的DTFT是
+$$
+    X=2\pi\sum_{\Omega\in\Lambda}a_\Omega\delta_\Omega.
+$$
+因此，若直接将DTFT写成$X=\sum_{\Omega\in\Lambda}c_\Omega\delta_\Omega$，则$c_\Omega=2\pi a_\Omega$，相应功率谱为
+$$
+    S_x=\sum_{\Omega\in\Lambda}\frac{|c_\Omega|^2}{4\pi^2}\delta_\Omega.
+$$
+
+对于周期为$N$的序列，若一周期的DFT为$X_N[k]$，则离散傅里叶展开系数为$X_N[k]/N$。令$\Omega_k$是在$(-\pi,\pi]$内与$2\pi k/N$同余的频率，即得
+$$
+    S_x=\sum_{k=0}^{N-1}\frac{|X_N[k]|^2}{N^2}\delta_{\Omega_k},
+    \qquad
+    P_x=\sum_{k=0}^{N-1}\frac{|X_N[k]|^2}{N^2}
+    =\frac1N\sum_{n=0}^{N-1}|x[n]|^2.
+$$
+
+\subsubsection{截短功率谱的分布极限}
+
+\begin{theorem}[离散功率信号的维纳-辛钦定理]\label{thm:deiscrete_winner_khinchin}
+    设$x,y\in\mathcal{P}_{\mathrm d}$，$x_M,y_M$为上述截短序列，其DTFT分别为$X_M,Y_M$。则在周期分布的意义下，
+    $$
+        \lim_{M\to\infty}\frac{X_M\overline{Y_M}}{2M+1}
+        =\DTFT(r_{xy})=2\pi S_{xy}.
+    $$
+    特别地，
+    $$
+        \lim_{M\to\infty}\frac{|X_M|^2}{2\pi(2M+1)}=S_x.
+    $$
+\end{theorem}
+\begin{proof}
+    考察截短序列的互相关除以窗口长度所得的序列
+    \begin{align*}
+        q_M[l]
+         & =\frac1{2M+1}\sum_{n=-\infty}^{\infty}
+        x_M[n+l]\overline{y_M[n]}                  \\
+         & =\frac1{2M+1}\sum_{n\in I_M\cap(I_M-l)}
+        x[n+l]\overline{y[n]}.
+    \end{align*}
+    必须同时保留两个截短窗口。固定$l$，当$M>|l|$时，与
+    $$
+        c_M[l]=\frac1{2M+1}\sum_{n=-M}^{M}
+        x[n+l]\overline{y[n]}
+    $$
+    相比，$q_M[l]$少了$|l|$项。故
+    $$
+        |q_M[l]-c_M[l]|
+        \le\frac{|l|}{2M+1}\|x\|_\infty\|y\|_\infty
+        \longrightarrow0.
+    $$
+    已知$c_M[l]\to r_{xy}[l]$，因此$q_M[l]\to r_{xy}[l]$。同时，对所有$M,l$都有
+    $$
+        |q_M[l]|\le\|x\|_\infty\|y\|_\infty.
+    $$
+    这给出了\cref{thm:DTFT_continuous_2}所需的一致缓增性，因而
+    $\DTFT(q_M)\to\DTFT(r_{xy})$。
+
+    也可以直接核对分布收敛。任取$\Phi\in\mathcal{C}$，其傅里叶系数$\phi[l]$速降，故$\sum_l|\phi[l]|<\infty$。利用与$M$无关的可求和控制项
+    $\|x\|_\infty\|y\|_\infty|\phi[l]|$，可将极限与求和交换：
+    $$
+        \lim_{M\to\infty}\sum_l q_M[l]\phi[l]
+        =\sum_l r_{xy}[l]\phi[l].
+    $$
+    由DTFT的配对定义，这正是上述周期分布收敛。
+
+    最后，对有限支集序列$x_M,y_M$应用\cref{thm:discrete_energy_wiener_khinchin}，得到
+    $$
+        \DTFT(q_M)=\frac{X_M\overline{Y_M}}{2M+1}
+        \longrightarrow\DTFT(r_{xy})=2\pi S_{xy}.
+    $$
+\end{proof}
+
+\subsubsection{功率谱的计算例子}
+
+\begin{example}[余弦序列的功率谱]
+    设$x[n]=A\cos(\Omega_0n+\theta)$，其中$A\in\mathbb{R}$、$0<\Omega_0<\pi$。由
+    $$
+        x[n]=\frac{A}{2}\mathrm{e}^{\mathrm{i}\theta}\mathrm{e}^{\mathrm{i}\Omega_0n}
+        +\frac{A}{2}\mathrm{e}^{-\mathrm{i}\theta}\mathrm{e}^{-\mathrm{i}\Omega_0n},
+    $$
+    得到
+    $$
+        P_x=\frac{A^2}{2},\qquad
+        r_x[l]=\frac{A^2}{2}\cos(\Omega_0l),
+        \qquad
+        S_x=\frac{A^2}{4}(\delta_{\Omega_0}+\delta_{-\Omega_0}).
+    $$
+    这一结论不要求$\Omega_0/(2\pi)$为有理数，因此也适用于非周期余弦序列。
 \end{example}
 
-基于此，可以看出幅值为1的余弦序列功率为$1/2$，并且可以猜想：对于离散信号也有类似\cref{thm:PSD}的结论。
-
-\begin{theorem}\label{thm:discrete_PSD}
-    对于几乎周期的功率序列$x[n]$，设其（作为分布的）傅里叶变换为
-    $$X=\sum_{p}a_p\delta_{\Omega_p}$$
-    其中$0\le\Omega_k\le \pi$，则其功率谱密度为
-    $$S_x=\sum_p |a_p|^2\delta_{\Omega_p}$$
-    进一步，设几乎周期的功率序列$y[n]$的傅里叶变换为
-    $$Y=\sum_q b_q\delta_{\Omega_q}$$
-    则$x[n]$与$y[n]$的互功率谱密度为
-    $$S_{xy}=\sum_{k}a_k\overline{b_k}\delta_{\Omega_k}$$
-    其中，求和指标$p,q$和$k$可以是有限的，也可以是可数的，因为分布级数由部分和分布的极限定义；$\Omega_k$为两个信号的公共频率，这是因为不同频率处的交叉项在互功率谱密度中的强度为0.
-\end{theorem}
-\begin{proof}
-    由\cref{thm:DTFT_continuous_1}，可以求得：
-    $$x[n]=\sum_p a_p\e^{\im\Omega_p n},\quad y[n]=\sum_q b_q\e^{\im\Omega_q n}$$
-    代入互相关的定义：
-    \begin{align*}
-        r_{xy}[l]&=\lim_{M\to\infty}\frac{1}{2M+1}\sum_{n=-M}^M \left(\sum_p a_p\e^{\im\Omega_p (n+l)}\right)\left(\sum_q \overline{b_q}\e^{-\im\Omega_q n}\right)\\
-        &=\sum_{p,q}\left(a_p \overline{b_q}\e^{\im\Omega_p l}\cdot\lim_{M\to\infty}\frac{1}{2M+1}\sum_{n=-M}^M \e^{\im(\Omega_p-\Omega_q)n}\right)
-    \end{align*}
-    其中\begin{align*}
-        \sum_{n=-M}^M \e^{\im(\Omega_p-\Omega_q)n}&=\e^{-\im(\Omega_p-\Omega_q)M}\frac{1-\e^{\im(\Omega_p-\Omega_q)(2M+1)}}{1-\e^{\im(\Omega_p-\Omega_q)}}\\
-        &=\frac{\e^{-\im(\Omega_p-\Omega_q)(2M+1)/2}-\e^{\im(\Omega_p-\Omega_q)(2M+1)/2}}{\e^{-\im(\Omega_p-\Omega_q)/2}-\e^{\im(\Omega_p-\Omega_q)/2}}\\
-        &=\frac{\sin\left((2M+1)(\Omega_p-\Omega_q)/2\right)}{\sin((\Omega_p-\Omega_q)/2)}
-    \end{align*}
-    因此\begin{align*}
-        r_{xy}[l]&=\sum_{p,q}\left(a_p\overline{b_q}\e^{\im\Omega_p l}\cdot\lim_{M\to\infty}\frac{\sin\left((2M+1)(\Omega_p-\Omega_q)/2\right)}{(2M+1)\sin((\Omega_p-\Omega_q)/2)}\right)
-    \end{align*}
-    其中
-    $$\lim_{M\to\infty}\frac{\sin\left((2M+1)(\Omega_p-\Omega_q)/2\right)}{(2M+1)\sin((\Omega_p-\Omega_q)/2)}=\begin{cases}
-        1,&\text{if }p=q\\
-        0,&\text{if }p\neq q
-    \end{cases}$$
-    因此
-    \begin{align*}
-        r_{xy}[l]=\sum_{k}a_k\overline{b_k}\e^{\im\Omega_k l}\tag{$*$}
-    \end{align*}
-    其中$\Omega_k$为两个信号的公共频率。为了使用\cref{thm:DTFT_continuous_2}得到最终的结论，我们不妨设指标$k$的范围是$\mathbb{N}$，说明部分和序列
-    $$\sum_{k=0}^K a_k\overline{b_k}\e^{\im\Omega_k l}$$
-    是一致缓增的。利用$(*)$，令$y=x$可得：
-    \begin{align*}
-        &r_x[l]=\sum_{p} |a_p|^2\e^{\im\Omega_p l}
-    \end{align*}
-    进而得到：
-    \begin{align*}
-        P_x&=\lim_{M\to\infty}\frac{1}{2M+1}\sum_{n=-\infty}^\infty |x[n]|^2=r_x[0]=\sum_{p} |a_p|^2
-    \end{align*}
-    由于$x[n],y[n]$是功率序列，有：
-    $$P_x=\sum_{p} |a_p|^2<\infty,\quad P_y=\sum_{q} |b_q|^2<\infty$$
-    由柯西-施瓦兹不等式可得：
-    \begin{align*}
-        \sum_{k=0}^K a_k\overline{b_k}\e^{\im\Omega_k l}&\le\sum_{k=0}^\infty |a_k b_k|\\
-        &\le \left(\sum_{k=0}^\infty |a_k|^2\right)^{1/2}\left(\sum_{k=0}^\infty |b_k|^2\right)^{1/2}\\
-        &\le \left(\sum_{p} |a_p|^2\right)^{1/2}\left(\sum_{q} |b_q|^2\right)^{1/2}\\
-        &=\sqrt{P_x P_y}<\infty
-    \end{align*}
-    可见$\sum_{k=0}^K a_k\overline{b_k}\e^{\im\Omega_k l}$对$K$有一致上界$\sqrt{P_x P_y}$.
-
-    由\cref{thm:DTFT_continuous_2}及\cref{thm:deiscrete_winner_khinchin}，我们得到：
-    $$S_{xy}=\DTFT\left(r_{xy}[l]\right)=\sum_{k}a_k\overline{b_k}\delta_{\Omega_k}$$
-\end{proof}
+为了与截短相关的证明对应，取$x[n]=\cos(\Omega_0n)$、$0<\Omega_0<\pi$，记
+$$
+    r_M[l]=\sum_{n=-\infty}^{\infty}x_M[n+l]x_M[n].
+$$
+当$|l|>2M$时，两个窗口不相交，$r_M[l]=0$；当$|l|\le2M$时，交集包含$2M+1-|l|$个整数。由积化和差及有限等比数列求和，
+$$
+    r_M[l]=\frac12\left[
+        \frac{\sin((2M+1-|l|)\Omega_0)}{\sin\Omega_0}
+        +(2M+1-|l|)\cos(\Omega_0l)\right].
+$$
+于是对每个固定的$l$，
+$$
+    \frac{r_M[l]}{2M+1}\longrightarrow\frac12\cos(\Omega_0l)=r_x[l],
+$$
+与前面的结论一致。
